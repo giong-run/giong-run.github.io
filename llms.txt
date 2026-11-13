@@ -29,6 +29,7 @@ Facts that are easy to get wrong:
 - [giong-mysql API](https://docs.rs/giong-mysql): A MySQL client and connection pool for the giong thread-per-core runtime
 - [giong-redis API](https://docs.rs/giong-redis): A Redis client, pipelining across tasks, with Pub/Sub and a pool, for the giong thread-per-core runtime
 - [giong-web API](https://docs.rs/giong-web): A router, middleware and JSON for HTTP services on the giong thread-per-core runtime
+- [giong-mcp API](https://docs.rs/giong-mcp): An MCP server that lets AI agents look inside a running giong service: workers, tasks, pools, profiles
 - [Get started](https://giong.run/docs/): requirements, a first server, examples, limits
 - [README](https://github.com/giong-run/Giong/blob/main/README.md): design, benchmarks with their method, limitations
 - [AGENTS.md](https://github.com/giong-run/Giong/blob/main/AGENTS.md): how to build, test and change giong, for coding agents
