@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Crates · giong</title>
+<meta name="description" content="The giong crates: the runtime, HTTP and TLS, PostgreSQL, MySQL and Redis clients, and a web framework.">
+<link rel="canonical" href="https://giong.run/crates/">
+<meta name="theme-color" content="#0A0C10">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="giong">
+<meta property="og:title" content="Crates · giong">
+<meta property="og:description" content="The giong crates: the runtime, HTTP and TLS, PostgreSQL, MySQL and Redis clients, and a web framework.">
+<meta property="og:url" content="https://giong.run/crates/">
+<meta property="og:image" content="https://giong.run/assets/social-preview.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="The giong logo: a segmented ember ring">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@giongrun">
+<meta name="twitter:title" content="Crates · giong">
+<meta name="twitter:description" content="The giong crates: the runtime, HTTP and TLS, PostgreSQL, MySQL and Redis clients, and a web framework.">
+<meta name="twitter:image" content="https://giong.run/assets/social-preview.png">
+<meta name="author" content="thekivashyn">
+<link rel="alternate" type="application/atom+xml" title="giong releases" href="https://github.com/giong-run/Giong/releases.atom">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","name":"Crates · giong","description":"The giong crates: the runtime, HTTP and TLS, PostgreSQL, MySQL and Redis clients, and a web framework.","url":"https://giong.run/crates/"}]}</script>
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/giong-icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/giong-icon-180.png">
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/styles.css">
+<script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("giong-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}})(document.documentElement)</script>
+</head>
+<body class="page-crates">
+<a class="skip" href="#main">Skip to content</a>
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="28" height="28"></picture><span>giong</span></a>
+    <nav class="nav" aria-label="Site"><a href="/docs/">Docs</a><a href="/crates/" aria-current="page">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a></nav>
+    <div class="hdr-side">
+      <a class="ver" href="/releases/#v0-3-0" title="Release notes for v0.3.0">v0.3.0</a>
+      <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="giong on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
+      <a class="icon-btn hide-sm" href="https://x.com/giongrun" aria-label="giong on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
+      <button class="icon-btn theme" type="button" aria-label="Switch between light and dark" hidden>
+        <span class="if-dark"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></span><span class="if-light"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z"/></svg></span></button>
+      <details class="menu">
+        <summary class="icon-btn" aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
+        <nav class="menu-panel" aria-label="Site">
+          <a href="/docs/">Docs</a><a href="/crates/" aria-current="page">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a>
+          <span class="menu-social"><a href="https://github.com/giong-run/Giong">GitHub</a><a href="https://x.com/giongrun">X</a></span>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+<main id="main">
+<section class="page-head"><div class="wrap"><p class="eyebrow">crates</p><h1>The crates</h1><p class="lede">7 crates that share one version number, 0.3.0. The runtime at the bottom, and the layers a service needs on top of it, each written for giong rather than wrapped around a Tokio crate.</p><p class="page-meta">about 40,000 lines of Rust and 643 tests in all · line counts are read from the sources when the site is built</p></div></section>
+<section class="band band-tight"><div class="wrap"><div class="stack"><div class="layer is-tooling"><p class="layer-name">Tooling</p><div class="layer-tiles"><div class="tile is-coming"><b>giong-mcp</b><span>A read-only MCP server: an agent reads workers, connections and pools.</span><i>on the roadmap</i></div></div></div><div class="layer is-framework"><p class="layer-name">Framework</p><div class="layer-tiles"><a class="tile" href="#giong-web"><b>giong-web</b><span>Router, middleware and JSON on giong-http; errors as coded problem+json.</span></a></div></div><div class="layer is-clients"><p class="layer-name">Clients</p><div class="layer-tiles"><a class="tile" href="#giong-postgres"><b>giong-postgres</b><span>PostgreSQL client and pool; statements of every task pipeline together.</span></a><a class="tile" href="#giong-mysql"><b>giong-mysql</b><span>MySQL 8 client and pool, built the same way as giong-postgres.</span></a><a class="tile" href="#giong-redis"><b>giong-redis</b><span>Redis client on RESP3: pipelining across tasks, Pub/Sub, a pool.</span></a></div></div><div class="layer is-protocols"><p class="layer-name">Protocols</p><div class="layer-tiles"><a class="tile" href="#giong-tls"><b>giong-tls</b><span>TLS 1.2 and 1.3 for servers and clients on rustls. No OpenSSL.</span></a><a class="tile" href="#giong-http"><b>giong-http</b><span>A strict HTTP/1.1 server, HTTPS behind a feature, and a pooled client.</span></a></div></div><div class="layer is-runtime"><p class="layer-name">Runtime</p><div class="layer-tiles"><a class="tile is-runtime" href="#giong"><b>giong</b><span>Executor, io_uring driver, TCP, UDP, Unix sockets, files, timers, DNS, channels.</span></a></div></div><div class="layer is-kernel"><p class="layer-name">Linux</p><div class="layer-tiles"><div class="kernel">io_uring <span>·</span> one thread and one ring per core <span>·</span> kernel 6.0+</div></div></div></div></div></section>
+<section class="band band-alt"><div class="wrap crate-list"><article class="crate" id="giong"><div class="crate-side"><h2>giong</h2><p class="crate-layer">Runtime</p><p class="crate-links"><a href="https://docs.rs/giong">docs.rs</a> · <a href="https://crates.io/crates/giong">crates.io</a> · <a href="https://github.com/giong-run/Giong">source</a></p><div class="cmd"><code id="add-giong">cargo add giong</code><button class="copy" type="button" data-copy="add-giong" data-done="copied">copy</button></div></div><div class="crate-main"><p class="crate-lede">The runtime: TCP, UDP, Unix sockets, files, timers, DNS, channels and graceful shutdown.</p><ul><li><code>Builder::new().workers(n)</code>, one worker per core</li><li><code>TcpListener</code>, <code>TcpStream</code>, <code>UdpSocket</code>, <code>UnixListener</code>, <code>UnixStream</code></li><li><code>fs::File</code> with <code>read_at</code> and <code>write_at</code>, <code>fs::read</code>, <code>read_dir</code>, <code>rename</code></li><li><code>net::lookup_host</code> without blocking; <code>sync::mpsc</code>, <code>bounded</code>, <code>oneshot</code></li><li><code>spawn_on</code>, <code>spawn_balanced</code> and <code>bind_balanced</code> to spread new work</li></ul><p class="crate-facts"><b>about 9,600</b> lines · <b>194</b> tests · 3 dependencies: <code>io-uring</code>, <code>libc</code>, <code>socket2</code></p></div></article><article class="crate" id="giong-tls"><div class="crate-side"><h2>giong-tls</h2><p class="crate-layer">Protocols</p><p class="crate-links"><a href="https://docs.rs/giong-tls">docs.rs</a> · <a href="https://crates.io/crates/giong-tls">crates.io</a> · <a href="https://github.com/giong-run/Giong/tree/main/giong-tls">source</a></p><div class="cmd"><code id="add-giong-tls">cargo add giong-tls</code><button class="copy" type="button" data-copy="add-giong-tls" data-done="copied">copy</button></div></div><div class="crate-main"><p class="crate-lede">TLS 1.2 and 1.3 for servers and clients on rustls with <code>ring</code>. No OpenSSL.</p><ul><li><code>TlsAcceptor::from_pem(cert, key)</code>; <code>TlsConnector</code> with the system's or built-in roots</li><li><code>recv()</code> is cancel safe</li><li>A cancelled write poisons the sending side instead of corrupting the record stream</li><li>ALPN, client certificates and a handshake timeout</li></ul><p class="crate-facts"><b>about 960</b> lines · <b>34</b> tests · TLS costs 4% on <code>/json</code></p></div></article><article class="crate" id="giong-http"><div class="crate-side"><h2>giong-http</h2><p class="crate-layer">Protocols</p><p class="crate-links"><a href="https://docs.rs/giong-http">docs.rs</a> · <a href="https://crates.io/crates/giong-http">crates.io</a> · <a href="https://github.com/giong-run/Giong/tree/main/giong-http">source</a></p><div class="cmd"><code id="add-giong-http">cargo add giong-http</code><button class="copy" type="button" data-copy="add-giong-http" data-done="copied">copy</button></div></div><div class="crate-main"><p class="crate-lede">A small, strict HTTP/1.1 server with one async handler, and a client.</p><ul><li>Keep-alive, pipelining, bodies by <code>Content-Length</code> or chunked</li><li>Limits on head and body size; timeouts for idle, slow and slow-reading clients</li><li>Answers <code>400</code> to any request a proxy in front could read differently</li><li><code>Server::serve</code>, <code>serve_unix</code>, <code>serve_tls</code>; a pooled HTTPS <code>Client</code> with proxies and gzip behind <code>client</code></li></ul><p class="crate-facts"><b>about 6,900</b> lines · <b>109</b> tests · the parser fuzzed every night</p></div></article><article class="crate" id="giong-postgres"><div class="crate-side"><h2>giong-postgres</h2><p class="crate-layer">Clients</p><p class="crate-links"><a href="https://docs.rs/giong-postgres">docs.rs</a> · <a href="https://crates.io/crates/giong-postgres">crates.io</a> · <a href="https://github.com/giong-run/Giong/tree/main/giong-postgres">source</a></p><div class="cmd"><code id="add-giong-postgres">cargo add giong-postgres</code><button class="copy" type="button" data-copy="add-giong-postgres" data-done="copied">copy</button></div></div><div class="crate-main"><p class="crate-lede">A PostgreSQL client and pool. The statements of every task pipeline over a few connections.</p><ul><li><code>Client::connect</code>, <code>query</code>, <code>execute</code>, <code>transaction</code>, <code>cancel_token</code></li><li>A <code>Pool</code> per worker: shared, pipelined statements; <code>get()</code> for a transaction</li><li>Every statement prepared once per connection and cached</li><li>TLS verified by default for remote hosts; SCRAM-SHA-256</li></ul><p class="crate-facts"><b>about 5,600</b> lines · <b>79</b> tests · 2.6× deadpool's statements per core</p></div></article><article class="crate" id="giong-mysql"><div class="crate-side"><h2>giong-mysql</h2><p class="crate-layer">Clients</p><p class="crate-links"><a href="https://docs.rs/giong-mysql">docs.rs</a> · <a href="https://crates.io/crates/giong-mysql">crates.io</a> · <a href="https://github.com/giong-run/Giong/tree/main/giong-mysql">source</a></p><div class="cmd"><code id="add-giong-mysql">cargo add giong-mysql</code><button class="copy" type="button" data-copy="add-giong-mysql" data-done="copied">copy</button></div></div><div class="crate-main"><p class="crate-lede">A MySQL 8 client and pool, built the same way as giong-postgres.</p><ul><li><code>Client::connect</code>, <code>query</code>, <code>execute</code>, <code>transaction</code></li><li>A <code>Pool</code> per worker: shared, pipelined statements; <code>get()</code> for a transaction</li><li>Prepared statements on the binary protocol, cached per connection</li><li>TLS; <code>caching_sha2_password</code> and <code>mysql_native_password</code></li></ul><p class="crate-facts"><b>about 6,500</b> lines · <b>88</b> tests · 4.7× SQLx's statements per core</p></div></article><article class="crate" id="giong-redis"><div class="crate-side"><h2>giong-redis</h2><p class="crate-layer">Clients</p><p class="crate-links"><a href="https://docs.rs/giong-redis">docs.rs</a> · <a href="https://crates.io/crates/giong-redis">crates.io</a> · <a href="https://github.com/giong-run/Giong/tree/main/giong-redis">source</a></p><div class="cmd"><code id="add-giong-redis">cargo add giong-redis</code><button class="copy" type="button" data-copy="add-giong-redis" data-done="copied">copy</button></div></div><div class="crate-main"><p class="crate-lede">A Redis client and pool on RESP3. The commands of every task pipeline over one connection.</p><ul><li>Typed commands, <code>query</code> for any other, <code>Pipeline</code> for a batch</li><li>Transactions with <code>watch</code>; Pub/Sub</li><li>A <code>Pool</code> per worker; <code>take()</code> for a connection of your own</li><li>TLS; Redis 6 or newer (RESP3)</li></ul><p class="crate-facts"><b>about 5,400</b> lines · <b>71</b> tests · 1.4× redis-rs's <code>GET</code>s per core</p></div></article><article class="crate" id="giong-web"><div class="crate-side"><h2>giong-web</h2><p class="crate-layer">Framework</p><p class="crate-links"><a href="https://docs.rs/giong-web">docs.rs</a> · <a href="https://crates.io/crates/giong-web">crates.io</a> · <a href="https://github.com/giong-run/Giong/tree/main/giong-web">source</a></p><div class="cmd"><code id="add-giong-web">cargo add giong-web</code><button class="copy" type="button" data-copy="add-giong-web" data-done="copied">copy</button></div></div><div class="crate-main"><p class="crate-lede">A router, middleware and JSON on giong-http. Handlers are plain <code>async fn</code>s; every error is a coded problem+json answer.</p><ul><li><code>Router::new().get("/users/{id}", user).nest("/api", api).build(state)</code></li><li><code>req.param::&lt;u64&gt;("id")?</code>, <code>req.query::&lt;T&gt;()?</code>, <code>req.json::&lt;T&gt;()?</code></li><li><code>RequestId</code>, <code>Logger</code> (JSON lines), <code>Cors</code>, <code>Compression</code> (gzip), <code>Timeout</code></li><li>404, 405 with <code>Allow</code>, <code>OPTIONS</code> and <code>HEAD</code> answered for you; <code>App::handle</code> tests without a socket</li></ul><p class="crate-facts"><b>about 5,000</b> lines · <b>68</b> tests · 1.3× axum's <code>/json</code> on one core</p></div></article><article class="crate is-coming" id="giong-mcp"><div class="crate-side"><h2>giong-mcp</h2><p class="crate-layer">Tooling · on the roadmap</p></div><div class="crate-main"><p class="crate-lede">A read-only MCP server: an agent reads workers, connections and pools.</p><p class="crate-facts"><a href="/roadmap/">See the roadmap</a></p></div></article></div></section>
+</main>
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr-grid">
+      <div class="ftr-brand">
+        <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="22" height="22"></picture><span>giong</span></a>
+        <p>A thread-per-core async runtime for Rust on Linux, built directly on io_uring.</p>
+        <p class="ftr-social">
+          <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
+          <a class="icon-btn" href="https://x.com/giongrun" aria-label="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
+          <a class="icon-btn" href="https://github.com/giong-run/Giong/releases.atom" aria-label="Release feed"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3a16 16 0 0 1 16 16h-3A13 13 0 0 0 5 6Zm0 6a10 10 0 0 1 10 10h-3a7 7 0 0 0-7-7Zm1.5 6.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z"/></svg></a>
+        </p>
+      </div>
+      <nav class="ftr-col" aria-label="Learn">
+        <h2>Learn</h2>
+        <a href="/docs/">Get started</a>
+        <a href="/docs/#examples">Examples</a>
+        <a href="https://docs.rs/giong/0.3.0/giong/">API reference</a>
+        <a href="/docs/#errors">Error codes</a>
+        <a href="/llms.txt">llms.txt</a>
+      </nav>
+      <nav class="ftr-col" aria-label="Project">
+        <h2>Project</h2>
+        <a href="/crates/">Crates</a>
+        <a href="/benchmarks/">Benchmarks</a>
+        <a href="/roadmap/">Roadmap</a>
+        <a href="/releases/">Releases</a>
+      </nav>
+      <nav class="ftr-col" aria-label="Community">
+        <h2>Community</h2>
+        <a href="https://github.com/giong-run/Giong">GitHub</a>
+        <a href="https://x.com/giongrun">X · @giongrun</a>
+        <a href="https://github.com/giong-run/Giong/issues">Issues</a>
+        <a href="https://github.com/giong-run/Giong/blob/main/CONTRIBUTING.md">Contributing</a>
+        <a href="https://github.com/giong-run/Giong/security/advisories/new">Report a vulnerability</a>
+      </nav>
+    </div>
+    <div class="ftr-base">
+      <span>© 2026 <a href="https://github.com/thekivashyn">thekivashyn</a> and the giong contributors. MIT or Apache-2.0.</span>
+      <span class="ramp" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+    </div>
+  </div>
+</footer>
+<script src="/main.js" defer></script>
+</body>
+</html>

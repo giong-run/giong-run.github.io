@@ -18,17 +18,18 @@ Facts that are easy to get wrong:
 - giong-web: build the `Router` inside each worker's future (`run(|_| async { .. })`), since
   an `App` is not `Send`. A handler is `async fn(Req<S>) -> Result<Response, Error>`; `?` on
   any other error answers `500` and logs the cause, never sending it.
-- Install with `cargo add giong` (and `giong-http`, `giong-tls`). Libraries need Rust 1.80.
+- Install with `cargo add giong` (and `giong-http`, `giong-web`, ...). Libraries need Rust 1.80.
 
 ## Docs
 
-- [giong API](https://docs.rs/giong): the runtime: executor, io_uring driver, TCP, UDP and Unix sockets, files, timers, channels
-- [giong-tls API](https://docs.rs/giong-tls): TLS on rustls
-- [giong-http API](https://docs.rs/giong-http): a small, strict HTTP/1.1 server, HTTPS behind the `tls` feature; an HTTP/1.1 client with a pool per host behind `client`
-- [giong-postgres API](https://docs.rs/giong-postgres): a PostgreSQL client and per-worker pool; statements from every task pipeline over a few connections
-- [giong-mysql API](https://docs.rs/giong-mysql): a MySQL 8 client and per-worker pool; statements from every task pipeline over a few connections
-- [giong-redis API](https://docs.rs/giong-redis): a Redis client and per-worker pool: commands from every task pipeline over one connection; pipelines, transactions, Pub/Sub
-- [giong-web API](https://docs.rs/giong-web): a router, middleware (request ids, JSON-line logs, CORS, gzip, timeouts) and JSON on giong-http; every error is problem+json with a `GIONG-E12xx` or your own code
+- [giong API](https://docs.rs/giong): Gióng — a thread-per-core async runtime for Linux built directly on io_uring
+- [giong-tls API](https://docs.rs/giong-tls): TLS for the giong thread-per-core runtime, built on rustls
+- [giong-http API](https://docs.rs/giong-http): A small, strict HTTP/1.1 server and client for the giong thread-per-core runtime
+- [giong-postgres API](https://docs.rs/giong-postgres): A PostgreSQL client and connection pool for the giong thread-per-core runtime
+- [giong-mysql API](https://docs.rs/giong-mysql): A MySQL client and connection pool for the giong thread-per-core runtime
+- [giong-redis API](https://docs.rs/giong-redis): A Redis client, pipelining across tasks, with Pub/Sub and a pool, for the giong thread-per-core runtime
+- [giong-web API](https://docs.rs/giong-web): A router, middleware and JSON for HTTP services on the giong thread-per-core runtime
+- [Get started](https://giong.run/docs/): requirements, a first server, examples, limits
 - [README](https://github.com/giong-run/Giong/blob/main/README.md): design, benchmarks with their method, limitations
 - [AGENTS.md](https://github.com/giong-run/Giong/blob/main/AGENTS.md): how to build, test and change giong, for coding agents
 - [Error codes](https://github.com/giong-run/Giong/blob/main/docs/errors/README.md): what each `GIONG-E` code means and how to fix it
@@ -40,10 +41,10 @@ Facts that are easy to get wrong:
 
 - [examples/echo.rs](https://github.com/giong-run/Giong/blob/main/examples/echo.rs): A TCP echo server on every core.
 - [examples/http.rs](https://github.com/giong-run/Giong/blob/main/examples/http.rs): A small HTTP/1.1 server: keep-alive, pipelining, idle timeouts, a header size limit and graceful shutdown on SIGINT and SIGTERM. The same routes the benchmarks use.
-- [examples/udp_echo.rs](https://github.com/giong-run/Giong/blob/main/examples/udp_echo.rs): A UDP echo server, receiving with multishot `recvmsg`.
+- [examples/udp_echo.rs](https://github.com/giong-run/Giong/blob/main/examples/udp_echo.rs): A UDP echo server, receiving with multishot recvmsg.
 - [examples/cat.rs](https://github.com/giong-run/Giong/blob/main/examples/cat.rs): Prints files to standard output, reading them through io_uring with positional reads.
 
 ## Optional
 
 - [Benchmark results](https://github.com/giong-run/Giong/tree/main/bench/results): raw numbers behind the README
-- [giong-http README](https://github.com/giong-run/Giong/blob/main/giong-http/README.md) and [giong-tls README](https://github.com/giong-run/Giong/blob/main/giong-tls/README.md)
+- [giong-http README](https://github.com/giong-run/Giong/blob/main/giong-http/README.md), [giong-web README](https://github.com/giong-run/Giong/blob/main/giong-web/README.md)
