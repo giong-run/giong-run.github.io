@@ -217,7 +217,7 @@ Error: <span class="e">GIONG-E0102: no address found for db.internal. Fix: check
       <div class="files">
         <a href="https://github.com/giong-run/Giong/blob/main/AGENTS.md"><b>AGENTS.md</b><span>how to build, test and change giong</span></a>
         <a href="/llms.txt"><b>llms.txt</b><span>where a model finds the docs</span></a>
-        <a href="/docs/#errors"><b>87 error codes</b><span>each with a page: cause and fix</span></a>
+        <a href="/docs/#errors"><b>88 error codes</b><span>each with a page: cause and fix</span></a>
       </div>
     </div>
     <ol class="points"><li><h3>Errors that say how to fix them</h3><p>Every error giong raises has a stable code, the cause and the fix, and a page of its own. <code>giong::error::code(&amp;err)</code> matches on the code, never on the message.</p></li><li><h3>One obvious way</h3><p>No macros that hide control flow. Strict types, so a mistake is a compile error. Every timeout and size limit is finite and documented.</p></li><li><h3>Verification is the law</h3><p>Tests, ThreadSanitizer, loom, fuzzing and soak tests run in CI and block merging. Machines check the work, not only reviewers.</p></li><li><h3>Docs a machine can read</h3><p><code>AGENTS.md</code> in the repository and <code>llms.txt</code> on this site. <code>giong-mcp</code>, on the roadmap, lets an agent look inside a running service.</p></li></ol>
