@@ -20,6 +20,12 @@ Facts that are easy to get wrong:
 - giong-web: build the `Router` inside each worker's future (`run(|_| async { .. })`), since
   an `App` is not `Send`. A handler is `async fn(Req<S>) -> Result<Response, Error>`; `?` on
   any other error answers `500` and logs the cause, never sending it.
+- Coming from Tokio: `giong::spawn` keeps a task on its worker, so nothing needs `Send` and
+  per-worker state is an `Rc<RefCell<..>>`, not an `Arc<Mutex<..>>`. `futures::join!` and
+  `futures::select!` take the place of Tokio's macros. There is no `spawn_blocking`: use
+  `std::thread::spawn` and a `giong::sync::oneshot` channel, and never block a worker.
+  `giong::sync` has `mpsc` and `oneshot`; Tokio's `sync` module (`Semaphore`, `Notify`,
+  `watch`, `broadcast`) needs no Tokio runtime and works on giong.
 - Crates that need the Tokio runtime (sqlx, reqwest, tonic's transport) do not run on giong.
   Crates generic over a Tokio or futures-io stream (h2, tokio-rustls, tokio-tungstenite) do,
   through `giong_compat::Compat::new(stream)`.
@@ -69,6 +75,7 @@ Facts that are easy to get wrong:
 
 ## Examples
 
+- [examples/rest-api](https://github.com/giong-run/Giong/blob/v0.6.0/examples/rest-api/README.md): A whole service on giong-web: users kept in PostgreSQL, read through a Redis cache, served over HTTPS, with request ids, a JSON access log, readiness, a streamed export and graceful shutdown. Its README has the routes, the configuration and how it is tested.
 - [examples/echo.rs](https://github.com/giong-run/Giong/blob/v0.6.0/examples/echo.rs): A TCP echo server on every core.
 - [examples/http.rs](https://github.com/giong-run/Giong/blob/v0.6.0/examples/http.rs): A small HTTP/1.1 server: keep-alive, pipelining, idle timeouts, a header size limit and graceful shutdown on SIGINT and SIGTERM. The same routes the benchmarks use.
 - [examples/udp_echo.rs](https://github.com/giong-run/Giong/blob/v0.6.0/examples/udp_echo.rs): A UDP echo server, receiving with multishot recvmsg.
