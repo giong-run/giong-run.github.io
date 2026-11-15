@@ -2,7 +2,8 @@
 
 > A thread-per-core async runtime for Rust on Linux, built directly on io_uring. Every
 > worker owns its ring, tasks and buffers; tasks never move between threads, so futures
-> need not be `Send`. Version 0.5.0.
+> need not be `Send`. Version 0.5.0; every link below is to the documentation of that
+> release, which is what `cargo add` installs.
 
 Facts that are easy to get wrong:
 
@@ -27,35 +28,48 @@ Facts that are easy to get wrong:
 - On Linux 6.14 to 7.2 each worker's rings count against the locked-memory limit
   (`ulimit -l`, about 150 KiB per worker). Past it giong runs that worker on epoll and says
   why (`GIONG-E0010`); raise the limit as docs/DEPLOYMENT.md shows.
+- To let an agent look inside a running service (which task blocks a worker, which line
+  spawned the tasks that leak, how full the pools are), add giong-mcp and call
+  `giong_mcp::start_from_env` with the runtime's handle: it serves MCP on the address
+  in `GIONG_MCP`. Its README says how to connect a client.
 - Install with `cargo add giong` (and `giong-http`, `giong-web`, ...). Libraries need Rust 1.80.
 
 ## Docs
 
-- [giong API](https://docs.rs/giong): Gióng — a thread-per-core async runtime for Linux, built on io_uring, with an epoll fallback
-- [giong-tls API](https://docs.rs/giong-tls): TLS for the giong thread-per-core runtime, built on rustls
-- [giong-http API](https://docs.rs/giong-http): A small, strict HTTP/1.1 and HTTP/2 server and client for the giong thread-per-core runtime
-- [giong-postgres API](https://docs.rs/giong-postgres): A PostgreSQL client and connection pool for the giong thread-per-core runtime
-- [giong-mysql API](https://docs.rs/giong-mysql): A MySQL client and connection pool for the giong thread-per-core runtime
-- [giong-redis API](https://docs.rs/giong-redis): A Redis client, pipelining across tasks, with Pub/Sub and a pool, for the giong thread-per-core runtime
-- [giong-web API](https://docs.rs/giong-web): A router, middleware and JSON for HTTP services on the giong thread-per-core runtime
-- [giong-mcp API](https://docs.rs/giong-mcp): An MCP server that lets AI agents look inside a running giong service: workers, tasks, pools, profiles
-- [giong-compat API](https://docs.rs/giong-compat): Tokio and futures-io I/O traits for giong's streams, so transport-generic protocol crates run on giong
+- [giong API](https://docs.rs/giong/0.5.0): Gióng — a thread-per-core async runtime for Linux, built on io_uring, with an epoll fallback
+- [giong-tls API](https://docs.rs/giong-tls/0.5.0): TLS for the giong thread-per-core runtime, built on rustls
+- [giong-http API](https://docs.rs/giong-http/0.5.0): A small, strict HTTP/1.1 and HTTP/2 server and client for the giong thread-per-core runtime
+- [giong-postgres API](https://docs.rs/giong-postgres/0.5.0): A PostgreSQL client and connection pool for the giong thread-per-core runtime
+- [giong-mysql API](https://docs.rs/giong-mysql/0.5.0): A MySQL client and connection pool for the giong thread-per-core runtime
+- [giong-redis API](https://docs.rs/giong-redis/0.5.0): A Redis client, pipelining across tasks, with Pub/Sub and a pool, for the giong thread-per-core runtime
+- [giong-web API](https://docs.rs/giong-web/0.5.0): A router, middleware and JSON for HTTP services on the giong thread-per-core runtime
+- [giong-mcp API](https://docs.rs/giong-mcp/0.5.0): An MCP server that lets AI agents look inside a running giong service: workers, tasks, pools, profiles
+- [giong-compat API](https://docs.rs/giong-compat/0.5.0): Tokio and futures-io I/O traits for giong's streams, so transport-generic protocol crates run on giong
 - [Get started](https://giong.run/docs/): requirements, a first server, examples, limits
-- [README](https://github.com/giong-run/Giong/blob/main/README.md): design, benchmarks with their method, limitations
-- [AGENTS.md](https://github.com/giong-run/Giong/blob/main/AGENTS.md): how to build, test and change giong, for coding agents
-- [Error codes](https://github.com/giong-run/Giong/blob/main/docs/errors/README.md): what each `GIONG-E` code means and how to fix it
-- [CONTRIBUTING.md](https://github.com/giong-run/Giong/blob/main/CONTRIBUTING.md): the rules every change follows
-- [ROADMAP.md](https://github.com/giong-run/Giong/blob/main/ROADMAP.md): milestones and deliberate non-goals
-- [CHANGELOG.md](https://github.com/giong-run/Giong/blob/main/CHANGELOG.md): what changed in each release
+- [README](https://github.com/giong-run/Giong/blob/v0.5.0/README.md): design, benchmarks with their method, limitations
+- [giong-tls README](https://github.com/giong-run/Giong/blob/v0.5.0/giong-tls/README.md)
+- [giong-http README](https://github.com/giong-run/Giong/blob/v0.5.0/giong-http/README.md)
+- [giong-postgres README](https://github.com/giong-run/Giong/blob/v0.5.0/giong-postgres/README.md)
+- [giong-mysql README](https://github.com/giong-run/Giong/blob/v0.5.0/giong-mysql/README.md)
+- [giong-redis README](https://github.com/giong-run/Giong/blob/v0.5.0/giong-redis/README.md)
+- [giong-web README](https://github.com/giong-run/Giong/blob/v0.5.0/giong-web/README.md)
+- [giong-mcp README](https://github.com/giong-run/Giong/blob/v0.5.0/giong-mcp/README.md)
+- [giong-compat README](https://github.com/giong-run/Giong/blob/v0.5.0/giong-compat/README.md)
+- [Error codes](https://github.com/giong-run/Giong/blob/v0.5.0/docs/errors/README.md): what each `GIONG-E` code means and how to fix it
+- [Deployment](https://github.com/giong-run/Giong/blob/v0.5.0/docs/DEPLOYMENT.md): io_uring in containers, limits, kernels
+- [CHANGELOG.md](https://github.com/giong-run/Giong/blob/v0.5.0/CHANGELOG.md): what changed in each release
+- [Everything above in one file](https://giong.run/llms-full.txt): the READMEs and error pages of v0.5.0
 
 ## Examples
 
-- [examples/echo.rs](https://github.com/giong-run/Giong/blob/main/examples/echo.rs): A TCP echo server on every core.
-- [examples/http.rs](https://github.com/giong-run/Giong/blob/main/examples/http.rs): A small HTTP/1.1 server: keep-alive, pipelining, idle timeouts, a header size limit and graceful shutdown on SIGINT and SIGTERM. The same routes the benchmarks use.
-- [examples/udp_echo.rs](https://github.com/giong-run/Giong/blob/main/examples/udp_echo.rs): A UDP echo server, receiving with multishot recvmsg.
-- [examples/cat.rs](https://github.com/giong-run/Giong/blob/main/examples/cat.rs): Prints files to standard output, reading them through io_uring with positional reads.
+- [examples/echo.rs](https://github.com/giong-run/Giong/blob/v0.5.0/examples/echo.rs): A TCP echo server on every core.
+- [examples/http.rs](https://github.com/giong-run/Giong/blob/v0.5.0/examples/http.rs): A small HTTP/1.1 server: keep-alive, pipelining, idle timeouts, a header size limit and graceful shutdown on SIGINT and SIGTERM. The same routes the benchmarks use.
+- [examples/udp_echo.rs](https://github.com/giong-run/Giong/blob/v0.5.0/examples/udp_echo.rs): A UDP echo server, receiving with multishot recvmsg.
+- [examples/cat.rs](https://github.com/giong-run/Giong/blob/v0.5.0/examples/cat.rs): Prints files to standard output, reading them through io_uring with positional reads.
 
 ## Optional
 
-- [Benchmark results](https://github.com/giong-run/Giong/tree/main/bench/results): raw numbers behind the README
-- [giong-http README](https://github.com/giong-run/Giong/blob/main/giong-http/README.md), [giong-web README](https://github.com/giong-run/Giong/blob/main/giong-web/README.md)
+- [Benchmark results](https://github.com/giong-run/Giong/tree/v0.5.0/bench/results): raw numbers behind the README
+- [ROADMAP.md](https://github.com/giong-run/Giong/blob/main/ROADMAP.md): milestones and deliberate non-goals
+- [AGENTS.md](https://github.com/giong-run/Giong/blob/main/AGENTS.md) and [CONTRIBUTING.md](https://github.com/giong-run/Giong/blob/main/CONTRIBUTING.md): how to build,
+  test and change giong itself, on its main branch
