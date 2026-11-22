@@ -103,6 +103,7 @@ Facts that are easy to get wrong:
 - [Error codes](https://giong.run/docs/errors.md): what each `GIONG-E` code means and how to fix it
 - [CHANGELOG.md](https://github.com/giong-run/Giong/blob/v1.3.0/CHANGELOG.md): what changed in each release
 - [Everything above in one file](https://giong.run/llms-full.txt): the READMEs, best practices and error pages of v1.3.0
+- Older versions, for code pinned to them: [1.2](https://giong.run/docs/1.2/index.md), [1.1](https://giong.run/docs/1.1/index.md), [1.0](https://giong.run/docs/1.0/index.md)
 
 ## Examples
 

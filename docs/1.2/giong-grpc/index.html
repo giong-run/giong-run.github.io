@@ -1,0 +1,914 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>giong-grpc · giong</title>
+<meta name="description" content="gRPC servers and clients on giong-http&#x27;s HTTP/2. Messages are read as giong-proto views without copies.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://giong.run/docs/1.2/giong-grpc/">
+<meta name="theme-color" content="#0A0C10">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="giong">
+<meta property="og:title" content="giong-grpc · giong">
+<meta property="og:description" content="gRPC servers and clients on giong-http&#x27;s HTTP/2. Messages are read as giong-proto views without copies.">
+<meta property="og:url" content="https://giong.run/docs/1.2/giong-grpc/">
+<meta property="og:image" content="https://giong.run/assets/social-preview.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="The giong logo: a segmented ember ring">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@giongrun">
+<meta name="twitter:title" content="giong-grpc · giong">
+<meta name="twitter:description" content="gRPC servers and clients on giong-http&#x27;s HTTP/2. Messages are read as giong-proto views without copies.">
+<meta name="twitter:image" content="https://giong.run/assets/social-preview.png">
+<meta name="author" content="thekivashyn">
+<link rel="alternate" type="application/atom+xml" title="giong releases" href="https://github.com/giong-run/Giong/releases.atom">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","name":"giong-grpc · giong","description":"gRPC servers and clients on giong-http's HTTP/2. Messages are read as giong-proto views without copies.","url":"https://giong.run/docs/1.2/giong-grpc/"}]}</script>
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/giong-icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/giong-icon-180.png">
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/styles.css">
+<script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("giong-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}})(document.documentElement)</script>
+</head>
+<body class="page-docs-1.2-giong-grpc">
+<a class="skip" href="#main">Skip to content</a>
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="28" height="28"></picture><span>giong</span></a>
+    <nav class="nav" aria-label="Site"><a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a></nav>
+    <div class="hdr-side">
+      <a class="ver" href="/releases/#v1-3-0" title="Release notes for v1.3.0">v1.3.0</a>
+      <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="giong on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
+      <a class="icon-btn hide-sm" href="https://x.com/giongrun" aria-label="giong on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
+      <button class="icon-btn theme" type="button" aria-label="Switch between light and dark" hidden>
+        <span class="if-dark"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></span><span class="if-light"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z"/></svg></span></button>
+      <details class="menu">
+        <summary class="icon-btn" aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
+        <nav class="menu-panel" aria-label="Site">
+          <a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a>
+          <span class="menu-social"><a href="https://github.com/giong-run/Giong">GitHub</a><a href="https://x.com/giongrun">X</a></span>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+<main id="main">
+<div class="wrap docs-layout">
+  <nav class="side" aria-label="Documentation"><details class="side-menu" open><summary>Documentation</summary><div class="side-links"><div class="side-group"><p>Start</p><a href="/docs/1.2/">Get started</a></div><div class="side-group"><p>Runtime</p><a href="/docs/1.2/giong/">giong</a></div><div class="side-group"><p>Protocols</p><a href="/docs/1.2/giong-proto/">giong-proto</a><a href="/docs/1.2/giong-tls/">giong-tls</a><a href="/docs/1.2/giong-http/">giong-http</a><a href="/docs/1.2/giong-grpc/" aria-current=page>giong-grpc</a><a href="/docs/1.2/giong-compat/">giong-compat</a></div><div class="side-group"><p>Clients</p><a href="/docs/1.2/giong-postgres/">giong-postgres</a><a href="/docs/1.2/giong-mysql/">giong-mysql</a><a href="/docs/1.2/giong-redis/">giong-redis</a></div><div class="side-group"><p>Framework</p><a href="/docs/1.2/giong-web/">giong-web</a></div><div class="side-group"><p>Tooling</p><a href="/docs/1.2/giong-grpc-build/">giong-grpc-build</a><a href="/docs/1.2/giong-mcp/">giong-mcp</a></div><div class="side-group"><p>Operate</p><a href="/docs/1.2/deployment/">Deployment</a><a href="/docs/1.2/stability/">Stability</a><a href="/docs/1.2/errors/">Error codes</a></div></div></details></nav>
+  <article class="doc-page prose">
+    <header class="doc-head"><p class="eyebrow">Protocols</p><h1>giong-grpc</h1><p class="lede">gRPC servers and clients on giong-http's HTTP/2. Messages are read as giong-proto views without copies.</p>
+      <div class="doc-bar"><details class="ver-menu"><summary title="Documentation version">giong 1.2</summary><nav class="ver-list" aria-label="Documentation versions"><a href="/docs/giong-grpc/"><b>1.3</b><span>newest</span></a><a href="/docs/1.2/giong-grpc/" aria-current=true><b>1.2</b></a><a href="/docs/1.1/giong-grpc/"><b>1.1</b></a><a href="/docs/1.0/"><b>1.0</b></a></nav></details><div class="doc-actions"><button class="act" type="button" data-md="md-page" data-done="copied" title="Copy this page as Markdown, for a coding agent"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy for agent</span></button><button class="act" type="button" data-md="md-prompt" data-done="copied" title="Copy a ready prompt with the rules and this page"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9Z"/><path d="M18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8Z"/></svg><span>Copy prompt</span></button><a class="act" href="/docs/1.2/giong-grpc.md" title="This page as plain Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><span>.md</span></a></div></div><div class="doc-meta"><div class="cmd"><code id="add-giong-grpc">cargo add giong-grpc</code><button class="copy" type="button" data-copy="add-giong-grpc" data-done="copied">copy</button></div><p class="crate-links"><a href="https://docs.rs/giong-grpc/1.2.0">docs.rs</a> · <a href="https://crates.io/crates/giong-grpc">crates.io</a> · <a href="https://github.com/giong-run/Giong/tree/main/giong-grpc">source</a></p></div></header>
+    <p class="ver-note">This is the documentation of giong 1.2 (v1.2.0). The newest release is 1.3: <a href="/docs/giong-grpc/">read this page for 1.3</a>.</p><div class="md-intro"><p>gRPC for the <a href="/docs/1.2/giong/">giong</a> runtime: servers and clients over <a href="/docs/1.2/giong-http/">giong-http</a>'s HTTP/2, with messages read as <a href="/docs/1.2/giong-proto/">giong-proto</a> views that borrow from the bytes received. Nothing from the Tokio ecosystem, and no <code>protoc</code> to install: <a href="/docs/1.2/giong-grpc-build/">giong-grpc-build</a> parses the <code>.proto</code> files in Rust.</p>
+<p>It interoperates with grpc-go in both directions on the test cases of <a href="https://github.com/grpc/grpc/blob/master/doc/interop-test-descriptions.md">gRPC's interoperability specification</a>, on io_uring and on epoll, in CI (<a href="https://github.com/giong-run/Giong/blob/v1.2.0/giong-grpc/interop/run.sh"><code>interop/run.sh</code></a>).</p>
+<blockquote><p><strong>New in giong 1.1.</strong></p></blockquote>
+<pre class="code"><code class="lang-toml">[dependencies]
+giong = "1"
+giong-http = "1"
+giong-grpc = "1"
+giong-proto = "1"
+
+[build-dependencies]
+giong-grpc-build = "1"</code></pre>
+<p><code>build.rs</code>:</p>
+<pre class="code"><code class="lang-rust"><span class="k">fn</span> main() {
+    giong_grpc_build::compile(&amp;[<span class="s">"proto/greeter.proto"</span>], &amp;[<span class="s">"proto"</span>]).unwrap();
+}</code></pre>
+<p><code>proto/greeter.proto</code>:</p>
+<pre class="code"><code class="lang-proto">syntax = "proto3";
+package hello.v1;
+
+service Greeter {
+  rpc SayHello(HelloRequest) returns (HelloReply);
+  rpc SayHelloMany(HelloRequest) returns (stream HelloReply);
+}
+
+message HelloRequest { string name = 1; uint32 count = 2; }
+message HelloReply { string message = 1; }</code></pre>
+<p>The server implements the trait generated for the service, one method for each rpc:</p>
+<pre class="code"><code class="lang-rust">mod pb {
+    include!(concat!(env!(<span class="s">"OUT_DIR"</span>), <span class="s">"/giong_proto.rs"</span>));
+}
+<span class="k">use</span> giong_grpc::{<span class="t">Code</span>, <span class="t">Reply</span>, <span class="t">Request</span>, <span class="t">Server</span>, <span class="t">Sink</span>, <span class="t">Status</span>};
+<span class="k">use</span> pb::hello::v1::greeter::{<span class="t">Greeter</span>, <span class="t">GreeterServer</span>};
+<span class="k">use</span> pb::hello::v1::{<span class="t">HelloReply</span>, <span class="t">HelloRequest</span>};
+
+<span class="k">struct</span> <span class="t">Hello</span>;
+
+<span class="k">impl</span> <span class="t">Greeter</span> <span class="k">for</span> <span class="t">Hello</span> {
+    <span class="k">async</span> <span class="k">fn</span> say_hello(
+        &amp;self,
+        request: <span class="t">Request</span>&lt;<span class="t">HelloRequest</span>&lt;'static&gt;&gt;,
+    ) -&gt; <span class="t">Result</span>&lt;<span class="t">Reply</span>&lt;<span class="t">HelloReply</span>&lt;'static&gt;&gt;, <span class="t">Status</span>&gt; {
+        <span class="c">// A view over the bytes received: `name()` borrows from them.</span>
+        <span class="k">let</span> name = request.message()?.name();
+        <span class="k">if</span> name.is_empty() {
+            <span class="k">return</span> <span class="t">Err</span>(<span class="t">Status</span>::new(<span class="t">Code</span>::<span class="t">InvalidArgument</span>, <span class="s">"name must not be empty"</span>));
+        }
+        <span class="t">Reply</span>::new(&amp;<span class="t">HelloReply</span> { message: &amp;format!(<span class="s">"Xin chào, {name}!"</span>), ..<span class="t">Default</span>::default() })
+    }
+
+    <span class="k">async</span> <span class="k">fn</span> say_hello_many(
+        &amp;self,
+        request: <span class="t">Request</span>&lt;<span class="t">HelloRequest</span>&lt;'static&gt;&gt;,
+        <span class="k">mut</span> responses: <span class="t">Sink</span>&lt;<span class="t">HelloReply</span>&lt;'static&gt;&gt;,
+    ) -&gt; <span class="t">Result</span>&lt;(), <span class="t">Status</span>&gt; {
+        <span class="k">let</span> message = request.message()?;
+        <span class="k">for</span> n <span class="k">in</span> 1..=message.count() {
+            <span class="k">let</span> text = format!(<span class="s">"Xin chào, {} ({n})!"</span>, message.name());
+            <span class="c">// Waits while the client is slow to read; fails once it is gone.</span>
+            responses.send(&amp;<span class="t">HelloReply</span> { message: &amp;text, ..<span class="t">Default</span>::default() }).<span class="k">await</span>?;
+        }
+        <span class="t">Ok</span>(())
+    }
+}
+
+<span class="k">fn</span> main() -&gt; std::io::<span class="t">Result</span>&lt;()&gt; {
+    <span class="c">// One server per worker thread, all on the same port.</span>
+    giong::<span class="t">Builder</span>::new().build()?.run(|_worker| <span class="k">async</span> {
+        <span class="k">let</span> listener = giong::net::<span class="t">TcpListener</span>::bind(<span class="s">"0.0.0.0:50051"</span>).expect(<span class="s">"bind"</span>);
+        <span class="k">let</span> grpc = <span class="t">Server</span>::new().add(<span class="t">GreeterServer</span>::new(<span class="t">Hello</span>));
+        giong_http::<span class="t">Server</span>::new().serve(listener, grpc).<span class="k">await</span>;
+    })
+}</code></pre>
+<p>The client calls through the generated <code>GreeterClient</code>:</p>
+<pre class="code"><code class="lang-rust"><span class="k">use</span> giong_grpc::{<span class="t">CallOptions</span>, <span class="t">Channel</span>};
+<span class="k">use</span> pb::hello::v1::greeter::<span class="t">GreeterClient</span>;
+
+<span class="k">let</span> greeter = <span class="t">GreeterClient</span>::new(<span class="t">Channel</span>::new(<span class="s">"http://127.0.0.1:50051"</span>)?);
+<span class="k">let</span> request = <span class="t">HelloRequest</span> { name: <span class="s">"An"</span>, count: 3, ..<span class="t">Default</span>::default() };
+
+<span class="k">let</span> reply = greeter.say_hello(&amp;request, <span class="t">CallOptions</span>::new()).<span class="k">await</span>?;
+println!(<span class="s">"{}"</span>, reply.message()?.message());
+
+<span class="k">let</span> <span class="k">mut</span> replies = greeter.say_hello_many(&amp;request, <span class="t">CallOptions</span>::new()).<span class="k">await</span>?;
+<span class="k">while</span> <span class="k">let</span> <span class="t">Some</span>(received) = replies.message().<span class="k">await</span>? {
+    println!(<span class="s">"{}"</span>, received.message()?.message());
+}</code></pre>
+<p><a href="https://github.com/giong-run/Giong/blob/v1.2.0/examples/grpc-hello"><code>examples/grpc-hello</code></a> is this program, complete, with health and reflection.</p></div><section class="md-sec"><button class="sec-copy" type="button" data-md="md-0" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="what-it-does">What it does</h2>
+<ul><li><strong>The four kinds of method</strong>: unary, server streaming, client streaming and bidirectional, with requests and responses flowing at the same time on one HTTP/2 stream.</li><li><strong>Messages without copies.</strong> A message is decoded as a view over the bytes that arrived: it is not copied out of the piece of the stream it came in, and messages that arrived together share that piece. Responses are encoded from structs whose fields borrow.</li><li><strong>Deadlines on both sides.</strong> A client sends its timeout and enforces it; a server enforces the one it was sent, or its own default. A call past its deadline ends with <code>DEADLINE_EXCEEDED</code> and its handler is dropped.</li><li><strong>Cancellation that reaches the handler.</strong> When a client cancels, drops its stream or disappears, the handler's future is dropped at its next <code>.await</code>, and <code>Sink::send</code> and <code>RequestStream::message</code> fail in a handler that is still running.</li><li><strong>Backpressure.</strong> Sending waits for the reader, so a slow reader slows its writer down and nothing queues without bound.</li><li><strong>Streams that batch themselves.</strong> The messages a handler sends before it next waits leave in one write (up to 16 KiB at a time); nothing is held back for more to come, and there is no flush to call.</li><li><strong>Metadata</strong>, text and binary (<code>-bin</code>), before and after the messages; statuses with details.</li><li><strong>gzip</strong>, per message, off by default.</li><li><strong>TLS</strong> through <code>giong_http::Server::serve_tls</code> and <code>https://</code> addresses (ALPN), with private authorities and client certificates.</li><li><strong>Health checking</strong> (<code>grpc.health.v1.Health</code>: Check, List, Watch) and <strong>server reflection</strong> (<code>v1</code> and <code>v1alpha</code>): <code>grpcurl list</code>, <code>describe</code> and calls work without the <code>.proto</code> files.</li><li><strong>Errors with codes.</strong> The statuses giong-grpc raises itself carry <code>GIONG-E4101</code> to <code>GIONG-E4110</code>, with what happened and how to fix it in the message (<a href="/docs/1.2/errors/#giong-grpc">docs/errors</a>).</li></ul></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-1" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="the-four-kinds-of-method">The four kinds of method</h2>
+<div class="table-scroll"><table><thead><tr><th>In the <code>.proto</code></th><th>The handler takes</th><th>and returns</th><th>The client method returns</th></tr></thead><tbody><tr><td><code>rpc M(Req) returns (Resp)</code></td><td><code>Request&lt;Req&gt;</code></td><td><code>Reply&lt;Resp&gt;</code></td><td><code>Reply&lt;Resp&gt;</code></td></tr><tr><td><code>rpc M(Req) returns (stream Resp)</code></td><td><code>Request&lt;Req&gt;</code>, <code>Sink&lt;Resp&gt;</code></td><td><code>()</code></td><td><code>ResponseStream&lt;Resp&gt;</code></td></tr><tr><td><code>rpc M(stream Req) returns (Resp)</code></td><td><code>RequestStream&lt;Req&gt;</code></td><td><code>Reply&lt;Resp&gt;</code></td><td><code>ClientStreaming&lt;Req, Resp&gt;</code></td></tr><tr><td><code>rpc M(stream Req) returns (stream Resp)</code></td><td><code>RequestStream&lt;Req&gt;</code>, <code>Sink&lt;Resp&gt;</code></td><td><code>()</code></td><td>(<code>RequestSink&lt;Req&gt;</code>, <code>ResponseStream&lt;Resp&gt;</code>)</td></tr></tbody></table></div>
+<p>Every handler returns <code>Result&lt;_, Status&gt;</code>. An <code>Err</code> ends the call with that status, and the client gets it as the <code>Err</code> of its call.</p>
+<p>A bidirectional call:</p>
+<pre class="code"><code class="lang-rust"><span class="k">let</span> (<span class="k">mut</span> requests, <span class="k">mut</span> responses) = chat.converse(<span class="t">CallOptions</span>::new());
+requests.send(&amp;<span class="t">Line</span> { text: <span class="s">"hello"</span>, ..<span class="t">Default</span>::default() }).<span class="k">await</span>?;
+<span class="k">while</span> <span class="k">let</span> <span class="t">Some</span>(received) = responses.message().<span class="k">await</span>? {
+    <span class="k">let</span> line = received.message()?;
+    <span class="k">if</span> line.text() == <span class="s">"bye"</span> {
+        break;
+    }
+    requests.send(&amp;<span class="t">Line</span> { text: <span class="s">"and then?"</span>, ..<span class="t">Default</span>::default() }).<span class="k">await</span>?;
+}
+requests.finish(); <span class="c">// the server sees the end of the requests</span></code></pre></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-2" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="limits">Limits</h2>
+<p>Every limit is finite by default.</p>
+<div class="table-scroll"><table><thead><tr><th>What</th><th>Default</th><th>Set with</th></tr></thead><tbody><tr><td>One message, compressed or once decompressed</td><td>4 MiB</td><td><code>Server::max_message_size</code>, <code>ChannelBuilder::max_message_size</code></td></tr><tr><td>A call, on the client</td><td>30 s</td><td><code>CallOptions::timeout</code>, <code>ChannelBuilder::timeout</code></td></tr><tr><td>A call whose client sent no deadline, on the server</td><td>1 h</td><td><code>Server::default_timeout</code></td></tr><tr><td>Opening a connection</td><td>10 s</td><td><code>ChannelBuilder::connect_timeout</code></td></tr><tr><td>Connections, concurrent streams, header sizes, a client's silence between two messages</td><td>giong-http's</td><td><code>giong_http::Server</code></td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-3" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="health-and-reflection">Health and reflection</h2>
+<pre class="code"><code class="lang-rust"><span class="k">use</span> giong_grpc::health::<span class="t">Health</span>;
+<span class="k">use</span> giong_grpc::reflection::<span class="t">Reflection</span>;
+
+<span class="c">// Both are Send and Sync: made once, shared by the servers of every worker.</span>
+<span class="k">let</span> health = <span class="t">Health</span>::new();
+health.set(<span class="s">"hello.v1.Greeter"</span>, true);
+<span class="k">let</span> reflection = <span class="t">Reflection</span>::new(&amp;[pb::FILE_DESCRIPTOR_SET, giong_grpc::health::FILE_DESCRIPTOR_SET])?;
+
+<span class="k">let</span> grpc = <span class="t">Server</span>::new()
+    .add(<span class="t">GreeterServer</span>::new(<span class="t">Hello</span>))
+    .add(health.service())
+    .add(reflection.v1())
+    .add(reflection.v1alpha());</code></pre>
+<pre class="code"><code class="lang-text">$ grpcurl -plaintext localhost:50051 list
+grpc.health.v1.Health
+grpc.reflection.v1.ServerReflection
+grpc.reflection.v1alpha.ServerReflection
+hello.v1.Greeter
+$ grpcurl -plaintext -d '{"name": "An"}' localhost:50051 hello.v1.Greeter/SayHello
+{
+  "message": "Xin chào, An!"
+}</code></pre>
+<p><code>health.set(service, false)</code> from any thread tells load balancers to stop sending calls; <code>health.set_all_not_serving()</code> does it for every service at the start of a shutdown. Reflection tells anyone who can reach the port what the server's API is: leave it off a server whose API is not public.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-4" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="measured-against-tonic">Measured against tonic</h2>
+<p><code>bench/grpc.sh</code>, against tonic 0.14 (prost, hyper, Tokio) with the same service: unary calls with 100-byte and 10,000-byte payloads, round trips on a bidirectional stream, and server streams of 1,000 messages of 100 bytes. A 4-core cloud VM (Xeon 2.1 GHz, Linux 6.18, io_uring), the median of 10 rounds of 5 s; the method is at the top of the script and the raw data in <a href="https://github.com/giong-run/Giong/blob/v1.2.0/bench/results/grpc"><code>bench/results/grpc/</code></a>.</p>
+<p>One server thread, loaded from three other cores until its core is the limit, with tonic's client and with giong-grpc's as the load generator:</p>
+<div class="table-scroll"><table><thead><tr><th>Workload</th><th>Load</th><th>tonic</th><th>giong-grpc</th><th></th><th>Server CPU per call or message, tonic → giong-grpc</th></tr></thead><tbody><tr><td>unary, 100 B</td><td>tonic</td><td>172,842 calls/s</td><td>259,030</td><td>+50%</td><td>5.54 → 3.62 µs</td></tr><tr><td>unary, 100 B</td><td>giong</td><td>174,525</td><td>227,408</td><td>+30%</td><td>5.46 → 4.14 µs</td></tr><tr><td>unary, 10 kB</td><td>tonic</td><td>71,918</td><td>89,862</td><td>+25%</td><td>13.25 → 10.44 µs</td></tr><tr><td>unary, 10 kB</td><td>giong</td><td>75,010</td><td>90,463</td><td>+21%</td><td>12.77 → 10.51 µs</td></tr><tr><td>bidirectional round trips</td><td>tonic</td><td>550,596 msg/s</td><td>813,260</td><td>+48%</td><td>1.74 → 1.18 µs</td></tr><tr><td>bidirectional round trips</td><td>giong</td><td>542,390</td><td>816,094</td><td>+50%</td><td>1.76 → 1.17 µs</td></tr><tr><td>server stream</td><td>tonic</td><td>2,917,860 msg/s</td><td>11,694,153</td><td>4.0×</td><td>0.329 → 0.081 µs</td></tr><tr><td>server stream</td><td>giong</td><td>2,985,038</td><td>11,394,657</td><td>3.8×</td><td>0.321 → 0.084 µs</td></tr></tbody></table></div>
+<p>No workload is behind on the server side. 10,000-byte unary calls from tonic's client were 7.5% behind until giong-http's HTTP/2 server sent the answers to a burst of short requests in one write: it cut its output at 64 KiB, and with one write in flight per connection each further write waited a turn of the worker. With 64 calls in flight per connection (<code>TASKS=128</code>, <a href="https://github.com/giong-run/Giong/blob/v1.2.0/bench/results/grpc/tasks-128"><code>tasks-128/</code></a>) giong-grpc's server does 78,401 calls/s against tonic's 70,778 (+10.8%) under tonic's client and 103,618 against 70,002 (+48%) under its own. The server stream is ahead by that much because the messages a handler sends in a row leave in one write.</p>
+<p>One client thread, against a server with three threads (tonic's, then giong-grpc's):</p>
+<div class="table-scroll"><table><thead><tr><th>Workload</th><th>Server</th><th>tonic client</th><th>giong-grpc client</th><th></th></tr></thead><tbody><tr><td>unary, 100 B</td><td>tonic</td><td>87,301 calls/s</td><td>94,606</td><td>+8%</td></tr><tr><td>unary, 100 B</td><td>giong</td><td>137,046</td><td>143,424</td><td>+5%</td></tr><tr><td>unary, 10 kB</td><td>tonic</td><td>51,879</td><td>58,964</td><td>+14%</td></tr><tr><td>unary, 10 kB</td><td>giong</td><td>57,778</td><td>60,384</td><td>+5%</td></tr><tr><td>bidirectional round trips</td><td>tonic</td><td>253,018 msg/s</td><td>248,773</td><td><strong>−1.7%</strong></td></tr><tr><td>bidirectional round trips</td><td>giong</td><td>489,518</td><td>498,710</td><td>+2%</td></tr><tr><td>server stream</td><td>tonic</td><td>5,627,548 msg/s</td><td>5,698,860</td><td>+1%</td></tr><tr><td>server stream</td><td>giong</td><td>9,399,474</td><td>9,446,808</td><td>+1%</td></tr></tbody></table></div>
+<p>Round trips against tonic's server are level (−1.7%; +0.8% to +2.2% in earlier runs): both clients used about three quarters of their core, so that row measures the server. Server streams from giong-grpc's server were 10% to 18% behind until two things changed: <code>ResponseStream::message</code> returns a message that has already arrived without setting up the future that waits for more (it was rebuilt for every message), and a received HTTP/2 frame is handed to the reader as it is instead of being joined to the next ones. The giong-grpc server in the client runs listens with <code>TcpListener::bind_balanced</code>, so that the client's two connections always land on two of its three workers: with the kernel's choice they sometimes shared one, and that row moved by a third between rounds. Not measured: client streams of many messages in a row, where the giong-grpc client still hands the connection one message at a time.</p>
+<p>Memory: with 1,000 bidirectional streams open on 10 connections, the server's resident memory grew by 5.7 kB a stream with giong-grpc and 11.6 kB with tonic.</p>
+<p>The giong-http server in these runs has <code>max_body_size(4 &lt;&lt; 20)</code>: the HTTP/2 window a stream starts with is a share of the server's body budget (half of it divided by <code>max_concurrent_streams</code>, 5 KiB with the defaults), and a request larger than that window waits for a WINDOW_UPDATE. A service whose requests are larger than 5 KiB should set <code>max_body_size</code> to its message limit, which makes the first window 20 KiB for 4 MiB.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-5" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="not-there">Not there</h2>
+<p>Client-side load balancing and name resolution beyond DNS, retries and hedging (a failed call is returned, not sent again), gRPC-Web, compression other than gzip, and the <code>google.rpc.Status</code> details message (its bytes are available: <code>Status::details</code>).</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-6" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="tests">Tests</h2>
+<pre class="code"><code class="lang-sh">cargo test -p giong-grpc               <span class="c">  # calls, faults, health, reflection, generated code</span>
+giong-grpc/interop/run.sh              <span class="c">  # grpc-go both directions, grpcurl (needs Go)</span>
+GIONG_SOAK_SECS=3600 cargo test --release -p giong-grpc --test soak -- --ignored --nocapture
+(cd giong-grpc &amp;&amp; cargo +nightly fuzz run framing) <span class="c">  # also: gzip timeout status_message metadata descriptors</span></code></pre>
+<p>The soak runs calls of every kind with faults mixed in (cancels, dropped streams, deadlines, connections cut in the middle of a message, bytes that are not HTTP/2) and then checks that no handler, descriptor, driver operation or memory was left behind.</p>
+<p>The minimum Rust version is 1.80, as for giong.</p></section>
+    <p class="src-note">giong 1.2.0 · from <a href="https://github.com/giong-run/Giong/blob/v1.2.0/giong-grpc/README.md">giong-grpc/README.md</a> at v1.2.0</p>
+    <script type="text/markdown" id="md-0"><!-- giong 1.2.0, https://giong.run/docs/1.2/giong-grpc/#what-it-does -->
+
+## What it does
+
+- **The four kinds of method**: unary, server streaming, client streaming and bidirectional, with requests and responses flowing at the same time on one HTTP/2 stream.
+- **Messages without copies.** A message is decoded as a view over the bytes that arrived: it is not copied out of the piece of the stream it came in, and messages that arrived together share that piece. Responses are encoded from structs whose fields borrow.
+- **Deadlines on both sides.** A client sends its timeout and enforces it; a server enforces the one it was sent, or its own default. A call past its deadline ends with `DEADLINE_EXCEEDED` and its handler is dropped.
+- **Cancellation that reaches the handler.** When a client cancels, drops its stream or disappears, the handler's future is dropped at its next `.await`, and `Sink::send` and `RequestStream::message` fail in a handler that is still running.
+- **Backpressure.** Sending waits for the reader, so a slow reader slows its writer down and nothing queues without bound.
+- **Streams that batch themselves.** The messages a handler sends before it next waits leave in one write (up to 16 KiB at a time); nothing is held back for more to come, and there is no flush to call.
+- **Metadata**, text and binary (`-bin`), before and after the messages; statuses with details.
+- **gzip**, per message, off by default.
+- **TLS** through `giong_http::Server::serve_tls` and `https://` addresses (ALPN), with private authorities and client certificates.
+- **Health checking** (`grpc.health.v1.Health`: Check, List, Watch) and **server reflection** (`v1` and `v1alpha`): `grpcurl list`, `describe` and calls work without the `.proto` files.
+- **Errors with codes.** The statuses giong-grpc raises itself carry `GIONG-E4101` to `GIONG-E4110`, with what happened and how to fix it in the message ([docs/errors](../docs/errors/README.md#giong-grpc)).</script><script type="text/markdown" id="md-1"><!-- giong 1.2.0, https://giong.run/docs/1.2/giong-grpc/#the-four-kinds-of-method -->
+
+## The four kinds of method
+
+| In the `.proto` | The handler takes | and returns | The client method returns |
+|---|---|---|---|
+| `rpc M(Req) returns (Resp)` | `Request<Req>` | `Reply<Resp>` | `Reply<Resp>` |
+| `rpc M(Req) returns (stream Resp)` | `Request<Req>`, `Sink<Resp>` | `()` | `ResponseStream<Resp>` |
+| `rpc M(stream Req) returns (Resp)` | `RequestStream<Req>` | `Reply<Resp>` | `ClientStreaming<Req, Resp>` |
+| `rpc M(stream Req) returns (stream Resp)` | `RequestStream<Req>`, `Sink<Resp>` | `()` | (`RequestSink<Req>`, `ResponseStream<Resp>`) |
+
+Every handler returns `Result<_, Status>`. An `Err` ends the call with that status, and the client gets it as the `Err` of its call.
+
+A bidirectional call:
+
+```rust,ignore
+let (mut requests, mut responses) = chat.converse(CallOptions::new());
+requests.send(&Line { text: "hello", ..Default::default() }).await?;
+while let Some(received) = responses.message().await? {
+    let line = received.message()?;
+    if line.text() == "bye" {
+        break;
+    }
+    requests.send(&Line { text: "and then?", ..Default::default() }).await?;
+}
+requests.finish(); // the server sees the end of the requests
+```</script><script type="text/markdown" id="md-2"><!-- giong 1.2.0, https://giong.run/docs/1.2/giong-grpc/#limits -->
+
+## Limits
+
+Every limit is finite by default.
+
+| What | Default | Set with |
+|---|---|---|
+| One message, compressed or once decompressed | 4 MiB | `Server::max_message_size`, `ChannelBuilder::max_message_size` |
+| A call, on the client | 30 s | `CallOptions::timeout`, `ChannelBuilder::timeout` |
+| A call whose client sent no deadline, on the server | 1 h | `Server::default_timeout` |
+| Opening a connection | 10 s | `ChannelBuilder::connect_timeout` |
+| Connections, concurrent streams, header sizes, a client's silence between two messages | giong-http's | `giong_http::Server` |</script><script type="text/markdown" id="md-3"><!-- giong 1.2.0, https://giong.run/docs/1.2/giong-grpc/#health-and-reflection -->
+
+## Health and reflection
+
+```rust,ignore
+use giong_grpc::health::Health;
+use giong_grpc::reflection::Reflection;
+
+// Both are Send and Sync: made once, shared by the servers of every worker.
+let health = Health::new();
+health.set("hello.v1.Greeter", true);
+let reflection = Reflection::new(&[pb::FILE_DESCRIPTOR_SET, giong_grpc::health::FILE_DESCRIPTOR_SET])?;
+
+let grpc = Server::new()
+    .add(GreeterServer::new(Hello))
+    .add(health.service())
+    .add(reflection.v1())
+    .add(reflection.v1alpha());
+```
+
+```text
+$ grpcurl -plaintext localhost:50051 list
+grpc.health.v1.Health
+grpc.reflection.v1.ServerReflection
+grpc.reflection.v1alpha.ServerReflection
+hello.v1.Greeter
+$ grpcurl -plaintext -d '{"name": "An"}' localhost:50051 hello.v1.Greeter/SayHello
+{
+  "message": "Xin chào, An!"
+}
+```
+
+`health.set(service, false)` from any thread tells load balancers to stop sending calls; `health.set_all_not_serving()` does it for every service at the start of a shutdown. Reflection tells anyone who can reach the port what the server's API is: leave it off a server whose API is not public.</script><script type="text/markdown" id="md-4"><!-- giong 1.2.0, https://giong.run/docs/1.2/giong-grpc/#measured-against-tonic -->
+
+## Measured against tonic
+
+`bench/grpc.sh`, against tonic 0.14 (prost, hyper, Tokio) with the same service: unary calls with 100-byte and 10,000-byte payloads, round trips on a bidirectional stream, and server streams of 1,000 messages of 100 bytes. A 4-core cloud VM (Xeon 2.1 GHz, Linux 6.18, io_uring), the median of 10 rounds of 5 s; the method is at the top of the script and the raw data in [`bench/results/grpc/`](../bench/results/grpc).
+
+One server thread, loaded from three other cores until its core is the limit, with tonic's client and with giong-grpc's as the load generator:
+
+| Workload | Load | tonic | giong-grpc | | Server CPU per call or message, tonic → giong-grpc |
+|---|---|---:|---:|---:|---:|
+| unary, 100 B | tonic | 172,842 calls/s | 259,030 | +50% | 5.54 → 3.62 µs |
+| unary, 100 B | giong | 174,525 | 227,408 | +30% | 5.46 → 4.14 µs |
+| unary, 10 kB | tonic | 71,918 | 89,862 | +25% | 13.25 → 10.44 µs |
+| unary, 10 kB | giong | 75,010 | 90,463 | +21% | 12.77 → 10.51 µs |
+| bidirectional round trips | tonic | 550,596 msg/s | 813,260 | +48% | 1.74 → 1.18 µs |
+| bidirectional round trips | giong | 542,390 | 816,094 | +50% | 1.76 → 1.17 µs |
+| server stream | tonic | 2,917,860 msg/s | 11,694,153 | 4.0× | 0.329 → 0.081 µs |
+| server stream | giong | 2,985,038 | 11,394,657 | 3.8× | 0.321 → 0.084 µs |
+
+No workload is behind on the server side. 10,000-byte unary calls from tonic's client were 7.5% behind until giong-http's HTTP/2 server sent the answers to a burst of short requests in one write: it cut its output at 64 KiB, and with one write in flight per connection each further write waited a turn of the worker. With 64 calls in flight per connection (`TASKS=128`, [`tasks-128/`](../bench/results/grpc/tasks-128)) giong-grpc's server does 78,401 calls/s against tonic's 70,778 (+10.8%) under tonic's client and 103,618 against 70,002 (+48%) under its own. The server stream is ahead by that much because the messages a handler sends in a row leave in one write.
+
+One client thread, against a server with three threads (tonic's, then giong-grpc's):
+
+| Workload | Server | tonic client | giong-grpc client | |
+|---|---|---:|---:|---:|
+| unary, 100 B | tonic | 87,301 calls/s | 94,606 | +8% |
+| unary, 100 B | giong | 137,046 | 143,424 | +5% |
+| unary, 10 kB | tonic | 51,879 | 58,964 | +14% |
+| unary, 10 kB | giong | 57,778 | 60,384 | +5% |
+| bidirectional round trips | tonic | 253,018 msg/s | 248,773 | **−1.7%** |
+| bidirectional round trips | giong | 489,518 | 498,710 | +2% |
+| server stream | tonic | 5,627,548 msg/s | 5,698,860 | +1% |
+| server stream | giong | 9,399,474 | 9,446,808 | +1% |
+
+Round trips against tonic's server are level (−1.7%; +0.8% to +2.2% in earlier runs): both clients used about three quarters of their core, so that row measures the server. Server streams from giong-grpc's server were 10% to 18% behind until two things changed: `ResponseStream::message` returns a message that has already arrived without setting up the future that waits for more (it was rebuilt for every message), and a received HTTP/2 frame is handed to the reader as it is instead of being joined to the next ones. The giong-grpc server in the client runs listens with `TcpListener::bind_balanced`, so that the client's two connections always land on two of its three workers: with the kernel's choice they sometimes shared one, and that row moved by a third between rounds. Not measured: client streams of many messages in a row, where the giong-grpc client still hands the connection one message at a time.
+
+Memory: with 1,000 bidirectional streams open on 10 connections, the server's resident memory grew by 5.7 kB a stream with giong-grpc and 11.6 kB with tonic.
+
+The giong-http server in these runs has `max_body_size(4 << 20)`: the HTTP/2 window a stream starts with is a share of the server's body budget (half of it divided by `max_concurrent_streams`, 5 KiB with the defaults), and a request larger than that window waits for a WINDOW_UPDATE. A service whose requests are larger than 5 KiB should set `max_body_size` to its message limit, which makes the first window 20 KiB for 4 MiB.</script><script type="text/markdown" id="md-5"><!-- giong 1.2.0, https://giong.run/docs/1.2/giong-grpc/#not-there -->
+
+## Not there
+
+Client-side load balancing and name resolution beyond DNS, retries and hedging (a failed call is returned, not sent again), gRPC-Web, compression other than gzip, and the `google.rpc.Status` details message (its bytes are available: `Status::details`).</script><script type="text/markdown" id="md-6"><!-- giong 1.2.0, https://giong.run/docs/1.2/giong-grpc/#tests -->
+
+## Tests
+
+```sh
+cargo test -p giong-grpc                 # calls, faults, health, reflection, generated code
+giong-grpc/interop/run.sh                # grpc-go both directions, grpcurl (needs Go)
+GIONG_SOAK_SECS=3600 cargo test --release -p giong-grpc --test soak -- --ignored --nocapture
+(cd giong-grpc && cargo +nightly fuzz run framing)   # also: gzip timeout status_message metadata descriptors
+```
+
+The soak runs calls of every kind with faults mixed in (cancels, dropped streams, deadlines, connections cut in the middle of a message, bytes that are not HTTP/2) and then checks that no handler, descriptor, driver operation or memory was left behind.
+
+The minimum Rust version is 1.80, as for giong.</script><script type="text/markdown" id="md-page"># giong-grpc
+
+> giong 1.2.0 · https://giong.run/docs/1.2/giong-grpc/ · source: https://github.com/giong-run/Giong/blob/v1.2.0/giong-grpc/README.md
+
+gRPC for the [giong](https://github.com/giong-run/Giong/blob/v1.2.0/README.md) runtime: servers and clients over [giong-http](https://github.com/giong-run/Giong/blob/v1.2.0/giong-http/README.md)'s HTTP/2, with messages read as [giong-proto](https://github.com/giong-run/Giong/blob/v1.2.0/giong-proto/README.md) views that borrow from the bytes received. Nothing from the Tokio ecosystem, and no `protoc` to install: [giong-grpc-build](https://github.com/giong-run/Giong/blob/v1.2.0/giong-grpc-build/README.md) parses the `.proto` files in Rust.
+
+It interoperates with grpc-go in both directions on the test cases of [gRPC's interoperability specification](https://github.com/grpc/grpc/blob/master/doc/interop-test-descriptions.md), on io_uring and on epoll, in CI ([`interop/run.sh`](https://github.com/giong-run/Giong/blob/v1.2.0/giong-grpc/interop/run.sh)).
+
+> **New in giong 1.1.**
+
+```toml
+[dependencies]
+giong = "1"
+giong-http = "1"
+giong-grpc = "1"
+giong-proto = "1"
+
+[build-dependencies]
+giong-grpc-build = "1"
+```
+
+`build.rs`:
+
+```rust,ignore
+fn main() {
+    giong_grpc_build::compile(&["proto/greeter.proto"], &["proto"]).unwrap();
+}
+```
+
+`proto/greeter.proto`:
+
+```proto
+syntax = "proto3";
+package hello.v1;
+
+service Greeter {
+  rpc SayHello(HelloRequest) returns (HelloReply);
+  rpc SayHelloMany(HelloRequest) returns (stream HelloReply);
+}
+
+message HelloRequest { string name = 1; uint32 count = 2; }
+message HelloReply { string message = 1; }
+```
+
+The server implements the trait generated for the service, one method for each rpc:
+
+```rust,ignore
+mod pb {
+    include!(concat!(env!("OUT_DIR"), "/giong_proto.rs"));
+}
+use giong_grpc::{Code, Reply, Request, Server, Sink, Status};
+use pb::hello::v1::greeter::{Greeter, GreeterServer};
+use pb::hello::v1::{HelloReply, HelloRequest};
+
+struct Hello;
+
+impl Greeter for Hello {
+    async fn say_hello(
+        &self,
+        request: Request<HelloRequest<'static>>,
+    ) -> Result<Reply<HelloReply<'static>>, Status> {
+        // A view over the bytes received: `name()` borrows from them.
+        let name = request.message()?.name();
+        if name.is_empty() {
+            return Err(Status::new(Code::InvalidArgument, "name must not be empty"));
+        }
+        Reply::new(&HelloReply { message: &format!("Xin chào, {name}!"), ..Default::default() })
+    }
+
+    async fn say_hello_many(
+        &self,
+        request: Request<HelloRequest<'static>>,
+        mut responses: Sink<HelloReply<'static>>,
+    ) -> Result<(), Status> {
+        let message = request.message()?;
+        for n in 1..=message.count() {
+            let text = format!("Xin chào, {} ({n})!", message.name());
+            // Waits while the client is slow to read; fails once it is gone.
+            responses.send(&HelloReply { message: &text, ..Default::default() }).await?;
+        }
+        Ok(())
+    }
+}
+
+fn main() -> std::io::Result<()> {
+    // One server per worker thread, all on the same port.
+    giong::Builder::new().build()?.run(|_worker| async {
+        let listener = giong::net::TcpListener::bind("0.0.0.0:50051").expect("bind");
+        let grpc = Server::new().add(GreeterServer::new(Hello));
+        giong_http::Server::new().serve(listener, grpc).await;
+    })
+}
+```
+
+The client calls through the generated `GreeterClient`:
+
+```rust,ignore
+use giong_grpc::{CallOptions, Channel};
+use pb::hello::v1::greeter::GreeterClient;
+
+let greeter = GreeterClient::new(Channel::new("http://127.0.0.1:50051")?);
+let request = HelloRequest { name: "An", count: 3, ..Default::default() };
+
+let reply = greeter.say_hello(&request, CallOptions::new()).await?;
+println!("{}", reply.message()?.message());
+
+let mut replies = greeter.say_hello_many(&request, CallOptions::new()).await?;
+while let Some(received) = replies.message().await? {
+    println!("{}", received.message()?.message());
+}
+```
+
+[`examples/grpc-hello`](https://github.com/giong-run/Giong/blob/v1.2.0/examples/grpc-hello) is this program, complete, with health and reflection.
+
+## What it does
+
+- **The four kinds of method**: unary, server streaming, client streaming and bidirectional, with requests and responses flowing at the same time on one HTTP/2 stream.
+- **Messages without copies.** A message is decoded as a view over the bytes that arrived: it is not copied out of the piece of the stream it came in, and messages that arrived together share that piece. Responses are encoded from structs whose fields borrow.
+- **Deadlines on both sides.** A client sends its timeout and enforces it; a server enforces the one it was sent, or its own default. A call past its deadline ends with `DEADLINE_EXCEEDED` and its handler is dropped.
+- **Cancellation that reaches the handler.** When a client cancels, drops its stream or disappears, the handler's future is dropped at its next `.await`, and `Sink::send` and `RequestStream::message` fail in a handler that is still running.
+- **Backpressure.** Sending waits for the reader, so a slow reader slows its writer down and nothing queues without bound.
+- **Streams that batch themselves.** The messages a handler sends before it next waits leave in one write (up to 16 KiB at a time); nothing is held back for more to come, and there is no flush to call.
+- **Metadata**, text and binary (`-bin`), before and after the messages; statuses with details.
+- **gzip**, per message, off by default.
+- **TLS** through `giong_http::Server::serve_tls` and `https://` addresses (ALPN), with private authorities and client certificates.
+- **Health checking** (`grpc.health.v1.Health`: Check, List, Watch) and **server reflection** (`v1` and `v1alpha`): `grpcurl list`, `describe` and calls work without the `.proto` files.
+- **Errors with codes.** The statuses giong-grpc raises itself carry `GIONG-E4101` to `GIONG-E4110`, with what happened and how to fix it in the message ([docs/errors](https://github.com/giong-run/Giong/blob/v1.2.0/docs/errors/README.md#giong-grpc)).
+
+## The four kinds of method
+
+| In the `.proto` | The handler takes | and returns | The client method returns |
+|---|---|---|---|
+| `rpc M(Req) returns (Resp)` | `Request<Req>` | `Reply<Resp>` | `Reply<Resp>` |
+| `rpc M(Req) returns (stream Resp)` | `Request<Req>`, `Sink<Resp>` | `()` | `ResponseStream<Resp>` |
+| `rpc M(stream Req) returns (Resp)` | `RequestStream<Req>` | `Reply<Resp>` | `ClientStreaming<Req, Resp>` |
+| `rpc M(stream Req) returns (stream Resp)` | `RequestStream<Req>`, `Sink<Resp>` | `()` | (`RequestSink<Req>`, `ResponseStream<Resp>`) |
+
+Every handler returns `Result<_, Status>`. An `Err` ends the call with that status, and the client gets it as the `Err` of its call.
+
+A bidirectional call:
+
+```rust,ignore
+let (mut requests, mut responses) = chat.converse(CallOptions::new());
+requests.send(&Line { text: "hello", ..Default::default() }).await?;
+while let Some(received) = responses.message().await? {
+    let line = received.message()?;
+    if line.text() == "bye" {
+        break;
+    }
+    requests.send(&Line { text: "and then?", ..Default::default() }).await?;
+}
+requests.finish(); // the server sees the end of the requests
+```
+
+## Limits
+
+Every limit is finite by default.
+
+| What | Default | Set with |
+|---|---|---|
+| One message, compressed or once decompressed | 4 MiB | `Server::max_message_size`, `ChannelBuilder::max_message_size` |
+| A call, on the client | 30 s | `CallOptions::timeout`, `ChannelBuilder::timeout` |
+| A call whose client sent no deadline, on the server | 1 h | `Server::default_timeout` |
+| Opening a connection | 10 s | `ChannelBuilder::connect_timeout` |
+| Connections, concurrent streams, header sizes, a client's silence between two messages | giong-http's | `giong_http::Server` |
+
+## Health and reflection
+
+```rust,ignore
+use giong_grpc::health::Health;
+use giong_grpc::reflection::Reflection;
+
+// Both are Send and Sync: made once, shared by the servers of every worker.
+let health = Health::new();
+health.set("hello.v1.Greeter", true);
+let reflection = Reflection::new(&[pb::FILE_DESCRIPTOR_SET, giong_grpc::health::FILE_DESCRIPTOR_SET])?;
+
+let grpc = Server::new()
+    .add(GreeterServer::new(Hello))
+    .add(health.service())
+    .add(reflection.v1())
+    .add(reflection.v1alpha());
+```
+
+```text
+$ grpcurl -plaintext localhost:50051 list
+grpc.health.v1.Health
+grpc.reflection.v1.ServerReflection
+grpc.reflection.v1alpha.ServerReflection
+hello.v1.Greeter
+$ grpcurl -plaintext -d '{"name": "An"}' localhost:50051 hello.v1.Greeter/SayHello
+{
+  "message": "Xin chào, An!"
+}
+```
+
+`health.set(service, false)` from any thread tells load balancers to stop sending calls; `health.set_all_not_serving()` does it for every service at the start of a shutdown. Reflection tells anyone who can reach the port what the server's API is: leave it off a server whose API is not public.
+
+## Measured against tonic
+
+`bench/grpc.sh`, against tonic 0.14 (prost, hyper, Tokio) with the same service: unary calls with 100-byte and 10,000-byte payloads, round trips on a bidirectional stream, and server streams of 1,000 messages of 100 bytes. A 4-core cloud VM (Xeon 2.1 GHz, Linux 6.18, io_uring), the median of 10 rounds of 5 s; the method is at the top of the script and the raw data in [`bench/results/grpc/`](https://github.com/giong-run/Giong/blob/v1.2.0/bench/results/grpc).
+
+One server thread, loaded from three other cores until its core is the limit, with tonic's client and with giong-grpc's as the load generator:
+
+| Workload | Load | tonic | giong-grpc | | Server CPU per call or message, tonic → giong-grpc |
+|---|---|---:|---:|---:|---:|
+| unary, 100 B | tonic | 172,842 calls/s | 259,030 | +50% | 5.54 → 3.62 µs |
+| unary, 100 B | giong | 174,525 | 227,408 | +30% | 5.46 → 4.14 µs |
+| unary, 10 kB | tonic | 71,918 | 89,862 | +25% | 13.25 → 10.44 µs |
+| unary, 10 kB | giong | 75,010 | 90,463 | +21% | 12.77 → 10.51 µs |
+| bidirectional round trips | tonic | 550,596 msg/s | 813,260 | +48% | 1.74 → 1.18 µs |
+| bidirectional round trips | giong | 542,390 | 816,094 | +50% | 1.76 → 1.17 µs |
+| server stream | tonic | 2,917,860 msg/s | 11,694,153 | 4.0× | 0.329 → 0.081 µs |
+| server stream | giong | 2,985,038 | 11,394,657 | 3.8× | 0.321 → 0.084 µs |
+
+No workload is behind on the server side. 10,000-byte unary calls from tonic's client were 7.5% behind until giong-http's HTTP/2 server sent the answers to a burst of short requests in one write: it cut its output at 64 KiB, and with one write in flight per connection each further write waited a turn of the worker. With 64 calls in flight per connection (`TASKS=128`, [`tasks-128/`](https://github.com/giong-run/Giong/blob/v1.2.0/bench/results/grpc/tasks-128)) giong-grpc's server does 78,401 calls/s against tonic's 70,778 (+10.8%) under tonic's client and 103,618 against 70,002 (+48%) under its own. The server stream is ahead by that much because the messages a handler sends in a row leave in one write.
+
+One client thread, against a server with three threads (tonic's, then giong-grpc's):
+
+| Workload | Server | tonic client | giong-grpc client | |
+|---|---|---:|---:|---:|
+| unary, 100 B | tonic | 87,301 calls/s | 94,606 | +8% |
+| unary, 100 B | giong | 137,046 | 143,424 | +5% |
+| unary, 10 kB | tonic | 51,879 | 58,964 | +14% |
+| unary, 10 kB | giong | 57,778 | 60,384 | +5% |
+| bidirectional round trips | tonic | 253,018 msg/s | 248,773 | **−1.7%** |
+| bidirectional round trips | giong | 489,518 | 498,710 | +2% |
+| server stream | tonic | 5,627,548 msg/s | 5,698,860 | +1% |
+| server stream | giong | 9,399,474 | 9,446,808 | +1% |
+
+Round trips against tonic's server are level (−1.7%; +0.8% to +2.2% in earlier runs): both clients used about three quarters of their core, so that row measures the server. Server streams from giong-grpc's server were 10% to 18% behind until two things changed: `ResponseStream::message` returns a message that has already arrived without setting up the future that waits for more (it was rebuilt for every message), and a received HTTP/2 frame is handed to the reader as it is instead of being joined to the next ones. The giong-grpc server in the client runs listens with `TcpListener::bind_balanced`, so that the client's two connections always land on two of its three workers: with the kernel's choice they sometimes shared one, and that row moved by a third between rounds. Not measured: client streams of many messages in a row, where the giong-grpc client still hands the connection one message at a time.
+
+Memory: with 1,000 bidirectional streams open on 10 connections, the server's resident memory grew by 5.7 kB a stream with giong-grpc and 11.6 kB with tonic.
+
+The giong-http server in these runs has `max_body_size(4 << 20)`: the HTTP/2 window a stream starts with is a share of the server's body budget (half of it divided by `max_concurrent_streams`, 5 KiB with the defaults), and a request larger than that window waits for a WINDOW_UPDATE. A service whose requests are larger than 5 KiB should set `max_body_size` to its message limit, which makes the first window 20 KiB for 4 MiB.
+
+## Not there
+
+Client-side load balancing and name resolution beyond DNS, retries and hedging (a failed call is returned, not sent again), gRPC-Web, compression other than gzip, and the `google.rpc.Status` details message (its bytes are available: `Status::details`).
+
+## Tests
+
+```sh
+cargo test -p giong-grpc                 # calls, faults, health, reflection, generated code
+giong-grpc/interop/run.sh                # grpc-go both directions, grpcurl (needs Go)
+GIONG_SOAK_SECS=3600 cargo test --release -p giong-grpc --test soak -- --ignored --nocapture
+(cd giong-grpc && cargo +nightly fuzz run framing)   # also: gzip timeout status_message metadata descriptors
+```
+
+The soak runs calls of every kind with faults mixed in (cancels, dropped streams, deadlines, connections cut in the middle of a message, bytes that are not HTTP/2) and then checks that no handler, descriptor, driver operation or memory was left behind.
+
+The minimum Rust version is 1.80, as for giong.
+</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.2.0, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use giong-grpc as documented below.
+
+Rules for giong code:
+- Start the runtime with giong::Builder::new().shutdown_on_signals(true).build()?.run(|_worker| async { .. }); there are no macros. Build listeners, routers, pools and clients inside each worker's future.
+- Never block a worker: no std::fs, std::net or std::thread::sleep; use giong::fs, giong::net and giong::time. Run heavy work on std::thread::spawn and await a giong::sync::oneshot.
+- Futures need not be Send. Per-worker state is Rc<RefCell<T>>, never borrowed across an .await.
+- Bind IP addresses ("0.0.0.0:8080"), never host names.
+- Match errors with giong::error::code(&err); every GIONG-Exxxx code has a page that says how to fix it.
+- Use the giong crate for each job (giong-http, giong-web, giong-postgres, giong-redis, ...). Crates that need the Tokio runtime (sqlx, reqwest, tonic's transport) panic on a giong worker.
+More facts: https://giong.run/llms.txt. Best practices: https://giong.run/docs/best-practices.md
+
+My task: <describe what to build or fix>
+
+Documentation of giong-grpc, giong 1.2.0 (https://giong.run/docs/1.2/giong-grpc.md):
+
+# giong-grpc
+
+> giong 1.2.0 · https://giong.run/docs/1.2/giong-grpc/ · source: https://github.com/giong-run/Giong/blob/v1.2.0/giong-grpc/README.md
+
+gRPC for the [giong](https://github.com/giong-run/Giong/blob/v1.2.0/README.md) runtime: servers and clients over [giong-http](https://github.com/giong-run/Giong/blob/v1.2.0/giong-http/README.md)'s HTTP/2, with messages read as [giong-proto](https://github.com/giong-run/Giong/blob/v1.2.0/giong-proto/README.md) views that borrow from the bytes received. Nothing from the Tokio ecosystem, and no `protoc` to install: [giong-grpc-build](https://github.com/giong-run/Giong/blob/v1.2.0/giong-grpc-build/README.md) parses the `.proto` files in Rust.
+
+It interoperates with grpc-go in both directions on the test cases of [gRPC's interoperability specification](https://github.com/grpc/grpc/blob/master/doc/interop-test-descriptions.md), on io_uring and on epoll, in CI ([`interop/run.sh`](https://github.com/giong-run/Giong/blob/v1.2.0/giong-grpc/interop/run.sh)).
+
+> **New in giong 1.1.**
+
+```toml
+[dependencies]
+giong = "1"
+giong-http = "1"
+giong-grpc = "1"
+giong-proto = "1"
+
+[build-dependencies]
+giong-grpc-build = "1"
+```
+
+`build.rs`:
+
+```rust,ignore
+fn main() {
+    giong_grpc_build::compile(&["proto/greeter.proto"], &["proto"]).unwrap();
+}
+```
+
+`proto/greeter.proto`:
+
+```proto
+syntax = "proto3";
+package hello.v1;
+
+service Greeter {
+  rpc SayHello(HelloRequest) returns (HelloReply);
+  rpc SayHelloMany(HelloRequest) returns (stream HelloReply);
+}
+
+message HelloRequest { string name = 1; uint32 count = 2; }
+message HelloReply { string message = 1; }
+```
+
+The server implements the trait generated for the service, one method for each rpc:
+
+```rust,ignore
+mod pb {
+    include!(concat!(env!("OUT_DIR"), "/giong_proto.rs"));
+}
+use giong_grpc::{Code, Reply, Request, Server, Sink, Status};
+use pb::hello::v1::greeter::{Greeter, GreeterServer};
+use pb::hello::v1::{HelloReply, HelloRequest};
+
+struct Hello;
+
+impl Greeter for Hello {
+    async fn say_hello(
+        &self,
+        request: Request<HelloRequest<'static>>,
+    ) -> Result<Reply<HelloReply<'static>>, Status> {
+        // A view over the bytes received: `name()` borrows from them.
+        let name = request.message()?.name();
+        if name.is_empty() {
+            return Err(Status::new(Code::InvalidArgument, "name must not be empty"));
+        }
+        Reply::new(&HelloReply { message: &format!("Xin chào, {name}!"), ..Default::default() })
+    }
+
+    async fn say_hello_many(
+        &self,
+        request: Request<HelloRequest<'static>>,
+        mut responses: Sink<HelloReply<'static>>,
+    ) -> Result<(), Status> {
+        let message = request.message()?;
+        for n in 1..=message.count() {
+            let text = format!("Xin chào, {} ({n})!", message.name());
+            // Waits while the client is slow to read; fails once it is gone.
+            responses.send(&HelloReply { message: &text, ..Default::default() }).await?;
+        }
+        Ok(())
+    }
+}
+
+fn main() -> std::io::Result<()> {
+    // One server per worker thread, all on the same port.
+    giong::Builder::new().build()?.run(|_worker| async {
+        let listener = giong::net::TcpListener::bind("0.0.0.0:50051").expect("bind");
+        let grpc = Server::new().add(GreeterServer::new(Hello));
+        giong_http::Server::new().serve(listener, grpc).await;
+    })
+}
+```
+
+The client calls through the generated `GreeterClient`:
+
+```rust,ignore
+use giong_grpc::{CallOptions, Channel};
+use pb::hello::v1::greeter::GreeterClient;
+
+let greeter = GreeterClient::new(Channel::new("http://127.0.0.1:50051")?);
+let request = HelloRequest { name: "An", count: 3, ..Default::default() };
+
+let reply = greeter.say_hello(&request, CallOptions::new()).await?;
+println!("{}", reply.message()?.message());
+
+let mut replies = greeter.say_hello_many(&request, CallOptions::new()).await?;
+while let Some(received) = replies.message().await? {
+    println!("{}", received.message()?.message());
+}
+```
+
+[`examples/grpc-hello`](https://github.com/giong-run/Giong/blob/v1.2.0/examples/grpc-hello) is this program, complete, with health and reflection.
+
+## What it does
+
+- **The four kinds of method**: unary, server streaming, client streaming and bidirectional, with requests and responses flowing at the same time on one HTTP/2 stream.
+- **Messages without copies.** A message is decoded as a view over the bytes that arrived: it is not copied out of the piece of the stream it came in, and messages that arrived together share that piece. Responses are encoded from structs whose fields borrow.
+- **Deadlines on both sides.** A client sends its timeout and enforces it; a server enforces the one it was sent, or its own default. A call past its deadline ends with `DEADLINE_EXCEEDED` and its handler is dropped.
+- **Cancellation that reaches the handler.** When a client cancels, drops its stream or disappears, the handler's future is dropped at its next `.await`, and `Sink::send` and `RequestStream::message` fail in a handler that is still running.
+- **Backpressure.** Sending waits for the reader, so a slow reader slows its writer down and nothing queues without bound.
+- **Streams that batch themselves.** The messages a handler sends before it next waits leave in one write (up to 16 KiB at a time); nothing is held back for more to come, and there is no flush to call.
+- **Metadata**, text and binary (`-bin`), before and after the messages; statuses with details.
+- **gzip**, per message, off by default.
+- **TLS** through `giong_http::Server::serve_tls` and `https://` addresses (ALPN), with private authorities and client certificates.
+- **Health checking** (`grpc.health.v1.Health`: Check, List, Watch) and **server reflection** (`v1` and `v1alpha`): `grpcurl list`, `describe` and calls work without the `.proto` files.
+- **Errors with codes.** The statuses giong-grpc raises itself carry `GIONG-E4101` to `GIONG-E4110`, with what happened and how to fix it in the message ([docs/errors](https://github.com/giong-run/Giong/blob/v1.2.0/docs/errors/README.md#giong-grpc)).
+
+## The four kinds of method
+
+| In the `.proto` | The handler takes | and returns | The client method returns |
+|---|---|---|---|
+| `rpc M(Req) returns (Resp)` | `Request<Req>` | `Reply<Resp>` | `Reply<Resp>` |
+| `rpc M(Req) returns (stream Resp)` | `Request<Req>`, `Sink<Resp>` | `()` | `ResponseStream<Resp>` |
+| `rpc M(stream Req) returns (Resp)` | `RequestStream<Req>` | `Reply<Resp>` | `ClientStreaming<Req, Resp>` |
+| `rpc M(stream Req) returns (stream Resp)` | `RequestStream<Req>`, `Sink<Resp>` | `()` | (`RequestSink<Req>`, `ResponseStream<Resp>`) |
+
+Every handler returns `Result<_, Status>`. An `Err` ends the call with that status, and the client gets it as the `Err` of its call.
+
+A bidirectional call:
+
+```rust,ignore
+let (mut requests, mut responses) = chat.converse(CallOptions::new());
+requests.send(&Line { text: "hello", ..Default::default() }).await?;
+while let Some(received) = responses.message().await? {
+    let line = received.message()?;
+    if line.text() == "bye" {
+        break;
+    }
+    requests.send(&Line { text: "and then?", ..Default::default() }).await?;
+}
+requests.finish(); // the server sees the end of the requests
+```
+
+## Limits
+
+Every limit is finite by default.
+
+| What | Default | Set with |
+|---|---|---|
+| One message, compressed or once decompressed | 4 MiB | `Server::max_message_size`, `ChannelBuilder::max_message_size` |
+| A call, on the client | 30 s | `CallOptions::timeout`, `ChannelBuilder::timeout` |
+| A call whose client sent no deadline, on the server | 1 h | `Server::default_timeout` |
+| Opening a connection | 10 s | `ChannelBuilder::connect_timeout` |
+| Connections, concurrent streams, header sizes, a client's silence between two messages | giong-http's | `giong_http::Server` |
+
+## Health and reflection
+
+```rust,ignore
+use giong_grpc::health::Health;
+use giong_grpc::reflection::Reflection;
+
+// Both are Send and Sync: made once, shared by the servers of every worker.
+let health = Health::new();
+health.set("hello.v1.Greeter", true);
+let reflection = Reflection::new(&[pb::FILE_DESCRIPTOR_SET, giong_grpc::health::FILE_DESCRIPTOR_SET])?;
+
+let grpc = Server::new()
+    .add(GreeterServer::new(Hello))
+    .add(health.service())
+    .add(reflection.v1())
+    .add(reflection.v1alpha());
+```
+
+```text
+$ grpcurl -plaintext localhost:50051 list
+grpc.health.v1.Health
+grpc.reflection.v1.ServerReflection
+grpc.reflection.v1alpha.ServerReflection
+hello.v1.Greeter
+$ grpcurl -plaintext -d '{"name": "An"}' localhost:50051 hello.v1.Greeter/SayHello
+{
+  "message": "Xin chào, An!"
+}
+```
+
+`health.set(service, false)` from any thread tells load balancers to stop sending calls; `health.set_all_not_serving()` does it for every service at the start of a shutdown. Reflection tells anyone who can reach the port what the server's API is: leave it off a server whose API is not public.
+
+## Measured against tonic
+
+`bench/grpc.sh`, against tonic 0.14 (prost, hyper, Tokio) with the same service: unary calls with 100-byte and 10,000-byte payloads, round trips on a bidirectional stream, and server streams of 1,000 messages of 100 bytes. A 4-core cloud VM (Xeon 2.1 GHz, Linux 6.18, io_uring), the median of 10 rounds of 5 s; the method is at the top of the script and the raw data in [`bench/results/grpc/`](https://github.com/giong-run/Giong/blob/v1.2.0/bench/results/grpc).
+
+One server thread, loaded from three other cores until its core is the limit, with tonic's client and with giong-grpc's as the load generator:
+
+| Workload | Load | tonic | giong-grpc | | Server CPU per call or message, tonic → giong-grpc |
+|---|---|---:|---:|---:|---:|
+| unary, 100 B | tonic | 172,842 calls/s | 259,030 | +50% | 5.54 → 3.62 µs |
+| unary, 100 B | giong | 174,525 | 227,408 | +30% | 5.46 → 4.14 µs |
+| unary, 10 kB | tonic | 71,918 | 89,862 | +25% | 13.25 → 10.44 µs |
+| unary, 10 kB | giong | 75,010 | 90,463 | +21% | 12.77 → 10.51 µs |
+| bidirectional round trips | tonic | 550,596 msg/s | 813,260 | +48% | 1.74 → 1.18 µs |
+| bidirectional round trips | giong | 542,390 | 816,094 | +50% | 1.76 → 1.17 µs |
+| server stream | tonic | 2,917,860 msg/s | 11,694,153 | 4.0× | 0.329 → 0.081 µs |
+| server stream | giong | 2,985,038 | 11,394,657 | 3.8× | 0.321 → 0.084 µs |
+
+No workload is behind on the server side. 10,000-byte unary calls from tonic's client were 7.5% behind until giong-http's HTTP/2 server sent the answers to a burst of short requests in one write: it cut its output at 64 KiB, and with one write in flight per connection each further write waited a turn of the worker. With 64 calls in flight per connection (`TASKS=128`, [`tasks-128/`](https://github.com/giong-run/Giong/blob/v1.2.0/bench/results/grpc/tasks-128)) giong-grpc's server does 78,401 calls/s against tonic's 70,778 (+10.8%) under tonic's client and 103,618 against 70,002 (+48%) under its own. The server stream is ahead by that much because the messages a handler sends in a row leave in one write.
+
+One client thread, against a server with three threads (tonic's, then giong-grpc's):
+
+| Workload | Server | tonic client | giong-grpc client | |
+|---|---|---:|---:|---:|
+| unary, 100 B | tonic | 87,301 calls/s | 94,606 | +8% |
+| unary, 100 B | giong | 137,046 | 143,424 | +5% |
+| unary, 10 kB | tonic | 51,879 | 58,964 | +14% |
+| unary, 10 kB | giong | 57,778 | 60,384 | +5% |
+| bidirectional round trips | tonic | 253,018 msg/s | 248,773 | **−1.7%** |
+| bidirectional round trips | giong | 489,518 | 498,710 | +2% |
+| server stream | tonic | 5,627,548 msg/s | 5,698,860 | +1% |
+| server stream | giong | 9,399,474 | 9,446,808 | +1% |
+
+Round trips against tonic's server are level (−1.7%; +0.8% to +2.2% in earlier runs): both clients used about three quarters of their core, so that row measures the server. Server streams from giong-grpc's server were 10% to 18% behind until two things changed: `ResponseStream::message` returns a message that has already arrived without setting up the future that waits for more (it was rebuilt for every message), and a received HTTP/2 frame is handed to the reader as it is instead of being joined to the next ones. The giong-grpc server in the client runs listens with `TcpListener::bind_balanced`, so that the client's two connections always land on two of its three workers: with the kernel's choice they sometimes shared one, and that row moved by a third between rounds. Not measured: client streams of many messages in a row, where the giong-grpc client still hands the connection one message at a time.
+
+Memory: with 1,000 bidirectional streams open on 10 connections, the server's resident memory grew by 5.7 kB a stream with giong-grpc and 11.6 kB with tonic.
+
+The giong-http server in these runs has `max_body_size(4 << 20)`: the HTTP/2 window a stream starts with is a share of the server's body budget (half of it divided by `max_concurrent_streams`, 5 KiB with the defaults), and a request larger than that window waits for a WINDOW_UPDATE. A service whose requests are larger than 5 KiB should set `max_body_size` to its message limit, which makes the first window 20 KiB for 4 MiB.
+
+## Not there
+
+Client-side load balancing and name resolution beyond DNS, retries and hedging (a failed call is returned, not sent again), gRPC-Web, compression other than gzip, and the `google.rpc.Status` details message (its bytes are available: `Status::details`).
+
+## Tests
+
+```sh
+cargo test -p giong-grpc                 # calls, faults, health, reflection, generated code
+giong-grpc/interop/run.sh                # grpc-go both directions, grpcurl (needs Go)
+GIONG_SOAK_SECS=3600 cargo test --release -p giong-grpc --test soak -- --ignored --nocapture
+(cd giong-grpc && cargo +nightly fuzz run framing)   # also: gzip timeout status_message metadata descriptors
+```
+
+The soak runs calls of every kind with faults mixed in (cancels, dropped streams, deadlines, connections cut in the middle of a message, bytes that are not HTTP/2) and then checks that no handler, descriptor, driver operation or memory was left behind.
+
+The minimum Rust version is 1.80, as for giong.
+</script>
+  </article>
+  <nav class="toc doc-toc" aria-label="On this page"><p>On this page</p><div class="toc-links"><a href="#what-it-does">What it does</a><a href="#the-four-kinds-of-method">The four kinds of method</a><a href="#limits">Limits</a><a href="#health-and-reflection">Health and reflection</a><a href="#measured-against-tonic">Measured against tonic</a><a href="#not-there">Not there</a><a href="#tests">Tests</a></div></nav>
+</div>
+</main>
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr-grid">
+      <div class="ftr-brand">
+        <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="22" height="22"></picture><span>giong</span></a>
+        <p>A thread-per-core async runtime for Rust, built on io_uring and made for the code agents write.</p>
+        <p class="ftr-social">
+          <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
+          <a class="icon-btn" href="https://x.com/giongrun" aria-label="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
+          <a class="icon-btn" href="https://github.com/giong-run/Giong/releases.atom" aria-label="Release feed"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3a16 16 0 0 1 16 16h-3A13 13 0 0 0 5 6Zm0 6a10 10 0 0 1 10 10h-3a7 7 0 0 0-7-7Zm1.5 6.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z"/></svg></a>
+        </p>
+      </div>
+      <nav class="ftr-col" aria-label="Learn">
+        <h2>Learn</h2>
+        <a href="/docs/">Get started</a>
+        <a href="/docs/#examples">Examples</a>
+        <a href="https://docs.rs/giong/1.2.0/giong/">API reference</a>
+        <a href="/docs/#errors">Error codes</a>
+        
+        <a href="/llms.txt">llms.txt</a>
+      </nav>
+      <nav class="ftr-col" aria-label="Project">
+        <h2>Project</h2>
+        <a href="/crates/">Crates</a>
+        <a href="/benchmarks/">Benchmarks</a>
+        <a href="/roadmap/">Roadmap</a>
+        <a href="/releases/">Releases</a>
+      </nav>
+      <nav class="ftr-col" aria-label="Community">
+        <h2>Community</h2>
+        <a href="https://github.com/giong-run/Giong">GitHub</a>
+        <a href="https://x.com/giongrun">X · @giongrun</a>
+        <a href="https://github.com/giong-run/Giong/issues">Issues</a>
+        <a href="https://github.com/giong-run/Giong/blob/main/CONTRIBUTING.md">Contributing</a>
+        <a href="https://github.com/giong-run/Giong/security/advisories/new">Report a vulnerability</a>
+      </nav>
+    </div>
+    <div class="ftr-base">
+      <span>© 2026 <a href="https://github.com/thekivashyn">thekivashyn</a> and the giong contributors. MIT or Apache-2.0.</span>
+      <span class="ramp" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+    </div>
+  </div>
+</footer>
+<script src="/main.js" defer></script>
+</body>
+</html>

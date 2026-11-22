@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>giong-compat · giong</title>
+<meta name="description" content="AsyncRead, AsyncWrite and AsyncBufRead from Tokio and futures-io for giong&#x27;s streams, so protocol crates that take a stream run on giong with no Tokio runtime.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://giong.run/docs/1.2/giong-compat/">
+<meta name="theme-color" content="#0A0C10">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="giong">
+<meta property="og:title" content="giong-compat · giong">
+<meta property="og:description" content="AsyncRead, AsyncWrite and AsyncBufRead from Tokio and futures-io for giong&#x27;s streams, so protocol crates that take a stream run on giong with no Tokio runtime.">
+<meta property="og:url" content="https://giong.run/docs/1.2/giong-compat/">
+<meta property="og:image" content="https://giong.run/assets/social-preview.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="The giong logo: a segmented ember ring">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@giongrun">
+<meta name="twitter:title" content="giong-compat · giong">
+<meta name="twitter:description" content="AsyncRead, AsyncWrite and AsyncBufRead from Tokio and futures-io for giong&#x27;s streams, so protocol crates that take a stream run on giong with no Tokio runtime.">
+<meta name="twitter:image" content="https://giong.run/assets/social-preview.png">
+<meta name="author" content="thekivashyn">
+<link rel="alternate" type="application/atom+xml" title="giong releases" href="https://github.com/giong-run/Giong/releases.atom">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","name":"giong-compat · giong","description":"AsyncRead, AsyncWrite and AsyncBufRead from Tokio and futures-io for giong's streams, so protocol crates that take a stream run on giong with no Tokio runtime.","url":"https://giong.run/docs/1.2/giong-compat/"}]}</script>
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/giong-icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/giong-icon-180.png">
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/styles.css">
+<script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("giong-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}})(document.documentElement)</script>
+</head>
+<body class="page-docs-1.2-giong-compat">
+<a class="skip" href="#main">Skip to content</a>
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="28" height="28"></picture><span>giong</span></a>
+    <nav class="nav" aria-label="Site"><a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a></nav>
+    <div class="hdr-side">
+      <a class="ver" href="/releases/#v1-3-0" title="Release notes for v1.3.0">v1.3.0</a>
+      <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="giong on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
+      <a class="icon-btn hide-sm" href="https://x.com/giongrun" aria-label="giong on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
+      <button class="icon-btn theme" type="button" aria-label="Switch between light and dark" hidden>
+        <span class="if-dark"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></span><span class="if-light"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z"/></svg></span></button>
+      <details class="menu">
+        <summary class="icon-btn" aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
+        <nav class="menu-panel" aria-label="Site">
+          <a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a>
+          <span class="menu-social"><a href="https://github.com/giong-run/Giong">GitHub</a><a href="https://x.com/giongrun">X</a></span>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+<main id="main">
+<div class="wrap docs-layout">
+  <nav class="side" aria-label="Documentation"><details class="side-menu" open><summary>Documentation</summary><div class="side-links"><div class="side-group"><p>Start</p><a href="/docs/1.2/">Get started</a></div><div class="side-group"><p>Runtime</p><a href="/docs/1.2/giong/">giong</a></div><div class="side-group"><p>Protocols</p><a href="/docs/1.2/giong-proto/">giong-proto</a><a href="/docs/1.2/giong-tls/">giong-tls</a><a href="/docs/1.2/giong-http/">giong-http</a><a href="/docs/1.2/giong-grpc/">giong-grpc</a><a href="/docs/1.2/giong-compat/" aria-current=page>giong-compat</a></div><div class="side-group"><p>Clients</p><a href="/docs/1.2/giong-postgres/">giong-postgres</a><a href="/docs/1.2/giong-mysql/">giong-mysql</a><a href="/docs/1.2/giong-redis/">giong-redis</a></div><div class="side-group"><p>Framework</p><a href="/docs/1.2/giong-web/">giong-web</a></div><div class="side-group"><p>Tooling</p><a href="/docs/1.2/giong-grpc-build/">giong-grpc-build</a><a href="/docs/1.2/giong-mcp/">giong-mcp</a></div><div class="side-group"><p>Operate</p><a href="/docs/1.2/deployment/">Deployment</a><a href="/docs/1.2/stability/">Stability</a><a href="/docs/1.2/errors/">Error codes</a></div></div></details></nav>
+  <article class="doc-page prose">
+    <header class="doc-head"><p class="eyebrow">Protocols</p><h1>giong-compat</h1><p class="lede"><code>AsyncRead</code>, <code>AsyncWrite</code> and <code>AsyncBufRead</code> from Tokio and futures-io for giong's streams, so protocol crates that take a stream run on giong with no Tokio runtime.</p>
+      <div class="doc-bar"><details class="ver-menu"><summary title="Documentation version">giong 1.2</summary><nav class="ver-list" aria-label="Documentation versions"><a href="/docs/giong-compat/"><b>1.3</b><span>newest</span></a><a href="/docs/1.2/giong-compat/" aria-current=true><b>1.2</b></a><a href="/docs/1.1/giong-compat/"><b>1.1</b></a><a href="/docs/1.0/giong-compat/"><b>1.0</b></a></nav></details><div class="doc-actions"><button class="act" type="button" data-md="md-page" data-done="copied" title="Copy this page as Markdown, for a coding agent"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy for agent</span></button><button class="act" type="button" data-md="md-prompt" data-done="copied" title="Copy a ready prompt with the rules and this page"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9Z"/><path d="M18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8Z"/></svg><span>Copy prompt</span></button><a class="act" href="/docs/1.2/giong-compat.md" title="This page as plain Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><span>.md</span></a></div></div><div class="doc-meta"><div class="cmd"><code id="add-giong-compat">cargo add giong-compat</code><button class="copy" type="button" data-copy="add-giong-compat" data-done="copied">copy</button></div><p class="crate-links"><a href="https://docs.rs/giong-compat/1.2.0">docs.rs</a> · <a href="https://crates.io/crates/giong-compat">crates.io</a> · <a href="https://github.com/giong-run/Giong/tree/main/giong-compat">source</a></p></div></header>
+    <p class="ver-note">This is the documentation of giong 1.2 (v1.2.0). The newest release is 1.3: <a href="/docs/giong-compat/">read this page for 1.3</a>.</p><div class="md-intro"><p>The I/O traits of Tokio and of the futures crates for <a href="/docs/1.2/giong/">giong</a>'s streams, so that protocol crates which are generic over their transport run on giong: TLS (tokio-rustls, futures-rustls), WebSocket (tokio-tungstenite), HTTP/2 (h2), hyper's connection API, framing (tokio-util's codecs) and the like. No Tokio runtime is involved: giong drives everything, on its own threads.</p>
+<pre class="code"><code class="lang-toml">[dependencies]
+giong = "1.2.0"
+giong-compat = "1.2.0"</code></pre>
+<pre class="code"><code class="lang-rust"><span class="k">use</span> giong::net::<span class="t">TcpStream</span>;
+<span class="k">use</span> giong_compat::<span class="t">Compat</span>;
+<span class="k">use</span> tokio::io::{<span class="t">AsyncReadExt</span>, <span class="t">AsyncWriteExt</span>};
+
+<span class="k">fn</span> main() -&gt; std::io::<span class="t">Result</span>&lt;()&gt; {
+    giong::block_on(<span class="k">async</span> {
+        <span class="k">let</span> <span class="k">mut</span> stream = <span class="t">Compat</span>::new(<span class="t">TcpStream</span>::connect(<span class="s">"127.0.0.1:7000"</span>).<span class="k">await</span>?);
+        stream.write_all(<span class="s">b"ping\n"</span>).<span class="k">await</span>?;
+        stream.flush().<span class="k">await</span>?; <span class="c">// writes are buffered until a flush, or until a read waits</span>
+        <span class="k">let</span> <span class="k">mut</span> reply = [0; 5];
+        stream.read_exact(&amp;<span class="k">mut</span> reply).<span class="k">await</span>?;
+        <span class="t">Ok</span>(())
+    })
+}</code></pre>
+<p><code>Compat&lt;S&gt;</code> wraps a <code>giong::net::TcpStream</code>, a <code>giong::net::UnixStream</code> or, with the <code>tls</code> feature, a <code>giong_tls::TlsStream</code>, and implements <code>AsyncRead</code>, <code>AsyncWrite</code> and <code>AsyncBufRead</code> from <code>tokio::io</code> (feature <code>tokio</code>) and from <code>futures_io</code> (feature <code>futures-io</code>). Both features are on by default and pull in the trait definitions only: <code>tokio</code> with its default features off, so no runtime, reactor or timer. The libraries build on Rust 1.80.</p></div><section class="md-sec"><button class="sec-copy" type="button" data-md="md-0" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="when-to-use-it-and-when-not">When to use it, and when not</h2>
+<p><strong>Use the giong crate when there is one; <code>Compat</code> is the bridge for a protocol giong has no crate for yet.</strong> The giong crates are built on giong's owned buffers and batched system calls, and measured against the Tokio crates they replace on Tokio they serve 1.1 to 5.1 times the requests or statements per core on the workloads measured, with the exceptions listed there (<a href="/docs/1.2/giong/#choosing-crates">the table in giong's README</a>). A Tokio crate run on giong through <code>Compat</code> keeps its own design and adds the copies described under <a href="#what-it-costs">What it costs</a>. No crate over <code>Compat</code> has been measured against the giong crate for the same protocol.</p>
+<div class="table-scroll"><table><thead><tr><th>You need</th><th>Use</th></tr></thead><tbody><tr><td>An HTTP/1.1 or HTTP/2 server or client (not hyper or reqwest)</td><td><a href="/docs/1.2/giong-http/"><code>giong-http</code></a>; <a href="/docs/1.2/giong-web/"><code>giong-web</code></a> for routing and JSON</td></tr><tr><td>TLS (tokio-rustls over <code>Compat</code> works too, with <code>Compat</code>'s copies added)</td><td><a href="/docs/1.2/giong-tls/"><code>giong-tls</code></a></td></tr><tr><td>PostgreSQL, MySQL, Redis (not sqlx, tokio-postgres or redis-rs, which need the Tokio runtime)</td><td><a href="/docs/1.2/giong-postgres/"><code>giong-postgres</code></a>, <a href="/docs/1.2/giong-mysql/"><code>giong-mysql</code></a>, <a href="/docs/1.2/giong-redis/"><code>giong-redis</code></a></td></tr><tr><td>h2's own API (HTTP/2 frames and streams, or a library built on h2)</td><td><a href="https://docs.rs/h2">h2</a> over <code>Compat</code>, plain or over <code>giong-tls</code> with ALPN <code>h2</code></td></tr><tr><td>WebSocket</td><td><a href="https://docs.rs/tokio-tungstenite">tokio-tungstenite</a> (<code>accept_async</code>, <code>client_async</code>) over <code>Compat</code></td></tr><tr><td>A protocol framed by length or by line</td><td><a href="https://docs.rs/tokio-util">tokio-util</a>'s <code>Framed</code> with a codec over <code>Compat</code></td></tr><tr><td>hyper's API in particular</td><td><code>hyper::{client, server}::conn</code> over <code>hyper_util::rt::TokioIo::new(Compat::new(..))</code>; a server needs a timer, <a href="#hyper-servers-need-a-timer">see below</a></td></tr><tr><td>A crate that opens its own connections with Tokio (reqwest, tonic's <code>transport</code>, sqlx, most SDKs)</td><td>Not <code>Compat</code>: see below</td></tr></tbody></table></div>
+<h3 id="what-works">What works</h3>
+<p>A crate works through <code>Compat</code> when <strong>it takes the stream from you and you drive it</strong>: a function such as <code>tokio_rustls::TlsConnector::connect(name, stream)</code>, <code>tokio_tungstenite::client_async(request, stream)</code>, <code>h2::client::handshake(stream)</code> or <code>hyper::client::conn::http1::handshake(io)</code>, which returns a future, or a connection object, that your task (or a task you start with <code>giong::spawn</code>) polls. Futures that are not <code>Send</code> are fine, since giong's tasks stay on their worker.</p>
+<p>These are tested in <a href="https://github.com/giong-run/Giong/blob/v1.2.0/giong-compat/tests"><code>tests/</code></a>, on giong's io_uring driver, its older ring setups and its epoll driver, with no Tokio runtime in the process:</p>
+<div class="table-scroll"><table><thead><tr><th>Crate</th><th>What the tests do</th></tr></thead><tbody><tr><td>tokio-rustls 0.26</td><td>A tokio-rustls client against a giong-tls server, and a giong-tls client against a tokio-rustls server (ALPN, <code>close_notify</code>), up to 1 MiB per message</td></tr><tr><td>futures-rustls 0.26</td><td>A futures-rustls client (futures-io traits) against a giong-tls server</td></tr><tr><td>tokio-tungstenite 0.29</td><td>A WebSocket echo server and client: text, a 4 MiB binary message, 1,000 messages queued before any is read, ping and pong, the close handshake</td></tr><tr><td>h2 0.4</td><td>An HTTP/2 server and client: 100 streams at once on one connection with bodies over several flow-control windows; and h2 over giong-tls with ALPN <code>h2</code></td></tr><tr><td>hyper 1 (HTTP/1)</td><td>hyper's client against a giong-http server, and giong-http's client against a hyper server, with keep-alive and bodies up to 500 KB; a hyper server with a timer on giong's timers closes a connection whose request head does not arrive in time</td></tr><tr><td>hyper 1 (HTTP/2)</td><td>hyper's client and server over <code>Compat</code>, with giong's tasks as hyper's executor: 100 requests at once on one connection, bodies up to 300 KB</td></tr><tr><td>tokio-util 0.7</td><td><code>LengthDelimitedCodec</code> over a Unix socket (200 frames up to 1 MB) and <code>LinesCodec</code> over TCP</td></tr></tbody></table></div>
+<h3 id="what-does-not">What does not</h3>
+<p><code>Compat</code> provides I/O traits, nothing else. A crate does not work through it when it</p>
+<ul><li><strong>opens its own connections with <code>tokio::net</code></strong> (reqwest, tonic's <code>transport</code>, sqlx, redis-rs, most cloud SDKs): it panics with <em>"there is no reactor running, must be called from the context of a Tokio 1.x runtime"</em>, or never finishes;</li><li><strong>uses Tokio's timers or spawns</strong> (<code>tokio::time::sleep</code>, <code>tokio::time::timeout</code>, <code>tokio::spawn</code>): the same panic. hyper takes its timer and executor from you instead: see <a href="#hyper-servers-need-a-timer">hyper servers need a timer</a>;</li><li><strong>requires <code>Send</code></strong> (bounds such as <code>T: Send</code> or <code>F: Future + Send + 'static</code>): <code>Compat</code> is not <code>Send</code>, because the stream belongs to one worker. The compiler says so.</li></ul>
+<p>Some of these crates take a custom connector or executor, and can work with one built on giong, but each has to be tried. Otherwise, run the crate on a Tokio runtime in a thread of its own.</p>
+<h3 id="hyper-servers-need-a-timer">hyper servers need a timer</h3>
+<p>hyper's server enforces no timeout of its own: <code>header_read_timeout</code> needs a <code>hyper::rt::Timer</code>, and without one a client that sends half a request head and then nothing holds the connection, and the task serving it, for as long as it likes. Setting the timeout without a timer panics. giong's timers can back one:</p>
+<pre class="code"><code class="lang-rust"><span class="k">use</span> std::pin::<span class="t">Pin</span>;
+<span class="k">use</span> std::task::{<span class="t">Context</span>, <span class="t">Poll</span>};
+<span class="k">use</span> std::time::{<span class="t">Duration</span>, <span class="t">Instant</span>};
+
+<span class="c">/// hyper's timer, on giong's timers.</span>
+<span class="c">#[derive(Clone, Copy, Debug)]</span>
+<span class="k">struct</span> <span class="t">GiongTimer</span>;
+
+<span class="k">struct</span> <span class="t">GiongSleep</span>(giong::time::<span class="t">Sleep</span>);
+
+<span class="k">impl</span> std::future::<span class="t">Future</span> <span class="k">for</span> <span class="t">GiongSleep</span> {
+    type <span class="t">Output</span> = ();
+    <span class="k">fn</span> poll(<span class="k">mut</span> self: <span class="t">Pin</span>&lt;&amp;<span class="k">mut</span> <span class="t">Self</span>&gt;, cx: &amp;<span class="k">mut</span> <span class="t">Context</span>&lt;'_&gt;) -&gt; <span class="t">Poll</span>&lt;()&gt; {
+        <span class="t">Pin</span>::new(&amp;<span class="k">mut</span> self.0).poll(cx)
+    }
+}
+
+<span class="k">impl</span> hyper::rt::<span class="t">Sleep</span> <span class="k">for</span> <span class="t">GiongSleep</span> {}
+
+<span class="k">impl</span> hyper::rt::<span class="t">Timer</span> <span class="k">for</span> <span class="t">GiongTimer</span> {
+    <span class="k">fn</span> sleep(&amp;self, duration: <span class="t">Duration</span>) -&gt; <span class="t">Pin</span>&lt;<span class="t">Box</span>&lt;dyn hyper::rt::<span class="t">Sleep</span>&gt;&gt; {
+        <span class="t">Box</span>::pin(<span class="t">GiongSleep</span>(giong::time::sleep(duration)))
+    }
+    <span class="k">fn</span> sleep_until(&amp;self, deadline: <span class="t">Instant</span>) -&gt; <span class="t">Pin</span>&lt;<span class="t">Box</span>&lt;dyn hyper::rt::<span class="t">Sleep</span>&gt;&gt; {
+        <span class="t">Box</span>::pin(<span class="t">GiongSleep</span>(giong::time::sleep_until(deadline)))
+    }
+}
+
+<span class="c">// For each accepted connection:</span>
+<span class="c">// hyper::server::conn::http1::Builder::new()</span>
+<span class="c">//     .timer(GiongTimer)</span>
+<span class="c">//     .header_read_timeout(Duration::from_secs(10))</span>
+<span class="c">//     .serve_connection(hyper_util::rt::TokioIo::new(Compat::new(tcp)), service)</span></code></pre>
+<p><a href="https://github.com/giong-run/Giong/blob/v1.2.0/giong-compat/tests/hyper.rs"><code>tests/hyper.rs</code></a> checks that a server built this way closes such a connection when the timeout ends.</p>
+<p>hyper's HTTP/2, client and server, also takes an executor for the tasks it starts. They need not be <code>Send</code>, so giong's tasks do:</p>
+<pre class="code"><code class="lang-rust"><span class="c">#[derive(Clone, Copy, Debug)]</span>
+<span class="k">struct</span> <span class="t">GiongExec</span>;
+
+<span class="k">impl</span>&lt;<span class="t">F</span>: std::future::<span class="t">Future</span> + 'static&gt; hyper::rt::<span class="t">Executor</span>&lt;<span class="t">F</span>&gt; <span class="k">for</span> <span class="t">GiongExec</span> {
+    <span class="k">fn</span> execute(&amp;self, future: <span class="t">F</span>) {
+        giong::spawn(future);
+    }
+}
+
+<span class="c">// hyper::server::conn::http2::Builder::new(GiongExec).timer(GiongTimer) ...</span>
+<span class="c">// hyper::client::conn::http2::handshake(GiongExec, io) ...</span></code></pre></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-1" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="how-it-behaves">How it behaves</h2>
+<ul><li><strong>Writes are buffered</strong>, as with <code>BufWriter</code> or a TLS stream. <code>poll_write</code> copies the bytes and returns; they are sent on <code>flush</code>, when the buffer is full, or when a read on the same task is about to wait. Call <code>flush</code> (or <code>shutdown</code>) where the data must have gone out; every crate written for these traits does. A writer in another task than the reader must flush: a read only sends what its own task wrote. While one buffer is being sent the next one fills, so a long transfer keeps the socket busy.</li><li><strong>The write buffer is bounded</strong>: <code>Compat::new(stream).write_buffer(limit)</code>, 64 KiB by default, from 1 byte to 1 GiB (<code>GIONG-E1403</code> otherwise). A busy stream holds up to twice the limit; an idle one holds no buffer.</li><li><strong><code>TCP_NODELAY</code> is turned on</strong> for TCP streams (plain or under TLS), as every giong crate does. <code>Compat</code> already gathers small writes until a flush, and Nagle's algorithm on top of that only delays them: the HTTP/2 test with 100 streams took 2.3 s with it and 21 ms without. <code>compat.get_ref().set_nodelay(false)</code> undoes it.</li><li><strong>A failed send is reported by the next write, flush or shutdown</strong>, with the kernel's own error (a large write sent straight to the socket reports its own failure at once); after that, writes, flushes and shutdowns fail with <code>GIONG-E1401</code>. So does a failed shutdown (a TLS stream that cannot send its <code>close_notify</code>). Writing after <code>shutdown</code> (or <code>close</code>) has started fails with <code>GIONG-E1402</code>. Reading still works in all these cases. A shutdown that finds the connection already reset counts as done, as with Tokio's <code>TcpStream</code>.</li><li><strong>Dropping a <code>Compat</code> discards what was written but not flushed</strong>, like dropping a <code>BufWriter</code>. Sends in flight are cancelled the way giong cancels any operation: their buffers stay alive until the kernel lets go.</li><li><strong>One task reads and one task writes at a time.</strong> <code>tokio::io::split</code> and <code>futures::io::AsyncReadExt::split</code> work, and so does splitting a <code>Framed</code> or a WebSocket stream.</li><li><strong>Cancel safe.</strong> A read that is dropped loses no data. A write either copies bytes and says how many, or copies nothing. <a href="https://github.com/giong-run/Giong/blob/v1.2.0/giong-compat/tests/cancel.rs"><code>tests/cancel.rs</code></a> drops reads, writes, flushes and whole streams at random (seeded, so a failure repeats), over TCP and giong-tls and through TLS 1.3 key updates, and checks every byte and that nothing leaks.</li><li><strong><code>fill_buf</code> holds a buffer of the worker's pool</strong> until <code>consume</code> takes all of it, or a read or <code>consume</code> of part of it moves the rest to the heap. Do not wait on something else between <code>fill_buf</code> and <code>consume</code>: with many connections doing that, the worker's receive pool runs dry and every socket on the worker stalls. <code>consume</code> of more than <code>fill_buf</code> returned is ignored, as with std's and Tokio's <code>BufReader</code>.</li><li><strong>Reading after the end of the stream</strong> keeps returning 0 bytes. <code>into_inner().await</code> flushes and hands back the stream with the bytes received but not yet read, to go on with giong's own API.</li></ul></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-2" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="what-it-costs">What it costs</h2>
+<p>giong reads into buffers from the worker's pool and writes buffers it owns until the kernel is done with them; these traits read into, and write from, memory the caller lends for one call. So <code>Compat</code> copies:</p>
+<ul><li><strong>Reading:</strong> each byte once more than giong's own <code>recv</code>, from the pool buffer into the caller's buffer. Through <code>AsyncBufRead</code> (<code>fill_buf</code>, then <code>consume</code> of the whole chunk) there is no extra copy. When a caller takes only part of a chunk, the rest moves to a heap buffer at once, so that a slow reader never holds on to the worker's pool.</li><li><strong>Writing:</strong> small writes are copied into the write buffer, which giong's <code>write_all</code> sends at a flush or when it fills; one small allocation per send (the future that sends it). A write at least as large as the buffer's limit (64 KiB by default), with nothing buffered or being sent before it, goes straight from the caller's memory to the socket in one <code>sendmsg(2)</code> that does not wait, as <code>BufWriter</code> and Tokio's streams do; only what the socket cannot take at once is copied.</li></ul>
+<p>Measured with <a href="https://github.com/giong-run/Giong/blob/v1.2.0/bench/compat.sh"><code>bench/compat.sh</code></a>: one TCP stream over loopback, the measured side on one pinned core and the other end on another, the same peer for every variant, 9 runs interleaved. Median, with the range of the 9 runs in brackets. The machine is a 4-vCPU cloud VM (Xeon at 2.1 GHz, Linux 6.18), where bulk transfers over loopback vary from run to run and from one session to the next: read the medians, the spread, and the sessions below. This session (2026-11-17, <a href="https://github.com/giong-run/Giong/blob/v1.2.0/bench/results/compat/README.md"><code>bench/results/compat/</code></a>) ran this version, with giong's default receive buffers of 16 KiB (8 KiB until 0.8.0), and, interleaved, <code>Compat</code> from 0.8.0 on giong 0.8.0.</p>
+<div class="table-scroll"><table><thead><tr><th>Workload</th><th>giong's own API</th><th><code>Compat</code></th><th><code>Compat</code> 0.8.0</th><th><code>Compat</code>, <code>AsyncBufRead</code></th><th>Tokio</th></tr></thead><tbody><tr><td>Receive 2 GiB (peer writes 256 KiB at a time), MiB/s</td><td>3124 [2876–3506]</td><td>3197 [2946–3677]</td><td>3503 [2703–4034]</td><td>3280 [3045–3493]</td><td>3041 [2479–3695]</td></tr><tr><td>CPU per KiB received</td><td>139 ns</td><td>147 ns</td><td>170 ns</td><td>141 ns</td><td>124 ns</td></tr><tr><td>Send 2 GiB from a 64 KiB buffer, MiB/s</td><td>2737 [2069–3196]</td><td>2535 [2255–4642]</td><td>2381 [2201–2553]</td><td></td><td>2404 [2266–3100]</td></tr><tr><td>CPU per KiB sent</td><td>351 ns</td><td>379 ns</td><td>407 ns</td><td></td><td>404 ns</td></tr><tr><td>64-byte request and reply, round trips/s</td><td>33,815 [30,808–35,058]</td><td>34,331 [31,586–35,290]</td><td>33,159 [31,855–34,394]</td><td></td><td>34,194 [32,267–35,948]</td></tr><tr><td>CPU per round trip</td><td>13.8 µs</td><td>13.7 µs</td><td>14.8 µs</td><td></td><td>14.0 µs</td></tr></tbody></table></div>
+<p>Where <code>Compat</code> is behind Tokio, and why:</p>
+<ul><li><strong>Receiving</strong>, 19% more CPU per KiB with <code>read</code> and 14% with <code>AsyncBufRead</code> (30% and 17% in the session before, with 8 KiB receive buffers). Most of it is giong's own receive (12% above Tokio here): it receives into the worker's 16 KiB pool buffers, so 2 GiB take four times as many completions as Tokio's 64 KiB reads; 32 and 64 KiB pool buffers (<code>Builder::recv_buffers</code>) measured no better than 16 KiB. <code>read</code> then copies each byte once more into the caller's buffer, which <code>AsyncBufRead</code> avoids. Reading from the socket straight into the caller's buffer, as Tokio does, is not safe while giong's multishot receive is armed: data it has already taken could be handed out after data read later.</li></ul>
+<p>Where it is ahead: <strong>sending</strong>, 6% less CPU per KiB than Tokio in this session (7% less than 0.8.0's <code>Compat</code>; 9% and 2% more than Tokio in the two sessions before, on 8 KiB receive buffers, so read it as level), and <strong>request and reply</strong>, 2% less CPU per round trip than Tokio.</p>
+<p>CPU is the measured thread's own (user and system, <code>CLOCK_THREAD_CPUTIME_ID</code>).</p>
+<p>The cost of <code>Compat</code> moves from one session of 9 runs to the next by more than the difference it measures. Eight sessions on the same machine type, each the medians of 9 runs, <code>Compat</code> against giong's own API:</p>
+<div class="table-scroll"><table><thead><tr><th>Session (commit)</th><th>Send, MiB/s</th><th>Send, CPU per KiB</th><th>Receive with <code>read</code>, CPU per KiB</th><th>Receive with <code>AsyncBufRead</code>, CPU per KiB</th><th>Request and reply, round trips/s</th><th>CPU per round trip</th></tr></thead><tbody><tr><td>1 (<code>f992163</code>)</td><td>−12.5%</td><td>+13.8%</td><td>+5.8%</td><td>−2.2%</td><td>−2.8%</td><td>+4.7%</td></tr><tr><td>2 (<code>0bd788a</code>)</td><td>−16.1%</td><td>+19.4%</td><td>+11.8%</td><td>+3.9%</td><td>+1.2%</td><td>+3.4%</td></tr><tr><td>3 (<code>0bd788a</code>)</td><td>−20.1%</td><td>+25.1%</td><td>+13.2%</td><td>+8.7%</td><td>−0.7%</td><td>+3.5%</td></tr><tr><td>4 (<code>8632eb7</code>)</td><td>−10.3%</td><td>+14.6%</td><td>+13.1%</td><td>−4.6%</td><td>−1.9%</td><td>+1.4%</td></tr><tr><td>5 (0.5.0 with #83)</td><td>+5.9%</td><td>−4.4%</td><td>+6.8%</td><td>−6.0%</td><td>+0.7%</td><td>+1.7%</td></tr><tr><td>6 (0.5.0 with #83)</td><td>−4.3%</td><td>+4.6%</td><td>+15.8%</td><td>+4.4%</td><td>+0.7%</td><td>+1.9%</td></tr><tr><td>7 (<code>8606db1</code> with #146)</td><td>−14.7%</td><td>+14.2%</td><td>+15.5%</td><td>+3.7%</td><td>−1.0%</td><td>+3.6%</td></tr><tr><td>8 (this version, 16 KiB receive buffers, the table above)</td><td>−7.4%</td><td>+7.8%</td><td>+5.7%</td><td>+1.7%</td><td>+1.5%</td><td>−0.7%</td></tr></tbody></table></div>
+<p>What the numbers say:</p>
+<ul><li><strong>Sending</strong> large writes now goes straight from the caller's memory to the socket (sessions 7 and 8). Until 0.8.0 each byte was copied into the write buffer first (under callgrind, <code>memcpy</code> was 96% of the user-space instructions <code>Compat</code> ran on this workload), which cost 10–20% of throughput and 14–25% more CPU per byte against giong's own <code>write_all</code> in sessions 1–4. In sessions 7 and 8 <code>Compat</code> sends at 5–7% less CPU per byte than 0.8.0's, from 9% above to 6% below Tokio. giong's own <code>write_all</code> measured faster than both (331 and 351 ns per KiB against Tokio's 347 and 404), which is why the column against it still shows +8% to +14%. Small writes are still gathered and copied: that is what lets <code>Compat</code> send one segment per flush.</li><li><strong>Receiving</strong> through <code>read</code> costs 6–16% more CPU per byte (5.7% in session 8) than giong's own <code>recv</code>, for the copy into the caller's buffer, at the same throughput. Through <code>AsyncBufRead</code> (<code>fill_buf</code>, then <code>consume</code>) there is no copy: the eight sessions put it between 6% below and 9% above giong's own cost, which is the noise between sessions.</li><li><strong>Request and reply</strong> differ by less than the noise in throughput; the CPU per round trip is up to 5% higher (0.7% lower in session 8). Callgrind counts about 1,000 more user-space instructions per round trip (the boxed send, the flush, one more poll), against 14 to 16 µs spent mostly in the kernel.</li><li><strong>Tokio's own receive spends less CPU per KiB</strong> than giong's <code>recv</code> on this benchmark: 11% less in session 8, with 16 KiB receive buffers, and 6–20% less in the sessions before, with 8 KiB. Each receive brings at most one buffer, so Tokio's 64 KiB reads take fewer system calls. That gap is giong's own, not <code>Compat</code>'s.</li></ul>
+<p>Run it with <code>bench/compat.sh</code> (the method is at the top of the script, and in <a href="https://github.com/giong-run/Giong/blob/v1.2.0/bench/compat/src/main.rs"><code>bench/compat/src/main.rs</code></a>); the raw numbers of the latest session are in <a href="https://github.com/giong-run/Giong/blob/v1.2.0/bench/results/compat"><code>bench/results/compat/</code></a>, the earlier ones in its <code>sessions/</code> folder.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-3" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="errors">Errors</h2>
+<div class="table-scroll"><table><thead><tr><th>Code</th><th>When</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.2.0/docs/errors/E1401.md"><code>GIONG-E1401</code></a></td><td>A write, flush or shutdown after a buffered send or a shutdown failed (the first call after the failure got the error itself)</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.2.0/docs/errors/E1402.md"><code>GIONG-E1402</code></a></td><td>A write after <code>shutdown</code> or <code>close</code> started</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.2.0/docs/errors/E1403.md"><code>GIONG-E1403</code></a></td><td><code>write_buffer</code> given 0 or more than 1 GiB (a panic)</td></tr></tbody></table></div>
+<p><code>giong::error::code(&amp;err)</code> returns the code, to match on instead of the message.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-4" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="license">License</h2>
+<p>MIT or Apache-2.0, at your option.</p></section>
+    <p class="src-note">giong 1.2.0 · from <a href="https://github.com/giong-run/Giong/blob/v1.2.0/giong-compat/README.md">giong-compat/README.md</a> at v1.2.0</p>
+    <script type="text/markdown" id="md-0"><!-- giong 1.2.0, https://giong.run/docs/1.2/giong-compat/#when-to-use-it-and-when-not -->
+
+## When to use it, and when not
+
+**Use the giong crate when there is one; `Compat` is the bridge for a protocol giong has no crate for yet.** The giong crates are built on giong's owned buffers and batched system calls, and measured against the Tokio crates they replace on Tokio they serve 1.1 to 5.1 times the requests or statements per core on the workloads measured, with the exceptions listed there ([the table in giong's README](../README.md#choosing-crates)). A Tokio crate run on giong through `Compat` keeps its own design and adds the copies described under [What it costs](#what-it-costs). No crate over `Compat` has been measured against the giong crate for the same protocol.
+
+| You need | Use |
+|---|---|
+| An HTTP/1.1 or HTTP/2 server or client (not hyper or reqwest) | [`giong-http`](../giong-http/README.md); [`giong-web`](../giong-web/README.md) for routing and JSON |
+| TLS (tokio-rustls over `Compat` works too, with `Compat`'s copies added) | [`giong-tls`](../giong-tls/README.md) |
+| PostgreSQL, MySQL, Redis (not sqlx, tokio-postgres or redis-rs, which need the Tokio runtime) | [`giong-postgres`](../giong-postgres/README.md), [`giong-mysql`](../giong-mysql/README.md), [`giong-redis`](../giong-redis/README.md) |
+| h2's own API (HTTP/2 frames and streams, or a library built on h2) | [h2](https://docs.rs/h2) over `Compat`, plain or over `giong-tls` with ALPN `h2` |
+| WebSocket | [tokio-tungstenite](https://docs.rs/tokio-tungstenite) (`accept_async`, `client_async`) over `Compat` |
+| A protocol framed by length or by line | [tokio-util](https://docs.rs/tokio-util)'s `Framed` with a codec over `Compat` |
+| hyper's API in particular | `hyper::{client, server}::conn` over `hyper_util::rt::TokioIo::new(Compat::new(..))`; a server needs a timer, [see below](#hyper-servers-need-a-timer) |
+| A crate that opens its own connections with Tokio (reqwest, tonic's `transport`, sqlx, most SDKs) | Not `Compat`: see below |
+
+### What works
+
+A crate works through `Compat` when **it takes the stream from you and you drive it**: a function such as `tokio_rustls::TlsConnector::connect(name, stream)`, `tokio_tungstenite::client_async(request, stream)`, `h2::client::handshake(stream)` or `hyper::client::conn::http1::handshake(io)`, which returns a future, or a connection object, that your task (or a task you start with `giong::spawn`) polls. Futures that are not `Send` are fine, since giong's tasks stay on their worker.
+
+These are tested in [`tests/`](tests), on giong's io_uring driver, its older ring setups and its epoll driver, with no Tokio runtime in the process:
+
+| Crate | What the tests do |
+|---|---|
+| tokio-rustls 0.26 | A tokio-rustls client against a giong-tls server, and a giong-tls client against a tokio-rustls server (ALPN, `close_notify`), up to 1 MiB per message |
+| futures-rustls 0.26 | A futures-rustls client (futures-io traits) against a giong-tls server |
+| tokio-tungstenite 0.29 | A WebSocket echo server and client: text, a 4 MiB binary message, 1,000 messages queued before any is read, ping and pong, the close handshake |
+| h2 0.4 | An HTTP/2 server and client: 100 streams at once on one connection with bodies over several flow-control windows; and h2 over giong-tls with ALPN `h2` |
+| hyper 1 (HTTP/1) | hyper's client against a giong-http server, and giong-http's client against a hyper server, with keep-alive and bodies up to 500 KB; a hyper server with a timer on giong's timers closes a connection whose request head does not arrive in time |
+| hyper 1 (HTTP/2) | hyper's client and server over `Compat`, with giong's tasks as hyper's executor: 100 requests at once on one connection, bodies up to 300 KB |
+| tokio-util 0.7 | `LengthDelimitedCodec` over a Unix socket (200 frames up to 1 MB) and `LinesCodec` over TCP |
+
+### What does not
+
+`Compat` provides I/O traits, nothing else. A crate does not work through it when it
+
+- **opens its own connections with `tokio::net`** (reqwest, tonic's `transport`, sqlx, redis-rs, most cloud SDKs): it panics with *"there is no reactor running, must be called from the context of a Tokio 1.x runtime"*, or never finishes;
+- **uses Tokio's timers or spawns** (`tokio::time::sleep`, `tokio::time::timeout`, `tokio::spawn`): the same panic. hyper takes its timer and executor from you instead: see [hyper servers need a timer](#hyper-servers-need-a-timer);
+- **requires `Send`** (bounds such as `T: Send` or `F: Future + Send + 'static`): `Compat` is not `Send`, because the stream belongs to one worker. The compiler says so.
+
+Some of these crates take a custom connector or executor, and can work with one built on giong, but each has to be tried. Otherwise, run the crate on a Tokio runtime in a thread of its own.
+
+### hyper servers need a timer
+
+hyper's server enforces no timeout of its own: `header_read_timeout` needs a `hyper::rt::Timer`, and without one a client that sends half a request head and then nothing holds the connection, and the task serving it, for as long as it likes. Setting the timeout without a timer panics. giong's timers can back one:
+
+```rust
+use std::pin::Pin;
+use std::task::{Context, Poll};
+use std::time::{Duration, Instant};
+
+/// hyper's timer, on giong's timers.
+#[derive(Clone, Copy, Debug)]
+struct GiongTimer;
+
+struct GiongSleep(giong::time::Sleep);
+
+impl std::future::Future for GiongSleep {
+    type Output = ();
+    fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<()> {
+        Pin::new(&mut self.0).poll(cx)
+    }
+}
+
+impl hyper::rt::Sleep for GiongSleep {}
+
+impl hyper::rt::Timer for GiongTimer {
+    fn sleep(&self, duration: Duration) -> Pin<Box<dyn hyper::rt::Sleep>> {
+        Box::pin(GiongSleep(giong::time::sleep(duration)))
+    }
+    fn sleep_until(&self, deadline: Instant) -> Pin<Box<dyn hyper::rt::Sleep>> {
+        Box::pin(GiongSleep(giong::time::sleep_until(deadline)))
+    }
+}
+
+// For each accepted connection:
+// hyper::server::conn::http1::Builder::new()
+//     .timer(GiongTimer)
+//     .header_read_timeout(Duration::from_secs(10))
+//     .serve_connection(hyper_util::rt::TokioIo::new(Compat::new(tcp)), service)
+```
+
+[`tests/hyper.rs`](tests/hyper.rs) checks that a server built this way closes such a connection when the timeout ends.
+
+hyper's HTTP/2, client and server, also takes an executor for the tasks it starts. They need not be `Send`, so giong's tasks do:
+
+```rust
+#[derive(Clone, Copy, Debug)]
+struct GiongExec;
+
+impl<F: std::future::Future + 'static> hyper::rt::Executor<F> for GiongExec {
+    fn execute(&self, future: F) {
+        giong::spawn(future);
+    }
+}
+
+// hyper::server::conn::http2::Builder::new(GiongExec).timer(GiongTimer) ...
+// hyper::client::conn::http2::handshake(GiongExec, io) ...
+```</script><script type="text/markdown" id="md-1"><!-- giong 1.2.0, https://giong.run/docs/1.2/giong-compat/#how-it-behaves -->
+
+## How it behaves
+
+- **Writes are buffered**, as with `BufWriter` or a TLS stream. `poll_write` copies the bytes and returns; they are sent on `flush`, when the buffer is full, or when a read on the same task is about to wait. Call `flush` (or `shutdown`) where the data must have gone out; every crate written for these traits does. A writer in another task than the reader must flush: a read only sends what its own task wrote. While one buffer is being sent the next one fills, so a long transfer keeps the socket busy.
+- **The write buffer is bounded**: `Compat::new(stream).write_buffer(limit)`, 64 KiB by default, from 1 byte to 1 GiB (`GIONG-E1403` otherwise). A busy stream holds up to twice the limit; an idle one holds no buffer.
+- **`TCP_NODELAY` is turned on** for TCP streams (plain or under TLS), as every giong crate does. `Compat` already gathers small writes until a flush, and Nagle's algorithm on top of that only delays them: the HTTP/2 test with 100 streams took 2.3 s with it and 21 ms without. `compat.get_ref().set_nodelay(false)` undoes it.
+- **A failed send is reported by the next write, flush or shutdown**, with the kernel's own error (a large write sent straight to the socket reports its own failure at once); after that, writes, flushes and shutdowns fail with `GIONG-E1401`. So does a failed shutdown (a TLS stream that cannot send its `close_notify`). Writing after `shutdown` (or `close`) has started fails with `GIONG-E1402`. Reading still works in all these cases. A shutdown that finds the connection already reset counts as done, as with Tokio's `TcpStream`.
+- **Dropping a `Compat` discards what was written but not flushed**, like dropping a `BufWriter`. Sends in flight are cancelled the way giong cancels any operation: their buffers stay alive until the kernel lets go.
+- **One task reads and one task writes at a time.** `tokio::io::split` and `futures::io::AsyncReadExt::split` work, and so does splitting a `Framed` or a WebSocket stream.
+- **Cancel safe.** A read that is dropped loses no data. A write either copies bytes and says how many, or copies nothing. [`tests/cancel.rs`](tests/cancel.rs) drops reads, writes, flushes and whole streams at random (seeded, so a failure repeats), over TCP and giong-tls and through TLS 1.3 key updates, and checks every byte and that nothing leaks.
+- **`fill_buf` holds a buffer of the worker's pool** until `consume` takes all of it, or a read or `consume` of part of it moves the rest to the heap. Do not wait on something else between `fill_buf` and `consume`: with many connections doing that, the worker's receive pool runs dry and every socket on the worker stalls. `consume` of more than `fill_buf` returned is ignored, as with std's and Tokio's `BufReader`.
+- **Reading after the end of the stream** keeps returning 0 bytes. `into_inner().await` flushes and hands back the stream with the bytes received but not yet read, to go on with giong's own API.</script><script type="text/markdown" id="md-2"><!-- giong 1.2.0, https://giong.run/docs/1.2/giong-compat/#what-it-costs -->
+
+## What it costs
+
+giong reads into buffers from the worker's pool and writes buffers it owns until the kernel is done with them; these traits read into, and write from, memory the caller lends for one call. So `Compat` copies:
+
+- **Reading:** each byte once more than giong's own `recv`, from the pool buffer into the caller's buffer. Through `AsyncBufRead` (`fill_buf`, then `consume` of the whole chunk) there is no extra copy. When a caller takes only part of a chunk, the rest moves to a heap buffer at once, so that a slow reader never holds on to the worker's pool.
+- **Writing:** small writes are copied into the write buffer, which giong's `write_all` sends at a flush or when it fills; one small allocation per send (the future that sends it). A write at least as large as the buffer's limit (64 KiB by default), with nothing buffered or being sent before it, goes straight from the caller's memory to the socket in one `sendmsg(2)` that does not wait, as `BufWriter` and Tokio's streams do; only what the socket cannot take at once is copied.
+
+Measured with [`bench/compat.sh`](../bench/compat.sh): one TCP stream over loopback, the measured side on one pinned core and the other end on another, the same peer for every variant, 9 runs interleaved. Median, with the range of the 9 runs in brackets. The machine is a 4-vCPU cloud VM (Xeon at 2.1 GHz, Linux 6.18), where bulk transfers over loopback vary from run to run and from one session to the next: read the medians, the spread, and the sessions below. This session (2026-11-17, [`bench/results/compat/`](../bench/results/compat/README.md)) ran this version, with giong's default receive buffers of 16 KiB (8 KiB until 0.8.0), and, interleaved, `Compat` from 0.8.0 on giong 0.8.0.
+
+| Workload | giong's own API | `Compat` | `Compat` 0.8.0 | `Compat`, `AsyncBufRead` | Tokio |
+|---|---|---|---|---|---|
+| Receive 2 GiB (peer writes 256 KiB at a time), MiB/s | 3124 [2876–3506] | 3197 [2946–3677] | 3503 [2703–4034] | 3280 [3045–3493] | 3041 [2479–3695] |
+| CPU per KiB received | 139 ns | 147 ns | 170 ns | 141 ns | 124 ns |
+| Send 2 GiB from a 64 KiB buffer, MiB/s | 2737 [2069–3196] | 2535 [2255–4642] | 2381 [2201–2553] | | 2404 [2266–3100] |
+| CPU per KiB sent | 351 ns | 379 ns | 407 ns | | 404 ns |
+| 64-byte request and reply, round trips/s | 33,815 [30,808–35,058] | 34,331 [31,586–35,290] | 33,159 [31,855–34,394] | | 34,194 [32,267–35,948] |
+| CPU per round trip | 13.8 µs | 13.7 µs | 14.8 µs | | 14.0 µs |
+
+Where `Compat` is behind Tokio, and why:
+
+- **Receiving**, 19% more CPU per KiB with `read` and 14% with `AsyncBufRead` (30% and 17% in the session before, with 8 KiB receive buffers). Most of it is giong's own receive (12% above Tokio here): it receives into the worker's 16 KiB pool buffers, so 2 GiB take four times as many completions as Tokio's 64 KiB reads; 32 and 64 KiB pool buffers (`Builder::recv_buffers`) measured no better than 16 KiB. `read` then copies each byte once more into the caller's buffer, which `AsyncBufRead` avoids. Reading from the socket straight into the caller's buffer, as Tokio does, is not safe while giong's multishot receive is armed: data it has already taken could be handed out after data read later.
+
+Where it is ahead: **sending**, 6% less CPU per KiB than Tokio in this session (7% less than 0.8.0's `Compat`; 9% and 2% more than Tokio in the two sessions before, on 8 KiB receive buffers, so read it as level), and **request and reply**, 2% less CPU per round trip than Tokio.
+
+CPU is the measured thread's own (user and system, `CLOCK_THREAD_CPUTIME_ID`).
+
+The cost of `Compat` moves from one session of 9 runs to the next by more than the difference it measures. Eight sessions on the same machine type, each the medians of 9 runs, `Compat` against giong's own API:
+
+| Session (commit) | Send, MiB/s | Send, CPU per KiB | Receive with `read`, CPU per KiB | Receive with `AsyncBufRead`, CPU per KiB | Request and reply, round trips/s | CPU per round trip |
+|---|---|---|---|---|---|---|
+| 1 (`f992163`) | −12.5% | +13.8% | +5.8% | −2.2% | −2.8% | +4.7% |
+| 2 (`0bd788a`) | −16.1% | +19.4% | +11.8% | +3.9% | +1.2% | +3.4% |
+| 3 (`0bd788a`) | −20.1% | +25.1% | +13.2% | +8.7% | −0.7% | +3.5% |
+| 4 (`8632eb7`) | −10.3% | +14.6% | +13.1% | −4.6% | −1.9% | +1.4% |
+| 5 (0.5.0 with #83) | +5.9% | −4.4% | +6.8% | −6.0% | +0.7% | +1.7% |
+| 6 (0.5.0 with #83) | −4.3% | +4.6% | +15.8% | +4.4% | +0.7% | +1.9% |
+| 7 (`8606db1` with #146) | −14.7% | +14.2% | +15.5% | +3.7% | −1.0% | +3.6% |
+| 8 (this version, 16 KiB receive buffers, the table above) | −7.4% | +7.8% | +5.7% | +1.7% | +1.5% | −0.7% |
+
+What the numbers say:
+
+- **Sending** large writes now goes straight from the caller's memory to the socket (sessions 7 and 8). Until 0.8.0 each byte was copied into the write buffer first (under callgrind, `memcpy` was 96% of the user-space instructions `Compat` ran on this workload), which cost 10–20% of throughput and 14–25% more CPU per byte against giong's own `write_all` in sessions 1–4. In sessions 7 and 8 `Compat` sends at 5–7% less CPU per byte than 0.8.0's, from 9% above to 6% below Tokio. giong's own `write_all` measured faster than both (331 and 351 ns per KiB against Tokio's 347 and 404), which is why the column against it still shows +8% to +14%. Small writes are still gathered and copied: that is what lets `Compat` send one segment per flush.
+- **Receiving** through `read` costs 6–16% more CPU per byte (5.7% in session 8) than giong's own `recv`, for the copy into the caller's buffer, at the same throughput. Through `AsyncBufRead` (`fill_buf`, then `consume`) there is no copy: the eight sessions put it between 6% below and 9% above giong's own cost, which is the noise between sessions.
+- **Request and reply** differ by less than the noise in throughput; the CPU per round trip is up to 5% higher (0.7% lower in session 8). Callgrind counts about 1,000 more user-space instructions per round trip (the boxed send, the flush, one more poll), against 14 to 16 µs spent mostly in the kernel.
+- **Tokio's own receive spends less CPU per KiB** than giong's `recv` on this benchmark: 11% less in session 8, with 16 KiB receive buffers, and 6–20% less in the sessions before, with 8 KiB. Each receive brings at most one buffer, so Tokio's 64 KiB reads take fewer system calls. That gap is giong's own, not `Compat`'s.
+
+Run it with `bench/compat.sh` (the method is at the top of the script, and in [`bench/compat/src/main.rs`](../bench/compat/src/main.rs)); the raw numbers of the latest session are in [`bench/results/compat/`](../bench/results/compat/), the earlier ones in its `sessions/` folder.</script><script type="text/markdown" id="md-3"><!-- giong 1.2.0, https://giong.run/docs/1.2/giong-compat/#errors -->
+
+## Errors
+
+| Code | When |
+|---|---|
+| [`GIONG-E1401`](../docs/errors/E1401.md) | A write, flush or shutdown after a buffered send or a shutdown failed (the first call after the failure got the error itself) |
+| [`GIONG-E1402`](../docs/errors/E1402.md) | A write after `shutdown` or `close` started |
+| [`GIONG-E1403`](../docs/errors/E1403.md) | `write_buffer` given 0 or more than 1 GiB (a panic) |
+
+`giong::error::code(&err)` returns the code, to match on instead of the message.</script><script type="text/markdown" id="md-4"><!-- giong 1.2.0, https://giong.run/docs/1.2/giong-compat/#license -->
+
+## License
+
+MIT or Apache-2.0, at your option.</script><script type="text/markdown" id="md-page"># giong-compat
+
+> giong 1.2.0 · https://giong.run/docs/1.2/giong-compat/ · source: https://github.com/giong-run/Giong/blob/v1.2.0/giong-compat/README.md
+
+The I/O traits of Tokio and of the futures crates for [giong](https://github.com/giong-run/Giong/blob/v1.2.0/README.md)'s streams, so that protocol crates which are generic over their transport run on giong: TLS (tokio-rustls, futures-rustls), WebSocket (tokio-tungstenite), HTTP/2 (h2), hyper's connection API, framing (tokio-util's codecs) and the like. No Tokio runtime is involved: giong drives everything, on its own threads.
+
+```toml
+[dependencies]
+giong = "1.2.0"
+giong-compat = "1.2.0"
+```
+
+```rust,no_run
+use giong::net::TcpStream;
+use giong_compat::Compat;
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
+
+fn main() -> std::io::Result<()> {
+    giong::block_on(async {
+        let mut stream = Compat::new(TcpStream::connect("127.0.0.1:7000").await?);
+        stream.write_all(b"ping\n").await?;
+        stream.flush().await?; // writes are buffered until a flush, or until a read waits
+        let mut reply = [0; 5];
+        stream.read_exact(&mut reply).await?;
+        Ok(())
+    })
+}
+```
+
+`Compat<S>` wraps a `giong::net::TcpStream`, a `giong::net::UnixStream` or, with the `tls` feature, a `giong_tls::TlsStream`, and implements `AsyncRead`, `AsyncWrite` and `AsyncBufRead` from `tokio::io` (feature `tokio`) and from `futures_io` (feature `futures-io`). Both features are on by default and pull in the trait definitions only: `tokio` with its default features off, so no runtime, reactor or timer. The libraries build on Rust 1.80.
+
+## When to use it, and when not
+
+**Use the giong crate when there is one; `Compat` is the bridge for a protocol giong has no crate for yet.** The giong crates are built on giong's owned buffers and batched system calls, and measured against the Tokio crates they replace on Tokio they serve 1.1 to 5.1 times the requests or statements per core on the workloads measured, with the exceptions listed there ([the table in giong's README](https://github.com/giong-run/Giong/blob/v1.2.0/README.md#choosing-crates)). A Tokio crate run on giong through `Compat` keeps its own design and adds the copies described under [What it costs](#what-it-costs). No crate over `Compat` has been measured against the giong crate for the same protocol.
+
+| You need | Use |
+|---|---|
+| An HTTP/1.1 or HTTP/2 server or client (not hyper or reqwest) | [`giong-http`](https://github.com/giong-run/Giong/blob/v1.2.0/giong-http/README.md); [`giong-web`](https://github.com/giong-run/Giong/blob/v1.2.0/giong-web/README.md) for routing and JSON |
+| TLS (tokio-rustls over `Compat` works too, with `Compat`'s copies added) | [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.2.0/giong-tls/README.md) |
+| PostgreSQL, MySQL, Redis (not sqlx, tokio-postgres or redis-rs, which need the Tokio runtime) | [`giong-postgres`](https://github.com/giong-run/Giong/blob/v1.2.0/giong-postgres/README.md), [`giong-mysql`](https://github.com/giong-run/Giong/blob/v1.2.0/giong-mysql/README.md), [`giong-redis`](https://github.com/giong-run/Giong/blob/v1.2.0/giong-redis/README.md) |
+| h2's own API (HTTP/2 frames and streams, or a library built on h2) | [h2](https://docs.rs/h2) over `Compat`, plain or over `giong-tls` with ALPN `h2` |
+| WebSocket | [tokio-tungstenite](https://docs.rs/tokio-tungstenite) (`accept_async`, `client_async`) over `Compat` |
+| A protocol framed by length or by line | [tokio-util](https://docs.rs/tokio-util)'s `Framed` with a codec over `Compat` |
+| hyper's API in particular | `hyper::{client, server}::conn` over `hyper_util::rt::TokioIo::new(Compat::new(..))`; a server needs a timer, [see below](#hyper-servers-need-a-timer) |
+| A crate that opens its own connections with Tokio (reqwest, tonic's `transport`, sqlx, most SDKs) | Not `Compat`: see below |
+
+### What works
+
+A crate works through `Compat` when **it takes the stream from you and you drive it**: a function such as `tokio_rustls::TlsConnector::connect(name, stream)`, `tokio_tungstenite::client_async(request, stream)`, `h2::client::handshake(stream)` or `hyper::client::conn::http1::handshake(io)`, which returns a future, or a connection object, that your task (or a task you start with `giong::spawn`) polls. Futures that are not `Send` are fine, since giong's tasks stay on their worker.
+
+These are tested in [`tests/`](https://github.com/giong-run/Giong/blob/v1.2.0/giong-compat/tests), on giong's io_uring driver, its older ring setups and its epoll driver, with no Tokio runtime in the process:
+
+| Crate | What the tests do |
+|---|---|
+| tokio-rustls 0.26 | A tokio-rustls client against a giong-tls server, and a giong-tls client against a tokio-rustls server (ALPN, `close_notify`), up to 1 MiB per message |
+| futures-rustls 0.26 | A futures-rustls client (futures-io traits) against a giong-tls server |
+| tokio-tungstenite 0.29 | A WebSocket echo server and client: text, a 4 MiB binary message, 1,000 messages queued before any is read, ping and pong, the close handshake |
+| h2 0.4 | An HTTP/2 server and client: 100 streams at once on one connection with bodies over several flow-control windows; and h2 over giong-tls with ALPN `h2` |
+| hyper 1 (HTTP/1) | hyper's client against a giong-http server, and giong-http's client against a hyper server, with keep-alive and bodies up to 500 KB; a hyper server with a timer on giong's timers closes a connection whose request head does not arrive in time |
+| hyper 1 (HTTP/2) | hyper's client and server over `Compat`, with giong's tasks as hyper's executor: 100 requests at once on one connection, bodies up to 300 KB |
+| tokio-util 0.7 | `LengthDelimitedCodec` over a Unix socket (200 frames up to 1 MB) and `LinesCodec` over TCP |
+
+### What does not
+
+`Compat` provides I/O traits, nothing else. A crate does not work through it when it
+
+- **opens its own connections with `tokio::net`** (reqwest, tonic's `transport`, sqlx, redis-rs, most cloud SDKs): it panics with *"there is no reactor running, must be called from the context of a Tokio 1.x runtime"*, or never finishes;
+- **uses Tokio's timers or spawns** (`tokio::time::sleep`, `tokio::time::timeout`, `tokio::spawn`): the same panic. hyper takes its timer and executor from you instead: see [hyper servers need a timer](#hyper-servers-need-a-timer);
+- **requires `Send`** (bounds such as `T: Send` or `F: Future + Send + 'static`): `Compat` is not `Send`, because the stream belongs to one worker. The compiler says so.
+
+Some of these crates take a custom connector or executor, and can work with one built on giong, but each has to be tried. Otherwise, run the crate on a Tokio runtime in a thread of its own.
+
+### hyper servers need a timer
+
+hyper's server enforces no timeout of its own: `header_read_timeout` needs a `hyper::rt::Timer`, and without one a client that sends half a request head and then nothing holds the connection, and the task serving it, for as long as it likes. Setting the timeout without a timer panics. giong's timers can back one:
+
+```rust
+use std::pin::Pin;
+use std::task::{Context, Poll};
+use std::time::{Duration, Instant};
+
+/// hyper's timer, on giong's timers.
+#[derive(Clone, Copy, Debug)]
+struct GiongTimer;
+
+struct GiongSleep(giong::time::Sleep);
+
+impl std::future::Future for GiongSleep {
+    type Output = ();
+    fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<()> {
+        Pin::new(&mut self.0).poll(cx)
+    }
+}
+
+impl hyper::rt::Sleep for GiongSleep {}
+
+impl hyper::rt::Timer for GiongTimer {
+    fn sleep(&self, duration: Duration) -> Pin<Box<dyn hyper::rt::Sleep>> {
+        Box::pin(GiongSleep(giong::time::sleep(duration)))
+    }
+    fn sleep_until(&self, deadline: Instant) -> Pin<Box<dyn hyper::rt::Sleep>> {
+        Box::pin(GiongSleep(giong::time::sleep_until(deadline)))
+    }
+}
+
+// For each accepted connection:
+// hyper::server::conn::http1::Builder::new()
+//     .timer(GiongTimer)
+//     .header_read_timeout(Duration::from_secs(10))
+//     .serve_connection(hyper_util::rt::TokioIo::new(Compat::new(tcp)), service)
+```
+
+[`tests/hyper.rs`](https://github.com/giong-run/Giong/blob/v1.2.0/giong-compat/tests/hyper.rs) checks that a server built this way closes such a connection when the timeout ends.
+
+hyper's HTTP/2, client and server, also takes an executor for the tasks it starts. They need not be `Send`, so giong's tasks do:
+
+```rust
+#[derive(Clone, Copy, Debug)]
+struct GiongExec;
+
+impl<F: std::future::Future + 'static> hyper::rt::Executor<F> for GiongExec {
+    fn execute(&self, future: F) {
+        giong::spawn(future);
+    }
+}
+
+// hyper::server::conn::http2::Builder::new(GiongExec).timer(GiongTimer) ...
+// hyper::client::conn::http2::handshake(GiongExec, io) ...
+```
+
+## How it behaves
+
+- **Writes are buffered**, as with `BufWriter` or a TLS stream. `poll_write` copies the bytes and returns; they are sent on `flush`, when the buffer is full, or when a read on the same task is about to wait. Call `flush` (or `shutdown`) where the data must have gone out; every crate written for these traits does. A writer in another task than the reader must flush: a read only sends what its own task wrote. While one buffer is being sent the next one fills, so a long transfer keeps the socket busy.
+- **The write buffer is bounded**: `Compat::new(stream).write_buffer(limit)`, 64 KiB by default, from 1 byte to 1 GiB (`GIONG-E1403` otherwise). A busy stream holds up to twice the limit; an idle one holds no buffer.
+- **`TCP_NODELAY` is turned on** for TCP streams (plain or under TLS), as every giong crate does. `Compat` already gathers small writes until a flush, and Nagle's algorithm on top of that only delays them: the HTTP/2 test with 100 streams took 2.3 s with it and 21 ms without. `compat.get_ref().set_nodelay(false)` undoes it.
+- **A failed send is reported by the next write, flush or shutdown**, with the kernel's own error (a large write sent straight to the socket reports its own failure at once); after that, writes, flushes and shutdowns fail with `GIONG-E1401`. So does a failed shutdown (a TLS stream that cannot send its `close_notify`). Writing after `shutdown` (or `close`) has started fails with `GIONG-E1402`. Reading still works in all these cases. A shutdown that finds the connection already reset counts as done, as with Tokio's `TcpStream`.
+- **Dropping a `Compat` discards what was written but not flushed**, like dropping a `BufWriter`. Sends in flight are cancelled the way giong cancels any operation: their buffers stay alive until the kernel lets go.
+- **One task reads and one task writes at a time.** `tokio::io::split` and `futures::io::AsyncReadExt::split` work, and so does splitting a `Framed` or a WebSocket stream.
+- **Cancel safe.** A read that is dropped loses no data. A write either copies bytes and says how many, or copies nothing. [`tests/cancel.rs`](https://github.com/giong-run/Giong/blob/v1.2.0/giong-compat/tests/cancel.rs) drops reads, writes, flushes and whole streams at random (seeded, so a failure repeats), over TCP and giong-tls and through TLS 1.3 key updates, and checks every byte and that nothing leaks.
+- **`fill_buf` holds a buffer of the worker's pool** until `consume` takes all of it, or a read or `consume` of part of it moves the rest to the heap. Do not wait on something else between `fill_buf` and `consume`: with many connections doing that, the worker's receive pool runs dry and every socket on the worker stalls. `consume` of more than `fill_buf` returned is ignored, as with std's and Tokio's `BufReader`.
+- **Reading after the end of the stream** keeps returning 0 bytes. `into_inner().await` flushes and hands back the stream with the bytes received but not yet read, to go on with giong's own API.
+
+## What it costs
+
+giong reads into buffers from the worker's pool and writes buffers it owns until the kernel is done with them; these traits read into, and write from, memory the caller lends for one call. So `Compat` copies:
+
+- **Reading:** each byte once more than giong's own `recv`, from the pool buffer into the caller's buffer. Through `AsyncBufRead` (`fill_buf`, then `consume` of the whole chunk) there is no extra copy. When a caller takes only part of a chunk, the rest moves to a heap buffer at once, so that a slow reader never holds on to the worker's pool.
+- **Writing:** small writes are copied into the write buffer, which giong's `write_all` sends at a flush or when it fills; one small allocation per send (the future that sends it). A write at least as large as the buffer's limit (64 KiB by default), with nothing buffered or being sent before it, goes straight from the caller's memory to the socket in one `sendmsg(2)` that does not wait, as `BufWriter` and Tokio's streams do; only what the socket cannot take at once is copied.
+
+Measured with [`bench/compat.sh`](https://github.com/giong-run/Giong/blob/v1.2.0/bench/compat.sh): one TCP stream over loopback, the measured side on one pinned core and the other end on another, the same peer for every variant, 9 runs interleaved. Median, with the range of the 9 runs in brackets. The machine is a 4-vCPU cloud VM (Xeon at 2.1 GHz, Linux 6.18), where bulk transfers over loopback vary from run to run and from one session to the next: read the medians, the spread, and the sessions below. This session (2026-11-17, [`bench/results/compat/`](https://github.com/giong-run/Giong/blob/v1.2.0/bench/results/compat/README.md)) ran this version, with giong's default receive buffers of 16 KiB (8 KiB until 0.8.0), and, interleaved, `Compat` from 0.8.0 on giong 0.8.0.
+
+| Workload | giong's own API | `Compat` | `Compat` 0.8.0 | `Compat`, `AsyncBufRead` | Tokio |
+|---|---|---|---|---|---|
+| Receive 2 GiB (peer writes 256 KiB at a time), MiB/s | 3124 [2876–3506] | 3197 [2946–3677] | 3503 [2703–4034] | 3280 [3045–3493] | 3041 [2479–3695] |
+| CPU per KiB received | 139 ns | 147 ns | 170 ns | 141 ns | 124 ns |
+| Send 2 GiB from a 64 KiB buffer, MiB/s | 2737 [2069–3196] | 2535 [2255–4642] | 2381 [2201–2553] | | 2404 [2266–3100] |
+| CPU per KiB sent | 351 ns | 379 ns | 407 ns | | 404 ns |
+| 64-byte request and reply, round trips/s | 33,815 [30,808–35,058] | 34,331 [31,586–35,290] | 33,159 [31,855–34,394] | | 34,194 [32,267–35,948] |
+| CPU per round trip | 13.8 µs | 13.7 µs | 14.8 µs | | 14.0 µs |
+
+Where `Compat` is behind Tokio, and why:
+
+- **Receiving**, 19% more CPU per KiB with `read` and 14% with `AsyncBufRead` (30% and 17% in the session before, with 8 KiB receive buffers). Most of it is giong's own receive (12% above Tokio here): it receives into the worker's 16 KiB pool buffers, so 2 GiB take four times as many completions as Tokio's 64 KiB reads; 32 and 64 KiB pool buffers (`Builder::recv_buffers`) measured no better than 16 KiB. `read` then copies each byte once more into the caller's buffer, which `AsyncBufRead` avoids. Reading from the socket straight into the caller's buffer, as Tokio does, is not safe while giong's multishot receive is armed: data it has already taken could be handed out after data read later.
+
+Where it is ahead: **sending**, 6% less CPU per KiB than Tokio in this session (7% less than 0.8.0's `Compat`; 9% and 2% more than Tokio in the two sessions before, on 8 KiB receive buffers, so read it as level), and **request and reply**, 2% less CPU per round trip than Tokio.
+
+CPU is the measured thread's own (user and system, `CLOCK_THREAD_CPUTIME_ID`).
+
+The cost of `Compat` moves from one session of 9 runs to the next by more than the difference it measures. Eight sessions on the same machine type, each the medians of 9 runs, `Compat` against giong's own API:
+
+| Session (commit) | Send, MiB/s | Send, CPU per KiB | Receive with `read`, CPU per KiB | Receive with `AsyncBufRead`, CPU per KiB | Request and reply, round trips/s | CPU per round trip |
+|---|---|---|---|---|---|---|
+| 1 (`f992163`) | −12.5% | +13.8% | +5.8% | −2.2% | −2.8% | +4.7% |
+| 2 (`0bd788a`) | −16.1% | +19.4% | +11.8% | +3.9% | +1.2% | +3.4% |
+| 3 (`0bd788a`) | −20.1% | +25.1% | +13.2% | +8.7% | −0.7% | +3.5% |
+| 4 (`8632eb7`) | −10.3% | +14.6% | +13.1% | −4.6% | −1.9% | +1.4% |
+| 5 (0.5.0 with #83) | +5.9% | −4.4% | +6.8% | −6.0% | +0.7% | +1.7% |
+| 6 (0.5.0 with #83) | −4.3% | +4.6% | +15.8% | +4.4% | +0.7% | +1.9% |
+| 7 (`8606db1` with #146) | −14.7% | +14.2% | +15.5% | +3.7% | −1.0% | +3.6% |
+| 8 (this version, 16 KiB receive buffers, the table above) | −7.4% | +7.8% | +5.7% | +1.7% | +1.5% | −0.7% |
+
+What the numbers say:
+
+- **Sending** large writes now goes straight from the caller's memory to the socket (sessions 7 and 8). Until 0.8.0 each byte was copied into the write buffer first (under callgrind, `memcpy` was 96% of the user-space instructions `Compat` ran on this workload), which cost 10–20% of throughput and 14–25% more CPU per byte against giong's own `write_all` in sessions 1–4. In sessions 7 and 8 `Compat` sends at 5–7% less CPU per byte than 0.8.0's, from 9% above to 6% below Tokio. giong's own `write_all` measured faster than both (331 and 351 ns per KiB against Tokio's 347 and 404), which is why the column against it still shows +8% to +14%. Small writes are still gathered and copied: that is what lets `Compat` send one segment per flush.
+- **Receiving** through `read` costs 6–16% more CPU per byte (5.7% in session 8) than giong's own `recv`, for the copy into the caller's buffer, at the same throughput. Through `AsyncBufRead` (`fill_buf`, then `consume`) there is no copy: the eight sessions put it between 6% below and 9% above giong's own cost, which is the noise between sessions.
+- **Request and reply** differ by less than the noise in throughput; the CPU per round trip is up to 5% higher (0.7% lower in session 8). Callgrind counts about 1,000 more user-space instructions per round trip (the boxed send, the flush, one more poll), against 14 to 16 µs spent mostly in the kernel.
+- **Tokio's own receive spends less CPU per KiB** than giong's `recv` on this benchmark: 11% less in session 8, with 16 KiB receive buffers, and 6–20% less in the sessions before, with 8 KiB. Each receive brings at most one buffer, so Tokio's 64 KiB reads take fewer system calls. That gap is giong's own, not `Compat`'s.
+
+Run it with `bench/compat.sh` (the method is at the top of the script, and in [`bench/compat/src/main.rs`](https://github.com/giong-run/Giong/blob/v1.2.0/bench/compat/src/main.rs)); the raw numbers of the latest session are in [`bench/results/compat/`](https://github.com/giong-run/Giong/blob/v1.2.0/bench/results/compat), the earlier ones in its `sessions/` folder.
+
+## Errors
+
+| Code | When |
+|---|---|
+| [`GIONG-E1401`](https://github.com/giong-run/Giong/blob/v1.2.0/docs/errors/E1401.md) | A write, flush or shutdown after a buffered send or a shutdown failed (the first call after the failure got the error itself) |
+| [`GIONG-E1402`](https://github.com/giong-run/Giong/blob/v1.2.0/docs/errors/E1402.md) | A write after `shutdown` or `close` started |
+| [`GIONG-E1403`](https://github.com/giong-run/Giong/blob/v1.2.0/docs/errors/E1403.md) | `write_buffer` given 0 or more than 1 GiB (a panic) |
+
+`giong::error::code(&err)` returns the code, to match on instead of the message.
+
+## License
+
+MIT or Apache-2.0, at your option.
+</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.2.0, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use giong-compat as documented below.
+
+Rules for giong code:
+- Start the runtime with giong::Builder::new().shutdown_on_signals(true).build()?.run(|_worker| async { .. }); there are no macros. Build listeners, routers, pools and clients inside each worker's future.
+- Never block a worker: no std::fs, std::net or std::thread::sleep; use giong::fs, giong::net and giong::time. Run heavy work on std::thread::spawn and await a giong::sync::oneshot.
+- Futures need not be Send. Per-worker state is Rc<RefCell<T>>, never borrowed across an .await.
+- Bind IP addresses ("0.0.0.0:8080"), never host names.
+- Match errors with giong::error::code(&err); every GIONG-Exxxx code has a page that says how to fix it.
+- Use the giong crate for each job (giong-http, giong-web, giong-postgres, giong-redis, ...). Crates that need the Tokio runtime (sqlx, reqwest, tonic's transport) panic on a giong worker.
+More facts: https://giong.run/llms.txt. Best practices: https://giong.run/docs/best-practices.md
+
+My task: <describe what to build or fix>
+
+Documentation of giong-compat, giong 1.2.0 (https://giong.run/docs/1.2/giong-compat.md):
+
+# giong-compat
+
+> giong 1.2.0 · https://giong.run/docs/1.2/giong-compat/ · source: https://github.com/giong-run/Giong/blob/v1.2.0/giong-compat/README.md
+
+The I/O traits of Tokio and of the futures crates for [giong](https://github.com/giong-run/Giong/blob/v1.2.0/README.md)'s streams, so that protocol crates which are generic over their transport run on giong: TLS (tokio-rustls, futures-rustls), WebSocket (tokio-tungstenite), HTTP/2 (h2), hyper's connection API, framing (tokio-util's codecs) and the like. No Tokio runtime is involved: giong drives everything, on its own threads.
+
+```toml
+[dependencies]
+giong = "1.2.0"
+giong-compat = "1.2.0"
+```
+
+```rust,no_run
+use giong::net::TcpStream;
+use giong_compat::Compat;
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
+
+fn main() -> std::io::Result<()> {
+    giong::block_on(async {
+        let mut stream = Compat::new(TcpStream::connect("127.0.0.1:7000").await?);
+        stream.write_all(b"ping\n").await?;
+        stream.flush().await?; // writes are buffered until a flush, or until a read waits
+        let mut reply = [0; 5];
+        stream.read_exact(&mut reply).await?;
+        Ok(())
+    })
+}
+```
+
+`Compat<S>` wraps a `giong::net::TcpStream`, a `giong::net::UnixStream` or, with the `tls` feature, a `giong_tls::TlsStream`, and implements `AsyncRead`, `AsyncWrite` and `AsyncBufRead` from `tokio::io` (feature `tokio`) and from `futures_io` (feature `futures-io`). Both features are on by default and pull in the trait definitions only: `tokio` with its default features off, so no runtime, reactor or timer. The libraries build on Rust 1.80.
+
+## When to use it, and when not
+
+**Use the giong crate when there is one; `Compat` is the bridge for a protocol giong has no crate for yet.** The giong crates are built on giong's owned buffers and batched system calls, and measured against the Tokio crates they replace on Tokio they serve 1.1 to 5.1 times the requests or statements per core on the workloads measured, with the exceptions listed there ([the table in giong's README](https://github.com/giong-run/Giong/blob/v1.2.0/README.md#choosing-crates)). A Tokio crate run on giong through `Compat` keeps its own design and adds the copies described under [What it costs](#what-it-costs). No crate over `Compat` has been measured against the giong crate for the same protocol.
+
+| You need | Use |
+|---|---|
+| An HTTP/1.1 or HTTP/2 server or client (not hyper or reqwest) | [`giong-http`](https://github.com/giong-run/Giong/blob/v1.2.0/giong-http/README.md); [`giong-web`](https://github.com/giong-run/Giong/blob/v1.2.0/giong-web/README.md) for routing and JSON |
+| TLS (tokio-rustls over `Compat` works too, with `Compat`'s copies added) | [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.2.0/giong-tls/README.md) |
+| PostgreSQL, MySQL, Redis (not sqlx, tokio-postgres or redis-rs, which need the Tokio runtime) | [`giong-postgres`](https://github.com/giong-run/Giong/blob/v1.2.0/giong-postgres/README.md), [`giong-mysql`](https://github.com/giong-run/Giong/blob/v1.2.0/giong-mysql/README.md), [`giong-redis`](https://github.com/giong-run/Giong/blob/v1.2.0/giong-redis/README.md) |
+| h2's own API (HTTP/2 frames and streams, or a library built on h2) | [h2](https://docs.rs/h2) over `Compat`, plain or over `giong-tls` with ALPN `h2` |
+| WebSocket | [tokio-tungstenite](https://docs.rs/tokio-tungstenite) (`accept_async`, `client_async`) over `Compat` |
+| A protocol framed by length or by line | [tokio-util](https://docs.rs/tokio-util)'s `Framed` with a codec over `Compat` |
+| hyper's API in particular | `hyper::{client, server}::conn` over `hyper_util::rt::TokioIo::new(Compat::new(..))`; a server needs a timer, [see below](#hyper-servers-need-a-timer) |
+| A crate that opens its own connections with Tokio (reqwest, tonic's `transport`, sqlx, most SDKs) | Not `Compat`: see below |
+
+### What works
+
+A crate works through `Compat` when **it takes the stream from you and you drive it**: a function such as `tokio_rustls::TlsConnector::connect(name, stream)`, `tokio_tungstenite::client_async(request, stream)`, `h2::client::handshake(stream)` or `hyper::client::conn::http1::handshake(io)`, which returns a future, or a connection object, that your task (or a task you start with `giong::spawn`) polls. Futures that are not `Send` are fine, since giong's tasks stay on their worker.
+
+These are tested in [`tests/`](https://github.com/giong-run/Giong/blob/v1.2.0/giong-compat/tests), on giong's io_uring driver, its older ring setups and its epoll driver, with no Tokio runtime in the process:
+
+| Crate | What the tests do |
+|---|---|
+| tokio-rustls 0.26 | A tokio-rustls client against a giong-tls server, and a giong-tls client against a tokio-rustls server (ALPN, `close_notify`), up to 1 MiB per message |
+| futures-rustls 0.26 | A futures-rustls client (futures-io traits) against a giong-tls server |
+| tokio-tungstenite 0.29 | A WebSocket echo server and client: text, a 4 MiB binary message, 1,000 messages queued before any is read, ping and pong, the close handshake |
+| h2 0.4 | An HTTP/2 server and client: 100 streams at once on one connection with bodies over several flow-control windows; and h2 over giong-tls with ALPN `h2` |
+| hyper 1 (HTTP/1) | hyper's client against a giong-http server, and giong-http's client against a hyper server, with keep-alive and bodies up to 500 KB; a hyper server with a timer on giong's timers closes a connection whose request head does not arrive in time |
+| hyper 1 (HTTP/2) | hyper's client and server over `Compat`, with giong's tasks as hyper's executor: 100 requests at once on one connection, bodies up to 300 KB |
+| tokio-util 0.7 | `LengthDelimitedCodec` over a Unix socket (200 frames up to 1 MB) and `LinesCodec` over TCP |
+
+### What does not
+
+`Compat` provides I/O traits, nothing else. A crate does not work through it when it
+
+- **opens its own connections with `tokio::net`** (reqwest, tonic's `transport`, sqlx, redis-rs, most cloud SDKs): it panics with *"there is no reactor running, must be called from the context of a Tokio 1.x runtime"*, or never finishes;
+- **uses Tokio's timers or spawns** (`tokio::time::sleep`, `tokio::time::timeout`, `tokio::spawn`): the same panic. hyper takes its timer and executor from you instead: see [hyper servers need a timer](#hyper-servers-need-a-timer);
+- **requires `Send`** (bounds such as `T: Send` or `F: Future + Send + 'static`): `Compat` is not `Send`, because the stream belongs to one worker. The compiler says so.
+
+Some of these crates take a custom connector or executor, and can work with one built on giong, but each has to be tried. Otherwise, run the crate on a Tokio runtime in a thread of its own.
+
+### hyper servers need a timer
+
+hyper's server enforces no timeout of its own: `header_read_timeout` needs a `hyper::rt::Timer`, and without one a client that sends half a request head and then nothing holds the connection, and the task serving it, for as long as it likes. Setting the timeout without a timer panics. giong's timers can back one:
+
+```rust
+use std::pin::Pin;
+use std::task::{Context, Poll};
+use std::time::{Duration, Instant};
+
+/// hyper's timer, on giong's timers.
+#[derive(Clone, Copy, Debug)]
+struct GiongTimer;
+
+struct GiongSleep(giong::time::Sleep);
+
+impl std::future::Future for GiongSleep {
+    type Output = ();
+    fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<()> {
+        Pin::new(&mut self.0).poll(cx)
+    }
+}
+
+impl hyper::rt::Sleep for GiongSleep {}
+
+impl hyper::rt::Timer for GiongTimer {
+    fn sleep(&self, duration: Duration) -> Pin<Box<dyn hyper::rt::Sleep>> {
+        Box::pin(GiongSleep(giong::time::sleep(duration)))
+    }
+    fn sleep_until(&self, deadline: Instant) -> Pin<Box<dyn hyper::rt::Sleep>> {
+        Box::pin(GiongSleep(giong::time::sleep_until(deadline)))
+    }
+}
+
+// For each accepted connection:
+// hyper::server::conn::http1::Builder::new()
+//     .timer(GiongTimer)
+//     .header_read_timeout(Duration::from_secs(10))
+//     .serve_connection(hyper_util::rt::TokioIo::new(Compat::new(tcp)), service)
+```
+
+[`tests/hyper.rs`](https://github.com/giong-run/Giong/blob/v1.2.0/giong-compat/tests/hyper.rs) checks that a server built this way closes such a connection when the timeout ends.
+
+hyper's HTTP/2, client and server, also takes an executor for the tasks it starts. They need not be `Send`, so giong's tasks do:
+
+```rust
+#[derive(Clone, Copy, Debug)]
+struct GiongExec;
+
+impl<F: std::future::Future + 'static> hyper::rt::Executor<F> for GiongExec {
+    fn execute(&self, future: F) {
+        giong::spawn(future);
+    }
+}
+
+// hyper::server::conn::http2::Builder::new(GiongExec).timer(GiongTimer) ...
+// hyper::client::conn::http2::handshake(GiongExec, io) ...
+```
+
+## How it behaves
+
+- **Writes are buffered**, as with `BufWriter` or a TLS stream. `poll_write` copies the bytes and returns; they are sent on `flush`, when the buffer is full, or when a read on the same task is about to wait. Call `flush` (or `shutdown`) where the data must have gone out; every crate written for these traits does. A writer in another task than the reader must flush: a read only sends what its own task wrote. While one buffer is being sent the next one fills, so a long transfer keeps the socket busy.
+- **The write buffer is bounded**: `Compat::new(stream).write_buffer(limit)`, 64 KiB by default, from 1 byte to 1 GiB (`GIONG-E1403` otherwise). A busy stream holds up to twice the limit; an idle one holds no buffer.
+- **`TCP_NODELAY` is turned on** for TCP streams (plain or under TLS), as every giong crate does. `Compat` already gathers small writes until a flush, and Nagle's algorithm on top of that only delays them: the HTTP/2 test with 100 streams took 2.3 s with it and 21 ms without. `compat.get_ref().set_nodelay(false)` undoes it.
+- **A failed send is reported by the next write, flush or shutdown**, with the kernel's own error (a large write sent straight to the socket reports its own failure at once); after that, writes, flushes and shutdowns fail with `GIONG-E1401`. So does a failed shutdown (a TLS stream that cannot send its `close_notify`). Writing after `shutdown` (or `close`) has started fails with `GIONG-E1402`. Reading still works in all these cases. A shutdown that finds the connection already reset counts as done, as with Tokio's `TcpStream`.
+- **Dropping a `Compat` discards what was written but not flushed**, like dropping a `BufWriter`. Sends in flight are cancelled the way giong cancels any operation: their buffers stay alive until the kernel lets go.
+- **One task reads and one task writes at a time.** `tokio::io::split` and `futures::io::AsyncReadExt::split` work, and so does splitting a `Framed` or a WebSocket stream.
+- **Cancel safe.** A read that is dropped loses no data. A write either copies bytes and says how many, or copies nothing. [`tests/cancel.rs`](https://github.com/giong-run/Giong/blob/v1.2.0/giong-compat/tests/cancel.rs) drops reads, writes, flushes and whole streams at random (seeded, so a failure repeats), over TCP and giong-tls and through TLS 1.3 key updates, and checks every byte and that nothing leaks.
+- **`fill_buf` holds a buffer of the worker's pool** until `consume` takes all of it, or a read or `consume` of part of it moves the rest to the heap. Do not wait on something else between `fill_buf` and `consume`: with many connections doing that, the worker's receive pool runs dry and every socket on the worker stalls. `consume` of more than `fill_buf` returned is ignored, as with std's and Tokio's `BufReader`.
+- **Reading after the end of the stream** keeps returning 0 bytes. `into_inner().await` flushes and hands back the stream with the bytes received but not yet read, to go on with giong's own API.
+
+## What it costs
+
+giong reads into buffers from the worker's pool and writes buffers it owns until the kernel is done with them; these traits read into, and write from, memory the caller lends for one call. So `Compat` copies:
+
+- **Reading:** each byte once more than giong's own `recv`, from the pool buffer into the caller's buffer. Through `AsyncBufRead` (`fill_buf`, then `consume` of the whole chunk) there is no extra copy. When a caller takes only part of a chunk, the rest moves to a heap buffer at once, so that a slow reader never holds on to the worker's pool.
+- **Writing:** small writes are copied into the write buffer, which giong's `write_all` sends at a flush or when it fills; one small allocation per send (the future that sends it). A write at least as large as the buffer's limit (64 KiB by default), with nothing buffered or being sent before it, goes straight from the caller's memory to the socket in one `sendmsg(2)` that does not wait, as `BufWriter` and Tokio's streams do; only what the socket cannot take at once is copied.
+
+Measured with [`bench/compat.sh`](https://github.com/giong-run/Giong/blob/v1.2.0/bench/compat.sh): one TCP stream over loopback, the measured side on one pinned core and the other end on another, the same peer for every variant, 9 runs interleaved. Median, with the range of the 9 runs in brackets. The machine is a 4-vCPU cloud VM (Xeon at 2.1 GHz, Linux 6.18), where bulk transfers over loopback vary from run to run and from one session to the next: read the medians, the spread, and the sessions below. This session (2026-11-17, [`bench/results/compat/`](https://github.com/giong-run/Giong/blob/v1.2.0/bench/results/compat/README.md)) ran this version, with giong's default receive buffers of 16 KiB (8 KiB until 0.8.0), and, interleaved, `Compat` from 0.8.0 on giong 0.8.0.
+
+| Workload | giong's own API | `Compat` | `Compat` 0.8.0 | `Compat`, `AsyncBufRead` | Tokio |
+|---|---|---|---|---|---|
+| Receive 2 GiB (peer writes 256 KiB at a time), MiB/s | 3124 [2876–3506] | 3197 [2946–3677] | 3503 [2703–4034] | 3280 [3045–3493] | 3041 [2479–3695] |
+| CPU per KiB received | 139 ns | 147 ns | 170 ns | 141 ns | 124 ns |
+| Send 2 GiB from a 64 KiB buffer, MiB/s | 2737 [2069–3196] | 2535 [2255–4642] | 2381 [2201–2553] | | 2404 [2266–3100] |
+| CPU per KiB sent | 351 ns | 379 ns | 407 ns | | 404 ns |
+| 64-byte request and reply, round trips/s | 33,815 [30,808–35,058] | 34,331 [31,586–35,290] | 33,159 [31,855–34,394] | | 34,194 [32,267–35,948] |
+| CPU per round trip | 13.8 µs | 13.7 µs | 14.8 µs | | 14.0 µs |
+
+Where `Compat` is behind Tokio, and why:
+
+- **Receiving**, 19% more CPU per KiB with `read` and 14% with `AsyncBufRead` (30% and 17% in the session before, with 8 KiB receive buffers). Most of it is giong's own receive (12% above Tokio here): it receives into the worker's 16 KiB pool buffers, so 2 GiB take four times as many completions as Tokio's 64 KiB reads; 32 and 64 KiB pool buffers (`Builder::recv_buffers`) measured no better than 16 KiB. `read` then copies each byte once more into the caller's buffer, which `AsyncBufRead` avoids. Reading from the socket straight into the caller's buffer, as Tokio does, is not safe while giong's multishot receive is armed: data it has already taken could be handed out after data read later.
+
+Where it is ahead: **sending**, 6% less CPU per KiB than Tokio in this session (7% less than 0.8.0's `Compat`; 9% and 2% more than Tokio in the two sessions before, on 8 KiB receive buffers, so read it as level), and **request and reply**, 2% less CPU per round trip than Tokio.
+
+CPU is the measured thread's own (user and system, `CLOCK_THREAD_CPUTIME_ID`).
+
+The cost of `Compat` moves from one session of 9 runs to the next by more than the difference it measures. Eight sessions on the same machine type, each the medians of 9 runs, `Compat` against giong's own API:
+
+| Session (commit) | Send, MiB/s | Send, CPU per KiB | Receive with `read`, CPU per KiB | Receive with `AsyncBufRead`, CPU per KiB | Request and reply, round trips/s | CPU per round trip |
+|---|---|---|---|---|---|---|
+| 1 (`f992163`) | −12.5% | +13.8% | +5.8% | −2.2% | −2.8% | +4.7% |
+| 2 (`0bd788a`) | −16.1% | +19.4% | +11.8% | +3.9% | +1.2% | +3.4% |
+| 3 (`0bd788a`) | −20.1% | +25.1% | +13.2% | +8.7% | −0.7% | +3.5% |
+| 4 (`8632eb7`) | −10.3% | +14.6% | +13.1% | −4.6% | −1.9% | +1.4% |
+| 5 (0.5.0 with #83) | +5.9% | −4.4% | +6.8% | −6.0% | +0.7% | +1.7% |
+| 6 (0.5.0 with #83) | −4.3% | +4.6% | +15.8% | +4.4% | +0.7% | +1.9% |
+| 7 (`8606db1` with #146) | −14.7% | +14.2% | +15.5% | +3.7% | −1.0% | +3.6% |
+| 8 (this version, 16 KiB receive buffers, the table above) | −7.4% | +7.8% | +5.7% | +1.7% | +1.5% | −0.7% |
+
+What the numbers say:
+
+- **Sending** large writes now goes straight from the caller's memory to the socket (sessions 7 and 8). Until 0.8.0 each byte was copied into the write buffer first (under callgrind, `memcpy` was 96% of the user-space instructions `Compat` ran on this workload), which cost 10–20% of throughput and 14–25% more CPU per byte against giong's own `write_all` in sessions 1–4. In sessions 7 and 8 `Compat` sends at 5–7% less CPU per byte than 0.8.0's, from 9% above to 6% below Tokio. giong's own `write_all` measured faster than both (331 and 351 ns per KiB against Tokio's 347 and 404), which is why the column against it still shows +8% to +14%. Small writes are still gathered and copied: that is what lets `Compat` send one segment per flush.
+- **Receiving** through `read` costs 6–16% more CPU per byte (5.7% in session 8) than giong's own `recv`, for the copy into the caller's buffer, at the same throughput. Through `AsyncBufRead` (`fill_buf`, then `consume`) there is no copy: the eight sessions put it between 6% below and 9% above giong's own cost, which is the noise between sessions.
+- **Request and reply** differ by less than the noise in throughput; the CPU per round trip is up to 5% higher (0.7% lower in session 8). Callgrind counts about 1,000 more user-space instructions per round trip (the boxed send, the flush, one more poll), against 14 to 16 µs spent mostly in the kernel.
+- **Tokio's own receive spends less CPU per KiB** than giong's `recv` on this benchmark: 11% less in session 8, with 16 KiB receive buffers, and 6–20% less in the sessions before, with 8 KiB. Each receive brings at most one buffer, so Tokio's 64 KiB reads take fewer system calls. That gap is giong's own, not `Compat`'s.
+
+Run it with `bench/compat.sh` (the method is at the top of the script, and in [`bench/compat/src/main.rs`](https://github.com/giong-run/Giong/blob/v1.2.0/bench/compat/src/main.rs)); the raw numbers of the latest session are in [`bench/results/compat/`](https://github.com/giong-run/Giong/blob/v1.2.0/bench/results/compat), the earlier ones in its `sessions/` folder.
+
+## Errors
+
+| Code | When |
+|---|---|
+| [`GIONG-E1401`](https://github.com/giong-run/Giong/blob/v1.2.0/docs/errors/E1401.md) | A write, flush or shutdown after a buffered send or a shutdown failed (the first call after the failure got the error itself) |
+| [`GIONG-E1402`](https://github.com/giong-run/Giong/blob/v1.2.0/docs/errors/E1402.md) | A write after `shutdown` or `close` started |
+| [`GIONG-E1403`](https://github.com/giong-run/Giong/blob/v1.2.0/docs/errors/E1403.md) | `write_buffer` given 0 or more than 1 GiB (a panic) |
+
+`giong::error::code(&err)` returns the code, to match on instead of the message.
+
+## License
+
+MIT or Apache-2.0, at your option.
+</script>
+  </article>
+  <nav class="toc doc-toc" aria-label="On this page"><p>On this page</p><div class="toc-links"><a href="#when-to-use-it-and-when-not">When to use it, and when not</a><a href="#how-it-behaves">How it behaves</a><a href="#what-it-costs">What it costs</a><a href="#errors">Errors</a><a href="#license">License</a></div></nav>
+</div>
+</main>
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr-grid">
+      <div class="ftr-brand">
+        <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="22" height="22"></picture><span>giong</span></a>
+        <p>A thread-per-core async runtime for Rust, built on io_uring and made for the code agents write.</p>
+        <p class="ftr-social">
+          <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
+          <a class="icon-btn" href="https://x.com/giongrun" aria-label="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
+          <a class="icon-btn" href="https://github.com/giong-run/Giong/releases.atom" aria-label="Release feed"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3a16 16 0 0 1 16 16h-3A13 13 0 0 0 5 6Zm0 6a10 10 0 0 1 10 10h-3a7 7 0 0 0-7-7Zm1.5 6.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z"/></svg></a>
+        </p>
+      </div>
+      <nav class="ftr-col" aria-label="Learn">
+        <h2>Learn</h2>
+        <a href="/docs/">Get started</a>
+        <a href="/docs/#examples">Examples</a>
+        <a href="https://docs.rs/giong/1.2.0/giong/">API reference</a>
+        <a href="/docs/#errors">Error codes</a>
+        
+        <a href="/llms.txt">llms.txt</a>
+      </nav>
+      <nav class="ftr-col" aria-label="Project">
+        <h2>Project</h2>
+        <a href="/crates/">Crates</a>
+        <a href="/benchmarks/">Benchmarks</a>
+        <a href="/roadmap/">Roadmap</a>
+        <a href="/releases/">Releases</a>
+      </nav>
+      <nav class="ftr-col" aria-label="Community">
+        <h2>Community</h2>
+        <a href="https://github.com/giong-run/Giong">GitHub</a>
+        <a href="https://x.com/giongrun">X · @giongrun</a>
+        <a href="https://github.com/giong-run/Giong/issues">Issues</a>
+        <a href="https://github.com/giong-run/Giong/blob/main/CONTRIBUTING.md">Contributing</a>
+        <a href="https://github.com/giong-run/Giong/security/advisories/new">Report a vulnerability</a>
+      </nav>
+    </div>
+    <div class="ftr-base">
+      <span>© 2026 <a href="https://github.com/thekivashyn">thekivashyn</a> and the giong contributors. MIT or Apache-2.0.</span>
+      <span class="ramp" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+    </div>
+  </div>
+</footer>
+<script src="/main.js" defer></script>
+</body>
+</html>
