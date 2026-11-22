@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>giong-tls · giong</title>
+<meta name="description" content="TLS 1.2 and 1.3 for servers and clients on rustls with ring. No OpenSSL.">
+<link rel="canonical" href="https://giong.run/docs/giong-tls/">
+<meta name="theme-color" content="#0A0C10">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="giong">
+<meta property="og:title" content="giong-tls · giong">
+<meta property="og:description" content="TLS 1.2 and 1.3 for servers and clients on rustls with ring. No OpenSSL.">
+<meta property="og:url" content="https://giong.run/docs/giong-tls/">
+<meta property="og:image" content="https://giong.run/assets/social-preview.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="The giong logo: a segmented ember ring">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@giongrun">
+<meta name="twitter:title" content="giong-tls · giong">
+<meta name="twitter:description" content="TLS 1.2 and 1.3 for servers and clients on rustls with ring. No OpenSSL.">
+<meta name="twitter:image" content="https://giong.run/assets/social-preview.png">
+<meta name="author" content="thekivashyn">
+<link rel="alternate" type="application/atom+xml" title="giong releases" href="https://github.com/giong-run/Giong/releases.atom">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","name":"giong-tls · giong","description":"TLS 1.2 and 1.3 for servers and clients on rustls with ring. No OpenSSL.","url":"https://giong.run/docs/giong-tls/"}]}</script>
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/giong-icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/giong-icon-180.png">
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/styles.css">
+<script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("giong-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}})(document.documentElement)</script>
+</head>
+<body class="page-docs-giong-tls">
+<a class="skip" href="#main">Skip to content</a>
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="28" height="28"></picture><span>giong</span></a>
+    <nav class="nav" aria-label="Site"><a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a></nav>
+    <div class="hdr-side">
+      <a class="ver" href="/releases/#v1-3-0" title="Release notes for v1.3.0">v1.3.0</a>
+      <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="giong on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
+      <a class="icon-btn hide-sm" href="https://x.com/giongrun" aria-label="giong on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
+      <button class="icon-btn theme" type="button" aria-label="Switch between light and dark" hidden>
+        <span class="if-dark"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></span><span class="if-light"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z"/></svg></span></button>
+      <details class="menu">
+        <summary class="icon-btn" aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
+        <nav class="menu-panel" aria-label="Site">
+          <a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a>
+          <span class="menu-social"><a href="https://github.com/giong-run/Giong">GitHub</a><a href="https://x.com/giongrun">X</a></span>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+<main id="main">
+<div class="wrap docs-layout">
+  <nav class="side" aria-label="Documentation"><details class="side-menu" open><summary>Documentation</summary><div class="side-links"><div class="side-group"><p>Start</p><a href="/docs/">Get started</a></div><div class="side-group"><p>Runtime</p><a href="/docs/giong/">giong</a></div><div class="side-group"><p>Protocols</p><a href="/docs/giong-proto/">giong-proto</a><a href="/docs/giong-quic/">giong-quic</a><a href="/docs/giong-tls/" aria-current=page>giong-tls</a><a href="/docs/giong-http/">giong-http</a><a href="/docs/giong-grpc/">giong-grpc</a><a href="/docs/giong-compat/">giong-compat</a></div><div class="side-group"><p>Clients</p><a href="/docs/giong-postgres/">giong-postgres</a><a href="/docs/giong-mysql/">giong-mysql</a><a href="/docs/giong-redis/">giong-redis</a></div><div class="side-group"><p>Framework</p><a href="/docs/giong-web/">giong-web</a></div><div class="side-group"><p>Tooling</p><a href="/docs/giong-grpc-build/">giong-grpc-build</a><a href="/docs/giong-mcp/">giong-mcp</a></div><div class="side-group"><p>Operate</p><a href="/docs/deployment/">Deployment</a><a href="/docs/stability/">Stability</a><a href="/docs/errors/">Error codes</a></div></div></details></nav>
+  <article class="doc-page prose">
+    <header class="doc-head"><p class="eyebrow">Protocols</p><h1>giong-tls</h1><p class="lede">TLS 1.2 and 1.3 for servers and clients on rustls with <code>ring</code>. No OpenSSL.</p>
+      <div class="doc-actions"><button class="act" type="button" data-md="md-page" data-done="copied" title="Copy this page as Markdown, for a coding agent"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy for agent</span></button><button class="act" type="button" data-md="md-prompt" data-done="copied" title="Copy a ready prompt with the rules and this page"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9Z"/><path d="M18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8Z"/></svg><span>Copy prompt</span></button><a class="act" href="/docs/giong-tls.md" title="This page as plain Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><span>.md</span></a></div><div class="doc-meta"><div class="cmd"><code id="add-giong-tls">cargo add giong-tls</code><button class="copy" type="button" data-copy="add-giong-tls" data-done="copied">copy</button></div><p class="crate-links"><a href="https://docs.rs/giong-tls">docs.rs</a> · <a href="https://crates.io/crates/giong-tls">crates.io</a> · <a href="https://github.com/giong-run/Giong/tree/main/giong-tls">source</a></p></div></header>
+    <div class="md-intro"><p>TLS for the <a href="/docs/giong/">giong</a> runtime, built on <a href="https://github.com/rustls/rustls">rustls</a> (TLS 1.2 and 1.3, cryptography from <code>ring</code>, no OpenSSL): <code>TlsAcceptor</code> for servers, <code>TlsConnector</code> for clients.</p>
+<pre class="code"><code class="lang-rust"><span class="k">use</span> giong::net::<span class="t">TcpListener</span>;
+<span class="k">use</span> giong_tls::{<span class="t">Certificates</span>, <span class="t">TlsAcceptor</span>};
+
+<span class="k">fn</span> main() -&gt; std::io::<span class="t">Result</span>&lt;()&gt; {
+    <span class="k">let</span> acceptor = <span class="t">TlsAcceptor</span>::with_certificates(&amp;<span class="t">Certificates</span>::from_pem(
+        &amp;std::fs::read(<span class="s">"cert.pem"</span>)?,
+        &amp;std::fs::read(<span class="s">"key.pem"</span>)?,
+    )?)?;
+
+    giong::block_on(<span class="k">async</span> <span class="k">move</span> {
+        <span class="k">let</span> listener = <span class="t">TcpListener</span>::bind(<span class="s">"0.0.0.0:8443"</span>)?;
+        <span class="k">loop</span> {
+            <span class="k">let</span> tcp = listener.accept().<span class="k">await</span>?;
+            <span class="k">let</span> acceptor = acceptor.clone();
+            giong::spawn(<span class="k">async</span> <span class="k">move</span> {
+                <span class="k">let</span> <span class="t">Ok</span>(tls) = acceptor.accept(tcp).<span class="k">await</span> <span class="k">else</span> { <span class="k">return</span> };
+                <span class="k">while</span> <span class="k">let</span> <span class="t">Ok</span>(data) = tls.recv().<span class="k">await</span> {
+                    <span class="k">if</span> data.is_empty() {
+                        break; <span class="c">// the peer closed</span>
+                    }
+                    <span class="k">if</span> tls.write_all(data).<span class="k">await</span>.0.is_err() {
+                        break;
+                    }
+                }
+                <span class="k">let</span> _ = tls.shutdown().<span class="k">await</span>;
+            });
+        }
+    })
+}</code></pre>
+<p>For HTTPS you do not need to write this loop yourself: turn on the <code>tls</code> feature of <a href="/docs/giong-http/"><code>giong-http</code></a> and call <code>Server::serve_tls</code>.</p>
+<p>A client, checking the server's certificate against the certificate authorities installed on the machine:</p>
+<pre class="code"><code class="lang-rust"><span class="k">use</span> giong::net::<span class="t">TcpStream</span>;
+<span class="k">use</span> giong_tls::<span class="t">TlsConnector</span>;
+
+<span class="k">fn</span> main() -&gt; std::io::<span class="t">Result</span>&lt;()&gt; {
+    <span class="k">let</span> connector = <span class="t">TlsConnector</span>::with_system_roots()?;
+
+    giong::block_on(<span class="k">async</span> <span class="k">move</span> {
+        <span class="k">let</span> tcp = <span class="t">TcpStream</span>::connect(<span class="s">"example.com:443"</span>).<span class="k">await</span>?;
+        <span class="k">let</span> tls = connector.connect(<span class="s">"example.com"</span>, tcp).<span class="k">await</span>?;
+        <span class="k">let</span> request = <span class="s">b"GET / HTTP/1.1\r\nHost: example.com\r\nConnection: close\r\n\r\n"</span>;
+        tls.write_all(request.to_vec()).<span class="k">await</span>.0?;
+        <span class="k">loop</span> {
+            <span class="k">let</span> data = tls.recv().<span class="k">await</span>?;
+            <span class="k">if</span> data.is_empty() {
+                break;
+            }
+            print!(<span class="s">"{}"</span>, <span class="t">String</span>::from_utf8_lossy(&amp;data));
+        }
+        <span class="t">Ok</span>(())
+    })
+}</code></pre></div><section class="md-sec"><button class="sec-copy" type="button" data-md="md-0" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="api">API</h2>
+<div class="table-scroll"><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><code>TlsAcceptor::with_certificates(&amp;certs)</code></td><td>The certificates the server presents, a <code>Certificates</code> set: <code>Certificates::from_pem(cert, key)</code> makes one from a certificate chain and its private key in PEM form. TLS 1.2 and 1.3, the default rustls cipher suites, no client authentication, no ALPN (add it with <code>.alpn(..)</code>). Of the suites both sides allow, the server picks AES-128-GCM first, as Go's and BoringSSL's servers do (see <a href="#handshakes">Handshakes</a>); a client that lists ChaCha20-Poly1305 before AES-GCM, as clients without AES instructions do, gets ChaCha20. The set can hold several chains, each handshake getting the first one valid for the name the client asked for (SNI), and the first of all when it asked for none or none matches. <code>certs.add_pem(cert, key)</code> adds one; <code>certs.replace_pem(&amp;[(cert, key), ..])</code> swaps the whole set while the server runs, for renewed certificates: every acceptor made from the set (or a clone of it) presents the new one from the next handshake on, connections already open are untouched, and on an error nothing changes.</td></tr><tr><td><code>.require_client_cert(ca_pem)</code>, <code>.request_client_cert(ca_pem)</code></td><td>Mutual TLS: every client must present a certificate issued by one of these authorities, or may present one (<code>tls.peer_certificates()</code> says who did). A certificate from another authority fails the handshake either way. On an acceptor made with <code>from_rustls</code> they fail with <code>GIONG-E2013</code>.</td></tr><tr><td><code>TlsAcceptor::from_rustls(config)</code></td><td>Bring your own <code>rustls::ServerConfig</code>, for what the rest does not cover. Needs the <code>unstable-rustls</code> feature, which also re-exports <code>rustls</code> so that you use the matching version; outside the semver promise, because the rustls version may rise in a minor release (see <a href="#stability">Stability</a>).</td></tr><tr><td><code>.handshake_timeout(duration)</code></td><td>The longest a handshake may take, 10 s by default.</td></tr><tr><td><code>.ktls(Ktls::Auto)</code></td><td>Kernel TLS: after the handshake the kernel encrypts and decrypts (see <a href="#kernel-tls">below</a>). <code>Ktls::Off</code> by default. Also on <code>TlsConnector</code>.</td></tr><tr><td><code>acceptor.accept(tcp)</code></td><td>Runs the handshake and returns a <code>TlsStream</code>.</td></tr><tr><td><code>TlsConnector::with_system_roots()</code></td><td>Trusts the certificate authorities installed on the machine: <code>SSL_CERT_FILE</code> / <code>SSL_CERT_DIR</code> if set, otherwise the distribution's bundle (<code>/etc/ssl/certs/ca-certificates.crt</code> and the other usual places). A clear <code>NotFound</code> error if there are none, as in an image built <code>FROM scratch</code>.</td></tr><tr><td><code>TlsConnector::with_webpki_roots()</code></td><td>Mozilla's root certificates compiled into the program, for machines without a bundle. Needs the <code>webpki-roots</code> feature.</td></tr><tr><td><code>TlsConnector::with_root_pem(pem)</code></td><td>Trusts only the given authorities: a private CA, or a server's own self-signed certificate. A self-signed certificate must not be marked as an authority, which <code>openssl req -x509</code> does unless given <code>-addext "basicConstraints=critical,CA:FALSE"</code>: a server that presents an authority's certificate as its own is refused (<code>GIONG-E2004</code>), trusted or not.</td></tr><tr><td><code>TlsConnector::with_root_pem_any_name(pem)</code></td><td>Trusts only the given authorities and does not check the host name, for servers whose certificates name none (MySQL's generated ones, <code>ssl-mode=VERIFY_CA</code>). Use it only with an authority that signs for that server alone.</td></tr><tr><td><code>TlsConnector::from_rustls(config)</code></td><td>Bring your own <code>rustls::ClientConfig</code>. Needs the <code>unstable-rustls</code> feature, as <code>TlsAcceptor::from_rustls</code>.</td></tr><tr><td><code>.alpn(&amp;[b"h2", b"http/1.1"])</code>, <code>.client_auth(cert, key)</code></td><td>Protocols to offer through ALPN; a client certificate for servers that ask for one (mutual TLS).</td></tr><tr><td><code>connector.connect(name, tcp)</code></td><td>Runs the handshake, checking that the certificate is valid for <code>name</code> (a DNS name, sent through SNI, or an IP address). A certificate for another name, expired, or from an unknown authority fails with <code>InvalidData</code> and a message saying which. Clones of a connector share a session cache, so reconnecting resumes the session.</td></tr><tr><td><code>tls.recv()</code></td><td>Decrypted data, as a <code>Received</code>: it derefs to <code>&amp;[u8]</code>, can be passed straight to <code>write_all</code>, and <code>into_vec()</code> gives a <code>Vec&lt;u8&gt;</code>. An empty one means the peer closed.</td></tr><tr><td><code>tls.received_close_notify()</code></td><td>Whether the peer ended the connection with <code>close_notify</code>. Without it, the TCP connection merely closed, which anyone on the path can cause: check it before trusting data that ends where the connection ends.</td></tr><tr><td><code>tls.write_all(buf)</code></td><td>Encrypts and sends all of <code>buf</code> (a <code>Vec&lt;u8&gt;</code>, <code>Box&lt;[u8]&gt;</code>, <code>&amp;'static [u8]</code>, ...), then hands the buffer back, like <code>TcpStream::write_all</code>.</td></tr><tr><td><code>tls.write_all_vectored(bufs)</code></td><td>The same for several buffers in order (a header and a body), without copying them into one first.</td></tr><tr><td><code>tls.send_file(&amp;file, offset, len)</code></td><td>Sends a range of a <code>giong::fs::File</code>. With kernel TLS the kernel encrypts it straight from the page cache (<code>sendfile</code>), the fastest way to serve a file over TLS; otherwise it is read and encrypted in 256 KiB pieces.</td></tr><tr><td><code>tls.shutdown()</code></td><td>Sends <code>close_notify</code>, then closes the sending direction. <code>Ok</code> also when the peer has closed its socket already (<code>EPIPE</code>, <code>ECONNRESET</code>), since nobody is left to tell.</td></tr><tr><td><code>tls.alpn_protocol()</code>, <code>tls.tcp()</code></td><td>The protocol agreed through ALPN; the TCP socket underneath, for its addresses and options only (sending or receiving on it would corrupt the TLS stream).</td></tr><tr><td><code>tls.peer_certificates()</code>, <code>tls.resumed()</code></td><td>The certificate chain the other side presented; whether the handshake resumed an earlier session.</td></tr><tr><td><code>tls.is_ktls()</code></td><td>Whether the kernel encrypts this connection.</td></tr><tr><td><code>giong_tls::ktls_support()</code>, <code>ktls_stats()</code></td><td>What the running kernel can do for kernel TLS, in one line for a log; how many connections went to the kernel, stayed in the process, and changed keys.</td></tr></tbody></table></div>
+<p>Things to remember:</p>
+<ol><li><code>recv()</code> is cancel safe: wrapping it in a <code>timeout</code> loses no data.</li><li><code>write_all()</code>, <code>write_all_vectored()</code> and <code>send_file()</code> are not. If the future is dropped in the middle of a TLS record, the record stream has been cut, so every later send returns an error instead of sending corrupt data. Data the peer already sent can still be received, and <code>shutdown()</code> still closes the TCP side.</li><li>One task may receive while others send on the same <code>TlsStream</code>. Each write goes out whole: two tasks writing at once never interleave their data, in the process or with kernel TLS. Only one task may receive at a time.</li><li>Data that arrived intact is always returned before an error that happened after it.</li><li>An empty <code>recv()</code> is the end of the stream, with or without <code>close_notify</code>. If the end of the stream is what marks the end of your data (an HTTP response without a length), check <code>received_close_notify()</code>: otherwise someone on the path could cut the data short.</li><li>A key encrypts at most 2^24 records with AES-GCM. TLS 1.3 then changes keys; TLS 1.2 cannot, so the connection sends <code>close_notify</code> and every later write fails with <code>GIONG-E2012</code>, in the process and with kernel TLS. Small writes reach the limit after 16.7 million of them: open a new connection then.</li></ol></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-1" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="kernel-tls">Kernel TLS</h2>
+<p>With kernel TLS (kTLS), rustls still does the handshake and checks the certificates; then giong-tls hands the connection's keys to the kernel, which encrypts what the program sends and decrypts what it receives. The program keeps the same <code>TlsStream</code> API, and the kernel can send encrypted data straight from its own buffers, which is what makes zero-copy sending possible over TLS.</p>
+<pre class="code"><code class="lang-rust"><span class="k">use</span> giong_tls::{<span class="t">Certificates</span>, <span class="t">Ktls</span>, <span class="t">TlsAcceptor</span>};
+
+<span class="k">fn</span> main() -&gt; std::io::<span class="t">Result</span>&lt;()&gt; {
+    <span class="k">let</span> certs = <span class="t">Certificates</span>::from_pem(&amp;std::fs::read(<span class="s">"cert.pem"</span>)?, &amp;std::fs::read(<span class="s">"key.pem"</span>)?)?;
+    <span class="k">let</span> acceptor = <span class="t">TlsAcceptor</span>::with_certificates(&amp;certs)?.ktls(<span class="t">Ktls</span>::<span class="t">Auto</span>)?;
+    <span class="k">if</span> <span class="k">let</span> <span class="t">Some</span>(why) = acceptor.ktls_unavailable() {
+        eprintln!(<span class="s">"kernel TLS is off: {why}"</span>);
+    }
+    <span class="c">// ... accept connections as above</span>
+    <span class="t">Ok</span>(())
+}</code></pre>
+<div class="table-scroll"><table><thead><tr><th>Mode</th><th>What it does</th></tr></thead><tbody><tr><td><code>Ktls::Off</code></td><td>The default: rustls encrypts in the process.</td></tr><tr><td><code>Ktls::Auto</code></td><td>The kernel takes a connection when it can do everything rustls would have done for it; otherwise the connection stays in the process. Fails because of kTLS only if the kernel then refuses keys it said it would take (<code>GIONG-E2010</code>): by then the connection cannot go back to the process.</td></tr><tr><td><code>Ktls::Required</code></td><td>The kernel takes every connection. <code>.ktls()</code> fails with <code>GIONG-E2009</code> if the kernel cannot, and so does a handshake on a stream that cannot be handed over.</td></tr></tbody></table></div>
+<p>What the kernel needs, checked once per process on throwaway loopback sockets (<code>ktls_support()</code> says what it found):</p>
+<ul><li><strong>Linux 5.15 or newer, except 6.0</strong>, whose kernel TLS can crash the kernel when a connection closes: giong-tls refuses it and says why. Tested on 5.15, 6.1, Ubuntu's 6.8, 6.18 and 7.0.</li><li><strong>The <code>tls</code> module.</strong> <code>modprobe tls</code> on the host, or <code>tls</code> in <code>/etc/modules-load.d/</code>. A container cannot load it; the host has to. Distribution kernels build it as a module (tested on Ubuntu's).</li><li><strong>Every cipher suite the configuration allows</strong>, in both directions: AES-128-GCM, AES-256-GCM and ChaCha20-Poly1305 for TLS 1.2 and 1.3, which every kernel since 5.11 has.</li><li><strong>For TLS 1.3, new keys on a live connection</strong> (Linux 6.14 or newer): a peer may change its keys at any time with a <code>KeyUpdate</code>, and giong-tls changes its own before a key has encrypted 2^24 records. On older kernels <code>Auto</code> keeps configurations that allow TLS 1.3 in the process; <code>Required</code> takes them anyway, and a peer's <code>KeyUpdate</code> then ends the connection with <code>GIONG-E2011</code>. Linux 6.14+ takes every handshake record that starts with the byte 24 for a <code>KeyUpdate</code> and receives nothing more until it gets keys, also when the record is a later piece of a message split over records (a session ticket, say); giong-tls joins the messages itself and, when no <code>KeyUpdate</code> came, gives the kernel its keys back so that it goes on.</li></ul>
+<p>Two more cases stay in the process under <code>Auto</code> and fail under <code>Required</code>: a configuration that allows 0-RTT data, and a stream on which <code>TcpStream::recv</code> was used before the handshake (giong may hold bytes the kernel would never see; read a plaintext greeting with <code>TcpStream::read</code> instead). Once the kernel has taken a connection it behaves as before: session tickets reach the client's session cache, alerts and <code>close_notify</code> are handled as rustls handles them, renegotiation is refused, a tampered record is an error, <code>recv</code> is cancel safe, and a cancelled <code>write_all</code> stops the stream from sending.</p>
+<h3 id="when-it-pays-off">When it pays off</h3>
+<p>Kernel TLS is not faster by itself. Measured on bare metal (AMD EPYC 4345P, Linux 7.0, loopback, the server on one core, TLS 1.3 with AES-256-GCM, medians of five rounds; <code>bench/tls.sh</code> and <code>bench/http-client.sh</code>, recorded in <a href="https://github.com/giong-run/Giong/blob/v1.3.0/bench/results/bare-metal-epyc-4345p/linux-7.0/ktls/summary.txt"><code>bench/results/bare-metal-epyc-4345p/linux-7.0/ktls/</code></a>):</p>
+<div class="table-scroll"><table><thead><tr><th>What the server sends</th><th>rustls in the process</th><th>Kernel TLS</th><th></th></tr></thead><tbody><tr><td><strong>1 MiB from a file</strong> (<code>send_file</code>, <code>Body::file</code>)</td><td>4,484 req/s, 223 µs CPU each</td><td><strong>6,104 req/s, 164 µs</strong></td><td><strong>+36%</strong></td></tr><tr><td>64 KiB from a file</td><td>62,927</td><td>55,763</td><td>−11%</td></tr><tr><td>1 MiB from memory</td><td>5,038</td><td>4,101</td><td>−19%</td></tr><tr><td>64 KiB from memory</td><td>69,989</td><td>54,693</td><td>−22%</td></tr><tr><td>A small JSON response</td><td>414,168</td><td>347,206</td><td>−16%</td></tr><tr><td>An 8 KB JSON response</td><td>100,697</td><td>96,931</td><td>−4%</td></tr><tr><td>A new connection per request</td><td>14,306</td><td>13,255</td><td>−7%</td></tr></tbody></table></div>
+<p>On the receiving side (giong-http's client on one core) the kernel decrypting 64 KiB bodies gives +11% (63,273 → 70,492 req/s), 1 MiB bodies +6% with noisy rounds, and small JSON responses −8%. For comparison, nginx 1.24 on the same machine serves the 1 MiB file at 6,039 req/s with kernel TLS and <code>sendfile</code> (166 µs of CPU each), and at 3,547 with OpenSSL in the process.</p>
+<p>Why: rustls with <code>ring</code>'s AES-GCM is fast, and data sent from memory has to be copied into pages the kernel allocates and zeroes for every record, which costs more than it saves. With <code>sendfile</code> nothing is copied: the profile of the 1 MiB file shows the ~20% that rustls spends copying (<code>pread</code>, then <code>send</code>) gone and the kernel's AVX-512 AES-GCM encrypting straight from the page cache. The next cost is page zeroing on allocation (<code>kernel_init_pages</code>, 11% of the kernel TLS server's time with <code>init_on_alloc=1</code>, Ubuntu's default); booting with <code>init_on_alloc=0</code> should remove most of it, which has not been measured. At 64 KiB per response the kernel's fixed costs still outweigh the copy saved; the crossover is somewhere between 64 KiB and 1 MiB.</p>
+<p>So <code>Ktls::Off</code> stays the default. Use <code>Ktls::Auto</code> on a server whose large responses (hundreds of KiB and up) come from files through <code>send_file</code> or giong-http's <code>Body::file</code>, and on a client that downloads large bodies. Keep rustls in the process for small responses and for bodies built in memory. <code>bench/tls.sh</code> measures your own sizes: <code>SERVERS="giong-http-tls giong-http-ktls" ENDPOINTS="file64k file1m" bench/tls.sh</code>.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-2" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="performance">Performance</h2>
+<p>Measured with <code>bench/tls.sh</code> on one core, with the same rustls and <code>ring</code> on both sides (4-vCPU VM, seven rounds, <a href="https://github.com/giong-run/Giong/blob/v1.3.0/bench/results/tls/README.md"><code>bench/results/tls/</code></a>): HTTPS through <code>giong-http</code> reaches 146.6k req/s on <code>/json</code> against 81.2k for Axum + rustls, and 48.7k against 18.5k with 8 KB responses. Details and how to read the numbers are in the <a href="/docs/giong/#https">main README</a>; kernel TLS has its own numbers <a href="#when-it-pays-off">above</a>.</p>
+<h3 id="handshakes">Handshakes</h3>
+<p>With a new connection for every request, giong-http + giong-tls does 8.4k per second against 7.1k for Axum + rustls (+18%), at 116 µs of server CPU per connection against 136, with p99 latency 4.2 ms against 7.1. giong-tls 0.8.0 did 6.8k (142 µs). Two things changed:</p>
+<ul><li><strong>Fewer packets.</strong> A TLS 1.3 server's session tickets wait for its first response (or for a receive that would have to wait) instead of going out alone, <code>shutdown</code> sends <code>close_notify</code> in the same segment as the FIN, and the head and body of one write go out in one send. Both directions together: 14.4 TCP segments per connection, against 16.5 for 0.8.0 and 14.0 for Axum.</li><li><strong>AES-128-GCM first.</strong> <code>TlsAcceptor::with_certificates</code> picks it whatever order the client lists, as Go's and BoringSSL's servers do. OpenSSL's clients (wrk, curl, Python) list AES-256-GCM first, and its TLS 1.3 suite hashes with SHA-384, about a sixth of a resumed handshake's CPU time; SHA-256 runs in hardware on current processors. Bulk encryption gains too: 64 KiB responses went from 26.3k to 31.9k per second. Browsers list AES-128-GCM first already. A client that lists ChaCha20-Poly1305 before every AES-GCM suite (one without AES instructions) gets ChaCha20.</li></ul>
+<p>Most of the handshake gain is the cipher suite: Axum with its rustls set to the same order reaches the same 8.4k (116 µs), with p99 latency 6.2 ms. An acceptor made with <code>TlsAcceptor::from_rustls</code> uses the configuration as given. wrk resumes sessions, so these are resumed handshakes; a full handshake adds the certificate's signature, which is the same cryptography on both sides.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-3" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="stability">Stability</h2>
+<p>The stable API uses only giong-tls's own types and <code>CertificateDer</code> from <code>rustls-pki-types</code> 1.x, so a new rustls version, which giong-tls will take up as it comes, changes nothing for code that uses it. What takes rustls' types (<code>from_rustls</code>, <code>KtlsSupport::supports</code>, the <code>rustls</code> re-export) needs the <code>unstable-rustls</code> feature and follows the rustls version giong-tls uses. <code>TlsAcceptor::new</code>, <code>TlsConnector::new</code> and <code>TlsConnector::with_roots</code> are deprecated and go in 1.0.0.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-4" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="post-quantum-key-exchange">Post-quantum key exchange</h2>
+<p>With the <code>post-quantum</code> feature, giong-tls uses aws-lc-rs instead of <em>ring</em> for its cryptography, and both the server and the client offer X25519MLKEM768 first: the X25519 exchange combined with ML-KEM-768, so that recorded traffic stays secret even from a future quantum computer. Peers that do not know it agree on X25519 as before, in the same round trips: the client sends an X25519 share alongside. Building aws-lc-rs needs a C compiler and CMake. Configurations given to <code>from_rustls</code> keep their own provider.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-5" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="not-there-yet">Not there yet</h2>
+<p>Checking certificate revocation on the client side (rustls can, through <code>TlsConnector::from_rustls</code> with your own verifier). All of them can be added in 1.x without breaking anything. The crate has had a <a href="https://github.com/giong-run/Giong/blob/v1.3.0/docs/reviews/2026-11-giong-tls.md">security review</a> by the project's AI agent, which found and fixed two issues in its users, and a second one for kernel TLS, but no independent audit yet; the cryptography and the protocol are rustls's, and the kernel's once it takes a connection.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-6" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="tests">Tests</h2>
+<p><code>cargo test -p giong-tls --all-features</code>: 17 server tests on real sockets with a rustls client (TLS 1.2 and 1.3, 4 MB in each direction, the cipher suite <code>with_certificates</code> picks for clients listing suites in OpenSSL's, a browser's and a phone's order, a vectored write of a header, a large body and a trailer, a file read and encrypted in the process, ALPN and a server from PEM that offers none, <code>recv</code> cancelled over and over, and dropped at the poll that sends the server's session tickets with the stream still able to send, two tasks sending at once, a write cancelled half way and a shutdown after it, broken or stalled handshakes, records arriving one byte at a time, a forged record after the handshake, random bytes instead of a handshake, <code>close_notify</code> told apart from a cut connection); 2 tests in <code>tests/writes.rs</code> (three tasks writing 1 MiB each at once, plain and vectored, arrive whole and in order; a TLS 1.2 write past the cipher suite's record limit fails with <code>GIONG-E2012</code> instead of vanishing) and one in <code>tests/memory.rs</code> (after a 1 MiB write, a connection pair keeps less than 48 KiB more than before it); 5 server tests through the stable API alone in <code>tests/server.rs</code> (the certificate picked by the name the client asks for, and a client refusing the fallback; certificates replaced while serving, a connection opened before keeping its own; client certificates required, with ALPN kept, a client without one and one from another authority refused; requested and missing; <code>GIONG-E2013</code> on an acceptor from <code>from_rustls</code>); 16 client tests against giong's own server and a blocking rustls server (TLS 1.2 and 1.3 with 4 MB each way, a certificate for another name, an unknown authority, a self-signed certificate marked as an authority refused with the reason and the <code>openssl</code> option that fixes it, an IP address as the name, ALPN, mutual TLS with and without a client certificate, session resumption, also from a server that only reads, a server that never answers or hangs up mid-handshake); 13 unit tests for choosing a certificate by name, records a receive could not send whole going out first and in order, replacing a set all or nothing, the post-quantum key exchange coming first with the feature, finding the machine's certificates, parsing server names, spotting application data among records, telling clients that want ChaCha20 apart, and when keys are extracted; 6 documentation examples.</p>
+<p>Kernel TLS has 23 tests in <code>tests/ktls.rs</code>, one in <code>tests/writes.rs</code> and 9 unit tests in <code>src/ktls.rs</code>: every cipher suite with the kernel on the server, the client or both sides, with plain and vectored writes and files sent with <code>sendfile</code> (whole, a range, and past the file's end); interoperation with blocking rustls peers; data sent in the same write as the last handshake message, and a key update sent in it too; ALPN, peer certificates and session resumption (TLS 1.3 tickets arrive through the kernel) after the handoff; key updates from either peer, and a key used up (new keys on TLS 1.3 with Linux 6.14+, <code>close_notify</code> and <code>GIONG-E2012</code> otherwise); the TLS 1.2 nonces read off the wire, so the kernel never reuses one rustls used; a tampered record; alerts, renegotiation requests and records of unexpected types, also in the middle of a handshake message split over records; a peer that cuts its records to 32 bytes, so the handoff comes in the middle of a record; a session ticket cut so that its later records start with the byte of a <code>KeyUpdate</code>, which Linux 6.14+ takes for one; <code>recv</code> cancelled over and over, and dropped as it answers a key update, a cancelled write, vectored write or file send, one task receiving while another sends, and three tasks writing at once; a stream already read with <code>recv</code>; and what <code>Auto</code> and <code>Required</code> do on a machine without the module. The fuzz target <code>ktls_records</code> (<code>cd giong-tls &amp;&amp; cargo +nightly fuzz run ktls_records</code>) checks what the kernel path reads of the peer's records itself, the record framing during the handshake and the handshake messages after it, however the bytes are split; a unit test runs the same checks on 3,000 streams in every <code>cargo test</code>. Most of the tests need the <code>tls</code> module and pass without it, saying so, unless <code>GIONG_KTLS_REQUIRED</code> is set; <code>KTLS=1 scripts/kernels.sh 5.15.225 6.1.155 6.18.63</code> runs them on real kernels in QEMU, with and without key updates (CI also runs Ubuntu's 6.8).</p>
+<p>A soak test (<code>tests/soak.rs</code>, ignored by default; <code>scripts/check.sh soak tls</code>, or <code>GIONG_SOAK_SECS=3600 cargo test --release -p giong-tls --all-features --test soak -- --ignored --nocapture</code>) churns TLS connections between giong's own acceptor and connector on every worker for as long as asked: TLS 1.3 and 1.2, resumed sessions and full handshakes, kernel TLS on half the stream ends where the <code>tls</code> module is loaded, clean closes checked for <code>close_notify</code> on both sides, dropped connections, handshakes given up part-way, receives cancelled and taken up again with every byte checked, and writes cancelled inside a record. Afterwards no descriptor, memory or driver state may be left over. CI runs it for two hours every night, on the runner's kernel and on Linux 6.18 in QEMU, both with kernel TLS.</p>
+<p>Twelve end-to-end HTTPS tests live in <code>giong-http</code> (<code>cargo test -p giong-http --features tls</code>).</p></section>
+    <p class="src-note">giong 1.3.0 · from <a href="https://github.com/giong-run/Giong/blob/v1.3.0/giong-tls/README.md">giong-tls/README.md</a> at v1.3.0</p>
+    <script type="text/markdown" id="md-0"><!-- giong 1.3.0, https://giong.run/docs/giong-tls/#api -->
+
+## API
+
+| | |
+|---|---|
+| `TlsAcceptor::with_certificates(&certs)` | The certificates the server presents, a `Certificates` set: `Certificates::from_pem(cert, key)` makes one from a certificate chain and its private key in PEM form. TLS 1.2 and 1.3, the default rustls cipher suites, no client authentication, no ALPN (add it with `.alpn(..)`). Of the suites both sides allow, the server picks AES-128-GCM first, as Go's and BoringSSL's servers do (see [Handshakes](#handshakes)); a client that lists ChaCha20-Poly1305 before AES-GCM, as clients without AES instructions do, gets ChaCha20. The set can hold several chains, each handshake getting the first one valid for the name the client asked for (SNI), and the first of all when it asked for none or none matches. `certs.add_pem(cert, key)` adds one; `certs.replace_pem(&[(cert, key), ..])` swaps the whole set while the server runs, for renewed certificates: every acceptor made from the set (or a clone of it) presents the new one from the next handshake on, connections already open are untouched, and on an error nothing changes. |
+| `.require_client_cert(ca_pem)`, `.request_client_cert(ca_pem)` | Mutual TLS: every client must present a certificate issued by one of these authorities, or may present one (`tls.peer_certificates()` says who did). A certificate from another authority fails the handshake either way. On an acceptor made with `from_rustls` they fail with `GIONG-E2013`. |
+| `TlsAcceptor::from_rustls(config)` | Bring your own `rustls::ServerConfig`, for what the rest does not cover. Needs the `unstable-rustls` feature, which also re-exports `rustls` so that you use the matching version; outside the semver promise, because the rustls version may rise in a minor release (see [Stability](#stability)). |
+| `.handshake_timeout(duration)` | The longest a handshake may take, 10 s by default. |
+| `.ktls(Ktls::Auto)` | Kernel TLS: after the handshake the kernel encrypts and decrypts (see [below](#kernel-tls)). `Ktls::Off` by default. Also on `TlsConnector`. |
+| `acceptor.accept(tcp)` | Runs the handshake and returns a `TlsStream`. |
+| `TlsConnector::with_system_roots()` | Trusts the certificate authorities installed on the machine: `SSL_CERT_FILE` / `SSL_CERT_DIR` if set, otherwise the distribution's bundle (`/etc/ssl/certs/ca-certificates.crt` and the other usual places). A clear `NotFound` error if there are none, as in an image built `FROM scratch`. |
+| `TlsConnector::with_webpki_roots()` | Mozilla's root certificates compiled into the program, for machines without a bundle. Needs the `webpki-roots` feature. |
+| `TlsConnector::with_root_pem(pem)` | Trusts only the given authorities: a private CA, or a server's own self-signed certificate. A self-signed certificate must not be marked as an authority, which `openssl req -x509` does unless given `-addext "basicConstraints=critical,CA:FALSE"`: a server that presents an authority's certificate as its own is refused (`GIONG-E2004`), trusted or not. |
+| `TlsConnector::with_root_pem_any_name(pem)` | Trusts only the given authorities and does not check the host name, for servers whose certificates name none (MySQL's generated ones, `ssl-mode=VERIFY_CA`). Use it only with an authority that signs for that server alone. |
+| `TlsConnector::from_rustls(config)` | Bring your own `rustls::ClientConfig`. Needs the `unstable-rustls` feature, as `TlsAcceptor::from_rustls`. |
+| `.alpn(&[b"h2", b"http/1.1"])`, `.client_auth(cert, key)` | Protocols to offer through ALPN; a client certificate for servers that ask for one (mutual TLS). |
+| `connector.connect(name, tcp)` | Runs the handshake, checking that the certificate is valid for `name` (a DNS name, sent through SNI, or an IP address). A certificate for another name, expired, or from an unknown authority fails with `InvalidData` and a message saying which. Clones of a connector share a session cache, so reconnecting resumes the session. |
+| `tls.recv()` | Decrypted data, as a `Received`: it derefs to `&[u8]`, can be passed straight to `write_all`, and `into_vec()` gives a `Vec<u8>`. An empty one means the peer closed. |
+| `tls.received_close_notify()` | Whether the peer ended the connection with `close_notify`. Without it, the TCP connection merely closed, which anyone on the path can cause: check it before trusting data that ends where the connection ends. |
+| `tls.write_all(buf)` | Encrypts and sends all of `buf` (a `Vec<u8>`, `Box<[u8]>`, `&'static [u8]`, ...), then hands the buffer back, like `TcpStream::write_all`. |
+| `tls.write_all_vectored(bufs)` | The same for several buffers in order (a header and a body), without copying them into one first. |
+| `tls.send_file(&file, offset, len)` | Sends a range of a `giong::fs::File`. With kernel TLS the kernel encrypts it straight from the page cache (`sendfile`), the fastest way to serve a file over TLS; otherwise it is read and encrypted in 256 KiB pieces. |
+| `tls.shutdown()` | Sends `close_notify`, then closes the sending direction. `Ok` also when the peer has closed its socket already (`EPIPE`, `ECONNRESET`), since nobody is left to tell. |
+| `tls.alpn_protocol()`, `tls.tcp()` | The protocol agreed through ALPN; the TCP socket underneath, for its addresses and options only (sending or receiving on it would corrupt the TLS stream). |
+| `tls.peer_certificates()`, `tls.resumed()` | The certificate chain the other side presented; whether the handshake resumed an earlier session. |
+| `tls.is_ktls()` | Whether the kernel encrypts this connection. |
+| `giong_tls::ktls_support()`, `ktls_stats()` | What the running kernel can do for kernel TLS, in one line for a log; how many connections went to the kernel, stayed in the process, and changed keys. |
+
+Things to remember:
+
+1. `recv()` is cancel safe: wrapping it in a `timeout` loses no data.
+2. `write_all()`, `write_all_vectored()` and `send_file()` are not. If the future is dropped in the middle of a TLS record, the record stream has been cut, so every later send returns an error instead of sending corrupt data. Data the peer already sent can still be received, and `shutdown()` still closes the TCP side.
+3. One task may receive while others send on the same `TlsStream`. Each write goes out whole: two tasks writing at once never interleave their data, in the process or with kernel TLS. Only one task may receive at a time.
+4. Data that arrived intact is always returned before an error that happened after it.
+5. An empty `recv()` is the end of the stream, with or without `close_notify`. If the end of the stream is what marks the end of your data (an HTTP response without a length), check `received_close_notify()`: otherwise someone on the path could cut the data short.
+6. A key encrypts at most 2^24 records with AES-GCM. TLS 1.3 then changes keys; TLS 1.2 cannot, so the connection sends `close_notify` and every later write fails with `GIONG-E2012`, in the process and with kernel TLS. Small writes reach the limit after 16.7 million of them: open a new connection then.</script><script type="text/markdown" id="md-1"><!-- giong 1.3.0, https://giong.run/docs/giong-tls/#kernel-tls -->
+
+## Kernel TLS
+
+With kernel TLS (kTLS), rustls still does the handshake and checks the certificates; then giong-tls hands the connection's keys to the kernel, which encrypts what the program sends and decrypts what it receives. The program keeps the same `TlsStream` API, and the kernel can send encrypted data straight from its own buffers, which is what makes zero-copy sending possible over TLS.
+
+```rust,no_run
+use giong_tls::{Certificates, Ktls, TlsAcceptor};
+
+fn main() -> std::io::Result<()> {
+    let certs = Certificates::from_pem(&std::fs::read("cert.pem")?, &std::fs::read("key.pem")?)?;
+    let acceptor = TlsAcceptor::with_certificates(&certs)?.ktls(Ktls::Auto)?;
+    if let Some(why) = acceptor.ktls_unavailable() {
+        eprintln!("kernel TLS is off: {why}");
+    }
+    // ... accept connections as above
+    Ok(())
+}
+```
+
+| Mode | What it does |
+|---|---|
+| `Ktls::Off` | The default: rustls encrypts in the process. |
+| `Ktls::Auto` | The kernel takes a connection when it can do everything rustls would have done for it; otherwise the connection stays in the process. Fails because of kTLS only if the kernel then refuses keys it said it would take (`GIONG-E2010`): by then the connection cannot go back to the process. |
+| `Ktls::Required` | The kernel takes every connection. `.ktls()` fails with `GIONG-E2009` if the kernel cannot, and so does a handshake on a stream that cannot be handed over. |
+
+What the kernel needs, checked once per process on throwaway loopback sockets (`ktls_support()` says what it found):
+
+- **Linux 5.15 or newer, except 6.0**, whose kernel TLS can crash the kernel when a connection closes: giong-tls refuses it and says why. Tested on 5.15, 6.1, Ubuntu's 6.8, 6.18 and 7.0.
+- **The `tls` module.** `modprobe tls` on the host, or `tls` in `/etc/modules-load.d/`. A container cannot load it; the host has to. Distribution kernels build it as a module (tested on Ubuntu's).
+- **Every cipher suite the configuration allows**, in both directions: AES-128-GCM, AES-256-GCM and ChaCha20-Poly1305 for TLS 1.2 and 1.3, which every kernel since 5.11 has.
+- **For TLS 1.3, new keys on a live connection** (Linux 6.14 or newer): a peer may change its keys at any time with a `KeyUpdate`, and giong-tls changes its own before a key has encrypted 2^24 records. On older kernels `Auto` keeps configurations that allow TLS 1.3 in the process; `Required` takes them anyway, and a peer's `KeyUpdate` then ends the connection with `GIONG-E2011`. Linux 6.14+ takes every handshake record that starts with the byte 24 for a `KeyUpdate` and receives nothing more until it gets keys, also when the record is a later piece of a message split over records (a session ticket, say); giong-tls joins the messages itself and, when no `KeyUpdate` came, gives the kernel its keys back so that it goes on.
+
+Two more cases stay in the process under `Auto` and fail under `Required`: a configuration that allows 0-RTT data, and a stream on which `TcpStream::recv` was used before the handshake (giong may hold bytes the kernel would never see; read a plaintext greeting with `TcpStream::read` instead). Once the kernel has taken a connection it behaves as before: session tickets reach the client's session cache, alerts and `close_notify` are handled as rustls handles them, renegotiation is refused, a tampered record is an error, `recv` is cancel safe, and a cancelled `write_all` stops the stream from sending.
+
+### When it pays off
+
+Kernel TLS is not faster by itself. Measured on bare metal (AMD EPYC 4345P, Linux 7.0, loopback, the server on one core, TLS 1.3 with AES-256-GCM, medians of five rounds; `bench/tls.sh` and `bench/http-client.sh`, recorded in [`bench/results/bare-metal-epyc-4345p/linux-7.0/ktls/`](../bench/results/bare-metal-epyc-4345p/linux-7.0/ktls/summary.txt)):
+
+| What the server sends | rustls in the process | Kernel TLS | |
+|---|---|---|---|
+| **1 MiB from a file** (`send_file`, `Body::file`) | 4,484 req/s, 223 µs CPU each | **6,104 req/s, 164 µs** | **+36%** |
+| 64 KiB from a file | 62,927 | 55,763 | −11% |
+| 1 MiB from memory | 5,038 | 4,101 | −19% |
+| 64 KiB from memory | 69,989 | 54,693 | −22% |
+| A small JSON response | 414,168 | 347,206 | −16% |
+| An 8 KB JSON response | 100,697 | 96,931 | −4% |
+| A new connection per request | 14,306 | 13,255 | −7% |
+
+On the receiving side (giong-http's client on one core) the kernel decrypting 64 KiB bodies gives +11% (63,273 → 70,492 req/s), 1 MiB bodies +6% with noisy rounds, and small JSON responses −8%. For comparison, nginx 1.24 on the same machine serves the 1 MiB file at 6,039 req/s with kernel TLS and `sendfile` (166 µs of CPU each), and at 3,547 with OpenSSL in the process.
+
+Why: rustls with `ring`'s AES-GCM is fast, and data sent from memory has to be copied into pages the kernel allocates and zeroes for every record, which costs more than it saves. With `sendfile` nothing is copied: the profile of the 1 MiB file shows the ~20% that rustls spends copying (`pread`, then `send`) gone and the kernel's AVX-512 AES-GCM encrypting straight from the page cache. The next cost is page zeroing on allocation (`kernel_init_pages`, 11% of the kernel TLS server's time with `init_on_alloc=1`, Ubuntu's default); booting with `init_on_alloc=0` should remove most of it, which has not been measured. At 64 KiB per response the kernel's fixed costs still outweigh the copy saved; the crossover is somewhere between 64 KiB and 1 MiB.
+
+So `Ktls::Off` stays the default. Use `Ktls::Auto` on a server whose large responses (hundreds of KiB and up) come from files through `send_file` or giong-http's `Body::file`, and on a client that downloads large bodies. Keep rustls in the process for small responses and for bodies built in memory. `bench/tls.sh` measures your own sizes: `SERVERS="giong-http-tls giong-http-ktls" ENDPOINTS="file64k file1m" bench/tls.sh`.</script><script type="text/markdown" id="md-2"><!-- giong 1.3.0, https://giong.run/docs/giong-tls/#performance -->
+
+## Performance
+
+Measured with `bench/tls.sh` on one core, with the same rustls and `ring` on both sides (4-vCPU VM, seven rounds, [`bench/results/tls/`](../bench/results/tls/README.md)): HTTPS through `giong-http` reaches 146.6k req/s on `/json` against 81.2k for Axum + rustls, and 48.7k against 18.5k with 8 KB responses. Details and how to read the numbers are in the [main README](../README.md#https); kernel TLS has its own numbers [above](#when-it-pays-off).
+
+### Handshakes
+
+With a new connection for every request, giong-http + giong-tls does 8.4k per second against 7.1k for Axum + rustls (+18%), at 116 µs of server CPU per connection against 136, with p99 latency 4.2 ms against 7.1. giong-tls 0.8.0 did 6.8k (142 µs). Two things changed:
+
+- **Fewer packets.** A TLS 1.3 server's session tickets wait for its first response (or for a receive that would have to wait) instead of going out alone, `shutdown` sends `close_notify` in the same segment as the FIN, and the head and body of one write go out in one send. Both directions together: 14.4 TCP segments per connection, against 16.5 for 0.8.0 and 14.0 for Axum.
+- **AES-128-GCM first.** `TlsAcceptor::with_certificates` picks it whatever order the client lists, as Go's and BoringSSL's servers do. OpenSSL's clients (wrk, curl, Python) list AES-256-GCM first, and its TLS 1.3 suite hashes with SHA-384, about a sixth of a resumed handshake's CPU time; SHA-256 runs in hardware on current processors. Bulk encryption gains too: 64 KiB responses went from 26.3k to 31.9k per second. Browsers list AES-128-GCM first already. A client that lists ChaCha20-Poly1305 before every AES-GCM suite (one without AES instructions) gets ChaCha20.
+
+Most of the handshake gain is the cipher suite: Axum with its rustls set to the same order reaches the same 8.4k (116 µs), with p99 latency 6.2 ms. An acceptor made with `TlsAcceptor::from_rustls` uses the configuration as given. wrk resumes sessions, so these are resumed handshakes; a full handshake adds the certificate's signature, which is the same cryptography on both sides.</script><script type="text/markdown" id="md-3"><!-- giong 1.3.0, https://giong.run/docs/giong-tls/#stability -->
+
+## Stability
+
+The stable API uses only giong-tls's own types and `CertificateDer` from `rustls-pki-types` 1.x, so a new rustls version, which giong-tls will take up as it comes, changes nothing for code that uses it. What takes rustls' types (`from_rustls`, `KtlsSupport::supports`, the `rustls` re-export) needs the `unstable-rustls` feature and follows the rustls version giong-tls uses. `TlsAcceptor::new`, `TlsConnector::new` and `TlsConnector::with_roots` are deprecated and go in 1.0.0.</script><script type="text/markdown" id="md-4"><!-- giong 1.3.0, https://giong.run/docs/giong-tls/#post-quantum-key-exchange -->
+
+## Post-quantum key exchange
+
+With the `post-quantum` feature, giong-tls uses aws-lc-rs instead of *ring* for its cryptography, and both the server and the client offer X25519MLKEM768 first: the X25519 exchange combined with ML-KEM-768, so that recorded traffic stays secret even from a future quantum computer. Peers that do not know it agree on X25519 as before, in the same round trips: the client sends an X25519 share alongside. Building aws-lc-rs needs a C compiler and CMake. Configurations given to `from_rustls` keep their own provider.</script><script type="text/markdown" id="md-5"><!-- giong 1.3.0, https://giong.run/docs/giong-tls/#not-there-yet -->
+
+## Not there yet
+
+Checking certificate revocation on the client side (rustls can, through `TlsConnector::from_rustls` with your own verifier). All of them can be added in 1.x without breaking anything. The crate has had a [security review](../docs/reviews/2026-11-giong-tls.md) by the project's AI agent, which found and fixed two issues in its users, and a second one for kernel TLS, but no independent audit yet; the cryptography and the protocol are rustls's, and the kernel's once it takes a connection.</script><script type="text/markdown" id="md-6"><!-- giong 1.3.0, https://giong.run/docs/giong-tls/#tests -->
+
+## Tests
+
+`cargo test -p giong-tls --all-features`: 17 server tests on real sockets with a rustls client (TLS 1.2 and 1.3, 4 MB in each direction, the cipher suite `with_certificates` picks for clients listing suites in OpenSSL's, a browser's and a phone's order, a vectored write of a header, a large body and a trailer, a file read and encrypted in the process, ALPN and a server from PEM that offers none, `recv` cancelled over and over, and dropped at the poll that sends the server's session tickets with the stream still able to send, two tasks sending at once, a write cancelled half way and a shutdown after it, broken or stalled handshakes, records arriving one byte at a time, a forged record after the handshake, random bytes instead of a handshake, `close_notify` told apart from a cut connection); 2 tests in `tests/writes.rs` (three tasks writing 1 MiB each at once, plain and vectored, arrive whole and in order; a TLS 1.2 write past the cipher suite's record limit fails with `GIONG-E2012` instead of vanishing) and one in `tests/memory.rs` (after a 1 MiB write, a connection pair keeps less than 48 KiB more than before it); 5 server tests through the stable API alone in `tests/server.rs` (the certificate picked by the name the client asks for, and a client refusing the fallback; certificates replaced while serving, a connection opened before keeping its own; client certificates required, with ALPN kept, a client without one and one from another authority refused; requested and missing; `GIONG-E2013` on an acceptor from `from_rustls`); 16 client tests against giong's own server and a blocking rustls server (TLS 1.2 and 1.3 with 4 MB each way, a certificate for another name, an unknown authority, a self-signed certificate marked as an authority refused with the reason and the `openssl` option that fixes it, an IP address as the name, ALPN, mutual TLS with and without a client certificate, session resumption, also from a server that only reads, a server that never answers or hangs up mid-handshake); 13 unit tests for choosing a certificate by name, records a receive could not send whole going out first and in order, replacing a set all or nothing, the post-quantum key exchange coming first with the feature, finding the machine's certificates, parsing server names, spotting application data among records, telling clients that want ChaCha20 apart, and when keys are extracted; 6 documentation examples.
+
+Kernel TLS has 23 tests in `tests/ktls.rs`, one in `tests/writes.rs` and 9 unit tests in `src/ktls.rs`: every cipher suite with the kernel on the server, the client or both sides, with plain and vectored writes and files sent with `sendfile` (whole, a range, and past the file's end); interoperation with blocking rustls peers; data sent in the same write as the last handshake message, and a key update sent in it too; ALPN, peer certificates and session resumption (TLS 1.3 tickets arrive through the kernel) after the handoff; key updates from either peer, and a key used up (new keys on TLS 1.3 with Linux 6.14+, `close_notify` and `GIONG-E2012` otherwise); the TLS 1.2 nonces read off the wire, so the kernel never reuses one rustls used; a tampered record; alerts, renegotiation requests and records of unexpected types, also in the middle of a handshake message split over records; a peer that cuts its records to 32 bytes, so the handoff comes in the middle of a record; a session ticket cut so that its later records start with the byte of a `KeyUpdate`, which Linux 6.14+ takes for one; `recv` cancelled over and over, and dropped as it answers a key update, a cancelled write, vectored write or file send, one task receiving while another sends, and three tasks writing at once; a stream already read with `recv`; and what `Auto` and `Required` do on a machine without the module. The fuzz target `ktls_records` (`cd giong-tls && cargo +nightly fuzz run ktls_records`) checks what the kernel path reads of the peer's records itself, the record framing during the handshake and the handshake messages after it, however the bytes are split; a unit test runs the same checks on 3,000 streams in every `cargo test`. Most of the tests need the `tls` module and pass without it, saying so, unless `GIONG_KTLS_REQUIRED` is set; `KTLS=1 scripts/kernels.sh 5.15.225 6.1.155 6.18.63` runs them on real kernels in QEMU, with and without key updates (CI also runs Ubuntu's 6.8).
+
+A soak test (`tests/soak.rs`, ignored by default; `scripts/check.sh soak tls`, or `GIONG_SOAK_SECS=3600 cargo test --release -p giong-tls --all-features --test soak -- --ignored --nocapture`) churns TLS connections between giong's own acceptor and connector on every worker for as long as asked: TLS 1.3 and 1.2, resumed sessions and full handshakes, kernel TLS on half the stream ends where the `tls` module is loaded, clean closes checked for `close_notify` on both sides, dropped connections, handshakes given up part-way, receives cancelled and taken up again with every byte checked, and writes cancelled inside a record. Afterwards no descriptor, memory or driver state may be left over. CI runs it for two hours every night, on the runner's kernel and on Linux 6.18 in QEMU, both with kernel TLS.
+
+Twelve end-to-end HTTPS tests live in `giong-http` (`cargo test -p giong-http --features tls`).</script><script type="text/markdown" id="md-page"># giong-tls
+
+> giong 1.3.0 · https://giong.run/docs/giong-tls/ · source: https://github.com/giong-run/Giong/blob/v1.3.0/giong-tls/README.md
+
+TLS for the [giong](https://github.com/giong-run/Giong/blob/v1.3.0/README.md) runtime, built on [rustls](https://github.com/rustls/rustls) (TLS 1.2 and 1.3, cryptography from `ring`, no OpenSSL): `TlsAcceptor` for servers, `TlsConnector` for clients.
+
+```rust,no_run
+use giong::net::TcpListener;
+use giong_tls::{Certificates, TlsAcceptor};
+
+fn main() -> std::io::Result<()> {
+    let acceptor = TlsAcceptor::with_certificates(&Certificates::from_pem(
+        &std::fs::read("cert.pem")?,
+        &std::fs::read("key.pem")?,
+    )?)?;
+
+    giong::block_on(async move {
+        let listener = TcpListener::bind("0.0.0.0:8443")?;
+        loop {
+            let tcp = listener.accept().await?;
+            let acceptor = acceptor.clone();
+            giong::spawn(async move {
+                let Ok(tls) = acceptor.accept(tcp).await else { return };
+                while let Ok(data) = tls.recv().await {
+                    if data.is_empty() {
+                        break; // the peer closed
+                    }
+                    if tls.write_all(data).await.0.is_err() {
+                        break;
+                    }
+                }
+                let _ = tls.shutdown().await;
+            });
+        }
+    })
+}
+```
+
+For HTTPS you do not need to write this loop yourself: turn on the `tls` feature of [`giong-http`](https://github.com/giong-run/Giong/blob/v1.3.0/giong-http/README.md) and call `Server::serve_tls`.
+
+A client, checking the server's certificate against the certificate authorities installed on the machine:
+
+```rust,no_run
+use giong::net::TcpStream;
+use giong_tls::TlsConnector;
+
+fn main() -> std::io::Result<()> {
+    let connector = TlsConnector::with_system_roots()?;
+
+    giong::block_on(async move {
+        let tcp = TcpStream::connect("example.com:443").await?;
+        let tls = connector.connect("example.com", tcp).await?;
+        let request = b"GET / HTTP/1.1\r\nHost: example.com\r\nConnection: close\r\n\r\n";
+        tls.write_all(request.to_vec()).await.0?;
+        loop {
+            let data = tls.recv().await?;
+            if data.is_empty() {
+                break;
+            }
+            print!("{}", String::from_utf8_lossy(&data));
+        }
+        Ok(())
+    })
+}
+```
+
+## API
+
+| | |
+|---|---|
+| `TlsAcceptor::with_certificates(&certs)` | The certificates the server presents, a `Certificates` set: `Certificates::from_pem(cert, key)` makes one from a certificate chain and its private key in PEM form. TLS 1.2 and 1.3, the default rustls cipher suites, no client authentication, no ALPN (add it with `.alpn(..)`). Of the suites both sides allow, the server picks AES-128-GCM first, as Go's and BoringSSL's servers do (see [Handshakes](#handshakes)); a client that lists ChaCha20-Poly1305 before AES-GCM, as clients without AES instructions do, gets ChaCha20. The set can hold several chains, each handshake getting the first one valid for the name the client asked for (SNI), and the first of all when it asked for none or none matches. `certs.add_pem(cert, key)` adds one; `certs.replace_pem(&[(cert, key), ..])` swaps the whole set while the server runs, for renewed certificates: every acceptor made from the set (or a clone of it) presents the new one from the next handshake on, connections already open are untouched, and on an error nothing changes. |
+| `.require_client_cert(ca_pem)`, `.request_client_cert(ca_pem)` | Mutual TLS: every client must present a certificate issued by one of these authorities, or may present one (`tls.peer_certificates()` says who did). A certificate from another authority fails the handshake either way. On an acceptor made with `from_rustls` they fail with `GIONG-E2013`. |
+| `TlsAcceptor::from_rustls(config)` | Bring your own `rustls::ServerConfig`, for what the rest does not cover. Needs the `unstable-rustls` feature, which also re-exports `rustls` so that you use the matching version; outside the semver promise, because the rustls version may rise in a minor release (see [Stability](#stability)). |
+| `.handshake_timeout(duration)` | The longest a handshake may take, 10 s by default. |
+| `.ktls(Ktls::Auto)` | Kernel TLS: after the handshake the kernel encrypts and decrypts (see [below](#kernel-tls)). `Ktls::Off` by default. Also on `TlsConnector`. |
+| `acceptor.accept(tcp)` | Runs the handshake and returns a `TlsStream`. |
+| `TlsConnector::with_system_roots()` | Trusts the certificate authorities installed on the machine: `SSL_CERT_FILE` / `SSL_CERT_DIR` if set, otherwise the distribution's bundle (`/etc/ssl/certs/ca-certificates.crt` and the other usual places). A clear `NotFound` error if there are none, as in an image built `FROM scratch`. |
+| `TlsConnector::with_webpki_roots()` | Mozilla's root certificates compiled into the program, for machines without a bundle. Needs the `webpki-roots` feature. |
+| `TlsConnector::with_root_pem(pem)` | Trusts only the given authorities: a private CA, or a server's own self-signed certificate. A self-signed certificate must not be marked as an authority, which `openssl req -x509` does unless given `-addext "basicConstraints=critical,CA:FALSE"`: a server that presents an authority's certificate as its own is refused (`GIONG-E2004`), trusted or not. |
+| `TlsConnector::with_root_pem_any_name(pem)` | Trusts only the given authorities and does not check the host name, for servers whose certificates name none (MySQL's generated ones, `ssl-mode=VERIFY_CA`). Use it only with an authority that signs for that server alone. |
+| `TlsConnector::from_rustls(config)` | Bring your own `rustls::ClientConfig`. Needs the `unstable-rustls` feature, as `TlsAcceptor::from_rustls`. |
+| `.alpn(&[b"h2", b"http/1.1"])`, `.client_auth(cert, key)` | Protocols to offer through ALPN; a client certificate for servers that ask for one (mutual TLS). |
+| `connector.connect(name, tcp)` | Runs the handshake, checking that the certificate is valid for `name` (a DNS name, sent through SNI, or an IP address). A certificate for another name, expired, or from an unknown authority fails with `InvalidData` and a message saying which. Clones of a connector share a session cache, so reconnecting resumes the session. |
+| `tls.recv()` | Decrypted data, as a `Received`: it derefs to `&[u8]`, can be passed straight to `write_all`, and `into_vec()` gives a `Vec<u8>`. An empty one means the peer closed. |
+| `tls.received_close_notify()` | Whether the peer ended the connection with `close_notify`. Without it, the TCP connection merely closed, which anyone on the path can cause: check it before trusting data that ends where the connection ends. |
+| `tls.write_all(buf)` | Encrypts and sends all of `buf` (a `Vec<u8>`, `Box<[u8]>`, `&'static [u8]`, ...), then hands the buffer back, like `TcpStream::write_all`. |
+| `tls.write_all_vectored(bufs)` | The same for several buffers in order (a header and a body), without copying them into one first. |
+| `tls.send_file(&file, offset, len)` | Sends a range of a `giong::fs::File`. With kernel TLS the kernel encrypts it straight from the page cache (`sendfile`), the fastest way to serve a file over TLS; otherwise it is read and encrypted in 256 KiB pieces. |
+| `tls.shutdown()` | Sends `close_notify`, then closes the sending direction. `Ok` also when the peer has closed its socket already (`EPIPE`, `ECONNRESET`), since nobody is left to tell. |
+| `tls.alpn_protocol()`, `tls.tcp()` | The protocol agreed through ALPN; the TCP socket underneath, for its addresses and options only (sending or receiving on it would corrupt the TLS stream). |
+| `tls.peer_certificates()`, `tls.resumed()` | The certificate chain the other side presented; whether the handshake resumed an earlier session. |
+| `tls.is_ktls()` | Whether the kernel encrypts this connection. |
+| `giong_tls::ktls_support()`, `ktls_stats()` | What the running kernel can do for kernel TLS, in one line for a log; how many connections went to the kernel, stayed in the process, and changed keys. |
+
+Things to remember:
+
+1. `recv()` is cancel safe: wrapping it in a `timeout` loses no data.
+2. `write_all()`, `write_all_vectored()` and `send_file()` are not. If the future is dropped in the middle of a TLS record, the record stream has been cut, so every later send returns an error instead of sending corrupt data. Data the peer already sent can still be received, and `shutdown()` still closes the TCP side.
+3. One task may receive while others send on the same `TlsStream`. Each write goes out whole: two tasks writing at once never interleave their data, in the process or with kernel TLS. Only one task may receive at a time.
+4. Data that arrived intact is always returned before an error that happened after it.
+5. An empty `recv()` is the end of the stream, with or without `close_notify`. If the end of the stream is what marks the end of your data (an HTTP response without a length), check `received_close_notify()`: otherwise someone on the path could cut the data short.
+6. A key encrypts at most 2^24 records with AES-GCM. TLS 1.3 then changes keys; TLS 1.2 cannot, so the connection sends `close_notify` and every later write fails with `GIONG-E2012`, in the process and with kernel TLS. Small writes reach the limit after 16.7 million of them: open a new connection then.
+
+## Kernel TLS
+
+With kernel TLS (kTLS), rustls still does the handshake and checks the certificates; then giong-tls hands the connection's keys to the kernel, which encrypts what the program sends and decrypts what it receives. The program keeps the same `TlsStream` API, and the kernel can send encrypted data straight from its own buffers, which is what makes zero-copy sending possible over TLS.
+
+```rust,no_run
+use giong_tls::{Certificates, Ktls, TlsAcceptor};
+
+fn main() -> std::io::Result<()> {
+    let certs = Certificates::from_pem(&std::fs::read("cert.pem")?, &std::fs::read("key.pem")?)?;
+    let acceptor = TlsAcceptor::with_certificates(&certs)?.ktls(Ktls::Auto)?;
+    if let Some(why) = acceptor.ktls_unavailable() {
+        eprintln!("kernel TLS is off: {why}");
+    }
+    // ... accept connections as above
+    Ok(())
+}
+```
+
+| Mode | What it does |
+|---|---|
+| `Ktls::Off` | The default: rustls encrypts in the process. |
+| `Ktls::Auto` | The kernel takes a connection when it can do everything rustls would have done for it; otherwise the connection stays in the process. Fails because of kTLS only if the kernel then refuses keys it said it would take (`GIONG-E2010`): by then the connection cannot go back to the process. |
+| `Ktls::Required` | The kernel takes every connection. `.ktls()` fails with `GIONG-E2009` if the kernel cannot, and so does a handshake on a stream that cannot be handed over. |
+
+What the kernel needs, checked once per process on throwaway loopback sockets (`ktls_support()` says what it found):
+
+- **Linux 5.15 or newer, except 6.0**, whose kernel TLS can crash the kernel when a connection closes: giong-tls refuses it and says why. Tested on 5.15, 6.1, Ubuntu's 6.8, 6.18 and 7.0.
+- **The `tls` module.** `modprobe tls` on the host, or `tls` in `/etc/modules-load.d/`. A container cannot load it; the host has to. Distribution kernels build it as a module (tested on Ubuntu's).
+- **Every cipher suite the configuration allows**, in both directions: AES-128-GCM, AES-256-GCM and ChaCha20-Poly1305 for TLS 1.2 and 1.3, which every kernel since 5.11 has.
+- **For TLS 1.3, new keys on a live connection** (Linux 6.14 or newer): a peer may change its keys at any time with a `KeyUpdate`, and giong-tls changes its own before a key has encrypted 2^24 records. On older kernels `Auto` keeps configurations that allow TLS 1.3 in the process; `Required` takes them anyway, and a peer's `KeyUpdate` then ends the connection with `GIONG-E2011`. Linux 6.14+ takes every handshake record that starts with the byte 24 for a `KeyUpdate` and receives nothing more until it gets keys, also when the record is a later piece of a message split over records (a session ticket, say); giong-tls joins the messages itself and, when no `KeyUpdate` came, gives the kernel its keys back so that it goes on.
+
+Two more cases stay in the process under `Auto` and fail under `Required`: a configuration that allows 0-RTT data, and a stream on which `TcpStream::recv` was used before the handshake (giong may hold bytes the kernel would never see; read a plaintext greeting with `TcpStream::read` instead). Once the kernel has taken a connection it behaves as before: session tickets reach the client's session cache, alerts and `close_notify` are handled as rustls handles them, renegotiation is refused, a tampered record is an error, `recv` is cancel safe, and a cancelled `write_all` stops the stream from sending.
+
+### When it pays off
+
+Kernel TLS is not faster by itself. Measured on bare metal (AMD EPYC 4345P, Linux 7.0, loopback, the server on one core, TLS 1.3 with AES-256-GCM, medians of five rounds; `bench/tls.sh` and `bench/http-client.sh`, recorded in [`bench/results/bare-metal-epyc-4345p/linux-7.0/ktls/`](https://github.com/giong-run/Giong/blob/v1.3.0/bench/results/bare-metal-epyc-4345p/linux-7.0/ktls/summary.txt)):
+
+| What the server sends | rustls in the process | Kernel TLS | |
+|---|---|---|---|
+| **1 MiB from a file** (`send_file`, `Body::file`) | 4,484 req/s, 223 µs CPU each | **6,104 req/s, 164 µs** | **+36%** |
+| 64 KiB from a file | 62,927 | 55,763 | −11% |
+| 1 MiB from memory | 5,038 | 4,101 | −19% |
+| 64 KiB from memory | 69,989 | 54,693 | −22% |
+| A small JSON response | 414,168 | 347,206 | −16% |
+| An 8 KB JSON response | 100,697 | 96,931 | −4% |
+| A new connection per request | 14,306 | 13,255 | −7% |
+
+On the receiving side (giong-http's client on one core) the kernel decrypting 64 KiB bodies gives +11% (63,273 → 70,492 req/s), 1 MiB bodies +6% with noisy rounds, and small JSON responses −8%. For comparison, nginx 1.24 on the same machine serves the 1 MiB file at 6,039 req/s with kernel TLS and `sendfile` (166 µs of CPU each), and at 3,547 with OpenSSL in the process.
+
+Why: rustls with `ring`'s AES-GCM is fast, and data sent from memory has to be copied into pages the kernel allocates and zeroes for every record, which costs more than it saves. With `sendfile` nothing is copied: the profile of the 1 MiB file shows the ~20% that rustls spends copying (`pread`, then `send`) gone and the kernel's AVX-512 AES-GCM encrypting straight from the page cache. The next cost is page zeroing on allocation (`kernel_init_pages`, 11% of the kernel TLS server's time with `init_on_alloc=1`, Ubuntu's default); booting with `init_on_alloc=0` should remove most of it, which has not been measured. At 64 KiB per response the kernel's fixed costs still outweigh the copy saved; the crossover is somewhere between 64 KiB and 1 MiB.
+
+So `Ktls::Off` stays the default. Use `Ktls::Auto` on a server whose large responses (hundreds of KiB and up) come from files through `send_file` or giong-http's `Body::file`, and on a client that downloads large bodies. Keep rustls in the process for small responses and for bodies built in memory. `bench/tls.sh` measures your own sizes: `SERVERS="giong-http-tls giong-http-ktls" ENDPOINTS="file64k file1m" bench/tls.sh`.
+
+## Performance
+
+Measured with `bench/tls.sh` on one core, with the same rustls and `ring` on both sides (4-vCPU VM, seven rounds, [`bench/results/tls/`](https://github.com/giong-run/Giong/blob/v1.3.0/bench/results/tls/README.md)): HTTPS through `giong-http` reaches 146.6k req/s on `/json` against 81.2k for Axum + rustls, and 48.7k against 18.5k with 8 KB responses. Details and how to read the numbers are in the [main README](https://github.com/giong-run/Giong/blob/v1.3.0/README.md#https); kernel TLS has its own numbers [above](#when-it-pays-off).
+
+### Handshakes
+
+With a new connection for every request, giong-http + giong-tls does 8.4k per second against 7.1k for Axum + rustls (+18%), at 116 µs of server CPU per connection against 136, with p99 latency 4.2 ms against 7.1. giong-tls 0.8.0 did 6.8k (142 µs). Two things changed:
+
+- **Fewer packets.** A TLS 1.3 server's session tickets wait for its first response (or for a receive that would have to wait) instead of going out alone, `shutdown` sends `close_notify` in the same segment as the FIN, and the head and body of one write go out in one send. Both directions together: 14.4 TCP segments per connection, against 16.5 for 0.8.0 and 14.0 for Axum.
+- **AES-128-GCM first.** `TlsAcceptor::with_certificates` picks it whatever order the client lists, as Go's and BoringSSL's servers do. OpenSSL's clients (wrk, curl, Python) list AES-256-GCM first, and its TLS 1.3 suite hashes with SHA-384, about a sixth of a resumed handshake's CPU time; SHA-256 runs in hardware on current processors. Bulk encryption gains too: 64 KiB responses went from 26.3k to 31.9k per second. Browsers list AES-128-GCM first already. A client that lists ChaCha20-Poly1305 before every AES-GCM suite (one without AES instructions) gets ChaCha20.
+
+Most of the handshake gain is the cipher suite: Axum with its rustls set to the same order reaches the same 8.4k (116 µs), with p99 latency 6.2 ms. An acceptor made with `TlsAcceptor::from_rustls` uses the configuration as given. wrk resumes sessions, so these are resumed handshakes; a full handshake adds the certificate's signature, which is the same cryptography on both sides.
+
+## Stability
+
+The stable API uses only giong-tls's own types and `CertificateDer` from `rustls-pki-types` 1.x, so a new rustls version, which giong-tls will take up as it comes, changes nothing for code that uses it. What takes rustls' types (`from_rustls`, `KtlsSupport::supports`, the `rustls` re-export) needs the `unstable-rustls` feature and follows the rustls version giong-tls uses. `TlsAcceptor::new`, `TlsConnector::new` and `TlsConnector::with_roots` are deprecated and go in 1.0.0.
+
+## Post-quantum key exchange
+
+With the `post-quantum` feature, giong-tls uses aws-lc-rs instead of *ring* for its cryptography, and both the server and the client offer X25519MLKEM768 first: the X25519 exchange combined with ML-KEM-768, so that recorded traffic stays secret even from a future quantum computer. Peers that do not know it agree on X25519 as before, in the same round trips: the client sends an X25519 share alongside. Building aws-lc-rs needs a C compiler and CMake. Configurations given to `from_rustls` keep their own provider.
+
+## Not there yet
+
+Checking certificate revocation on the client side (rustls can, through `TlsConnector::from_rustls` with your own verifier). All of them can be added in 1.x without breaking anything. The crate has had a [security review](https://github.com/giong-run/Giong/blob/v1.3.0/docs/reviews/2026-11-giong-tls.md) by the project's AI agent, which found and fixed two issues in its users, and a second one for kernel TLS, but no independent audit yet; the cryptography and the protocol are rustls's, and the kernel's once it takes a connection.
+
+## Tests
+
+`cargo test -p giong-tls --all-features`: 17 server tests on real sockets with a rustls client (TLS 1.2 and 1.3, 4 MB in each direction, the cipher suite `with_certificates` picks for clients listing suites in OpenSSL's, a browser's and a phone's order, a vectored write of a header, a large body and a trailer, a file read and encrypted in the process, ALPN and a server from PEM that offers none, `recv` cancelled over and over, and dropped at the poll that sends the server's session tickets with the stream still able to send, two tasks sending at once, a write cancelled half way and a shutdown after it, broken or stalled handshakes, records arriving one byte at a time, a forged record after the handshake, random bytes instead of a handshake, `close_notify` told apart from a cut connection); 2 tests in `tests/writes.rs` (three tasks writing 1 MiB each at once, plain and vectored, arrive whole and in order; a TLS 1.2 write past the cipher suite's record limit fails with `GIONG-E2012` instead of vanishing) and one in `tests/memory.rs` (after a 1 MiB write, a connection pair keeps less than 48 KiB more than before it); 5 server tests through the stable API alone in `tests/server.rs` (the certificate picked by the name the client asks for, and a client refusing the fallback; certificates replaced while serving, a connection opened before keeping its own; client certificates required, with ALPN kept, a client without one and one from another authority refused; requested and missing; `GIONG-E2013` on an acceptor from `from_rustls`); 16 client tests against giong's own server and a blocking rustls server (TLS 1.2 and 1.3 with 4 MB each way, a certificate for another name, an unknown authority, a self-signed certificate marked as an authority refused with the reason and the `openssl` option that fixes it, an IP address as the name, ALPN, mutual TLS with and without a client certificate, session resumption, also from a server that only reads, a server that never answers or hangs up mid-handshake); 13 unit tests for choosing a certificate by name, records a receive could not send whole going out first and in order, replacing a set all or nothing, the post-quantum key exchange coming first with the feature, finding the machine's certificates, parsing server names, spotting application data among records, telling clients that want ChaCha20 apart, and when keys are extracted; 6 documentation examples.
+
+Kernel TLS has 23 tests in `tests/ktls.rs`, one in `tests/writes.rs` and 9 unit tests in `src/ktls.rs`: every cipher suite with the kernel on the server, the client or both sides, with plain and vectored writes and files sent with `sendfile` (whole, a range, and past the file's end); interoperation with blocking rustls peers; data sent in the same write as the last handshake message, and a key update sent in it too; ALPN, peer certificates and session resumption (TLS 1.3 tickets arrive through the kernel) after the handoff; key updates from either peer, and a key used up (new keys on TLS 1.3 with Linux 6.14+, `close_notify` and `GIONG-E2012` otherwise); the TLS 1.2 nonces read off the wire, so the kernel never reuses one rustls used; a tampered record; alerts, renegotiation requests and records of unexpected types, also in the middle of a handshake message split over records; a peer that cuts its records to 32 bytes, so the handoff comes in the middle of a record; a session ticket cut so that its later records start with the byte of a `KeyUpdate`, which Linux 6.14+ takes for one; `recv` cancelled over and over, and dropped as it answers a key update, a cancelled write, vectored write or file send, one task receiving while another sends, and three tasks writing at once; a stream already read with `recv`; and what `Auto` and `Required` do on a machine without the module. The fuzz target `ktls_records` (`cd giong-tls && cargo +nightly fuzz run ktls_records`) checks what the kernel path reads of the peer's records itself, the record framing during the handshake and the handshake messages after it, however the bytes are split; a unit test runs the same checks on 3,000 streams in every `cargo test`. Most of the tests need the `tls` module and pass without it, saying so, unless `GIONG_KTLS_REQUIRED` is set; `KTLS=1 scripts/kernels.sh 5.15.225 6.1.155 6.18.63` runs them on real kernels in QEMU, with and without key updates (CI also runs Ubuntu's 6.8).
+
+A soak test (`tests/soak.rs`, ignored by default; `scripts/check.sh soak tls`, or `GIONG_SOAK_SECS=3600 cargo test --release -p giong-tls --all-features --test soak -- --ignored --nocapture`) churns TLS connections between giong's own acceptor and connector on every worker for as long as asked: TLS 1.3 and 1.2, resumed sessions and full handshakes, kernel TLS on half the stream ends where the `tls` module is loaded, clean closes checked for `close_notify` on both sides, dropped connections, handshakes given up part-way, receives cancelled and taken up again with every byte checked, and writes cancelled inside a record. Afterwards no descriptor, memory or driver state may be left over. CI runs it for two hours every night, on the runner's kernel and on Linux 6.18 in QEMU, both with kernel TLS.
+
+Twelve end-to-end HTTPS tests live in `giong-http` (`cargo test -p giong-http --features tls`).
+</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.3.0, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use giong-tls as documented below.
+
+Rules for giong code:
+- Start the runtime with giong::Builder::new().shutdown_on_signals(true).build()?.run(|_worker| async { .. }); there are no macros. Build listeners, routers, pools and clients inside each worker's future.
+- Never block a worker: no std::fs, std::net or std::thread::sleep; use giong::fs, giong::net and giong::time. Run heavy work on std::thread::spawn and await a giong::sync::oneshot.
+- Futures need not be Send. Per-worker state is Rc<RefCell<T>>, never borrowed across an .await.
+- Bind IP addresses ("0.0.0.0:8080"), never host names.
+- Match errors with giong::error::code(&err); every GIONG-Exxxx code has a page that says how to fix it.
+- Use the giong crate for each job (giong-http, giong-web, giong-postgres, giong-redis, ...). Crates that need the Tokio runtime (sqlx, reqwest, tonic's transport) panic on a giong worker.
+More facts: https://giong.run/llms.txt. Best practices: https://giong.run/docs/best-practices.md
+
+My task: <describe what to build or fix>
+
+Documentation of giong-tls, giong 1.3.0 (https://giong.run/docs/giong-tls.md):
+
+# giong-tls
+
+> giong 1.3.0 · https://giong.run/docs/giong-tls/ · source: https://github.com/giong-run/Giong/blob/v1.3.0/giong-tls/README.md
+
+TLS for the [giong](https://github.com/giong-run/Giong/blob/v1.3.0/README.md) runtime, built on [rustls](https://github.com/rustls/rustls) (TLS 1.2 and 1.3, cryptography from `ring`, no OpenSSL): `TlsAcceptor` for servers, `TlsConnector` for clients.
+
+```rust,no_run
+use giong::net::TcpListener;
+use giong_tls::{Certificates, TlsAcceptor};
+
+fn main() -> std::io::Result<()> {
+    let acceptor = TlsAcceptor::with_certificates(&Certificates::from_pem(
+        &std::fs::read("cert.pem")?,
+        &std::fs::read("key.pem")?,
+    )?)?;
+
+    giong::block_on(async move {
+        let listener = TcpListener::bind("0.0.0.0:8443")?;
+        loop {
+            let tcp = listener.accept().await?;
+            let acceptor = acceptor.clone();
+            giong::spawn(async move {
+                let Ok(tls) = acceptor.accept(tcp).await else { return };
+                while let Ok(data) = tls.recv().await {
+                    if data.is_empty() {
+                        break; // the peer closed
+                    }
+                    if tls.write_all(data).await.0.is_err() {
+                        break;
+                    }
+                }
+                let _ = tls.shutdown().await;
+            });
+        }
+    })
+}
+```
+
+For HTTPS you do not need to write this loop yourself: turn on the `tls` feature of [`giong-http`](https://github.com/giong-run/Giong/blob/v1.3.0/giong-http/README.md) and call `Server::serve_tls`.
+
+A client, checking the server's certificate against the certificate authorities installed on the machine:
+
+```rust,no_run
+use giong::net::TcpStream;
+use giong_tls::TlsConnector;
+
+fn main() -> std::io::Result<()> {
+    let connector = TlsConnector::with_system_roots()?;
+
+    giong::block_on(async move {
+        let tcp = TcpStream::connect("example.com:443").await?;
+        let tls = connector.connect("example.com", tcp).await?;
+        let request = b"GET / HTTP/1.1\r\nHost: example.com\r\nConnection: close\r\n\r\n";
+        tls.write_all(request.to_vec()).await.0?;
+        loop {
+            let data = tls.recv().await?;
+            if data.is_empty() {
+                break;
+            }
+            print!("{}", String::from_utf8_lossy(&data));
+        }
+        Ok(())
+    })
+}
+```
+
+## API
+
+| | |
+|---|---|
+| `TlsAcceptor::with_certificates(&certs)` | The certificates the server presents, a `Certificates` set: `Certificates::from_pem(cert, key)` makes one from a certificate chain and its private key in PEM form. TLS 1.2 and 1.3, the default rustls cipher suites, no client authentication, no ALPN (add it with `.alpn(..)`). Of the suites both sides allow, the server picks AES-128-GCM first, as Go's and BoringSSL's servers do (see [Handshakes](#handshakes)); a client that lists ChaCha20-Poly1305 before AES-GCM, as clients without AES instructions do, gets ChaCha20. The set can hold several chains, each handshake getting the first one valid for the name the client asked for (SNI), and the first of all when it asked for none or none matches. `certs.add_pem(cert, key)` adds one; `certs.replace_pem(&[(cert, key), ..])` swaps the whole set while the server runs, for renewed certificates: every acceptor made from the set (or a clone of it) presents the new one from the next handshake on, connections already open are untouched, and on an error nothing changes. |
+| `.require_client_cert(ca_pem)`, `.request_client_cert(ca_pem)` | Mutual TLS: every client must present a certificate issued by one of these authorities, or may present one (`tls.peer_certificates()` says who did). A certificate from another authority fails the handshake either way. On an acceptor made with `from_rustls` they fail with `GIONG-E2013`. |
+| `TlsAcceptor::from_rustls(config)` | Bring your own `rustls::ServerConfig`, for what the rest does not cover. Needs the `unstable-rustls` feature, which also re-exports `rustls` so that you use the matching version; outside the semver promise, because the rustls version may rise in a minor release (see [Stability](#stability)). |
+| `.handshake_timeout(duration)` | The longest a handshake may take, 10 s by default. |
+| `.ktls(Ktls::Auto)` | Kernel TLS: after the handshake the kernel encrypts and decrypts (see [below](#kernel-tls)). `Ktls::Off` by default. Also on `TlsConnector`. |
+| `acceptor.accept(tcp)` | Runs the handshake and returns a `TlsStream`. |
+| `TlsConnector::with_system_roots()` | Trusts the certificate authorities installed on the machine: `SSL_CERT_FILE` / `SSL_CERT_DIR` if set, otherwise the distribution's bundle (`/etc/ssl/certs/ca-certificates.crt` and the other usual places). A clear `NotFound` error if there are none, as in an image built `FROM scratch`. |
+| `TlsConnector::with_webpki_roots()` | Mozilla's root certificates compiled into the program, for machines without a bundle. Needs the `webpki-roots` feature. |
+| `TlsConnector::with_root_pem(pem)` | Trusts only the given authorities: a private CA, or a server's own self-signed certificate. A self-signed certificate must not be marked as an authority, which `openssl req -x509` does unless given `-addext "basicConstraints=critical,CA:FALSE"`: a server that presents an authority's certificate as its own is refused (`GIONG-E2004`), trusted or not. |
+| `TlsConnector::with_root_pem_any_name(pem)` | Trusts only the given authorities and does not check the host name, for servers whose certificates name none (MySQL's generated ones, `ssl-mode=VERIFY_CA`). Use it only with an authority that signs for that server alone. |
+| `TlsConnector::from_rustls(config)` | Bring your own `rustls::ClientConfig`. Needs the `unstable-rustls` feature, as `TlsAcceptor::from_rustls`. |
+| `.alpn(&[b"h2", b"http/1.1"])`, `.client_auth(cert, key)` | Protocols to offer through ALPN; a client certificate for servers that ask for one (mutual TLS). |
+| `connector.connect(name, tcp)` | Runs the handshake, checking that the certificate is valid for `name` (a DNS name, sent through SNI, or an IP address). A certificate for another name, expired, or from an unknown authority fails with `InvalidData` and a message saying which. Clones of a connector share a session cache, so reconnecting resumes the session. |
+| `tls.recv()` | Decrypted data, as a `Received`: it derefs to `&[u8]`, can be passed straight to `write_all`, and `into_vec()` gives a `Vec<u8>`. An empty one means the peer closed. |
+| `tls.received_close_notify()` | Whether the peer ended the connection with `close_notify`. Without it, the TCP connection merely closed, which anyone on the path can cause: check it before trusting data that ends where the connection ends. |
+| `tls.write_all(buf)` | Encrypts and sends all of `buf` (a `Vec<u8>`, `Box<[u8]>`, `&'static [u8]`, ...), then hands the buffer back, like `TcpStream::write_all`. |
+| `tls.write_all_vectored(bufs)` | The same for several buffers in order (a header and a body), without copying them into one first. |
+| `tls.send_file(&file, offset, len)` | Sends a range of a `giong::fs::File`. With kernel TLS the kernel encrypts it straight from the page cache (`sendfile`), the fastest way to serve a file over TLS; otherwise it is read and encrypted in 256 KiB pieces. |
+| `tls.shutdown()` | Sends `close_notify`, then closes the sending direction. `Ok` also when the peer has closed its socket already (`EPIPE`, `ECONNRESET`), since nobody is left to tell. |
+| `tls.alpn_protocol()`, `tls.tcp()` | The protocol agreed through ALPN; the TCP socket underneath, for its addresses and options only (sending or receiving on it would corrupt the TLS stream). |
+| `tls.peer_certificates()`, `tls.resumed()` | The certificate chain the other side presented; whether the handshake resumed an earlier session. |
+| `tls.is_ktls()` | Whether the kernel encrypts this connection. |
+| `giong_tls::ktls_support()`, `ktls_stats()` | What the running kernel can do for kernel TLS, in one line for a log; how many connections went to the kernel, stayed in the process, and changed keys. |
+
+Things to remember:
+
+1. `recv()` is cancel safe: wrapping it in a `timeout` loses no data.
+2. `write_all()`, `write_all_vectored()` and `send_file()` are not. If the future is dropped in the middle of a TLS record, the record stream has been cut, so every later send returns an error instead of sending corrupt data. Data the peer already sent can still be received, and `shutdown()` still closes the TCP side.
+3. One task may receive while others send on the same `TlsStream`. Each write goes out whole: two tasks writing at once never interleave their data, in the process or with kernel TLS. Only one task may receive at a time.
+4. Data that arrived intact is always returned before an error that happened after it.
+5. An empty `recv()` is the end of the stream, with or without `close_notify`. If the end of the stream is what marks the end of your data (an HTTP response without a length), check `received_close_notify()`: otherwise someone on the path could cut the data short.
+6. A key encrypts at most 2^24 records with AES-GCM. TLS 1.3 then changes keys; TLS 1.2 cannot, so the connection sends `close_notify` and every later write fails with `GIONG-E2012`, in the process and with kernel TLS. Small writes reach the limit after 16.7 million of them: open a new connection then.
+
+## Kernel TLS
+
+With kernel TLS (kTLS), rustls still does the handshake and checks the certificates; then giong-tls hands the connection's keys to the kernel, which encrypts what the program sends and decrypts what it receives. The program keeps the same `TlsStream` API, and the kernel can send encrypted data straight from its own buffers, which is what makes zero-copy sending possible over TLS.
+
+```rust,no_run
+use giong_tls::{Certificates, Ktls, TlsAcceptor};
+
+fn main() -> std::io::Result<()> {
+    let certs = Certificates::from_pem(&std::fs::read("cert.pem")?, &std::fs::read("key.pem")?)?;
+    let acceptor = TlsAcceptor::with_certificates(&certs)?.ktls(Ktls::Auto)?;
+    if let Some(why) = acceptor.ktls_unavailable() {
+        eprintln!("kernel TLS is off: {why}");
+    }
+    // ... accept connections as above
+    Ok(())
+}
+```
+
+| Mode | What it does |
+|---|---|
+| `Ktls::Off` | The default: rustls encrypts in the process. |
+| `Ktls::Auto` | The kernel takes a connection when it can do everything rustls would have done for it; otherwise the connection stays in the process. Fails because of kTLS only if the kernel then refuses keys it said it would take (`GIONG-E2010`): by then the connection cannot go back to the process. |
+| `Ktls::Required` | The kernel takes every connection. `.ktls()` fails with `GIONG-E2009` if the kernel cannot, and so does a handshake on a stream that cannot be handed over. |
+
+What the kernel needs, checked once per process on throwaway loopback sockets (`ktls_support()` says what it found):
+
+- **Linux 5.15 or newer, except 6.0**, whose kernel TLS can crash the kernel when a connection closes: giong-tls refuses it and says why. Tested on 5.15, 6.1, Ubuntu's 6.8, 6.18 and 7.0.
+- **The `tls` module.** `modprobe tls` on the host, or `tls` in `/etc/modules-load.d/`. A container cannot load it; the host has to. Distribution kernels build it as a module (tested on Ubuntu's).
+- **Every cipher suite the configuration allows**, in both directions: AES-128-GCM, AES-256-GCM and ChaCha20-Poly1305 for TLS 1.2 and 1.3, which every kernel since 5.11 has.
+- **For TLS 1.3, new keys on a live connection** (Linux 6.14 or newer): a peer may change its keys at any time with a `KeyUpdate`, and giong-tls changes its own before a key has encrypted 2^24 records. On older kernels `Auto` keeps configurations that allow TLS 1.3 in the process; `Required` takes them anyway, and a peer's `KeyUpdate` then ends the connection with `GIONG-E2011`. Linux 6.14+ takes every handshake record that starts with the byte 24 for a `KeyUpdate` and receives nothing more until it gets keys, also when the record is a later piece of a message split over records (a session ticket, say); giong-tls joins the messages itself and, when no `KeyUpdate` came, gives the kernel its keys back so that it goes on.
+
+Two more cases stay in the process under `Auto` and fail under `Required`: a configuration that allows 0-RTT data, and a stream on which `TcpStream::recv` was used before the handshake (giong may hold bytes the kernel would never see; read a plaintext greeting with `TcpStream::read` instead). Once the kernel has taken a connection it behaves as before: session tickets reach the client's session cache, alerts and `close_notify` are handled as rustls handles them, renegotiation is refused, a tampered record is an error, `recv` is cancel safe, and a cancelled `write_all` stops the stream from sending.
+
+### When it pays off
+
+Kernel TLS is not faster by itself. Measured on bare metal (AMD EPYC 4345P, Linux 7.0, loopback, the server on one core, TLS 1.3 with AES-256-GCM, medians of five rounds; `bench/tls.sh` and `bench/http-client.sh`, recorded in [`bench/results/bare-metal-epyc-4345p/linux-7.0/ktls/`](https://github.com/giong-run/Giong/blob/v1.3.0/bench/results/bare-metal-epyc-4345p/linux-7.0/ktls/summary.txt)):
+
+| What the server sends | rustls in the process | Kernel TLS | |
+|---|---|---|---|
+| **1 MiB from a file** (`send_file`, `Body::file`) | 4,484 req/s, 223 µs CPU each | **6,104 req/s, 164 µs** | **+36%** |
+| 64 KiB from a file | 62,927 | 55,763 | −11% |
+| 1 MiB from memory | 5,038 | 4,101 | −19% |
+| 64 KiB from memory | 69,989 | 54,693 | −22% |
+| A small JSON response | 414,168 | 347,206 | −16% |
+| An 8 KB JSON response | 100,697 | 96,931 | −4% |
+| A new connection per request | 14,306 | 13,255 | −7% |
+
+On the receiving side (giong-http's client on one core) the kernel decrypting 64 KiB bodies gives +11% (63,273 → 70,492 req/s), 1 MiB bodies +6% with noisy rounds, and small JSON responses −8%. For comparison, nginx 1.24 on the same machine serves the 1 MiB file at 6,039 req/s with kernel TLS and `sendfile` (166 µs of CPU each), and at 3,547 with OpenSSL in the process.
+
+Why: rustls with `ring`'s AES-GCM is fast, and data sent from memory has to be copied into pages the kernel allocates and zeroes for every record, which costs more than it saves. With `sendfile` nothing is copied: the profile of the 1 MiB file shows the ~20% that rustls spends copying (`pread`, then `send`) gone and the kernel's AVX-512 AES-GCM encrypting straight from the page cache. The next cost is page zeroing on allocation (`kernel_init_pages`, 11% of the kernel TLS server's time with `init_on_alloc=1`, Ubuntu's default); booting with `init_on_alloc=0` should remove most of it, which has not been measured. At 64 KiB per response the kernel's fixed costs still outweigh the copy saved; the crossover is somewhere between 64 KiB and 1 MiB.
+
+So `Ktls::Off` stays the default. Use `Ktls::Auto` on a server whose large responses (hundreds of KiB and up) come from files through `send_file` or giong-http's `Body::file`, and on a client that downloads large bodies. Keep rustls in the process for small responses and for bodies built in memory. `bench/tls.sh` measures your own sizes: `SERVERS="giong-http-tls giong-http-ktls" ENDPOINTS="file64k file1m" bench/tls.sh`.
+
+## Performance
+
+Measured with `bench/tls.sh` on one core, with the same rustls and `ring` on both sides (4-vCPU VM, seven rounds, [`bench/results/tls/`](https://github.com/giong-run/Giong/blob/v1.3.0/bench/results/tls/README.md)): HTTPS through `giong-http` reaches 146.6k req/s on `/json` against 81.2k for Axum + rustls, and 48.7k against 18.5k with 8 KB responses. Details and how to read the numbers are in the [main README](https://github.com/giong-run/Giong/blob/v1.3.0/README.md#https); kernel TLS has its own numbers [above](#when-it-pays-off).
+
+### Handshakes
+
+With a new connection for every request, giong-http + giong-tls does 8.4k per second against 7.1k for Axum + rustls (+18%), at 116 µs of server CPU per connection against 136, with p99 latency 4.2 ms against 7.1. giong-tls 0.8.0 did 6.8k (142 µs). Two things changed:
+
+- **Fewer packets.** A TLS 1.3 server's session tickets wait for its first response (or for a receive that would have to wait) instead of going out alone, `shutdown` sends `close_notify` in the same segment as the FIN, and the head and body of one write go out in one send. Both directions together: 14.4 TCP segments per connection, against 16.5 for 0.8.0 and 14.0 for Axum.
+- **AES-128-GCM first.** `TlsAcceptor::with_certificates` picks it whatever order the client lists, as Go's and BoringSSL's servers do. OpenSSL's clients (wrk, curl, Python) list AES-256-GCM first, and its TLS 1.3 suite hashes with SHA-384, about a sixth of a resumed handshake's CPU time; SHA-256 runs in hardware on current processors. Bulk encryption gains too: 64 KiB responses went from 26.3k to 31.9k per second. Browsers list AES-128-GCM first already. A client that lists ChaCha20-Poly1305 before every AES-GCM suite (one without AES instructions) gets ChaCha20.
+
+Most of the handshake gain is the cipher suite: Axum with its rustls set to the same order reaches the same 8.4k (116 µs), with p99 latency 6.2 ms. An acceptor made with `TlsAcceptor::from_rustls` uses the configuration as given. wrk resumes sessions, so these are resumed handshakes; a full handshake adds the certificate's signature, which is the same cryptography on both sides.
+
+## Stability
+
+The stable API uses only giong-tls's own types and `CertificateDer` from `rustls-pki-types` 1.x, so a new rustls version, which giong-tls will take up as it comes, changes nothing for code that uses it. What takes rustls' types (`from_rustls`, `KtlsSupport::supports`, the `rustls` re-export) needs the `unstable-rustls` feature and follows the rustls version giong-tls uses. `TlsAcceptor::new`, `TlsConnector::new` and `TlsConnector::with_roots` are deprecated and go in 1.0.0.
+
+## Post-quantum key exchange
+
+With the `post-quantum` feature, giong-tls uses aws-lc-rs instead of *ring* for its cryptography, and both the server and the client offer X25519MLKEM768 first: the X25519 exchange combined with ML-KEM-768, so that recorded traffic stays secret even from a future quantum computer. Peers that do not know it agree on X25519 as before, in the same round trips: the client sends an X25519 share alongside. Building aws-lc-rs needs a C compiler and CMake. Configurations given to `from_rustls` keep their own provider.
+
+## Not there yet
+
+Checking certificate revocation on the client side (rustls can, through `TlsConnector::from_rustls` with your own verifier). All of them can be added in 1.x without breaking anything. The crate has had a [security review](https://github.com/giong-run/Giong/blob/v1.3.0/docs/reviews/2026-11-giong-tls.md) by the project's AI agent, which found and fixed two issues in its users, and a second one for kernel TLS, but no independent audit yet; the cryptography and the protocol are rustls's, and the kernel's once it takes a connection.
+
+## Tests
+
+`cargo test -p giong-tls --all-features`: 17 server tests on real sockets with a rustls client (TLS 1.2 and 1.3, 4 MB in each direction, the cipher suite `with_certificates` picks for clients listing suites in OpenSSL's, a browser's and a phone's order, a vectored write of a header, a large body and a trailer, a file read and encrypted in the process, ALPN and a server from PEM that offers none, `recv` cancelled over and over, and dropped at the poll that sends the server's session tickets with the stream still able to send, two tasks sending at once, a write cancelled half way and a shutdown after it, broken or stalled handshakes, records arriving one byte at a time, a forged record after the handshake, random bytes instead of a handshake, `close_notify` told apart from a cut connection); 2 tests in `tests/writes.rs` (three tasks writing 1 MiB each at once, plain and vectored, arrive whole and in order; a TLS 1.2 write past the cipher suite's record limit fails with `GIONG-E2012` instead of vanishing) and one in `tests/memory.rs` (after a 1 MiB write, a connection pair keeps less than 48 KiB more than before it); 5 server tests through the stable API alone in `tests/server.rs` (the certificate picked by the name the client asks for, and a client refusing the fallback; certificates replaced while serving, a connection opened before keeping its own; client certificates required, with ALPN kept, a client without one and one from another authority refused; requested and missing; `GIONG-E2013` on an acceptor from `from_rustls`); 16 client tests against giong's own server and a blocking rustls server (TLS 1.2 and 1.3 with 4 MB each way, a certificate for another name, an unknown authority, a self-signed certificate marked as an authority refused with the reason and the `openssl` option that fixes it, an IP address as the name, ALPN, mutual TLS with and without a client certificate, session resumption, also from a server that only reads, a server that never answers or hangs up mid-handshake); 13 unit tests for choosing a certificate by name, records a receive could not send whole going out first and in order, replacing a set all or nothing, the post-quantum key exchange coming first with the feature, finding the machine's certificates, parsing server names, spotting application data among records, telling clients that want ChaCha20 apart, and when keys are extracted; 6 documentation examples.
+
+Kernel TLS has 23 tests in `tests/ktls.rs`, one in `tests/writes.rs` and 9 unit tests in `src/ktls.rs`: every cipher suite with the kernel on the server, the client or both sides, with plain and vectored writes and files sent with `sendfile` (whole, a range, and past the file's end); interoperation with blocking rustls peers; data sent in the same write as the last handshake message, and a key update sent in it too; ALPN, peer certificates and session resumption (TLS 1.3 tickets arrive through the kernel) after the handoff; key updates from either peer, and a key used up (new keys on TLS 1.3 with Linux 6.14+, `close_notify` and `GIONG-E2012` otherwise); the TLS 1.2 nonces read off the wire, so the kernel never reuses one rustls used; a tampered record; alerts, renegotiation requests and records of unexpected types, also in the middle of a handshake message split over records; a peer that cuts its records to 32 bytes, so the handoff comes in the middle of a record; a session ticket cut so that its later records start with the byte of a `KeyUpdate`, which Linux 6.14+ takes for one; `recv` cancelled over and over, and dropped as it answers a key update, a cancelled write, vectored write or file send, one task receiving while another sends, and three tasks writing at once; a stream already read with `recv`; and what `Auto` and `Required` do on a machine without the module. The fuzz target `ktls_records` (`cd giong-tls && cargo +nightly fuzz run ktls_records`) checks what the kernel path reads of the peer's records itself, the record framing during the handshake and the handshake messages after it, however the bytes are split; a unit test runs the same checks on 3,000 streams in every `cargo test`. Most of the tests need the `tls` module and pass without it, saying so, unless `GIONG_KTLS_REQUIRED` is set; `KTLS=1 scripts/kernels.sh 5.15.225 6.1.155 6.18.63` runs them on real kernels in QEMU, with and without key updates (CI also runs Ubuntu's 6.8).
+
+A soak test (`tests/soak.rs`, ignored by default; `scripts/check.sh soak tls`, or `GIONG_SOAK_SECS=3600 cargo test --release -p giong-tls --all-features --test soak -- --ignored --nocapture`) churns TLS connections between giong's own acceptor and connector on every worker for as long as asked: TLS 1.3 and 1.2, resumed sessions and full handshakes, kernel TLS on half the stream ends where the `tls` module is loaded, clean closes checked for `close_notify` on both sides, dropped connections, handshakes given up part-way, receives cancelled and taken up again with every byte checked, and writes cancelled inside a record. Afterwards no descriptor, memory or driver state may be left over. CI runs it for two hours every night, on the runner's kernel and on Linux 6.18 in QEMU, both with kernel TLS.
+
+Twelve end-to-end HTTPS tests live in `giong-http` (`cargo test -p giong-http --features tls`).
+</script>
+  </article>
+  <nav class="toc doc-toc" aria-label="On this page"><p>On this page</p><div class="toc-links"><a href="#api">API</a><a href="#kernel-tls">Kernel TLS</a><a href="#performance">Performance</a><a href="#stability">Stability</a><a href="#post-quantum-key-exchange">Post-quantum key exchange</a><a href="#not-there-yet">Not there yet</a><a href="#tests">Tests</a></div></nav>
+</div>
+</main>
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr-grid">
+      <div class="ftr-brand">
+        <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="22" height="22"></picture><span>giong</span></a>
+        <p>A thread-per-core async runtime for Rust, built on io_uring and made for the code agents write.</p>
+        <p class="ftr-social">
+          <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
+          <a class="icon-btn" href="https://x.com/giongrun" aria-label="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
+          <a class="icon-btn" href="https://github.com/giong-run/Giong/releases.atom" aria-label="Release feed"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3a16 16 0 0 1 16 16h-3A13 13 0 0 0 5 6Zm0 6a10 10 0 0 1 10 10h-3a7 7 0 0 0-7-7Zm1.5 6.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z"/></svg></a>
+        </p>
+      </div>
+      <nav class="ftr-col" aria-label="Learn">
+        <h2>Learn</h2>
+        <a href="/docs/">Get started</a>
+        <a href="/docs/#examples">Examples</a>
+        <a href="https://docs.rs/giong/1.3.0/giong/">API reference</a>
+        <a href="/docs/#errors">Error codes</a>
+        
+        <a href="/llms.txt">llms.txt</a>
+      </nav>
+      <nav class="ftr-col" aria-label="Project">
+        <h2>Project</h2>
+        <a href="/crates/">Crates</a>
+        <a href="/benchmarks/">Benchmarks</a>
+        <a href="/roadmap/">Roadmap</a>
+        <a href="/releases/">Releases</a>
+      </nav>
+      <nav class="ftr-col" aria-label="Community">
+        <h2>Community</h2>
+        <a href="https://github.com/giong-run/Giong">GitHub</a>
+        <a href="https://x.com/giongrun">X · @giongrun</a>
+        <a href="https://github.com/giong-run/Giong/issues">Issues</a>
+        <a href="https://github.com/giong-run/Giong/blob/main/CONTRIBUTING.md">Contributing</a>
+        <a href="https://github.com/giong-run/Giong/security/advisories/new">Report a vulnerability</a>
+      </nav>
+    </div>
+    <div class="ftr-base">
+      <span>© 2026 <a href="https://github.com/thekivashyn">thekivashyn</a> and the giong contributors. MIT or Apache-2.0.</span>
+      <span class="ramp" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+    </div>
+  </div>
+</footer>
+<script src="/main.js" defer></script>
+</body>
+</html>

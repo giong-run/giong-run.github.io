@@ -1,0 +1,839 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>giong-postgres · giong</title>
+<meta name="description" content="A PostgreSQL client and pool. The statements of every task pipeline over a few connections.">
+<link rel="canonical" href="https://giong.run/docs/giong-postgres/">
+<meta name="theme-color" content="#0A0C10">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="giong">
+<meta property="og:title" content="giong-postgres · giong">
+<meta property="og:description" content="A PostgreSQL client and pool. The statements of every task pipeline over a few connections.">
+<meta property="og:url" content="https://giong.run/docs/giong-postgres/">
+<meta property="og:image" content="https://giong.run/assets/social-preview.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="The giong logo: a segmented ember ring">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@giongrun">
+<meta name="twitter:title" content="giong-postgres · giong">
+<meta name="twitter:description" content="A PostgreSQL client and pool. The statements of every task pipeline over a few connections.">
+<meta name="twitter:image" content="https://giong.run/assets/social-preview.png">
+<meta name="author" content="thekivashyn">
+<link rel="alternate" type="application/atom+xml" title="giong releases" href="https://github.com/giong-run/Giong/releases.atom">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","name":"giong-postgres · giong","description":"A PostgreSQL client and pool. The statements of every task pipeline over a few connections.","url":"https://giong.run/docs/giong-postgres/"}]}</script>
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/giong-icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/giong-icon-180.png">
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/styles.css">
+<script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("giong-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}})(document.documentElement)</script>
+</head>
+<body class="page-docs-giong-postgres">
+<a class="skip" href="#main">Skip to content</a>
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="28" height="28"></picture><span>giong</span></a>
+    <nav class="nav" aria-label="Site"><a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a></nav>
+    <div class="hdr-side">
+      <a class="ver" href="/releases/#v1-3-0" title="Release notes for v1.3.0">v1.3.0</a>
+      <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="giong on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
+      <a class="icon-btn hide-sm" href="https://x.com/giongrun" aria-label="giong on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
+      <button class="icon-btn theme" type="button" aria-label="Switch between light and dark" hidden>
+        <span class="if-dark"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></span><span class="if-light"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z"/></svg></span></button>
+      <details class="menu">
+        <summary class="icon-btn" aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
+        <nav class="menu-panel" aria-label="Site">
+          <a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a>
+          <span class="menu-social"><a href="https://github.com/giong-run/Giong">GitHub</a><a href="https://x.com/giongrun">X</a></span>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+<main id="main">
+<div class="wrap docs-layout">
+  <nav class="side" aria-label="Documentation"><details class="side-menu" open><summary>Documentation</summary><div class="side-links"><div class="side-group"><p>Start</p><a href="/docs/">Get started</a></div><div class="side-group"><p>Runtime</p><a href="/docs/giong/">giong</a></div><div class="side-group"><p>Protocols</p><a href="/docs/giong-proto/">giong-proto</a><a href="/docs/giong-quic/">giong-quic</a><a href="/docs/giong-tls/">giong-tls</a><a href="/docs/giong-http/">giong-http</a><a href="/docs/giong-grpc/">giong-grpc</a><a href="/docs/giong-compat/">giong-compat</a></div><div class="side-group"><p>Clients</p><a href="/docs/giong-postgres/" aria-current=page>giong-postgres</a><a href="/docs/giong-mysql/">giong-mysql</a><a href="/docs/giong-redis/">giong-redis</a></div><div class="side-group"><p>Framework</p><a href="/docs/giong-web/">giong-web</a></div><div class="side-group"><p>Tooling</p><a href="/docs/giong-grpc-build/">giong-grpc-build</a><a href="/docs/giong-mcp/">giong-mcp</a></div><div class="side-group"><p>Operate</p><a href="/docs/deployment/">Deployment</a><a href="/docs/stability/">Stability</a><a href="/docs/errors/">Error codes</a></div></div></details></nav>
+  <article class="doc-page prose">
+    <header class="doc-head"><p class="eyebrow">Clients</p><h1>giong-postgres</h1><p class="lede">A PostgreSQL client and pool. The statements of every task pipeline over a few connections.</p>
+      <div class="doc-actions"><button class="act" type="button" data-md="md-page" data-done="copied" title="Copy this page as Markdown, for a coding agent"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy for agent</span></button><button class="act" type="button" data-md="md-prompt" data-done="copied" title="Copy a ready prompt with the rules and this page"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9Z"/><path d="M18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8Z"/></svg><span>Copy prompt</span></button><a class="act" href="/docs/giong-postgres.md" title="This page as plain Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><span>.md</span></a></div><div class="doc-meta"><div class="cmd"><code id="add-giong-postgres">cargo add giong-postgres</code><button class="copy" type="button" data-copy="add-giong-postgres" data-done="copied">copy</button></div><p class="crate-links"><a href="https://docs.rs/giong-postgres">docs.rs</a> · <a href="https://crates.io/crates/giong-postgres">crates.io</a> · <a href="https://github.com/giong-run/Giong/tree/main/giong-postgres">source</a></p></div></header>
+    <div class="md-intro"><p>A PostgreSQL client and connection pool for the <a href="/docs/giong/">giong</a> runtime. It speaks the wire protocol itself (no libpq), encrypts with <a href="/docs/giong-tls/"><code>giong-tls</code></a>, and depends on nothing from the Tokio ecosystem.</p>
+<pre class="code"><code class="lang-toml">[dependencies]
+giong = "1.3.0"
+giong-postgres = "1.3.0"</code></pre>
+<pre class="code"><code class="lang-rust"><span class="k">use</span> giong_postgres::{<span class="t">Client</span>, <span class="t">Config</span>};
+
+<span class="k">fn</span> main() -&gt; <span class="t">Result</span>&lt;(), giong_postgres::<span class="t">Error</span>&gt; {
+    <span class="k">let</span> config = <span class="t">Config</span>::from_url(<span class="s">"postgres://app:secret@localhost/shop"</span>)?;
+    giong::block_on(<span class="k">async</span> {
+        <span class="k">let</span> client = <span class="t">Client</span>::connect(&amp;config).<span class="k">await</span>?;
+        <span class="k">let</span> rows = client
+            .query(<span class="s">"SELECT id, name FROM products WHERE price &lt; $1"</span>, &amp;[&amp;100i32])
+            .<span class="k">await</span>?;
+        <span class="k">for</span> row <span class="k">in</span> &amp;rows {
+            <span class="k">let</span> id: i64 = row.get(<span class="s">"id"</span>)?;
+            <span class="k">let</span> name: &amp;str = row.get(<span class="s">"name"</span>)?;
+            println!(<span class="s">"{id} {name}"</span>);
+        }
+        <span class="t">Ok</span>(())
+    })
+}</code></pre>
+<p>In a service, make one <code>Pool</code> per worker. Nothing is shared between threads, so nothing is locked:</p>
+<pre class="code"><code class="lang-rust"><span class="k">use</span> giong_postgres::{<span class="t">Config</span>, <span class="t">Pool</span>};
+
+<span class="k">fn</span> main() -&gt; std::io::<span class="t">Result</span>&lt;()&gt; {
+    <span class="k">let</span> config = <span class="t">Config</span>::from_url(<span class="s">"postgres://app:secret@db.internal/shop"</span>)?;
+    giong::<span class="t">Builder</span>::new().build()?.run(<span class="k">move</span> |_worker| {
+        <span class="k">let</span> pool = <span class="t">Pool</span>::new(config.clone(), 4);
+        <span class="k">async</span> <span class="k">move</span> {
+            <span class="c">// ... serve requests, each one calling pool.query(..) ...</span>
+            <span class="k">let</span> row = pool.query_one(<span class="s">"SELECT count(*) FROM orders"</span>, &amp;[]).<span class="k">await</span>.unwrap();
+            <span class="k">let</span> n: i64 = row.get(0).unwrap();
+            println!(<span class="s">"{n} orders"</span>);
+        }
+    })
+}</code></pre></div><section class="md-sec"><button class="sec-copy" type="button" data-md="md-0" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="what-it-does">What it does</h2>
+<ul><li><strong>Pipelining across tasks.</strong> Tasks that share a connection send their statements together, and one round trip answers all of them. A few connections serve hundreds of concurrent tasks without each task waiting for a connection of its own.</li><li><strong>Prepared statements, kept.</strong> Every statement is prepared the first time a connection runs it and kept in a bounded cache (256 per connection by default), so from then on it takes one round trip. When the schema changes under a cached statement (<code>ALTER TABLE</code>, a view replaced), the statement is prepared again and run once more, so the caller sees no error; inside a transaction the server has already aborted the transaction, so that one call fails with the server's error and the next one is prepared again. Stale statements are recognised by SQLSTATE and the server's routine name, so this works whatever language the server writes its messages in.</li><li><strong>Binary results for the common types</strong> (<code>boolean</code>, <code>bytea</code>, the integers, <code>oid</code>, the floats, <code>timestamptz</code>), and text for the rest. A column of a text-format type (<code>uuid</code>, <code>numeric</code>, <code>date</code>, <code>timestamp</code>, <code>jsonb</code>, arrays, <code>interval</code>, <code>inet</code> and the like) can be read as a <code>String</code>; a binary one is read as its Rust type in the <a href="#types">table</a> below, or cast in SQL (<code>created_at::text</code>).</li><li><strong>A pool per worker.</strong> Statements that stand alone share connections; <code>pool.get()</code> takes one connection for a transaction, session settings or a slow statement. When it comes back, a transaction left open is rolled back and the session is reset (settings, temporary tables, advisory locks, <code>LISTEN</code>, cursors), so nothing one task did reaches the next. Tasks waiting in <code>get()</code> are served in the order they came, even while shared statements keep every connection busy. <code>get()</code> can take every connection of the pool: while all of them are held, the pool's own <code>query</code> waits too, and fails with <code>GIONG-E3009</code> when the wait runs out, so size a pool for the transactions that run at once and one connection more. Transactions and session changes never run on the shared connections: the pool's own methods refuse <code>BEGIN</code>, <code>SET</code>, <code>LISTEN</code>, <code>PREPARE</code>, temporary tables and the like before sending them, and a batch that leaves a transaction open closes its connection rather than let the statements of other tasks run inside it. The pool steers new statements away from a connection whose oldest statement has been running for more than 5 ms, so a slow query does not hold up the fast ones behind it. Connections are closed after 10 minutes unused and replaced after 30 minutes, or as soon as their server turns out to be a standby after a failover.</li><li><strong>TLS on by default for remote hosts, always verified.</strong> SCRAM-SHA-256, MD5, and clear-text passwords only over TLS or to this machine. <code>require_auth</code> limits the methods the server may ask for. SCRAM's key derivation runs on a thread of its own, once per password and salt, so connecting does not stall the other tasks of the worker.</li><li><strong>Errors that say what to do.</strong> Every error has an <code>ErrorKind</code>; errors from the server carry the SQLSTATE code and every field the server sent (<code>detail</code>, <code>hint</code>, <code>constraint</code>...).</li><li><strong>Finite limits everywhere.</strong> Connecting, running a statement, the size of a result, the statement cache and waiting for the pool all have a limit by default, so nothing waits forever and nothing grows without bound.</li></ul></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-1" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="connecting">Connecting</h2>
+<pre class="code"><code class="lang-rust"><span class="k">use</span> std::time::<span class="t">Duration</span>;
+<span class="k">use</span> giong_postgres::{<span class="t">Config</span>, <span class="t">Error</span>};
+
+<span class="k">fn</span> configs() -&gt; <span class="t">Result</span>&lt;(), <span class="t">Error</span>&gt; {
+    <span class="k">let</span> config = <span class="t">Config</span>::from_url(<span class="s">"postgres://app:secret@db.internal:5432/shop?sslmode=verify-full"</span>)?;
+
+    <span class="k">let</span> same_place = <span class="t">Config</span>::new()
+        .host(<span class="s">"db.internal"</span>)
+        .user(<span class="s">"app"</span>)
+        .password(<span class="s">"secret"</span>)
+        .database(<span class="s">"shop"</span>)
+        .statement_timeout(<span class="t">Duration</span>::from_secs(5));
+    <span class="k">let</span> _ = (config, same_place);
+    <span class="t">Ok</span>(())
+}</code></pre>
+<p>A URL is <code>postgres://user:password@host:port/dbname?param=value</code> (<code>postgresql://</code> too). The host can be an IPv6 address in brackets, or, as with libpq, empty with the socket directory in a <code>host</code> parameter: <code>postgres:///shop?host=/var/run/postgresql</code>. The parameters understood are <code>sslmode</code>, <code>sslrootcert</code>, <code>host</code>, <code>port</code>, <code>user</code>, <code>password</code>, <code>dbname</code>, <code>application_name</code>, <code>connect_timeout</code> (seconds) and <code>require_auth</code>. Any other parameter is an error, not silently ignored.</p>
+<p><strong>TLS.</strong> Unless <code>Config::tls</code> or <code>sslmode</code> says otherwise:</p>
+<div class="table-scroll"><table><thead><tr><th>Where the server is</th><th>What happens</th></tr></thead><tbody><tr><td>A Unix socket (a host starting with <code>/</code>)</td><td>No TLS.</td></tr><tr><td>A loopback address (<code>localhost</code>, <code>127.0.0.0/8</code>, <code>::1</code>)</td><td>No TLS.</td></tr><tr><td>Anywhere else</td><td>TLS, with the certificate checked against the certificate authorities installed on the machine and against the host name.</td></tr></tbody></table></div>
+<p><code>sslmode=disable</code> turns TLS off. <code>require</code>, <code>verify-ca</code> and <code>verify-full</code> all check the certificate and the host name, which is stricter than libpq (libpq checks nothing for <code>require</code>). <code>prefer</code> and <code>allow</code> are refused, because they fall back to an unencrypted connection without saying so. <code>sslrootcert=/path/ca.pem</code> trusts only that authority; in code, use <code>Tls::Verify(TlsConnector::with_root_pem(..)?)</code>. When TLS is requested and the server does not support it, connecting fails.</p>
+<p>A clear-text password is never sent over an unencrypted connection to another machine: the connection fails with <code>ErrorKind::Auth</code> instead.</p>
+<p><strong>Authentication.</strong> Without TLS (a Unix socket, a loopback address, <code>sslmode=disable</code>), nothing proves the server is the real one, and an impostor could ask for MD5 instead of SCRAM or let the client in without asking. <code>Config::require_auth(&amp;[AuthMethod::ScramSha256])</code>, or <code>require_auth=scram-sha-256</code> in the URL (libpq's names, comma-separated, without libpq's <code>!</code> negations), refuses any other method before anything is sent for the password.</p>
+<h3 id="behind-pgbouncer">Behind PgBouncer</h3>
+<p>In transaction mode, PgBouncer gives each transaction any server connection, so two things need setting up:</p>
+<ul><li><strong>Prepared statements</strong> need PgBouncer 1.21 or later with <code>max_prepared_statements</code> above 0 (it then prepares them on whichever server connection runs them). With it, the statement cache works as usual. Without it, prepared statements cannot work through PgBouncer in transaction mode, whatever <code>statement_cache_capacity</code> is.</li><li><strong>The statement timeout</strong> cannot be sent when connecting: PgBouncer refuses the connection, and neither <code>track_extra_parameters</code> nor <code>ignore_startup_parameters</code> passes it on to the server (checked with PgBouncer 1.22). Call <code>Config::statement_timeout(None)</code> and set the limit on the role: <code>ALTER ROLE app SET statement_timeout = '30s'</code>. Connecting without <code>None</code> fails with an error that says this.</li></ul>
+<p>Both are tested in CI against PgBouncer in transaction mode.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-2" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="api">API</h2>
+<div class="table-scroll"><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><code>Client::connect(&amp;config)</code></td><td>Opens a connection: TCP or Unix socket, TLS, authentication, all within <code>connect_timeout</code>.</td></tr><tr><td><code>client.query(sql, &amp;[&amp;a, &amp;b])</code></td><td>All the rows, as <code>Vec&lt;Row&gt;</code>. Parameters are <code>$1</code>, <code>$2</code>...</td></tr><tr><td><code>client.query_one(..)</code>, <code>query_opt(..)</code></td><td>Exactly one row (<code>ErrorKind::RowCount</code> otherwise); at most one.</td></tr><tr><td><code>client.execute(..)</code></td><td>The number of rows affected.</td></tr><tr><td><code>client.batch_execute(sql)</code></td><td>Several statements separated by <code>;</code>, through the simple protocol, with no parameters and no results. For migrations and setup.</td></tr><tr><td><code>client.transaction()</code></td><td>Starts a transaction and borrows the client mutably until it ends. <code>tx.commit()</code> or <code>tx.rollback()</code>; dropping the transaction rolls it back. A <code>COMMIT</code> that the server turned into a rollback (because of an earlier error) is an error, not a success.</td></tr><tr><td><code>client.cancel_token()</code></td><td>A <code>CancelToken</code> whose <code>cancel()</code> asks the server, over a separate connection, to stop the statement running now. A token taken from a <code>PooledClient</code> stops working when the connection goes back to the pool, so it cannot cancel another task's statement.</td></tr><tr><td><code>client.parameter(name)</code></td><td>A setting the server reported, such as <code>server_version</code> or <code>TimeZone</code>.</td></tr><tr><td><code>client.is_closed()</code>, <code>client.in_flight()</code></td><td>Whether the connection is closed; how many requests are waiting for their answer.</td></tr><tr><td><code>row.get::&lt;T&gt;(column)</code></td><td>A column by position or name, converted to <code>T</code> (see <a href="#types">Types</a>). Borrowed types (<code>&amp;str</code>, <code>&amp;[u8]</code>) borrow from the row.</td></tr><tr><td><code>row.is_null(column)</code>, <code>row.columns()</code>, <code>row.len()</code></td><td>Whether a value is <code>NULL</code>; the columns' names and types; how many there are.</td></tr><tr><td><code>Pool::new(config, max_size)</code></td><td>A pool for the current worker. Connections are opened when needed, up to <code>max_size</code>. Size it to the database server's cores, shared among the workers (see <a href="#performance">Performance</a>).</td></tr><tr><td><code>.wait_timeout(duration)</code></td><td>How long <code>get()</code> and the statement methods wait when every connection is taken, 5 s by default.</td></tr><tr><td><code>.idle_timeout(duration)</code>, <code>.max_lifetime(duration)</code></td><td>Close a connection unused for this long (10 min by default); replace one older than this (30 min, less up to 10% so that connections opened together are not replaced together).</td></tr><tr><td><code>pool.query(..)</code> and the other statement methods</td><td>Run on the least busy connection, pipelined with other tasks' statements. They refuse transaction statements, session changes and <code>COPY ... FROM STDIN</code> before sending them (<code>ErrorKind::Statement</code>).</td></tr><tr><td><code>Config::batch_reads(true)</code></td><td>Lets the pool send the <code>SELECT</code>s waiting for one shared connection under one <code>Sync</code>, up to 16, never waiting for more (see <a href="#batched-reads">Batched reads</a>). Off by default.</td></tr><tr><td><code>pool.get()</code></td><td>A <code>PooledClient</code> for this task alone, which derefs to <code>Client</code>. For transactions, session settings and statements known to be slow. Served in the order asked. When it is dropped, a transaction left open is rolled back and, if anything was sent, the session is reset; settings given to <code>Config</code> survive the reset.</td></tr><tr><td><code>pool.stats()</code></td><td>Connections open, taken, being opened; requests in flight; tasks waiting; and counters for connections opened, connect errors, wait timeouts and connections recycled.</td></tr><tr><td><code>Config::require_auth(&amp;[AuthMethod::..])</code></td><td>The only authentication methods the server may ask for.</td></tr></tbody></table></div>
+<p>A <code>Client</code> belongs to the worker that opened it (it is not <code>Send</code>, like everything in giong). Its methods take <code>&amp;self</code>, so tasks share one by cloning an <code>Rc</code> or by holding a reference, and their statements are pipelined.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-3" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="types">Types</h2>
+<div class="table-scroll"><table><thead><tr><th>Rust</th><th>PostgreSQL</th></tr></thead><tbody><tr><td><code>bool</code></td><td><code>boolean</code></td></tr><tr><td><code>i16</code>, <code>i32</code>, <code>i64</code></td><td><code>smallint</code>, <code>integer</code>, <code>bigint</code> (any of them, checked for range); <code>oid</code></td></tr><tr><td><code>f32</code>, <code>f64</code></td><td><code>real</code>, <code>double precision</code></td></tr><tr><td><code>&amp;str</code>, <code>String</code></td><td><code>text</code>, <code>varchar</code>, <code>char(n)</code>, <code>name</code>; as parameters, any type the server can parse from text (<code>uuid</code>, <code>numeric</code>, <code>date</code>, <code>json</code>...); as results, any column the rest of this table does not list</td></tr><tr><td><code>&amp;[u8]</code>, <code>Vec&lt;u8&gt;</code></td><td><code>bytea</code></td></tr><tr><td><code>SystemTime</code></td><td><code>timestamptz</code></td></tr><tr><td><code>Option&lt;T&gt;</code></td><td><code>NULL</code> or a value</td></tr></tbody></table></div>
+<p>Integers convert between the three integer types when the value fits and fail when it does not, with an error that names the parameter or column, so a conversion never loses anything silently. Implement <code>ToSql</code> and <code>FromSql</code> for your own types.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-4" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="errors">Errors</h2>
+<p><code>Error</code> is cheap to clone, implements <code>std::error::Error</code>, and converts into <code>io::Error</code>. <code>error.kind()</code> says what went wrong. Each kind has a giong error code, shown in front of the message and linked to its page in <a href="/docs/errors/">docs/errors</a> (<code>GIONG-E3003: password authentication failed for user "app". See …</code>); after <code>?</code> into an <code>io::Error</code>, <code>giong::error::code(&amp;err)</code> finds it:</p>
+<div class="table-scroll"><table><thead><tr><th><code>ErrorKind</code></th><th>Code</th><th>Meaning</th></tr></thead><tbody><tr><td><code>Config</code></td><td><a href="https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3001.md">E3001</a></td><td>The configuration or URL is not valid.</td></tr><tr><td><code>Connect</code></td><td><a href="https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3002.md">E3002</a></td><td>Name resolution, TCP, TLS, or the connect timeout. Also an unknown database (<code>3D000</code>).</td></tr><tr><td><code>Auth</code></td><td><a href="https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3003.md">E3003</a></td><td>The server refused the credentials, or asked for a method this crate does not support.</td></tr><tr><td><code>Db</code></td><td><a href="https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3004.md">E3004</a></td><td>The server reported an error for the statement; <code>error.server_code()</code> is the SQLSTATE (<code>23505</code> for a unique violation...) and <code>error.db()</code> has every field. A <code>COMMIT</code> that the server turned into a rollback is <code>Db</code> with code <code>25P02</code> and no <code>db()</code>.</td></tr><tr><td><code>Type</code></td><td><a href="https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3005.md">E3005</a></td><td>A value could not be converted between Rust and PostgreSQL. The message names the parameter or column and suggests the Rust type to use.</td></tr><tr><td><code>RowCount</code></td><td><a href="https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3006.md">E3006</a></td><td><code>query_one</code> found no row, or more than one.</td></tr><tr><td><code>TooLarge</code></td><td><a href="https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3007.md">E3007</a></td><td>The result was larger than <code>max_result_size</code>. The connection stays usable.</td></tr><tr><td><code>Closed</code></td><td><a href="https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3008.md">E3008</a></td><td>The connection is closed. A <code>Pool</code> replaces it by itself. Also a cancel token whose pooled connection went back to the pool.</td></tr><tr><td><code>PoolTimeout</code></td><td><a href="https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3009.md">E3009</a></td><td>No pooled connection became free within <code>wait_timeout</code>.</td></tr><tr><td><code>Protocol</code></td><td><a href="https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3010.md">E3010</a></td><td>The server sent something this crate cannot understand. The connection is closed.</td></tr><tr><td><code>Statement</code></td><td><a href="https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3011.md">E3011</a></td><td>Refused before sending, on the connections a <code>Pool</code> shares: a transaction statement, a statement that changes the session (<code>SET</code>, <code>LISTEN</code>, <code>PREPARE</code>, temporary tables...), or <code>COPY ... FROM STDIN</code>. Use <code>pool.get()</code>. The check reads the statement, not what a function does: <code>SELECT set_config('search_path', 'x', false)</code> is sent, and changes the session for every task that shares the connection.</td></tr></tbody></table></div>
+<p><code>error.is_transient()</code> is true for errors worth retrying after a pause: connecting, a closed connection, a pool wait timeout, and the server's serialization failure (<code>40001</code>), deadlock (<code>40P01</code>), lock not available (<code>55P03</code>), too many connections (<code>53300</code>), connection errors (class <code>08</code>), shutdown or startup (<code>57P01</code>, <code>57P02</code>, <code>57P03</code>) and standby (<code>25006</code>). Retry a whole transaction, not its failed statement.</p>
+<p>An error from the server affects only its own statement: the statements that other tasks pipelined on the same connection get their own results. Two things close the connection instead, and every statement sent on it after them fails with <code>ErrorKind::Closed</code>: <code>COPY ... FROM STDIN</code> on a <code>Client</code> (COPY is not supported yet; the pool refuses it), and a <code>batch_execute</code> that leaves a transaction open on a pool's shared connection.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-5" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="limits">Limits</h2>
+<div class="table-scroll"><table><thead><tr><th>Setting</th><th>Default</th><th>What happens at the limit</th></tr></thead><tbody><tr><td><code>Config::connect_timeout</code></td><td>10 s</td><td><code>ErrorKind::Connect</code>, "connect timeout".</td></tr><tr><td><code>Config::statement_timeout</code></td><td>30 s</td><td>Sent as the session's <code>statement_timeout</code>, so the server cancels exactly the statement that ran too long (SQLSTATE <code>57014</code>). From 1 ms to <code>i32::MAX</code> ms (24.8 days); outside that, connecting fails with <code>ErrorKind::Config</code>. <code>None</code> sends nothing and leaves the limit to the server or the role.</td></tr><tr><td><code>Config::max_result_size</code></td><td>64 MiB of row data</td><td><code>ErrorKind::TooLarge</code>; the rest of the result is read and thrown away. A notice larger than this is skipped; an error message larger than this fails its statement with <code>TooLarge</code>. Either way the connection stays usable.</td></tr><tr><td><code>Config::statement_cache_capacity</code></td><td>256 per connection</td><td>The least recently used statement is closed. 0 prepares and closes every statement each time.</td></tr><tr><td><code>Pool::wait_timeout</code></td><td>5 s</td><td><code>ErrorKind::PoolTimeout</code>. It bounds the wait for a connection; a task that opens a new connection itself waits up to <code>connect_timeout</code> instead.</td></tr><tr><td><code>Pool::idle_timeout</code></td><td>10 min</td><td>The connection is closed.</td></tr><tr><td><code>Pool::max_lifetime</code></td><td>30 min, less up to 10%</td><td>The connection is closed once no statement uses it, and a new one is opened when needed.</td></tr><tr><td>Statements on one pooled connection at a time</td><td>1024</td><td>The statement methods use another connection, or wait for room. A <code>Client</code> used directly has no such bound: its callers decide how many tasks share it.</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-6" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="performance">Performance</h2>
+<p>Measured with <code>bench/postgres.sh</code> against tokio-postgres 0.7.18 with deadpool-postgres 0.14.2 (Tokio 1.54, current-thread runtime). Each client runs on one core; the same PostgreSQL 16 server runs on the other three cores of a 4-vCPU virtual machine (Xeon 2.1 GHz, Linux 6.18), reached over TCP on 127.0.0.1. 64 tasks issue statements back to back: <code>point</code> reads one row by primary key, <code>list</code> reads 100 rows, and every column of every row is decoded (<code>i64</code>, two <code>&amp;str</code>, <code>SystemTime</code>). The figures are medians of 5 rounds of 5 s (3 rounds for the other pool sizes), with the range in brackets.</p>
+<p>A pool, on one client core:</p>
+<div class="table-scroll"><table><thead><tr><th>Client</th><th>Connections</th><th><code>point</code> statements/s</th><th>p99</th><th><code>list</code> statements/s</th><th>p99</th></tr></thead><tbody><tr><td><strong>giong-postgres</strong></td><td>3</td><td><strong>311.4k</strong> (308–322k)</td><td><strong>0.43 ms</strong></td><td><strong>71.3k</strong> (70–74k)</td><td><strong>2.0 ms</strong></td></tr><tr><td>giong-postgres</td><td>4</td><td>303.8k (277–317k)</td><td>2.9 ms</td><td>72.9k (64–76k)</td><td>4.9 ms</td></tr><tr><td>tokio-postgres + deadpool</td><td>4</td><td>55.4k (53–56k)</td><td>1.7 ms</td><td>25.4k (24–26k)</td><td>3.9 ms</td></tr><tr><td>tokio-postgres + deadpool</td><td>64, its best</td><td>93.8k (91–97k)</td><td>1.5 ms</td><td>28.6k (27–29k)</td><td>4.1 ms</td></tr></tbody></table></div>
+<ul><li><strong>Against deadpool at its best: 3.3× the point lookups and 2.5× the 100-row reads, at a third to a half of the p99.</strong> deadpool's client core is the limit (98–99% busy): every statement is a pool checkout, a round trip and a wake-up. giong-postgres sends the statements of all 64 tasks in a few writes and reads their answers in a few reads.</li><li><strong>Size the pool to the database's cores.</strong> With more connections than the server has cores (4 on 3 here), one backend at a time waits for a core, and the statements pipelined on its connection, about 16 of them, wait with it: the same throughput, but a p99 of 2.9 ms instead of 0.43. 8 connections give 253.8k at a p99 of 1.4 ms (8.6 ms for 100 rows); 2 connections leave a server core idle, 183.9k. With several workers, the connections of all their pools add up. Statements that wait on disk or on locks need more connections than this.</li><li><strong>One connection shared by every task</strong> (both libraries pipeline): the single backend process is the limit, one server core at 100%, and here giong-postgres is behind: its medians are 7–9% lower (point 47.7k against 51.4k, list 18.7k against 20.5k; the same with the two run in the other order), though the ranges of the rounds overlap, and it uses less of its core (50% against 52%, 43% against 64%). Both send the same messages, one <code>Sync</code> per statement, and the server spends half of its time in <code>send()</code>, writing one reply per statement and waking the client for it, and the gap is in that part (a quarter of the server's time with giong-postgres, against slightly less with tokio-postgres, whose busier client needs waking less often). Sending several statements under one <code>Sync</code> cuts the server's work, but it runs them in one transaction, so it is only done by a pool with <code>batch_reads</code> (below). Use a <code>Pool</code>, where the client is the limit and giong-postgres does 5.5 times as much.</li></ul>
+<h3 id="batched-reads">Batched reads</h3>
+<p>With <code>Config::batch_reads(true)</code>, the <code>SELECT</code>s that a pool's shared connection has waiting when it writes go to the server under one <code>Sync</code>, at most 16, behind a prepared statement that makes their transaction read-only; a statement never waits for others to join it. The server then sends one reply and wakes the client once per batch rather than once per statement, which matters when the server is the busy side. Measured with <code>bench/postgres.sh</code> (<code>batch</code> mode, 3 rounds of 5 s, 64 tasks, <code>point</code>; results in <code>bench/results/postgres/batch/</code>):</p>
+<div class="table-scroll"><table><thead><tr><th>Server cores</th><th>Connections</th><th>without batches</th><th>p99</th><th>with batches</th><th>p99</th></tr></thead><tbody><tr><td>1</td><td>1</td><td>58.7k (54–61k)</td><td>2.0 ms</td><td><strong>198.3k</strong> (197–204k)</td><td><strong>0.56 ms</strong></td></tr><tr><td>1</td><td>4</td><td>50.5k (49–55k)</td><td>12.5 ms</td><td><strong>171.9k</strong> (167–187k)</td><td><strong>0.75 ms</strong></td></tr><tr><td>3</td><td>4</td><td>314.2k (273–327k)</td><td>2.5 ms</td><td><strong>370.4k</strong> (318–372k)</td><td><strong>0.39 ms</strong></td></tr></tbody></table></div>
+<ul><li><strong>3.4 times the point lookups when the database is the limit, and up to 18% more with it on three cores</strong>, where the client core is then no longer full (71% busy against 98%): the server's work per statement is what shrinks.</li><li><strong>No gain for the 100-row reads</strong> (<code>list</code>: 81.6k against 80.5k on three cores, 21.8k against 22.6k on one; the ranges overlap): producing the rows costs far more than the reply's <code>send()</code>.</li><li><strong>The full path of an HTTP request gains little</strong>, because there the HTTP side is the limit (<code>bench/db-path.sh</code>, results in <code>bench/results/db-path/</code>): with one giong worker and the database on two cores, 82.9k against 86.9k requests a second (ranges 79–96k and 75–93k), the database 84% busy against 93%; with two giong workers and the database on one core (<code>db-bound/</code>), 96.9k against 91.7k, p99 3.1 ms against 4.7 ms. Few requests arrive in the same tick for one connection there: 1.7 statements a batch on average, measured from the server's transaction count. One request at a time is unchanged (88–92 µs median).</li><li><strong>Transaction-local settings.</strong> The statements of a batch share one transaction, so a setting made with <code>set_config(.., true)</code> would apply to the other tasks' statements after it in the batch. A <code>SELECT</code> whose text calls <code>set_config</code> therefore runs alone; one that calls a function that makes such a setting (<code>set_config(.., true)</code> or <code>SET LOCAL</code> inside it) cannot be seen, so leave <code>batch_reads</code> off where row-level security or anything else is set up that way per request.</li><li>What else changes for a statement in a batch is in the documentation of <code>Config::batch_reads</code>: in short, a write is refused in the batch (<code>25006</code>) and the statement is sent again alone; when a statement or the batch's commit fails, the batch is rolled back and every other statement of it is sent again alone; answers arrive when the batch ends; <code>now()</code> is the batch's start.</li><li>MySQL has nothing like it: its protocol has no <code>Sync</code>, every statement gets its own reply, and giong-mysql already pipelines them.</li></ul>
+<p>Not measured: a server on another machine (network latency, where pipelining should matter more), writes, more than one client core, PostgreSQL versions other than 16. Results are in <code>bench/results/postgres/</code>; pool sizes other than 4 in <code>pool-size/</code>.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-7" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="not-there-yet">Not there yet</h2>
+<p><code>COPY</code>, <code>LISTEN</code>/<code>NOTIFY</code>, streaming a result one row at a time (a result is collected in full, up to <code>max_result_size</code>), arrays, <code>numeric</code>, <code>uuid</code>, <code>date</code> and the other types not listed above in binary form (read them as strings), channel binding (<code>SCRAM-SHA-256-PLUS</code>), client certificates in the URL (<code>sslcert</code> and <code>sslkey</code> are refused; in code, give the connector one with <code>TlsConnector::client_auth</code>), several hosts with failover, running through PgBouncer without <code>max_prepared_statements</code>, and SASLprep normalization of non-ASCII passwords. The crate has had one independent review before 1.0, whose findings are fixed, but no security audit.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-8" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="tests">Tests</h2>
+<p><code>cargo test -p giong-postgres</code>: 70 tests against a real PostgreSQL server that the test binary starts for itself (a throwaway cluster from <code>initdb</code>, with users for SCRAM, MD5, clear text and TLS only, listening on a Unix socket, 127.0.0.1 and 127.0.0.2): every supported type in both directions; conversion errors; server errors and their fields; pipelining across tasks, and a failing statement in the middle of a pipeline; the statement cache, its bound, statement names an application took, and schema changes under cached statements, in and out of a transaction; notices and errors larger than the result limit; the result-size limit; the statement timeout, and leaving it to the server; cancel requests; a query dropped mid-flight; a connection the server terminates; transactions committed, rolled back and dropped, and a <code>COMMIT</code> turned into a rollback; no task or connection left behind after a client is dropped; TLS against the right and the wrong authority and host; each authentication method with the right and the wrong password, and <code>require_auth</code>; SCRAM keys derived once and off the worker; a server that answers the TLS request with extra bytes; a clear-text password never sent unencrypted; the connect timeout; and the pool (spreading statements, exclusive use and the rollback on return, even with <code>BEGIN</code> still in flight, the session reset on return and no reset for an unused connection, <code>get()</code> served in order while shared statements keep every connection busy, waiting, and waking when a dropped statement frees the connection, cancel tokens that stop working on return, idle and old connections closed, at most 1024 statements per connection at a time, replacing broken connections, connect errors, a slow statement not holding up the others, transaction and session statements refused on shared connections and a batch that leaves a transaction open; batched reads: each statement's own rows, one failing statement among good ones, <code>SELECT</code>s that write and lock rows, reads after writes, statements leaving the cache mid-batch, an error at a batch's commit, statements rolled back with their batch and run again, a statement that calls <code>set_config</code> kept out of batches (and one hidden in a function shared within its batch), the read-only guard prepared again after a <code>DEALLOCATE</code>, and no deadlock with a migration or with another batch taking locks in the opposite order). Two of them run a workload through PgBouncer in transaction mode, with the statement timeout left to the role, when PgBouncer is installed. 45 unit tests: the message encoder and parser, SCRAM against the RFC 7677 example, MD5 against RFC 1321, URLs, type conversions and how their errors name types, the statements the pool refuses and the ones it batches (never one that calls <code>set_config</code>), which errors are worth a retry, the old names of renamed methods, 42,000 random inputs for the message parser, the URL parser and SCRAM, and 300 sessions against a fake server answering with mutated replies (also the <code>session</code> fuzz target). 8 documentation examples.</p>
+<p>The tests find PostgreSQL through <code>GIONG_PG_BIN</code>, <code>/usr/lib/postgresql/*/bin</code> or <code>PATH</code>, and skip when it is not installed, unless <code>GIONG_PG_REQUIRED=1</code> (CI sets it); PgBouncer likewise through <code>GIONG_PGBOUNCER_BIN</code>, <code>PATH</code> or <code>/usr/sbin</code>, and <code>GIONG_PGBOUNCER_REQUIRED=1</code>. Run as root, they start the server as the <code>postgres</code> user. They also pass under ThreadSanitizer and on the fallback io_uring setups (<code>scripts/check.sh tsan</code> and <code>fallback</code>).</p></section>
+    <p class="src-note">giong 1.3.0 · from <a href="https://github.com/giong-run/Giong/blob/v1.3.0/giong-postgres/README.md">giong-postgres/README.md</a> at v1.3.0</p>
+    <script type="text/markdown" id="md-0"><!-- giong 1.3.0, https://giong.run/docs/giong-postgres/#what-it-does -->
+
+## What it does
+
+- **Pipelining across tasks.** Tasks that share a connection send their statements together, and one round trip answers all of them. A few connections serve hundreds of concurrent tasks without each task waiting for a connection of its own.
+- **Prepared statements, kept.** Every statement is prepared the first time a connection runs it and kept in a bounded cache (256 per connection by default), so from then on it takes one round trip. When the schema changes under a cached statement (`ALTER TABLE`, a view replaced), the statement is prepared again and run once more, so the caller sees no error; inside a transaction the server has already aborted the transaction, so that one call fails with the server's error and the next one is prepared again. Stale statements are recognised by SQLSTATE and the server's routine name, so this works whatever language the server writes its messages in.
+- **Binary results for the common types** (`boolean`, `bytea`, the integers, `oid`, the floats, `timestamptz`), and text for the rest. A column of a text-format type (`uuid`, `numeric`, `date`, `timestamp`, `jsonb`, arrays, `interval`, `inet` and the like) can be read as a `String`; a binary one is read as its Rust type in the [table](#types) below, or cast in SQL (`created_at::text`).
+- **A pool per worker.** Statements that stand alone share connections; `pool.get()` takes one connection for a transaction, session settings or a slow statement. When it comes back, a transaction left open is rolled back and the session is reset (settings, temporary tables, advisory locks, `LISTEN`, cursors), so nothing one task did reaches the next. Tasks waiting in `get()` are served in the order they came, even while shared statements keep every connection busy. `get()` can take every connection of the pool: while all of them are held, the pool's own `query` waits too, and fails with `GIONG-E3009` when the wait runs out, so size a pool for the transactions that run at once and one connection more. Transactions and session changes never run on the shared connections: the pool's own methods refuse `BEGIN`, `SET`, `LISTEN`, `PREPARE`, temporary tables and the like before sending them, and a batch that leaves a transaction open closes its connection rather than let the statements of other tasks run inside it. The pool steers new statements away from a connection whose oldest statement has been running for more than 5 ms, so a slow query does not hold up the fast ones behind it. Connections are closed after 10 minutes unused and replaced after 30 minutes, or as soon as their server turns out to be a standby after a failover.
+- **TLS on by default for remote hosts, always verified.** SCRAM-SHA-256, MD5, and clear-text passwords only over TLS or to this machine. `require_auth` limits the methods the server may ask for. SCRAM's key derivation runs on a thread of its own, once per password and salt, so connecting does not stall the other tasks of the worker.
+- **Errors that say what to do.** Every error has an `ErrorKind`; errors from the server carry the SQLSTATE code and every field the server sent (`detail`, `hint`, `constraint`...).
+- **Finite limits everywhere.** Connecting, running a statement, the size of a result, the statement cache and waiting for the pool all have a limit by default, so nothing waits forever and nothing grows without bound.</script><script type="text/markdown" id="md-1"><!-- giong 1.3.0, https://giong.run/docs/giong-postgres/#connecting -->
+
+## Connecting
+
+```rust
+use std::time::Duration;
+use giong_postgres::{Config, Error};
+
+fn configs() -> Result<(), Error> {
+    let config = Config::from_url("postgres://app:secret@db.internal:5432/shop?sslmode=verify-full")?;
+
+    let same_place = Config::new()
+        .host("db.internal")
+        .user("app")
+        .password("secret")
+        .database("shop")
+        .statement_timeout(Duration::from_secs(5));
+    let _ = (config, same_place);
+    Ok(())
+}
+```
+
+A URL is `postgres://user:password@host:port/dbname?param=value` (`postgresql://` too). The host can be an IPv6 address in brackets, or, as with libpq, empty with the socket directory in a `host` parameter: `postgres:///shop?host=/var/run/postgresql`. The parameters understood are `sslmode`, `sslrootcert`, `host`, `port`, `user`, `password`, `dbname`, `application_name`, `connect_timeout` (seconds) and `require_auth`. Any other parameter is an error, not silently ignored.
+
+**TLS.** Unless `Config::tls` or `sslmode` says otherwise:
+
+| Where the server is | What happens |
+|---|---|
+| A Unix socket (a host starting with `/`) | No TLS. |
+| A loopback address (`localhost`, `127.0.0.0/8`, `::1`) | No TLS. |
+| Anywhere else | TLS, with the certificate checked against the certificate authorities installed on the machine and against the host name. |
+
+`sslmode=disable` turns TLS off. `require`, `verify-ca` and `verify-full` all check the certificate and the host name, which is stricter than libpq (libpq checks nothing for `require`). `prefer` and `allow` are refused, because they fall back to an unencrypted connection without saying so. `sslrootcert=/path/ca.pem` trusts only that authority; in code, use `Tls::Verify(TlsConnector::with_root_pem(..)?)`. When TLS is requested and the server does not support it, connecting fails.
+
+A clear-text password is never sent over an unencrypted connection to another machine: the connection fails with `ErrorKind::Auth` instead.
+
+**Authentication.** Without TLS (a Unix socket, a loopback address, `sslmode=disable`), nothing proves the server is the real one, and an impostor could ask for MD5 instead of SCRAM or let the client in without asking. `Config::require_auth(&[AuthMethod::ScramSha256])`, or `require_auth=scram-sha-256` in the URL (libpq's names, comma-separated, without libpq's `!` negations), refuses any other method before anything is sent for the password.
+
+### Behind PgBouncer
+
+In transaction mode, PgBouncer gives each transaction any server connection, so two things need setting up:
+
+- **Prepared statements** need PgBouncer 1.21 or later with `max_prepared_statements` above 0 (it then prepares them on whichever server connection runs them). With it, the statement cache works as usual. Without it, prepared statements cannot work through PgBouncer in transaction mode, whatever `statement_cache_capacity` is.
+- **The statement timeout** cannot be sent when connecting: PgBouncer refuses the connection, and neither `track_extra_parameters` nor `ignore_startup_parameters` passes it on to the server (checked with PgBouncer 1.22). Call `Config::statement_timeout(None)` and set the limit on the role: `ALTER ROLE app SET statement_timeout = '30s'`. Connecting without `None` fails with an error that says this.
+
+Both are tested in CI against PgBouncer in transaction mode.</script><script type="text/markdown" id="md-2"><!-- giong 1.3.0, https://giong.run/docs/giong-postgres/#api -->
+
+## API
+
+| | |
+|---|---|
+| `Client::connect(&config)` | Opens a connection: TCP or Unix socket, TLS, authentication, all within `connect_timeout`. |
+| `client.query(sql, &[&a, &b])` | All the rows, as `Vec<Row>`. Parameters are `$1`, `$2`... |
+| `client.query_one(..)`, `query_opt(..)` | Exactly one row (`ErrorKind::RowCount` otherwise); at most one. |
+| `client.execute(..)` | The number of rows affected. |
+| `client.batch_execute(sql)` | Several statements separated by `;`, through the simple protocol, with no parameters and no results. For migrations and setup. |
+| `client.transaction()` | Starts a transaction and borrows the client mutably until it ends. `tx.commit()` or `tx.rollback()`; dropping the transaction rolls it back. A `COMMIT` that the server turned into a rollback (because of an earlier error) is an error, not a success. |
+| `client.cancel_token()` | A `CancelToken` whose `cancel()` asks the server, over a separate connection, to stop the statement running now. A token taken from a `PooledClient` stops working when the connection goes back to the pool, so it cannot cancel another task's statement. |
+| `client.parameter(name)` | A setting the server reported, such as `server_version` or `TimeZone`. |
+| `client.is_closed()`, `client.in_flight()` | Whether the connection is closed; how many requests are waiting for their answer. |
+| `row.get::<T>(column)` | A column by position or name, converted to `T` (see [Types](#types)). Borrowed types (`&str`, `&[u8]`) borrow from the row. |
+| `row.is_null(column)`, `row.columns()`, `row.len()` | Whether a value is `NULL`; the columns' names and types; how many there are. |
+| `Pool::new(config, max_size)` | A pool for the current worker. Connections are opened when needed, up to `max_size`. Size it to the database server's cores, shared among the workers (see [Performance](#performance)). |
+| `.wait_timeout(duration)` | How long `get()` and the statement methods wait when every connection is taken, 5 s by default. |
+| `.idle_timeout(duration)`, `.max_lifetime(duration)` | Close a connection unused for this long (10 min by default); replace one older than this (30 min, less up to 10% so that connections opened together are not replaced together). |
+| `pool.query(..)` and the other statement methods | Run on the least busy connection, pipelined with other tasks' statements. They refuse transaction statements, session changes and `COPY ... FROM STDIN` before sending them (`ErrorKind::Statement`). |
+| `Config::batch_reads(true)` | Lets the pool send the `SELECT`s waiting for one shared connection under one `Sync`, up to 16, never waiting for more (see [Batched reads](#batched-reads)). Off by default. |
+| `pool.get()` | A `PooledClient` for this task alone, which derefs to `Client`. For transactions, session settings and statements known to be slow. Served in the order asked. When it is dropped, a transaction left open is rolled back and, if anything was sent, the session is reset; settings given to `Config` survive the reset. |
+| `pool.stats()` | Connections open, taken, being opened; requests in flight; tasks waiting; and counters for connections opened, connect errors, wait timeouts and connections recycled. |
+| `Config::require_auth(&[AuthMethod::..])` | The only authentication methods the server may ask for. |
+
+A `Client` belongs to the worker that opened it (it is not `Send`, like everything in giong). Its methods take `&self`, so tasks share one by cloning an `Rc` or by holding a reference, and their statements are pipelined.</script><script type="text/markdown" id="md-3"><!-- giong 1.3.0, https://giong.run/docs/giong-postgres/#types -->
+
+## Types
+
+| Rust | PostgreSQL |
+|---|---|
+| `bool` | `boolean` |
+| `i16`, `i32`, `i64` | `smallint`, `integer`, `bigint` (any of them, checked for range); `oid` |
+| `f32`, `f64` | `real`, `double precision` |
+| `&str`, `String` | `text`, `varchar`, `char(n)`, `name`; as parameters, any type the server can parse from text (`uuid`, `numeric`, `date`, `json`...); as results, any column the rest of this table does not list |
+| `&[u8]`, `Vec<u8>` | `bytea` |
+| `SystemTime` | `timestamptz` |
+| `Option<T>` | `NULL` or a value |
+
+Integers convert between the three integer types when the value fits and fail when it does not, with an error that names the parameter or column, so a conversion never loses anything silently. Implement `ToSql` and `FromSql` for your own types.</script><script type="text/markdown" id="md-4"><!-- giong 1.3.0, https://giong.run/docs/giong-postgres/#errors -->
+
+## Errors
+
+`Error` is cheap to clone, implements `std::error::Error`, and converts into `io::Error`. `error.kind()` says what went wrong. Each kind has a giong error code, shown in front of the message and linked to its page in [docs/errors](../docs/errors/README.md) (`GIONG-E3003: password authentication failed for user "app". See …`); after `?` into an `io::Error`, `giong::error::code(&err)` finds it:
+
+| `ErrorKind` | Code | Meaning |
+|---|---|---|
+| `Config` | [E3001](../docs/errors/E3001.md) | The configuration or URL is not valid. |
+| `Connect` | [E3002](../docs/errors/E3002.md) | Name resolution, TCP, TLS, or the connect timeout. Also an unknown database (`3D000`). |
+| `Auth` | [E3003](../docs/errors/E3003.md) | The server refused the credentials, or asked for a method this crate does not support. |
+| `Db` | [E3004](../docs/errors/E3004.md) | The server reported an error for the statement; `error.server_code()` is the SQLSTATE (`23505` for a unique violation...) and `error.db()` has every field. A `COMMIT` that the server turned into a rollback is `Db` with code `25P02` and no `db()`. |
+| `Type` | [E3005](../docs/errors/E3005.md) | A value could not be converted between Rust and PostgreSQL. The message names the parameter or column and suggests the Rust type to use. |
+| `RowCount` | [E3006](../docs/errors/E3006.md) | `query_one` found no row, or more than one. |
+| `TooLarge` | [E3007](../docs/errors/E3007.md) | The result was larger than `max_result_size`. The connection stays usable. |
+| `Closed` | [E3008](../docs/errors/E3008.md) | The connection is closed. A `Pool` replaces it by itself. Also a cancel token whose pooled connection went back to the pool. |
+| `PoolTimeout` | [E3009](../docs/errors/E3009.md) | No pooled connection became free within `wait_timeout`. |
+| `Protocol` | [E3010](../docs/errors/E3010.md) | The server sent something this crate cannot understand. The connection is closed. |
+| `Statement` | [E3011](../docs/errors/E3011.md) | Refused before sending, on the connections a `Pool` shares: a transaction statement, a statement that changes the session (`SET`, `LISTEN`, `PREPARE`, temporary tables...), or `COPY ... FROM STDIN`. Use `pool.get()`. The check reads the statement, not what a function does: `SELECT set_config('search_path', 'x', false)` is sent, and changes the session for every task that shares the connection. |
+
+`error.is_transient()` is true for errors worth retrying after a pause: connecting, a closed connection, a pool wait timeout, and the server's serialization failure (`40001`), deadlock (`40P01`), lock not available (`55P03`), too many connections (`53300`), connection errors (class `08`), shutdown or startup (`57P01`, `57P02`, `57P03`) and standby (`25006`). Retry a whole transaction, not its failed statement.
+
+An error from the server affects only its own statement: the statements that other tasks pipelined on the same connection get their own results. Two things close the connection instead, and every statement sent on it after them fails with `ErrorKind::Closed`: `COPY ... FROM STDIN` on a `Client` (COPY is not supported yet; the pool refuses it), and a `batch_execute` that leaves a transaction open on a pool's shared connection.</script><script type="text/markdown" id="md-5"><!-- giong 1.3.0, https://giong.run/docs/giong-postgres/#limits -->
+
+## Limits
+
+| Setting | Default | What happens at the limit |
+|---|---|---|
+| `Config::connect_timeout` | 10 s | `ErrorKind::Connect`, "connect timeout". |
+| `Config::statement_timeout` | 30 s | Sent as the session's `statement_timeout`, so the server cancels exactly the statement that ran too long (SQLSTATE `57014`). From 1 ms to `i32::MAX` ms (24.8 days); outside that, connecting fails with `ErrorKind::Config`. `None` sends nothing and leaves the limit to the server or the role. |
+| `Config::max_result_size` | 64 MiB of row data | `ErrorKind::TooLarge`; the rest of the result is read and thrown away. A notice larger than this is skipped; an error message larger than this fails its statement with `TooLarge`. Either way the connection stays usable. |
+| `Config::statement_cache_capacity` | 256 per connection | The least recently used statement is closed. 0 prepares and closes every statement each time. |
+| `Pool::wait_timeout` | 5 s | `ErrorKind::PoolTimeout`. It bounds the wait for a connection; a task that opens a new connection itself waits up to `connect_timeout` instead. |
+| `Pool::idle_timeout` | 10 min | The connection is closed. |
+| `Pool::max_lifetime` | 30 min, less up to 10% | The connection is closed once no statement uses it, and a new one is opened when needed. |
+| Statements on one pooled connection at a time | 1024 | The statement methods use another connection, or wait for room. A `Client` used directly has no such bound: its callers decide how many tasks share it. |</script><script type="text/markdown" id="md-6"><!-- giong 1.3.0, https://giong.run/docs/giong-postgres/#performance -->
+
+## Performance
+
+Measured with `bench/postgres.sh` against tokio-postgres 0.7.18 with deadpool-postgres 0.14.2 (Tokio 1.54, current-thread runtime). Each client runs on one core; the same PostgreSQL 16 server runs on the other three cores of a 4-vCPU virtual machine (Xeon 2.1 GHz, Linux 6.18), reached over TCP on 127.0.0.1. 64 tasks issue statements back to back: `point` reads one row by primary key, `list` reads 100 rows, and every column of every row is decoded (`i64`, two `&str`, `SystemTime`). The figures are medians of 5 rounds of 5 s (3 rounds for the other pool sizes), with the range in brackets.
+
+A pool, on one client core:
+
+| Client | Connections | `point` statements/s | p99 | `list` statements/s | p99 |
+|---|---|---|---|---|---|
+| **giong-postgres** | 3 | **311.4k** (308–322k) | **0.43 ms** | **71.3k** (70–74k) | **2.0 ms** |
+| giong-postgres | 4 | 303.8k (277–317k) | 2.9 ms | 72.9k (64–76k) | 4.9 ms |
+| tokio-postgres + deadpool | 4 | 55.4k (53–56k) | 1.7 ms | 25.4k (24–26k) | 3.9 ms |
+| tokio-postgres + deadpool | 64, its best | 93.8k (91–97k) | 1.5 ms | 28.6k (27–29k) | 4.1 ms |
+
+- **Against deadpool at its best: 3.3× the point lookups and 2.5× the 100-row reads, at a third to a half of the p99.** deadpool's client core is the limit (98–99% busy): every statement is a pool checkout, a round trip and a wake-up. giong-postgres sends the statements of all 64 tasks in a few writes and reads their answers in a few reads.
+- **Size the pool to the database's cores.** With more connections than the server has cores (4 on 3 here), one backend at a time waits for a core, and the statements pipelined on its connection, about 16 of them, wait with it: the same throughput, but a p99 of 2.9 ms instead of 0.43. 8 connections give 253.8k at a p99 of 1.4 ms (8.6 ms for 100 rows); 2 connections leave a server core idle, 183.9k. With several workers, the connections of all their pools add up. Statements that wait on disk or on locks need more connections than this.
+- **One connection shared by every task** (both libraries pipeline): the single backend process is the limit, one server core at 100%, and here giong-postgres is behind: its medians are 7–9% lower (point 47.7k against 51.4k, list 18.7k against 20.5k; the same with the two run in the other order), though the ranges of the rounds overlap, and it uses less of its core (50% against 52%, 43% against 64%). Both send the same messages, one `Sync` per statement, and the server spends half of its time in `send()`, writing one reply per statement and waking the client for it, and the gap is in that part (a quarter of the server's time with giong-postgres, against slightly less with tokio-postgres, whose busier client needs waking less often). Sending several statements under one `Sync` cuts the server's work, but it runs them in one transaction, so it is only done by a pool with `batch_reads` (below). Use a `Pool`, where the client is the limit and giong-postgres does 5.5 times as much.
+
+### Batched reads
+
+With `Config::batch_reads(true)`, the `SELECT`s that a pool's shared connection has waiting when it writes go to the server under one `Sync`, at most 16, behind a prepared statement that makes their transaction read-only; a statement never waits for others to join it. The server then sends one reply and wakes the client once per batch rather than once per statement, which matters when the server is the busy side. Measured with `bench/postgres.sh` (`batch` mode, 3 rounds of 5 s, 64 tasks, `point`; results in `bench/results/postgres/batch/`):
+
+| Server cores | Connections | without batches | p99 | with batches | p99 |
+|---|---|---|---|---|---|
+| 1 | 1 | 58.7k (54–61k) | 2.0 ms | **198.3k** (197–204k) | **0.56 ms** |
+| 1 | 4 | 50.5k (49–55k) | 12.5 ms | **171.9k** (167–187k) | **0.75 ms** |
+| 3 | 4 | 314.2k (273–327k) | 2.5 ms | **370.4k** (318–372k) | **0.39 ms** |
+
+- **3.4 times the point lookups when the database is the limit, and up to 18% more with it on three cores**, where the client core is then no longer full (71% busy against 98%): the server's work per statement is what shrinks.
+- **No gain for the 100-row reads** (`list`: 81.6k against 80.5k on three cores, 21.8k against 22.6k on one; the ranges overlap): producing the rows costs far more than the reply's `send()`.
+- **The full path of an HTTP request gains little**, because there the HTTP side is the limit (`bench/db-path.sh`, results in `bench/results/db-path/`): with one giong worker and the database on two cores, 82.9k against 86.9k requests a second (ranges 79–96k and 75–93k), the database 84% busy against 93%; with two giong workers and the database on one core (`db-bound/`), 96.9k against 91.7k, p99 3.1 ms against 4.7 ms. Few requests arrive in the same tick for one connection there: 1.7 statements a batch on average, measured from the server's transaction count. One request at a time is unchanged (88–92 µs median).
+- **Transaction-local settings.** The statements of a batch share one transaction, so a setting made with `set_config(.., true)` would apply to the other tasks' statements after it in the batch. A `SELECT` whose text calls `set_config` therefore runs alone; one that calls a function that makes such a setting (`set_config(.., true)` or `SET LOCAL` inside it) cannot be seen, so leave `batch_reads` off where row-level security or anything else is set up that way per request.
+- What else changes for a statement in a batch is in the documentation of `Config::batch_reads`: in short, a write is refused in the batch (`25006`) and the statement is sent again alone; when a statement or the batch's commit fails, the batch is rolled back and every other statement of it is sent again alone; answers arrive when the batch ends; `now()` is the batch's start.
+- MySQL has nothing like it: its protocol has no `Sync`, every statement gets its own reply, and giong-mysql already pipelines them.
+
+Not measured: a server on another machine (network latency, where pipelining should matter more), writes, more than one client core, PostgreSQL versions other than 16. Results are in `bench/results/postgres/`; pool sizes other than 4 in `pool-size/`.</script><script type="text/markdown" id="md-7"><!-- giong 1.3.0, https://giong.run/docs/giong-postgres/#not-there-yet -->
+
+## Not there yet
+
+`COPY`, `LISTEN`/`NOTIFY`, streaming a result one row at a time (a result is collected in full, up to `max_result_size`), arrays, `numeric`, `uuid`, `date` and the other types not listed above in binary form (read them as strings), channel binding (`SCRAM-SHA-256-PLUS`), client certificates in the URL (`sslcert` and `sslkey` are refused; in code, give the connector one with `TlsConnector::client_auth`), several hosts with failover, running through PgBouncer without `max_prepared_statements`, and SASLprep normalization of non-ASCII passwords. The crate has had one independent review before 1.0, whose findings are fixed, but no security audit.</script><script type="text/markdown" id="md-8"><!-- giong 1.3.0, https://giong.run/docs/giong-postgres/#tests -->
+
+## Tests
+
+`cargo test -p giong-postgres`: 70 tests against a real PostgreSQL server that the test binary starts for itself (a throwaway cluster from `initdb`, with users for SCRAM, MD5, clear text and TLS only, listening on a Unix socket, 127.0.0.1 and 127.0.0.2): every supported type in both directions; conversion errors; server errors and their fields; pipelining across tasks, and a failing statement in the middle of a pipeline; the statement cache, its bound, statement names an application took, and schema changes under cached statements, in and out of a transaction; notices and errors larger than the result limit; the result-size limit; the statement timeout, and leaving it to the server; cancel requests; a query dropped mid-flight; a connection the server terminates; transactions committed, rolled back and dropped, and a `COMMIT` turned into a rollback; no task or connection left behind after a client is dropped; TLS against the right and the wrong authority and host; each authentication method with the right and the wrong password, and `require_auth`; SCRAM keys derived once and off the worker; a server that answers the TLS request with extra bytes; a clear-text password never sent unencrypted; the connect timeout; and the pool (spreading statements, exclusive use and the rollback on return, even with `BEGIN` still in flight, the session reset on return and no reset for an unused connection, `get()` served in order while shared statements keep every connection busy, waiting, and waking when a dropped statement frees the connection, cancel tokens that stop working on return, idle and old connections closed, at most 1024 statements per connection at a time, replacing broken connections, connect errors, a slow statement not holding up the others, transaction and session statements refused on shared connections and a batch that leaves a transaction open; batched reads: each statement's own rows, one failing statement among good ones, `SELECT`s that write and lock rows, reads after writes, statements leaving the cache mid-batch, an error at a batch's commit, statements rolled back with their batch and run again, a statement that calls `set_config` kept out of batches (and one hidden in a function shared within its batch), the read-only guard prepared again after a `DEALLOCATE`, and no deadlock with a migration or with another batch taking locks in the opposite order). Two of them run a workload through PgBouncer in transaction mode, with the statement timeout left to the role, when PgBouncer is installed. 45 unit tests: the message encoder and parser, SCRAM against the RFC 7677 example, MD5 against RFC 1321, URLs, type conversions and how their errors name types, the statements the pool refuses and the ones it batches (never one that calls `set_config`), which errors are worth a retry, the old names of renamed methods, 42,000 random inputs for the message parser, the URL parser and SCRAM, and 300 sessions against a fake server answering with mutated replies (also the `session` fuzz target). 8 documentation examples.
+
+The tests find PostgreSQL through `GIONG_PG_BIN`, `/usr/lib/postgresql/*/bin` or `PATH`, and skip when it is not installed, unless `GIONG_PG_REQUIRED=1` (CI sets it); PgBouncer likewise through `GIONG_PGBOUNCER_BIN`, `PATH` or `/usr/sbin`, and `GIONG_PGBOUNCER_REQUIRED=1`. Run as root, they start the server as the `postgres` user. They also pass under ThreadSanitizer and on the fallback io_uring setups (`scripts/check.sh tsan` and `fallback`).</script><script type="text/markdown" id="md-page"># giong-postgres
+
+> giong 1.3.0 · https://giong.run/docs/giong-postgres/ · source: https://github.com/giong-run/Giong/blob/v1.3.0/giong-postgres/README.md
+
+A PostgreSQL client and connection pool for the [giong](https://github.com/giong-run/Giong/blob/v1.3.0/README.md) runtime. It speaks the wire protocol itself (no libpq), encrypts with [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.3.0/giong-tls/README.md), and depends on nothing from the Tokio ecosystem.
+
+```toml
+[dependencies]
+giong = "1.3.0"
+giong-postgres = "1.3.0"
+```
+
+```rust,no_run
+use giong_postgres::{Client, Config};
+
+fn main() -> Result<(), giong_postgres::Error> {
+    let config = Config::from_url("postgres://app:secret@localhost/shop")?;
+    giong::block_on(async {
+        let client = Client::connect(&config).await?;
+        let rows = client
+            .query("SELECT id, name FROM products WHERE price < $1", &[&100i32])
+            .await?;
+        for row in &rows {
+            let id: i64 = row.get("id")?;
+            let name: &str = row.get("name")?;
+            println!("{id} {name}");
+        }
+        Ok(())
+    })
+}
+```
+
+In a service, make one `Pool` per worker. Nothing is shared between threads, so nothing is locked:
+
+```rust,no_run
+use giong_postgres::{Config, Pool};
+
+fn main() -> std::io::Result<()> {
+    let config = Config::from_url("postgres://app:secret@db.internal/shop")?;
+    giong::Builder::new().build()?.run(move |_worker| {
+        let pool = Pool::new(config.clone(), 4);
+        async move {
+            // ... serve requests, each one calling pool.query(..) ...
+            let row = pool.query_one("SELECT count(*) FROM orders", &[]).await.unwrap();
+            let n: i64 = row.get(0).unwrap();
+            println!("{n} orders");
+        }
+    })
+}
+```
+
+## What it does
+
+- **Pipelining across tasks.** Tasks that share a connection send their statements together, and one round trip answers all of them. A few connections serve hundreds of concurrent tasks without each task waiting for a connection of its own.
+- **Prepared statements, kept.** Every statement is prepared the first time a connection runs it and kept in a bounded cache (256 per connection by default), so from then on it takes one round trip. When the schema changes under a cached statement (`ALTER TABLE`, a view replaced), the statement is prepared again and run once more, so the caller sees no error; inside a transaction the server has already aborted the transaction, so that one call fails with the server's error and the next one is prepared again. Stale statements are recognised by SQLSTATE and the server's routine name, so this works whatever language the server writes its messages in.
+- **Binary results for the common types** (`boolean`, `bytea`, the integers, `oid`, the floats, `timestamptz`), and text for the rest. A column of a text-format type (`uuid`, `numeric`, `date`, `timestamp`, `jsonb`, arrays, `interval`, `inet` and the like) can be read as a `String`; a binary one is read as its Rust type in the [table](#types) below, or cast in SQL (`created_at::text`).
+- **A pool per worker.** Statements that stand alone share connections; `pool.get()` takes one connection for a transaction, session settings or a slow statement. When it comes back, a transaction left open is rolled back and the session is reset (settings, temporary tables, advisory locks, `LISTEN`, cursors), so nothing one task did reaches the next. Tasks waiting in `get()` are served in the order they came, even while shared statements keep every connection busy. `get()` can take every connection of the pool: while all of them are held, the pool's own `query` waits too, and fails with `GIONG-E3009` when the wait runs out, so size a pool for the transactions that run at once and one connection more. Transactions and session changes never run on the shared connections: the pool's own methods refuse `BEGIN`, `SET`, `LISTEN`, `PREPARE`, temporary tables and the like before sending them, and a batch that leaves a transaction open closes its connection rather than let the statements of other tasks run inside it. The pool steers new statements away from a connection whose oldest statement has been running for more than 5 ms, so a slow query does not hold up the fast ones behind it. Connections are closed after 10 minutes unused and replaced after 30 minutes, or as soon as their server turns out to be a standby after a failover.
+- **TLS on by default for remote hosts, always verified.** SCRAM-SHA-256, MD5, and clear-text passwords only over TLS or to this machine. `require_auth` limits the methods the server may ask for. SCRAM's key derivation runs on a thread of its own, once per password and salt, so connecting does not stall the other tasks of the worker.
+- **Errors that say what to do.** Every error has an `ErrorKind`; errors from the server carry the SQLSTATE code and every field the server sent (`detail`, `hint`, `constraint`...).
+- **Finite limits everywhere.** Connecting, running a statement, the size of a result, the statement cache and waiting for the pool all have a limit by default, so nothing waits forever and nothing grows without bound.
+
+## Connecting
+
+```rust
+use std::time::Duration;
+use giong_postgres::{Config, Error};
+
+fn configs() -> Result<(), Error> {
+    let config = Config::from_url("postgres://app:secret@db.internal:5432/shop?sslmode=verify-full")?;
+
+    let same_place = Config::new()
+        .host("db.internal")
+        .user("app")
+        .password("secret")
+        .database("shop")
+        .statement_timeout(Duration::from_secs(5));
+    let _ = (config, same_place);
+    Ok(())
+}
+```
+
+A URL is `postgres://user:password@host:port/dbname?param=value` (`postgresql://` too). The host can be an IPv6 address in brackets, or, as with libpq, empty with the socket directory in a `host` parameter: `postgres:///shop?host=/var/run/postgresql`. The parameters understood are `sslmode`, `sslrootcert`, `host`, `port`, `user`, `password`, `dbname`, `application_name`, `connect_timeout` (seconds) and `require_auth`. Any other parameter is an error, not silently ignored.
+
+**TLS.** Unless `Config::tls` or `sslmode` says otherwise:
+
+| Where the server is | What happens |
+|---|---|
+| A Unix socket (a host starting with `/`) | No TLS. |
+| A loopback address (`localhost`, `127.0.0.0/8`, `::1`) | No TLS. |
+| Anywhere else | TLS, with the certificate checked against the certificate authorities installed on the machine and against the host name. |
+
+`sslmode=disable` turns TLS off. `require`, `verify-ca` and `verify-full` all check the certificate and the host name, which is stricter than libpq (libpq checks nothing for `require`). `prefer` and `allow` are refused, because they fall back to an unencrypted connection without saying so. `sslrootcert=/path/ca.pem` trusts only that authority; in code, use `Tls::Verify(TlsConnector::with_root_pem(..)?)`. When TLS is requested and the server does not support it, connecting fails.
+
+A clear-text password is never sent over an unencrypted connection to another machine: the connection fails with `ErrorKind::Auth` instead.
+
+**Authentication.** Without TLS (a Unix socket, a loopback address, `sslmode=disable`), nothing proves the server is the real one, and an impostor could ask for MD5 instead of SCRAM or let the client in without asking. `Config::require_auth(&[AuthMethod::ScramSha256])`, or `require_auth=scram-sha-256` in the URL (libpq's names, comma-separated, without libpq's `!` negations), refuses any other method before anything is sent for the password.
+
+### Behind PgBouncer
+
+In transaction mode, PgBouncer gives each transaction any server connection, so two things need setting up:
+
+- **Prepared statements** need PgBouncer 1.21 or later with `max_prepared_statements` above 0 (it then prepares them on whichever server connection runs them). With it, the statement cache works as usual. Without it, prepared statements cannot work through PgBouncer in transaction mode, whatever `statement_cache_capacity` is.
+- **The statement timeout** cannot be sent when connecting: PgBouncer refuses the connection, and neither `track_extra_parameters` nor `ignore_startup_parameters` passes it on to the server (checked with PgBouncer 1.22). Call `Config::statement_timeout(None)` and set the limit on the role: `ALTER ROLE app SET statement_timeout = '30s'`. Connecting without `None` fails with an error that says this.
+
+Both are tested in CI against PgBouncer in transaction mode.
+
+## API
+
+| | |
+|---|---|
+| `Client::connect(&config)` | Opens a connection: TCP or Unix socket, TLS, authentication, all within `connect_timeout`. |
+| `client.query(sql, &[&a, &b])` | All the rows, as `Vec<Row>`. Parameters are `$1`, `$2`... |
+| `client.query_one(..)`, `query_opt(..)` | Exactly one row (`ErrorKind::RowCount` otherwise); at most one. |
+| `client.execute(..)` | The number of rows affected. |
+| `client.batch_execute(sql)` | Several statements separated by `;`, through the simple protocol, with no parameters and no results. For migrations and setup. |
+| `client.transaction()` | Starts a transaction and borrows the client mutably until it ends. `tx.commit()` or `tx.rollback()`; dropping the transaction rolls it back. A `COMMIT` that the server turned into a rollback (because of an earlier error) is an error, not a success. |
+| `client.cancel_token()` | A `CancelToken` whose `cancel()` asks the server, over a separate connection, to stop the statement running now. A token taken from a `PooledClient` stops working when the connection goes back to the pool, so it cannot cancel another task's statement. |
+| `client.parameter(name)` | A setting the server reported, such as `server_version` or `TimeZone`. |
+| `client.is_closed()`, `client.in_flight()` | Whether the connection is closed; how many requests are waiting for their answer. |
+| `row.get::<T>(column)` | A column by position or name, converted to `T` (see [Types](#types)). Borrowed types (`&str`, `&[u8]`) borrow from the row. |
+| `row.is_null(column)`, `row.columns()`, `row.len()` | Whether a value is `NULL`; the columns' names and types; how many there are. |
+| `Pool::new(config, max_size)` | A pool for the current worker. Connections are opened when needed, up to `max_size`. Size it to the database server's cores, shared among the workers (see [Performance](#performance)). |
+| `.wait_timeout(duration)` | How long `get()` and the statement methods wait when every connection is taken, 5 s by default. |
+| `.idle_timeout(duration)`, `.max_lifetime(duration)` | Close a connection unused for this long (10 min by default); replace one older than this (30 min, less up to 10% so that connections opened together are not replaced together). |
+| `pool.query(..)` and the other statement methods | Run on the least busy connection, pipelined with other tasks' statements. They refuse transaction statements, session changes and `COPY ... FROM STDIN` before sending them (`ErrorKind::Statement`). |
+| `Config::batch_reads(true)` | Lets the pool send the `SELECT`s waiting for one shared connection under one `Sync`, up to 16, never waiting for more (see [Batched reads](#batched-reads)). Off by default. |
+| `pool.get()` | A `PooledClient` for this task alone, which derefs to `Client`. For transactions, session settings and statements known to be slow. Served in the order asked. When it is dropped, a transaction left open is rolled back and, if anything was sent, the session is reset; settings given to `Config` survive the reset. |
+| `pool.stats()` | Connections open, taken, being opened; requests in flight; tasks waiting; and counters for connections opened, connect errors, wait timeouts and connections recycled. |
+| `Config::require_auth(&[AuthMethod::..])` | The only authentication methods the server may ask for. |
+
+A `Client` belongs to the worker that opened it (it is not `Send`, like everything in giong). Its methods take `&self`, so tasks share one by cloning an `Rc` or by holding a reference, and their statements are pipelined.
+
+## Types
+
+| Rust | PostgreSQL |
+|---|---|
+| `bool` | `boolean` |
+| `i16`, `i32`, `i64` | `smallint`, `integer`, `bigint` (any of them, checked for range); `oid` |
+| `f32`, `f64` | `real`, `double precision` |
+| `&str`, `String` | `text`, `varchar`, `char(n)`, `name`; as parameters, any type the server can parse from text (`uuid`, `numeric`, `date`, `json`...); as results, any column the rest of this table does not list |
+| `&[u8]`, `Vec<u8>` | `bytea` |
+| `SystemTime` | `timestamptz` |
+| `Option<T>` | `NULL` or a value |
+
+Integers convert between the three integer types when the value fits and fail when it does not, with an error that names the parameter or column, so a conversion never loses anything silently. Implement `ToSql` and `FromSql` for your own types.
+
+## Errors
+
+`Error` is cheap to clone, implements `std::error::Error`, and converts into `io::Error`. `error.kind()` says what went wrong. Each kind has a giong error code, shown in front of the message and linked to its page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/README.md) (`GIONG-E3003: password authentication failed for user "app". See …`); after `?` into an `io::Error`, `giong::error::code(&err)` finds it:
+
+| `ErrorKind` | Code | Meaning |
+|---|---|---|
+| `Config` | [E3001](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3001.md) | The configuration or URL is not valid. |
+| `Connect` | [E3002](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3002.md) | Name resolution, TCP, TLS, or the connect timeout. Also an unknown database (`3D000`). |
+| `Auth` | [E3003](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3003.md) | The server refused the credentials, or asked for a method this crate does not support. |
+| `Db` | [E3004](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3004.md) | The server reported an error for the statement; `error.server_code()` is the SQLSTATE (`23505` for a unique violation...) and `error.db()` has every field. A `COMMIT` that the server turned into a rollback is `Db` with code `25P02` and no `db()`. |
+| `Type` | [E3005](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3005.md) | A value could not be converted between Rust and PostgreSQL. The message names the parameter or column and suggests the Rust type to use. |
+| `RowCount` | [E3006](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3006.md) | `query_one` found no row, or more than one. |
+| `TooLarge` | [E3007](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3007.md) | The result was larger than `max_result_size`. The connection stays usable. |
+| `Closed` | [E3008](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3008.md) | The connection is closed. A `Pool` replaces it by itself. Also a cancel token whose pooled connection went back to the pool. |
+| `PoolTimeout` | [E3009](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3009.md) | No pooled connection became free within `wait_timeout`. |
+| `Protocol` | [E3010](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3010.md) | The server sent something this crate cannot understand. The connection is closed. |
+| `Statement` | [E3011](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3011.md) | Refused before sending, on the connections a `Pool` shares: a transaction statement, a statement that changes the session (`SET`, `LISTEN`, `PREPARE`, temporary tables...), or `COPY ... FROM STDIN`. Use `pool.get()`. The check reads the statement, not what a function does: `SELECT set_config('search_path', 'x', false)` is sent, and changes the session for every task that shares the connection. |
+
+`error.is_transient()` is true for errors worth retrying after a pause: connecting, a closed connection, a pool wait timeout, and the server's serialization failure (`40001`), deadlock (`40P01`), lock not available (`55P03`), too many connections (`53300`), connection errors (class `08`), shutdown or startup (`57P01`, `57P02`, `57P03`) and standby (`25006`). Retry a whole transaction, not its failed statement.
+
+An error from the server affects only its own statement: the statements that other tasks pipelined on the same connection get their own results. Two things close the connection instead, and every statement sent on it after them fails with `ErrorKind::Closed`: `COPY ... FROM STDIN` on a `Client` (COPY is not supported yet; the pool refuses it), and a `batch_execute` that leaves a transaction open on a pool's shared connection.
+
+## Limits
+
+| Setting | Default | What happens at the limit |
+|---|---|---|
+| `Config::connect_timeout` | 10 s | `ErrorKind::Connect`, "connect timeout". |
+| `Config::statement_timeout` | 30 s | Sent as the session's `statement_timeout`, so the server cancels exactly the statement that ran too long (SQLSTATE `57014`). From 1 ms to `i32::MAX` ms (24.8 days); outside that, connecting fails with `ErrorKind::Config`. `None` sends nothing and leaves the limit to the server or the role. |
+| `Config::max_result_size` | 64 MiB of row data | `ErrorKind::TooLarge`; the rest of the result is read and thrown away. A notice larger than this is skipped; an error message larger than this fails its statement with `TooLarge`. Either way the connection stays usable. |
+| `Config::statement_cache_capacity` | 256 per connection | The least recently used statement is closed. 0 prepares and closes every statement each time. |
+| `Pool::wait_timeout` | 5 s | `ErrorKind::PoolTimeout`. It bounds the wait for a connection; a task that opens a new connection itself waits up to `connect_timeout` instead. |
+| `Pool::idle_timeout` | 10 min | The connection is closed. |
+| `Pool::max_lifetime` | 30 min, less up to 10% | The connection is closed once no statement uses it, and a new one is opened when needed. |
+| Statements on one pooled connection at a time | 1024 | The statement methods use another connection, or wait for room. A `Client` used directly has no such bound: its callers decide how many tasks share it. |
+
+## Performance
+
+Measured with `bench/postgres.sh` against tokio-postgres 0.7.18 with deadpool-postgres 0.14.2 (Tokio 1.54, current-thread runtime). Each client runs on one core; the same PostgreSQL 16 server runs on the other three cores of a 4-vCPU virtual machine (Xeon 2.1 GHz, Linux 6.18), reached over TCP on 127.0.0.1. 64 tasks issue statements back to back: `point` reads one row by primary key, `list` reads 100 rows, and every column of every row is decoded (`i64`, two `&str`, `SystemTime`). The figures are medians of 5 rounds of 5 s (3 rounds for the other pool sizes), with the range in brackets.
+
+A pool, on one client core:
+
+| Client | Connections | `point` statements/s | p99 | `list` statements/s | p99 |
+|---|---|---|---|---|---|
+| **giong-postgres** | 3 | **311.4k** (308–322k) | **0.43 ms** | **71.3k** (70–74k) | **2.0 ms** |
+| giong-postgres | 4 | 303.8k (277–317k) | 2.9 ms | 72.9k (64–76k) | 4.9 ms |
+| tokio-postgres + deadpool | 4 | 55.4k (53–56k) | 1.7 ms | 25.4k (24–26k) | 3.9 ms |
+| tokio-postgres + deadpool | 64, its best | 93.8k (91–97k) | 1.5 ms | 28.6k (27–29k) | 4.1 ms |
+
+- **Against deadpool at its best: 3.3× the point lookups and 2.5× the 100-row reads, at a third to a half of the p99.** deadpool's client core is the limit (98–99% busy): every statement is a pool checkout, a round trip and a wake-up. giong-postgres sends the statements of all 64 tasks in a few writes and reads their answers in a few reads.
+- **Size the pool to the database's cores.** With more connections than the server has cores (4 on 3 here), one backend at a time waits for a core, and the statements pipelined on its connection, about 16 of them, wait with it: the same throughput, but a p99 of 2.9 ms instead of 0.43. 8 connections give 253.8k at a p99 of 1.4 ms (8.6 ms for 100 rows); 2 connections leave a server core idle, 183.9k. With several workers, the connections of all their pools add up. Statements that wait on disk or on locks need more connections than this.
+- **One connection shared by every task** (both libraries pipeline): the single backend process is the limit, one server core at 100%, and here giong-postgres is behind: its medians are 7–9% lower (point 47.7k against 51.4k, list 18.7k against 20.5k; the same with the two run in the other order), though the ranges of the rounds overlap, and it uses less of its core (50% against 52%, 43% against 64%). Both send the same messages, one `Sync` per statement, and the server spends half of its time in `send()`, writing one reply per statement and waking the client for it, and the gap is in that part (a quarter of the server's time with giong-postgres, against slightly less with tokio-postgres, whose busier client needs waking less often). Sending several statements under one `Sync` cuts the server's work, but it runs them in one transaction, so it is only done by a pool with `batch_reads` (below). Use a `Pool`, where the client is the limit and giong-postgres does 5.5 times as much.
+
+### Batched reads
+
+With `Config::batch_reads(true)`, the `SELECT`s that a pool's shared connection has waiting when it writes go to the server under one `Sync`, at most 16, behind a prepared statement that makes their transaction read-only; a statement never waits for others to join it. The server then sends one reply and wakes the client once per batch rather than once per statement, which matters when the server is the busy side. Measured with `bench/postgres.sh` (`batch` mode, 3 rounds of 5 s, 64 tasks, `point`; results in `bench/results/postgres/batch/`):
+
+| Server cores | Connections | without batches | p99 | with batches | p99 |
+|---|---|---|---|---|---|
+| 1 | 1 | 58.7k (54–61k) | 2.0 ms | **198.3k** (197–204k) | **0.56 ms** |
+| 1 | 4 | 50.5k (49–55k) | 12.5 ms | **171.9k** (167–187k) | **0.75 ms** |
+| 3 | 4 | 314.2k (273–327k) | 2.5 ms | **370.4k** (318–372k) | **0.39 ms** |
+
+- **3.4 times the point lookups when the database is the limit, and up to 18% more with it on three cores**, where the client core is then no longer full (71% busy against 98%): the server's work per statement is what shrinks.
+- **No gain for the 100-row reads** (`list`: 81.6k against 80.5k on three cores, 21.8k against 22.6k on one; the ranges overlap): producing the rows costs far more than the reply's `send()`.
+- **The full path of an HTTP request gains little**, because there the HTTP side is the limit (`bench/db-path.sh`, results in `bench/results/db-path/`): with one giong worker and the database on two cores, 82.9k against 86.9k requests a second (ranges 79–96k and 75–93k), the database 84% busy against 93%; with two giong workers and the database on one core (`db-bound/`), 96.9k against 91.7k, p99 3.1 ms against 4.7 ms. Few requests arrive in the same tick for one connection there: 1.7 statements a batch on average, measured from the server's transaction count. One request at a time is unchanged (88–92 µs median).
+- **Transaction-local settings.** The statements of a batch share one transaction, so a setting made with `set_config(.., true)` would apply to the other tasks' statements after it in the batch. A `SELECT` whose text calls `set_config` therefore runs alone; one that calls a function that makes such a setting (`set_config(.., true)` or `SET LOCAL` inside it) cannot be seen, so leave `batch_reads` off where row-level security or anything else is set up that way per request.
+- What else changes for a statement in a batch is in the documentation of `Config::batch_reads`: in short, a write is refused in the batch (`25006`) and the statement is sent again alone; when a statement or the batch's commit fails, the batch is rolled back and every other statement of it is sent again alone; answers arrive when the batch ends; `now()` is the batch's start.
+- MySQL has nothing like it: its protocol has no `Sync`, every statement gets its own reply, and giong-mysql already pipelines them.
+
+Not measured: a server on another machine (network latency, where pipelining should matter more), writes, more than one client core, PostgreSQL versions other than 16. Results are in `bench/results/postgres/`; pool sizes other than 4 in `pool-size/`.
+
+## Not there yet
+
+`COPY`, `LISTEN`/`NOTIFY`, streaming a result one row at a time (a result is collected in full, up to `max_result_size`), arrays, `numeric`, `uuid`, `date` and the other types not listed above in binary form (read them as strings), channel binding (`SCRAM-SHA-256-PLUS`), client certificates in the URL (`sslcert` and `sslkey` are refused; in code, give the connector one with `TlsConnector::client_auth`), several hosts with failover, running through PgBouncer without `max_prepared_statements`, and SASLprep normalization of non-ASCII passwords. The crate has had one independent review before 1.0, whose findings are fixed, but no security audit.
+
+## Tests
+
+`cargo test -p giong-postgres`: 70 tests against a real PostgreSQL server that the test binary starts for itself (a throwaway cluster from `initdb`, with users for SCRAM, MD5, clear text and TLS only, listening on a Unix socket, 127.0.0.1 and 127.0.0.2): every supported type in both directions; conversion errors; server errors and their fields; pipelining across tasks, and a failing statement in the middle of a pipeline; the statement cache, its bound, statement names an application took, and schema changes under cached statements, in and out of a transaction; notices and errors larger than the result limit; the result-size limit; the statement timeout, and leaving it to the server; cancel requests; a query dropped mid-flight; a connection the server terminates; transactions committed, rolled back and dropped, and a `COMMIT` turned into a rollback; no task or connection left behind after a client is dropped; TLS against the right and the wrong authority and host; each authentication method with the right and the wrong password, and `require_auth`; SCRAM keys derived once and off the worker; a server that answers the TLS request with extra bytes; a clear-text password never sent unencrypted; the connect timeout; and the pool (spreading statements, exclusive use and the rollback on return, even with `BEGIN` still in flight, the session reset on return and no reset for an unused connection, `get()` served in order while shared statements keep every connection busy, waiting, and waking when a dropped statement frees the connection, cancel tokens that stop working on return, idle and old connections closed, at most 1024 statements per connection at a time, replacing broken connections, connect errors, a slow statement not holding up the others, transaction and session statements refused on shared connections and a batch that leaves a transaction open; batched reads: each statement's own rows, one failing statement among good ones, `SELECT`s that write and lock rows, reads after writes, statements leaving the cache mid-batch, an error at a batch's commit, statements rolled back with their batch and run again, a statement that calls `set_config` kept out of batches (and one hidden in a function shared within its batch), the read-only guard prepared again after a `DEALLOCATE`, and no deadlock with a migration or with another batch taking locks in the opposite order). Two of them run a workload through PgBouncer in transaction mode, with the statement timeout left to the role, when PgBouncer is installed. 45 unit tests: the message encoder and parser, SCRAM against the RFC 7677 example, MD5 against RFC 1321, URLs, type conversions and how their errors name types, the statements the pool refuses and the ones it batches (never one that calls `set_config`), which errors are worth a retry, the old names of renamed methods, 42,000 random inputs for the message parser, the URL parser and SCRAM, and 300 sessions against a fake server answering with mutated replies (also the `session` fuzz target). 8 documentation examples.
+
+The tests find PostgreSQL through `GIONG_PG_BIN`, `/usr/lib/postgresql/*/bin` or `PATH`, and skip when it is not installed, unless `GIONG_PG_REQUIRED=1` (CI sets it); PgBouncer likewise through `GIONG_PGBOUNCER_BIN`, `PATH` or `/usr/sbin`, and `GIONG_PGBOUNCER_REQUIRED=1`. Run as root, they start the server as the `postgres` user. They also pass under ThreadSanitizer and on the fallback io_uring setups (`scripts/check.sh tsan` and `fallback`).
+</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.3.0, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use giong-postgres as documented below.
+
+Rules for giong code:
+- Start the runtime with giong::Builder::new().shutdown_on_signals(true).build()?.run(|_worker| async { .. }); there are no macros. Build listeners, routers, pools and clients inside each worker's future.
+- Never block a worker: no std::fs, std::net or std::thread::sleep; use giong::fs, giong::net and giong::time. Run heavy work on std::thread::spawn and await a giong::sync::oneshot.
+- Futures need not be Send. Per-worker state is Rc<RefCell<T>>, never borrowed across an .await.
+- Bind IP addresses ("0.0.0.0:8080"), never host names.
+- Match errors with giong::error::code(&err); every GIONG-Exxxx code has a page that says how to fix it.
+- Use the giong crate for each job (giong-http, giong-web, giong-postgres, giong-redis, ...). Crates that need the Tokio runtime (sqlx, reqwest, tonic's transport) panic on a giong worker.
+More facts: https://giong.run/llms.txt. Best practices: https://giong.run/docs/best-practices.md
+
+My task: <describe what to build or fix>
+
+Documentation of giong-postgres, giong 1.3.0 (https://giong.run/docs/giong-postgres.md):
+
+# giong-postgres
+
+> giong 1.3.0 · https://giong.run/docs/giong-postgres/ · source: https://github.com/giong-run/Giong/blob/v1.3.0/giong-postgres/README.md
+
+A PostgreSQL client and connection pool for the [giong](https://github.com/giong-run/Giong/blob/v1.3.0/README.md) runtime. It speaks the wire protocol itself (no libpq), encrypts with [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.3.0/giong-tls/README.md), and depends on nothing from the Tokio ecosystem.
+
+```toml
+[dependencies]
+giong = "1.3.0"
+giong-postgres = "1.3.0"
+```
+
+```rust,no_run
+use giong_postgres::{Client, Config};
+
+fn main() -> Result<(), giong_postgres::Error> {
+    let config = Config::from_url("postgres://app:secret@localhost/shop")?;
+    giong::block_on(async {
+        let client = Client::connect(&config).await?;
+        let rows = client
+            .query("SELECT id, name FROM products WHERE price < $1", &[&100i32])
+            .await?;
+        for row in &rows {
+            let id: i64 = row.get("id")?;
+            let name: &str = row.get("name")?;
+            println!("{id} {name}");
+        }
+        Ok(())
+    })
+}
+```
+
+In a service, make one `Pool` per worker. Nothing is shared between threads, so nothing is locked:
+
+```rust,no_run
+use giong_postgres::{Config, Pool};
+
+fn main() -> std::io::Result<()> {
+    let config = Config::from_url("postgres://app:secret@db.internal/shop")?;
+    giong::Builder::new().build()?.run(move |_worker| {
+        let pool = Pool::new(config.clone(), 4);
+        async move {
+            // ... serve requests, each one calling pool.query(..) ...
+            let row = pool.query_one("SELECT count(*) FROM orders", &[]).await.unwrap();
+            let n: i64 = row.get(0).unwrap();
+            println!("{n} orders");
+        }
+    })
+}
+```
+
+## What it does
+
+- **Pipelining across tasks.** Tasks that share a connection send their statements together, and one round trip answers all of them. A few connections serve hundreds of concurrent tasks without each task waiting for a connection of its own.
+- **Prepared statements, kept.** Every statement is prepared the first time a connection runs it and kept in a bounded cache (256 per connection by default), so from then on it takes one round trip. When the schema changes under a cached statement (`ALTER TABLE`, a view replaced), the statement is prepared again and run once more, so the caller sees no error; inside a transaction the server has already aborted the transaction, so that one call fails with the server's error and the next one is prepared again. Stale statements are recognised by SQLSTATE and the server's routine name, so this works whatever language the server writes its messages in.
+- **Binary results for the common types** (`boolean`, `bytea`, the integers, `oid`, the floats, `timestamptz`), and text for the rest. A column of a text-format type (`uuid`, `numeric`, `date`, `timestamp`, `jsonb`, arrays, `interval`, `inet` and the like) can be read as a `String`; a binary one is read as its Rust type in the [table](#types) below, or cast in SQL (`created_at::text`).
+- **A pool per worker.** Statements that stand alone share connections; `pool.get()` takes one connection for a transaction, session settings or a slow statement. When it comes back, a transaction left open is rolled back and the session is reset (settings, temporary tables, advisory locks, `LISTEN`, cursors), so nothing one task did reaches the next. Tasks waiting in `get()` are served in the order they came, even while shared statements keep every connection busy. `get()` can take every connection of the pool: while all of them are held, the pool's own `query` waits too, and fails with `GIONG-E3009` when the wait runs out, so size a pool for the transactions that run at once and one connection more. Transactions and session changes never run on the shared connections: the pool's own methods refuse `BEGIN`, `SET`, `LISTEN`, `PREPARE`, temporary tables and the like before sending them, and a batch that leaves a transaction open closes its connection rather than let the statements of other tasks run inside it. The pool steers new statements away from a connection whose oldest statement has been running for more than 5 ms, so a slow query does not hold up the fast ones behind it. Connections are closed after 10 minutes unused and replaced after 30 minutes, or as soon as their server turns out to be a standby after a failover.
+- **TLS on by default for remote hosts, always verified.** SCRAM-SHA-256, MD5, and clear-text passwords only over TLS or to this machine. `require_auth` limits the methods the server may ask for. SCRAM's key derivation runs on a thread of its own, once per password and salt, so connecting does not stall the other tasks of the worker.
+- **Errors that say what to do.** Every error has an `ErrorKind`; errors from the server carry the SQLSTATE code and every field the server sent (`detail`, `hint`, `constraint`...).
+- **Finite limits everywhere.** Connecting, running a statement, the size of a result, the statement cache and waiting for the pool all have a limit by default, so nothing waits forever and nothing grows without bound.
+
+## Connecting
+
+```rust
+use std::time::Duration;
+use giong_postgres::{Config, Error};
+
+fn configs() -> Result<(), Error> {
+    let config = Config::from_url("postgres://app:secret@db.internal:5432/shop?sslmode=verify-full")?;
+
+    let same_place = Config::new()
+        .host("db.internal")
+        .user("app")
+        .password("secret")
+        .database("shop")
+        .statement_timeout(Duration::from_secs(5));
+    let _ = (config, same_place);
+    Ok(())
+}
+```
+
+A URL is `postgres://user:password@host:port/dbname?param=value` (`postgresql://` too). The host can be an IPv6 address in brackets, or, as with libpq, empty with the socket directory in a `host` parameter: `postgres:///shop?host=/var/run/postgresql`. The parameters understood are `sslmode`, `sslrootcert`, `host`, `port`, `user`, `password`, `dbname`, `application_name`, `connect_timeout` (seconds) and `require_auth`. Any other parameter is an error, not silently ignored.
+
+**TLS.** Unless `Config::tls` or `sslmode` says otherwise:
+
+| Where the server is | What happens |
+|---|---|
+| A Unix socket (a host starting with `/`) | No TLS. |
+| A loopback address (`localhost`, `127.0.0.0/8`, `::1`) | No TLS. |
+| Anywhere else | TLS, with the certificate checked against the certificate authorities installed on the machine and against the host name. |
+
+`sslmode=disable` turns TLS off. `require`, `verify-ca` and `verify-full` all check the certificate and the host name, which is stricter than libpq (libpq checks nothing for `require`). `prefer` and `allow` are refused, because they fall back to an unencrypted connection without saying so. `sslrootcert=/path/ca.pem` trusts only that authority; in code, use `Tls::Verify(TlsConnector::with_root_pem(..)?)`. When TLS is requested and the server does not support it, connecting fails.
+
+A clear-text password is never sent over an unencrypted connection to another machine: the connection fails with `ErrorKind::Auth` instead.
+
+**Authentication.** Without TLS (a Unix socket, a loopback address, `sslmode=disable`), nothing proves the server is the real one, and an impostor could ask for MD5 instead of SCRAM or let the client in without asking. `Config::require_auth(&[AuthMethod::ScramSha256])`, or `require_auth=scram-sha-256` in the URL (libpq's names, comma-separated, without libpq's `!` negations), refuses any other method before anything is sent for the password.
+
+### Behind PgBouncer
+
+In transaction mode, PgBouncer gives each transaction any server connection, so two things need setting up:
+
+- **Prepared statements** need PgBouncer 1.21 or later with `max_prepared_statements` above 0 (it then prepares them on whichever server connection runs them). With it, the statement cache works as usual. Without it, prepared statements cannot work through PgBouncer in transaction mode, whatever `statement_cache_capacity` is.
+- **The statement timeout** cannot be sent when connecting: PgBouncer refuses the connection, and neither `track_extra_parameters` nor `ignore_startup_parameters` passes it on to the server (checked with PgBouncer 1.22). Call `Config::statement_timeout(None)` and set the limit on the role: `ALTER ROLE app SET statement_timeout = '30s'`. Connecting without `None` fails with an error that says this.
+
+Both are tested in CI against PgBouncer in transaction mode.
+
+## API
+
+| | |
+|---|---|
+| `Client::connect(&config)` | Opens a connection: TCP or Unix socket, TLS, authentication, all within `connect_timeout`. |
+| `client.query(sql, &[&a, &b])` | All the rows, as `Vec<Row>`. Parameters are `$1`, `$2`... |
+| `client.query_one(..)`, `query_opt(..)` | Exactly one row (`ErrorKind::RowCount` otherwise); at most one. |
+| `client.execute(..)` | The number of rows affected. |
+| `client.batch_execute(sql)` | Several statements separated by `;`, through the simple protocol, with no parameters and no results. For migrations and setup. |
+| `client.transaction()` | Starts a transaction and borrows the client mutably until it ends. `tx.commit()` or `tx.rollback()`; dropping the transaction rolls it back. A `COMMIT` that the server turned into a rollback (because of an earlier error) is an error, not a success. |
+| `client.cancel_token()` | A `CancelToken` whose `cancel()` asks the server, over a separate connection, to stop the statement running now. A token taken from a `PooledClient` stops working when the connection goes back to the pool, so it cannot cancel another task's statement. |
+| `client.parameter(name)` | A setting the server reported, such as `server_version` or `TimeZone`. |
+| `client.is_closed()`, `client.in_flight()` | Whether the connection is closed; how many requests are waiting for their answer. |
+| `row.get::<T>(column)` | A column by position or name, converted to `T` (see [Types](#types)). Borrowed types (`&str`, `&[u8]`) borrow from the row. |
+| `row.is_null(column)`, `row.columns()`, `row.len()` | Whether a value is `NULL`; the columns' names and types; how many there are. |
+| `Pool::new(config, max_size)` | A pool for the current worker. Connections are opened when needed, up to `max_size`. Size it to the database server's cores, shared among the workers (see [Performance](#performance)). |
+| `.wait_timeout(duration)` | How long `get()` and the statement methods wait when every connection is taken, 5 s by default. |
+| `.idle_timeout(duration)`, `.max_lifetime(duration)` | Close a connection unused for this long (10 min by default); replace one older than this (30 min, less up to 10% so that connections opened together are not replaced together). |
+| `pool.query(..)` and the other statement methods | Run on the least busy connection, pipelined with other tasks' statements. They refuse transaction statements, session changes and `COPY ... FROM STDIN` before sending them (`ErrorKind::Statement`). |
+| `Config::batch_reads(true)` | Lets the pool send the `SELECT`s waiting for one shared connection under one `Sync`, up to 16, never waiting for more (see [Batched reads](#batched-reads)). Off by default. |
+| `pool.get()` | A `PooledClient` for this task alone, which derefs to `Client`. For transactions, session settings and statements known to be slow. Served in the order asked. When it is dropped, a transaction left open is rolled back and, if anything was sent, the session is reset; settings given to `Config` survive the reset. |
+| `pool.stats()` | Connections open, taken, being opened; requests in flight; tasks waiting; and counters for connections opened, connect errors, wait timeouts and connections recycled. |
+| `Config::require_auth(&[AuthMethod::..])` | The only authentication methods the server may ask for. |
+
+A `Client` belongs to the worker that opened it (it is not `Send`, like everything in giong). Its methods take `&self`, so tasks share one by cloning an `Rc` or by holding a reference, and their statements are pipelined.
+
+## Types
+
+| Rust | PostgreSQL |
+|---|---|
+| `bool` | `boolean` |
+| `i16`, `i32`, `i64` | `smallint`, `integer`, `bigint` (any of them, checked for range); `oid` |
+| `f32`, `f64` | `real`, `double precision` |
+| `&str`, `String` | `text`, `varchar`, `char(n)`, `name`; as parameters, any type the server can parse from text (`uuid`, `numeric`, `date`, `json`...); as results, any column the rest of this table does not list |
+| `&[u8]`, `Vec<u8>` | `bytea` |
+| `SystemTime` | `timestamptz` |
+| `Option<T>` | `NULL` or a value |
+
+Integers convert between the three integer types when the value fits and fail when it does not, with an error that names the parameter or column, so a conversion never loses anything silently. Implement `ToSql` and `FromSql` for your own types.
+
+## Errors
+
+`Error` is cheap to clone, implements `std::error::Error`, and converts into `io::Error`. `error.kind()` says what went wrong. Each kind has a giong error code, shown in front of the message and linked to its page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/README.md) (`GIONG-E3003: password authentication failed for user "app". See …`); after `?` into an `io::Error`, `giong::error::code(&err)` finds it:
+
+| `ErrorKind` | Code | Meaning |
+|---|---|---|
+| `Config` | [E3001](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3001.md) | The configuration or URL is not valid. |
+| `Connect` | [E3002](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3002.md) | Name resolution, TCP, TLS, or the connect timeout. Also an unknown database (`3D000`). |
+| `Auth` | [E3003](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3003.md) | The server refused the credentials, or asked for a method this crate does not support. |
+| `Db` | [E3004](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3004.md) | The server reported an error for the statement; `error.server_code()` is the SQLSTATE (`23505` for a unique violation...) and `error.db()` has every field. A `COMMIT` that the server turned into a rollback is `Db` with code `25P02` and no `db()`. |
+| `Type` | [E3005](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3005.md) | A value could not be converted between Rust and PostgreSQL. The message names the parameter or column and suggests the Rust type to use. |
+| `RowCount` | [E3006](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3006.md) | `query_one` found no row, or more than one. |
+| `TooLarge` | [E3007](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3007.md) | The result was larger than `max_result_size`. The connection stays usable. |
+| `Closed` | [E3008](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3008.md) | The connection is closed. A `Pool` replaces it by itself. Also a cancel token whose pooled connection went back to the pool. |
+| `PoolTimeout` | [E3009](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3009.md) | No pooled connection became free within `wait_timeout`. |
+| `Protocol` | [E3010](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3010.md) | The server sent something this crate cannot understand. The connection is closed. |
+| `Statement` | [E3011](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3011.md) | Refused before sending, on the connections a `Pool` shares: a transaction statement, a statement that changes the session (`SET`, `LISTEN`, `PREPARE`, temporary tables...), or `COPY ... FROM STDIN`. Use `pool.get()`. The check reads the statement, not what a function does: `SELECT set_config('search_path', 'x', false)` is sent, and changes the session for every task that shares the connection. |
+
+`error.is_transient()` is true for errors worth retrying after a pause: connecting, a closed connection, a pool wait timeout, and the server's serialization failure (`40001`), deadlock (`40P01`), lock not available (`55P03`), too many connections (`53300`), connection errors (class `08`), shutdown or startup (`57P01`, `57P02`, `57P03`) and standby (`25006`). Retry a whole transaction, not its failed statement.
+
+An error from the server affects only its own statement: the statements that other tasks pipelined on the same connection get their own results. Two things close the connection instead, and every statement sent on it after them fails with `ErrorKind::Closed`: `COPY ... FROM STDIN` on a `Client` (COPY is not supported yet; the pool refuses it), and a `batch_execute` that leaves a transaction open on a pool's shared connection.
+
+## Limits
+
+| Setting | Default | What happens at the limit |
+|---|---|---|
+| `Config::connect_timeout` | 10 s | `ErrorKind::Connect`, "connect timeout". |
+| `Config::statement_timeout` | 30 s | Sent as the session's `statement_timeout`, so the server cancels exactly the statement that ran too long (SQLSTATE `57014`). From 1 ms to `i32::MAX` ms (24.8 days); outside that, connecting fails with `ErrorKind::Config`. `None` sends nothing and leaves the limit to the server or the role. |
+| `Config::max_result_size` | 64 MiB of row data | `ErrorKind::TooLarge`; the rest of the result is read and thrown away. A notice larger than this is skipped; an error message larger than this fails its statement with `TooLarge`. Either way the connection stays usable. |
+| `Config::statement_cache_capacity` | 256 per connection | The least recently used statement is closed. 0 prepares and closes every statement each time. |
+| `Pool::wait_timeout` | 5 s | `ErrorKind::PoolTimeout`. It bounds the wait for a connection; a task that opens a new connection itself waits up to `connect_timeout` instead. |
+| `Pool::idle_timeout` | 10 min | The connection is closed. |
+| `Pool::max_lifetime` | 30 min, less up to 10% | The connection is closed once no statement uses it, and a new one is opened when needed. |
+| Statements on one pooled connection at a time | 1024 | The statement methods use another connection, or wait for room. A `Client` used directly has no such bound: its callers decide how many tasks share it. |
+
+## Performance
+
+Measured with `bench/postgres.sh` against tokio-postgres 0.7.18 with deadpool-postgres 0.14.2 (Tokio 1.54, current-thread runtime). Each client runs on one core; the same PostgreSQL 16 server runs on the other three cores of a 4-vCPU virtual machine (Xeon 2.1 GHz, Linux 6.18), reached over TCP on 127.0.0.1. 64 tasks issue statements back to back: `point` reads one row by primary key, `list` reads 100 rows, and every column of every row is decoded (`i64`, two `&str`, `SystemTime`). The figures are medians of 5 rounds of 5 s (3 rounds for the other pool sizes), with the range in brackets.
+
+A pool, on one client core:
+
+| Client | Connections | `point` statements/s | p99 | `list` statements/s | p99 |
+|---|---|---|---|---|---|
+| **giong-postgres** | 3 | **311.4k** (308–322k) | **0.43 ms** | **71.3k** (70–74k) | **2.0 ms** |
+| giong-postgres | 4 | 303.8k (277–317k) | 2.9 ms | 72.9k (64–76k) | 4.9 ms |
+| tokio-postgres + deadpool | 4 | 55.4k (53–56k) | 1.7 ms | 25.4k (24–26k) | 3.9 ms |
+| tokio-postgres + deadpool | 64, its best | 93.8k (91–97k) | 1.5 ms | 28.6k (27–29k) | 4.1 ms |
+
+- **Against deadpool at its best: 3.3× the point lookups and 2.5× the 100-row reads, at a third to a half of the p99.** deadpool's client core is the limit (98–99% busy): every statement is a pool checkout, a round trip and a wake-up. giong-postgres sends the statements of all 64 tasks in a few writes and reads their answers in a few reads.
+- **Size the pool to the database's cores.** With more connections than the server has cores (4 on 3 here), one backend at a time waits for a core, and the statements pipelined on its connection, about 16 of them, wait with it: the same throughput, but a p99 of 2.9 ms instead of 0.43. 8 connections give 253.8k at a p99 of 1.4 ms (8.6 ms for 100 rows); 2 connections leave a server core idle, 183.9k. With several workers, the connections of all their pools add up. Statements that wait on disk or on locks need more connections than this.
+- **One connection shared by every task** (both libraries pipeline): the single backend process is the limit, one server core at 100%, and here giong-postgres is behind: its medians are 7–9% lower (point 47.7k against 51.4k, list 18.7k against 20.5k; the same with the two run in the other order), though the ranges of the rounds overlap, and it uses less of its core (50% against 52%, 43% against 64%). Both send the same messages, one `Sync` per statement, and the server spends half of its time in `send()`, writing one reply per statement and waking the client for it, and the gap is in that part (a quarter of the server's time with giong-postgres, against slightly less with tokio-postgres, whose busier client needs waking less often). Sending several statements under one `Sync` cuts the server's work, but it runs them in one transaction, so it is only done by a pool with `batch_reads` (below). Use a `Pool`, where the client is the limit and giong-postgres does 5.5 times as much.
+
+### Batched reads
+
+With `Config::batch_reads(true)`, the `SELECT`s that a pool's shared connection has waiting when it writes go to the server under one `Sync`, at most 16, behind a prepared statement that makes their transaction read-only; a statement never waits for others to join it. The server then sends one reply and wakes the client once per batch rather than once per statement, which matters when the server is the busy side. Measured with `bench/postgres.sh` (`batch` mode, 3 rounds of 5 s, 64 tasks, `point`; results in `bench/results/postgres/batch/`):
+
+| Server cores | Connections | without batches | p99 | with batches | p99 |
+|---|---|---|---|---|---|
+| 1 | 1 | 58.7k (54–61k) | 2.0 ms | **198.3k** (197–204k) | **0.56 ms** |
+| 1 | 4 | 50.5k (49–55k) | 12.5 ms | **171.9k** (167–187k) | **0.75 ms** |
+| 3 | 4 | 314.2k (273–327k) | 2.5 ms | **370.4k** (318–372k) | **0.39 ms** |
+
+- **3.4 times the point lookups when the database is the limit, and up to 18% more with it on three cores**, where the client core is then no longer full (71% busy against 98%): the server's work per statement is what shrinks.
+- **No gain for the 100-row reads** (`list`: 81.6k against 80.5k on three cores, 21.8k against 22.6k on one; the ranges overlap): producing the rows costs far more than the reply's `send()`.
+- **The full path of an HTTP request gains little**, because there the HTTP side is the limit (`bench/db-path.sh`, results in `bench/results/db-path/`): with one giong worker and the database on two cores, 82.9k against 86.9k requests a second (ranges 79–96k and 75–93k), the database 84% busy against 93%; with two giong workers and the database on one core (`db-bound/`), 96.9k against 91.7k, p99 3.1 ms against 4.7 ms. Few requests arrive in the same tick for one connection there: 1.7 statements a batch on average, measured from the server's transaction count. One request at a time is unchanged (88–92 µs median).
+- **Transaction-local settings.** The statements of a batch share one transaction, so a setting made with `set_config(.., true)` would apply to the other tasks' statements after it in the batch. A `SELECT` whose text calls `set_config` therefore runs alone; one that calls a function that makes such a setting (`set_config(.., true)` or `SET LOCAL` inside it) cannot be seen, so leave `batch_reads` off where row-level security or anything else is set up that way per request.
+- What else changes for a statement in a batch is in the documentation of `Config::batch_reads`: in short, a write is refused in the batch (`25006`) and the statement is sent again alone; when a statement or the batch's commit fails, the batch is rolled back and every other statement of it is sent again alone; answers arrive when the batch ends; `now()` is the batch's start.
+- MySQL has nothing like it: its protocol has no `Sync`, every statement gets its own reply, and giong-mysql already pipelines them.
+
+Not measured: a server on another machine (network latency, where pipelining should matter more), writes, more than one client core, PostgreSQL versions other than 16. Results are in `bench/results/postgres/`; pool sizes other than 4 in `pool-size/`.
+
+## Not there yet
+
+`COPY`, `LISTEN`/`NOTIFY`, streaming a result one row at a time (a result is collected in full, up to `max_result_size`), arrays, `numeric`, `uuid`, `date` and the other types not listed above in binary form (read them as strings), channel binding (`SCRAM-SHA-256-PLUS`), client certificates in the URL (`sslcert` and `sslkey` are refused; in code, give the connector one with `TlsConnector::client_auth`), several hosts with failover, running through PgBouncer without `max_prepared_statements`, and SASLprep normalization of non-ASCII passwords. The crate has had one independent review before 1.0, whose findings are fixed, but no security audit.
+
+## Tests
+
+`cargo test -p giong-postgres`: 70 tests against a real PostgreSQL server that the test binary starts for itself (a throwaway cluster from `initdb`, with users for SCRAM, MD5, clear text and TLS only, listening on a Unix socket, 127.0.0.1 and 127.0.0.2): every supported type in both directions; conversion errors; server errors and their fields; pipelining across tasks, and a failing statement in the middle of a pipeline; the statement cache, its bound, statement names an application took, and schema changes under cached statements, in and out of a transaction; notices and errors larger than the result limit; the result-size limit; the statement timeout, and leaving it to the server; cancel requests; a query dropped mid-flight; a connection the server terminates; transactions committed, rolled back and dropped, and a `COMMIT` turned into a rollback; no task or connection left behind after a client is dropped; TLS against the right and the wrong authority and host; each authentication method with the right and the wrong password, and `require_auth`; SCRAM keys derived once and off the worker; a server that answers the TLS request with extra bytes; a clear-text password never sent unencrypted; the connect timeout; and the pool (spreading statements, exclusive use and the rollback on return, even with `BEGIN` still in flight, the session reset on return and no reset for an unused connection, `get()` served in order while shared statements keep every connection busy, waiting, and waking when a dropped statement frees the connection, cancel tokens that stop working on return, idle and old connections closed, at most 1024 statements per connection at a time, replacing broken connections, connect errors, a slow statement not holding up the others, transaction and session statements refused on shared connections and a batch that leaves a transaction open; batched reads: each statement's own rows, one failing statement among good ones, `SELECT`s that write and lock rows, reads after writes, statements leaving the cache mid-batch, an error at a batch's commit, statements rolled back with their batch and run again, a statement that calls `set_config` kept out of batches (and one hidden in a function shared within its batch), the read-only guard prepared again after a `DEALLOCATE`, and no deadlock with a migration or with another batch taking locks in the opposite order). Two of them run a workload through PgBouncer in transaction mode, with the statement timeout left to the role, when PgBouncer is installed. 45 unit tests: the message encoder and parser, SCRAM against the RFC 7677 example, MD5 against RFC 1321, URLs, type conversions and how their errors name types, the statements the pool refuses and the ones it batches (never one that calls `set_config`), which errors are worth a retry, the old names of renamed methods, 42,000 random inputs for the message parser, the URL parser and SCRAM, and 300 sessions against a fake server answering with mutated replies (also the `session` fuzz target). 8 documentation examples.
+
+The tests find PostgreSQL through `GIONG_PG_BIN`, `/usr/lib/postgresql/*/bin` or `PATH`, and skip when it is not installed, unless `GIONG_PG_REQUIRED=1` (CI sets it); PgBouncer likewise through `GIONG_PGBOUNCER_BIN`, `PATH` or `/usr/sbin`, and `GIONG_PGBOUNCER_REQUIRED=1`. Run as root, they start the server as the `postgres` user. They also pass under ThreadSanitizer and on the fallback io_uring setups (`scripts/check.sh tsan` and `fallback`).
+</script>
+  </article>
+  <nav class="toc doc-toc" aria-label="On this page"><p>On this page</p><div class="toc-links"><a href="#what-it-does">What it does</a><a href="#connecting">Connecting</a><a href="#api">API</a><a href="#types">Types</a><a href="#errors">Errors</a><a href="#limits">Limits</a><a href="#performance">Performance</a><a href="#not-there-yet">Not there yet</a><a href="#tests">Tests</a></div></nav>
+</div>
+</main>
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr-grid">
+      <div class="ftr-brand">
+        <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="22" height="22"></picture><span>giong</span></a>
+        <p>A thread-per-core async runtime for Rust, built on io_uring and made for the code agents write.</p>
+        <p class="ftr-social">
+          <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
+          <a class="icon-btn" href="https://x.com/giongrun" aria-label="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
+          <a class="icon-btn" href="https://github.com/giong-run/Giong/releases.atom" aria-label="Release feed"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3a16 16 0 0 1 16 16h-3A13 13 0 0 0 5 6Zm0 6a10 10 0 0 1 10 10h-3a7 7 0 0 0-7-7Zm1.5 6.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z"/></svg></a>
+        </p>
+      </div>
+      <nav class="ftr-col" aria-label="Learn">
+        <h2>Learn</h2>
+        <a href="/docs/">Get started</a>
+        <a href="/docs/#examples">Examples</a>
+        <a href="https://docs.rs/giong/1.3.0/giong/">API reference</a>
+        <a href="/docs/#errors">Error codes</a>
+        
+        <a href="/llms.txt">llms.txt</a>
+      </nav>
+      <nav class="ftr-col" aria-label="Project">
+        <h2>Project</h2>
+        <a href="/crates/">Crates</a>
+        <a href="/benchmarks/">Benchmarks</a>
+        <a href="/roadmap/">Roadmap</a>
+        <a href="/releases/">Releases</a>
+      </nav>
+      <nav class="ftr-col" aria-label="Community">
+        <h2>Community</h2>
+        <a href="https://github.com/giong-run/Giong">GitHub</a>
+        <a href="https://x.com/giongrun">X · @giongrun</a>
+        <a href="https://github.com/giong-run/Giong/issues">Issues</a>
+        <a href="https://github.com/giong-run/Giong/blob/main/CONTRIBUTING.md">Contributing</a>
+        <a href="https://github.com/giong-run/Giong/security/advisories/new">Report a vulnerability</a>
+      </nav>
+    </div>
+    <div class="ftr-base">
+      <span>© 2026 <a href="https://github.com/thekivashyn">thekivashyn</a> and the giong contributors. MIT or Apache-2.0.</span>
+      <span class="ramp" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+    </div>
+  </div>
+</footer>
+<script src="/main.js" defer></script>
+</body>
+</html>

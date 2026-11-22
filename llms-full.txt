@@ -1,6 +1,6 @@
 # giong 1.3.0: the documentation in one file
 
-> The README of every crate and of the example service, the deployment notes and every
+> The README of every crate and of the example service, the best practices, the deployment notes and every
 > error code page of giong 1.3.0, as released in v1.3.0. Links point at the same
 > release. The short index is https://giong.run/llms.txt.
 
