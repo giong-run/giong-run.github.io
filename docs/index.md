@@ -164,7 +164,7 @@ Not crates that need the Tokio runtime; giong has its own HTTP, TLS, PostgreSQL,
 
 **Is it faster than Tokio?**
 
-Sometimes, and the benchmarks page says where. Small responses at 50 connections are a tie. giong makes about 0.03 system calls per request against 2.05, spends the least CPU per request at 5,000 connections, and reads files 5.5 times faster than Tokio on one core. On bare metal with 8 workers it served 2.45M requests/s against raw Tokio's 2.16M.
+Sometimes, and the benchmarks page says where. Small responses at 50 connections are a tie. giong makes about 0.03 system calls per request against 2.05, spends the least CPU per request at 5,000 connections, and reads files 8 times faster than Tokio on one core. On bare metal with 8 workers it served 2.45M requests/s against raw Tokio's 2.16M.
 
 **How do I report a security problem?**
 
