@@ -6,6 +6,8 @@
   <url><loc>https://giong.run/benchmarks/</loc></url>
   <url><loc>https://giong.run/roadmap/</loc></url>
   <url><loc>https://giong.run/releases/</loc></url>
+  <url><loc>https://giong.run/docs/best-practices/</loc></url>
+  <url><loc>https://giong.run/docs/agent-skill/</loc></url>
   <url><loc>https://giong.run/docs/giong/</loc></url>
   <url><loc>https://giong.run/docs/giong-proto/</loc></url>
   <url><loc>https://giong.run/docs/giong-grpc-build/</loc></url>
@@ -21,5 +23,6 @@
   <url><loc>https://giong.run/docs/giong-compat/</loc></url>
   <url><loc>https://giong.run/docs/deployment/</loc></url>
   <url><loc>https://giong.run/docs/stability/</loc></url>
+  <url><loc>https://giong.run/docs/benchmark-tables/</loc></url>
   <url><loc>https://giong.run/docs/errors/</loc></url>
 </urlset>

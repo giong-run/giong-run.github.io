@@ -1,13 +1,13 @@
 # giong-mcp
 
-> giong 1.3.0 · https://giong.run/docs/giong-mcp/ · source: https://github.com/giong-run/Giong/blob/v1.3.0/giong-mcp/README.md
+> giong 1.4.0 · https://giong.run/docs/giong-mcp/ · source: https://github.com/giong-run/Giong/blob/v1.4.0/giong-mcp/README.md
 
-An [MCP](https://modelcontextprotocol.io) server that lets an AI agent look inside a running [giong](https://github.com/giong-run/Giong/blob/v1.3.0/README.md) service: what each worker is doing, which tasks are alive and which line spawned them, what the connection pools hold, and where the time goes. Read-only, on a loopback address or a Unix socket, and only when the service turns it on.
+An [MCP](https://modelcontextprotocol.io) server that lets an AI agent look inside a running [giong](https://github.com/giong-run/Giong/blob/v1.4.0/README.md) service: what each worker is doing, which tasks are alive and which line spawned them, what the connection pools hold, and where the time goes. Read-only, on a loopback address or a Unix socket, and only when the service turns it on.
 
 ```toml
 [dependencies]
-giong = "1.3.0"
-giong-mcp = "1.3.0"
+giong = "1.4.0"
+giong-mcp = "1.4.0"
 ```
 
 ```rust,no_run
@@ -90,8 +90,8 @@ The runtime keeps the data; this crate only serves it. In `giong`:
 
 Whoever can reach the server can read the internals of the service: task locations, pool addresses (never user names or passwords), memory figures. So:
 
-- It listens on `127.0.0.1`, `::1` or a Unix socket, and refuses any other address with [GIONG-E1301](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E1301.md). To reach a service elsewhere, forward the port (`ssh -L 7777:127.0.0.1:7777 host`, `kubectl port-forward`).
-- On TCP, every request needs `Authorization: Bearer <token>` (`GIONG_MCP_TOKEN`, `Config::token`): every process on the machine can connect to a loopback port, whichever user runs it, and so can every container in the same pod. Without a token the server does not start ([GIONG-E1304](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E1304.md)), unless the code opts out with `Config::allow_unauthenticated()`, for a development machine. A token must be at least 16 characters a bearer token can carry; an empty one is refused rather than taken to mean "no token" ([GIONG-E1305](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E1305.md)).
+- It listens on `127.0.0.1`, `::1` or a Unix socket, and refuses any other address with [GIONG-E1301](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1301.md). To reach a service elsewhere, forward the port (`ssh -L 7777:127.0.0.1:7777 host`, `kubectl port-forward`).
+- On TCP, every request needs `Authorization: Bearer <token>` (`GIONG_MCP_TOKEN`, `Config::token`): every process on the machine can connect to a loopback port, whichever user runs it, and so can every container in the same pod. Without a token the server does not start ([GIONG-E1304](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1304.md)), unless the code opts out with `Config::allow_unauthenticated()`, for a development machine. A token must be at least 16 characters a bearer token can carry; an empty one is refused rather than taken to mean "no token" ([GIONG-E1305](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1305.md)).
 - A Unix socket is created with mode `0600`, under a temporary name first, so that it is never reachable by other users, and needs no token. A live socket at the path is never replaced, and stopping removes only the socket this server created. Most MCP clients speak HTTP over TCP only; to use one with a socket, bridge it: `socat TCP-LISTEN:7777,bind=127.0.0.1,fork UNIX-CONNECT:/run/giong/mcp.sock` (which lets every local process in again), or `ssh -L 7777:/run/giong/mcp.sock host` from another machine.
 - A request whose `Host` header is not a loopback name, or whose `Origin` is not a loopback origin, is refused with `403`: a web page cannot reach the server through DNS rebinding.
 - What a client can make the server hold is bounded, since it lives in the service's process. Requests are served over HTTP/1.1 only (an HTTP/2 connection could carry a hundred at once), on at most 16 connections, each answered one request at a time; more wait in the kernel's listen queue. A body holds at most 64 KiB (`413` past that), a batch at most 16 messages, and an answer at most 4 MiB (an error past that, which tells the agent to ask for less). Connections idle for 60 s are closed, and a request must arrive within 10 s. Before these limits, 24 connections each sending one 254 KiB batch took a 4-worker service from 4 MB to 2 GB; now 64 such connections leave it under 8 MB.

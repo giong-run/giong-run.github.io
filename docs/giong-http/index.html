@@ -36,9 +36,9 @@
 <header class="hdr">
   <div class="wrap hdr-in">
     <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="28" height="28"></picture><span>giong</span></a>
-    <nav class="nav" aria-label="Site"><a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a></nav>
+    <nav class="nav" aria-label="Site"><a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a><a href="/docs/agent-skill/">Agent skill</a></nav>
     <div class="hdr-side">
-      <a class="ver" href="/releases/#v1-3-0" title="Release notes for v1.3.0">v1.3.0</a>
+      <a class="ver" href="/releases/#v1-4-0" title="Release notes for v1.4.0">v1.4.0</a>
       <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="giong on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
       <a class="icon-btn hide-sm" href="https://x.com/giongrun" aria-label="giong on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
       <button class="icon-btn theme" type="button" aria-label="Switch between light and dark" hidden>
@@ -46,7 +46,7 @@
       <details class="menu">
         <summary class="icon-btn" aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
         <nav class="menu-panel" aria-label="Site">
-          <a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a>
+          <a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a><a href="/docs/agent-skill/">Agent skill</a>
           <span class="menu-social"><a href="https://github.com/giong-run/Giong">GitHub</a><a href="https://x.com/giongrun">X</a></span>
         </nav>
       </details>
@@ -55,10 +55,10 @@
 </header>
 <main id="main">
 <div class="wrap docs-layout">
-  <nav class="side" aria-label="Documentation"><details class="side-menu" open><summary>Documentation</summary><div class="side-links"><div class="side-group"><p>Start</p><a href="/docs/">Get started</a></div><div class="side-group"><p>Runtime</p><a href="/docs/giong/">giong</a></div><div class="side-group"><p>Protocols</p><a href="/docs/giong-proto/">giong-proto</a><a href="/docs/giong-quic/">giong-quic</a><a href="/docs/giong-tls/">giong-tls</a><a href="/docs/giong-http/" aria-current=page>giong-http</a><a href="/docs/giong-grpc/">giong-grpc</a><a href="/docs/giong-compat/">giong-compat</a></div><div class="side-group"><p>Clients</p><a href="/docs/giong-postgres/">giong-postgres</a><a href="/docs/giong-mysql/">giong-mysql</a><a href="/docs/giong-redis/">giong-redis</a></div><div class="side-group"><p>Framework</p><a href="/docs/giong-web/">giong-web</a></div><div class="side-group"><p>Tooling</p><a href="/docs/giong-grpc-build/">giong-grpc-build</a><a href="/docs/giong-mcp/">giong-mcp</a></div><div class="side-group"><p>Operate</p><a href="/docs/deployment/">Deployment</a><a href="/docs/stability/">Stability</a><a href="/docs/errors/">Error codes</a></div></div></details></nav>
+  <nav class="side" aria-label="Documentation"><details class="side-menu" open><summary>Documentation</summary><div class="side-links"><div class="side-group"><p>Start</p><a href="/docs/">Get started</a><a href="/docs/best-practices/">Best practices</a><a href="/docs/agent-skill/">Agent skill</a></div><div class="side-group"><p>Runtime</p><a href="/docs/giong/">giong</a></div><div class="side-group"><p>Protocols</p><a href="/docs/giong-proto/">giong-proto</a><a href="/docs/giong-quic/">giong-quic</a><a href="/docs/giong-tls/">giong-tls</a><a href="/docs/giong-http/" aria-current=page>giong-http</a><a href="/docs/giong-grpc/">giong-grpc</a><a href="/docs/giong-compat/">giong-compat</a></div><div class="side-group"><p>Clients</p><a href="/docs/giong-postgres/">giong-postgres</a><a href="/docs/giong-mysql/">giong-mysql</a><a href="/docs/giong-redis/">giong-redis</a></div><div class="side-group"><p>Framework</p><a href="/docs/giong-web/">giong-web</a></div><div class="side-group"><p>Tooling</p><a href="/docs/giong-grpc-build/">giong-grpc-build</a><a href="/docs/giong-mcp/">giong-mcp</a></div><div class="side-group"><p>Operate</p><a href="/docs/deployment/">Deployment</a><a href="/docs/stability/">Stability</a><a href="/docs/benchmark-tables/">Benchmark tables</a><a href="/docs/errors/">Error codes</a></div></div></details></nav>
   <article class="doc-page prose">
     <header class="doc-head"><p class="eyebrow">Protocols</p><h1>giong-http</h1><p class="lede">A small, strict HTTP/1.1 and HTTP/2 server with one async handler, and a client that speaks both.</p>
-      <div class="doc-bar"><details class="ver-menu"><summary title="Documentation version">giong 1.3</summary><nav class="ver-list" aria-label="Documentation versions"><a href="/docs/giong-http/" aria-current=true><b>1.3</b><span>newest</span></a><a href="/docs/1.2/giong-http/"><b>1.2</b></a><a href="/docs/1.1/giong-http/"><b>1.1</b></a><a href="/docs/1.0/giong-http/"><b>1.0</b></a></nav></details><div class="doc-actions"><button class="act" type="button" data-md="md-page" data-done="copied" title="Copy this page as Markdown, for a coding agent"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy for agent</span></button><button class="act" type="button" data-md="md-prompt" data-done="copied" title="Copy a ready prompt with the rules and this page"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9Z"/><path d="M18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8Z"/></svg><span>Copy prompt</span></button><a class="act" href="/docs/giong-http.md" title="This page as plain Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><span>.md</span></a></div></div><div class="doc-meta"><div class="cmd"><code id="add-giong-http">cargo add giong-http</code><button class="copy" type="button" data-copy="add-giong-http" data-done="copied">copy</button></div><p class="crate-links"><a href="https://docs.rs/giong-http">docs.rs</a> · <a href="https://crates.io/crates/giong-http">crates.io</a> · <a href="https://github.com/giong-run/Giong/tree/main/giong-http">source</a></p></div></header>
+      <div class="doc-bar"><details class="ver-menu"><summary title="Documentation version">giong 1.4</summary><nav class="ver-list" aria-label="Documentation versions"><a href="/docs/giong-http/" aria-current=true><b>1.4</b><span>newest</span></a><a href="/docs/1.3/giong-http/"><b>1.3</b></a><a href="/docs/1.2/giong-http/"><b>1.2</b></a><a href="/docs/1.1/giong-http/"><b>1.1</b></a><a href="/docs/1.0/giong-http/"><b>1.0</b></a></nav></details><div class="doc-actions"><button class="act" type="button" data-md="md-page" data-done="copied" title="Copy this page as Markdown, for a coding agent"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy for agent</span></button><button class="act" type="button" data-md="md-prompt" data-done="copied" title="Copy a ready prompt with the rules and this page"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9Z"/><path d="M18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8Z"/></svg><span>Copy prompt</span></button><a class="act" href="/docs/giong-http.md" title="This page as plain Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><span>.md</span></a></div></div><div class="doc-meta"><div class="cmd"><code id="add-giong-http">cargo add giong-http</code><button class="copy" type="button" data-copy="add-giong-http" data-done="copied">copy</button></div><p class="crate-links"><a href="https://docs.rs/giong-http">docs.rs</a> · <a href="https://crates.io/crates/giong-http">crates.io</a> · <a href="https://github.com/giong-run/Giong/tree/main/giong-http">source</a></p></div></header>
     <div class="md-intro"><p>A small, strict HTTP/1.1 and HTTP/2 server, and an HTTP/1.1 and HTTP/2 client, for the <a href="/docs/giong/">giong</a> runtime.</p>
 <pre class="code"><code class="lang-rust"><span class="k">use</span> std::time::<span class="t">Duration</span>;
 <span class="k">use</span> giong::net::<span class="t">TcpListener</span>;
@@ -122,8 +122,8 @@
 <ul><li>two different <code>Content-Length</code> headers, or <code>Content-Length</code> together with <code>Transfer-Encoding</code></li><li>whitespace before the colon, folded header lines, line endings that are a bare LF</li><li>control characters in a header name or value, a missing or repeated <code>Host</code> in HTTP/1.1</li><li>a trailer line after a chunked body that would not pass as a header line</li><li>a target that is a whole URL (<code>GET http://host/path</code>, which servers must accept) unless it is <code>http</code> or <code>https</code>, has no user name or password, and names the host the <code>Host</code> header names (compared without regard to case, ports included): a handler reads <code>Host</code>, and a proxy that routes on the URL must not see another host. So <code>Host</code> names the host of every request, as <code>:authority</code> does over HTTP/2. <code>*</code> is accepted only with <code>OPTIONS</code>, and <code>host:port</code> only with <code>CONNECT</code>.</li></ul>
 <p>Other status codes: <code>408</code> the request was too slow, <code>413</code> the body is too large, <code>417</code> an unknown <code>Expect</code>, <code>431</code> the head is too large, <code>501</code> a transfer-encoding other than chunked, <code>505</code> not HTTP/1.x.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-3" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="https">HTTPS</h2>
 <p>Turn on the <code>tls</code> feature to get <code>Server::serve_tls</code>, which uses the <a href="/docs/giong-tls/"><code>giong-tls</code></a> crate (rustls, TLS 1.2 and 1.3):</p>
-<pre class="code"><code class="lang-toml">giong-http = { version = "1.3.0", features = ["tls"] }
-giong-tls = "1.3.0"</code></pre>
+<pre class="code"><code class="lang-toml">giong-http = { version = "1.4.0", features = ["tls"] }
+giong-tls = "1.4.0"</code></pre>
 <pre class="code"><code class="lang-rust"><span class="k">use</span> giong::net::<span class="t">TcpListener</span>;
 <span class="k">use</span> giong_http::{<span class="t">Request</span>, <span class="t">Response</span>, <span class="t">Server</span>};
 
@@ -166,9 +166,26 @@ curl --http2-prior-knowledge http://localhost:8080/bytes?n=100000 -o /dev/null</
 <ul><li><strong>3.8 to 4.4 times axum's requests per second on small answers, 2.5 to 3.0 times on 8.5 KiB ones.</strong> The server's core is the limit in every case (97–100% busy), and no request failed. h2load's mean time per request follows: 0.83 ms against 3.63 ms for <code>json</code> over HTTPS, 8.1 against 20.5 ms for <code>users</code>.</li><li>Our reading, not profiled: with 10 or 100 streams in flight on a connection, one read brings many requests and one write takes many answers, much as pipelining does over HTTP/1.1, and giong-http turns that batching into requests served as it does for pipelined ones (<a href="/docs/giong-web/#performance">giong-web's benchmark</a>). hyper gains far less from either.</li><li>Not measured yet: several cores, a load generator on another machine, request bodies.</li></ul>
 <p>Memory per connection, measured with <code>bench/hold</code> over HTTP/2 with prior knowledge: 5,000 connections on one worker thread, the server's resident memory before and after, divided by 5,000. KiB, the same in all 5 rounds within 0.2%:</p>
 <div class="table-scroll"><table><thead><tr><th>Server</th><th>Idle (one request answered)</th><th>One request in progress</th><th>Each further request in progress</th></tr></thead><tbody><tr><td><strong>giong-http</strong></td><td><strong>4.2</strong></td><td><strong>5.9</strong></td><td><strong>1.1</strong></td></tr><tr><td>axum</td><td>23.8</td><td>23.0</td><td>2.0</td></tr></tbody></table></div>
-<p>An idle connection gives its buffers back, so what it keeps is its task, its HPACK tables and its state; an idle HTTP/1.1 connection still costs 1.9 KiB. Results are in <code>bench/results/h2/</code>.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-5" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="client">Client</h2>
+<p>An idle connection gives its buffers back, so what it keeps is its task, its HPACK tables and its state; an idle HTTP/1.1 connection still costs 1.9 KiB. Results are in <code>bench/results/h2/</code>.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-5" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="http3-unstable">HTTP/3 (unstable)</h2>
+<p>The <code>unstable-http3</code> feature adds HTTP/3 (RFC 9114) on <a href="/docs/giong-quic/"><code>giong-quic</code></a>, for the same handlers, on Linux and macOS. It needs Rust 1.85, and may change before it is stabilised; the default build does not have it.</p>
+<pre class="code"><code class="lang-toml">giong-http = { version = "1.4.0", features = ["unstable-http3", "client"] }
+giong-quic = "1.4.0"</code></pre>
+<pre class="code"><code class="lang-rust"><span class="k">use</span> giong_http::{<span class="t">Request</span>, <span class="t">Response</span>, <span class="t">Server</span>};
+
+<span class="k">async</span> <span class="k">fn</span> handler(req: <span class="t">Request</span>) -&gt; <span class="t">Response</span> {
+    <span class="t">Response</span>::text(format!(<span class="s">"hello over {}"</span>, req.version()))
+}
+
+<span class="k">async</span> <span class="k">fn</span> serve(tls: rustls::<span class="t">ServerConfig</span>) -&gt; std::io::<span class="t">Result</span>&lt;()&gt; {
+    <span class="c">// `tls` allows TLS 1.3 and has `alpn_protocols` set to `vec![b"h3".to_vec()]`.</span>
+    <span class="k">let</span> config = giong_quic::<span class="t">ServerConfig</span>::new(tls)?;
+    <span class="k">let</span> endpoint = giong_quic::<span class="t">Endpoint</span>::server(<span class="s">"0.0.0.0:443"</span>.parse().unwrap(), config)?;
+    <span class="t">Server</span>::new().serve_h3(endpoint, handler).<span class="k">await</span>;
+    <span class="t">Ok</span>(())
+}</code></pre>
+<ul><li><strong>Browsers find it through <code>Alt-Svc</code>.</strong> Have the server that answers over TCP add <code>Response::header("alt-svc", "h3=\":443\"; ma=86400")</code>, with the UDP port of the endpoint.</li><li><strong>Limits come from the endpoint</strong>: the requests a client may have open at once are its <code>TransportConfig::max_streams</code>, and an idle connection closes after its <code>TransportConfig::idle_timeout</code>. On shutdown the client gets <code>GOAWAY</code>, requests in flight finish, and later ones are refused with <code>H3_REQUEST_REJECTED</code> so the client can retry them elsewhere.</li><li><strong>Trailers</strong> travel both ways as over HTTP/2. A streamed request body goes over HTTP/1.1 or HTTP/2.</li><li><strong>The client</strong>: <code>Client::builder().http3(quic)</code> uses HTTP/3 for origins that advertise it with <code>Alt-Svc</code>, and falls back to TCP for five minutes when the QUIC handshake does not answer; <code>http3_prior_knowledge(quic)</code> speaks it at once. With early data on in <code>quic</code>, only GET, HEAD and OPTIONS requests without a body go in 0-RTT. Not through a proxy.</li><li><strong>Checked</strong> with <code>h3spec</code> in CI: 85 of 86 cases pass and none fails (the other needs 0-RTT, which the example leaves off). <code>cargo run --release -p giong-http --features unstable-http3 --example h3</code> serves it locally (<code>curl -k --http3-only https://localhost:8443/</code>).</li><li><strong>Not measured yet</strong> end to end; the QUIC layer underneath is in <a href="/docs/benchmark-tables/#quic">docs/BENCHMARKS.md</a>.</li></ul></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-6" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="client">Client</h2>
 <p>The <code>client</code> feature adds an HTTP/1.1 and HTTP/2 client, <code>giong_http::client</code> (HTTPS included, through giong-tls):</p>
-<pre class="code"><code class="lang-toml">giong-http = { version = "1.3.0", features = ["client"] }</code></pre>
+<pre class="code"><code class="lang-toml">giong-http = { version = "1.4.0", features = ["client"] }</code></pre>
 <pre class="code"><code class="lang-rust"><span class="k">use</span> giong_http::client::{<span class="t">Client</span>, <span class="t">Error</span>};
 
 <span class="k">async</span> <span class="k">fn</span> demo() -&gt; <span class="t">Result</span>&lt;(), <span class="t">Error</span>&gt; {
@@ -199,11 +216,11 @@ curl --http2-prior-knowledge http://localhost:8080/bytes?n=100000 -o /dev/null</
 <p>Over HTTP/2, every request on one connection:</p>
 <div class="table-scroll"><table><thead><tr><th>Client</th><th><code>json</code> over HTTPS</th><th><code>users</code> over HTTPS</th><th><code>json</code>, prior knowledge</th><th><code>users</code>, prior knowledge</th></tr></thead><tbody><tr><td><strong>giong-http</strong></td><td><strong>250.7k</strong> (242–264k)</td><td><strong>64.2k</strong> (55–66k)</td><td><strong>265.7k</strong> (251–273k)</td><td><strong>68.4k</strong> (68–71k)</td></tr><tr><td>reqwest</td><td>122.9k (116–135k)</td><td>48.3k (43–51k)</td><td>123.1k (119–124k)</td><td>56.0k (43–65k)</td></tr></tbody></table></div>
 <ul><li><strong>HTTP/1.1 with as many connections: 1.6 to 1.8 times reqwest's requests per second, with a lower p99</strong> (0.66–1.5 ms against 1.15–2.0 ms). Every client's core is the limit (99–100% busy); the server's three cores are not (50–159% of 300).</li><li><strong>With its default of 16 connections, still 1.2 to 1.7 times reqwest with 64.</strong> Fewer requests in flight means fewer of them handled per trip into the kernel; the default is there to spare the server, and <code>max_connections_per_host</code> raises it.</li><li><strong>HTTP/2: 2.0 to 2.2 times reqwest on small answers, 1.2 to 1.3 times on 8.5 KiB ones</strong>, with half the latency on small ones (p50 0.24 against 0.49 ms, p99 0.41 against 0.84 ms over HTTPS). On one connection the two ends take turns (the client writes every request queued at once, the server answers them all at once), so neither is busy all the time: giong-http's core is 51–63% busy, reqwest's 60–88%. With 8.5 KiB answers the server's single worker for the single connection is the limit (94% of a core), which is why HTTP/1.1 over 64 connections, spread over the server's three workers, gets more there; with small answers, HTTP/2 gets 1.7 times what HTTP/1.1 does.</li><li>Not measured: a server on another machine, <code>POST</code> bodies, more than one client core, many hosts at once.</li></ul>
-<p>Results are in <code>bench/results/http-client/</code>.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-6" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="not-there-yet">Not there yet</h2>
-<p>Server push. Routing and compression of responses are in <a href="/docs/giong-web/"><code>giong-web</code></a>. In the client: cookies, streaming request bodies, <code>br</code> and <code>zstd</code>, SOCKS proxies, HTTP/2 through an <code>http://</code> proxy (HTTPS through a proxy's tunnel gets HTTP/2), the <code>Upgrade: h2c</code> handshake.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-7" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="tests">Tests</h2>
+<p>Results are in <code>bench/results/http-client/</code>.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-7" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="not-there-yet">Not there yet</h2>
+<p>Server push. Routing and compression of responses are in <a href="/docs/giong-web/"><code>giong-web</code></a>. In the client: cookies, <code>br</code> and <code>zstd</code>, SOCKS proxies, HTTP/2 through an <code>http://</code> proxy (HTTPS through a proxy's tunnel gets HTTP/2), the <code>Upgrade: h2c</code> handshake.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-8" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="tests">Tests</h2>
 <p><code>cargo test -p giong-http --all-features</code>: 66 unit tests (including 500,000 random inputs for the parser and the chunked decoder, 300,000 for the client's response parser and URLs, 100,000 responses read by the client on a connection in random pieces, 50,000 damaged gzip and deflate bodies, 200,000 HPACK header blocks and Huffman strings, 3,000 HTTP/2 connections whose every frame is checked, and 3,000 from the client's side, checking what it holds and writes), 44 HTTP/2 tests (22 end-to-end on real sockets with a client that writes its frames by hand, 22 of frames, HPACK, requests and stream memory), 30 end-to-end tests of the server on real sockets (one of them over a Unix socket, four of the memory budget for requests being received, one of them with bodies received straight into the request buffer, one of bodies from 64 KiB to 3 MiB received straight into the request buffer between other requests), 14 end-to-end tests of streamed bodies (a 250 KB upload read piece by piece with the connection used again after it, chunked uploads, bodies past the handler's limit, broken framing, nothing read and no <code>100 Continue</code> until the handler asks, a handler that answers early, a body cut short, the timeout of each piece; streamed responses chunked and sent piece by piece, to an HTTP/1.0 client, without a body for <code>HEAD</code>, 204 and 304, aborted, and stopped when the client goes away), 12 end-to-end HTTPS tests with a rustls client (TLS 1.2 and 1.3, pipelining, a 3 MB body, 400/413 errors, idle connections, clients that do not speak TLS, graceful shutdown, 16 client threads at once), 22 end-to-end tests of the client against this server, against servers that misbehave on purpose and through proxies, 15 of the client over HTTP/2 (against this server through ALPN, over kernel TLS where the kernel has it, and with prior knowledge, and against servers that refuse streams, send GOAWAY, reset streams, send malformed responses, close early, send past the window or wait for a window the client grants only once the connection has gone quiet), 15 documentation examples. One more client test, ignored by default (<code>-- --ignored</code>), fetches from crates.io over HTTPS.</p></section>
-    <p class="src-note">giong 1.3.0 · from <a href="https://github.com/giong-run/Giong/blob/v1.3.0/giong-http/README.md">giong-http/README.md</a> at v1.3.0</p>
-    <script type="text/markdown" id="md-0"><!-- giong 1.3.0, https://giong.run/docs/giong-http/#what-it-does -->
+    <p class="src-note">giong 1.4.0 · from <a href="https://github.com/giong-run/Giong/blob/v1.4.0/giong-http/README.md">giong-http/README.md</a> at v1.4.0</p>
+    <script type="text/markdown" id="md-0"><!-- giong 1.4.0, https://giong.run/docs/giong-http/#what-it-does -->
 
 ## What it does
 
@@ -227,7 +244,7 @@ curl --http2-prior-knowledge http://localhost:8080/bytes?n=100000 -o /dev/null</
 - Graceful shutdown: a request in progress is answered with `Connection: close`, an idle connection is closed at once.
 - HTTPS through the `tls` feature (see below).
 - Serving over a Unix socket with `Server::serve_unix`, the usual setup behind a reverse proxy on the same machine.
-- `Date` and `Content-Length` are added for you. A header value with control characters is refused (against response splitting): `Response::header` panics, and `Response::try_header` (with `Response::try_new` for the status) returns an error instead, for values that come from the request.</script><script type="text/markdown" id="md-1"><!-- giong 1.3.0, https://giong.run/docs/giong-http/#streaming -->
+- `Date` and `Content-Length` are added for you. A header value with control characters is refused (against response splitting): `Response::header` panics, and `Response::try_header` (with `Response::try_new` for the status) returns an error instead, for values that come from the request.</script><script type="text/markdown" id="md-1"><!-- giong 1.4.0, https://giong.run/docs/giong-http/#streaming -->
 
 ## Streaming
 
@@ -270,7 +287,7 @@ impl Handler for Files {
 - A streamed request body has the limit `stream_body` returns instead of `max_body_size`. Announced longer: `413` before the handler runs. Chunked and growing past it: `GIONG-E1111` from `chunk`. Cut short, or a piece slower than `request_timeout` (the whole body has no deadline): `GIONG-E1112`. Broken chunked framing: `GIONG-E1113`.
 - A handler that returns before the end of the body has its response sent, then the connection closes (whatever the client still sends is read and dropped for a moment, so it gets the response instead of a reset).
 - A streamed response goes out with `Transfer-Encoding: chunked`; an HTTP/1.0 client gets it without a length and the connection closes after it. The head is sent when the handler returns, each piece as soon as it is sent, and pieces of 32 KiB or more are written without a copy.
-- The server waits for the producer without a time limit (an event stream can be quiet for long); each write has `write_timeout`. `send` fails with `GIONG-E1114` once the client is gone, which is noticed at the next write, or when the response has no body (`HEAD`, 204, 304). `BodySender::abort` ends the body without its last chunk, so the client can tell it is incomplete.</script><script type="text/markdown" id="md-2"><!-- giong 1.3.0, https://giong.run/docs/giong-http/#strict-parsing -->
+- The server waits for the producer without a time limit (an event stream can be quiet for long); each write has `write_timeout`. `send` fails with `GIONG-E1114` once the client is gone, which is noticed at the next write, or when the response has no body (`HEAD`, 204, 304). `BodySender::abort` ends the body without its last chunk, so the client can tell it is incomplete.</script><script type="text/markdown" id="md-2"><!-- giong 1.4.0, https://giong.run/docs/giong-http/#strict-parsing -->
 
 ## Strict parsing
 
@@ -282,15 +299,15 @@ Any request that a proxy in front could read differently is answered with `400`,
 - a trailer line after a chunked body that would not pass as a header line
 - a target that is a whole URL (`GET http://host/path`, which servers must accept) unless it is `http` or `https`, has no user name or password, and names the host the `Host` header names (compared without regard to case, ports included): a handler reads `Host`, and a proxy that routes on the URL must not see another host. So `Host` names the host of every request, as `:authority` does over HTTP/2. `*` is accepted only with `OPTIONS`, and `host:port` only with `CONNECT`.
 
-Other status codes: `408` the request was too slow, `413` the body is too large, `417` an unknown `Expect`, `431` the head is too large, `501` a transfer-encoding other than chunked, `505` not HTTP/1.x.</script><script type="text/markdown" id="md-3"><!-- giong 1.3.0, https://giong.run/docs/giong-http/#https -->
+Other status codes: `408` the request was too slow, `413` the body is too large, `417` an unknown `Expect`, `431` the head is too large, `501` a transfer-encoding other than chunked, `505` not HTTP/1.x.</script><script type="text/markdown" id="md-3"><!-- giong 1.4.0, https://giong.run/docs/giong-http/#https -->
 
 ## HTTPS
 
 Turn on the `tls` feature to get `Server::serve_tls`, which uses the [`giong-tls`](../giong-tls/README.md) crate (rustls, TLS 1.2 and 1.3):
 
 ```toml
-giong-http = { version = "1.3.0", features = ["tls"] }
-giong-tls = "1.3.0"
+giong-http = { version = "1.4.0", features = ["tls"] }
+giong-tls = "1.4.0"
 ```
 
 ```rust,no_run
@@ -321,7 +338,7 @@ Handlers, limits, timeouts and graceful shutdown are the same as for plain HTTP.
 
 To have the kernel encrypt and decrypt the records once rustls has done the handshake (kernel TLS, Linux with the `tls` module), build the acceptor with `.ktls(giong_tls::Ktls::Auto)?`; nothing else changes. When it pays off and when it does not is in [giong-tls's README](../giong-tls/README.md#kernel-tls).
 
-To serve over another kind of connection (a different TLS layer, a fake connection in a test), implement the `Transport` trait and call `Server::serve_connection`.</script><script type="text/markdown" id="md-4"><!-- giong 1.3.0, https://giong.run/docs/giong-http/#http2 -->
+To serve over another kind of connection (a different TLS layer, a fake connection in a test), implement the `Transport` trait and call `Server::serve_connection`.</script><script type="text/markdown" id="md-4"><!-- giong 1.4.0, https://giong.run/docs/giong-http/#http2 -->
 
 ## HTTP/2
 
@@ -389,14 +406,61 @@ Memory per connection, measured with `bench/hold` over HTTP/2 with prior knowled
 | **giong-http** | **4.2** | **5.9** | **1.1** |
 | axum | 23.8 | 23.0 | 2.0 |
 
-An idle connection gives its buffers back, so what it keeps is its task, its HPACK tables and its state; an idle HTTP/1.1 connection still costs 1.9 KiB. Results are in `bench/results/h2/`.</script><script type="text/markdown" id="md-5"><!-- giong 1.3.0, https://giong.run/docs/giong-http/#client -->
+An idle connection gives its buffers back, so what it keeps is its task, its HPACK tables and its state; an idle HTTP/1.1 connection still costs 1.9 KiB. Results are in `bench/results/h2/`.</script><script type="text/markdown" id="md-5"><!-- giong 1.4.0, https://giong.run/docs/giong-http/#http3-unstable -->
+
+## HTTP/3 (unstable)
+
+The `unstable-http3` feature adds HTTP/3 (RFC 9114) on [`giong-quic`](../giong-quic/README.md),
+for the same handlers, on Linux and macOS. It needs Rust 1.85, and may change before it is
+stabilised; the default build does not have it.
+
+```toml
+giong-http = { version = "1.4.0", features = ["unstable-http3", "client"] }
+giong-quic = "1.4.0"
+```
+
+```rust,ignore
+use giong_http::{Request, Response, Server};
+
+async fn handler(req: Request) -> Response {
+    Response::text(format!("hello over {}", req.version()))
+}
+
+async fn serve(tls: rustls::ServerConfig) -> std::io::Result<()> {
+    // `tls` allows TLS 1.3 and has `alpn_protocols` set to `vec![b"h3".to_vec()]`.
+    let config = giong_quic::ServerConfig::new(tls)?;
+    let endpoint = giong_quic::Endpoint::server("0.0.0.0:443".parse().unwrap(), config)?;
+    Server::new().serve_h3(endpoint, handler).await;
+    Ok(())
+}
+```
+
+- **Browsers find it through `Alt-Svc`.** Have the server that answers over TCP add
+  `Response::header("alt-svc", "h3=\":443\"; ma=86400")`, with the UDP port of the
+  endpoint.
+- **Limits come from the endpoint**: the requests a client may have open at once are its
+  `TransportConfig::max_streams`, and an idle connection closes after its
+  `TransportConfig::idle_timeout`. On shutdown the client gets `GOAWAY`, requests in flight
+  finish, and later ones are refused with `H3_REQUEST_REJECTED` so the client can retry them
+  elsewhere.
+- **Trailers** travel both ways as over HTTP/2. A streamed request body goes over HTTP/1.1
+  or HTTP/2.
+- **The client**: `Client::builder().http3(quic)` uses HTTP/3 for origins that advertise it
+  with `Alt-Svc`, and falls back to TCP for five minutes when the QUIC handshake does not
+  answer; `http3_prior_knowledge(quic)` speaks it at once. With early data on in `quic`,
+  only GET, HEAD and OPTIONS requests without a body go in 0-RTT. Not through a proxy.
+- **Checked** with `h3spec` in CI: 85 of 86 cases pass and none fails (the other needs
+  0-RTT, which the example leaves off). `cargo run --release -p giong-http --features
+  unstable-http3 --example h3` serves it locally (`curl -k --http3-only https://localhost:8443/`).
+- **Not measured yet** end to end; the QUIC layer underneath is in
+  [docs/BENCHMARKS.md](../docs/BENCHMARKS.md#quic).</script><script type="text/markdown" id="md-6"><!-- giong 1.4.0, https://giong.run/docs/giong-http/#client -->
 
 ## Client
 
 The `client` feature adds an HTTP/1.1 and HTTP/2 client, `giong_http::client` (HTTPS included, through giong-tls):
 
 ```toml
-giong-http = { version = "1.3.0", features = ["client"] }
+giong-http = { version = "1.4.0", features = ["client"] }
 ```
 
 ```rust,no_run
@@ -462,19 +526,19 @@ Over HTTP/2, every request on one connection:
 - **HTTP/2: 2.0 to 2.2 times reqwest on small answers, 1.2 to 1.3 times on 8.5 KiB ones**, with half the latency on small ones (p50 0.24 against 0.49 ms, p99 0.41 against 0.84 ms over HTTPS). On one connection the two ends take turns (the client writes every request queued at once, the server answers them all at once), so neither is busy all the time: giong-http's core is 51–63% busy, reqwest's 60–88%. With 8.5 KiB answers the server's single worker for the single connection is the limit (94% of a core), which is why HTTP/1.1 over 64 connections, spread over the server's three workers, gets more there; with small answers, HTTP/2 gets 1.7 times what HTTP/1.1 does.
 - Not measured: a server on another machine, `POST` bodies, more than one client core, many hosts at once.
 
-Results are in `bench/results/http-client/`.</script><script type="text/markdown" id="md-6"><!-- giong 1.3.0, https://giong.run/docs/giong-http/#not-there-yet -->
+Results are in `bench/results/http-client/`.</script><script type="text/markdown" id="md-7"><!-- giong 1.4.0, https://giong.run/docs/giong-http/#not-there-yet -->
 
 ## Not there yet
 
-Server push. Routing and compression of responses are in [`giong-web`](../giong-web/README.md). In the client: cookies, streaming request bodies, `br` and `zstd`, SOCKS proxies, HTTP/2 through an `http://` proxy (HTTPS through a proxy's tunnel gets HTTP/2), the `Upgrade: h2c` handshake.</script><script type="text/markdown" id="md-7"><!-- giong 1.3.0, https://giong.run/docs/giong-http/#tests -->
+Server push. Routing and compression of responses are in [`giong-web`](../giong-web/README.md). In the client: cookies, `br` and `zstd`, SOCKS proxies, HTTP/2 through an `http://` proxy (HTTPS through a proxy's tunnel gets HTTP/2), the `Upgrade: h2c` handshake.</script><script type="text/markdown" id="md-8"><!-- giong 1.4.0, https://giong.run/docs/giong-http/#tests -->
 
 ## Tests
 
 `cargo test -p giong-http --all-features`: 66 unit tests (including 500,000 random inputs for the parser and the chunked decoder, 300,000 for the client's response parser and URLs, 100,000 responses read by the client on a connection in random pieces, 50,000 damaged gzip and deflate bodies, 200,000 HPACK header blocks and Huffman strings, 3,000 HTTP/2 connections whose every frame is checked, and 3,000 from the client's side, checking what it holds and writes), 44 HTTP/2 tests (22 end-to-end on real sockets with a client that writes its frames by hand, 22 of frames, HPACK, requests and stream memory), 30 end-to-end tests of the server on real sockets (one of them over a Unix socket, four of the memory budget for requests being received, one of them with bodies received straight into the request buffer, one of bodies from 64 KiB to 3 MiB received straight into the request buffer between other requests), 14 end-to-end tests of streamed bodies (a 250 KB upload read piece by piece with the connection used again after it, chunked uploads, bodies past the handler's limit, broken framing, nothing read and no `100 Continue` until the handler asks, a handler that answers early, a body cut short, the timeout of each piece; streamed responses chunked and sent piece by piece, to an HTTP/1.0 client, without a body for `HEAD`, 204 and 304, aborted, and stopped when the client goes away), 12 end-to-end HTTPS tests with a rustls client (TLS 1.2 and 1.3, pipelining, a 3 MB body, 400/413 errors, idle connections, clients that do not speak TLS, graceful shutdown, 16 client threads at once), 22 end-to-end tests of the client against this server, against servers that misbehave on purpose and through proxies, 15 of the client over HTTP/2 (against this server through ALPN, over kernel TLS where the kernel has it, and with prior knowledge, and against servers that refuse streams, send GOAWAY, reset streams, send malformed responses, close early, send past the window or wait for a window the client grants only once the connection has gone quiet), 15 documentation examples. One more client test, ignored by default (`-- --ignored`), fetches from crates.io over HTTPS.</script><script type="text/markdown" id="md-page"># giong-http
 
-> giong 1.3.0 · https://giong.run/docs/giong-http/ · source: https://github.com/giong-run/Giong/blob/v1.3.0/giong-http/README.md
+> giong 1.4.0 · https://giong.run/docs/giong-http/ · source: https://github.com/giong-run/Giong/blob/v1.4.0/giong-http/README.md
 
-A small, strict HTTP/1.1 and HTTP/2 server, and an HTTP/1.1 and HTTP/2 client, for the [giong](https://github.com/giong-run/Giong/blob/v1.3.0/README.md) runtime.
+A small, strict HTTP/1.1 and HTTP/2 server, and an HTTP/1.1 and HTTP/2 client, for the [giong](https://github.com/giong-run/Giong/blob/v1.4.0/README.md) runtime.
 
 ```rust,no_run
 use std::time::Duration;
@@ -514,9 +578,9 @@ fn main() -> std::io::Result<()> {
 - Limits on the size of the head (64 KiB) and the body (1 MiB); timeouts for idle connections (60 s), slow requests (30 s, against slowloris) and clients that read slowly (30 s). All of them can be changed on `Server`.
 - A cap on open connections, 10,000 per `serve` call (so per worker) unless `Server::max_connections` says otherwise: at the cap the server stops accepting, and new clients wait in the kernel's listen queue until a connection closes.
 - A floor under free memory: while less than `Server::min_free_memory` is left to the process (by default a tenth of its cgroup's memory limit, or of the machine's memory, between 16 and 256 MiB), new connections are refused, with `503` and `Retry-After: 1` (`GIONG-E1121`) without TLS and closed before the handshake with it, and the connections the server holds keep being served. Without it, enough idle connections get the process killed by the kernel's out-of-memory killer, connections and all (0.8.0 was killed at 7,900 idle HTTPS connections in a 96 MiB container, under the default connection cap).
-- A cap on the bytes of requests a worker holds while receiving them, shared by all its connections, HTTP/1.1 and HTTP/2: `Server::max_buffered_request_bytes`, by default 64 MiB per worker or, in a container, a quarter of its memory limit divided among the workers if that is less. Without it, a few hundred clients sending large bodies slowly could exhaust a small container's memory (measured with one worker: 130 such clients got a 128 MiB container OOM-killed; with the cap, 450 of them over HTTP/1.1 and HTTP/2 leave it at a 35 MiB peak). Past the cap a request gets `503` with `Retry-After: 1` (`GIONG-E1120`) over HTTP/1.1, `REFUSED_STREAM` over HTTP/2, without its handler being called; the first 4 KiB of each HTTP/1.1 request do not count, so ordinary requests keep being served. Bodies read as a stream do not count. How to size a container: [docs/DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.3.0/docs/DEPLOYMENT.md#sizing-memory).
+- A cap on the bytes of requests a worker holds while receiving them, shared by all its connections, HTTP/1.1 and HTTP/2: `Server::max_buffered_request_bytes`, by default 64 MiB per worker or, in a container, a quarter of its memory limit divided among the workers if that is less. Without it, a few hundred clients sending large bodies slowly could exhaust a small container's memory (measured with one worker: 130 such clients got a 128 MiB container OOM-killed; with the cap, 450 of them over HTTP/1.1 and HTTP/2 leave it at a 35 MiB peak). Past the cap a request gets `503` with `Retry-After: 1` (`GIONG-E1120`) over HTTP/1.1, `REFUSED_STREAM` over HTTP/2, without its handler being called; the first 4 KiB of each HTTP/1.1 request do not count, so ordinary requests keep being served. Bodies read as a stream do not count. How to size a container: [docs/DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.0/docs/DEPLOYMENT.md#sizing-memory).
 - Handlers that keep a worker busy (heavy computation, long responses) leave the kernel's even spread of connections uneven. Bind each worker's listener with `giong::net::TcpListener::bind_balanced` instead of `bind` and a busy worker hands new connections to a quieter one; `Server::serve` takes either.
-- A handler is an `async fn(Request) -> Response`, a closure that returns a future (write its argument's type: `|req: Request| async move { .. }`), or a type of your own that implements `Handler` and borrows from itself while it answers. [`giong-web`](https://github.com/giong-run/Giong/blob/v1.3.0/giong-web/README.md) builds routing, middleware and JSON on it.
+- A handler is an `async fn(Request) -> Response`, a closure that returns a future (write its argument's type: `|req: Request| async move { .. }`), or a type of your own that implements `Handler` and borrows from itself while it answers. [`giong-web`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-web/README.md) builds routing, middleware and JSON on it.
 - `Server::serve` takes its handler by value. To serve one handler on two listeners (plain HTTP and HTTPS, a public port and an internal one), put it in an `Rc` and give each `serve` a clone: `Handler` is implemented for `Rc<H>`, and streaming routes keep streaming. Do not wrap it in a closure instead: a closure never streams, so every route that reads its body as it arrives would get it whole, or a `413`.
 - **When a handler is dropped.** A handler's future can be dropped at any `.await`, so work that must finish once started (a charge, then its record) belongs in a task of its own (`giong::spawn`), not after an `.await` in the handler. It is dropped when the client resets its HTTP/2 stream (`RST_STREAM`, which giong-http's own client sends when its timeout runs out), when a timeout around it runs out (giong-web's `Timeout`), and at the end of the grace period of a shutdown. It is *not* dropped when the client closes the connection, over HTTP/1.1 or HTTP/2: the handler runs to its end and the answer is thrown away, so a slow query for a client that has gone still runs. A body from `Body::channel()` learns that the client has gone at its next `send`.
 - `Request::from_bytes` makes a request from its bytes and `Response::headers`, `get_header` and `body_bytes` read an answer back, so handlers are tested without a socket.
@@ -583,11 +647,11 @@ Other status codes: `408` the request was too slow, `413` the body is too large,
 
 ## HTTPS
 
-Turn on the `tls` feature to get `Server::serve_tls`, which uses the [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.3.0/giong-tls/README.md) crate (rustls, TLS 1.2 and 1.3):
+Turn on the `tls` feature to get `Server::serve_tls`, which uses the [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-tls/README.md) crate (rustls, TLS 1.2 and 1.3):
 
 ```toml
-giong-http = { version = "1.3.0", features = ["tls"] }
-giong-tls = "1.3.0"
+giong-http = { version = "1.4.0", features = ["tls"] }
+giong-tls = "1.4.0"
 ```
 
 ```rust,no_run
@@ -616,7 +680,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 Handlers, limits, timeouts and graceful shutdown are the same as for plain HTTP. Each handshake runs in its connection's own task, so a slow client does not hold up accepting new connections; a client that does not speak TLS (a port scan, plain HTTP sent to the wrong port) is closed when the handshake timeout expires. When it closes a connection the server sends `close_notify`, so the client can tell a complete response from a connection that was cut.
 
-To have the kernel encrypt and decrypt the records once rustls has done the handshake (kernel TLS, Linux with the `tls` module), build the acceptor with `.ktls(giong_tls::Ktls::Auto)?`; nothing else changes. When it pays off and when it does not is in [giong-tls's README](https://github.com/giong-run/Giong/blob/v1.3.0/giong-tls/README.md#kernel-tls).
+To have the kernel encrypt and decrypt the records once rustls has done the handshake (kernel TLS, Linux with the `tls` module), build the acceptor with `.ktls(giong_tls::Ktls::Auto)?`; nothing else changes. When it pays off and when it does not is in [giong-tls's README](https://github.com/giong-run/Giong/blob/v1.4.0/giong-tls/README.md#kernel-tls).
 
 To serve over another kind of connection (a different TLS layer, a fake connection in a test), implement the `Transport` trait and call `Server::serve_connection`.
 
@@ -632,7 +696,7 @@ curl --http2-prior-knowledge http://localhost:8080/bytes?n=100000 -o /dev/null
 
 What a handler sees:
 
-- Each stream is a `Request` like any other, and `Request::version()` is `Version::Http2`. `:authority` becomes the `Host` header (a `Host` that differs from it is refused), and the `cookie` fields a client sends apart are joined into one. A [`giong-web`](https://github.com/giong-run/Giong/blob/v1.3.0/giong-web/README.md) app serves HTTP/2 without a change.
+- Each stream is a `Request` like any other, and `Request::version()` is `Version::Http2`. `:authority` becomes the `Host` header (a `Host` that differs from it is refused), and the `cookie` fields a client sends apart are joined into one. A [`giong-web`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-web/README.md) app serves HTTP/2 without a change.
 - Streams are served at once and answered as their handlers finish; a slow handler holds up no other stream. Each handler runs in its connection's task, like an HTTP/1.1 one, on the same core. A handler that panics has its stream answered with `500`; the other streams and the connection go on (over HTTP/1.1, the `500` is followed by the end of the connection).
 - The response is written as HEADERS and DATA frames. Its headers are sent in lowercase, without those HTTP/2 forbids (`Connection`, `Keep-Alive`, `Transfer-Encoding`, `Upgrade`); a streamed body (`Body::channel`) goes out as DATA frames instead of chunks.
 - A stream the client resets (`RST_STREAM`) drops its handler at once, as a dropped future: whatever it was waiting on is cancelled. A handler that answers before the request body has all arrived has its response sent, then the rest of the body is refused with `RST_STREAM(NO_ERROR)`; the connection stays open.
@@ -641,7 +705,7 @@ What a handler sees:
 
 ### Limits
 
-Every resource a client can make the server hold is bounded. A client that goes past a limit loses its stream or its connection; a connection ends with a GOAWAY whose debug data starts with a `GIONG-E` code, which has a page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/README.md).
+Every resource a client can make the server hold is bounded. A client that goes past a limit loses its stream or its connection; a connection ends with a GOAWAY whose debug data starts with a `GIONG-E` code, which has a page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/README.md).
 
 | Attack | What the server does | Code |
 |---|---|---|
@@ -676,7 +740,7 @@ Measured with `bench/h2.sh` against axum 0.8 on hyper's HTTP/2 (through `axum-se
 | axum, prior knowledge | 138.9k (126–146k) | 23.0k (22–26k) | 158.0k (152–171k) |
 
 - **3.8 to 4.4 times axum's requests per second on small answers, 2.5 to 3.0 times on 8.5 KiB ones.** The server's core is the limit in every case (97–100% busy), and no request failed. h2load's mean time per request follows: 0.83 ms against 3.63 ms for `json` over HTTPS, 8.1 against 20.5 ms for `users`.
-- Our reading, not profiled: with 10 or 100 streams in flight on a connection, one read brings many requests and one write takes many answers, much as pipelining does over HTTP/1.1, and giong-http turns that batching into requests served as it does for pipelined ones ([giong-web's benchmark](https://github.com/giong-run/Giong/blob/v1.3.0/giong-web/README.md#performance)). hyper gains far less from either.
+- Our reading, not profiled: with 10 or 100 streams in flight on a connection, one read brings many requests and one write takes many answers, much as pipelining does over HTTP/1.1, and giong-http turns that batching into requests served as it does for pipelined ones ([giong-web's benchmark](https://github.com/giong-run/Giong/blob/v1.4.0/giong-web/README.md#performance)). hyper gains far less from either.
 - Not measured yet: several cores, a load generator on another machine, request bodies.
 
 Memory per connection, measured with `bench/hold` over HTTP/2 with prior knowledge: 5,000 connections on one worker thread, the server's resident memory before and after, divided by 5,000. KiB, the same in all 5 rounds within 0.2%:
@@ -688,12 +752,59 @@ Memory per connection, measured with `bench/hold` over HTTP/2 with prior knowled
 
 An idle connection gives its buffers back, so what it keeps is its task, its HPACK tables and its state; an idle HTTP/1.1 connection still costs 1.9 KiB. Results are in `bench/results/h2/`.
 
+## HTTP/3 (unstable)
+
+The `unstable-http3` feature adds HTTP/3 (RFC 9114) on [`giong-quic`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-quic/README.md),
+for the same handlers, on Linux and macOS. It needs Rust 1.85, and may change before it is
+stabilised; the default build does not have it.
+
+```toml
+giong-http = { version = "1.4.0", features = ["unstable-http3", "client"] }
+giong-quic = "1.4.0"
+```
+
+```rust,ignore
+use giong_http::{Request, Response, Server};
+
+async fn handler(req: Request) -> Response {
+    Response::text(format!("hello over {}", req.version()))
+}
+
+async fn serve(tls: rustls::ServerConfig) -> std::io::Result<()> {
+    // `tls` allows TLS 1.3 and has `alpn_protocols` set to `vec![b"h3".to_vec()]`.
+    let config = giong_quic::ServerConfig::new(tls)?;
+    let endpoint = giong_quic::Endpoint::server("0.0.0.0:443".parse().unwrap(), config)?;
+    Server::new().serve_h3(endpoint, handler).await;
+    Ok(())
+}
+```
+
+- **Browsers find it through `Alt-Svc`.** Have the server that answers over TCP add
+  `Response::header("alt-svc", "h3=\":443\"; ma=86400")`, with the UDP port of the
+  endpoint.
+- **Limits come from the endpoint**: the requests a client may have open at once are its
+  `TransportConfig::max_streams`, and an idle connection closes after its
+  `TransportConfig::idle_timeout`. On shutdown the client gets `GOAWAY`, requests in flight
+  finish, and later ones are refused with `H3_REQUEST_REJECTED` so the client can retry them
+  elsewhere.
+- **Trailers** travel both ways as over HTTP/2. A streamed request body goes over HTTP/1.1
+  or HTTP/2.
+- **The client**: `Client::builder().http3(quic)` uses HTTP/3 for origins that advertise it
+  with `Alt-Svc`, and falls back to TCP for five minutes when the QUIC handshake does not
+  answer; `http3_prior_knowledge(quic)` speaks it at once. With early data on in `quic`,
+  only GET, HEAD and OPTIONS requests without a body go in 0-RTT. Not through a proxy.
+- **Checked** with `h3spec` in CI: 85 of 86 cases pass and none fails (the other needs
+  0-RTT, which the example leaves off). `cargo run --release -p giong-http --features
+  unstable-http3 --example h3` serves it locally (`curl -k --http3-only https://localhost:8443/`).
+- **Not measured yet** end to end; the QUIC layer underneath is in
+  [docs/BENCHMARKS.md](https://github.com/giong-run/Giong/blob/v1.4.0/docs/BENCHMARKS.md#quic).
+
 ## Client
 
 The `client` feature adds an HTTP/1.1 and HTTP/2 client, `giong_http::client` (HTTPS included, through giong-tls):
 
 ```toml
-giong-http = { version = "1.3.0", features = ["client"] }
+giong-http = { version = "1.4.0", features = ["client"] }
 ```
 
 ```rust,no_run
@@ -731,7 +842,7 @@ async fn demo() -> Result<(), Error> {
 - **Proxies.** `ClientBuilder::proxy(Proxy::all("http://user:pass@proxy:3128")?.no_proxy(".svc.cluster.local, 10.0.0.0/8")?)`, or `Proxy::from_env()` for `HTTPS_PROXY`, `HTTP_PROXY`, `ALL_PROXY` and `NO_PROXY` the way curl reads them (never read unless asked). It returns `Result<Option<Proxy>, Error>`, `None` when the environment names no proxy: `if let Some(proxy) = Proxy::from_env()? { builder = builder.proxy(proxy); }`. `https` goes through a `CONNECT` tunnel, so the proxy sees only the host name; the credentials go to the proxy, never to the server. Plain `http://` proxies only, for now (no SOCKS, no TLS to the proxy itself).
 - **Compression.** Responses are asked for with `Accept-Encoding: gzip, deflate` and decompressed as they arrive (`ClientBuilder::decompress(false)` turns it off; a request with its own `Accept-Encoding` gets the bytes as sent). The size limit applies to the decompressed body, so 32 KiB that would expand to gigabytes fails at the limit instead of filling memory; the gzip checksum is checked, and a body cut short is an error, not a shorter body.
 - **Streaming.** `RequestBuilder::send_streaming()` returns once the head has arrived; `StreamingResponse::chunk()` gives the body piece by piece (64 KiB at most, decompressed), with no limit on its size and the timeout applying to each piece. Read to its end, the connection goes back to the pool; dropped before, it is closed (over HTTP/2, only its stream is reset).
-- **Errors that say what to do.** `Error::kind` is one of `Request`, `Connect`, `Timeout`, `TooLarge`, `Redirect`, `Closed`, `Protocol`, `Status`, `Decode` and `Proxy`, each with a giong code (GIONG-E1101 to E1110) and a page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/README.md); `Error::is_transient` says whether retrying can help. Any status is a `Response`; `error_for_status` turns 4xx and 5xx into an error with the start of the body.
+- **Errors that say what to do.** `Error::kind` is one of `Request`, `Connect`, `Timeout`, `TooLarge`, `Redirect`, `Closed`, `Protocol`, `Status`, `Decode` and `Proxy`, each with a giong code (GIONG-E1101 to E1110) and a page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/README.md); `Error::is_transient` says whether retrying can help. Any status is a `Response`; `error_for_status` turns 4xx and 5xx into an error with the start of the body.
 
 The client is not `Send`, like everything in giong: make one per worker (in the closure given to `Runtime::run`) and clone it into that worker's tasks.
 
@@ -763,12 +874,12 @@ Results are in `bench/results/http-client/`.
 
 ## Not there yet
 
-Server push. Routing and compression of responses are in [`giong-web`](https://github.com/giong-run/Giong/blob/v1.3.0/giong-web/README.md). In the client: cookies, streaming request bodies, `br` and `zstd`, SOCKS proxies, HTTP/2 through an `http://` proxy (HTTPS through a proxy's tunnel gets HTTP/2), the `Upgrade: h2c` handshake.
+Server push. Routing and compression of responses are in [`giong-web`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-web/README.md). In the client: cookies, `br` and `zstd`, SOCKS proxies, HTTP/2 through an `http://` proxy (HTTPS through a proxy's tunnel gets HTTP/2), the `Upgrade: h2c` handshake.
 
 ## Tests
 
 `cargo test -p giong-http --all-features`: 66 unit tests (including 500,000 random inputs for the parser and the chunked decoder, 300,000 for the client's response parser and URLs, 100,000 responses read by the client on a connection in random pieces, 50,000 damaged gzip and deflate bodies, 200,000 HPACK header blocks and Huffman strings, 3,000 HTTP/2 connections whose every frame is checked, and 3,000 from the client's side, checking what it holds and writes), 44 HTTP/2 tests (22 end-to-end on real sockets with a client that writes its frames by hand, 22 of frames, HPACK, requests and stream memory), 30 end-to-end tests of the server on real sockets (one of them over a Unix socket, four of the memory budget for requests being received, one of them with bodies received straight into the request buffer, one of bodies from 64 KiB to 3 MiB received straight into the request buffer between other requests), 14 end-to-end tests of streamed bodies (a 250 KB upload read piece by piece with the connection used again after it, chunked uploads, bodies past the handler's limit, broken framing, nothing read and no `100 Continue` until the handler asks, a handler that answers early, a body cut short, the timeout of each piece; streamed responses chunked and sent piece by piece, to an HTTP/1.0 client, without a body for `HEAD`, 204 and 304, aborted, and stopped when the client goes away), 12 end-to-end HTTPS tests with a rustls client (TLS 1.2 and 1.3, pipelining, a 3 MB body, 400/413 errors, idle connections, clients that do not speak TLS, graceful shutdown, 16 client threads at once), 22 end-to-end tests of the client against this server, against servers that misbehave on purpose and through proxies, 15 of the client over HTTP/2 (against this server through ALPN, over kernel TLS where the kernel has it, and with prior knowledge, and against servers that refuse streams, send GOAWAY, reset streams, send malformed responses, close early, send past the window or wait for a window the client grants only once the connection has gone quiet), 15 documentation examples. One more client test, ignored by default (`-- --ignored`), fetches from crates.io over HTTPS.
-</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.3.0, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use giong-http as documented below.
+</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.4.0, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use giong-http as documented below.
 
 Rules for giong code:
 - Start the runtime with giong::Builder::new().shutdown_on_signals(true).build()?.run(|_worker| async { .. }); there are no macros. Build listeners, routers, pools and clients inside each worker's future.
@@ -781,13 +892,13 @@ More facts: https://giong.run/llms.txt. Best practices: https://giong.run/docs/b
 
 My task: <describe what to build or fix>
 
-Documentation of giong-http, giong 1.3.0 (https://giong.run/docs/giong-http.md):
+Documentation of giong-http, giong 1.4.0 (https://giong.run/docs/giong-http.md):
 
 # giong-http
 
-> giong 1.3.0 · https://giong.run/docs/giong-http/ · source: https://github.com/giong-run/Giong/blob/v1.3.0/giong-http/README.md
+> giong 1.4.0 · https://giong.run/docs/giong-http/ · source: https://github.com/giong-run/Giong/blob/v1.4.0/giong-http/README.md
 
-A small, strict HTTP/1.1 and HTTP/2 server, and an HTTP/1.1 and HTTP/2 client, for the [giong](https://github.com/giong-run/Giong/blob/v1.3.0/README.md) runtime.
+A small, strict HTTP/1.1 and HTTP/2 server, and an HTTP/1.1 and HTTP/2 client, for the [giong](https://github.com/giong-run/Giong/blob/v1.4.0/README.md) runtime.
 
 ```rust,no_run
 use std::time::Duration;
@@ -827,9 +938,9 @@ fn main() -> std::io::Result<()> {
 - Limits on the size of the head (64 KiB) and the body (1 MiB); timeouts for idle connections (60 s), slow requests (30 s, against slowloris) and clients that read slowly (30 s). All of them can be changed on `Server`.
 - A cap on open connections, 10,000 per `serve` call (so per worker) unless `Server::max_connections` says otherwise: at the cap the server stops accepting, and new clients wait in the kernel's listen queue until a connection closes.
 - A floor under free memory: while less than `Server::min_free_memory` is left to the process (by default a tenth of its cgroup's memory limit, or of the machine's memory, between 16 and 256 MiB), new connections are refused, with `503` and `Retry-After: 1` (`GIONG-E1121`) without TLS and closed before the handshake with it, and the connections the server holds keep being served. Without it, enough idle connections get the process killed by the kernel's out-of-memory killer, connections and all (0.8.0 was killed at 7,900 idle HTTPS connections in a 96 MiB container, under the default connection cap).
-- A cap on the bytes of requests a worker holds while receiving them, shared by all its connections, HTTP/1.1 and HTTP/2: `Server::max_buffered_request_bytes`, by default 64 MiB per worker or, in a container, a quarter of its memory limit divided among the workers if that is less. Without it, a few hundred clients sending large bodies slowly could exhaust a small container's memory (measured with one worker: 130 such clients got a 128 MiB container OOM-killed; with the cap, 450 of them over HTTP/1.1 and HTTP/2 leave it at a 35 MiB peak). Past the cap a request gets `503` with `Retry-After: 1` (`GIONG-E1120`) over HTTP/1.1, `REFUSED_STREAM` over HTTP/2, without its handler being called; the first 4 KiB of each HTTP/1.1 request do not count, so ordinary requests keep being served. Bodies read as a stream do not count. How to size a container: [docs/DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.3.0/docs/DEPLOYMENT.md#sizing-memory).
+- A cap on the bytes of requests a worker holds while receiving them, shared by all its connections, HTTP/1.1 and HTTP/2: `Server::max_buffered_request_bytes`, by default 64 MiB per worker or, in a container, a quarter of its memory limit divided among the workers if that is less. Without it, a few hundred clients sending large bodies slowly could exhaust a small container's memory (measured with one worker: 130 such clients got a 128 MiB container OOM-killed; with the cap, 450 of them over HTTP/1.1 and HTTP/2 leave it at a 35 MiB peak). Past the cap a request gets `503` with `Retry-After: 1` (`GIONG-E1120`) over HTTP/1.1, `REFUSED_STREAM` over HTTP/2, without its handler being called; the first 4 KiB of each HTTP/1.1 request do not count, so ordinary requests keep being served. Bodies read as a stream do not count. How to size a container: [docs/DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.0/docs/DEPLOYMENT.md#sizing-memory).
 - Handlers that keep a worker busy (heavy computation, long responses) leave the kernel's even spread of connections uneven. Bind each worker's listener with `giong::net::TcpListener::bind_balanced` instead of `bind` and a busy worker hands new connections to a quieter one; `Server::serve` takes either.
-- A handler is an `async fn(Request) -> Response`, a closure that returns a future (write its argument's type: `|req: Request| async move { .. }`), or a type of your own that implements `Handler` and borrows from itself while it answers. [`giong-web`](https://github.com/giong-run/Giong/blob/v1.3.0/giong-web/README.md) builds routing, middleware and JSON on it.
+- A handler is an `async fn(Request) -> Response`, a closure that returns a future (write its argument's type: `|req: Request| async move { .. }`), or a type of your own that implements `Handler` and borrows from itself while it answers. [`giong-web`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-web/README.md) builds routing, middleware and JSON on it.
 - `Server::serve` takes its handler by value. To serve one handler on two listeners (plain HTTP and HTTPS, a public port and an internal one), put it in an `Rc` and give each `serve` a clone: `Handler` is implemented for `Rc<H>`, and streaming routes keep streaming. Do not wrap it in a closure instead: a closure never streams, so every route that reads its body as it arrives would get it whole, or a `413`.
 - **When a handler is dropped.** A handler's future can be dropped at any `.await`, so work that must finish once started (a charge, then its record) belongs in a task of its own (`giong::spawn`), not after an `.await` in the handler. It is dropped when the client resets its HTTP/2 stream (`RST_STREAM`, which giong-http's own client sends when its timeout runs out), when a timeout around it runs out (giong-web's `Timeout`), and at the end of the grace period of a shutdown. It is *not* dropped when the client closes the connection, over HTTP/1.1 or HTTP/2: the handler runs to its end and the answer is thrown away, so a slow query for a client that has gone still runs. A body from `Body::channel()` learns that the client has gone at its next `send`.
 - `Request::from_bytes` makes a request from its bytes and `Response::headers`, `get_header` and `body_bytes` read an answer back, so handlers are tested without a socket.
@@ -896,11 +1007,11 @@ Other status codes: `408` the request was too slow, `413` the body is too large,
 
 ## HTTPS
 
-Turn on the `tls` feature to get `Server::serve_tls`, which uses the [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.3.0/giong-tls/README.md) crate (rustls, TLS 1.2 and 1.3):
+Turn on the `tls` feature to get `Server::serve_tls`, which uses the [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-tls/README.md) crate (rustls, TLS 1.2 and 1.3):
 
 ```toml
-giong-http = { version = "1.3.0", features = ["tls"] }
-giong-tls = "1.3.0"
+giong-http = { version = "1.4.0", features = ["tls"] }
+giong-tls = "1.4.0"
 ```
 
 ```rust,no_run
@@ -929,7 +1040,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 Handlers, limits, timeouts and graceful shutdown are the same as for plain HTTP. Each handshake runs in its connection's own task, so a slow client does not hold up accepting new connections; a client that does not speak TLS (a port scan, plain HTTP sent to the wrong port) is closed when the handshake timeout expires. When it closes a connection the server sends `close_notify`, so the client can tell a complete response from a connection that was cut.
 
-To have the kernel encrypt and decrypt the records once rustls has done the handshake (kernel TLS, Linux with the `tls` module), build the acceptor with `.ktls(giong_tls::Ktls::Auto)?`; nothing else changes. When it pays off and when it does not is in [giong-tls's README](https://github.com/giong-run/Giong/blob/v1.3.0/giong-tls/README.md#kernel-tls).
+To have the kernel encrypt and decrypt the records once rustls has done the handshake (kernel TLS, Linux with the `tls` module), build the acceptor with `.ktls(giong_tls::Ktls::Auto)?`; nothing else changes. When it pays off and when it does not is in [giong-tls's README](https://github.com/giong-run/Giong/blob/v1.4.0/giong-tls/README.md#kernel-tls).
 
 To serve over another kind of connection (a different TLS layer, a fake connection in a test), implement the `Transport` trait and call `Server::serve_connection`.
 
@@ -945,7 +1056,7 @@ curl --http2-prior-knowledge http://localhost:8080/bytes?n=100000 -o /dev/null
 
 What a handler sees:
 
-- Each stream is a `Request` like any other, and `Request::version()` is `Version::Http2`. `:authority` becomes the `Host` header (a `Host` that differs from it is refused), and the `cookie` fields a client sends apart are joined into one. A [`giong-web`](https://github.com/giong-run/Giong/blob/v1.3.0/giong-web/README.md) app serves HTTP/2 without a change.
+- Each stream is a `Request` like any other, and `Request::version()` is `Version::Http2`. `:authority` becomes the `Host` header (a `Host` that differs from it is refused), and the `cookie` fields a client sends apart are joined into one. A [`giong-web`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-web/README.md) app serves HTTP/2 without a change.
 - Streams are served at once and answered as their handlers finish; a slow handler holds up no other stream. Each handler runs in its connection's task, like an HTTP/1.1 one, on the same core. A handler that panics has its stream answered with `500`; the other streams and the connection go on (over HTTP/1.1, the `500` is followed by the end of the connection).
 - The response is written as HEADERS and DATA frames. Its headers are sent in lowercase, without those HTTP/2 forbids (`Connection`, `Keep-Alive`, `Transfer-Encoding`, `Upgrade`); a streamed body (`Body::channel`) goes out as DATA frames instead of chunks.
 - A stream the client resets (`RST_STREAM`) drops its handler at once, as a dropped future: whatever it was waiting on is cancelled. A handler that answers before the request body has all arrived has its response sent, then the rest of the body is refused with `RST_STREAM(NO_ERROR)`; the connection stays open.
@@ -954,7 +1065,7 @@ What a handler sees:
 
 ### Limits
 
-Every resource a client can make the server hold is bounded. A client that goes past a limit loses its stream or its connection; a connection ends with a GOAWAY whose debug data starts with a `GIONG-E` code, which has a page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/README.md).
+Every resource a client can make the server hold is bounded. A client that goes past a limit loses its stream or its connection; a connection ends with a GOAWAY whose debug data starts with a `GIONG-E` code, which has a page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/README.md).
 
 | Attack | What the server does | Code |
 |---|---|---|
@@ -989,7 +1100,7 @@ Measured with `bench/h2.sh` against axum 0.8 on hyper's HTTP/2 (through `axum-se
 | axum, prior knowledge | 138.9k (126–146k) | 23.0k (22–26k) | 158.0k (152–171k) |
 
 - **3.8 to 4.4 times axum's requests per second on small answers, 2.5 to 3.0 times on 8.5 KiB ones.** The server's core is the limit in every case (97–100% busy), and no request failed. h2load's mean time per request follows: 0.83 ms against 3.63 ms for `json` over HTTPS, 8.1 against 20.5 ms for `users`.
-- Our reading, not profiled: with 10 or 100 streams in flight on a connection, one read brings many requests and one write takes many answers, much as pipelining does over HTTP/1.1, and giong-http turns that batching into requests served as it does for pipelined ones ([giong-web's benchmark](https://github.com/giong-run/Giong/blob/v1.3.0/giong-web/README.md#performance)). hyper gains far less from either.
+- Our reading, not profiled: with 10 or 100 streams in flight on a connection, one read brings many requests and one write takes many answers, much as pipelining does over HTTP/1.1, and giong-http turns that batching into requests served as it does for pipelined ones ([giong-web's benchmark](https://github.com/giong-run/Giong/blob/v1.4.0/giong-web/README.md#performance)). hyper gains far less from either.
 - Not measured yet: several cores, a load generator on another machine, request bodies.
 
 Memory per connection, measured with `bench/hold` over HTTP/2 with prior knowledge: 5,000 connections on one worker thread, the server's resident memory before and after, divided by 5,000. KiB, the same in all 5 rounds within 0.2%:
@@ -1001,12 +1112,59 @@ Memory per connection, measured with `bench/hold` over HTTP/2 with prior knowled
 
 An idle connection gives its buffers back, so what it keeps is its task, its HPACK tables and its state; an idle HTTP/1.1 connection still costs 1.9 KiB. Results are in `bench/results/h2/`.
 
+## HTTP/3 (unstable)
+
+The `unstable-http3` feature adds HTTP/3 (RFC 9114) on [`giong-quic`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-quic/README.md),
+for the same handlers, on Linux and macOS. It needs Rust 1.85, and may change before it is
+stabilised; the default build does not have it.
+
+```toml
+giong-http = { version = "1.4.0", features = ["unstable-http3", "client"] }
+giong-quic = "1.4.0"
+```
+
+```rust,ignore
+use giong_http::{Request, Response, Server};
+
+async fn handler(req: Request) -> Response {
+    Response::text(format!("hello over {}", req.version()))
+}
+
+async fn serve(tls: rustls::ServerConfig) -> std::io::Result<()> {
+    // `tls` allows TLS 1.3 and has `alpn_protocols` set to `vec![b"h3".to_vec()]`.
+    let config = giong_quic::ServerConfig::new(tls)?;
+    let endpoint = giong_quic::Endpoint::server("0.0.0.0:443".parse().unwrap(), config)?;
+    Server::new().serve_h3(endpoint, handler).await;
+    Ok(())
+}
+```
+
+- **Browsers find it through `Alt-Svc`.** Have the server that answers over TCP add
+  `Response::header("alt-svc", "h3=\":443\"; ma=86400")`, with the UDP port of the
+  endpoint.
+- **Limits come from the endpoint**: the requests a client may have open at once are its
+  `TransportConfig::max_streams`, and an idle connection closes after its
+  `TransportConfig::idle_timeout`. On shutdown the client gets `GOAWAY`, requests in flight
+  finish, and later ones are refused with `H3_REQUEST_REJECTED` so the client can retry them
+  elsewhere.
+- **Trailers** travel both ways as over HTTP/2. A streamed request body goes over HTTP/1.1
+  or HTTP/2.
+- **The client**: `Client::builder().http3(quic)` uses HTTP/3 for origins that advertise it
+  with `Alt-Svc`, and falls back to TCP for five minutes when the QUIC handshake does not
+  answer; `http3_prior_knowledge(quic)` speaks it at once. With early data on in `quic`,
+  only GET, HEAD and OPTIONS requests without a body go in 0-RTT. Not through a proxy.
+- **Checked** with `h3spec` in CI: 85 of 86 cases pass and none fails (the other needs
+  0-RTT, which the example leaves off). `cargo run --release -p giong-http --features
+  unstable-http3 --example h3` serves it locally (`curl -k --http3-only https://localhost:8443/`).
+- **Not measured yet** end to end; the QUIC layer underneath is in
+  [docs/BENCHMARKS.md](https://github.com/giong-run/Giong/blob/v1.4.0/docs/BENCHMARKS.md#quic).
+
 ## Client
 
 The `client` feature adds an HTTP/1.1 and HTTP/2 client, `giong_http::client` (HTTPS included, through giong-tls):
 
 ```toml
-giong-http = { version = "1.3.0", features = ["client"] }
+giong-http = { version = "1.4.0", features = ["client"] }
 ```
 
 ```rust,no_run
@@ -1044,7 +1202,7 @@ async fn demo() -> Result<(), Error> {
 - **Proxies.** `ClientBuilder::proxy(Proxy::all("http://user:pass@proxy:3128")?.no_proxy(".svc.cluster.local, 10.0.0.0/8")?)`, or `Proxy::from_env()` for `HTTPS_PROXY`, `HTTP_PROXY`, `ALL_PROXY` and `NO_PROXY` the way curl reads them (never read unless asked). It returns `Result<Option<Proxy>, Error>`, `None` when the environment names no proxy: `if let Some(proxy) = Proxy::from_env()? { builder = builder.proxy(proxy); }`. `https` goes through a `CONNECT` tunnel, so the proxy sees only the host name; the credentials go to the proxy, never to the server. Plain `http://` proxies only, for now (no SOCKS, no TLS to the proxy itself).
 - **Compression.** Responses are asked for with `Accept-Encoding: gzip, deflate` and decompressed as they arrive (`ClientBuilder::decompress(false)` turns it off; a request with its own `Accept-Encoding` gets the bytes as sent). The size limit applies to the decompressed body, so 32 KiB that would expand to gigabytes fails at the limit instead of filling memory; the gzip checksum is checked, and a body cut short is an error, not a shorter body.
 - **Streaming.** `RequestBuilder::send_streaming()` returns once the head has arrived; `StreamingResponse::chunk()` gives the body piece by piece (64 KiB at most, decompressed), with no limit on its size and the timeout applying to each piece. Read to its end, the connection goes back to the pool; dropped before, it is closed (over HTTP/2, only its stream is reset).
-- **Errors that say what to do.** `Error::kind` is one of `Request`, `Connect`, `Timeout`, `TooLarge`, `Redirect`, `Closed`, `Protocol`, `Status`, `Decode` and `Proxy`, each with a giong code (GIONG-E1101 to E1110) and a page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/README.md); `Error::is_transient` says whether retrying can help. Any status is a `Response`; `error_for_status` turns 4xx and 5xx into an error with the start of the body.
+- **Errors that say what to do.** `Error::kind` is one of `Request`, `Connect`, `Timeout`, `TooLarge`, `Redirect`, `Closed`, `Protocol`, `Status`, `Decode` and `Proxy`, each with a giong code (GIONG-E1101 to E1110) and a page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/README.md); `Error::is_transient` says whether retrying can help. Any status is a `Response`; `error_for_status` turns 4xx and 5xx into an error with the start of the body.
 
 The client is not `Send`, like everything in giong: make one per worker (in the closure given to `Runtime::run`) and clone it into that worker's tasks.
 
@@ -1076,14 +1234,14 @@ Results are in `bench/results/http-client/`.
 
 ## Not there yet
 
-Server push. Routing and compression of responses are in [`giong-web`](https://github.com/giong-run/Giong/blob/v1.3.0/giong-web/README.md). In the client: cookies, streaming request bodies, `br` and `zstd`, SOCKS proxies, HTTP/2 through an `http://` proxy (HTTPS through a proxy's tunnel gets HTTP/2), the `Upgrade: h2c` handshake.
+Server push. Routing and compression of responses are in [`giong-web`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-web/README.md). In the client: cookies, `br` and `zstd`, SOCKS proxies, HTTP/2 through an `http://` proxy (HTTPS through a proxy's tunnel gets HTTP/2), the `Upgrade: h2c` handshake.
 
 ## Tests
 
 `cargo test -p giong-http --all-features`: 66 unit tests (including 500,000 random inputs for the parser and the chunked decoder, 300,000 for the client's response parser and URLs, 100,000 responses read by the client on a connection in random pieces, 50,000 damaged gzip and deflate bodies, 200,000 HPACK header blocks and Huffman strings, 3,000 HTTP/2 connections whose every frame is checked, and 3,000 from the client's side, checking what it holds and writes), 44 HTTP/2 tests (22 end-to-end on real sockets with a client that writes its frames by hand, 22 of frames, HPACK, requests and stream memory), 30 end-to-end tests of the server on real sockets (one of them over a Unix socket, four of the memory budget for requests being received, one of them with bodies received straight into the request buffer, one of bodies from 64 KiB to 3 MiB received straight into the request buffer between other requests), 14 end-to-end tests of streamed bodies (a 250 KB upload read piece by piece with the connection used again after it, chunked uploads, bodies past the handler's limit, broken framing, nothing read and no `100 Continue` until the handler asks, a handler that answers early, a body cut short, the timeout of each piece; streamed responses chunked and sent piece by piece, to an HTTP/1.0 client, without a body for `HEAD`, 204 and 304, aborted, and stopped when the client goes away), 12 end-to-end HTTPS tests with a rustls client (TLS 1.2 and 1.3, pipelining, a 3 MB body, 400/413 errors, idle connections, clients that do not speak TLS, graceful shutdown, 16 client threads at once), 22 end-to-end tests of the client against this server, against servers that misbehave on purpose and through proxies, 15 of the client over HTTP/2 (against this server through ALPN, over kernel TLS where the kernel has it, and with prior knowledge, and against servers that refuse streams, send GOAWAY, reset streams, send malformed responses, close early, send past the window or wait for a window the client grants only once the connection has gone quiet), 15 documentation examples. One more client test, ignored by default (`-- --ignored`), fetches from crates.io over HTTPS.
 </script>
   </article>
-  <nav class="toc doc-toc" aria-label="On this page"><p>On this page</p><div class="toc-links"><a href="#what-it-does">What it does</a><a href="#streaming">Streaming</a><a href="#strict-parsing">Strict parsing</a><a href="#https">HTTPS</a><a href="#http2">HTTP/2</a><a href="#client">Client</a><a href="#not-there-yet">Not there yet</a><a href="#tests">Tests</a></div></nav>
+  <nav class="toc doc-toc" aria-label="On this page"><p>On this page</p><div class="toc-links"><a href="#what-it-does">What it does</a><a href="#streaming">Streaming</a><a href="#strict-parsing">Strict parsing</a><a href="#https">HTTPS</a><a href="#http2">HTTP/2</a><a href="#http3-unstable">HTTP/3 (unstable)</a><a href="#client">Client</a><a href="#not-there-yet">Not there yet</a><a href="#tests">Tests</a></div></nav>
 </div>
 </main>
 <footer class="ftr">
@@ -1102,9 +1260,9 @@ Server push. Routing and compression of responses are in [`giong-web`](https://g
         <h2>Learn</h2>
         <a href="/docs/">Get started</a>
         <a href="/docs/#examples">Examples</a>
-        <a href="https://docs.rs/giong/1.3.0/giong/">API reference</a>
+        <a href="https://docs.rs/giong/1.4.0/giong/">API reference</a>
         <a href="/docs/#errors">Error codes</a>
-        
+        <a href="/docs/best-practices/">Best practices</a><a href="/docs/agent-skill/">Agent skill</a>
         <a href="/llms.txt">llms.txt</a>
       </nav>
       <nav class="ftr-col" aria-label="Project">

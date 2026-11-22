@@ -1,0 +1,829 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stability · giong</title>
+<meta name="description" content="What the 1.x promise covers: the API and its documented behaviour, error codes, environment variables, the minimum Rust version and the kernels.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://giong.run/docs/1.3/stability/">
+<meta name="theme-color" content="#0A0C10">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="giong">
+<meta property="og:title" content="Stability · giong">
+<meta property="og:description" content="What the 1.x promise covers: the API and its documented behaviour, error codes, environment variables, the minimum Rust version and the kernels.">
+<meta property="og:url" content="https://giong.run/docs/1.3/stability/">
+<meta property="og:image" content="https://giong.run/assets/social-preview.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="The giong logo: a segmented ember ring">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@giongrun">
+<meta name="twitter:title" content="Stability · giong">
+<meta name="twitter:description" content="What the 1.x promise covers: the API and its documented behaviour, error codes, environment variables, the minimum Rust version and the kernels.">
+<meta name="twitter:image" content="https://giong.run/assets/social-preview.png">
+<meta name="author" content="thekivashyn">
+<link rel="alternate" type="application/atom+xml" title="giong releases" href="https://github.com/giong-run/Giong/releases.atom">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","name":"Stability · giong","description":"What the 1.x promise covers: the API and its documented behaviour, error codes, environment variables, the minimum Rust version and the kernels.","url":"https://giong.run/docs/1.3/stability/"}]}</script>
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/giong-icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/giong-icon-180.png">
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/styles.css">
+<script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("giong-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}})(document.documentElement)</script>
+</head>
+<body class="page-docs-1.3-stability">
+<a class="skip" href="#main">Skip to content</a>
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="28" height="28"></picture><span>giong</span></a>
+    <nav class="nav" aria-label="Site"><a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a><a href="/docs/agent-skill/">Agent skill</a></nav>
+    <div class="hdr-side">
+      <a class="ver" href="/releases/#v1-4-0" title="Release notes for v1.4.0">v1.4.0</a>
+      <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="giong on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
+      <a class="icon-btn hide-sm" href="https://x.com/giongrun" aria-label="giong on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
+      <button class="icon-btn theme" type="button" aria-label="Switch between light and dark" hidden>
+        <span class="if-dark"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></span><span class="if-light"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z"/></svg></span></button>
+      <details class="menu">
+        <summary class="icon-btn" aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
+        <nav class="menu-panel" aria-label="Site">
+          <a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a><a href="/docs/agent-skill/">Agent skill</a>
+          <span class="menu-social"><a href="https://github.com/giong-run/Giong">GitHub</a><a href="https://x.com/giongrun">X</a></span>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+<main id="main">
+<div class="wrap docs-layout">
+  <nav class="side" aria-label="Documentation"><details class="side-menu" open><summary>Documentation</summary><div class="side-links"><div class="side-group"><p>Start</p><a href="/docs/1.3/">Get started</a></div><div class="side-group"><p>Runtime</p><a href="/docs/1.3/giong/">giong</a></div><div class="side-group"><p>Protocols</p><a href="/docs/1.3/giong-proto/">giong-proto</a><a href="/docs/1.3/giong-quic/">giong-quic</a><a href="/docs/1.3/giong-tls/">giong-tls</a><a href="/docs/1.3/giong-http/">giong-http</a><a href="/docs/1.3/giong-grpc/">giong-grpc</a><a href="/docs/1.3/giong-compat/">giong-compat</a></div><div class="side-group"><p>Clients</p><a href="/docs/1.3/giong-postgres/">giong-postgres</a><a href="/docs/1.3/giong-mysql/">giong-mysql</a><a href="/docs/1.3/giong-redis/">giong-redis</a></div><div class="side-group"><p>Framework</p><a href="/docs/1.3/giong-web/">giong-web</a></div><div class="side-group"><p>Tooling</p><a href="/docs/1.3/giong-grpc-build/">giong-grpc-build</a><a href="/docs/1.3/giong-mcp/">giong-mcp</a></div><div class="side-group"><p>Operate</p><a href="/docs/1.3/deployment/">Deployment</a><a href="/docs/1.3/stability/" aria-current=page>Stability</a><a href="/docs/1.3/errors/">Error codes</a></div></div></details></nav>
+  <article class="doc-page prose">
+    <header class="doc-head"><p class="eyebrow">Operate</p><h1>Stability</h1><p class="lede">What the 1.x promise covers: the API and its documented behaviour, error codes, environment variables, the minimum Rust version and the kernels.</p>
+      <div class="doc-bar"><details class="ver-menu"><summary title="Documentation version">giong 1.3</summary><nav class="ver-list" aria-label="Documentation versions"><a href="/docs/stability/"><b>1.4</b><span>newest</span></a><a href="/docs/1.3/stability/" aria-current=true><b>1.3</b></a><a href="/docs/1.2/stability/"><b>1.2</b></a><a href="/docs/1.1/stability/"><b>1.1</b></a><a href="/docs/1.0/stability/"><b>1.0</b></a></nav></details><div class="doc-actions"><button class="act" type="button" data-md="md-page" data-done="copied" title="Copy this page as Markdown, for a coding agent"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy for agent</span></button><button class="act" type="button" data-md="md-prompt" data-done="copied" title="Copy a ready prompt with the rules and this page"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9Z"/><path d="M18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8Z"/></svg><span>Copy prompt</span></button><a class="act" href="/docs/1.3/stability.md" title="This page as plain Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><span>.md</span></a></div></div></header>
+    <p class="ver-note">This is the documentation of giong 1.3 (v1.3.0). The newest release is 1.4: <a href="/docs/stability/">read this page for 1.4</a>.</p><div class="md-intro"><p>From 1.0.0 on, giong keeps major version 1 for a long time and grows through 1.x minor releases. Code that builds and behaves correctly on 1.N builds and behaves the same way on every later 1.x. This page says exactly what that promise covers, what it does not, and how the parts that have to move (the Rust version, the Linux kernel, the crates giong depends on) move without breaking it.</p>
+<p><code>scripts/semver.sh</code> (cargo-semver-checks, run on every pull request) enforces the Rust API part; the rest is kept by review.</p></div><section class="md-sec"><button class="sec-copy" type="button" data-md="md-0" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="what-the-promise-covers">What the promise covers</h2>
+<p>All nine published crates: <code>giong</code>, <code>giong-http</code>, <code>giong-tls</code>, <code>giong-postgres</code>, <code>giong-mysql</code>, <code>giong-redis</code>, <code>giong-web</code>, <code>giong-mcp</code> and <code>giong-compat</code>.</p>
+<ul><li><strong>The Rust API</strong>: every public item that shows in the documentation, with its signature, its trait implementations and its auto traits. Whether a type is <code>Send</code> or <code>Sync</code> is part of the API: a type that is <code>Send</code> today stays <code>Send</code>. A type that is not may become so in a minor release (adding an auto trait breaks nothing), as <code>JoinError</code>, <code>RecvBuf</code> or a database <code>Row</code> might.</li><li><strong>Error codes.</strong> A <code>GIONG-Exxxx</code> code keeps its number, its meaning and its <code>io::ErrorKind</code> forever, and is never reused for something else. A code that is no longer raised keeps its page under <code>docs/errors/</code>. New codes are added in minor releases, which is why <code>giong::error::Code</code> is <code>#[non_exhaustive]</code>. The message text and the fix text around a code may be improved in any release: match on the code, not on the text.</li><li><strong>Environment variables</strong> that change behaviour: <code>GIONG_DRIVER</code>, <code>GIONG_MCP</code> and <code>GIONG_MCP_TOKEN</code>. Their accepted values keep working; new values may be added.</li><li><strong>Machine-read output</strong>: the JSON lines that <code>giong_web::middleware::Logger</code> writes and the tools and result fields that <code>giong-mcp</code> serves keep their names and meaning. Fields may be added, and a reader must ignore fields it does not know.</li><li><strong>Documented behaviour</strong>: limits and defaults that the documentation states, such as "every limit has a finite default" or "dropping an I/O future never frees memory the kernel may still write to". A default value may be tuned in a minor release when the documentation does not promise the number; the change is in the CHANGELOG.</li></ul></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-1" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="what-it-does-not-cover">What it does not cover</h2>
+<ul><li><strong>Items marked <code>#[doc(hidden)]</code></strong>, such as <code>TcpStream::send_with_control</code> (which <code>giong-tls</code> uses for kernel TLS) and the <code>fuzzing</code> modules built only under <code>--cfg fuzzing</code>. They are public only so that the crates of this workspace can reach each other; they may change or go in any release. cargo-semver-checks ignores them too.</li><li><strong>Features named <code>unstable-*</code></strong>, such as <code>giong-tls</code>'s <code>unstable-rustls</code>, which exposes rustls' own types. Their items follow the version of the dependency giong uses and may change in a minor release; the CHANGELOG says so when they do.</li><li><strong><code>Debug</code> output</strong>, the wording of error messages and log lines meant for people, and the exact numbers in the <code>observe</code> statistics (their fields stay; what one unit of them costs may change).</li><li><strong>Performance.</strong> Speed and memory are measured in CI (<code>bench/instr</code>) and only get better on purpose, but a number is not an API.</li><li><strong>Which driver a worker gets.</strong> A newer kernel may get a worker the io_uring driver where an older giong chose epoll, or the reverse when a kernel bug needs avoiding (<code>KernelWorkaround</code>); both drivers behave the same through the API.</li></ul></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-2" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="how-the-api-grows">How the API grows</h2>
+<p>These rules let 1.x add what the roadmap needs (gRPC, macOS, HTTP/3, Windows) without a 2.0:</p>
+<ul><li><strong>Enums and structs with public fields are <code>#[non_exhaustive]</code></strong>, so variants and fields can be added. The few exhaustive enums are complete by nature (<code>mpsc::TryRecvError</code>, <code>oneshot::TryRecvError</code>, <code>TrySendError</code>, <code>giong_postgres::types::Format</code> and <code>Encoded</code>) and stay as they are.</li><li><strong>Traits that users implement</strong> (<code>IoBuf</code>, <code>IoBufMut</code>, <code>observe::Source</code>, <code>giong_http::Handler</code>, <code>giong_http::Transport</code>, <code>giong_web::Middleware</code>, the database crates' <code>ToSql</code>, <code>FromSql</code>, <code>FromValue</code> and <code>ToArg</code>) only gain methods that have a default. Traits users are not meant to implement are sealed (<code>ToSocketAddrs</code>, <code>RowIndex</code>, <code>giong_compat::Transport</code>); a sealed trait may be opened later, never the reverse.</li><li><strong>New ways of doing something come as new items</strong>: a method, a constructor, a builder setting, a type, a crate. An existing signature does not change. A name that turns out wrong gets a new name and the old one stays as a deprecated alias for the rest of 1.x.</li><li><strong>New platforms and protocols are new code behind the same signatures.</strong> The epoll driver already runs the whole API on a readiness-based kernel interface, as kqueue on macOS is; IOCP on Windows is completion-based, as io_uring is, which the owned-buffer API (<code>IoBuf</code>, <code>RecvBuf</code>) was built for. Methods that only make sense on Unix (<code>OpenOptions::mode</code>, <code>Metadata::mode</code>, <code>DirEntry::ino</code>, the <code>AsRawFd</code> implementations) stay on Unix when other systems are added. HTTP/3 comes as a new entry point next to <code>Server::serve_tls</code>, and <code>giong_http::Version</code> can take a new variant.</li></ul></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-3" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="public-dependencies">Public dependencies</h2>
+<p>A type from another crate in giong's API ties giong's major version to that crate's. The stable API uses only these, all at a major version they have promised to keep:</p>
+<div class="table-scroll"><table><thead><tr><th>Crate</th><th>Where</th><th>Version</th></tr></thead><tbody><tr><td><code>tokio</code> (the I/O traits only, no runtime)</td><td><code>giong-compat</code>, feature <code>tokio</code></td><td>1.x</td></tr><tr><td><code>futures-io</code> (the I/O traits)</td><td><code>giong-compat</code>, feature <code>futures-io</code></td><td>0.3</td></tr><tr><td><code>rustls-pki-types</code> (<code>CertificateDer</code>)</td><td><code>giong-tls</code></td><td>1.x</td></tr><tr><td><code>serde</code> (<code>Serialize</code>, <code>Deserialize</code> bounds)</td><td><code>giong-web</code>, feature <code>serde</code></td><td>1.x</td></tr></tbody></table></div>
+<p>If one of them ever publishes a new major version, giong adds support for it under a new feature and keeps the old one; nothing is taken away in 1.x. Every other dependency (<code>io-uring</code>, <code>libc</code>, <code>socket2</code>, <code>rustls</code>, <code>ring</code>, <code>miniz_oxide</code>, <code>serde_json</code>, <code>tracing</code>, <code>webpki-roots</code>) is private: giong can move to its next version in a minor release without anyone noticing. rustls in particular is kept out of <code>giong-tls</code>'s stable API for this reason; its types are reachable only through the <code>unstable-rustls</code> feature.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-4" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="rust-version-msrv">Rust version (MSRV)</h2>
+<p>The libraries build with <strong>Rust 1.80</strong> and newer, checked by the <code>msrv</code> CI job. The exception is giong-quic, and with it giong-http's <code>unstable-http3</code> feature, which need <strong>Rust 1.85</strong>: the QUIC engine underneath, quinn-proto, needs it from the version that fixes a remote memory exhaustion (GHSA-4w2j-m93h-cj5j) on.</p>
+<ul><li>The minimum is raised only in a minor release, never in a patch release, and the CHANGELOG entry says so.</li><li>It is raised to a Rust release that is at least six months old at the time, and only when that brings something giong needs (async closures, a newer <code>std</code> API, a fix).</li><li>The edition of giong's own code may change in a minor release; it does not affect code that uses giong.</li></ul></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-5" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="linux-kernel">Linux kernel</h2>
+<p>The io_uring driver needs <strong>Linux 6.0</strong> or newer; older kernels, tested down to <strong>5.15</strong>, run on the epoll driver with the same API.</p>
+<ul><li>These minimums are raised only in a minor release, announced in the CHANGELOG of the minor release before, and only for a kernel line that no longer gets upstream long-term support.</li><li>Newer kernel features (zero-copy receive, newer io_uring operations) are used when the running kernel has them and give way to the older path when it does not; they never raise the minimum.</li></ul></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-6" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="versions-of-the-crates">Versions of the crates</h2>
+<p>The thirteen crates are released together and carry the same version. A crate that depends on another depends on the same minor or newer. New crates (<code>giong-quic</code>, <code>giong-grpc</code> and the others on the roadmap) join at the current version when they are first published.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-7" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="cancellation">Cancellation</h2>
+<p>A future is cancelled by dropping it: a <code>timeout</code>, a <code>select</code> that takes another branch, a task that is aborted or a runtime that shuts down. What every I/O operation does then is part of the promise, because callers rely on it as much as on a return value.</p>
+<ul><li><strong>The operation may still happen.</strong> Dropping the future stops the caller from learning the result, not the kernel from acting. A write, a send, a rename or an <code>unlink</code> handed to the kernel (or, on the epoll driver, to a blocking thread) may complete after the drop, in full or in part. Each public async fn says in its documentation whether it is <em>cancel safe</em> (dropping it loses nothing and changes nothing the caller cannot see) and, when it is not, what may have happened; <code>tests/cancel_docs.rs</code> fails a public async fn that does not say.</li><li><strong>The driver holds what the kernel may still touch.</strong> The buffers an operation was given (<code>IoBuf</code>, <code>IoBufMut</code>, <code>Vec</code>), the path it reads and the structures it points at move to the worker's driver when the future is dropped. They are freed, or a pool buffer goes back to its pool, only once nothing can touch them any more:<ul><li>on io_uring, when the operation's completion arrives (the driver asks the kernel to cancel it at once, and the completion comes either way); for a zero-copy send, when the kernel's notification says it stopped reading the buffer, which comes after the result;</li><li>on epoll, at once for an operation that was waiting for readiness (nothing was handed to the kernel), and when the blocking thread returns for a file operation it had already started; one it had not started is skipped. The caller never gets those buffers back: a dropped <code>write(buf)</code> loses <code>buf</code>. Until they are freed they count wherever they were counted before the drop (a pool buffer stays out of the pool; a request's bytes stay in <code>max_buffered_request_bytes</code>), and that moment is also the earliest at which any 1.x budget gives their share back.</li></ul></li><li><strong>Descriptors are never leaked or closed twice.</strong> An <code>accept</code>, <code>connect</code> or <code>open</code> that completes after its future was dropped has its new descriptor closed by the driver. A descriptor that an owner (<code>File</code>, <code>TcpStream</code>, <code>UdpSocket</code>) closes is closed exactly once, and its number may be reused by the process only after that close. A close itself is never cancelled: once <code>File::close</code> is called, the descriptor ends up closed whether or not its future is awaited; only the result can be lost.</li><li><strong>Slots are given back when the operation ends, not when the future is dropped.</strong> A database statement that was sent keeps its place in the connection's pipeline until its answer has been read and thrown away (<code>Client::in_flight</code> counts it until then). An HTTP/2 client stream whose response future was dropped is reset with <code>CANCEL</code>.</li><li><strong>Data received is not lost by a cancelled receive</strong> where the documentation says <em>cancel safe</em>: <code>TcpStream::recv</code>, <code>UdpSocket::recv_from</code> and the channel receivers keep what arrived for the next call. <code>read</code> into a caller's buffer is not: bytes the kernel had copied in are lost with the buffer.</li><li><strong>A transaction never commits work whose outcome it does not know.</strong> A statement of a transaction that was sent and then given up (its future dropped before the answer) may have run, so the transaction refuses <code>commit</code> with a coded error and has to be rolled back (dropping it does that). A statement whose answer had arrived before its future was dropped does not count: its outcome is known. giong-postgres and giong-mysql both do this.</li></ul></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-8" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="defaults-you-can-rely-on">Defaults you can rely on</h2>
+<p>When a limit is reached, a giong API does one of three things by default, and which one is part of the promise: it <strong>waits</strong> (with no end, or until a stated timeout), or it <strong>refuses</strong> with a coded error. A 1.x release never turns a default that waits into one that refuses, or the reverse; a new way of refusing early (an overload policy, a per-tenant budget) comes as a setting that is off until it is turned on. The numbers may be tuned when the documentation does not promise them; the kind of answer stays.</p>
+<div class="table-scroll"><table><thead><tr><th>Limit</th><th>Default answer</th></tr></thead><tbody><tr><td>A bounded channel is full (<code>send</code>)</td><td>waits until there is room</td></tr><tr><td>A database pool has no free connection (<code>Pool::get</code>)</td><td>waits up to <code>wait_timeout</code> (5 s), then <code>E3009</code>, <code>E3109</code> or <code>E3209</code></td></tr><tr><td>The HTTP client has <code>max_connections_per_host</code> (16) open to the origin</td><td>waits for a connection to be free, within the request's <code>timeout</code> (30 s)</td></tr><tr><td>The HTTP server holds <code>max_connections</code> (10,000 per worker)</td><td>stops accepting; new connections wait in the kernel's backlog</td></tr><tr><td>A request would take a worker past <code>max_buffered_request_bytes</code></td><td>refuses: <code>503</code> with <code>E1120</code> (HTTP/2: <code>REFUSED_STREAM</code>)</td></tr><tr><td>Free memory is below <code>min_free_memory</code> when a connection arrives</td><td>refuses: <code>503</code> with <code>E1121</code>, or a TLS connection closed before its handshake</td></tr><tr><td>An HTTP/2 client opens more than <code>max_concurrent_streams</code> (100)</td><td>refuses the extra streams, as HTTP/2 requires</td></tr></tbody></table></div>
+<p>The two memory refusals are on by default because waiting is not possible there: the memory is already gone. Everything else waits, so code written for 1.0 sees no new errors from a 1.x release unless it turns a new policy on.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-9" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="changes-made-before-10">Changes made before 1.0</h2>
+<p>Breaking changes are refused between releases (<code>scripts/semver.sh</code>), so the few the API review left for 1.0 were made together by one release pull request, that of 1.0.0-rc.1 (see <a href="https://github.com/giong-run/Giong/blob/v1.3.0/docs/RELEASING.md">RELEASING.md</a>). Nothing used giong in production yet, so no deprecated alias was kept: old names went outright. This list was that pull request's checklist, and every item of it is done:</p>
+<ul><li>every item deprecated after 0.8 is removed, each listed under <em>Removed</em> with the name that replaces it: <code>Error::code</code> in giong-postgres and giong-mysql (<code>server_code</code>), <code>Config::dbname</code> in giong-postgres (<code>database</code>), <code>giong::sync::mpsc::channel</code> (<code>unbounded</code>), <code>TlsAcceptor::new</code> and <code>TlsConnector::new</code> (<code>from_rustls</code>, or the stable constructors), <code>TlsConnector::with_roots</code> (<code>with_root_pem</code>);</li><li><code>giong::sync::mpsc::Sender</code> and <code>Receiver</code> go to the bounded channel, and <code>BoundedSender</code> and <code>BoundedReceiver</code> are removed (the API freeze record, <a href="https://github.com/giong-run/Giong/blob/v1.3.0/docs/reviews/2026-11-api-freeze.md">reviews/2026-11-api-freeze.md</a>); the unbounded halves stay <code>UnboundedSender</code> and <code>UnboundedReceiver</code>;</li><li>the tests of the old names go with them, and the README's test counts drop to match;</li><li>the texts that describe keeping aliases (the freeze record, RELEASING.md, the <em>Deprecated</em> section of CHANGELOG.md) say what was done instead;</li><li><code>giong_mcp::FromEnv</code> becomes <code>#[non_exhaustive]</code>, like every other enum that is not complete by nature;</li><li>three shortcuts that repeated another function go, so that each task has one spelling: <code>TlsAcceptor::from_pem</code> (<code>with_certificates</code> with <code>Certificates::from_pem</code>), <code>giong_redis::Cmd::new</code> (<code>cmd</code>) and <code>giong::observe::register_rc</code> (<code>register</code>).</li></ul></section>
+    <p class="src-note">giong 1.3.0 · from <a href="https://github.com/giong-run/Giong/blob/v1.3.0/docs/STABILITY.md">docs/STABILITY.md</a> at v1.3.0</p>
+    <script type="text/markdown" id="md-0"><!-- giong 1.3.0, https://giong.run/docs/1.3/stability/#what-the-promise-covers -->
+
+## What the promise covers
+
+All nine published crates: `giong`, `giong-http`, `giong-tls`, `giong-postgres`,
+`giong-mysql`, `giong-redis`, `giong-web`, `giong-mcp` and `giong-compat`.
+
+- **The Rust API**: every public item that shows in the documentation, with its
+  signature, its trait implementations and its auto traits. Whether a type is `Send` or
+  `Sync` is part of the API: a type that is `Send` today stays `Send`. A type that is not
+  may become so in a minor release (adding an auto trait breaks nothing), as `JoinError`,
+  `RecvBuf` or a database `Row` might.
+- **Error codes.** A `GIONG-Exxxx` code keeps its number, its meaning and its
+  `io::ErrorKind` forever, and is never reused for something else. A code that is no longer
+  raised keeps its page under `docs/errors/`. New codes are added in minor releases, which
+  is why `giong::error::Code` is `#[non_exhaustive]`. The message text and the fix text
+  around a code may be improved in any release: match on the code, not on the text.
+- **Environment variables** that change behaviour: `GIONG_DRIVER`, `GIONG_MCP` and
+  `GIONG_MCP_TOKEN`. Their accepted values keep working; new values may be added.
+- **Machine-read output**: the JSON lines that `giong_web::middleware::Logger` writes and
+  the tools and result fields that `giong-mcp` serves keep their names and meaning. Fields
+  may be added, and a reader must ignore fields it does not know.
+- **Documented behaviour**: limits and defaults that the documentation states, such as
+  "every limit has a finite default" or "dropping an I/O future never frees memory the
+  kernel may still write to". A default value may be tuned in a minor release when the
+  documentation does not promise the number; the change is in the CHANGELOG.</script><script type="text/markdown" id="md-1"><!-- giong 1.3.0, https://giong.run/docs/1.3/stability/#what-it-does-not-cover -->
+
+## What it does not cover
+
+- **Items marked `#[doc(hidden)]`**, such as `TcpStream::send_with_control` (which
+  `giong-tls` uses for kernel TLS) and the `fuzzing` modules built only under
+  `--cfg fuzzing`. They are public only so that the crates of this workspace can reach
+  each other; they may change or go in any release. cargo-semver-checks ignores them too.
+- **Features named `unstable-*`**, such as `giong-tls`'s `unstable-rustls`, which exposes
+  rustls' own types. Their items follow the version of the dependency giong uses and may
+  change in a minor release; the CHANGELOG says so when they do.
+- **`Debug` output**, the wording of error messages and log lines meant for people, and
+  the exact numbers in the `observe` statistics (their fields stay; what one unit of them
+  costs may change).
+- **Performance.** Speed and memory are measured in CI (`bench/instr`) and only get better
+  on purpose, but a number is not an API.
+- **Which driver a worker gets.** A newer kernel may get a worker the io_uring driver where
+  an older giong chose epoll, or the reverse when a kernel bug needs avoiding
+  (`KernelWorkaround`); both drivers behave the same through the API.</script><script type="text/markdown" id="md-2"><!-- giong 1.3.0, https://giong.run/docs/1.3/stability/#how-the-api-grows -->
+
+## How the API grows
+
+These rules let 1.x add what the roadmap needs (gRPC, macOS, HTTP/3, Windows) without a
+2.0:
+
+- **Enums and structs with public fields are `#[non_exhaustive]`**, so variants and fields
+  can be added. The few exhaustive enums are complete by nature (`mpsc::TryRecvError`,
+  `oneshot::TryRecvError`, `TrySendError`, `giong_postgres::types::Format` and `Encoded`)
+  and stay as they are.
+- **Traits that users implement** (`IoBuf`, `IoBufMut`, `observe::Source`,
+  `giong_http::Handler`, `giong_http::Transport`, `giong_web::Middleware`, the database
+  crates' `ToSql`, `FromSql`, `FromValue` and `ToArg`) only gain methods that have a
+  default. Traits users are not meant to implement are sealed (`ToSocketAddrs`,
+  `RowIndex`, `giong_compat::Transport`); a sealed trait may be opened later, never the
+  reverse.
+- **New ways of doing something come as new items**: a method, a constructor, a builder
+  setting, a type, a crate. An existing signature does not change. A name that turns out
+  wrong gets a new name and the old one stays as a deprecated alias for the rest of 1.x.
+- **New platforms and protocols are new code behind the same signatures.** The epoll
+  driver already runs the whole API on a readiness-based kernel interface, as kqueue on
+  macOS is; IOCP on Windows is completion-based, as io_uring is, which the owned-buffer
+  API (`IoBuf`, `RecvBuf`) was built for. Methods that only make sense on Unix
+  (`OpenOptions::mode`, `Metadata::mode`, `DirEntry::ino`, the `AsRawFd` implementations)
+  stay on Unix when other systems are added. HTTP/3 comes as a new entry point next to
+  `Server::serve_tls`, and `giong_http::Version` can take a new variant.</script><script type="text/markdown" id="md-3"><!-- giong 1.3.0, https://giong.run/docs/1.3/stability/#public-dependencies -->
+
+## Public dependencies
+
+A type from another crate in giong's API ties giong's major version to that crate's. The
+stable API uses only these, all at a major version they have promised to keep:
+
+| Crate | Where | Version |
+|---|---|---|
+| `tokio` (the I/O traits only, no runtime) | `giong-compat`, feature `tokio` | 1.x |
+| `futures-io` (the I/O traits) | `giong-compat`, feature `futures-io` | 0.3 |
+| `rustls-pki-types` (`CertificateDer`) | `giong-tls` | 1.x |
+| `serde` (`Serialize`, `Deserialize` bounds) | `giong-web`, feature `serde` | 1.x |
+
+If one of them ever publishes a new major version, giong adds support for it under a new
+feature and keeps the old one; nothing is taken away in 1.x. Every other dependency
+(`io-uring`, `libc`, `socket2`, `rustls`, `ring`, `miniz_oxide`, `serde_json`, `tracing`,
+`webpki-roots`) is private: giong can move to its next version in a minor release without
+anyone noticing. rustls in particular is kept out of `giong-tls`'s stable API for this
+reason; its types are reachable only through the `unstable-rustls` feature.</script><script type="text/markdown" id="md-4"><!-- giong 1.3.0, https://giong.run/docs/1.3/stability/#rust-version-msrv -->
+
+## Rust version (MSRV)
+
+The libraries build with **Rust 1.80** and newer, checked by the `msrv` CI job. The
+exception is giong-quic, and with it giong-http's `unstable-http3` feature, which need
+**Rust 1.85**: the QUIC engine underneath, quinn-proto, needs it from the version that fixes
+a remote memory exhaustion (GHSA-4w2j-m93h-cj5j) on.
+
+- The minimum is raised only in a minor release, never in a patch release, and the
+  CHANGELOG entry says so.
+- It is raised to a Rust release that is at least six months old at the time, and only
+  when that brings something giong needs (async closures, a newer `std` API, a fix).
+- The edition of giong's own code may change in a minor release; it does not affect code
+  that uses giong.</script><script type="text/markdown" id="md-5"><!-- giong 1.3.0, https://giong.run/docs/1.3/stability/#linux-kernel -->
+
+## Linux kernel
+
+The io_uring driver needs **Linux 6.0** or newer; older kernels, tested down to **5.15**,
+run on the epoll driver with the same API.
+
+- These minimums are raised only in a minor release, announced in the CHANGELOG of the
+  minor release before, and only for a kernel line that no longer gets upstream long-term
+  support.
+- Newer kernel features (zero-copy receive, newer io_uring operations) are used when the
+  running kernel has them and give way to the older path when it does not; they never
+  raise the minimum.</script><script type="text/markdown" id="md-6"><!-- giong 1.3.0, https://giong.run/docs/1.3/stability/#versions-of-the-crates -->
+
+## Versions of the crates
+
+The thirteen crates are released together and carry the same version. A crate that depends on
+another depends on the same minor or newer. New crates (`giong-quic`, `giong-grpc` and the
+others on the roadmap) join at the current version when they are first published.</script><script type="text/markdown" id="md-7"><!-- giong 1.3.0, https://giong.run/docs/1.3/stability/#cancellation -->
+
+## Cancellation
+
+A future is cancelled by dropping it: a `timeout`, a `select` that takes another branch, a
+task that is aborted or a runtime that shuts down. What every I/O operation does then is
+part of the promise, because callers rely on it as much as on a return value.
+
+- **The operation may still happen.** Dropping the future stops the caller from learning
+  the result, not the kernel from acting. A write, a send, a rename or an `unlink` handed to
+  the kernel (or, on the epoll driver, to a blocking thread) may complete after the drop,
+  in full or in part. Each public async fn says in its documentation whether it is *cancel
+  safe* (dropping it loses nothing and changes nothing the caller cannot see) and, when it
+  is not, what may have happened; `tests/cancel_docs.rs` fails a public async fn that does
+  not say.
+- **The driver holds what the kernel may still touch.** The buffers an operation was given
+  (`IoBuf`, `IoBufMut`, `Vec`), the path it reads and the structures it points at move to
+  the worker's driver when the future is dropped. They are freed, or a pool buffer goes
+  back to its pool, only once nothing can touch them any more:
+  - on io_uring, when the operation's completion arrives (the driver asks the kernel to
+    cancel it at once, and the completion comes either way); for a zero-copy send, when
+    the kernel's notification says it stopped reading the buffer, which comes after the
+    result;
+  - on epoll, at once for an operation that was waiting for readiness (nothing was handed
+    to the kernel), and when the blocking thread returns for a file operation it had
+    already started; one it had not started is skipped.
+  The caller never gets those buffers back: a dropped `write(buf)` loses `buf`. Until they
+  are freed they count wherever they were counted before the drop (a pool buffer stays out
+  of the pool; a request's bytes stay in `max_buffered_request_bytes`), and that moment is
+  also the earliest at which any 1.x budget gives their share back.
+- **Descriptors are never leaked or closed twice.** An `accept`, `connect` or `open` that
+  completes after its future was dropped has its new descriptor closed by the driver. A
+  descriptor that an owner (`File`, `TcpStream`, `UdpSocket`) closes is closed exactly
+  once, and its number may be reused by the process only after that close. A close itself
+  is never cancelled: once `File::close` is called, the descriptor ends up closed whether
+  or not its future is awaited; only the result can be lost.
+- **Slots are given back when the operation ends, not when the future is dropped.** A
+  database statement that was sent keeps its place in the connection's pipeline until its
+  answer has been read and thrown away (`Client::in_flight` counts it until then). An
+  HTTP/2 client stream whose response future was dropped is reset with `CANCEL`.
+- **Data received is not lost by a cancelled receive** where the documentation says
+  *cancel safe*: `TcpStream::recv`, `UdpSocket::recv_from` and the channel receivers keep
+  what arrived for the next call. `read` into a caller's buffer is not: bytes the kernel
+  had copied in are lost with the buffer.
+- **A transaction never commits work whose outcome it does not know.** A statement of a
+  transaction that was sent and then given up (its future dropped before the answer) may
+  have run, so the transaction refuses `commit` with a coded error and has to be rolled
+  back (dropping it does that). A statement whose answer had arrived before
+  its future was dropped does not count: its outcome is known. giong-postgres and
+  giong-mysql both do this.</script><script type="text/markdown" id="md-8"><!-- giong 1.3.0, https://giong.run/docs/1.3/stability/#defaults-you-can-rely-on -->
+
+## Defaults you can rely on
+
+When a limit is reached, a giong API does one of three things by default, and which one is
+part of the promise: it **waits** (with no end, or until a stated timeout), or it
+**refuses** with a coded error. A 1.x release never turns a default that waits into one
+that refuses, or the reverse; a new way of refusing early (an overload policy, a per-tenant
+budget) comes as a setting that is off until it is turned on. The numbers may be tuned when
+the documentation does not promise them; the kind of answer stays.
+
+| Limit | Default answer |
+|---|---|
+| A bounded channel is full (`send`) | waits until there is room |
+| A database pool has no free connection (`Pool::get`) | waits up to `wait_timeout` (5 s), then `E3009`, `E3109` or `E3209` |
+| The HTTP client has `max_connections_per_host` (16) open to the origin | waits for a connection to be free, within the request's `timeout` (30 s) |
+| The HTTP server holds `max_connections` (10,000 per worker) | stops accepting; new connections wait in the kernel's backlog |
+| A request would take a worker past `max_buffered_request_bytes` | refuses: `503` with `E1120` (HTTP/2: `REFUSED_STREAM`) |
+| Free memory is below `min_free_memory` when a connection arrives | refuses: `503` with `E1121`, or a TLS connection closed before its handshake |
+| An HTTP/2 client opens more than `max_concurrent_streams` (100) | refuses the extra streams, as HTTP/2 requires |
+
+The two memory refusals are on by default because waiting is not possible there: the
+memory is already gone. Everything else waits, so code written for 1.0 sees no new errors
+from a 1.x release unless it turns a new policy on.</script><script type="text/markdown" id="md-9"><!-- giong 1.3.0, https://giong.run/docs/1.3/stability/#changes-made-before-10 -->
+
+## Changes made before 1.0
+
+Breaking changes are refused between releases (`scripts/semver.sh`), so the few the API
+review left for 1.0 were made together by one release pull request, that of 1.0.0-rc.1
+(see [RELEASING.md](RELEASING.md)). Nothing used giong in production yet, so no deprecated
+alias was kept: old names went outright. This list was that pull request's checklist, and
+every item of it is done:
+
+- every item deprecated after 0.8 is removed, each listed under *Removed* with the name
+  that replaces it: `Error::code` in giong-postgres and giong-mysql (`server_code`),
+  `Config::dbname` in giong-postgres (`database`), `giong::sync::mpsc::channel`
+  (`unbounded`), `TlsAcceptor::new` and `TlsConnector::new` (`from_rustls`, or the stable
+  constructors), `TlsConnector::with_roots` (`with_root_pem`);
+- `giong::sync::mpsc::Sender` and `Receiver` go to the bounded channel, and
+  `BoundedSender` and `BoundedReceiver` are removed (the API freeze record,
+  [reviews/2026-11-api-freeze.md](reviews/2026-11-api-freeze.md)); the unbounded halves
+  stay `UnboundedSender` and `UnboundedReceiver`;
+- the tests of the old names go with them, and the README's test counts drop to match;
+- the texts that describe keeping aliases (the freeze record, RELEASING.md, the
+  *Deprecated* section of CHANGELOG.md) say what was done instead;
+- `giong_mcp::FromEnv` becomes `#[non_exhaustive]`, like every other enum that is not
+  complete by nature;
+- three shortcuts that repeated another function go, so that each task has one spelling:
+  `TlsAcceptor::from_pem` (`with_certificates` with `Certificates::from_pem`),
+  `giong_redis::Cmd::new` (`cmd`) and `giong::observe::register_rc` (`register`).</script><script type="text/markdown" id="md-page"># Stability
+
+> giong 1.3.0 · https://giong.run/docs/1.3/stability/ · source: https://github.com/giong-run/Giong/blob/v1.3.0/docs/STABILITY.md
+
+From 1.0.0 on, giong keeps major version 1 for a long time and grows through 1.x minor
+releases. Code that builds and behaves correctly on 1.N builds and behaves the same way on
+every later 1.x. This page says exactly what that promise covers, what it does not, and how
+the parts that have to move (the Rust version, the Linux kernel, the crates giong depends
+on) move without breaking it.
+
+`scripts/semver.sh` (cargo-semver-checks, run on every pull request) enforces the Rust API
+part; the rest is kept by review.
+
+## What the promise covers
+
+All nine published crates: `giong`, `giong-http`, `giong-tls`, `giong-postgres`,
+`giong-mysql`, `giong-redis`, `giong-web`, `giong-mcp` and `giong-compat`.
+
+- **The Rust API**: every public item that shows in the documentation, with its
+  signature, its trait implementations and its auto traits. Whether a type is `Send` or
+  `Sync` is part of the API: a type that is `Send` today stays `Send`. A type that is not
+  may become so in a minor release (adding an auto trait breaks nothing), as `JoinError`,
+  `RecvBuf` or a database `Row` might.
+- **Error codes.** A `GIONG-Exxxx` code keeps its number, its meaning and its
+  `io::ErrorKind` forever, and is never reused for something else. A code that is no longer
+  raised keeps its page under `docs/errors/`. New codes are added in minor releases, which
+  is why `giong::error::Code` is `#[non_exhaustive]`. The message text and the fix text
+  around a code may be improved in any release: match on the code, not on the text.
+- **Environment variables** that change behaviour: `GIONG_DRIVER`, `GIONG_MCP` and
+  `GIONG_MCP_TOKEN`. Their accepted values keep working; new values may be added.
+- **Machine-read output**: the JSON lines that `giong_web::middleware::Logger` writes and
+  the tools and result fields that `giong-mcp` serves keep their names and meaning. Fields
+  may be added, and a reader must ignore fields it does not know.
+- **Documented behaviour**: limits and defaults that the documentation states, such as
+  "every limit has a finite default" or "dropping an I/O future never frees memory the
+  kernel may still write to". A default value may be tuned in a minor release when the
+  documentation does not promise the number; the change is in the CHANGELOG.
+
+## What it does not cover
+
+- **Items marked `#[doc(hidden)]`**, such as `TcpStream::send_with_control` (which
+  `giong-tls` uses for kernel TLS) and the `fuzzing` modules built only under
+  `--cfg fuzzing`. They are public only so that the crates of this workspace can reach
+  each other; they may change or go in any release. cargo-semver-checks ignores them too.
+- **Features named `unstable-*`**, such as `giong-tls`'s `unstable-rustls`, which exposes
+  rustls' own types. Their items follow the version of the dependency giong uses and may
+  change in a minor release; the CHANGELOG says so when they do.
+- **`Debug` output**, the wording of error messages and log lines meant for people, and
+  the exact numbers in the `observe` statistics (their fields stay; what one unit of them
+  costs may change).
+- **Performance.** Speed and memory are measured in CI (`bench/instr`) and only get better
+  on purpose, but a number is not an API.
+- **Which driver a worker gets.** A newer kernel may get a worker the io_uring driver where
+  an older giong chose epoll, or the reverse when a kernel bug needs avoiding
+  (`KernelWorkaround`); both drivers behave the same through the API.
+
+## How the API grows
+
+These rules let 1.x add what the roadmap needs (gRPC, macOS, HTTP/3, Windows) without a
+2.0:
+
+- **Enums and structs with public fields are `#[non_exhaustive]`**, so variants and fields
+  can be added. The few exhaustive enums are complete by nature (`mpsc::TryRecvError`,
+  `oneshot::TryRecvError`, `TrySendError`, `giong_postgres::types::Format` and `Encoded`)
+  and stay as they are.
+- **Traits that users implement** (`IoBuf`, `IoBufMut`, `observe::Source`,
+  `giong_http::Handler`, `giong_http::Transport`, `giong_web::Middleware`, the database
+  crates' `ToSql`, `FromSql`, `FromValue` and `ToArg`) only gain methods that have a
+  default. Traits users are not meant to implement are sealed (`ToSocketAddrs`,
+  `RowIndex`, `giong_compat::Transport`); a sealed trait may be opened later, never the
+  reverse.
+- **New ways of doing something come as new items**: a method, a constructor, a builder
+  setting, a type, a crate. An existing signature does not change. A name that turns out
+  wrong gets a new name and the old one stays as a deprecated alias for the rest of 1.x.
+- **New platforms and protocols are new code behind the same signatures.** The epoll
+  driver already runs the whole API on a readiness-based kernel interface, as kqueue on
+  macOS is; IOCP on Windows is completion-based, as io_uring is, which the owned-buffer
+  API (`IoBuf`, `RecvBuf`) was built for. Methods that only make sense on Unix
+  (`OpenOptions::mode`, `Metadata::mode`, `DirEntry::ino`, the `AsRawFd` implementations)
+  stay on Unix when other systems are added. HTTP/3 comes as a new entry point next to
+  `Server::serve_tls`, and `giong_http::Version` can take a new variant.
+
+## Public dependencies
+
+A type from another crate in giong's API ties giong's major version to that crate's. The
+stable API uses only these, all at a major version they have promised to keep:
+
+| Crate | Where | Version |
+|---|---|---|
+| `tokio` (the I/O traits only, no runtime) | `giong-compat`, feature `tokio` | 1.x |
+| `futures-io` (the I/O traits) | `giong-compat`, feature `futures-io` | 0.3 |
+| `rustls-pki-types` (`CertificateDer`) | `giong-tls` | 1.x |
+| `serde` (`Serialize`, `Deserialize` bounds) | `giong-web`, feature `serde` | 1.x |
+
+If one of them ever publishes a new major version, giong adds support for it under a new
+feature and keeps the old one; nothing is taken away in 1.x. Every other dependency
+(`io-uring`, `libc`, `socket2`, `rustls`, `ring`, `miniz_oxide`, `serde_json`, `tracing`,
+`webpki-roots`) is private: giong can move to its next version in a minor release without
+anyone noticing. rustls in particular is kept out of `giong-tls`'s stable API for this
+reason; its types are reachable only through the `unstable-rustls` feature.
+
+## Rust version (MSRV)
+
+The libraries build with **Rust 1.80** and newer, checked by the `msrv` CI job. The
+exception is giong-quic, and with it giong-http's `unstable-http3` feature, which need
+**Rust 1.85**: the QUIC engine underneath, quinn-proto, needs it from the version that fixes
+a remote memory exhaustion (GHSA-4w2j-m93h-cj5j) on.
+
+- The minimum is raised only in a minor release, never in a patch release, and the
+  CHANGELOG entry says so.
+- It is raised to a Rust release that is at least six months old at the time, and only
+  when that brings something giong needs (async closures, a newer `std` API, a fix).
+- The edition of giong's own code may change in a minor release; it does not affect code
+  that uses giong.
+
+## Linux kernel
+
+The io_uring driver needs **Linux 6.0** or newer; older kernels, tested down to **5.15**,
+run on the epoll driver with the same API.
+
+- These minimums are raised only in a minor release, announced in the CHANGELOG of the
+  minor release before, and only for a kernel line that no longer gets upstream long-term
+  support.
+- Newer kernel features (zero-copy receive, newer io_uring operations) are used when the
+  running kernel has them and give way to the older path when it does not; they never
+  raise the minimum.
+
+## Versions of the crates
+
+The thirteen crates are released together and carry the same version. A crate that depends on
+another depends on the same minor or newer. New crates (`giong-quic`, `giong-grpc` and the
+others on the roadmap) join at the current version when they are first published.
+
+## Cancellation
+
+A future is cancelled by dropping it: a `timeout`, a `select` that takes another branch, a
+task that is aborted or a runtime that shuts down. What every I/O operation does then is
+part of the promise, because callers rely on it as much as on a return value.
+
+- **The operation may still happen.** Dropping the future stops the caller from learning
+  the result, not the kernel from acting. A write, a send, a rename or an `unlink` handed to
+  the kernel (or, on the epoll driver, to a blocking thread) may complete after the drop,
+  in full or in part. Each public async fn says in its documentation whether it is *cancel
+  safe* (dropping it loses nothing and changes nothing the caller cannot see) and, when it
+  is not, what may have happened; `tests/cancel_docs.rs` fails a public async fn that does
+  not say.
+- **The driver holds what the kernel may still touch.** The buffers an operation was given
+  (`IoBuf`, `IoBufMut`, `Vec`), the path it reads and the structures it points at move to
+  the worker's driver when the future is dropped. They are freed, or a pool buffer goes
+  back to its pool, only once nothing can touch them any more:
+  - on io_uring, when the operation's completion arrives (the driver asks the kernel to
+    cancel it at once, and the completion comes either way); for a zero-copy send, when
+    the kernel's notification says it stopped reading the buffer, which comes after the
+    result;
+  - on epoll, at once for an operation that was waiting for readiness (nothing was handed
+    to the kernel), and when the blocking thread returns for a file operation it had
+    already started; one it had not started is skipped.
+  The caller never gets those buffers back: a dropped `write(buf)` loses `buf`. Until they
+  are freed they count wherever they were counted before the drop (a pool buffer stays out
+  of the pool; a request's bytes stay in `max_buffered_request_bytes`), and that moment is
+  also the earliest at which any 1.x budget gives their share back.
+- **Descriptors are never leaked or closed twice.** An `accept`, `connect` or `open` that
+  completes after its future was dropped has its new descriptor closed by the driver. A
+  descriptor that an owner (`File`, `TcpStream`, `UdpSocket`) closes is closed exactly
+  once, and its number may be reused by the process only after that close. A close itself
+  is never cancelled: once `File::close` is called, the descriptor ends up closed whether
+  or not its future is awaited; only the result can be lost.
+- **Slots are given back when the operation ends, not when the future is dropped.** A
+  database statement that was sent keeps its place in the connection's pipeline until its
+  answer has been read and thrown away (`Client::in_flight` counts it until then). An
+  HTTP/2 client stream whose response future was dropped is reset with `CANCEL`.
+- **Data received is not lost by a cancelled receive** where the documentation says
+  *cancel safe*: `TcpStream::recv`, `UdpSocket::recv_from` and the channel receivers keep
+  what arrived for the next call. `read` into a caller's buffer is not: bytes the kernel
+  had copied in are lost with the buffer.
+- **A transaction never commits work whose outcome it does not know.** A statement of a
+  transaction that was sent and then given up (its future dropped before the answer) may
+  have run, so the transaction refuses `commit` with a coded error and has to be rolled
+  back (dropping it does that). A statement whose answer had arrived before
+  its future was dropped does not count: its outcome is known. giong-postgres and
+  giong-mysql both do this.
+
+## Defaults you can rely on
+
+When a limit is reached, a giong API does one of three things by default, and which one is
+part of the promise: it **waits** (with no end, or until a stated timeout), or it
+**refuses** with a coded error. A 1.x release never turns a default that waits into one
+that refuses, or the reverse; a new way of refusing early (an overload policy, a per-tenant
+budget) comes as a setting that is off until it is turned on. The numbers may be tuned when
+the documentation does not promise them; the kind of answer stays.
+
+| Limit | Default answer |
+|---|---|
+| A bounded channel is full (`send`) | waits until there is room |
+| A database pool has no free connection (`Pool::get`) | waits up to `wait_timeout` (5 s), then `E3009`, `E3109` or `E3209` |
+| The HTTP client has `max_connections_per_host` (16) open to the origin | waits for a connection to be free, within the request's `timeout` (30 s) |
+| The HTTP server holds `max_connections` (10,000 per worker) | stops accepting; new connections wait in the kernel's backlog |
+| A request would take a worker past `max_buffered_request_bytes` | refuses: `503` with `E1120` (HTTP/2: `REFUSED_STREAM`) |
+| Free memory is below `min_free_memory` when a connection arrives | refuses: `503` with `E1121`, or a TLS connection closed before its handshake |
+| An HTTP/2 client opens more than `max_concurrent_streams` (100) | refuses the extra streams, as HTTP/2 requires |
+
+The two memory refusals are on by default because waiting is not possible there: the
+memory is already gone. Everything else waits, so code written for 1.0 sees no new errors
+from a 1.x release unless it turns a new policy on.
+
+## Changes made before 1.0
+
+Breaking changes are refused between releases (`scripts/semver.sh`), so the few the API
+review left for 1.0 were made together by one release pull request, that of 1.0.0-rc.1
+(see [RELEASING.md](https://github.com/giong-run/Giong/blob/v1.3.0/docs/RELEASING.md)). Nothing used giong in production yet, so no deprecated
+alias was kept: old names went outright. This list was that pull request's checklist, and
+every item of it is done:
+
+- every item deprecated after 0.8 is removed, each listed under *Removed* with the name
+  that replaces it: `Error::code` in giong-postgres and giong-mysql (`server_code`),
+  `Config::dbname` in giong-postgres (`database`), `giong::sync::mpsc::channel`
+  (`unbounded`), `TlsAcceptor::new` and `TlsConnector::new` (`from_rustls`, or the stable
+  constructors), `TlsConnector::with_roots` (`with_root_pem`);
+- `giong::sync::mpsc::Sender` and `Receiver` go to the bounded channel, and
+  `BoundedSender` and `BoundedReceiver` are removed (the API freeze record,
+  [reviews/2026-11-api-freeze.md](https://github.com/giong-run/Giong/blob/v1.3.0/docs/reviews/2026-11-api-freeze.md)); the unbounded halves
+  stay `UnboundedSender` and `UnboundedReceiver`;
+- the tests of the old names go with them, and the README's test counts drop to match;
+- the texts that describe keeping aliases (the freeze record, RELEASING.md, the
+  *Deprecated* section of CHANGELOG.md) say what was done instead;
+- `giong_mcp::FromEnv` becomes `#[non_exhaustive]`, like every other enum that is not
+  complete by nature;
+- three shortcuts that repeated another function go, so that each task has one spelling:
+  `TlsAcceptor::from_pem` (`with_certificates` with `Certificates::from_pem`),
+  `giong_redis::Cmd::new` (`cmd`) and `giong::observe::register_rc` (`register`).
+</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.3.0, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use Stability as documented below.
+
+Rules for giong code:
+- Start the runtime with giong::Builder::new().shutdown_on_signals(true).build()?.run(|_worker| async { .. }); there are no macros. Build listeners, routers, pools and clients inside each worker's future.
+- Never block a worker: no std::fs, std::net or std::thread::sleep; use giong::fs, giong::net and giong::time. Run heavy work on std::thread::spawn and await a giong::sync::oneshot.
+- Futures need not be Send. Per-worker state is Rc<RefCell<T>>, never borrowed across an .await.
+- Bind IP addresses ("0.0.0.0:8080"), never host names.
+- Match errors with giong::error::code(&err); every GIONG-Exxxx code has a page that says how to fix it.
+- Use the giong crate for each job (giong-http, giong-web, giong-postgres, giong-redis, ...). Crates that need the Tokio runtime (sqlx, reqwest, tonic's transport) panic on a giong worker.
+More facts: https://giong.run/llms.txt. Best practices: https://giong.run/docs/best-practices.md
+
+My task: <describe what to build or fix>
+
+Documentation of Stability, giong 1.3.0 (https://giong.run/docs/1.3/stability.md):
+
+# Stability
+
+> giong 1.3.0 · https://giong.run/docs/1.3/stability/ · source: https://github.com/giong-run/Giong/blob/v1.3.0/docs/STABILITY.md
+
+From 1.0.0 on, giong keeps major version 1 for a long time and grows through 1.x minor
+releases. Code that builds and behaves correctly on 1.N builds and behaves the same way on
+every later 1.x. This page says exactly what that promise covers, what it does not, and how
+the parts that have to move (the Rust version, the Linux kernel, the crates giong depends
+on) move without breaking it.
+
+`scripts/semver.sh` (cargo-semver-checks, run on every pull request) enforces the Rust API
+part; the rest is kept by review.
+
+## What the promise covers
+
+All nine published crates: `giong`, `giong-http`, `giong-tls`, `giong-postgres`,
+`giong-mysql`, `giong-redis`, `giong-web`, `giong-mcp` and `giong-compat`.
+
+- **The Rust API**: every public item that shows in the documentation, with its
+  signature, its trait implementations and its auto traits. Whether a type is `Send` or
+  `Sync` is part of the API: a type that is `Send` today stays `Send`. A type that is not
+  may become so in a minor release (adding an auto trait breaks nothing), as `JoinError`,
+  `RecvBuf` or a database `Row` might.
+- **Error codes.** A `GIONG-Exxxx` code keeps its number, its meaning and its
+  `io::ErrorKind` forever, and is never reused for something else. A code that is no longer
+  raised keeps its page under `docs/errors/`. New codes are added in minor releases, which
+  is why `giong::error::Code` is `#[non_exhaustive]`. The message text and the fix text
+  around a code may be improved in any release: match on the code, not on the text.
+- **Environment variables** that change behaviour: `GIONG_DRIVER`, `GIONG_MCP` and
+  `GIONG_MCP_TOKEN`. Their accepted values keep working; new values may be added.
+- **Machine-read output**: the JSON lines that `giong_web::middleware::Logger` writes and
+  the tools and result fields that `giong-mcp` serves keep their names and meaning. Fields
+  may be added, and a reader must ignore fields it does not know.
+- **Documented behaviour**: limits and defaults that the documentation states, such as
+  "every limit has a finite default" or "dropping an I/O future never frees memory the
+  kernel may still write to". A default value may be tuned in a minor release when the
+  documentation does not promise the number; the change is in the CHANGELOG.
+
+## What it does not cover
+
+- **Items marked `#[doc(hidden)]`**, such as `TcpStream::send_with_control` (which
+  `giong-tls` uses for kernel TLS) and the `fuzzing` modules built only under
+  `--cfg fuzzing`. They are public only so that the crates of this workspace can reach
+  each other; they may change or go in any release. cargo-semver-checks ignores them too.
+- **Features named `unstable-*`**, such as `giong-tls`'s `unstable-rustls`, which exposes
+  rustls' own types. Their items follow the version of the dependency giong uses and may
+  change in a minor release; the CHANGELOG says so when they do.
+- **`Debug` output**, the wording of error messages and log lines meant for people, and
+  the exact numbers in the `observe` statistics (their fields stay; what one unit of them
+  costs may change).
+- **Performance.** Speed and memory are measured in CI (`bench/instr`) and only get better
+  on purpose, but a number is not an API.
+- **Which driver a worker gets.** A newer kernel may get a worker the io_uring driver where
+  an older giong chose epoll, or the reverse when a kernel bug needs avoiding
+  (`KernelWorkaround`); both drivers behave the same through the API.
+
+## How the API grows
+
+These rules let 1.x add what the roadmap needs (gRPC, macOS, HTTP/3, Windows) without a
+2.0:
+
+- **Enums and structs with public fields are `#[non_exhaustive]`**, so variants and fields
+  can be added. The few exhaustive enums are complete by nature (`mpsc::TryRecvError`,
+  `oneshot::TryRecvError`, `TrySendError`, `giong_postgres::types::Format` and `Encoded`)
+  and stay as they are.
+- **Traits that users implement** (`IoBuf`, `IoBufMut`, `observe::Source`,
+  `giong_http::Handler`, `giong_http::Transport`, `giong_web::Middleware`, the database
+  crates' `ToSql`, `FromSql`, `FromValue` and `ToArg`) only gain methods that have a
+  default. Traits users are not meant to implement are sealed (`ToSocketAddrs`,
+  `RowIndex`, `giong_compat::Transport`); a sealed trait may be opened later, never the
+  reverse.
+- **New ways of doing something come as new items**: a method, a constructor, a builder
+  setting, a type, a crate. An existing signature does not change. A name that turns out
+  wrong gets a new name and the old one stays as a deprecated alias for the rest of 1.x.
+- **New platforms and protocols are new code behind the same signatures.** The epoll
+  driver already runs the whole API on a readiness-based kernel interface, as kqueue on
+  macOS is; IOCP on Windows is completion-based, as io_uring is, which the owned-buffer
+  API (`IoBuf`, `RecvBuf`) was built for. Methods that only make sense on Unix
+  (`OpenOptions::mode`, `Metadata::mode`, `DirEntry::ino`, the `AsRawFd` implementations)
+  stay on Unix when other systems are added. HTTP/3 comes as a new entry point next to
+  `Server::serve_tls`, and `giong_http::Version` can take a new variant.
+
+## Public dependencies
+
+A type from another crate in giong's API ties giong's major version to that crate's. The
+stable API uses only these, all at a major version they have promised to keep:
+
+| Crate | Where | Version |
+|---|---|---|
+| `tokio` (the I/O traits only, no runtime) | `giong-compat`, feature `tokio` | 1.x |
+| `futures-io` (the I/O traits) | `giong-compat`, feature `futures-io` | 0.3 |
+| `rustls-pki-types` (`CertificateDer`) | `giong-tls` | 1.x |
+| `serde` (`Serialize`, `Deserialize` bounds) | `giong-web`, feature `serde` | 1.x |
+
+If one of them ever publishes a new major version, giong adds support for it under a new
+feature and keeps the old one; nothing is taken away in 1.x. Every other dependency
+(`io-uring`, `libc`, `socket2`, `rustls`, `ring`, `miniz_oxide`, `serde_json`, `tracing`,
+`webpki-roots`) is private: giong can move to its next version in a minor release without
+anyone noticing. rustls in particular is kept out of `giong-tls`'s stable API for this
+reason; its types are reachable only through the `unstable-rustls` feature.
+
+## Rust version (MSRV)
+
+The libraries build with **Rust 1.80** and newer, checked by the `msrv` CI job. The
+exception is giong-quic, and with it giong-http's `unstable-http3` feature, which need
+**Rust 1.85**: the QUIC engine underneath, quinn-proto, needs it from the version that fixes
+a remote memory exhaustion (GHSA-4w2j-m93h-cj5j) on.
+
+- The minimum is raised only in a minor release, never in a patch release, and the
+  CHANGELOG entry says so.
+- It is raised to a Rust release that is at least six months old at the time, and only
+  when that brings something giong needs (async closures, a newer `std` API, a fix).
+- The edition of giong's own code may change in a minor release; it does not affect code
+  that uses giong.
+
+## Linux kernel
+
+The io_uring driver needs **Linux 6.0** or newer; older kernels, tested down to **5.15**,
+run on the epoll driver with the same API.
+
+- These minimums are raised only in a minor release, announced in the CHANGELOG of the
+  minor release before, and only for a kernel line that no longer gets upstream long-term
+  support.
+- Newer kernel features (zero-copy receive, newer io_uring operations) are used when the
+  running kernel has them and give way to the older path when it does not; they never
+  raise the minimum.
+
+## Versions of the crates
+
+The thirteen crates are released together and carry the same version. A crate that depends on
+another depends on the same minor or newer. New crates (`giong-quic`, `giong-grpc` and the
+others on the roadmap) join at the current version when they are first published.
+
+## Cancellation
+
+A future is cancelled by dropping it: a `timeout`, a `select` that takes another branch, a
+task that is aborted or a runtime that shuts down. What every I/O operation does then is
+part of the promise, because callers rely on it as much as on a return value.
+
+- **The operation may still happen.** Dropping the future stops the caller from learning
+  the result, not the kernel from acting. A write, a send, a rename or an `unlink` handed to
+  the kernel (or, on the epoll driver, to a blocking thread) may complete after the drop,
+  in full or in part. Each public async fn says in its documentation whether it is *cancel
+  safe* (dropping it loses nothing and changes nothing the caller cannot see) and, when it
+  is not, what may have happened; `tests/cancel_docs.rs` fails a public async fn that does
+  not say.
+- **The driver holds what the kernel may still touch.** The buffers an operation was given
+  (`IoBuf`, `IoBufMut`, `Vec`), the path it reads and the structures it points at move to
+  the worker's driver when the future is dropped. They are freed, or a pool buffer goes
+  back to its pool, only once nothing can touch them any more:
+  - on io_uring, when the operation's completion arrives (the driver asks the kernel to
+    cancel it at once, and the completion comes either way); for a zero-copy send, when
+    the kernel's notification says it stopped reading the buffer, which comes after the
+    result;
+  - on epoll, at once for an operation that was waiting for readiness (nothing was handed
+    to the kernel), and when the blocking thread returns for a file operation it had
+    already started; one it had not started is skipped.
+  The caller never gets those buffers back: a dropped `write(buf)` loses `buf`. Until they
+  are freed they count wherever they were counted before the drop (a pool buffer stays out
+  of the pool; a request's bytes stay in `max_buffered_request_bytes`), and that moment is
+  also the earliest at which any 1.x budget gives their share back.
+- **Descriptors are never leaked or closed twice.** An `accept`, `connect` or `open` that
+  completes after its future was dropped has its new descriptor closed by the driver. A
+  descriptor that an owner (`File`, `TcpStream`, `UdpSocket`) closes is closed exactly
+  once, and its number may be reused by the process only after that close. A close itself
+  is never cancelled: once `File::close` is called, the descriptor ends up closed whether
+  or not its future is awaited; only the result can be lost.
+- **Slots are given back when the operation ends, not when the future is dropped.** A
+  database statement that was sent keeps its place in the connection's pipeline until its
+  answer has been read and thrown away (`Client::in_flight` counts it until then). An
+  HTTP/2 client stream whose response future was dropped is reset with `CANCEL`.
+- **Data received is not lost by a cancelled receive** where the documentation says
+  *cancel safe*: `TcpStream::recv`, `UdpSocket::recv_from` and the channel receivers keep
+  what arrived for the next call. `read` into a caller's buffer is not: bytes the kernel
+  had copied in are lost with the buffer.
+- **A transaction never commits work whose outcome it does not know.** A statement of a
+  transaction that was sent and then given up (its future dropped before the answer) may
+  have run, so the transaction refuses `commit` with a coded error and has to be rolled
+  back (dropping it does that). A statement whose answer had arrived before
+  its future was dropped does not count: its outcome is known. giong-postgres and
+  giong-mysql both do this.
+
+## Defaults you can rely on
+
+When a limit is reached, a giong API does one of three things by default, and which one is
+part of the promise: it **waits** (with no end, or until a stated timeout), or it
+**refuses** with a coded error. A 1.x release never turns a default that waits into one
+that refuses, or the reverse; a new way of refusing early (an overload policy, a per-tenant
+budget) comes as a setting that is off until it is turned on. The numbers may be tuned when
+the documentation does not promise them; the kind of answer stays.
+
+| Limit | Default answer |
+|---|---|
+| A bounded channel is full (`send`) | waits until there is room |
+| A database pool has no free connection (`Pool::get`) | waits up to `wait_timeout` (5 s), then `E3009`, `E3109` or `E3209` |
+| The HTTP client has `max_connections_per_host` (16) open to the origin | waits for a connection to be free, within the request's `timeout` (30 s) |
+| The HTTP server holds `max_connections` (10,000 per worker) | stops accepting; new connections wait in the kernel's backlog |
+| A request would take a worker past `max_buffered_request_bytes` | refuses: `503` with `E1120` (HTTP/2: `REFUSED_STREAM`) |
+| Free memory is below `min_free_memory` when a connection arrives | refuses: `503` with `E1121`, or a TLS connection closed before its handshake |
+| An HTTP/2 client opens more than `max_concurrent_streams` (100) | refuses the extra streams, as HTTP/2 requires |
+
+The two memory refusals are on by default because waiting is not possible there: the
+memory is already gone. Everything else waits, so code written for 1.0 sees no new errors
+from a 1.x release unless it turns a new policy on.
+
+## Changes made before 1.0
+
+Breaking changes are refused between releases (`scripts/semver.sh`), so the few the API
+review left for 1.0 were made together by one release pull request, that of 1.0.0-rc.1
+(see [RELEASING.md](https://github.com/giong-run/Giong/blob/v1.3.0/docs/RELEASING.md)). Nothing used giong in production yet, so no deprecated
+alias was kept: old names went outright. This list was that pull request's checklist, and
+every item of it is done:
+
+- every item deprecated after 0.8 is removed, each listed under *Removed* with the name
+  that replaces it: `Error::code` in giong-postgres and giong-mysql (`server_code`),
+  `Config::dbname` in giong-postgres (`database`), `giong::sync::mpsc::channel`
+  (`unbounded`), `TlsAcceptor::new` and `TlsConnector::new` (`from_rustls`, or the stable
+  constructors), `TlsConnector::with_roots` (`with_root_pem`);
+- `giong::sync::mpsc::Sender` and `Receiver` go to the bounded channel, and
+  `BoundedSender` and `BoundedReceiver` are removed (the API freeze record,
+  [reviews/2026-11-api-freeze.md](https://github.com/giong-run/Giong/blob/v1.3.0/docs/reviews/2026-11-api-freeze.md)); the unbounded halves
+  stay `UnboundedSender` and `UnboundedReceiver`;
+- the tests of the old names go with them, and the README's test counts drop to match;
+- the texts that describe keeping aliases (the freeze record, RELEASING.md, the
+  *Deprecated* section of CHANGELOG.md) say what was done instead;
+- `giong_mcp::FromEnv` becomes `#[non_exhaustive]`, like every other enum that is not
+  complete by nature;
+- three shortcuts that repeated another function go, so that each task has one spelling:
+  `TlsAcceptor::from_pem` (`with_certificates` with `Certificates::from_pem`),
+  `giong_redis::Cmd::new` (`cmd`) and `giong::observe::register_rc` (`register`).
+</script>
+  </article>
+  <nav class="toc doc-toc" aria-label="On this page"><p>On this page</p><div class="toc-links"><a href="#what-the-promise-covers">What the promise covers</a><a href="#what-it-does-not-cover">What it does not cover</a><a href="#how-the-api-grows">How the API grows</a><a href="#public-dependencies">Public dependencies</a><a href="#rust-version-msrv">Rust version (MSRV)</a><a href="#linux-kernel">Linux kernel</a><a href="#versions-of-the-crates">Versions of the crates</a><a href="#cancellation">Cancellation</a><a href="#defaults-you-can-rely-on">Defaults you can rely on</a><a href="#changes-made-before-10">Changes made before 1.0</a></div></nav>
+</div>
+</main>
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr-grid">
+      <div class="ftr-brand">
+        <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="22" height="22"></picture><span>giong</span></a>
+        <p>A thread-per-core async runtime for Rust, built on io_uring and made for the code agents write.</p>
+        <p class="ftr-social">
+          <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
+          <a class="icon-btn" href="https://x.com/giongrun" aria-label="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
+          <a class="icon-btn" href="https://github.com/giong-run/Giong/releases.atom" aria-label="Release feed"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3a16 16 0 0 1 16 16h-3A13 13 0 0 0 5 6Zm0 6a10 10 0 0 1 10 10h-3a7 7 0 0 0-7-7Zm1.5 6.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z"/></svg></a>
+        </p>
+      </div>
+      <nav class="ftr-col" aria-label="Learn">
+        <h2>Learn</h2>
+        <a href="/docs/">Get started</a>
+        <a href="/docs/#examples">Examples</a>
+        <a href="https://docs.rs/giong/1.3.0/giong/">API reference</a>
+        <a href="/docs/#errors">Error codes</a>
+        <a href="/docs/best-practices/">Best practices</a><a href="/docs/agent-skill/">Agent skill</a>
+        <a href="/llms.txt">llms.txt</a>
+      </nav>
+      <nav class="ftr-col" aria-label="Project">
+        <h2>Project</h2>
+        <a href="/crates/">Crates</a>
+        <a href="/benchmarks/">Benchmarks</a>
+        <a href="/roadmap/">Roadmap</a>
+        <a href="/releases/">Releases</a>
+      </nav>
+      <nav class="ftr-col" aria-label="Community">
+        <h2>Community</h2>
+        <a href="https://github.com/giong-run/Giong">GitHub</a>
+        <a href="https://x.com/giongrun">X · @giongrun</a>
+        <a href="https://github.com/giong-run/Giong/issues">Issues</a>
+        <a href="https://github.com/giong-run/Giong/blob/main/CONTRIBUTING.md">Contributing</a>
+        <a href="https://github.com/giong-run/Giong/security/advisories/new">Report a vulnerability</a>
+      </nav>
+    </div>
+    <div class="ftr-base">
+      <span>© 2026 <a href="https://github.com/thekivashyn">thekivashyn</a> and the giong contributors. MIT or Apache-2.0.</span>
+      <span class="ramp" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+    </div>
+  </div>
+</footer>
+<script src="/main.js" defer></script>
+</body>
+</html>

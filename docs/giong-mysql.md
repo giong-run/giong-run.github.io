@@ -1,13 +1,13 @@
 # giong-mysql
 
-> giong 1.3.0 · https://giong.run/docs/giong-mysql/ · source: https://github.com/giong-run/Giong/blob/v1.3.0/giong-mysql/README.md
+> giong 1.4.0 · https://giong.run/docs/giong-mysql/ · source: https://github.com/giong-run/Giong/blob/v1.4.0/giong-mysql/README.md
 
-A MySQL and MariaDB client and connection pool for the [giong](https://github.com/giong-run/Giong/blob/v1.3.0/README.md) runtime. It speaks the client/server protocol itself (no libmysqlclient), encrypts with [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.3.0/giong-tls/README.md), and depends on nothing from the Tokio ecosystem.
+A MySQL and MariaDB client and connection pool for the [giong](https://github.com/giong-run/Giong/blob/v1.4.0/README.md) runtime. It speaks the client/server protocol itself (no libmysqlclient), encrypts with [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-tls/README.md), and depends on nothing from the Tokio ecosystem.
 
 ```toml
 [dependencies]
-giong = "1.3.0"
-giong-mysql = "1.3.0"
+giong = "1.4.0"
+giong-mysql = "1.4.0"
 ```
 
 ```rust,no_run
@@ -171,21 +171,21 @@ Conversions never lose anything silently: a value that does not fit, a binary co
 
 ## Errors
 
-`Error` is cheap to clone, implements `std::error::Error`, and converts into `io::Error`. `error.kind()` says what went wrong. Each kind has a giong error code, shown in front of the message and linked to its page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/README.md) (`GIONG-E3104: ERROR 1062 (23000): Duplicate entry '1' for key 'users.PRIMARY'. See …`); after `?` into an `io::Error`, `giong::error::code(&err)` finds it:
+`Error` is cheap to clone, implements `std::error::Error`, and converts into `io::Error`. `error.kind()` says what went wrong. Each kind has a giong error code, shown in front of the message and linked to its page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/README.md) (`GIONG-E3104: ERROR 1062 (23000): Duplicate entry '1' for key 'users.PRIMARY'. See …`); after `?` into an `io::Error`, `giong::error::code(&err)` finds it:
 
 | `ErrorKind` | Code | Meaning |
 |---|---|---|
-| `Config` | [E3101](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3101.md) | The configuration or URL is not valid, or the server refused a session variable. |
-| `Connect` | [E3102](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3102.md) | Name resolution, TCP, TLS, or the connect timeout. Also an unknown database (1049), a server older than MySQL 8.0 or MariaDB 10.6, a session whose character set is not `utf8mb4`, and a cancel request that reached another server. |
-| `Auth` | [E3103](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3103.md) | The server refused the credentials, asked for a plugin this crate does not support, or would have needed the password where it could be read. |
-| `Db` | [E3104](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3104.md) | The server reported an error for the statement; `error.server_code()` is MySQL's error number (1062 for a duplicate key, 1213 for a deadlock...) and `error.db()` has the SQLSTATE too. |
-| `Type` | [E3105](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3105.md) | A value could not be converted between Rust and MySQL, or the number of parameters is wrong. The message names the parameter or column and suggests the Rust type to use. |
-| `RowCount` | [E3106](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3106.md) | `query_one` found no row or several, `query_opt` several. |
-| `TooLarge` | [E3107](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3107.md) | The result was larger than `max_result_size`. The connection stays usable. |
-| `Closed` | [E3108](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3108.md) | The connection is closed. A `Pool` replaces it by itself. |
-| `PoolTimeout` | [E3109](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3109.md) | No pooled connection became free within `wait_timeout`. |
-| `Protocol` | [E3110](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3110.md) | The server sent something this crate cannot understand. The connection is closed. |
-| `Statement` | [E3111](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/E3111.md) | Refused before sending: a transaction statement, or one that changes the session (`SET`, `USE`, `LOCK TABLES`, a temporary table, `GET_LOCK`, a user variable), on the connections a `Pool` shares. Use `pool.get()`, and `transaction()`. |
+| `Config` | [E3101](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3101.md) | The configuration or URL is not valid, or the server refused a session variable. |
+| `Connect` | [E3102](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3102.md) | Name resolution, TCP, TLS, or the connect timeout. Also an unknown database (1049), a server older than MySQL 8.0 or MariaDB 10.6, a session whose character set is not `utf8mb4`, and a cancel request that reached another server. |
+| `Auth` | [E3103](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3103.md) | The server refused the credentials, asked for a plugin this crate does not support, or would have needed the password where it could be read. |
+| `Db` | [E3104](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3104.md) | The server reported an error for the statement; `error.server_code()` is MySQL's error number (1062 for a duplicate key, 1213 for a deadlock...) and `error.db()` has the SQLSTATE too. |
+| `Type` | [E3105](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3105.md) | A value could not be converted between Rust and MySQL, or the number of parameters is wrong. The message names the parameter or column and suggests the Rust type to use. |
+| `RowCount` | [E3106](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3106.md) | `query_one` found no row or several, `query_opt` several. |
+| `TooLarge` | [E3107](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3107.md) | The result was larger than `max_result_size`. The connection stays usable. |
+| `Closed` | [E3108](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3108.md) | The connection is closed. A `Pool` replaces it by itself. |
+| `PoolTimeout` | [E3109](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3109.md) | No pooled connection became free within `wait_timeout`. |
+| `Protocol` | [E3110](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3110.md) | The server sent something this crate cannot understand. The connection is closed. |
+| `Statement` | [E3111](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3111.md) | Refused before sending: a transaction statement, or one that changes the session (`SET`, `USE`, `LOCK TABLES`, a temporary table, `GET_LOCK`, a user variable), on the connections a `Pool` shares. Use `pool.get()`, and `transaction()`. |
 
 `error.is_transient()` is true for errors worth retrying after a pause: connecting, a closed connection, a pool wait timeout, and the server's deadlock (1213), lock wait timeout (1205), too many connections (1040, 1203), shutdown (1053), read-only mode (1290 naming `--read-only`, 1792, 1836) and a killed connection (1927, MariaDB). Retry a whole transaction, not its failed statement.
 

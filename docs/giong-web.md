@@ -1,13 +1,13 @@
 # giong-web
 
-> giong 1.3.0 · https://giong.run/docs/giong-web/ · source: https://github.com/giong-run/Giong/blob/v1.3.0/giong-web/README.md
+> giong 1.4.0 · https://giong.run/docs/giong-web/ · source: https://github.com/giong-run/Giong/blob/v1.4.0/giong-web/README.md
 
-Routing, middleware and JSON for HTTP services on the [giong](https://github.com/giong-run/Giong/blob/v1.3.0/README.md) runtime, on top of [`giong-http`](https://github.com/giong-run/Giong/blob/v1.3.0/giong-http/README.md). A handler is a plain `async fn`; every error, yours or the framework's, is answered as a problem+json body with a stable code (the three answers `giong-http` gives before a request reaches the app are the [exception](#errors)). No macros, no Tokio.
+Routing, middleware and JSON for HTTP services on the [giong](https://github.com/giong-run/Giong/blob/v1.4.0/README.md) runtime, on top of [`giong-http`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-http/README.md). A handler is a plain `async fn`; every error, yours or the framework's, is answered as a problem+json body with a stable code (the three answers `giong-http` gives before a request reaches the app are the [exception](#errors)). No macros, no Tokio.
 
 ```toml
 [dependencies]
-giong = "1.3.0"
-giong-web = { version = "1.3.0", features = ["serde"] }
+giong = "1.4.0"
+giong-web = { version = "1.4.0", features = ["serde"] }
 serde = { version = "1", features = ["derive"] }
 ```
 
@@ -79,7 +79,7 @@ fn main() -> std::io::Result<()> {
 - **A panic fails one request, not the connection.** A handler or middleware that panics is answered with a `500` (`GIONG-E1210`) whose logged cause is the panic's message, with the request id and the log line of any other error; the connection, and over HTTP/2 every other request on it, carries on. (With `panic = "abort"` the process still stops.)
 - **Typed parameters.** `req.param::<u64>("id")?` and `req.query_param::<u32>("page")?` parse into any `FromStr` type. A value that does not parse is a `400` naming the parameter, the value and the type expected. With `serde`, `req.query::<T>()` reads the whole query string into a struct and `req.json::<T>()` the body; their string fields are `String`, or `Cow<'a, str>` with `#[serde(borrow)]`, never `&str`, which cannot hold an escaped value (giong-web answers that `500` with a cause that says so, rather than blame the client). Both query APIs follow one strict rule: a key that is read appears once, and the whole query string is valid percent-encoding, or the answer is a `400`.
 - **Routing that answers what it can for you.** Patterns with parameters (`/users/{id}`) and a catch-all (`/files/{*path}`). A literal segment wins over a parameter and a parameter over a catch-all, with backtracking, so `/users/me` and `/users/{id}` live side by side. `HEAD` is answered by the `GET` route, `OPTIONS` and `405` with `Allow` for every path, and a `404` for `/users/` asks "did you mean /users?" when that route exists.
-- **Errors that explain themselves.** Every error answer is an [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457) problem+json body with a code an agent or a client can match on, and the request id when there is one. The codes giong-web uses itself (`GIONG-E1201` to `GIONG-E1213`) each have a page with the cause and the fix in [docs/errors](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/README.md).
+- **Errors that explain themselves.** Every error answer is an [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457) problem+json body with a code an agent or a client can match on, and the request id when there is one. The codes giong-web uses itself (`GIONG-E1201` to `GIONG-E1213`) each have a page with the cause and the fix in [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/README.md).
 - **Mistakes in the program fail at startup, not on the first request.** Two routes that would answer the same requests, a pattern that is not valid, or middleware settings that cannot work (any origin with credentials) panic with a code and the line that added them.
 - **Middleware is one `async fn`.** They run in the order added, and those of a nested router only for its routes and the `404`, `405` and preflight answers under its prefix. Included: request ids, JSON-line logs, CORS, gzip and timeouts, and with the `tracing` feature a `tracing` span per request.
 - **Bodies of any size.** The routes of a router with `stream_bodies(max)` read their request body as it arrives; any handler can write its response body as it is produced. See "Streaming".
@@ -280,10 +280,10 @@ With middleware:
 
 - **1.3 times axum on small JSON answers, 1.8 times on the list of users, 1.9 to 2.3 times with middleware.** The routes, the parameters and serde cost giong-web about 5% against giong-http's bare handler on `/json`. giong-http's `/users` is faster because it writes its JSON by hand, without serde or the 200 small strings the handler builds; giong-web and axum run the same handler.
 - **`/compute` is the handler's time,** the same for both within noise (giong-web's range 3.66–4.01k, axum's 3.58–4.07k). Its p99 is higher on giong-web (22.9 against 18.5 ms), as it is on giong-http (24.2 ms). Our guess, not measured: a worker runs every ready request before it reads its sockets again, so when each costs 250 µs of CPU, some wait for a whole batch.
-- **Pipelined requests** (16 per write): axum stays at 18k, as in the [main benchmark](https://github.com/giong-run/Giong/blob/v1.3.0/README.md#throughput-at-50-connections); we have not looked into why. giong-http reads a pipeline and answers it as a batch.
+- **Pipelined requests** (16 per write): axum stays at 18k, as in the [main benchmark](https://github.com/giong-run/Giong/blob/v1.4.0/docs/BENCHMARKS.md#throughput-at-50-connections); we have not looked into why. giong-http reads a pipeline and answers it as a batch.
 - Resident memory after the run: 6.6 MB for giong-web, 5.2 MB for axum.
 
-HTTPS and a database behind the handlers are measured with the [example REST API](https://github.com/giong-run/Giong/blob/v1.3.0/examples/rest-api/README.md#performance). Not measured yet: several cores, and middleware one at a time. Results are in `bench/results/web/`.
+HTTPS and a database behind the handlers are measured with the [example REST API](https://github.com/giong-run/Giong/blob/v1.4.0/examples/rest-api/README.md#performance). Not measured yet: several cores, and middleware one at a time. Results are in `bench/results/web/`.
 
 ## Features
 
@@ -293,7 +293,7 @@ HTTPS and a database behind the handlers are measured with the [example REST API
 | `tls` | `Server::serve_tls`, through giong-http: HTTP/2 or HTTP/1.1, as ALPN picks |
 | `tracing` | `middleware::Trace`, through `tracing` 0.1 |
 
-Apps are served over HTTP/2 as well as HTTP/1.1, with nothing to change: giong-http turns each HTTP/2 stream into the request a handler already knows (see [its HTTP/2 section](https://github.com/giong-run/Giong/blob/v1.3.0/giong-http/README.md#http2)). Over TLS, ALPN picks the protocol; without TLS, a client that knows the server speaks HTTP/2 (prior knowledge) gets it on the same port.
+Apps are served over HTTP/2 as well as HTTP/1.1, with nothing to change: giong-http turns each HTTP/2 stream into the request a handler already knows (see [its HTTP/2 section](https://github.com/giong-run/Giong/blob/v1.4.0/giong-http/README.md#http2)). Over TLS, ALPN picks the protocol; without TLS, a client that knows the server speaks HTTP/2 (prior knowledge) gets it on the same port.
 
 ## Not there yet
 

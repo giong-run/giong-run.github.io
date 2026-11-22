@@ -1,10 +1,10 @@
 # giong-grpc
 
-> giong 1.3.0 · https://giong.run/docs/giong-grpc/ · source: https://github.com/giong-run/Giong/blob/v1.3.0/giong-grpc/README.md
+> giong 1.4.0 · https://giong.run/docs/giong-grpc/ · source: https://github.com/giong-run/Giong/blob/v1.4.0/giong-grpc/README.md
 
-gRPC for the [giong](https://github.com/giong-run/Giong/blob/v1.3.0/README.md) runtime: servers and clients over [giong-http](https://github.com/giong-run/Giong/blob/v1.3.0/giong-http/README.md)'s HTTP/2, with messages read as [giong-proto](https://github.com/giong-run/Giong/blob/v1.3.0/giong-proto/README.md) views that borrow from the bytes received. Nothing from the Tokio ecosystem, and no `protoc` to install: [giong-grpc-build](https://github.com/giong-run/Giong/blob/v1.3.0/giong-grpc-build/README.md) parses the `.proto` files in Rust.
+gRPC for the [giong](https://github.com/giong-run/Giong/blob/v1.4.0/README.md) runtime: servers and clients over [giong-http](https://github.com/giong-run/Giong/blob/v1.4.0/giong-http/README.md)'s HTTP/2, with messages read as [giong-proto](https://github.com/giong-run/Giong/blob/v1.4.0/giong-proto/README.md) views that borrow from the bytes received. Nothing from the Tokio ecosystem, and no `protoc` to install: [giong-grpc-build](https://github.com/giong-run/Giong/blob/v1.4.0/giong-grpc-build/README.md) parses the `.proto` files in Rust.
 
-It interoperates with grpc-go in both directions on the test cases of [gRPC's interoperability specification](https://github.com/grpc/grpc/blob/master/doc/interop-test-descriptions.md), on io_uring and on epoll, in CI ([`interop/run.sh`](https://github.com/giong-run/Giong/blob/v1.3.0/giong-grpc/interop/run.sh)).
+It interoperates with grpc-go in both directions on the test cases of [gRPC's interoperability specification](https://github.com/grpc/grpc/blob/master/doc/interop-test-descriptions.md), on io_uring and on epoll, in CI ([`interop/run.sh`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-grpc/interop/run.sh)).
 
 > **New in giong 1.1.**
 
@@ -110,7 +110,7 @@ while let Some(received) = replies.message().await? {
 }
 ```
 
-[`examples/grpc-hello`](https://github.com/giong-run/Giong/blob/v1.3.0/examples/grpc-hello) is this program, complete, with health and reflection.
+[`examples/grpc-hello`](https://github.com/giong-run/Giong/blob/v1.4.0/examples/grpc-hello) is this program, complete, with health and reflection.
 
 ## What it does
 
@@ -124,7 +124,7 @@ while let Some(received) = replies.message().await? {
 - **gzip**, per message, off by default.
 - **TLS** through `giong_http::Server::serve_tls` and `https://` addresses (ALPN), with private authorities and client certificates.
 - **Health checking** (`grpc.health.v1.Health`: Check, List, Watch) and **server reflection** (`v1` and `v1alpha`): `grpcurl list`, `describe` and calls work without the `.proto` files.
-- **Errors with codes.** The statuses giong-grpc raises itself carry `GIONG-E4101` to `GIONG-E4110`, with what happened and how to fix it in the message ([docs/errors](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/README.md#giong-grpc)).
+- **Errors with codes.** The statuses giong-grpc raises itself carry `GIONG-E4101` to `GIONG-E4110`, with what happened and how to fix it in the message ([docs/errors](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/README.md#giong-grpc)).
 
 ## The four kinds of method
 
@@ -198,7 +198,7 @@ $ grpcurl -plaintext -d '{"name": "An"}' localhost:50051 hello.v1.Greeter/SayHel
 
 ## Measured against tonic
 
-`bench/grpc.sh`, against tonic 0.14 (prost, hyper, Tokio) with the same service: unary calls with 100-byte and 10,000-byte payloads, round trips on a bidirectional stream, and server streams of 1,000 messages of 100 bytes. A 4-core cloud VM (Xeon 2.1 GHz, Linux 6.18, io_uring), the median of 10 rounds of 5 s; the method is at the top of the script and the raw data in [`bench/results/grpc/`](https://github.com/giong-run/Giong/blob/v1.3.0/bench/results/grpc).
+`bench/grpc.sh`, against tonic 0.14 (prost, hyper, Tokio) with the same service: unary calls with 100-byte and 10,000-byte payloads, round trips on a bidirectional stream, and server streams of 1,000 messages of 100 bytes. A 4-core cloud VM (Xeon 2.1 GHz, Linux 6.18, io_uring), the median of 10 rounds of 5 s; the method is at the top of the script and the raw data in [`bench/results/grpc/`](https://github.com/giong-run/Giong/blob/v1.4.0/bench/results/grpc).
 
 One server thread, loaded from three other cores until its core is the limit, with tonic's client and with giong-grpc's as the load generator:
 
@@ -213,7 +213,7 @@ One server thread, loaded from three other cores until its core is the limit, wi
 | server stream | tonic | 2,917,860 msg/s | 11,694,153 | 4.0× | 0.329 → 0.081 µs |
 | server stream | giong | 2,985,038 | 11,394,657 | 3.8× | 0.321 → 0.084 µs |
 
-No workload is behind on the server side. 10,000-byte unary calls from tonic's client were 7.5% behind until giong-http's HTTP/2 server sent the answers to a burst of short requests in one write: it cut its output at 64 KiB, and with one write in flight per connection each further write waited a turn of the worker. With 64 calls in flight per connection (`TASKS=128`, [`tasks-128/`](https://github.com/giong-run/Giong/blob/v1.3.0/bench/results/grpc/tasks-128)) giong-grpc's server does 78,401 calls/s against tonic's 70,778 (+10.8%) under tonic's client and 103,618 against 70,002 (+48%) under its own. The server stream is ahead by that much because the messages a handler sends in a row leave in one write.
+No workload is behind on the server side. 10,000-byte unary calls from tonic's client were 7.5% behind until giong-http's HTTP/2 server sent the answers to a burst of short requests in one write: it cut its output at 64 KiB, and with one write in flight per connection each further write waited a turn of the worker. With 64 calls in flight per connection (`TASKS=128`, [`tasks-128/`](https://github.com/giong-run/Giong/blob/v1.4.0/bench/results/grpc/tasks-128)) giong-grpc's server does 78,401 calls/s against tonic's 70,778 (+10.8%) under tonic's client and 103,618 against 70,002 (+48%) under its own. The server stream is ahead by that much because the messages a handler sends in a row leave in one write.
 
 One client thread, against a server with three threads (tonic's, then giong-grpc's):
 
