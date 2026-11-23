@@ -1,12 +1,12 @@
 # giong
 
-> giong 1.4.0 · https://giong.run/docs/giong/ · source: https://github.com/giong-run/Giong/blob/v1.4.0/README.md
+> giong 1.4.1 · https://giong.run/docs/giong/ · source: https://github.com/giong-run/Giong/blob/v1.4.1/README.md
 
 Named after Thánh Gióng, the child of Vietnamese legend who lay silent for three years and
 then rose a giant: giong costs next to nothing while idle and uses every core the moment
 load arrives.
 
-> **Status: 1.4.0.** The API has been frozen since 1.0 ([STABILITY.md](https://github.com/giong-run/Giong/blob/v1.4.0/docs/STABILITY.md)),
+> **Status: 1.4.0.** The API has been frozen since 1.0 ([STABILITY.md](https://github.com/giong-run/Giong/blob/v1.4.1/docs/STABILITY.md)),
 > and every 1.x release only adds. A whole service runs on giong with no Tokio underneath:
 > TCP, UDP, Unix sockets, files, timers, DNS, multi-core and graceful shutdown in the
 > runtime, and twelve companion crates for HTTP/1.1, HTTP/2 and HTTP/3, TLS, gRPC,
@@ -19,11 +19,11 @@ load arrives.
 | Release | What it added |
 |---|---|
 | **1.4** | Windows: a completion-port (IOCP) driver for the runtime crate: tasks, timers, channels, TCP, UDP, files, DNS and Ctrl+C. The other crates come to Windows in later 1.x releases. |
-| **1.3** | HTTP/3: [`giong-quic`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-quic/README.md) (QUIC on giong's UDP sockets) and giong-http's HTTP/3 server and client behind the `unstable-http3` feature; UDP offloads (GSO, GRO, ECN) behind `unstable-udp-offload`. |
-| **1.2** | macOS: a kqueue driver, tested on macOS 15 and 26 on Apple Silicon; a send or connect that meets `ENOBUFS` waits for buffers ([GIONG-E0028](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0028.md)). |
-| **1.1** | gRPC: [`giong-grpc`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-grpc/README.md), [`giong-proto`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-proto/README.md) and [`giong-grpc-build`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-grpc-build/README.md); HTTP trailers and streamed request bodies; `Client::preconnect` and HTTP/2 pings; batched PostgreSQL reads; uploads of 1 MiB 2.2 times as fast. |
+| **1.3** | HTTP/3: [`giong-quic`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-quic/README.md) (QUIC on giong's UDP sockets) and giong-http's HTTP/3 server and client behind the `unstable-http3` feature; UDP offloads (GSO, GRO, ECN) behind `unstable-udp-offload`. |
+| **1.2** | macOS: a kqueue driver, tested on macOS 15 and 26 on Apple Silicon; a send or connect that meets `ENOBUFS` waits for buffers ([GIONG-E0028](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0028.md)). |
+| **1.1** | gRPC: [`giong-grpc`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-grpc/README.md), [`giong-proto`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-proto/README.md) and [`giong-grpc-build`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-grpc-build/README.md); HTTP trailers and streamed request bodies; `Client::preconnect` and HTTP/2 pings; batched PostgreSQL reads; uploads of 1 MiB 2.2 times as fast. |
 
-The full list is in [CHANGELOG.md](https://github.com/giong-run/Giong/blob/v1.4.0/CHANGELOG.md).
+The full list is in [CHANGELOG.md](https://github.com/giong-run/Giong/blob/v1.4.1/CHANGELOG.md).
 
 ## Start here
 
@@ -37,18 +37,18 @@ For people and for AI agents alike, the one path:
    Each worker binds its own listener on the same port; there is no `#[main]` macro.
 3. **Read the error.** Every error giong raises starts with a code
    (`GIONG-E0102: no address found for db.internal. Fix: ...`) and links to its page in
-   [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/README.md). Match on `giong::error::code(&err)`, never on the text.
-4. **Ask the running service** when something is slow or stuck: [`giong-mcp`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-mcp/README.md)
+   [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/README.md). Match on `giong::error::code(&err)`, never on the text.
+4. **Ask the running service** when something is slow or stuck: [`giong-mcp`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-mcp/README.md)
    lets your coding agent read each worker, task and pool ([below](#let-your-agent-look-inside-the-running-service)).
 5. **Deploy anywhere Linux runs.** In Docker it works with no settings; allowing io_uring
    makes it faster ([Run in Docker](#run-in-docker)).
 
-Then read [docs/BEST_PRACTICES.md](https://github.com/giong-run/Giong/blob/v1.4.0/docs/BEST_PRACTICES.md): the shape of a service, state,
+Then read [docs/BEST_PRACTICES.md](https://github.com/giong-run/Giong/blob/v1.4.1/docs/BEST_PRACTICES.md): the shape of a service, state,
 timeouts, databases, deployment and tests, each rule with its reason. A coding agent gets the
-same as a skill: [skills/giong](https://github.com/giong-run/Giong/blob/v1.4.0/skills/giong/SKILL.md), or download it from
+same as a skill: [skills/giong](https://github.com/giong-run/Giong/blob/v1.4.1/skills/giong/SKILL.md), or download it from
 [giong.run/docs/agent-skill](https://giong.run/docs/agent-skill/).
 
-[AGENTS.md](https://github.com/giong-run/Giong/blob/v1.4.0/AGENTS.md) and [giong.run/llms.txt](https://giong.run/llms.txt) tell a model
+[AGENTS.md](https://github.com/giong-run/Giong/blob/v1.4.1/AGENTS.md) and [giong.run/llms.txt](https://giong.run/llms.txt) tell a model
 the facts it gets wrong; the API reference is on [docs.rs](https://docs.rs/giong).
 
 ## What giong is for
@@ -68,9 +68,9 @@ to type.
   its buffer pool and its batched system calls, not adapters. [Choosing crates](#choosing-crates)
   measures each one against the Tokio crate it replaces.
 - **Agent-first.** Every error giong raises carries a stable code, the cause and the fix,
-  and has a page of its own ([docs/errors](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/README.md)). [AGENTS.md](https://github.com/giong-run/Giong/blob/v1.4.0/AGENTS.md)
+  and has a page of its own ([docs/errors](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/README.md)). [AGENTS.md](https://github.com/giong-run/Giong/blob/v1.4.1/AGENTS.md)
   and [giong.run/llms.txt](https://giong.run/llms.txt) tell a model how to work with it;
-  giong-web writes JSON-line logs and `tracing` spans; [`giong-mcp`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-mcp/README.md)
+  giong-web writes JSON-line logs and `tracing` spans; [`giong-mcp`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-mcp/README.md)
   lets an agent look inside a running service ([below](#let-your-agent-look-inside-the-running-service)).
 - **One major version for a long time.** After 1.0, giong grows through 1.x minor releases
   for years rather than moving to a 2.0, so the API follows four rules:
@@ -79,7 +79,7 @@ to type.
   3. Every behaviour code relies on is documented.
   4. Releases only add; they never change what existing code means.
 
-  The API was settled in 0.7 ([review](https://github.com/giong-run/Giong/blob/v1.4.0/docs/reviews/2026-11-api-freeze.md)), and
+  The API was settled in 0.7 ([review](https://github.com/giong-run/Giong/blob/v1.4.1/docs/reviews/2026-11-api-freeze.md)), and
   `cargo-semver-checks` runs on every pull request.
 - **Linux first, and the same program elsewhere.** Tuned and measured on Linux with
   io_uring, with an epoll driver wherever io_uring is blocked. macOS runs on a kqueue
@@ -89,7 +89,7 @@ to type.
 
 ## Let your agent look inside the running service
 
-[`giong-mcp`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-mcp/README.md) is an MCP server built into your service. Connect your
+[`giong-mcp`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-mcp/README.md) is an MCP server built into your service. Connect your
 coding agent (Claude Code, or any client that speaks MCP's Streamable HTTP) and it can see
 what each worker is doing, which tasks are alive and which line of your code spawned them,
 what the database pools hold and where the time goes, instead of guessing from logs. The
@@ -148,8 +148,8 @@ even when every worker is stuck. To reach a service on another machine, forward 
 - **It holds up when connections pile up.** At 5,000 connections giong spends the least
   CPU per request (11% below the next runtime) and has the lowest p99. At 1,000 it is level
   with a hand-written epoll server and ahead of the rest.
-- **HTTP and HTTPS in the box.** [`giong-http`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-http/README.md) and
-  [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-tls/README.md) serve HTTPS at **146.6k requests/s on one core,
+- **HTTP and HTTPS in the box.** [`giong-http`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-http/README.md) and
+  [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-tls/README.md) serve HTTPS at **146.6k requests/s on one core,
   against 81.2k for Axum** on the same rustls.
 - **Cancellation-safe by construction.** Dropping an I/O future never frees memory the
   kernel may still write to, and wrapping `recv`, `recv_from` or `accept` in a timeout
@@ -158,8 +158,8 @@ even when every worker is stuck. To reach a service on another machine, forward 
   under gVisor or on a kernel older than 6.0, a worker switches to an epoll driver by
   itself: same API, same tests, and as fast as raw Tokio there. See
   [Drivers](#drivers).
-- **gRPC without copies.** [`giong-grpc`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-grpc/README.md) reads messages as
-  [`giong-proto`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-proto/README.md) views over the receive buffer: a one-thread server
+- **gRPC without copies.** [`giong-grpc`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-grpc/README.md) reads messages as
+  [`giong-proto`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-proto/README.md) views over the receive buffer: a one-thread server
   does 30% to 50% more 100-byte unary calls than tonic and holds 5.7 kB per open stream
   against tonic's 11.6 kB.
 - **Small enough to read.** Three dependencies on any one system (`socket2`, plus `libc`
@@ -172,7 +172,7 @@ because the kernel's TCP stack, not the runtime, is most of the cost. Over one P
 connection shared by every task, giong-postgres is 7–9% behind tokio-postgres; a blocking
 `std` read of a cached file beats every async one, giong's included; and a TLS handshake
 costs the same as Axum's once both prefer the same cipher suite. The
-[benchmark lab](https://github.com/giong-run/Giong/blob/v1.4.0/docs/BENCHMARKS.md#benchmark-lab), which drives giong, Tokio, Monoio and
+[benchmark lab](https://github.com/giong-run/Giong/blob/v1.4.1/docs/BENCHMARKS.md#benchmark-lab), which drives giong, Tokio, Monoio and
 Glommio with the same program and a neutral load generator, also finds giong behind: Monoio
 serves 13% more requests on one core; Tokio receives 1 MiB uploads 1.7 times as fast on the
 bare runtime; and with one request in twenty computing for a millisecond, the short
@@ -202,7 +202,7 @@ under [Benchmarks](#benchmarks).
 connection, the same as the others.
 
 Against the Tokio crate each giong crate replaces, one core each (details and losses in
-[docs/BENCHMARKS.md](https://github.com/giong-run/Giong/blob/v1.4.0/docs/BENCHMARKS.md)):
+[docs/BENCHMARKS.md](https://github.com/giong-run/Giong/blob/v1.4.1/docs/BENCHMARKS.md)):
 
 | Job | giong | Against | Result |
 |---|---|---|---|
@@ -213,7 +213,7 @@ Against the Tokio crate each giong crate replaces, one core each (details and lo
 | Redis `GET` | giong-redis | redis-rs | 640k against 492k commands/s at half the CPU per command |
 | Files, 4 KiB at an offset | `giong::fs` | `tokio::fs` | 1.33M against 163k reads/s (8×); level with blocking `std` |
 | Idle connection memory | giong-http | Axum | 2.0 KiB against 20.4 KiB |
-| Building a small web service | giong-web | axum + tower-http | 22 crates against 83; clean debug build 7.4 s against 18.8 s; stripped binary 1.45 MB against 3.60 MB ([build](https://github.com/giong-run/Giong/blob/v1.4.0/docs/BENCHMARKS.md#build-time-and-size)) |
+| Building a small web service | giong-web | axum + tower-http | 22 crates against 83; clean debug build 7.4 s against 18.8 s; stripped binary 1.45 MB against 3.60 MB ([build](https://github.com/giong-run/Giong/blob/v1.4.1/docs/BENCHMARKS.md#build-time-and-size)) |
 
 ## Platforms
 
@@ -226,21 +226,21 @@ Against the Tokio crate each giong crate replaces, one core each (details and lo
 | Not there | | kernel TLS; CPU pinning; GSO/GRO | Unix sockets; the HTTP, TLS, database, gRPC, QUIC and MCP crates; processor groups beyond 64 CPUs |
 | Use it for | production | developing and testing on a Mac | services that have to run on Windows, on the runtime crate |
 
-- **Rust 1.80** or newer for every crate except [`giong-quic`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-quic/README.md), and
+- **Rust 1.80** or newer for every crate except [`giong-quic`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-quic/README.md), and
   with it giong-http's `unstable-http3` feature, which need **1.85**. How this minimum, the
-  kernel minimums and the API move during 1.x: [docs/STABILITY.md](https://github.com/giong-run/Giong/blob/v1.4.0/docs/STABILITY.md).
+  kernel minimums and the API move during 1.x: [docs/STABILITY.md](https://github.com/giong-run/Giong/blob/v1.4.1/docs/STABILITY.md).
 - **io_uring is often blocked** by default (Docker's and containerd's seccomp profiles,
   gVisor, the `kernel.io_uring_disabled` sysctl). giong then runs on epoll without being
-  told and says so once on stderr; [docs/DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.0/docs/DEPLOYMENT.md) shows how to
+  told and says so once on stderr; [docs/DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.1/docs/DEPLOYMENT.md) shows how to
   allow io_uring in Docker, Docker Compose and Kubernetes.
 - The differences from Linux on macOS and Windows, area by area, are in
-  [docs/design/portability.md](https://github.com/giong-run/Giong/blob/v1.4.0/docs/design/portability.md).
+  [docs/design/portability.md](https://github.com/giong-run/Giong/blob/v1.4.1/docs/design/portability.md).
 - On a Windows machine, a service that needs the other crates runs under WSL2 (`uname -r`;
   `wsl --update` for a 6.x kernel), in a Linux virtual machine or in Docker.
 
 ## Quick start
 
-A JSON API on every core, with [`giong-web`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-web/README.md):
+A JSON API on every core, with [`giong-web`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-web/README.md):
 
 ```bash
 cargo new hello && cd hello
@@ -297,9 +297,9 @@ cargo run --release --example cat -- Cargo.toml   # read a file through the ring
 ```
 
 A whole service, with PostgreSQL, a Redis cache and HTTPS, is in
-[examples/rest-api](https://github.com/giong-run/Giong/blob/v1.4.0/examples/rest-api/README.md).
+[examples/rest-api](https://github.com/giong-run/Giong/blob/v1.4.1/examples/rest-api/README.md).
 
-An HTTP service on every core, with [`giong-http`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-http/README.md):
+An HTTP service on every core, with [`giong-http`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-http/README.md):
 
 ```rust,no_run
 use std::time::Duration;
@@ -329,7 +329,7 @@ fn main() -> std::io::Result<()> {
 ```
 
 For HTTPS, turn on the `tls` feature and call `serve_tls` with a
-[`giong_tls::TlsAcceptor`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-tls/README.md).
+[`giong_tls::TlsAcceptor`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-tls/README.md).
 
 The runtime itself, without the library: a TCP echo server.
 
@@ -417,12 +417,12 @@ What matters at run time:
 - **Workers follow the CPU limit.** giong starts one worker per CPU the container may use:
   the cpuset, lowered by a CPU quota (`--cpus`, `resources.limits.cpu`), rounded down.
 - **io_uring for full speed.** Docker's and Kubernetes' default profiles block it.
-  [docs/DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.0/docs/DEPLOYMENT.md) builds a seccomp profile that is Docker's default
+  [docs/DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.1/docs/DEPLOYMENT.md) builds a seccomp profile that is Docker's default
   plus the three io_uring calls, for `docker run`, Docker Compose and Kubernetes, and the locked-memory
   limit (`--ulimit memlock=-1:-1`) some kernels need. `giong::driver_choice()` says which
   driver a worker got and why; log it at startup.
 - **Check before you rely on it**: `GIONG_DRIVER=io_uring` makes the runtime refuse to start
-  where io_uring is blocked ([GIONG-E0001](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0001.md)) instead of falling back.
+  where io_uring is blocked ([GIONG-E0001](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0001.md)) instead of falling back.
 
 ## What is in the box
 
@@ -439,18 +439,18 @@ What matters at run time:
 | Time | `time::sleep`, `sleep_until`, `timeout(duration, fut)` |
 | Shutdown | `shutdown_signal()`, `until_shutdown(fut)`, `is_shutting_down()`, `Handle::shutdown()` |
 | Across threads | `Handle::spawn_on(worker, \|\| async { .. }) -> RemoteJoinHandle<T>` (await or abort it from any thread), `Handle::spawn_balanced(\|\| async { .. })` (the first idle worker starts it), `Handle::least_loaded_worker()`, `sync::mpsc::unbounded()`, `sync::mpsc::bounded(n)` (senders wait when full), `sync::oneshot::channel()` (one value) |
-| Errors | Every error giong raises starts with a code (`GIONG-E0102: no address found for …`) and links to its page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/README.md); `error::code(&err)` returns it as a `Code` to match on |
-| HTTP | [`giong-http`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-http/README.md): `Server::serve` / `serve_unix` / `serve_tls`, `Request`, `Response`, `BodySender` and `Trailers` for streamed bodies; with the `client` feature, `client::Client` (`get`, `post`, ... `send`, `preconnect`, `ping_idle_http2`), `client::Response`; with `unstable-http3`, `Server::serve_h3` and `ClientBuilder::http3` (Rust 1.85) |
-| gRPC | [`giong-grpc`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-grpc/README.md): `Server`, `Service`, `Channel`, `Status`, `Metadata`; `health::Health`, `reflection::Reflection`; code generated by [`giong-grpc-build`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-grpc-build/README.md) in `build.rs` (no `protoc`) |
-| Protocol Buffers | [`giong-proto`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-proto/README.md): generated `…View::decode(&buf)?` views that borrow from the input; message structs and `Encode` for writing |
-| QUIC | [`giong-quic`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-quic/README.md) (Rust 1.85): `Endpoint::server` / `client`, `Connection`, `SendStream`, `RecvStream`, 0-RTT |
-| TLS | [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-tls/README.md): `TlsAcceptor`, `TlsConnector`, `TlsStream` |
-| PostgreSQL | [`giong-postgres`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-postgres/README.md): `Client`, `Pool`, `Config`, `Row`, `Transaction` |
-| MySQL, MariaDB | [`giong-mysql`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-mysql/README.md): `Client`, `Pool`, `Config`, `Row`, `Transaction` |
-| Redis | [`giong-redis`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-redis/README.md): `Client`, `Pool`, `Config`, `cmd`, `Pipeline`, `PubSub` |
-| Web services | [`giong-web`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-web/README.md): `Router`, `App`, `Req`, `Error`, `Middleware`; `middleware::{RequestId, Logger, Cors, Compression, Timeout}`; `json` with `serde` |
-| Tokio-ecosystem crates | [`giong-compat`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-compat/README.md): `Compat::new(stream)` implements `AsyncRead`, `AsyncWrite` and `AsyncBufRead` from `tokio::io` and `futures_io` for `TcpStream`, `UnixStream` and `TlsStream`, for crates that take a stream and are driven by you (h2, tokio-rustls, tokio-tungstenite, hyper's `conn`, tokio-util's codecs) |
-| Looking inside | `Handle::pulse(worker)` (counters and the task being polled, from any thread), `observe::snapshot()` (live tasks by the line that spawned them, timers, I/O, pools), `Handle::set_profiling` and `observe::take_profile()`, `observe::worker_stats()` (the current worker's counters, for leak checks in tests); [`giong-mcp`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-mcp/README.md) serves them to AI agents over MCP |
+| Errors | Every error giong raises starts with a code (`GIONG-E0102: no address found for …`) and links to its page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/README.md); `error::code(&err)` returns it as a `Code` to match on |
+| HTTP | [`giong-http`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-http/README.md): `Server::serve` / `serve_unix` / `serve_tls`, `Request`, `Response`, `BodySender` and `Trailers` for streamed bodies; with the `client` feature, `client::Client` (`get`, `post`, ... `send`, `preconnect`, `ping_idle_http2`), `client::Response`; with `unstable-http3`, `Server::serve_h3` and `ClientBuilder::http3` (Rust 1.85) |
+| gRPC | [`giong-grpc`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-grpc/README.md): `Server`, `Service`, `Channel`, `Status`, `Metadata`; `health::Health`, `reflection::Reflection`; code generated by [`giong-grpc-build`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-grpc-build/README.md) in `build.rs` (no `protoc`) |
+| Protocol Buffers | [`giong-proto`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-proto/README.md): generated `…View::decode(&buf)?` views that borrow from the input; message structs and `Encode` for writing |
+| QUIC | [`giong-quic`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-quic/README.md) (Rust 1.85): `Endpoint::server` / `client`, `Connection`, `SendStream`, `RecvStream`, 0-RTT |
+| TLS | [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-tls/README.md): `TlsAcceptor`, `TlsConnector`, `TlsStream` |
+| PostgreSQL | [`giong-postgres`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-postgres/README.md): `Client`, `Pool`, `Config`, `Row`, `Transaction` |
+| MySQL, MariaDB | [`giong-mysql`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-mysql/README.md): `Client`, `Pool`, `Config`, `Row`, `Transaction` |
+| Redis | [`giong-redis`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-redis/README.md): `Client`, `Pool`, `Config`, `cmd`, `Pipeline`, `PubSub` |
+| Web services | [`giong-web`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-web/README.md): `Router`, `App`, `Req`, `Error`, `Middleware`; `middleware::{RequestId, Logger, Cors, Compression, Timeout}`; `json` with `serde` |
+| Tokio-ecosystem crates | [`giong-compat`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-compat/README.md): `Compat::new(stream)` implements `AsyncRead`, `AsyncWrite` and `AsyncBufRead` from `tokio::io` and `futures_io` for `TcpStream`, `UnixStream` and `TlsStream`, for crates that take a stream and are driven by you (h2, tokio-rustls, tokio-tungstenite, hyper's `conn`, tokio-util's codecs) |
+| Looking inside | `Handle::pulse(worker)` (counters and the task being polled, from any thread), `observe::snapshot()` (live tasks by the line that spawned them, timers, I/O, pools), `Handle::set_profiling` and `observe::take_profile()`, `observe::worker_stats()` (the current worker's counters, for leak checks in tests); [`giong-mcp`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-mcp/README.md) serves them to AI agents over MCP |
 
 Five things to remember:
 
@@ -467,7 +467,8 @@ Five things to remember:
    buffer of your own. Do not mix the two kinds on one socket.
 4. A `File` has no cursor: every read and write names its offset. Opened with
    `append(true)`, writes go to the end whatever the offset.
-5. Timers have 1 ms resolution and never fire early.
+5. Timers fire at their deadline, to the precision of the kernel's wake-up (a 1 ms sleep
+   takes about 1.05 ms on Linux), and never early.
 
 ## Choosing crates
 
@@ -482,7 +483,7 @@ For each job a service has, try these in order and take the first that fits:
    `sync` module (`Semaphore`, `Notify`, `watch`, `broadcast`), and anything else built
    only on `std::future`, run on giong as they are.
 3. **A Tokio-ecosystem crate that takes a stream from you**, over
-   [`giong_compat::Compat`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-compat/README.md): h2, tokio-rustls, tokio-tungstenite,
+   [`giong_compat::Compat`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-compat/README.md): h2, tokio-rustls, tokio-tungstenite,
    hyper's `conn` API, tokio-util's codecs. This is the bridge for a protocol giong has no
    crate for yet (WebSocket, for one), not a second way to do what a giong crate does.
 4. **A crate that needs the Tokio runtime** (reqwest, sqlx, tonic's `transport`,
@@ -493,21 +494,21 @@ For each job a service has, try these in order and take the first that fits:
 
 | You need | Use | Instead of | Measured against it (one core each, medians, method under [Benchmarks](#benchmarks)) |
 |---|---|---|---|
-| An HTTP/1.1 server | [`giong-http`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-http/README.md) | hyper, axum | 1.2 to 1.6 times axum on `/json` (1.2 where the load generator was the limit), 2.8 to 3.2 times on 8 KB answers ([Throughput](https://github.com/giong-run/Giong/blob/v1.4.0/docs/BENCHMARKS.md#throughput-at-50-connections), and the plain rows under [HTTPS](https://github.com/giong-run/Giong/blob/v1.4.0/docs/BENCHMARKS.md#https)) |
-| An HTTP/2 server | `giong-http` (on by default) | hyper, axum | 3.8 to 4.4 times axum on small answers, 2.5 to 3.0 times on 8.5 KiB ones ([giong-http](https://github.com/giong-run/Giong/blob/v1.4.0/giong-http/README.md)) |
-| Routing, JSON, middleware | [`giong-web`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-web/README.md) | axum, tower-http | 1.3 times axum on `/json` and 1.8 times on 8 KB answers; with request ids, gzip and a timeout, 1.9 and 2.3 times ([Routing](https://github.com/giong-run/Giong/blob/v1.4.0/docs/BENCHMARKS.md#routing-json-and-middleware)) |
-| An HTTP client | `giong-http`, feature `client` | reqwest, hyper's client | 1.6 to 1.8 times reqwest over HTTP/1.1; over HTTP/2 2.0 to 2.2 times on small answers, 1.2 to 1.3 times on 8.5 KiB ones ([giong-http](https://github.com/giong-run/Giong/blob/v1.4.0/giong-http/README.md)) |
-| TLS | [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-tls/README.md) | tokio-rustls | The same rustls underneath. Measured with `giong-http`: 1.8 times axum + rustls on `/json`, 2.6 times on 8 KB answers, 1.18 times the new connections per second (level with axum set to prefer AES-128-GCM as giong does) ([HTTPS](https://github.com/giong-run/Giong/blob/v1.4.0/docs/BENCHMARKS.md#https)) |
-| PostgreSQL | [`giong-postgres`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-postgres/README.md) | tokio-postgres, sqlx | 3.3 times tokio-postgres + deadpool at its best on one row by key, 2.5 times on 100 rows; 7–9% behind tokio-postgres on one shared connection ([PostgreSQL](https://github.com/giong-run/Giong/blob/v1.4.0/docs/BENCHMARKS.md#postgresql)) |
-| MySQL, MariaDB | [`giong-mysql`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-mysql/README.md) | sqlx, mysql_async | 5.1 times SQLx at its best on one row by key, 3.7 times on 100 rows ([MySQL](https://github.com/giong-run/Giong/blob/v1.4.0/docs/BENCHMARKS.md#mysql)) |
-| Redis | [`giong-redis`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-redis/README.md) | redis-rs, fred | 1.1 to 1.8 times redis-rs on small commands, 1.25 to 2.5 times on 8 KiB values, at half its CPU per command or less ([Redis](https://github.com/giong-run/Giong/blob/v1.4.0/docs/BENCHMARKS.md#redis)) |
-| Files | `giong::fs` | `tokio::fs` | 8 times Tokio on reads at an offset, 3.2 to 4.1 times on whole small files ([File I/O](https://github.com/giong-run/Giong/blob/v1.4.0/docs/BENCHMARKS.md#file-io)) |
-| Name lookups | `giong::net::lookup_host`, `net::Resolver` | `tokio::net::lookup_host`, hickory-resolver | `localhost` from `/etc/hosts`: 171 ns against Tokio's 28.6 µs ([Core primitives](https://github.com/giong-run/Giong/blob/v1.4.0/docs/BENCHMARKS.md#core-primitives)); DNS over the network not measured |
-| Tasks, timers, channels | `giong::spawn`, `giong::time`, `giong::sync` (`mpsc`, `oneshot`) | `tokio::spawn`, `tokio::time`, `tokio::sync` | 1.3 to 2.6 times Tokio; Monoio and Glommio are ahead on spawning and channels within one thread ([Core primitives](https://github.com/giong-run/Giong/blob/v1.4.0/docs/BENCHMARKS.md#core-primitives)) |
-| A gRPC server or client | [`giong-grpc`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-grpc/README.md), with [`giong-grpc-build`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-grpc-build/README.md) | tonic, prost | 1.3 to 1.5 times tonic on 100-byte unary calls, 1.2 to 1.25 times on 10 kB ones, 3.8 to 4.0 times on server streams, half the memory per open stream; a one-thread client level to 14% ahead ([giong-grpc](https://github.com/giong-run/Giong/blob/v1.4.0/giong-grpc/README.md#measured-against-tonic)) |
-| Protocol Buffers | [`giong-proto`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-proto/README.md) | prost | Views over the receive buffer, no allocation per field; not measured on its own against prost |
-| HTTP/3, QUIC | `giong-http`, feature `unstable-http3`; [`giong-quic`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-quic/README.md) | quinn, h3 | The same QUIC engine (quinn-proto) on giong's UDP sockets: level with it on Tokio, 18% less CPU per request than quinn ([QUIC](https://github.com/giong-run/Giong/blob/v1.4.0/docs/BENCHMARKS.md#quic)); HTTP/3 end to end not measured yet |
-| Runtime state for an AI agent | [`giong-mcp`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-mcp/README.md) | | |
+| An HTTP/1.1 server | [`giong-http`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-http/README.md) | hyper, axum | 1.2 to 1.6 times axum on `/json` (1.2 where the load generator was the limit), 2.8 to 3.2 times on 8 KB answers ([Throughput](https://github.com/giong-run/Giong/blob/v1.4.1/docs/BENCHMARKS.md#throughput-at-50-connections), and the plain rows under [HTTPS](https://github.com/giong-run/Giong/blob/v1.4.1/docs/BENCHMARKS.md#https)) |
+| An HTTP/2 server | `giong-http` (on by default) | hyper, axum | 3.8 to 4.4 times axum on small answers, 2.5 to 3.0 times on 8.5 KiB ones ([giong-http](https://github.com/giong-run/Giong/blob/v1.4.1/giong-http/README.md)) |
+| Routing, JSON, middleware | [`giong-web`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-web/README.md) | axum, tower-http | 1.3 times axum on `/json` and 1.8 times on 8 KB answers; with request ids, gzip and a timeout, 1.9 and 2.3 times ([Routing](https://github.com/giong-run/Giong/blob/v1.4.1/docs/BENCHMARKS.md#routing-json-and-middleware)) |
+| An HTTP client | `giong-http`, feature `client` | reqwest, hyper's client | 1.6 to 1.8 times reqwest over HTTP/1.1; over HTTP/2 2.0 to 2.2 times on small answers, 1.2 to 1.3 times on 8.5 KiB ones ([giong-http](https://github.com/giong-run/Giong/blob/v1.4.1/giong-http/README.md)) |
+| TLS | [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-tls/README.md) | tokio-rustls | The same rustls underneath. Measured with `giong-http`: 1.8 times axum + rustls on `/json`, 2.6 times on 8 KB answers, 1.18 times the new connections per second (level with axum set to prefer AES-128-GCM as giong does) ([HTTPS](https://github.com/giong-run/Giong/blob/v1.4.1/docs/BENCHMARKS.md#https)) |
+| PostgreSQL | [`giong-postgres`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-postgres/README.md) | tokio-postgres, sqlx | 3.3 times tokio-postgres + deadpool at its best on one row by key, 2.5 times on 100 rows; 7–9% behind tokio-postgres on one shared connection ([PostgreSQL](https://github.com/giong-run/Giong/blob/v1.4.1/docs/BENCHMARKS.md#postgresql)) |
+| MySQL, MariaDB | [`giong-mysql`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-mysql/README.md) | sqlx, mysql_async | 5.1 times SQLx at its best on one row by key, 3.7 times on 100 rows ([MySQL](https://github.com/giong-run/Giong/blob/v1.4.1/docs/BENCHMARKS.md#mysql)) |
+| Redis | [`giong-redis`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-redis/README.md) | redis-rs, fred | 1.1 to 1.8 times redis-rs on small commands, 1.25 to 2.5 times on 8 KiB values, at half its CPU per command or less ([Redis](https://github.com/giong-run/Giong/blob/v1.4.1/docs/BENCHMARKS.md#redis)) |
+| Files | `giong::fs` | `tokio::fs` | 8 times Tokio on reads at an offset, 3.2 to 4.1 times on whole small files ([File I/O](https://github.com/giong-run/Giong/blob/v1.4.1/docs/BENCHMARKS.md#file-io)) |
+| Name lookups | `giong::net::lookup_host`, `net::Resolver` | `tokio::net::lookup_host`, hickory-resolver | `localhost` from `/etc/hosts`: 171 ns against Tokio's 28.6 µs ([Core primitives](https://github.com/giong-run/Giong/blob/v1.4.1/docs/BENCHMARKS.md#core-primitives)); DNS over the network not measured |
+| Tasks, timers, channels | `giong::spawn`, `giong::time`, `giong::sync` (`mpsc`, `oneshot`) | `tokio::spawn`, `tokio::time`, `tokio::sync` | 1.3 to 2.6 times Tokio; Monoio and Glommio are ahead on spawning and channels within one thread ([Core primitives](https://github.com/giong-run/Giong/blob/v1.4.1/docs/BENCHMARKS.md#core-primitives)) |
+| A gRPC server or client | [`giong-grpc`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-grpc/README.md), with [`giong-grpc-build`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-grpc-build/README.md) | tonic, prost | 1.3 to 1.5 times tonic on 100-byte unary calls, 1.2 to 1.25 times on 10 kB ones, 3.8 to 4.0 times on server streams, half the memory per open stream; a one-thread client level to 14% ahead ([giong-grpc](https://github.com/giong-run/Giong/blob/v1.4.1/giong-grpc/README.md#measured-against-tonic)) |
+| Protocol Buffers | [`giong-proto`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-proto/README.md) | prost | Views over the receive buffer, no allocation per field; not measured on its own against prost |
+| HTTP/3, QUIC | `giong-http`, feature `unstable-http3`; [`giong-quic`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-quic/README.md) | quinn, h3 | The same QUIC engine (quinn-proto) on giong's UDP sockets: level with it on Tokio, 18% less CPU per request than quinn ([QUIC](https://github.com/giong-run/Giong/blob/v1.4.1/docs/BENCHMARKS.md#quic)); HTTP/3 end to end not measured yet |
+| Runtime state for an AI agent | [`giong-mcp`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-mcp/README.md) | | |
 
 Where a giong crate is not ahead, the sections linked above say so: over one shared
 connection giong-postgres is 7–9% below tokio-postgres at the median, a blocking `std`
@@ -516,7 +517,7 @@ pass values within one thread faster, and TLS handshakes cost the same on both o
 rustls is set to the cipher suite giong-tls prefers.
 
 What `Compat` adds is measured on its own, on one TCP stream with no protocol on top
-([giong-compat](https://github.com/giong-run/Giong/blob/v1.4.0/giong-compat/README.md#what-it-costs)): large writes go straight from the
+([giong-compat](https://github.com/giong-run/Giong/blob/v1.4.1/giong-compat/README.md#what-it-costs)): large writes go straight from the
 caller's memory to the socket, from 9% above to 6% below Tokio's CPU per byte sent over the
 last two sessions (until 0.8.0 they were copied first: 25% above Tokio in a session the same
 day); against giong's own `recv`, 6–16% more CPU per byte read with `read`, and no measurable
@@ -589,7 +590,7 @@ run the tasks that are ready  →  io_uring_enter (submit everything, collect ev
 | **Writes and files** | Ownership passing: `write_all(buf)` returns `(result, buf)`. TCP sends of 16 KiB and more from bytes that cannot change (`&'static`, `Rc<[u8]>`, `Arc<[u8]>`) go out without a copy on 6.2+ (`SEND_ZC`), and the write still returns as soon as they are queued. File operations are ordinary entries in the same ring. | The kernel keeps a pointer to the buffer until it is done; this API makes that sound in Rust. Files need no pool of blocking threads. |
 | **Cancellation** | When a future is dropped mid-flight, its buffer moves to the driver, a cancel is sent, and the memory is freed only when the kernel confirms. | Avoids use-after-free, the classic bug of completion-based runtimes. |
 | **Backpressure** | A reader more than an eighth of the pool behind has its multishot receive paused (TCP then slows the sender), and its backlog copied off the pool while the pool runs low. A dry pool reclaims buffers that hold data left unread for a whole turn of the event loop. An accept backlog over 1,024 pauses the accept. | One stalled connection cannot starve the rest, and a busy one that keeps up is never copied. |
-| **Timers** | A hierarchical timing wheel in user space (six levels of 64 slots, 1 ms ticks). | Arming and cancelling are O(1) and make no system call. Nearly every timer is an I/O timeout that is cancelled before it fires. |
+| **Timers** | A hierarchical timing wheel in user space (six levels of 64 slots, 1 ms ticks), with each timer's exact deadline: the worker sleeps until the earliest one. | Arming and cancelling are O(1) and make no system call. Nearly every timer is an I/O timeout that is cancelled before it fires. |
 | **Latency dial** | Optionally busy-poll the ring for a while before sleeping. | A sleeping thread must be woken by an interrupt and rescheduled, which costs tens of microseconds, more in a virtual machine. |
 | **Panics** | A panic in a task is caught and reported through its `JoinHandle`. | One bad connection does not take down the worker. |
 | **Shutdown** | With a grace period, a worker keeps running its tasks after its main future returns, until they finish or the period ends. Then: cancel everything, wait for the kernel to confirm, free. If confirmation does not come, leak on purpose. | Requests in progress are answered. Memory safety matters more than a few megabytes at exit. |
@@ -605,15 +606,15 @@ Each worker runs on one I/O driver, behind the same API. Linux has two:
 - **epoll**, chosen without being told where io_uring cannot be set up: a Docker container
   with the default seccomp profile, Kubernetes with `RuntimeDefault`, gVisor, the
   `kernel.io_uring_disabled` sysctl, or a kernel older than 6.0 (tested on 5.15).
-  [docs/DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.0/docs/DEPLOYMENT.md) shows how to allow io_uring where it is blocked.
+  [docs/DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.1/docs/DEPLOYMENT.md) shows how to allow io_uring where it is blocked.
 
 `Builder::driver(DriverKind::IoUring)`, or `GIONG_DRIVER=io_uring`, makes the runtime fail
-to start where io_uring is missing ([GIONG-E0001](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0001.md)) instead of falling
+to start where io_uring is missing ([GIONG-E0001](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0001.md)) instead of falling
 back; `DriverKind::Epoll`, or `GIONG_DRIVER=epoll`, chooses epoll anywhere. A fallback
 is said once on stderr, with the reason, and `giong::driver_choice()` tells which driver
 a worker got, who chose it and why. Kernel bugs that would cost io_uring are worked
 around: Ubuntu 24.04's 6.8 kernels from 6.8.0-135 on refuse correctly formed buffer rings,
-and giong registers its ring the way they accept ([DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.0/docs/DEPLOYMENT.md#ubuntu-2404)).
+and giong registers its ring the way they accept ([DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.1/docs/DEPLOYMENT.md#ubuntu-2404)).
 The whole test suite runs on both drivers, and in CI also inside a Docker container with
 the default profile, on a real 5.15 kernel and on Ubuntu 24.04's own kernel; CI fails if
 giong would not choose io_uring where it should.
@@ -631,11 +632,11 @@ giong would not choose io_uring where it should.
 On epoll giong is an epoll runtime like the others and as fast as they are (two system
 calls per request, the same requests per second as raw Tokio); what sets it apart comes
 from io_uring, such as 70% more requests per second on 8 KB responses. The measured table
-is under [io_uring against epoll](https://github.com/giong-run/Giong/blob/v1.4.0/docs/BENCHMARKS.md#io_uring-against-epoll).
+is under [io_uring against epoll](https://github.com/giong-run/Giong/blob/v1.4.1/docs/BENCHMARKS.md#io_uring-against-epoll).
 
 The other systems have one driver each, chosen by default (`DriverKind` is
 `non_exhaustive`; asking for a driver the system does not have fails with
-[GIONG-E0004](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0004.md)):
+[GIONG-E0004](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0004.md)):
 
 - **kqueue on macOS** (`DriverKind::Kqueue`): the readiness loop of the epoll driver, files
   on the pool of blocking threads, a wake-up through `EVFILT_USER`. The workers of an
@@ -652,12 +653,12 @@ The other systems have one driver each, chosen by default (`DriverKind` is
 ## Benchmarks
 
 Every table, with its method, machine and raw output, is in
-[docs/BENCHMARKS.md](https://github.com/giong-run/Giong/blob/v1.4.0/docs/BENCHMARKS.md): throughput from one connection to 5,000, memory
+[docs/BENCHMARKS.md](https://github.com/giong-run/Giong/blob/v1.4.1/docs/BENCHMARKS.md): throughput from one connection to 5,000, memory
 per connection, system calls, bare metal from one worker to sixteen, HTTPS, the database and
 Redis clients, routing, files, core primitives, UDP, gRPC, large uploads, QUIC, the
 benchmark lab against Tokio, Monoio and Glommio, and what has not been measured. A change of
 a percent or two is below the noise of those runs, so CI holds the hot paths to their
-instruction counts instead ([bench/instr](https://github.com/giong-run/Giong/blob/v1.4.0/bench/instr/README.md)): a change that makes any
+instruction counts instead ([bench/instr](https://github.com/giong-run/Giong/blob/v1.4.1/bench/instr/README.md)): a change that makes any
 of them cost 1% more fails.
 
 ## Testing and safety
@@ -724,7 +725,7 @@ Also:
   tasks, channels, timers, `observe`, several workers), on the epoll driver, in CI on
   every change. It found memory the kernel writes into being reached through a pointer
   taken before its `Box` moved, in the file and UDP paths (nothing miscompiled); fixed.
-- **Kani proofs** (`scripts/check.sh kani`, [docs/kani.md](https://github.com/giong-run/Giong/blob/v1.4.0/docs/kani.md)): the model
+- **Kani proofs** (`scripts/check.sh kani`, [docs/kani.md](https://github.com/giong-run/Giong/blob/v1.4.1/docs/kani.md)): the model
   checker proves, for every input within stated bounds, that the slab's free list stays
   sound, that no receive buffer is ever both lent to the kernel and read by user space or
   lent twice (from any pool state of two buffers, so for sequences of any length), that a
@@ -774,10 +775,10 @@ Not verified, and you should know it:
 - valgrind 3.22 cannot run the multi-threaded tests (it treats `io_uring_enter` as
   non-blocking, so threads starve each other); ThreadSanitizer covers those.
 - Every crate, the `unsafe` code and the workspace's security were reviewed before 0.6,
-  and what was found is fixed there (see the [changelog](https://github.com/giong-run/Giong/blob/v1.4.0/CHANGELOG.md)), but the reviewers
+  and what was found is fixed there (see the [changelog](https://github.com/giong-run/Giong/blob/v1.4.1/CHANGELOG.md)), but the reviewers
   were the project's AI agents, each reading code it had not written. No outside person
   has audited giong.
-- `giong-tls` has had a [security review](https://github.com/giong-run/Giong/blob/v1.4.0/docs/reviews/2026-11-giong-tls.md) of its own
+- `giong-tls` has had a [security review](https://github.com/giong-run/Giong/blob/v1.4.1/docs/reviews/2026-11-giong-tls.md) of its own
   code and of every crate that uses it, which found and fixed two medium issues, but it was
   done by the project's AI agent, not by an independent auditor. The cryptography and the
   protocol are rustls's; giong's part is connecting rustls to the socket.
@@ -830,15 +831,15 @@ younger than both, and one service runs on it so far.
   finishes there. Also missing: Unix datagram
   sockets, multicast, `set_len`, file locks, `O_DIRECT` with registered buffers.
 - **`giong-tls` has had no independent audit** (see the
-  [self-review](https://github.com/giong-run/Giong/blob/v1.4.0/docs/reviews/2026-11-giong-tls.md)).
+  [self-review](https://github.com/giong-run/Giong/blob/v1.4.1/docs/reviews/2026-11-giong-tls.md)).
 - **The Tokio ecosystem only through I/O traits.** Crates that are generic over the
   stream and driven by you (h2, tokio-rustls, tokio-tungstenite, hyper's connection API,
-  tokio-util's codecs) run on giong through [`giong-compat`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-compat/README.md), at
+  tokio-util's codecs) run on giong through [`giong-compat`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-compat/README.md), at
   the cost of a copy. Crates that need the Tokio runtime itself (its reactor, timers or
   `tokio::spawn`, as in sqlx, reqwest or tonic's `transport`) do not. Crates that only use
-  `std::future` do. For PostgreSQL, use [`giong-postgres`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-postgres/README.md); for
-  MySQL, [`giong-mysql`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-mysql/README.md); for Redis,
-  [`giong-redis`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-redis/README.md); for HTTP requests, `giong-http`'s client.
+  `std::future` do. For PostgreSQL, use [`giong-postgres`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-postgres/README.md); for
+  MySQL, [`giong-mysql`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-mysql/README.md); for Redis,
+  [`giong-redis`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-redis/README.md); for HTTP requests, `giong-http`'s client.
 - **Started tasks do not migrate.** Balancing happens where work starts: jobs queued with
   `Handle::spawn_balanced` go to the first idle worker, and listeners bound with
   `TcpListener::bind_balanced` hand new connections to less busy workers. A connection
@@ -854,14 +855,14 @@ younger than both, and one service runs on it so far.
 ## Project
 
 - Source, issues and discussions: <https://github.com/giong-run/Giong>
-- [CONTRIBUTING.md](https://github.com/giong-run/Giong/blob/v1.4.0/CONTRIBUTING.md) — building, required checks, the rules for `unsafe`
+- [CONTRIBUTING.md](https://github.com/giong-run/Giong/blob/v1.4.1/CONTRIBUTING.md) — building, required checks, the rules for `unsafe`
   and cancellation, commit conventions, and how to make a first contribution.
-- [CODE_OF_CONDUCT.md](https://github.com/giong-run/Giong/blob/v1.4.0/CODE_OF_CONDUCT.md) — how we treat each other, and how to report a
+- [CODE_OF_CONDUCT.md](https://github.com/giong-run/Giong/blob/v1.4.1/CODE_OF_CONDUCT.md) — how we treat each other, and how to report a
   problem.
-- [ROADMAP.md](https://github.com/giong-run/Giong/blob/v1.4.0/ROADMAP.md) — milestones and deliberate non-goals.
-- [AGENTS.md](https://github.com/giong-run/Giong/blob/v1.4.0/AGENTS.md) — building, testing and changing giong, written for AI coding agents;
+- [ROADMAP.md](https://github.com/giong-run/Giong/blob/v1.4.1/ROADMAP.md) — milestones and deliberate non-goals.
+- [AGENTS.md](https://github.com/giong-run/Giong/blob/v1.4.1/AGENTS.md) — building, testing and changing giong, written for AI coding agents;
   [giong.run/llms.txt](https://giong.run/llms.txt) points a model at the docs.
-- [CHANGELOG.md](https://github.com/giong-run/Giong/blob/v1.4.0/CHANGELOG.md) — what changed in each release.
+- [CHANGELOG.md](https://github.com/giong-run/Giong/blob/v1.4.1/CHANGELOG.md) — what changed in each release.
 
 ```text
 src/
@@ -916,8 +917,8 @@ assets/         logo, icons, social preview (sources in assets/README.md)
 
 Dual-licensed under either of
 
-- Apache License, Version 2.0 ([LICENSE-APACHE](https://github.com/giong-run/Giong/blob/v1.4.0/LICENSE-APACHE))
-- MIT license ([LICENSE-MIT](https://github.com/giong-run/Giong/blob/v1.4.0/LICENSE-MIT))
+- Apache License, Version 2.0 ([LICENSE-APACHE](https://github.com/giong-run/Giong/blob/v1.4.1/LICENSE-APACHE))
+- MIT license ([LICENSE-MIT](https://github.com/giong-run/Giong/blob/v1.4.1/LICENSE-MIT))
 
 at your option. Unless you state otherwise, any contribution you submit is licensed the
 same way, without additional terms.

@@ -1,8 +1,8 @@
 # giong-grpc-build
 
-> giong 1.4.0 · https://giong.run/docs/giong-grpc-build/ · source: https://github.com/giong-run/Giong/blob/v1.4.0/giong-grpc-build/README.md
+> giong 1.4.1 · https://giong.run/docs/giong-grpc-build/ · source: https://github.com/giong-run/Giong/blob/v1.4.1/giong-grpc-build/README.md
 
-Generates [giong-proto](https://github.com/giong-run/Giong/blob/v1.4.0/giong-proto) messages and [giong-grpc](https://github.com/giong-run/Giong/blob/v1.4.0/giong-grpc) services from `.proto` files at build time. The
+Generates [giong-proto](https://github.com/giong-run/Giong/blob/v1.4.1/giong-proto) messages and [giong-grpc](https://github.com/giong-run/Giong/blob/v1.4.1/giong-grpc) services from `.proto` files at build time. The
 `.proto` files are parsed in Rust by [protox](https://docs.rs/protox) (Google's
 well-known types included), so there is **no `protoc` to install**: `cargo build` is
 enough, on any machine an agent or a CI runner starts with.
@@ -28,10 +28,10 @@ and per message a view `MView<'a>` for reading, a struct `M<'a>` for writing, it
 types in module `m`, a Rust enum per protobuf enum, and per service a module with the
 paths and kinds of its methods, a trait to implement (one method for each rpc), a
 `...Server` that routes calls to an implementation of the trait, and a `...Client`.
-[giong-proto's README](https://github.com/giong-run/Giong/blob/v1.4.0/giong-proto/README.md) describes the generated messages and
-[giong-grpc's](https://github.com/giong-run/Giong/blob/v1.4.0/giong-grpc/README.md) the services;
-[`examples/proto-hello`](https://github.com/giong-run/Giong/blob/v1.4.0/examples/proto-hello) and
-[`examples/grpc-hello`](https://github.com/giong-run/Giong/blob/v1.4.0/examples/grpc-hello) use them.
+[giong-proto's README](https://github.com/giong-run/Giong/blob/v1.4.1/giong-proto/README.md) describes the generated messages and
+[giong-grpc's](https://github.com/giong-run/Giong/blob/v1.4.1/giong-grpc/README.md) the services;
+[`examples/proto-hello`](https://github.com/giong-run/Giong/blob/v1.4.1/examples/proto-hello) and
+[`examples/grpc-hello`](https://github.com/giong-run/Giong/blob/v1.4.1/examples/grpc-hello) use them.
 
 The file also holds `FILE_DESCRIPTOR_SET`, the `.proto` files themselves in encoded form,
 which `giong_grpc::reflection` serves to tools such as `grpcurl`. A program that does not

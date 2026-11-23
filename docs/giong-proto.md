@@ -1,14 +1,14 @@
 # giong-proto
 
-> giong 1.4.0 · https://giong.run/docs/giong-proto/ · source: https://github.com/giong-run/Giong/blob/v1.4.0/giong-proto/README.md
+> giong 1.4.1 · https://giong.run/docs/giong-proto/ · source: https://github.com/giong-run/Giong/blob/v1.4.1/giong-proto/README.md
 
 Protocol Buffers for [giong](https://github.com/giong-run/Giong): messages decoded as
 **views over the receive buffer**. Strings, bytes, repeated fields and maps borrow from
 the input, so decoding copies nothing and makes no heap allocation; encoding writes
 message structs whose fields borrow too. Code is generated from `.proto` files by
-[giong-grpc-build](https://github.com/giong-run/Giong/blob/v1.4.0/giong-grpc-build), which parses them in Rust: no `protoc` to install.
+[giong-grpc-build](https://github.com/giong-run/Giong/blob/v1.4.1/giong-grpc-build), which parses them in Rust: no `protoc` to install.
 
-> **New in giong 1.1.** It is the message layer of [giong-grpc](https://github.com/giong-run/Giong/blob/v1.4.0/giong-grpc), gRPC on giong's HTTP/2.
+> **New in giong 1.1.** It is the message layer of [giong-grpc](https://github.com/giong-run/Giong/blob/v1.4.1/giong-grpc), gRPC on giong's HTTP/2.
 
 ## Use
 
@@ -44,7 +44,7 @@ for item in order.items() {
 }
 ```
 
-[`examples/proto-hello`](https://github.com/giong-run/Giong/blob/v1.4.0/examples/proto-hello) is a complete program with enums,
+[`examples/proto-hello`](https://github.com/giong-run/Giong/blob/v1.4.1/examples/proto-hello) is a complete program with enums,
 oneofs, maps, `optional` fields and a service (`cargo run -p proto-hello`).
 
 ## What is generated
@@ -66,7 +66,7 @@ modified, so they are its encoding): forwarding a received message is one copy.
 ## Errors
 
 Decoding and encoding errors carry codes `GIONG-E4001` to `GIONG-E4008`
-([`ErrorKind`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-proto/src/error.rs)), each with a page in [`docs/errors/`](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/README.md):
+([`ErrorKind`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-proto/src/error.rs)), each with a page in [`docs/errors/`](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/README.md):
 truncated input, malformed varints, invalid tags, unbalanced groups, non-UTF-8 strings,
 nesting deeper than 100, malformed packed fields, messages over 2 GiB.
 
@@ -99,7 +99,7 @@ editions (`edition = "2023"`) and extensions are not supported; no JSON or text 
 ## Speed
 
 `bench/proto.sh` against prost 0.13 with its defaults (as tonic uses it), one core of the
-cloud VM, median of 10 rounds; raw data in [`bench/results/proto/`](https://github.com/giong-run/Giong/blob/v1.4.0/bench/results/proto).
+cloud VM, median of 10 rounds; raw data in [`bench/results/proto/`](https://github.com/giong-run/Giong/blob/v1.4.1/bench/results/proto).
 "decode+read" decodes and reads every field, the fair comparison since views read
 repeated fields lazily:
 

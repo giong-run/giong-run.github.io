@@ -38,7 +38,7 @@
     <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="28" height="28"></picture><span>giong</span></a>
     <nav class="nav" aria-label="Site"><a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a><a href="/docs/agent-skill/">Agent skill</a></nav>
     <div class="hdr-side">
-      <a class="ver" href="/releases/#v1-4-0" title="Release notes for v1.4.0">v1.4.0</a>
+      <a class="ver" href="/releases/#v1-4-1" title="Release notes for v1.4.1">v1.4.1</a>
       <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="giong on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
       <a class="icon-btn hide-sm" href="https://x.com/giongrun" aria-label="giong on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
       <button class="icon-btn theme" type="button" aria-label="Switch between light and dark" hidden>
@@ -72,24 +72,24 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
     }
 }</code></pre>
 <p>giong-http, giong-web, giong-tls, giong-postgres, giong-mysql, giong-redis, giong-mcp and giong-compat use the same codes. A code is never reused or renumbered, and its page stays when it is no longer raised.</p></div><section class="md-sec"><button class="sec-copy" type="button" data-md="md-0" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="the-runtime">The runtime</h2>
-<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0001.md">GIONG-E0001</a></td><td><code>IoUringUnavailable</code></td><td>io_uring is not available</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0002.md">GIONG-E0002</a></td><td><code>KernelTooOld</code></td><td>the kernel is too old</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0003.md">GIONG-E0003</a></td><td><code>SignalsTaken</code></td><td>another runtime handles the signals</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0004.md">GIONG-E0004</a></td><td><code>InvalidConfig</code></td><td>invalid runtime setting</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0005.md">GIONG-E0005</a></td><td><code>Unexpected</code></td><td>unexpected result from the kernel</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0006.md">GIONG-E0006</a></td><td><code>MixedReads</code></td><td>read used after recv</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0007.md">GIONG-E0007</a></td><td><code>TimedOut</code></td><td>the time limit passed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0008.md">GIONG-E0008</a></td><td><code>NoSuchWorker</code></td><td>no such worker</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0009.md">GIONG-E0009</a></td><td><code>BufferRingRefused</code></td><td>the kernel refused io_uring buffer rings</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0010.md">GIONG-E0010</a></td><td><code>LockedMemoryLimit</code></td><td>the locked-memory limit is used up</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0011.md">GIONG-E0011</a></td><td><code>NotInRuntime</code></td><td>not inside a giong runtime</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0012.md">GIONG-E0012</a></td><td><code>RuntimeAlreadyRunning</code></td><td>a runtime already runs on this thread</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0013.md">GIONG-E0013</a></td><td><code>WrongWorker</code></td><td>an operation was polled on another worker</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-1" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="macos">macOS</h2>
-<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0028.md">GIONG-E0028</a></td><td><code>NetworkBuffersExhausted</code></td><td>the system ran out of network buffers</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-2" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="network-and-name-resolution">Network and name resolution</h2>
-<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0100.md">GIONG-E0100</a></td><td><code>InvalidAddress</code></td><td>invalid address</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0101.md">GIONG-E0101</a></td><td><code>InvalidHostName</code></td><td>invalid host name</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0102.md">GIONG-E0102</a></td><td><code>HostNotFound</code></td><td>host not found</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0103.md">GIONG-E0103</a></td><td><code>NoAddresses</code></td><td>no address to use</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0104.md">GIONG-E0104</a></td><td><code>NoDnsServer</code></td><td>no DNS server configured</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0105.md">GIONG-E0105</a></td><td><code>DnsTimeout</code></td><td>DNS server did not answer</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0106.md">GIONG-E0106</a></td><td><code>DnsServerFailure</code></td><td>DNS server failed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0107.md">GIONG-E0107</a></td><td><code>DnsBadResponse</code></td><td>malformed DNS answer</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0108.md">GIONG-E0108</a></td><td><code>DnsServerUnreachable</code></td><td>cannot reach the DNS server</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0109.md">GIONG-E0109</a></td><td><code>EmptyBuffer</code></td><td>buffer with no room</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0110.md">GIONG-E0110</a></td><td><code>RecvBufferTooSmall</code></td><td>receive buffers too small for GRO</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0111.md">GIONG-E0111</a></td><td><code>RecvAlreadyStarted</code></td><td>receive option set after recv started</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-3" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="files">Files</h2>
-<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0200.md">GIONG-E0200</a></td><td><code>InvalidPath</code></td><td>invalid path</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0201.md">GIONG-E0201</a></td><td><code>FileTooShort</code></td><td>the file ended before the bytes to send</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0202.md">GIONG-E0202</a></td><td><code>OffsetOutOfRange</code></td><td>file offset out of range</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0203.md">GIONG-E0203</a></td><td><code>InvalidOpenOptions</code></td><td>invalid combination of open options</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-4" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="giong-http">giong-http</h2>
-<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1101.md">GIONG-E1101</a></td><td><code>HttpClientRequest</code></td><td>invalid HTTP request</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1102.md">GIONG-E1102</a></td><td><code>HttpClientConnect</code></td><td>cannot connect to the HTTP server</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1103.md">GIONG-E1103</a></td><td><code>HttpClientTimeout</code></td><td>HTTP request timed out</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1104.md">GIONG-E1104</a></td><td><code>HttpClientTooLarge</code></td><td>HTTP response too large</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1105.md">GIONG-E1105</a></td><td><code>HttpClientRedirect</code></td><td>redirect not followed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1106.md">GIONG-E1106</a></td><td><code>HttpClientClosed</code></td><td>connection closed before the response</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1107.md">GIONG-E1107</a></td><td><code>HttpClientProtocol</code></td><td>malformed HTTP response</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1108.md">GIONG-E1108</a></td><td><code>HttpClientStatus</code></td><td>HTTP error status</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1109.md">GIONG-E1109</a></td><td><code>HttpClientDecode</code></td><td>cannot decode the response body</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1110.md">GIONG-E1110</a></td><td><code>HttpClientProxy</code></td><td>the HTTP proxy refused the request</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1111.md">GIONG-E1111</a></td><td><code>HttpBodyTooLarge</code></td><td>request body too large</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1112.md">GIONG-E1112</a></td><td><code>HttpBodyIncomplete</code></td><td>request body cut short</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1113.md">GIONG-E1113</a></td><td><code>HttpBodyMalformed</code></td><td>malformed request body</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1114.md">GIONG-E1114</a></td><td><code>HttpBodyNotSent</code></td><td>response body not sent</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1115.md">GIONG-E1115</a></td><td><code>Http2Protocol</code></td><td>HTTP/2 protocol error</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1116.md">GIONG-E1116</a></td><td><code>Http2TooManyResets</code></td><td>too many HTTP/2 streams reset</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1117.md">GIONG-E1117</a></td><td><code>Http2Flood</code></td><td>too many HTTP/2 control frames</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1118.md">GIONG-E1118</a></td><td><code>Http2HeadersTooLarge</code></td><td>HTTP/2 header block too large</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1119.md">GIONG-E1119</a></td><td><code>HttpInvalidResponse</code></td><td>invalid HTTP response</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1120.md">GIONG-E1120</a></td><td><code>HttpServerBusy</code></td><td>request refused: the server's memory budget for requests is full</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1121.md">GIONG-E1121</a></td><td><code>HttpServerLowMemory</code></td><td>connection refused: the server is low on memory</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1122.md">GIONG-E1122</a></td><td><code>HttpInvalidTrailer</code></td><td>invalid HTTP trailer field</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-5" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="giong-web">giong-web</h2>
-<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1201.md">GIONG-E1201</a></td><td><code>WebInvalidRoute</code></td><td>invalid route pattern</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1202.md">GIONG-E1202</a></td><td><code>WebDuplicateRoute</code></td><td>route added twice</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1203.md">GIONG-E1203</a></td><td><code>WebNoRoute</code></td><td>no route for the path</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1204.md">GIONG-E1204</a></td><td><code>WebMethodNotAllowed</code></td><td>method not allowed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1205.md">GIONG-E1205</a></td><td><code>WebBadParameter</code></td><td>invalid path or query parameter</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1206.md">GIONG-E1206</a></td><td><code>WebNoSuchParameter</code></td><td>the route has no such parameter</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1207.md">GIONG-E1207</a></td><td><code>WebBadBody</code></td><td>unreadable request body</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1208.md">GIONG-E1208</a></td><td><code>WebUnsupportedMediaType</code></td><td>unsupported Content-Type</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1209.md">GIONG-E1209</a></td><td><code>WebTimeout</code></td><td>no response in time</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1210.md">GIONG-E1210</a></td><td><code>WebInternal</code></td><td>the handler failed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1211.md">GIONG-E1211</a></td><td><code>WebUnavailable</code></td><td>a service the handler needs is unavailable</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1212.md">GIONG-E1212</a></td><td><code>WebCorsRejected</code></td><td>cross-origin request refused</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1213.md">GIONG-E1213</a></td><td><code>WebConfig</code></td><td>invalid giong-web setting</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-6" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="giong-mcp">giong-mcp</h2>
-<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1301.md">GIONG-E1301</a></td><td><code>McpNotLocal</code></td><td>the MCP server listens on this machine only</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1302.md">GIONG-E1302</a></td><td><code>McpBadAddress</code></td><td>invalid address for the MCP server</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1303.md">GIONG-E1303</a></td><td><code>McpBind</code></td><td>the MCP server cannot listen on its address</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1304.md">GIONG-E1304</a></td><td><code>McpNoToken</code></td><td>the MCP server needs a token on TCP</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1305.md">GIONG-E1305</a></td><td><code>McpBadToken</code></td><td>invalid token for the MCP server</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-7" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="giong-compat">giong-compat</h2>
-<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1401.md">GIONG-E1401</a></td><td><code>CompatWriteFailed</code></td><td>an earlier buffered write failed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1402.md">GIONG-E1402</a></td><td><code>CompatShutDown</code></td><td>write after shutdown</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1403.md">GIONG-E1403</a></td><td><code>CompatConfig</code></td><td>invalid giong-compat setting</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-8" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="giong-tls">giong-tls</h2>
-<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2001.md">GIONG-E2001</a></td><td><code>NoTrustedRoots</code></td><td>no trusted certificate authorities</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2002.md">GIONG-E2002</a></td><td><code>BadCertificateData</code></td><td>unreadable certificate data</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2003.md">GIONG-E2003</a></td><td><code>InvalidServerName</code></td><td>invalid TLS server name</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2004.md">GIONG-E2004</a></td><td><code>TlsCertificate</code></td><td>certificate rejected</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2005.md">GIONG-E2005</a></td><td><code>TlsProtocol</code></td><td>TLS protocol error</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2006.md">GIONG-E2006</a></td><td><code>TlsHandshakeTimeout</code></td><td>TLS handshake timed out</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2007.md">GIONG-E2007</a></td><td><code>TlsHandshakeEof</code></td><td>connection closed during the TLS handshake</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2008.md">GIONG-E2008</a></td><td><code>TlsBroken</code></td><td>TLS stream broken</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2009.md">GIONG-E2009</a></td><td><code>KtlsUnavailable</code></td><td>kernel TLS is not available</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2010.md">GIONG-E2010</a></td><td><code>KtlsSetup</code></td><td>the kernel refused the TLS keys</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2011.md">GIONG-E2011</a></td><td><code>KtlsKeyUpdate</code></td><td>the kernel cannot change TLS keys</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2012.md">GIONG-E2012</a></td><td><code>TlsKeysExhausted</code></td><td>TLS keys used up</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2013.md">GIONG-E2013</a></td><td><code>TlsConfig</code></td><td>TLS setting not possible here</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-9" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="giong-postgres">giong-postgres</h2>
-<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3001.md">GIONG-E3001</a></td><td><code>PostgresConfig</code></td><td>invalid PostgreSQL configuration</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3002.md">GIONG-E3002</a></td><td><code>PostgresConnect</code></td><td>cannot connect to PostgreSQL</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3003.md">GIONG-E3003</a></td><td><code>PostgresAuth</code></td><td>PostgreSQL authentication failed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3004.md">GIONG-E3004</a></td><td><code>PostgresServer</code></td><td>PostgreSQL server error</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3005.md">GIONG-E3005</a></td><td><code>PostgresType</code></td><td>PostgreSQL type mismatch</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3006.md">GIONG-E3006</a></td><td><code>PostgresRowCount</code></td><td>wrong number of rows</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3007.md">GIONG-E3007</a></td><td><code>PostgresTooLarge</code></td><td>PostgreSQL result too large</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3008.md">GIONG-E3008</a></td><td><code>PostgresClosed</code></td><td>PostgreSQL connection closed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3009.md">GIONG-E3009</a></td><td><code>PostgresPoolTimeout</code></td><td>PostgreSQL pool wait timed out</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3010.md">GIONG-E3010</a></td><td><code>PostgresProtocol</code></td><td>PostgreSQL protocol error</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3011.md">GIONG-E3011</a></td><td><code>PostgresStatement</code></td><td>statement refused before sending</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-10" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="giong-mysql">giong-mysql</h2>
-<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3101.md">GIONG-E3101</a></td><td><code>MysqlConfig</code></td><td>invalid MySQL configuration</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3102.md">GIONG-E3102</a></td><td><code>MysqlConnect</code></td><td>cannot connect to MySQL</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3103.md">GIONG-E3103</a></td><td><code>MysqlAuth</code></td><td>MySQL authentication failed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3104.md">GIONG-E3104</a></td><td><code>MysqlServer</code></td><td>MySQL server error</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3105.md">GIONG-E3105</a></td><td><code>MysqlType</code></td><td>MySQL type mismatch</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3106.md">GIONG-E3106</a></td><td><code>MysqlRowCount</code></td><td>wrong number of rows</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3107.md">GIONG-E3107</a></td><td><code>MysqlTooLarge</code></td><td>MySQL result too large</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3108.md">GIONG-E3108</a></td><td><code>MysqlClosed</code></td><td>MySQL connection closed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3109.md">GIONG-E3109</a></td><td><code>MysqlPoolTimeout</code></td><td>MySQL pool wait timed out</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3110.md">GIONG-E3110</a></td><td><code>MysqlProtocol</code></td><td>MySQL protocol error</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3111.md">GIONG-E3111</a></td><td><code>MysqlStatement</code></td><td>statement refused before sending</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-11" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="giong-redis">giong-redis</h2>
-<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3201.md">GIONG-E3201</a></td><td><code>RedisConfig</code></td><td>invalid Redis configuration</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3202.md">GIONG-E3202</a></td><td><code>RedisConnect</code></td><td>cannot connect to Redis</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3203.md">GIONG-E3203</a></td><td><code>RedisAuth</code></td><td>Redis authentication failed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3204.md">GIONG-E3204</a></td><td><code>RedisServer</code></td><td>Redis server error</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3205.md">GIONG-E3205</a></td><td><code>RedisType</code></td><td>Redis type mismatch</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3206.md">GIONG-E3206</a></td><td><code>RedisCommand</code></td><td>command refused before sending</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3207.md">GIONG-E3207</a></td><td><code>RedisTooLarge</code></td><td>Redis reply too large</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3208.md">GIONG-E3208</a></td><td><code>RedisClosed</code></td><td>Redis connection closed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3209.md">GIONG-E3209</a></td><td><code>RedisPoolTimeout</code></td><td>Redis pool wait timed out</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3210.md">GIONG-E3210</a></td><td><code>RedisProtocol</code></td><td>Redis protocol error</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3211.md">GIONG-E3211</a></td><td><code>RedisTimeout</code></td><td>Redis reply timed out</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3601.md">GIONG-E3601</a></td><td><code>QuicConfig</code></td><td>invalid QUIC configuration</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3602.md">GIONG-E3602</a></td><td><code>QuicConnect</code></td><td>cannot set up the QUIC connection</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3603.md">GIONG-E3603</a></td><td><code>QuicConnectionLost</code></td><td>the QUIC connection was lost</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3604.md">GIONG-E3604</a></td><td><code>QuicStreamReset</code></td><td>the QUIC stream was reset</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3605.md">GIONG-E3605</a></td><td><code>QuicEarlyDataRejected</code></td><td>the server refused the 0-RTT data</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-12" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="giong-proto">giong-proto</h2>
+<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0001.md">GIONG-E0001</a></td><td><code>IoUringUnavailable</code></td><td>io_uring is not available</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0002.md">GIONG-E0002</a></td><td><code>KernelTooOld</code></td><td>the kernel is too old</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0003.md">GIONG-E0003</a></td><td><code>SignalsTaken</code></td><td>another runtime handles the signals</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0004.md">GIONG-E0004</a></td><td><code>InvalidConfig</code></td><td>invalid runtime setting</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0005.md">GIONG-E0005</a></td><td><code>Unexpected</code></td><td>unexpected result from the kernel</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0006.md">GIONG-E0006</a></td><td><code>MixedReads</code></td><td>read used after recv</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0007.md">GIONG-E0007</a></td><td><code>TimedOut</code></td><td>the time limit passed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0008.md">GIONG-E0008</a></td><td><code>NoSuchWorker</code></td><td>no such worker</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0009.md">GIONG-E0009</a></td><td><code>BufferRingRefused</code></td><td>the kernel refused io_uring buffer rings</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0010.md">GIONG-E0010</a></td><td><code>LockedMemoryLimit</code></td><td>the locked-memory limit is used up</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0011.md">GIONG-E0011</a></td><td><code>NotInRuntime</code></td><td>not inside a giong runtime</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0012.md">GIONG-E0012</a></td><td><code>RuntimeAlreadyRunning</code></td><td>a runtime already runs on this thread</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0013.md">GIONG-E0013</a></td><td><code>WrongWorker</code></td><td>an operation was polled on another worker</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0020.md">GIONG-E0020</a></td><td><code>ThreadLimit</code></td><td>a worker thread could not be started</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-1" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="macos">macOS</h2>
+<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0028.md">GIONG-E0028</a></td><td><code>NetworkBuffersExhausted</code></td><td>the system ran out of network buffers</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-2" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="network-and-name-resolution">Network and name resolution</h2>
+<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0100.md">GIONG-E0100</a></td><td><code>InvalidAddress</code></td><td>invalid address</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0101.md">GIONG-E0101</a></td><td><code>InvalidHostName</code></td><td>invalid host name</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0102.md">GIONG-E0102</a></td><td><code>HostNotFound</code></td><td>host not found</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0103.md">GIONG-E0103</a></td><td><code>NoAddresses</code></td><td>no address to use</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0104.md">GIONG-E0104</a></td><td><code>NoDnsServer</code></td><td>no DNS server configured</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0105.md">GIONG-E0105</a></td><td><code>DnsTimeout</code></td><td>DNS server did not answer</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0106.md">GIONG-E0106</a></td><td><code>DnsServerFailure</code></td><td>DNS server failed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0107.md">GIONG-E0107</a></td><td><code>DnsBadResponse</code></td><td>malformed DNS answer</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0108.md">GIONG-E0108</a></td><td><code>DnsServerUnreachable</code></td><td>cannot reach the DNS server</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0109.md">GIONG-E0109</a></td><td><code>EmptyBuffer</code></td><td>buffer with no room</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0110.md">GIONG-E0110</a></td><td><code>RecvBufferTooSmall</code></td><td>receive buffers too small for GRO</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0111.md">GIONG-E0111</a></td><td><code>RecvAlreadyStarted</code></td><td>receive option set after recv started</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-3" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="files">Files</h2>
+<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0200.md">GIONG-E0200</a></td><td><code>InvalidPath</code></td><td>invalid path</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0201.md">GIONG-E0201</a></td><td><code>FileTooShort</code></td><td>the file ended before the bytes to send</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0202.md">GIONG-E0202</a></td><td><code>OffsetOutOfRange</code></td><td>file offset out of range</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0203.md">GIONG-E0203</a></td><td><code>InvalidOpenOptions</code></td><td>invalid combination of open options</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-4" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="giong-http">giong-http</h2>
+<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1101.md">GIONG-E1101</a></td><td><code>HttpClientRequest</code></td><td>invalid HTTP request</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1102.md">GIONG-E1102</a></td><td><code>HttpClientConnect</code></td><td>cannot connect to the HTTP server</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1103.md">GIONG-E1103</a></td><td><code>HttpClientTimeout</code></td><td>HTTP request timed out</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1104.md">GIONG-E1104</a></td><td><code>HttpClientTooLarge</code></td><td>HTTP response too large</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1105.md">GIONG-E1105</a></td><td><code>HttpClientRedirect</code></td><td>redirect not followed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1106.md">GIONG-E1106</a></td><td><code>HttpClientClosed</code></td><td>connection closed before the response</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1107.md">GIONG-E1107</a></td><td><code>HttpClientProtocol</code></td><td>malformed HTTP response</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1108.md">GIONG-E1108</a></td><td><code>HttpClientStatus</code></td><td>HTTP error status</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1109.md">GIONG-E1109</a></td><td><code>HttpClientDecode</code></td><td>cannot decode the response body</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1110.md">GIONG-E1110</a></td><td><code>HttpClientProxy</code></td><td>the HTTP proxy refused the request</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1111.md">GIONG-E1111</a></td><td><code>HttpBodyTooLarge</code></td><td>request body too large</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1112.md">GIONG-E1112</a></td><td><code>HttpBodyIncomplete</code></td><td>request body cut short</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1113.md">GIONG-E1113</a></td><td><code>HttpBodyMalformed</code></td><td>malformed request body</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1114.md">GIONG-E1114</a></td><td><code>HttpBodyNotSent</code></td><td>response body not sent</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1115.md">GIONG-E1115</a></td><td><code>Http2Protocol</code></td><td>HTTP/2 protocol error</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1116.md">GIONG-E1116</a></td><td><code>Http2TooManyResets</code></td><td>too many HTTP/2 streams reset</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1117.md">GIONG-E1117</a></td><td><code>Http2Flood</code></td><td>too many HTTP/2 control frames</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1118.md">GIONG-E1118</a></td><td><code>Http2HeadersTooLarge</code></td><td>HTTP/2 header block too large</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1119.md">GIONG-E1119</a></td><td><code>HttpInvalidResponse</code></td><td>invalid HTTP response</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1120.md">GIONG-E1120</a></td><td><code>HttpServerBusy</code></td><td>request refused: the server's memory budget for requests is full</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1121.md">GIONG-E1121</a></td><td><code>HttpServerLowMemory</code></td><td>connection refused: the server is low on memory</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1122.md">GIONG-E1122</a></td><td><code>HttpInvalidTrailer</code></td><td>invalid HTTP trailer field</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-5" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="giong-web">giong-web</h2>
+<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1201.md">GIONG-E1201</a></td><td><code>WebInvalidRoute</code></td><td>invalid route pattern</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1202.md">GIONG-E1202</a></td><td><code>WebDuplicateRoute</code></td><td>route added twice</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1203.md">GIONG-E1203</a></td><td><code>WebNoRoute</code></td><td>no route for the path</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1204.md">GIONG-E1204</a></td><td><code>WebMethodNotAllowed</code></td><td>method not allowed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1205.md">GIONG-E1205</a></td><td><code>WebBadParameter</code></td><td>invalid path or query parameter</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1206.md">GIONG-E1206</a></td><td><code>WebNoSuchParameter</code></td><td>the route has no such parameter</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1207.md">GIONG-E1207</a></td><td><code>WebBadBody</code></td><td>unreadable request body</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1208.md">GIONG-E1208</a></td><td><code>WebUnsupportedMediaType</code></td><td>unsupported Content-Type</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1209.md">GIONG-E1209</a></td><td><code>WebTimeout</code></td><td>no response in time</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1210.md">GIONG-E1210</a></td><td><code>WebInternal</code></td><td>the handler failed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1211.md">GIONG-E1211</a></td><td><code>WebUnavailable</code></td><td>a service the handler needs is unavailable</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1212.md">GIONG-E1212</a></td><td><code>WebCorsRejected</code></td><td>cross-origin request refused</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1213.md">GIONG-E1213</a></td><td><code>WebConfig</code></td><td>invalid giong-web setting</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-6" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="giong-mcp">giong-mcp</h2>
+<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1301.md">GIONG-E1301</a></td><td><code>McpNotLocal</code></td><td>the MCP server listens on this machine only</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1302.md">GIONG-E1302</a></td><td><code>McpBadAddress</code></td><td>invalid address for the MCP server</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1303.md">GIONG-E1303</a></td><td><code>McpBind</code></td><td>the MCP server cannot listen on its address</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1304.md">GIONG-E1304</a></td><td><code>McpNoToken</code></td><td>the MCP server needs a token on TCP</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1305.md">GIONG-E1305</a></td><td><code>McpBadToken</code></td><td>invalid token for the MCP server</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-7" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="giong-compat">giong-compat</h2>
+<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1401.md">GIONG-E1401</a></td><td><code>CompatWriteFailed</code></td><td>an earlier buffered write failed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1402.md">GIONG-E1402</a></td><td><code>CompatShutDown</code></td><td>write after shutdown</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1403.md">GIONG-E1403</a></td><td><code>CompatConfig</code></td><td>invalid giong-compat setting</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-8" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="giong-tls">giong-tls</h2>
+<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2001.md">GIONG-E2001</a></td><td><code>NoTrustedRoots</code></td><td>no trusted certificate authorities</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2002.md">GIONG-E2002</a></td><td><code>BadCertificateData</code></td><td>unreadable certificate data</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2003.md">GIONG-E2003</a></td><td><code>InvalidServerName</code></td><td>invalid TLS server name</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2004.md">GIONG-E2004</a></td><td><code>TlsCertificate</code></td><td>certificate rejected</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2005.md">GIONG-E2005</a></td><td><code>TlsProtocol</code></td><td>TLS protocol error</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2006.md">GIONG-E2006</a></td><td><code>TlsHandshakeTimeout</code></td><td>TLS handshake timed out</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2007.md">GIONG-E2007</a></td><td><code>TlsHandshakeEof</code></td><td>connection closed during the TLS handshake</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2008.md">GIONG-E2008</a></td><td><code>TlsBroken</code></td><td>TLS stream broken</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2009.md">GIONG-E2009</a></td><td><code>KtlsUnavailable</code></td><td>kernel TLS is not available</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2010.md">GIONG-E2010</a></td><td><code>KtlsSetup</code></td><td>the kernel refused the TLS keys</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2011.md">GIONG-E2011</a></td><td><code>KtlsKeyUpdate</code></td><td>the kernel cannot change TLS keys</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2012.md">GIONG-E2012</a></td><td><code>TlsKeysExhausted</code></td><td>TLS keys used up</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2013.md">GIONG-E2013</a></td><td><code>TlsConfig</code></td><td>TLS setting not possible here</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-9" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="giong-postgres">giong-postgres</h2>
+<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3001.md">GIONG-E3001</a></td><td><code>PostgresConfig</code></td><td>invalid PostgreSQL configuration</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3002.md">GIONG-E3002</a></td><td><code>PostgresConnect</code></td><td>cannot connect to PostgreSQL</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3003.md">GIONG-E3003</a></td><td><code>PostgresAuth</code></td><td>PostgreSQL authentication failed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3004.md">GIONG-E3004</a></td><td><code>PostgresServer</code></td><td>PostgreSQL server error</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3005.md">GIONG-E3005</a></td><td><code>PostgresType</code></td><td>PostgreSQL type mismatch</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3006.md">GIONG-E3006</a></td><td><code>PostgresRowCount</code></td><td>wrong number of rows</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3007.md">GIONG-E3007</a></td><td><code>PostgresTooLarge</code></td><td>PostgreSQL result too large</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3008.md">GIONG-E3008</a></td><td><code>PostgresClosed</code></td><td>PostgreSQL connection closed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3009.md">GIONG-E3009</a></td><td><code>PostgresPoolTimeout</code></td><td>PostgreSQL pool wait timed out</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3010.md">GIONG-E3010</a></td><td><code>PostgresProtocol</code></td><td>PostgreSQL protocol error</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3011.md">GIONG-E3011</a></td><td><code>PostgresStatement</code></td><td>statement refused before sending</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-10" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="giong-mysql">giong-mysql</h2>
+<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3101.md">GIONG-E3101</a></td><td><code>MysqlConfig</code></td><td>invalid MySQL configuration</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3102.md">GIONG-E3102</a></td><td><code>MysqlConnect</code></td><td>cannot connect to MySQL</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3103.md">GIONG-E3103</a></td><td><code>MysqlAuth</code></td><td>MySQL authentication failed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3104.md">GIONG-E3104</a></td><td><code>MysqlServer</code></td><td>MySQL server error</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3105.md">GIONG-E3105</a></td><td><code>MysqlType</code></td><td>MySQL type mismatch</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3106.md">GIONG-E3106</a></td><td><code>MysqlRowCount</code></td><td>wrong number of rows</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3107.md">GIONG-E3107</a></td><td><code>MysqlTooLarge</code></td><td>MySQL result too large</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3108.md">GIONG-E3108</a></td><td><code>MysqlClosed</code></td><td>MySQL connection closed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3109.md">GIONG-E3109</a></td><td><code>MysqlPoolTimeout</code></td><td>MySQL pool wait timed out</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3110.md">GIONG-E3110</a></td><td><code>MysqlProtocol</code></td><td>MySQL protocol error</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3111.md">GIONG-E3111</a></td><td><code>MysqlStatement</code></td><td>statement refused before sending</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-11" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="giong-redis">giong-redis</h2>
+<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3201.md">GIONG-E3201</a></td><td><code>RedisConfig</code></td><td>invalid Redis configuration</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3202.md">GIONG-E3202</a></td><td><code>RedisConnect</code></td><td>cannot connect to Redis</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3203.md">GIONG-E3203</a></td><td><code>RedisAuth</code></td><td>Redis authentication failed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3204.md">GIONG-E3204</a></td><td><code>RedisServer</code></td><td>Redis server error</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3205.md">GIONG-E3205</a></td><td><code>RedisType</code></td><td>Redis type mismatch</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3206.md">GIONG-E3206</a></td><td><code>RedisCommand</code></td><td>command refused before sending</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3207.md">GIONG-E3207</a></td><td><code>RedisTooLarge</code></td><td>Redis reply too large</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3208.md">GIONG-E3208</a></td><td><code>RedisClosed</code></td><td>Redis connection closed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3209.md">GIONG-E3209</a></td><td><code>RedisPoolTimeout</code></td><td>Redis pool wait timed out</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3210.md">GIONG-E3210</a></td><td><code>RedisProtocol</code></td><td>Redis protocol error</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3211.md">GIONG-E3211</a></td><td><code>RedisTimeout</code></td><td>Redis reply timed out</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3601.md">GIONG-E3601</a></td><td><code>QuicConfig</code></td><td>invalid QUIC configuration</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3602.md">GIONG-E3602</a></td><td><code>QuicConnect</code></td><td>cannot set up the QUIC connection</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3603.md">GIONG-E3603</a></td><td><code>QuicConnectionLost</code></td><td>the QUIC connection was lost</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3604.md">GIONG-E3604</a></td><td><code>QuicStreamReset</code></td><td>the QUIC stream was reset</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3605.md">GIONG-E3605</a></td><td><code>QuicEarlyDataRejected</code></td><td>the server refused the 0-RTT data</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-12" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="giong-proto">giong-proto</h2>
 <p>A prototype for giong 1.1, not published yet; its codes are <code>giong_proto::ErrorKind</code> until it joins <code>giong::error::Code</code>.</p>
-<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>ErrorKind::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4001.md">GIONG-E4001</a></td><td><code>ErrorKind::Truncated</code></td><td>the message ends in the middle of a field</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4002.md">GIONG-E4002</a></td><td><code>ErrorKind::BadVarint</code></td><td>malformed varint</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4003.md">GIONG-E4003</a></td><td><code>ErrorKind::BadTag</code></td><td>invalid field tag</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4004.md">GIONG-E4004</a></td><td><code>ErrorKind::BadGroup</code></td><td>unbalanced group</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4005.md">GIONG-E4005</a></td><td><code>ErrorKind::BadUtf8</code></td><td>string field is not UTF-8</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4006.md">GIONG-E4006</a></td><td><code>ErrorKind::TooDeep</code></td><td>messages nested too deeply</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4007.md">GIONG-E4007</a></td><td><code>ErrorKind::BadPacked</code></td><td>malformed packed field</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4008.md">GIONG-E4008</a></td><td><code>ErrorKind::TooLarge</code></td><td>message larger than 2 GiB</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-13" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="giong-grpc">giong-grpc</h2>
+<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>ErrorKind::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4001.md">GIONG-E4001</a></td><td><code>ErrorKind::Truncated</code></td><td>the message ends in the middle of a field</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4002.md">GIONG-E4002</a></td><td><code>ErrorKind::BadVarint</code></td><td>malformed varint</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4003.md">GIONG-E4003</a></td><td><code>ErrorKind::BadTag</code></td><td>invalid field tag</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4004.md">GIONG-E4004</a></td><td><code>ErrorKind::BadGroup</code></td><td>unbalanced group</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4005.md">GIONG-E4005</a></td><td><code>ErrorKind::BadUtf8</code></td><td>string field is not UTF-8</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4006.md">GIONG-E4006</a></td><td><code>ErrorKind::TooDeep</code></td><td>messages nested too deeply</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4007.md">GIONG-E4007</a></td><td><code>ErrorKind::BadPacked</code></td><td>malformed packed field</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4008.md">GIONG-E4008</a></td><td><code>ErrorKind::TooLarge</code></td><td>message larger than 2 GiB</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-13" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="giong-grpc">giong-grpc</h2>
 <p>New in giong 1.1. A call that fails ends with a gRPC status; the statuses giong-grpc raises itself carry one of these codes at the start of their message and in <code>Status::error_code</code>.</p>
-<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4101.md">GIONG-E4101</a></td><td><code>GrpcInvalidMetadata</code></td><td>invalid gRPC metadata</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4102.md">GIONG-E4102</a></td><td><code>GrpcMessageTooLarge</code></td><td>gRPC message too large</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4103.md">GIONG-E4103</a></td><td><code>GrpcProtocol</code></td><td>gRPC protocol error</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4104.md">GIONG-E4104</a></td><td><code>GrpcEncoding</code></td><td>unsupported gRPC message encoding</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4105.md">GIONG-E4105</a></td><td><code>GrpcDecode</code></td><td>gRPC message is not valid protobuf</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4106.md">GIONG-E4106</a></td><td><code>GrpcTransport</code></td><td>gRPC connection failed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4107.md">GIONG-E4107</a></td><td><code>GrpcEndpoint</code></td><td>invalid gRPC endpoint</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4108.md">GIONG-E4108</a></td><td><code>GrpcDeadline</code></td><td>gRPC deadline exceeded</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4109.md">GIONG-E4109</a></td><td><code>GrpcCancelled</code></td><td>gRPC call cancelled</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4110.md">GIONG-E4110</a></td><td><code>GrpcUnimplemented</code></td><td>gRPC method not found</td></tr></tbody></table></div></section>
-    <p class="src-note">giong 1.4.0 · from <a href="https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/README.md">docs/errors/README.md</a> at v1.4.0</p>
-    <script type="text/markdown" id="md-0"><!-- giong 1.4.0, https://giong.run/docs/errors/#the-runtime -->
+<div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4101.md">GIONG-E4101</a></td><td><code>GrpcInvalidMetadata</code></td><td>invalid gRPC metadata</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4102.md">GIONG-E4102</a></td><td><code>GrpcMessageTooLarge</code></td><td>gRPC message too large</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4103.md">GIONG-E4103</a></td><td><code>GrpcProtocol</code></td><td>gRPC protocol error</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4104.md">GIONG-E4104</a></td><td><code>GrpcEncoding</code></td><td>unsupported gRPC message encoding</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4105.md">GIONG-E4105</a></td><td><code>GrpcDecode</code></td><td>gRPC message is not valid protobuf</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4106.md">GIONG-E4106</a></td><td><code>GrpcTransport</code></td><td>gRPC connection failed</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4107.md">GIONG-E4107</a></td><td><code>GrpcEndpoint</code></td><td>invalid gRPC endpoint</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4108.md">GIONG-E4108</a></td><td><code>GrpcDeadline</code></td><td>gRPC deadline exceeded</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4109.md">GIONG-E4109</a></td><td><code>GrpcCancelled</code></td><td>gRPC call cancelled</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4110.md">GIONG-E4110</a></td><td><code>GrpcUnimplemented</code></td><td>gRPC method not found</td></tr></tbody></table></div></section>
+    <p class="src-note">giong 1.4.1 · from <a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/README.md">docs/errors/README.md</a> at v1.4.1</p>
+    <script type="text/markdown" id="md-0"><!-- giong 1.4.1, https://giong.run/docs/errors/#the-runtime -->
 
 ## The runtime
 
@@ -107,13 +107,14 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 | [GIONG-E0010](E0010.md) | `LockedMemoryLimit` | the locked-memory limit is used up |
 | [GIONG-E0011](E0011.md) | `NotInRuntime` | not inside a giong runtime |
 | [GIONG-E0012](E0012.md) | `RuntimeAlreadyRunning` | a runtime already runs on this thread |
-| [GIONG-E0013](E0013.md) | `WrongWorker` | an operation was polled on another worker |</script><script type="text/markdown" id="md-1"><!-- giong 1.4.0, https://giong.run/docs/errors/#macos -->
+| [GIONG-E0013](E0013.md) | `WrongWorker` | an operation was polled on another worker |
+| [GIONG-E0020](E0020.md) | `ThreadLimit` | a worker thread could not be started |</script><script type="text/markdown" id="md-1"><!-- giong 1.4.1, https://giong.run/docs/errors/#macos -->
 
 ## macOS
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E0028](E0028.md) | `NetworkBuffersExhausted` | the system ran out of network buffers |</script><script type="text/markdown" id="md-2"><!-- giong 1.4.0, https://giong.run/docs/errors/#network-and-name-resolution -->
+| [GIONG-E0028](E0028.md) | `NetworkBuffersExhausted` | the system ran out of network buffers |</script><script type="text/markdown" id="md-2"><!-- giong 1.4.1, https://giong.run/docs/errors/#network-and-name-resolution -->
 
 ## Network and name resolution
 
@@ -130,7 +131,7 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 | [GIONG-E0108](E0108.md) | `DnsServerUnreachable` | cannot reach the DNS server |
 | [GIONG-E0109](E0109.md) | `EmptyBuffer` | buffer with no room |
 | [GIONG-E0110](E0110.md) | `RecvBufferTooSmall` | receive buffers too small for GRO |
-| [GIONG-E0111](E0111.md) | `RecvAlreadyStarted` | receive option set after recv started |</script><script type="text/markdown" id="md-3"><!-- giong 1.4.0, https://giong.run/docs/errors/#files -->
+| [GIONG-E0111](E0111.md) | `RecvAlreadyStarted` | receive option set after recv started |</script><script type="text/markdown" id="md-3"><!-- giong 1.4.1, https://giong.run/docs/errors/#files -->
 
 ## Files
 
@@ -139,7 +140,7 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 | [GIONG-E0200](E0200.md) | `InvalidPath` | invalid path |
 | [GIONG-E0201](E0201.md) | `FileTooShort` | the file ended before the bytes to send |
 | [GIONG-E0202](E0202.md) | `OffsetOutOfRange` | file offset out of range |
-| [GIONG-E0203](E0203.md) | `InvalidOpenOptions` | invalid combination of open options |</script><script type="text/markdown" id="md-4"><!-- giong 1.4.0, https://giong.run/docs/errors/#giong-http -->
+| [GIONG-E0203](E0203.md) | `InvalidOpenOptions` | invalid combination of open options |</script><script type="text/markdown" id="md-4"><!-- giong 1.4.1, https://giong.run/docs/errors/#giong-http -->
 
 ## giong-http
 
@@ -166,7 +167,7 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 | [GIONG-E1119](E1119.md) | `HttpInvalidResponse` | invalid HTTP response |
 | [GIONG-E1120](E1120.md) | `HttpServerBusy` | request refused: the server's memory budget for requests is full |
 | [GIONG-E1121](E1121.md) | `HttpServerLowMemory` | connection refused: the server is low on memory |
-| [GIONG-E1122](E1122.md) | `HttpInvalidTrailer` | invalid HTTP trailer field |</script><script type="text/markdown" id="md-5"><!-- giong 1.4.0, https://giong.run/docs/errors/#giong-web -->
+| [GIONG-E1122](E1122.md) | `HttpInvalidTrailer` | invalid HTTP trailer field |</script><script type="text/markdown" id="md-5"><!-- giong 1.4.1, https://giong.run/docs/errors/#giong-web -->
 
 ## giong-web
 
@@ -184,7 +185,7 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 | [GIONG-E1210](E1210.md) | `WebInternal` | the handler failed |
 | [GIONG-E1211](E1211.md) | `WebUnavailable` | a service the handler needs is unavailable |
 | [GIONG-E1212](E1212.md) | `WebCorsRejected` | cross-origin request refused |
-| [GIONG-E1213](E1213.md) | `WebConfig` | invalid giong-web setting |</script><script type="text/markdown" id="md-6"><!-- giong 1.4.0, https://giong.run/docs/errors/#giong-mcp -->
+| [GIONG-E1213](E1213.md) | `WebConfig` | invalid giong-web setting |</script><script type="text/markdown" id="md-6"><!-- giong 1.4.1, https://giong.run/docs/errors/#giong-mcp -->
 
 ## giong-mcp
 
@@ -194,7 +195,7 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 | [GIONG-E1302](E1302.md) | `McpBadAddress` | invalid address for the MCP server |
 | [GIONG-E1303](E1303.md) | `McpBind` | the MCP server cannot listen on its address |
 | [GIONG-E1304](E1304.md) | `McpNoToken` | the MCP server needs a token on TCP |
-| [GIONG-E1305](E1305.md) | `McpBadToken` | invalid token for the MCP server |</script><script type="text/markdown" id="md-7"><!-- giong 1.4.0, https://giong.run/docs/errors/#giong-compat -->
+| [GIONG-E1305](E1305.md) | `McpBadToken` | invalid token for the MCP server |</script><script type="text/markdown" id="md-7"><!-- giong 1.4.1, https://giong.run/docs/errors/#giong-compat -->
 
 ## giong-compat
 
@@ -202,7 +203,7 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 |---|---|---|
 | [GIONG-E1401](E1401.md) | `CompatWriteFailed` | an earlier buffered write failed |
 | [GIONG-E1402](E1402.md) | `CompatShutDown` | write after shutdown |
-| [GIONG-E1403](E1403.md) | `CompatConfig` | invalid giong-compat setting |</script><script type="text/markdown" id="md-8"><!-- giong 1.4.0, https://giong.run/docs/errors/#giong-tls -->
+| [GIONG-E1403](E1403.md) | `CompatConfig` | invalid giong-compat setting |</script><script type="text/markdown" id="md-8"><!-- giong 1.4.1, https://giong.run/docs/errors/#giong-tls -->
 
 ## giong-tls
 
@@ -220,7 +221,7 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 | [GIONG-E2010](E2010.md) | `KtlsSetup` | the kernel refused the TLS keys |
 | [GIONG-E2011](E2011.md) | `KtlsKeyUpdate` | the kernel cannot change TLS keys |
 | [GIONG-E2012](E2012.md) | `TlsKeysExhausted` | TLS keys used up |
-| [GIONG-E2013](E2013.md) | `TlsConfig` | TLS setting not possible here |</script><script type="text/markdown" id="md-9"><!-- giong 1.4.0, https://giong.run/docs/errors/#giong-postgres -->
+| [GIONG-E2013](E2013.md) | `TlsConfig` | TLS setting not possible here |</script><script type="text/markdown" id="md-9"><!-- giong 1.4.1, https://giong.run/docs/errors/#giong-postgres -->
 
 ## giong-postgres
 
@@ -236,7 +237,7 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 | [GIONG-E3008](E3008.md) | `PostgresClosed` | PostgreSQL connection closed |
 | [GIONG-E3009](E3009.md) | `PostgresPoolTimeout` | PostgreSQL pool wait timed out |
 | [GIONG-E3010](E3010.md) | `PostgresProtocol` | PostgreSQL protocol error |
-| [GIONG-E3011](E3011.md) | `PostgresStatement` | statement refused before sending |</script><script type="text/markdown" id="md-10"><!-- giong 1.4.0, https://giong.run/docs/errors/#giong-mysql -->
+| [GIONG-E3011](E3011.md) | `PostgresStatement` | statement refused before sending |</script><script type="text/markdown" id="md-10"><!-- giong 1.4.1, https://giong.run/docs/errors/#giong-mysql -->
 
 ## giong-mysql
 
@@ -252,7 +253,7 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 | [GIONG-E3108](E3108.md) | `MysqlClosed` | MySQL connection closed |
 | [GIONG-E3109](E3109.md) | `MysqlPoolTimeout` | MySQL pool wait timed out |
 | [GIONG-E3110](E3110.md) | `MysqlProtocol` | MySQL protocol error |
-| [GIONG-E3111](E3111.md) | `MysqlStatement` | statement refused before sending |</script><script type="text/markdown" id="md-11"><!-- giong 1.4.0, https://giong.run/docs/errors/#giong-redis -->
+| [GIONG-E3111](E3111.md) | `MysqlStatement` | statement refused before sending |</script><script type="text/markdown" id="md-11"><!-- giong 1.4.1, https://giong.run/docs/errors/#giong-redis -->
 
 ## giong-redis
 
@@ -273,7 +274,7 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 | [GIONG-E3602](E3602.md) | `QuicConnect` | cannot set up the QUIC connection |
 | [GIONG-E3603](E3603.md) | `QuicConnectionLost` | the QUIC connection was lost |
 | [GIONG-E3604](E3604.md) | `QuicStreamReset` | the QUIC stream was reset |
-| [GIONG-E3605](E3605.md) | `QuicEarlyDataRejected` | the server refused the 0-RTT data |</script><script type="text/markdown" id="md-12"><!-- giong 1.4.0, https://giong.run/docs/errors/#giong-proto -->
+| [GIONG-E3605](E3605.md) | `QuicEarlyDataRejected` | the server refused the 0-RTT data |</script><script type="text/markdown" id="md-12"><!-- giong 1.4.1, https://giong.run/docs/errors/#giong-proto -->
 
 ## giong-proto
 
@@ -288,7 +289,7 @@ A prototype for giong 1.1, not published yet; its codes are `giong_proto::ErrorK
 | [GIONG-E4005](E4005.md) | `ErrorKind::BadUtf8` | string field is not UTF-8 |
 | [GIONG-E4006](E4006.md) | `ErrorKind::TooDeep` | messages nested too deeply |
 | [GIONG-E4007](E4007.md) | `ErrorKind::BadPacked` | malformed packed field |
-| [GIONG-E4008](E4008.md) | `ErrorKind::TooLarge` | message larger than 2 GiB |</script><script type="text/markdown" id="md-13"><!-- giong 1.4.0, https://giong.run/docs/errors/#giong-grpc -->
+| [GIONG-E4008](E4008.md) | `ErrorKind::TooLarge` | message larger than 2 GiB |</script><script type="text/markdown" id="md-13"><!-- giong 1.4.1, https://giong.run/docs/errors/#giong-grpc -->
 
 ## giong-grpc
 
@@ -307,7 +308,7 @@ New in giong 1.1. A call that fails ends with a gRPC status; the statuses giong-
 | [GIONG-E4109](E4109.md) | `GrpcCancelled` | gRPC call cancelled |
 | [GIONG-E4110](E4110.md) | `GrpcUnimplemented` | gRPC method not found |</script><script type="text/markdown" id="md-page"># Error codes
 
-> giong 1.4.0 · https://giong.run/docs/errors/ · source: https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/README.md
+> giong 1.4.1 · https://giong.run/docs/errors/ · source: https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/README.md
 
 Every error giong raises itself starts with a code and ends with a link to its page here:
 
@@ -338,185 +339,186 @@ when it is no longer raised.
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E0001](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0001.md) | `IoUringUnavailable` | io_uring is not available |
-| [GIONG-E0002](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0002.md) | `KernelTooOld` | the kernel is too old |
-| [GIONG-E0003](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0003.md) | `SignalsTaken` | another runtime handles the signals |
-| [GIONG-E0004](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0004.md) | `InvalidConfig` | invalid runtime setting |
-| [GIONG-E0005](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0005.md) | `Unexpected` | unexpected result from the kernel |
-| [GIONG-E0006](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0006.md) | `MixedReads` | read used after recv |
-| [GIONG-E0007](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0007.md) | `TimedOut` | the time limit passed |
-| [GIONG-E0008](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0008.md) | `NoSuchWorker` | no such worker |
-| [GIONG-E0009](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0009.md) | `BufferRingRefused` | the kernel refused io_uring buffer rings |
-| [GIONG-E0010](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0010.md) | `LockedMemoryLimit` | the locked-memory limit is used up |
-| [GIONG-E0011](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0011.md) | `NotInRuntime` | not inside a giong runtime |
-| [GIONG-E0012](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0012.md) | `RuntimeAlreadyRunning` | a runtime already runs on this thread |
-| [GIONG-E0013](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0013.md) | `WrongWorker` | an operation was polled on another worker |
+| [GIONG-E0001](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0001.md) | `IoUringUnavailable` | io_uring is not available |
+| [GIONG-E0002](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0002.md) | `KernelTooOld` | the kernel is too old |
+| [GIONG-E0003](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0003.md) | `SignalsTaken` | another runtime handles the signals |
+| [GIONG-E0004](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0004.md) | `InvalidConfig` | invalid runtime setting |
+| [GIONG-E0005](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0005.md) | `Unexpected` | unexpected result from the kernel |
+| [GIONG-E0006](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0006.md) | `MixedReads` | read used after recv |
+| [GIONG-E0007](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0007.md) | `TimedOut` | the time limit passed |
+| [GIONG-E0008](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0008.md) | `NoSuchWorker` | no such worker |
+| [GIONG-E0009](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0009.md) | `BufferRingRefused` | the kernel refused io_uring buffer rings |
+| [GIONG-E0010](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0010.md) | `LockedMemoryLimit` | the locked-memory limit is used up |
+| [GIONG-E0011](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0011.md) | `NotInRuntime` | not inside a giong runtime |
+| [GIONG-E0012](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0012.md) | `RuntimeAlreadyRunning` | a runtime already runs on this thread |
+| [GIONG-E0013](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0013.md) | `WrongWorker` | an operation was polled on another worker |
+| [GIONG-E0020](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0020.md) | `ThreadLimit` | a worker thread could not be started |
 
 ## macOS
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E0028](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0028.md) | `NetworkBuffersExhausted` | the system ran out of network buffers |
+| [GIONG-E0028](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0028.md) | `NetworkBuffersExhausted` | the system ran out of network buffers |
 
 ## Network and name resolution
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E0100](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0100.md) | `InvalidAddress` | invalid address |
-| [GIONG-E0101](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0101.md) | `InvalidHostName` | invalid host name |
-| [GIONG-E0102](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0102.md) | `HostNotFound` | host not found |
-| [GIONG-E0103](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0103.md) | `NoAddresses` | no address to use |
-| [GIONG-E0104](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0104.md) | `NoDnsServer` | no DNS server configured |
-| [GIONG-E0105](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0105.md) | `DnsTimeout` | DNS server did not answer |
-| [GIONG-E0106](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0106.md) | `DnsServerFailure` | DNS server failed |
-| [GIONG-E0107](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0107.md) | `DnsBadResponse` | malformed DNS answer |
-| [GIONG-E0108](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0108.md) | `DnsServerUnreachable` | cannot reach the DNS server |
-| [GIONG-E0109](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0109.md) | `EmptyBuffer` | buffer with no room |
-| [GIONG-E0110](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0110.md) | `RecvBufferTooSmall` | receive buffers too small for GRO |
-| [GIONG-E0111](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0111.md) | `RecvAlreadyStarted` | receive option set after recv started |
+| [GIONG-E0100](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0100.md) | `InvalidAddress` | invalid address |
+| [GIONG-E0101](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0101.md) | `InvalidHostName` | invalid host name |
+| [GIONG-E0102](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0102.md) | `HostNotFound` | host not found |
+| [GIONG-E0103](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0103.md) | `NoAddresses` | no address to use |
+| [GIONG-E0104](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0104.md) | `NoDnsServer` | no DNS server configured |
+| [GIONG-E0105](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0105.md) | `DnsTimeout` | DNS server did not answer |
+| [GIONG-E0106](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0106.md) | `DnsServerFailure` | DNS server failed |
+| [GIONG-E0107](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0107.md) | `DnsBadResponse` | malformed DNS answer |
+| [GIONG-E0108](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0108.md) | `DnsServerUnreachable` | cannot reach the DNS server |
+| [GIONG-E0109](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0109.md) | `EmptyBuffer` | buffer with no room |
+| [GIONG-E0110](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0110.md) | `RecvBufferTooSmall` | receive buffers too small for GRO |
+| [GIONG-E0111](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0111.md) | `RecvAlreadyStarted` | receive option set after recv started |
 
 ## Files
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E0200](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0200.md) | `InvalidPath` | invalid path |
-| [GIONG-E0201](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0201.md) | `FileTooShort` | the file ended before the bytes to send |
-| [GIONG-E0202](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0202.md) | `OffsetOutOfRange` | file offset out of range |
-| [GIONG-E0203](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0203.md) | `InvalidOpenOptions` | invalid combination of open options |
+| [GIONG-E0200](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0200.md) | `InvalidPath` | invalid path |
+| [GIONG-E0201](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0201.md) | `FileTooShort` | the file ended before the bytes to send |
+| [GIONG-E0202](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0202.md) | `OffsetOutOfRange` | file offset out of range |
+| [GIONG-E0203](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0203.md) | `InvalidOpenOptions` | invalid combination of open options |
 
 ## giong-http
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E1101](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1101.md) | `HttpClientRequest` | invalid HTTP request |
-| [GIONG-E1102](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1102.md) | `HttpClientConnect` | cannot connect to the HTTP server |
-| [GIONG-E1103](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1103.md) | `HttpClientTimeout` | HTTP request timed out |
-| [GIONG-E1104](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1104.md) | `HttpClientTooLarge` | HTTP response too large |
-| [GIONG-E1105](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1105.md) | `HttpClientRedirect` | redirect not followed |
-| [GIONG-E1106](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1106.md) | `HttpClientClosed` | connection closed before the response |
-| [GIONG-E1107](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1107.md) | `HttpClientProtocol` | malformed HTTP response |
-| [GIONG-E1108](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1108.md) | `HttpClientStatus` | HTTP error status |
-| [GIONG-E1109](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1109.md) | `HttpClientDecode` | cannot decode the response body |
-| [GIONG-E1110](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1110.md) | `HttpClientProxy` | the HTTP proxy refused the request |
-| [GIONG-E1111](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1111.md) | `HttpBodyTooLarge` | request body too large |
-| [GIONG-E1112](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1112.md) | `HttpBodyIncomplete` | request body cut short |
-| [GIONG-E1113](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1113.md) | `HttpBodyMalformed` | malformed request body |
-| [GIONG-E1114](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1114.md) | `HttpBodyNotSent` | response body not sent |
-| [GIONG-E1115](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1115.md) | `Http2Protocol` | HTTP/2 protocol error |
-| [GIONG-E1116](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1116.md) | `Http2TooManyResets` | too many HTTP/2 streams reset |
-| [GIONG-E1117](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1117.md) | `Http2Flood` | too many HTTP/2 control frames |
-| [GIONG-E1118](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1118.md) | `Http2HeadersTooLarge` | HTTP/2 header block too large |
-| [GIONG-E1119](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1119.md) | `HttpInvalidResponse` | invalid HTTP response |
-| [GIONG-E1120](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1120.md) | `HttpServerBusy` | request refused: the server's memory budget for requests is full |
-| [GIONG-E1121](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1121.md) | `HttpServerLowMemory` | connection refused: the server is low on memory |
-| [GIONG-E1122](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1122.md) | `HttpInvalidTrailer` | invalid HTTP trailer field |
+| [GIONG-E1101](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1101.md) | `HttpClientRequest` | invalid HTTP request |
+| [GIONG-E1102](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1102.md) | `HttpClientConnect` | cannot connect to the HTTP server |
+| [GIONG-E1103](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1103.md) | `HttpClientTimeout` | HTTP request timed out |
+| [GIONG-E1104](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1104.md) | `HttpClientTooLarge` | HTTP response too large |
+| [GIONG-E1105](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1105.md) | `HttpClientRedirect` | redirect not followed |
+| [GIONG-E1106](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1106.md) | `HttpClientClosed` | connection closed before the response |
+| [GIONG-E1107](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1107.md) | `HttpClientProtocol` | malformed HTTP response |
+| [GIONG-E1108](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1108.md) | `HttpClientStatus` | HTTP error status |
+| [GIONG-E1109](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1109.md) | `HttpClientDecode` | cannot decode the response body |
+| [GIONG-E1110](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1110.md) | `HttpClientProxy` | the HTTP proxy refused the request |
+| [GIONG-E1111](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1111.md) | `HttpBodyTooLarge` | request body too large |
+| [GIONG-E1112](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1112.md) | `HttpBodyIncomplete` | request body cut short |
+| [GIONG-E1113](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1113.md) | `HttpBodyMalformed` | malformed request body |
+| [GIONG-E1114](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1114.md) | `HttpBodyNotSent` | response body not sent |
+| [GIONG-E1115](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1115.md) | `Http2Protocol` | HTTP/2 protocol error |
+| [GIONG-E1116](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1116.md) | `Http2TooManyResets` | too many HTTP/2 streams reset |
+| [GIONG-E1117](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1117.md) | `Http2Flood` | too many HTTP/2 control frames |
+| [GIONG-E1118](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1118.md) | `Http2HeadersTooLarge` | HTTP/2 header block too large |
+| [GIONG-E1119](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1119.md) | `HttpInvalidResponse` | invalid HTTP response |
+| [GIONG-E1120](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1120.md) | `HttpServerBusy` | request refused: the server's memory budget for requests is full |
+| [GIONG-E1121](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1121.md) | `HttpServerLowMemory` | connection refused: the server is low on memory |
+| [GIONG-E1122](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1122.md) | `HttpInvalidTrailer` | invalid HTTP trailer field |
 
 ## giong-web
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E1201](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1201.md) | `WebInvalidRoute` | invalid route pattern |
-| [GIONG-E1202](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1202.md) | `WebDuplicateRoute` | route added twice |
-| [GIONG-E1203](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1203.md) | `WebNoRoute` | no route for the path |
-| [GIONG-E1204](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1204.md) | `WebMethodNotAllowed` | method not allowed |
-| [GIONG-E1205](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1205.md) | `WebBadParameter` | invalid path or query parameter |
-| [GIONG-E1206](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1206.md) | `WebNoSuchParameter` | the route has no such parameter |
-| [GIONG-E1207](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1207.md) | `WebBadBody` | unreadable request body |
-| [GIONG-E1208](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1208.md) | `WebUnsupportedMediaType` | unsupported Content-Type |
-| [GIONG-E1209](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1209.md) | `WebTimeout` | no response in time |
-| [GIONG-E1210](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1210.md) | `WebInternal` | the handler failed |
-| [GIONG-E1211](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1211.md) | `WebUnavailable` | a service the handler needs is unavailable |
-| [GIONG-E1212](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1212.md) | `WebCorsRejected` | cross-origin request refused |
-| [GIONG-E1213](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1213.md) | `WebConfig` | invalid giong-web setting |
+| [GIONG-E1201](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1201.md) | `WebInvalidRoute` | invalid route pattern |
+| [GIONG-E1202](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1202.md) | `WebDuplicateRoute` | route added twice |
+| [GIONG-E1203](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1203.md) | `WebNoRoute` | no route for the path |
+| [GIONG-E1204](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1204.md) | `WebMethodNotAllowed` | method not allowed |
+| [GIONG-E1205](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1205.md) | `WebBadParameter` | invalid path or query parameter |
+| [GIONG-E1206](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1206.md) | `WebNoSuchParameter` | the route has no such parameter |
+| [GIONG-E1207](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1207.md) | `WebBadBody` | unreadable request body |
+| [GIONG-E1208](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1208.md) | `WebUnsupportedMediaType` | unsupported Content-Type |
+| [GIONG-E1209](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1209.md) | `WebTimeout` | no response in time |
+| [GIONG-E1210](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1210.md) | `WebInternal` | the handler failed |
+| [GIONG-E1211](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1211.md) | `WebUnavailable` | a service the handler needs is unavailable |
+| [GIONG-E1212](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1212.md) | `WebCorsRejected` | cross-origin request refused |
+| [GIONG-E1213](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1213.md) | `WebConfig` | invalid giong-web setting |
 
 ## giong-mcp
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E1301](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1301.md) | `McpNotLocal` | the MCP server listens on this machine only |
-| [GIONG-E1302](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1302.md) | `McpBadAddress` | invalid address for the MCP server |
-| [GIONG-E1303](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1303.md) | `McpBind` | the MCP server cannot listen on its address |
-| [GIONG-E1304](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1304.md) | `McpNoToken` | the MCP server needs a token on TCP |
-| [GIONG-E1305](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1305.md) | `McpBadToken` | invalid token for the MCP server |
+| [GIONG-E1301](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1301.md) | `McpNotLocal` | the MCP server listens on this machine only |
+| [GIONG-E1302](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1302.md) | `McpBadAddress` | invalid address for the MCP server |
+| [GIONG-E1303](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1303.md) | `McpBind` | the MCP server cannot listen on its address |
+| [GIONG-E1304](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1304.md) | `McpNoToken` | the MCP server needs a token on TCP |
+| [GIONG-E1305](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1305.md) | `McpBadToken` | invalid token for the MCP server |
 
 ## giong-compat
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E1401](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1401.md) | `CompatWriteFailed` | an earlier buffered write failed |
-| [GIONG-E1402](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1402.md) | `CompatShutDown` | write after shutdown |
-| [GIONG-E1403](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1403.md) | `CompatConfig` | invalid giong-compat setting |
+| [GIONG-E1401](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1401.md) | `CompatWriteFailed` | an earlier buffered write failed |
+| [GIONG-E1402](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1402.md) | `CompatShutDown` | write after shutdown |
+| [GIONG-E1403](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1403.md) | `CompatConfig` | invalid giong-compat setting |
 
 ## giong-tls
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E2001](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2001.md) | `NoTrustedRoots` | no trusted certificate authorities |
-| [GIONG-E2002](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2002.md) | `BadCertificateData` | unreadable certificate data |
-| [GIONG-E2003](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2003.md) | `InvalidServerName` | invalid TLS server name |
-| [GIONG-E2004](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2004.md) | `TlsCertificate` | certificate rejected |
-| [GIONG-E2005](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2005.md) | `TlsProtocol` | TLS protocol error |
-| [GIONG-E2006](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2006.md) | `TlsHandshakeTimeout` | TLS handshake timed out |
-| [GIONG-E2007](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2007.md) | `TlsHandshakeEof` | connection closed during the TLS handshake |
-| [GIONG-E2008](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2008.md) | `TlsBroken` | TLS stream broken |
-| [GIONG-E2009](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2009.md) | `KtlsUnavailable` | kernel TLS is not available |
-| [GIONG-E2010](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2010.md) | `KtlsSetup` | the kernel refused the TLS keys |
-| [GIONG-E2011](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2011.md) | `KtlsKeyUpdate` | the kernel cannot change TLS keys |
-| [GIONG-E2012](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2012.md) | `TlsKeysExhausted` | TLS keys used up |
-| [GIONG-E2013](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2013.md) | `TlsConfig` | TLS setting not possible here |
+| [GIONG-E2001](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2001.md) | `NoTrustedRoots` | no trusted certificate authorities |
+| [GIONG-E2002](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2002.md) | `BadCertificateData` | unreadable certificate data |
+| [GIONG-E2003](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2003.md) | `InvalidServerName` | invalid TLS server name |
+| [GIONG-E2004](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2004.md) | `TlsCertificate` | certificate rejected |
+| [GIONG-E2005](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2005.md) | `TlsProtocol` | TLS protocol error |
+| [GIONG-E2006](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2006.md) | `TlsHandshakeTimeout` | TLS handshake timed out |
+| [GIONG-E2007](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2007.md) | `TlsHandshakeEof` | connection closed during the TLS handshake |
+| [GIONG-E2008](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2008.md) | `TlsBroken` | TLS stream broken |
+| [GIONG-E2009](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2009.md) | `KtlsUnavailable` | kernel TLS is not available |
+| [GIONG-E2010](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2010.md) | `KtlsSetup` | the kernel refused the TLS keys |
+| [GIONG-E2011](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2011.md) | `KtlsKeyUpdate` | the kernel cannot change TLS keys |
+| [GIONG-E2012](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2012.md) | `TlsKeysExhausted` | TLS keys used up |
+| [GIONG-E2013](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2013.md) | `TlsConfig` | TLS setting not possible here |
 
 ## giong-postgres
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E3001](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3001.md) | `PostgresConfig` | invalid PostgreSQL configuration |
-| [GIONG-E3002](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3002.md) | `PostgresConnect` | cannot connect to PostgreSQL |
-| [GIONG-E3003](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3003.md) | `PostgresAuth` | PostgreSQL authentication failed |
-| [GIONG-E3004](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3004.md) | `PostgresServer` | PostgreSQL server error |
-| [GIONG-E3005](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3005.md) | `PostgresType` | PostgreSQL type mismatch |
-| [GIONG-E3006](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3006.md) | `PostgresRowCount` | wrong number of rows |
-| [GIONG-E3007](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3007.md) | `PostgresTooLarge` | PostgreSQL result too large |
-| [GIONG-E3008](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3008.md) | `PostgresClosed` | PostgreSQL connection closed |
-| [GIONG-E3009](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3009.md) | `PostgresPoolTimeout` | PostgreSQL pool wait timed out |
-| [GIONG-E3010](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3010.md) | `PostgresProtocol` | PostgreSQL protocol error |
-| [GIONG-E3011](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3011.md) | `PostgresStatement` | statement refused before sending |
+| [GIONG-E3001](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3001.md) | `PostgresConfig` | invalid PostgreSQL configuration |
+| [GIONG-E3002](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3002.md) | `PostgresConnect` | cannot connect to PostgreSQL |
+| [GIONG-E3003](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3003.md) | `PostgresAuth` | PostgreSQL authentication failed |
+| [GIONG-E3004](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3004.md) | `PostgresServer` | PostgreSQL server error |
+| [GIONG-E3005](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3005.md) | `PostgresType` | PostgreSQL type mismatch |
+| [GIONG-E3006](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3006.md) | `PostgresRowCount` | wrong number of rows |
+| [GIONG-E3007](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3007.md) | `PostgresTooLarge` | PostgreSQL result too large |
+| [GIONG-E3008](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3008.md) | `PostgresClosed` | PostgreSQL connection closed |
+| [GIONG-E3009](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3009.md) | `PostgresPoolTimeout` | PostgreSQL pool wait timed out |
+| [GIONG-E3010](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3010.md) | `PostgresProtocol` | PostgreSQL protocol error |
+| [GIONG-E3011](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3011.md) | `PostgresStatement` | statement refused before sending |
 
 ## giong-mysql
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E3101](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3101.md) | `MysqlConfig` | invalid MySQL configuration |
-| [GIONG-E3102](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3102.md) | `MysqlConnect` | cannot connect to MySQL |
-| [GIONG-E3103](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3103.md) | `MysqlAuth` | MySQL authentication failed |
-| [GIONG-E3104](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3104.md) | `MysqlServer` | MySQL server error |
-| [GIONG-E3105](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3105.md) | `MysqlType` | MySQL type mismatch |
-| [GIONG-E3106](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3106.md) | `MysqlRowCount` | wrong number of rows |
-| [GIONG-E3107](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3107.md) | `MysqlTooLarge` | MySQL result too large |
-| [GIONG-E3108](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3108.md) | `MysqlClosed` | MySQL connection closed |
-| [GIONG-E3109](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3109.md) | `MysqlPoolTimeout` | MySQL pool wait timed out |
-| [GIONG-E3110](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3110.md) | `MysqlProtocol` | MySQL protocol error |
-| [GIONG-E3111](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3111.md) | `MysqlStatement` | statement refused before sending |
+| [GIONG-E3101](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3101.md) | `MysqlConfig` | invalid MySQL configuration |
+| [GIONG-E3102](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3102.md) | `MysqlConnect` | cannot connect to MySQL |
+| [GIONG-E3103](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3103.md) | `MysqlAuth` | MySQL authentication failed |
+| [GIONG-E3104](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3104.md) | `MysqlServer` | MySQL server error |
+| [GIONG-E3105](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3105.md) | `MysqlType` | MySQL type mismatch |
+| [GIONG-E3106](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3106.md) | `MysqlRowCount` | wrong number of rows |
+| [GIONG-E3107](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3107.md) | `MysqlTooLarge` | MySQL result too large |
+| [GIONG-E3108](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3108.md) | `MysqlClosed` | MySQL connection closed |
+| [GIONG-E3109](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3109.md) | `MysqlPoolTimeout` | MySQL pool wait timed out |
+| [GIONG-E3110](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3110.md) | `MysqlProtocol` | MySQL protocol error |
+| [GIONG-E3111](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3111.md) | `MysqlStatement` | statement refused before sending |
 
 ## giong-redis
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E3201](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3201.md) | `RedisConfig` | invalid Redis configuration |
-| [GIONG-E3202](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3202.md) | `RedisConnect` | cannot connect to Redis |
-| [GIONG-E3203](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3203.md) | `RedisAuth` | Redis authentication failed |
-| [GIONG-E3204](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3204.md) | `RedisServer` | Redis server error |
-| [GIONG-E3205](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3205.md) | `RedisType` | Redis type mismatch |
-| [GIONG-E3206](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3206.md) | `RedisCommand` | command refused before sending |
-| [GIONG-E3207](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3207.md) | `RedisTooLarge` | Redis reply too large |
-| [GIONG-E3208](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3208.md) | `RedisClosed` | Redis connection closed |
-| [GIONG-E3209](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3209.md) | `RedisPoolTimeout` | Redis pool wait timed out |
-| [GIONG-E3210](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3210.md) | `RedisProtocol` | Redis protocol error |
-| [GIONG-E3211](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3211.md) | `RedisTimeout` | Redis reply timed out |
-| [GIONG-E3601](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3601.md) | `QuicConfig` | invalid QUIC configuration |
-| [GIONG-E3602](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3602.md) | `QuicConnect` | cannot set up the QUIC connection |
-| [GIONG-E3603](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3603.md) | `QuicConnectionLost` | the QUIC connection was lost |
-| [GIONG-E3604](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3604.md) | `QuicStreamReset` | the QUIC stream was reset |
-| [GIONG-E3605](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3605.md) | `QuicEarlyDataRejected` | the server refused the 0-RTT data |
+| [GIONG-E3201](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3201.md) | `RedisConfig` | invalid Redis configuration |
+| [GIONG-E3202](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3202.md) | `RedisConnect` | cannot connect to Redis |
+| [GIONG-E3203](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3203.md) | `RedisAuth` | Redis authentication failed |
+| [GIONG-E3204](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3204.md) | `RedisServer` | Redis server error |
+| [GIONG-E3205](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3205.md) | `RedisType` | Redis type mismatch |
+| [GIONG-E3206](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3206.md) | `RedisCommand` | command refused before sending |
+| [GIONG-E3207](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3207.md) | `RedisTooLarge` | Redis reply too large |
+| [GIONG-E3208](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3208.md) | `RedisClosed` | Redis connection closed |
+| [GIONG-E3209](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3209.md) | `RedisPoolTimeout` | Redis pool wait timed out |
+| [GIONG-E3210](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3210.md) | `RedisProtocol` | Redis protocol error |
+| [GIONG-E3211](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3211.md) | `RedisTimeout` | Redis reply timed out |
+| [GIONG-E3601](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3601.md) | `QuicConfig` | invalid QUIC configuration |
+| [GIONG-E3602](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3602.md) | `QuicConnect` | cannot set up the QUIC connection |
+| [GIONG-E3603](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3603.md) | `QuicConnectionLost` | the QUIC connection was lost |
+| [GIONG-E3604](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3604.md) | `QuicStreamReset` | the QUIC stream was reset |
+| [GIONG-E3605](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3605.md) | `QuicEarlyDataRejected` | the server refused the 0-RTT data |
 
 ## giong-proto
 
@@ -524,14 +526,14 @@ A prototype for giong 1.1, not published yet; its codes are `giong_proto::ErrorK
 
 | Code | `ErrorKind::` | Meaning |
 |---|---|---|
-| [GIONG-E4001](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4001.md) | `ErrorKind::Truncated` | the message ends in the middle of a field |
-| [GIONG-E4002](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4002.md) | `ErrorKind::BadVarint` | malformed varint |
-| [GIONG-E4003](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4003.md) | `ErrorKind::BadTag` | invalid field tag |
-| [GIONG-E4004](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4004.md) | `ErrorKind::BadGroup` | unbalanced group |
-| [GIONG-E4005](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4005.md) | `ErrorKind::BadUtf8` | string field is not UTF-8 |
-| [GIONG-E4006](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4006.md) | `ErrorKind::TooDeep` | messages nested too deeply |
-| [GIONG-E4007](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4007.md) | `ErrorKind::BadPacked` | malformed packed field |
-| [GIONG-E4008](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4008.md) | `ErrorKind::TooLarge` | message larger than 2 GiB |
+| [GIONG-E4001](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4001.md) | `ErrorKind::Truncated` | the message ends in the middle of a field |
+| [GIONG-E4002](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4002.md) | `ErrorKind::BadVarint` | malformed varint |
+| [GIONG-E4003](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4003.md) | `ErrorKind::BadTag` | invalid field tag |
+| [GIONG-E4004](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4004.md) | `ErrorKind::BadGroup` | unbalanced group |
+| [GIONG-E4005](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4005.md) | `ErrorKind::BadUtf8` | string field is not UTF-8 |
+| [GIONG-E4006](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4006.md) | `ErrorKind::TooDeep` | messages nested too deeply |
+| [GIONG-E4007](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4007.md) | `ErrorKind::BadPacked` | malformed packed field |
+| [GIONG-E4008](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4008.md) | `ErrorKind::TooLarge` | message larger than 2 GiB |
 
 ## giong-grpc
 
@@ -539,17 +541,17 @@ New in giong 1.1. A call that fails ends with a gRPC status; the statuses giong-
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E4101](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4101.md) | `GrpcInvalidMetadata` | invalid gRPC metadata |
-| [GIONG-E4102](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4102.md) | `GrpcMessageTooLarge` | gRPC message too large |
-| [GIONG-E4103](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4103.md) | `GrpcProtocol` | gRPC protocol error |
-| [GIONG-E4104](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4104.md) | `GrpcEncoding` | unsupported gRPC message encoding |
-| [GIONG-E4105](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4105.md) | `GrpcDecode` | gRPC message is not valid protobuf |
-| [GIONG-E4106](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4106.md) | `GrpcTransport` | gRPC connection failed |
-| [GIONG-E4107](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4107.md) | `GrpcEndpoint` | invalid gRPC endpoint |
-| [GIONG-E4108](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4108.md) | `GrpcDeadline` | gRPC deadline exceeded |
-| [GIONG-E4109](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4109.md) | `GrpcCancelled` | gRPC call cancelled |
-| [GIONG-E4110](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4110.md) | `GrpcUnimplemented` | gRPC method not found |
-</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.4.0, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use Error codes as documented below.
+| [GIONG-E4101](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4101.md) | `GrpcInvalidMetadata` | invalid gRPC metadata |
+| [GIONG-E4102](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4102.md) | `GrpcMessageTooLarge` | gRPC message too large |
+| [GIONG-E4103](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4103.md) | `GrpcProtocol` | gRPC protocol error |
+| [GIONG-E4104](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4104.md) | `GrpcEncoding` | unsupported gRPC message encoding |
+| [GIONG-E4105](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4105.md) | `GrpcDecode` | gRPC message is not valid protobuf |
+| [GIONG-E4106](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4106.md) | `GrpcTransport` | gRPC connection failed |
+| [GIONG-E4107](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4107.md) | `GrpcEndpoint` | invalid gRPC endpoint |
+| [GIONG-E4108](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4108.md) | `GrpcDeadline` | gRPC deadline exceeded |
+| [GIONG-E4109](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4109.md) | `GrpcCancelled` | gRPC call cancelled |
+| [GIONG-E4110](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4110.md) | `GrpcUnimplemented` | gRPC method not found |
+</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.4.1, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use Error codes as documented below.
 
 Rules for giong code:
 - Start the runtime with giong::Builder::new().shutdown_on_signals(true).build()?.run(|_worker| async { .. }); there are no macros. Build listeners, routers, pools and clients inside each worker's future.
@@ -562,11 +564,11 @@ More facts: https://giong.run/llms.txt. Best practices: https://giong.run/docs/b
 
 My task: <describe what to build or fix>
 
-Documentation of Error codes, giong 1.4.0 (https://giong.run/docs/errors.md):
+Documentation of Error codes, giong 1.4.1 (https://giong.run/docs/errors.md):
 
 # Error codes
 
-> giong 1.4.0 · https://giong.run/docs/errors/ · source: https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/README.md
+> giong 1.4.1 · https://giong.run/docs/errors/ · source: https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/README.md
 
 Every error giong raises itself starts with a code and ends with a link to its page here:
 
@@ -597,185 +599,186 @@ when it is no longer raised.
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E0001](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0001.md) | `IoUringUnavailable` | io_uring is not available |
-| [GIONG-E0002](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0002.md) | `KernelTooOld` | the kernel is too old |
-| [GIONG-E0003](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0003.md) | `SignalsTaken` | another runtime handles the signals |
-| [GIONG-E0004](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0004.md) | `InvalidConfig` | invalid runtime setting |
-| [GIONG-E0005](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0005.md) | `Unexpected` | unexpected result from the kernel |
-| [GIONG-E0006](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0006.md) | `MixedReads` | read used after recv |
-| [GIONG-E0007](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0007.md) | `TimedOut` | the time limit passed |
-| [GIONG-E0008](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0008.md) | `NoSuchWorker` | no such worker |
-| [GIONG-E0009](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0009.md) | `BufferRingRefused` | the kernel refused io_uring buffer rings |
-| [GIONG-E0010](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0010.md) | `LockedMemoryLimit` | the locked-memory limit is used up |
-| [GIONG-E0011](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0011.md) | `NotInRuntime` | not inside a giong runtime |
-| [GIONG-E0012](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0012.md) | `RuntimeAlreadyRunning` | a runtime already runs on this thread |
-| [GIONG-E0013](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0013.md) | `WrongWorker` | an operation was polled on another worker |
+| [GIONG-E0001](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0001.md) | `IoUringUnavailable` | io_uring is not available |
+| [GIONG-E0002](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0002.md) | `KernelTooOld` | the kernel is too old |
+| [GIONG-E0003](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0003.md) | `SignalsTaken` | another runtime handles the signals |
+| [GIONG-E0004](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0004.md) | `InvalidConfig` | invalid runtime setting |
+| [GIONG-E0005](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0005.md) | `Unexpected` | unexpected result from the kernel |
+| [GIONG-E0006](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0006.md) | `MixedReads` | read used after recv |
+| [GIONG-E0007](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0007.md) | `TimedOut` | the time limit passed |
+| [GIONG-E0008](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0008.md) | `NoSuchWorker` | no such worker |
+| [GIONG-E0009](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0009.md) | `BufferRingRefused` | the kernel refused io_uring buffer rings |
+| [GIONG-E0010](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0010.md) | `LockedMemoryLimit` | the locked-memory limit is used up |
+| [GIONG-E0011](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0011.md) | `NotInRuntime` | not inside a giong runtime |
+| [GIONG-E0012](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0012.md) | `RuntimeAlreadyRunning` | a runtime already runs on this thread |
+| [GIONG-E0013](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0013.md) | `WrongWorker` | an operation was polled on another worker |
+| [GIONG-E0020](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0020.md) | `ThreadLimit` | a worker thread could not be started |
 
 ## macOS
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E0028](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0028.md) | `NetworkBuffersExhausted` | the system ran out of network buffers |
+| [GIONG-E0028](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0028.md) | `NetworkBuffersExhausted` | the system ran out of network buffers |
 
 ## Network and name resolution
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E0100](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0100.md) | `InvalidAddress` | invalid address |
-| [GIONG-E0101](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0101.md) | `InvalidHostName` | invalid host name |
-| [GIONG-E0102](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0102.md) | `HostNotFound` | host not found |
-| [GIONG-E0103](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0103.md) | `NoAddresses` | no address to use |
-| [GIONG-E0104](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0104.md) | `NoDnsServer` | no DNS server configured |
-| [GIONG-E0105](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0105.md) | `DnsTimeout` | DNS server did not answer |
-| [GIONG-E0106](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0106.md) | `DnsServerFailure` | DNS server failed |
-| [GIONG-E0107](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0107.md) | `DnsBadResponse` | malformed DNS answer |
-| [GIONG-E0108](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0108.md) | `DnsServerUnreachable` | cannot reach the DNS server |
-| [GIONG-E0109](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0109.md) | `EmptyBuffer` | buffer with no room |
-| [GIONG-E0110](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0110.md) | `RecvBufferTooSmall` | receive buffers too small for GRO |
-| [GIONG-E0111](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0111.md) | `RecvAlreadyStarted` | receive option set after recv started |
+| [GIONG-E0100](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0100.md) | `InvalidAddress` | invalid address |
+| [GIONG-E0101](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0101.md) | `InvalidHostName` | invalid host name |
+| [GIONG-E0102](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0102.md) | `HostNotFound` | host not found |
+| [GIONG-E0103](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0103.md) | `NoAddresses` | no address to use |
+| [GIONG-E0104](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0104.md) | `NoDnsServer` | no DNS server configured |
+| [GIONG-E0105](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0105.md) | `DnsTimeout` | DNS server did not answer |
+| [GIONG-E0106](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0106.md) | `DnsServerFailure` | DNS server failed |
+| [GIONG-E0107](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0107.md) | `DnsBadResponse` | malformed DNS answer |
+| [GIONG-E0108](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0108.md) | `DnsServerUnreachable` | cannot reach the DNS server |
+| [GIONG-E0109](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0109.md) | `EmptyBuffer` | buffer with no room |
+| [GIONG-E0110](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0110.md) | `RecvBufferTooSmall` | receive buffers too small for GRO |
+| [GIONG-E0111](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0111.md) | `RecvAlreadyStarted` | receive option set after recv started |
 
 ## Files
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E0200](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0200.md) | `InvalidPath` | invalid path |
-| [GIONG-E0201](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0201.md) | `FileTooShort` | the file ended before the bytes to send |
-| [GIONG-E0202](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0202.md) | `OffsetOutOfRange` | file offset out of range |
-| [GIONG-E0203](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0203.md) | `InvalidOpenOptions` | invalid combination of open options |
+| [GIONG-E0200](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0200.md) | `InvalidPath` | invalid path |
+| [GIONG-E0201](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0201.md) | `FileTooShort` | the file ended before the bytes to send |
+| [GIONG-E0202](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0202.md) | `OffsetOutOfRange` | file offset out of range |
+| [GIONG-E0203](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0203.md) | `InvalidOpenOptions` | invalid combination of open options |
 
 ## giong-http
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E1101](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1101.md) | `HttpClientRequest` | invalid HTTP request |
-| [GIONG-E1102](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1102.md) | `HttpClientConnect` | cannot connect to the HTTP server |
-| [GIONG-E1103](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1103.md) | `HttpClientTimeout` | HTTP request timed out |
-| [GIONG-E1104](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1104.md) | `HttpClientTooLarge` | HTTP response too large |
-| [GIONG-E1105](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1105.md) | `HttpClientRedirect` | redirect not followed |
-| [GIONG-E1106](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1106.md) | `HttpClientClosed` | connection closed before the response |
-| [GIONG-E1107](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1107.md) | `HttpClientProtocol` | malformed HTTP response |
-| [GIONG-E1108](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1108.md) | `HttpClientStatus` | HTTP error status |
-| [GIONG-E1109](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1109.md) | `HttpClientDecode` | cannot decode the response body |
-| [GIONG-E1110](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1110.md) | `HttpClientProxy` | the HTTP proxy refused the request |
-| [GIONG-E1111](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1111.md) | `HttpBodyTooLarge` | request body too large |
-| [GIONG-E1112](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1112.md) | `HttpBodyIncomplete` | request body cut short |
-| [GIONG-E1113](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1113.md) | `HttpBodyMalformed` | malformed request body |
-| [GIONG-E1114](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1114.md) | `HttpBodyNotSent` | response body not sent |
-| [GIONG-E1115](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1115.md) | `Http2Protocol` | HTTP/2 protocol error |
-| [GIONG-E1116](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1116.md) | `Http2TooManyResets` | too many HTTP/2 streams reset |
-| [GIONG-E1117](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1117.md) | `Http2Flood` | too many HTTP/2 control frames |
-| [GIONG-E1118](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1118.md) | `Http2HeadersTooLarge` | HTTP/2 header block too large |
-| [GIONG-E1119](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1119.md) | `HttpInvalidResponse` | invalid HTTP response |
-| [GIONG-E1120](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1120.md) | `HttpServerBusy` | request refused: the server's memory budget for requests is full |
-| [GIONG-E1121](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1121.md) | `HttpServerLowMemory` | connection refused: the server is low on memory |
-| [GIONG-E1122](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1122.md) | `HttpInvalidTrailer` | invalid HTTP trailer field |
+| [GIONG-E1101](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1101.md) | `HttpClientRequest` | invalid HTTP request |
+| [GIONG-E1102](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1102.md) | `HttpClientConnect` | cannot connect to the HTTP server |
+| [GIONG-E1103](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1103.md) | `HttpClientTimeout` | HTTP request timed out |
+| [GIONG-E1104](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1104.md) | `HttpClientTooLarge` | HTTP response too large |
+| [GIONG-E1105](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1105.md) | `HttpClientRedirect` | redirect not followed |
+| [GIONG-E1106](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1106.md) | `HttpClientClosed` | connection closed before the response |
+| [GIONG-E1107](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1107.md) | `HttpClientProtocol` | malformed HTTP response |
+| [GIONG-E1108](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1108.md) | `HttpClientStatus` | HTTP error status |
+| [GIONG-E1109](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1109.md) | `HttpClientDecode` | cannot decode the response body |
+| [GIONG-E1110](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1110.md) | `HttpClientProxy` | the HTTP proxy refused the request |
+| [GIONG-E1111](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1111.md) | `HttpBodyTooLarge` | request body too large |
+| [GIONG-E1112](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1112.md) | `HttpBodyIncomplete` | request body cut short |
+| [GIONG-E1113](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1113.md) | `HttpBodyMalformed` | malformed request body |
+| [GIONG-E1114](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1114.md) | `HttpBodyNotSent` | response body not sent |
+| [GIONG-E1115](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1115.md) | `Http2Protocol` | HTTP/2 protocol error |
+| [GIONG-E1116](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1116.md) | `Http2TooManyResets` | too many HTTP/2 streams reset |
+| [GIONG-E1117](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1117.md) | `Http2Flood` | too many HTTP/2 control frames |
+| [GIONG-E1118](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1118.md) | `Http2HeadersTooLarge` | HTTP/2 header block too large |
+| [GIONG-E1119](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1119.md) | `HttpInvalidResponse` | invalid HTTP response |
+| [GIONG-E1120](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1120.md) | `HttpServerBusy` | request refused: the server's memory budget for requests is full |
+| [GIONG-E1121](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1121.md) | `HttpServerLowMemory` | connection refused: the server is low on memory |
+| [GIONG-E1122](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1122.md) | `HttpInvalidTrailer` | invalid HTTP trailer field |
 
 ## giong-web
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E1201](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1201.md) | `WebInvalidRoute` | invalid route pattern |
-| [GIONG-E1202](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1202.md) | `WebDuplicateRoute` | route added twice |
-| [GIONG-E1203](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1203.md) | `WebNoRoute` | no route for the path |
-| [GIONG-E1204](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1204.md) | `WebMethodNotAllowed` | method not allowed |
-| [GIONG-E1205](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1205.md) | `WebBadParameter` | invalid path or query parameter |
-| [GIONG-E1206](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1206.md) | `WebNoSuchParameter` | the route has no such parameter |
-| [GIONG-E1207](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1207.md) | `WebBadBody` | unreadable request body |
-| [GIONG-E1208](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1208.md) | `WebUnsupportedMediaType` | unsupported Content-Type |
-| [GIONG-E1209](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1209.md) | `WebTimeout` | no response in time |
-| [GIONG-E1210](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1210.md) | `WebInternal` | the handler failed |
-| [GIONG-E1211](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1211.md) | `WebUnavailable` | a service the handler needs is unavailable |
-| [GIONG-E1212](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1212.md) | `WebCorsRejected` | cross-origin request refused |
-| [GIONG-E1213](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1213.md) | `WebConfig` | invalid giong-web setting |
+| [GIONG-E1201](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1201.md) | `WebInvalidRoute` | invalid route pattern |
+| [GIONG-E1202](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1202.md) | `WebDuplicateRoute` | route added twice |
+| [GIONG-E1203](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1203.md) | `WebNoRoute` | no route for the path |
+| [GIONG-E1204](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1204.md) | `WebMethodNotAllowed` | method not allowed |
+| [GIONG-E1205](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1205.md) | `WebBadParameter` | invalid path or query parameter |
+| [GIONG-E1206](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1206.md) | `WebNoSuchParameter` | the route has no such parameter |
+| [GIONG-E1207](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1207.md) | `WebBadBody` | unreadable request body |
+| [GIONG-E1208](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1208.md) | `WebUnsupportedMediaType` | unsupported Content-Type |
+| [GIONG-E1209](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1209.md) | `WebTimeout` | no response in time |
+| [GIONG-E1210](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1210.md) | `WebInternal` | the handler failed |
+| [GIONG-E1211](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1211.md) | `WebUnavailable` | a service the handler needs is unavailable |
+| [GIONG-E1212](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1212.md) | `WebCorsRejected` | cross-origin request refused |
+| [GIONG-E1213](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1213.md) | `WebConfig` | invalid giong-web setting |
 
 ## giong-mcp
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E1301](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1301.md) | `McpNotLocal` | the MCP server listens on this machine only |
-| [GIONG-E1302](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1302.md) | `McpBadAddress` | invalid address for the MCP server |
-| [GIONG-E1303](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1303.md) | `McpBind` | the MCP server cannot listen on its address |
-| [GIONG-E1304](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1304.md) | `McpNoToken` | the MCP server needs a token on TCP |
-| [GIONG-E1305](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1305.md) | `McpBadToken` | invalid token for the MCP server |
+| [GIONG-E1301](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1301.md) | `McpNotLocal` | the MCP server listens on this machine only |
+| [GIONG-E1302](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1302.md) | `McpBadAddress` | invalid address for the MCP server |
+| [GIONG-E1303](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1303.md) | `McpBind` | the MCP server cannot listen on its address |
+| [GIONG-E1304](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1304.md) | `McpNoToken` | the MCP server needs a token on TCP |
+| [GIONG-E1305](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1305.md) | `McpBadToken` | invalid token for the MCP server |
 
 ## giong-compat
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E1401](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1401.md) | `CompatWriteFailed` | an earlier buffered write failed |
-| [GIONG-E1402](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1402.md) | `CompatShutDown` | write after shutdown |
-| [GIONG-E1403](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1403.md) | `CompatConfig` | invalid giong-compat setting |
+| [GIONG-E1401](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1401.md) | `CompatWriteFailed` | an earlier buffered write failed |
+| [GIONG-E1402](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1402.md) | `CompatShutDown` | write after shutdown |
+| [GIONG-E1403](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1403.md) | `CompatConfig` | invalid giong-compat setting |
 
 ## giong-tls
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E2001](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2001.md) | `NoTrustedRoots` | no trusted certificate authorities |
-| [GIONG-E2002](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2002.md) | `BadCertificateData` | unreadable certificate data |
-| [GIONG-E2003](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2003.md) | `InvalidServerName` | invalid TLS server name |
-| [GIONG-E2004](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2004.md) | `TlsCertificate` | certificate rejected |
-| [GIONG-E2005](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2005.md) | `TlsProtocol` | TLS protocol error |
-| [GIONG-E2006](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2006.md) | `TlsHandshakeTimeout` | TLS handshake timed out |
-| [GIONG-E2007](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2007.md) | `TlsHandshakeEof` | connection closed during the TLS handshake |
-| [GIONG-E2008](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2008.md) | `TlsBroken` | TLS stream broken |
-| [GIONG-E2009](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2009.md) | `KtlsUnavailable` | kernel TLS is not available |
-| [GIONG-E2010](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2010.md) | `KtlsSetup` | the kernel refused the TLS keys |
-| [GIONG-E2011](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2011.md) | `KtlsKeyUpdate` | the kernel cannot change TLS keys |
-| [GIONG-E2012](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2012.md) | `TlsKeysExhausted` | TLS keys used up |
-| [GIONG-E2013](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E2013.md) | `TlsConfig` | TLS setting not possible here |
+| [GIONG-E2001](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2001.md) | `NoTrustedRoots` | no trusted certificate authorities |
+| [GIONG-E2002](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2002.md) | `BadCertificateData` | unreadable certificate data |
+| [GIONG-E2003](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2003.md) | `InvalidServerName` | invalid TLS server name |
+| [GIONG-E2004](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2004.md) | `TlsCertificate` | certificate rejected |
+| [GIONG-E2005](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2005.md) | `TlsProtocol` | TLS protocol error |
+| [GIONG-E2006](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2006.md) | `TlsHandshakeTimeout` | TLS handshake timed out |
+| [GIONG-E2007](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2007.md) | `TlsHandshakeEof` | connection closed during the TLS handshake |
+| [GIONG-E2008](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2008.md) | `TlsBroken` | TLS stream broken |
+| [GIONG-E2009](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2009.md) | `KtlsUnavailable` | kernel TLS is not available |
+| [GIONG-E2010](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2010.md) | `KtlsSetup` | the kernel refused the TLS keys |
+| [GIONG-E2011](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2011.md) | `KtlsKeyUpdate` | the kernel cannot change TLS keys |
+| [GIONG-E2012](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2012.md) | `TlsKeysExhausted` | TLS keys used up |
+| [GIONG-E2013](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E2013.md) | `TlsConfig` | TLS setting not possible here |
 
 ## giong-postgres
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E3001](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3001.md) | `PostgresConfig` | invalid PostgreSQL configuration |
-| [GIONG-E3002](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3002.md) | `PostgresConnect` | cannot connect to PostgreSQL |
-| [GIONG-E3003](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3003.md) | `PostgresAuth` | PostgreSQL authentication failed |
-| [GIONG-E3004](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3004.md) | `PostgresServer` | PostgreSQL server error |
-| [GIONG-E3005](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3005.md) | `PostgresType` | PostgreSQL type mismatch |
-| [GIONG-E3006](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3006.md) | `PostgresRowCount` | wrong number of rows |
-| [GIONG-E3007](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3007.md) | `PostgresTooLarge` | PostgreSQL result too large |
-| [GIONG-E3008](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3008.md) | `PostgresClosed` | PostgreSQL connection closed |
-| [GIONG-E3009](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3009.md) | `PostgresPoolTimeout` | PostgreSQL pool wait timed out |
-| [GIONG-E3010](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3010.md) | `PostgresProtocol` | PostgreSQL protocol error |
-| [GIONG-E3011](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3011.md) | `PostgresStatement` | statement refused before sending |
+| [GIONG-E3001](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3001.md) | `PostgresConfig` | invalid PostgreSQL configuration |
+| [GIONG-E3002](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3002.md) | `PostgresConnect` | cannot connect to PostgreSQL |
+| [GIONG-E3003](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3003.md) | `PostgresAuth` | PostgreSQL authentication failed |
+| [GIONG-E3004](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3004.md) | `PostgresServer` | PostgreSQL server error |
+| [GIONG-E3005](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3005.md) | `PostgresType` | PostgreSQL type mismatch |
+| [GIONG-E3006](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3006.md) | `PostgresRowCount` | wrong number of rows |
+| [GIONG-E3007](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3007.md) | `PostgresTooLarge` | PostgreSQL result too large |
+| [GIONG-E3008](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3008.md) | `PostgresClosed` | PostgreSQL connection closed |
+| [GIONG-E3009](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3009.md) | `PostgresPoolTimeout` | PostgreSQL pool wait timed out |
+| [GIONG-E3010](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3010.md) | `PostgresProtocol` | PostgreSQL protocol error |
+| [GIONG-E3011](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3011.md) | `PostgresStatement` | statement refused before sending |
 
 ## giong-mysql
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E3101](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3101.md) | `MysqlConfig` | invalid MySQL configuration |
-| [GIONG-E3102](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3102.md) | `MysqlConnect` | cannot connect to MySQL |
-| [GIONG-E3103](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3103.md) | `MysqlAuth` | MySQL authentication failed |
-| [GIONG-E3104](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3104.md) | `MysqlServer` | MySQL server error |
-| [GIONG-E3105](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3105.md) | `MysqlType` | MySQL type mismatch |
-| [GIONG-E3106](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3106.md) | `MysqlRowCount` | wrong number of rows |
-| [GIONG-E3107](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3107.md) | `MysqlTooLarge` | MySQL result too large |
-| [GIONG-E3108](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3108.md) | `MysqlClosed` | MySQL connection closed |
-| [GIONG-E3109](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3109.md) | `MysqlPoolTimeout` | MySQL pool wait timed out |
-| [GIONG-E3110](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3110.md) | `MysqlProtocol` | MySQL protocol error |
-| [GIONG-E3111](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3111.md) | `MysqlStatement` | statement refused before sending |
+| [GIONG-E3101](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3101.md) | `MysqlConfig` | invalid MySQL configuration |
+| [GIONG-E3102](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3102.md) | `MysqlConnect` | cannot connect to MySQL |
+| [GIONG-E3103](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3103.md) | `MysqlAuth` | MySQL authentication failed |
+| [GIONG-E3104](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3104.md) | `MysqlServer` | MySQL server error |
+| [GIONG-E3105](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3105.md) | `MysqlType` | MySQL type mismatch |
+| [GIONG-E3106](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3106.md) | `MysqlRowCount` | wrong number of rows |
+| [GIONG-E3107](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3107.md) | `MysqlTooLarge` | MySQL result too large |
+| [GIONG-E3108](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3108.md) | `MysqlClosed` | MySQL connection closed |
+| [GIONG-E3109](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3109.md) | `MysqlPoolTimeout` | MySQL pool wait timed out |
+| [GIONG-E3110](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3110.md) | `MysqlProtocol` | MySQL protocol error |
+| [GIONG-E3111](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3111.md) | `MysqlStatement` | statement refused before sending |
 
 ## giong-redis
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E3201](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3201.md) | `RedisConfig` | invalid Redis configuration |
-| [GIONG-E3202](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3202.md) | `RedisConnect` | cannot connect to Redis |
-| [GIONG-E3203](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3203.md) | `RedisAuth` | Redis authentication failed |
-| [GIONG-E3204](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3204.md) | `RedisServer` | Redis server error |
-| [GIONG-E3205](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3205.md) | `RedisType` | Redis type mismatch |
-| [GIONG-E3206](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3206.md) | `RedisCommand` | command refused before sending |
-| [GIONG-E3207](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3207.md) | `RedisTooLarge` | Redis reply too large |
-| [GIONG-E3208](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3208.md) | `RedisClosed` | Redis connection closed |
-| [GIONG-E3209](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3209.md) | `RedisPoolTimeout` | Redis pool wait timed out |
-| [GIONG-E3210](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3210.md) | `RedisProtocol` | Redis protocol error |
-| [GIONG-E3211](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3211.md) | `RedisTimeout` | Redis reply timed out |
-| [GIONG-E3601](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3601.md) | `QuicConfig` | invalid QUIC configuration |
-| [GIONG-E3602](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3602.md) | `QuicConnect` | cannot set up the QUIC connection |
-| [GIONG-E3603](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3603.md) | `QuicConnectionLost` | the QUIC connection was lost |
-| [GIONG-E3604](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3604.md) | `QuicStreamReset` | the QUIC stream was reset |
-| [GIONG-E3605](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E3605.md) | `QuicEarlyDataRejected` | the server refused the 0-RTT data |
+| [GIONG-E3201](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3201.md) | `RedisConfig` | invalid Redis configuration |
+| [GIONG-E3202](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3202.md) | `RedisConnect` | cannot connect to Redis |
+| [GIONG-E3203](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3203.md) | `RedisAuth` | Redis authentication failed |
+| [GIONG-E3204](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3204.md) | `RedisServer` | Redis server error |
+| [GIONG-E3205](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3205.md) | `RedisType` | Redis type mismatch |
+| [GIONG-E3206](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3206.md) | `RedisCommand` | command refused before sending |
+| [GIONG-E3207](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3207.md) | `RedisTooLarge` | Redis reply too large |
+| [GIONG-E3208](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3208.md) | `RedisClosed` | Redis connection closed |
+| [GIONG-E3209](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3209.md) | `RedisPoolTimeout` | Redis pool wait timed out |
+| [GIONG-E3210](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3210.md) | `RedisProtocol` | Redis protocol error |
+| [GIONG-E3211](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3211.md) | `RedisTimeout` | Redis reply timed out |
+| [GIONG-E3601](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3601.md) | `QuicConfig` | invalid QUIC configuration |
+| [GIONG-E3602](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3602.md) | `QuicConnect` | cannot set up the QUIC connection |
+| [GIONG-E3603](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3603.md) | `QuicConnectionLost` | the QUIC connection was lost |
+| [GIONG-E3604](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3604.md) | `QuicStreamReset` | the QUIC stream was reset |
+| [GIONG-E3605](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3605.md) | `QuicEarlyDataRejected` | the server refused the 0-RTT data |
 
 ## giong-proto
 
@@ -783,14 +786,14 @@ A prototype for giong 1.1, not published yet; its codes are `giong_proto::ErrorK
 
 | Code | `ErrorKind::` | Meaning |
 |---|---|---|
-| [GIONG-E4001](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4001.md) | `ErrorKind::Truncated` | the message ends in the middle of a field |
-| [GIONG-E4002](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4002.md) | `ErrorKind::BadVarint` | malformed varint |
-| [GIONG-E4003](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4003.md) | `ErrorKind::BadTag` | invalid field tag |
-| [GIONG-E4004](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4004.md) | `ErrorKind::BadGroup` | unbalanced group |
-| [GIONG-E4005](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4005.md) | `ErrorKind::BadUtf8` | string field is not UTF-8 |
-| [GIONG-E4006](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4006.md) | `ErrorKind::TooDeep` | messages nested too deeply |
-| [GIONG-E4007](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4007.md) | `ErrorKind::BadPacked` | malformed packed field |
-| [GIONG-E4008](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4008.md) | `ErrorKind::TooLarge` | message larger than 2 GiB |
+| [GIONG-E4001](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4001.md) | `ErrorKind::Truncated` | the message ends in the middle of a field |
+| [GIONG-E4002](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4002.md) | `ErrorKind::BadVarint` | malformed varint |
+| [GIONG-E4003](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4003.md) | `ErrorKind::BadTag` | invalid field tag |
+| [GIONG-E4004](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4004.md) | `ErrorKind::BadGroup` | unbalanced group |
+| [GIONG-E4005](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4005.md) | `ErrorKind::BadUtf8` | string field is not UTF-8 |
+| [GIONG-E4006](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4006.md) | `ErrorKind::TooDeep` | messages nested too deeply |
+| [GIONG-E4007](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4007.md) | `ErrorKind::BadPacked` | malformed packed field |
+| [GIONG-E4008](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4008.md) | `ErrorKind::TooLarge` | message larger than 2 GiB |
 
 ## giong-grpc
 
@@ -798,16 +801,16 @@ New in giong 1.1. A call that fails ends with a gRPC status; the statuses giong-
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E4101](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4101.md) | `GrpcInvalidMetadata` | invalid gRPC metadata |
-| [GIONG-E4102](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4102.md) | `GrpcMessageTooLarge` | gRPC message too large |
-| [GIONG-E4103](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4103.md) | `GrpcProtocol` | gRPC protocol error |
-| [GIONG-E4104](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4104.md) | `GrpcEncoding` | unsupported gRPC message encoding |
-| [GIONG-E4105](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4105.md) | `GrpcDecode` | gRPC message is not valid protobuf |
-| [GIONG-E4106](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4106.md) | `GrpcTransport` | gRPC connection failed |
-| [GIONG-E4107](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4107.md) | `GrpcEndpoint` | invalid gRPC endpoint |
-| [GIONG-E4108](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4108.md) | `GrpcDeadline` | gRPC deadline exceeded |
-| [GIONG-E4109](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4109.md) | `GrpcCancelled` | gRPC call cancelled |
-| [GIONG-E4110](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E4110.md) | `GrpcUnimplemented` | gRPC method not found |
+| [GIONG-E4101](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4101.md) | `GrpcInvalidMetadata` | invalid gRPC metadata |
+| [GIONG-E4102](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4102.md) | `GrpcMessageTooLarge` | gRPC message too large |
+| [GIONG-E4103](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4103.md) | `GrpcProtocol` | gRPC protocol error |
+| [GIONG-E4104](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4104.md) | `GrpcEncoding` | unsupported gRPC message encoding |
+| [GIONG-E4105](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4105.md) | `GrpcDecode` | gRPC message is not valid protobuf |
+| [GIONG-E4106](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4106.md) | `GrpcTransport` | gRPC connection failed |
+| [GIONG-E4107](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4107.md) | `GrpcEndpoint` | invalid gRPC endpoint |
+| [GIONG-E4108](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4108.md) | `GrpcDeadline` | gRPC deadline exceeded |
+| [GIONG-E4109](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4109.md) | `GrpcCancelled` | gRPC call cancelled |
+| [GIONG-E4110](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E4110.md) | `GrpcUnimplemented` | gRPC method not found |
 </script>
   </article>
   <nav class="toc doc-toc" aria-label="On this page"><p>On this page</p><div class="toc-links"><a href="#the-runtime">The runtime</a><a href="#macos">macOS</a><a href="#network-and-name-resolution">Network and name resolution</a><a href="#files">Files</a><a href="#giong-http">giong-http</a><a href="#giong-web">giong-web</a><a href="#giong-mcp">giong-mcp</a><a href="#giong-compat">giong-compat</a><a href="#giong-tls">giong-tls</a><a href="#giong-postgres">giong-postgres</a><a href="#giong-mysql">giong-mysql</a><a href="#giong-redis">giong-redis</a><a href="#giong-proto">giong-proto</a><a href="#giong-grpc">giong-grpc</a></div></nav>
@@ -829,7 +832,7 @@ New in giong 1.1. A call that fails ends with a gRPC status; the statuses giong-
         <h2>Learn</h2>
         <a href="/docs/">Get started</a>
         <a href="/docs/#examples">Examples</a>
-        <a href="https://docs.rs/giong/1.4.0/giong/">API reference</a>
+        <a href="https://docs.rs/giong/1.4.1/giong/">API reference</a>
         <a href="/docs/#errors">Error codes</a>
         <a href="/docs/best-practices/">Best practices</a><a href="/docs/agent-skill/">Agent skill</a>
         <a href="/llms.txt">llms.txt</a>

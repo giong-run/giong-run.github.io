@@ -38,7 +38,7 @@
     <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="28" height="28"></picture><span>giong</span></a>
     <nav class="nav" aria-label="Site"><a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a><a href="/docs/agent-skill/">Agent skill</a></nav>
     <div class="hdr-side">
-      <a class="ver" href="/releases/#v1-4-0" title="Release notes for v1.4.0">v1.4.0</a>
+      <a class="ver" href="/releases/#v1-4-1" title="Release notes for v1.4.1">v1.4.1</a>
       <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="giong on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
       <a class="icon-btn hide-sm" href="https://x.com/giongrun" aria-label="giong on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
       <button class="icon-btn theme" type="button" aria-label="Switch between light and dark" hidden>
@@ -59,8 +59,8 @@
   <article class="doc-page prose">
     <header class="doc-head"><p class="eyebrow">Protocols</p><h1>giong-proto</h1><p class="lede">Protocol Buffers decoded as views over the receive buffer. Strings, bytes, repeated fields and maps borrow from the input; encoding writes message structs whose fields borrow too.</p>
       <div class="doc-bar"><details class="ver-menu"><summary title="Documentation version">giong 1.4</summary><nav class="ver-list" aria-label="Documentation versions"><a href="/docs/giong-proto/" aria-current=true><b>1.4</b><span>newest</span></a><a href="/docs/1.3/giong-proto/"><b>1.3</b></a><a href="/docs/1.2/giong-proto/"><b>1.2</b></a><a href="/docs/1.1/giong-proto/"><b>1.1</b></a><a href="/docs/1.0/"><b>1.0</b></a></nav></details><div class="doc-actions"><button class="act" type="button" data-md="md-page" data-done="copied" title="Copy this page as Markdown, for a coding agent"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy for agent</span></button><button class="act" type="button" data-md="md-prompt" data-done="copied" title="Copy a ready prompt with the rules and this page"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9Z"/><path d="M18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8Z"/></svg><span>Copy prompt</span></button><a class="act" href="/docs/giong-proto.md" title="This page as plain Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><span>.md</span></a></div></div><div class="doc-meta"><div class="cmd"><code id="add-giong-proto">cargo add giong-proto</code><button class="copy" type="button" data-copy="add-giong-proto" data-done="copied">copy</button></div><p class="crate-links"><a href="https://docs.rs/giong-proto">docs.rs</a> · <a href="https://crates.io/crates/giong-proto">crates.io</a> · <a href="https://github.com/giong-run/Giong/tree/main/giong-proto">source</a></p></div></header>
-    <div class="md-intro"><p>Protocol Buffers for <a href="https://github.com/giong-run/Giong">giong</a>: messages decoded as <strong>views over the receive buffer</strong>. Strings, bytes, repeated fields and maps borrow from the input, so decoding copies nothing and makes no heap allocation; encoding writes message structs whose fields borrow too. Code is generated from <code>.proto</code> files by <a href="https://github.com/giong-run/Giong/blob/v1.4.0/giong-grpc-build">giong-grpc-build</a>, which parses them in Rust: no <code>protoc</code> to install.</p>
-<blockquote><p><strong>New in giong 1.1.</strong> It is the message layer of <a href="https://github.com/giong-run/Giong/blob/v1.4.0/giong-grpc">giong-grpc</a>, gRPC on giong's HTTP/2.</p></blockquote></div><section class="md-sec"><button class="sec-copy" type="button" data-md="md-0" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="use">Use</h2>
+    <div class="md-intro"><p>Protocol Buffers for <a href="https://github.com/giong-run/Giong">giong</a>: messages decoded as <strong>views over the receive buffer</strong>. Strings, bytes, repeated fields and maps borrow from the input, so decoding copies nothing and makes no heap allocation; encoding writes message structs whose fields borrow too. Code is generated from <code>.proto</code> files by <a href="https://github.com/giong-run/Giong/blob/v1.4.1/giong-grpc-build">giong-grpc-build</a>, which parses them in Rust: no <code>protoc</code> to install.</p>
+<blockquote><p><strong>New in giong 1.1.</strong> It is the message layer of <a href="https://github.com/giong-run/Giong/blob/v1.4.1/giong-grpc">giong-grpc</a>, gRPC on giong's HTTP/2.</p></blockquote></div><section class="md-sec"><button class="sec-copy" type="button" data-md="md-0" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="use">Use</h2>
 <p><code>build.rs</code>:</p>
 <pre class="code"><code class="lang-rust"><span class="k">fn</span> main() {
     giong_grpc_build::compile(&amp;[<span class="s">"proto/shop.proto"</span>], &amp;[<span class="s">"proto"</span>]).unwrap();
@@ -85,21 +85,21 @@ assert_eq!(order.customer(), <span class="s">"Nguyễn Văn A"</span>);
 <span class="k">for</span> item <span class="k">in</span> order.items() {
     println!(<span class="s">"{} x{}"</span>, item.sku(), item.quantity());
 }</code></pre>
-<p><a href="https://github.com/giong-run/Giong/blob/v1.4.0/examples/proto-hello"><code>examples/proto-hello</code></a> is a complete program with enums, oneofs, maps, <code>optional</code> fields and a service (<code>cargo run -p proto-hello</code>).</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-1" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="what-is-generated">What is generated</h2>
+<p><a href="https://github.com/giong-run/Giong/blob/v1.4.1/examples/proto-hello"><code>examples/proto-hello</code></a> is a complete program with enums, oneofs, maps, <code>optional</code> fields and a service (<code>cargo run -p proto-hello</code>).</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-1" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="what-is-generated">What is generated</h2>
 <p>For each message <code>M</code> in package <code>a.b</code> (module <code>a::b</code>):</p>
 <div class="table-scroll"><table><thead><tr><th>Item</th><th>What it is</th></tr></thead><tbody><tr><td><code>MView&lt;'a&gt;</code></td><td>the decoded message. <code>MView::decode(&amp;buf)</code> checks everything protobuf requires, then accessors return <code>&amp;'a str</code>, <code>&amp;'a [u8]</code>, numbers, <code>Enum&lt;E&gt;</code>, nested views, and <code>&amp;Repeated</code> / <code>&amp;Map</code> for repeated fields and maps, read lazily from the buffer. Singular fields with presence (proto2, proto3 <code>optional</code>) have <code>has_x()</code>; absent fields return their default (proto2 <code>[default = ...]</code> included).</td></tr><tr><td><code>M&lt;'a&gt;</code></td><td>the message to build and encode: plain public fields (<code>&amp;'a str</code>, <code>&amp;'a [T]</code>, <code>Option&lt;&amp;'a Sub&gt;</code>, <code>&amp;'a [(K, V)]</code> for maps). Implements <code>Encode</code>.</td></tr><tr><td><code>m::OneofView&lt;'a&gt;</code>, <code>m::Oneof&lt;'a&gt;</code></td><td>an enum per oneof, for each side. Nested messages and enums are in the module <code>m</code>.</td></tr><tr><td><code>E</code></td><td>a Rust enum per protobuf enum; fields hold <code>Enum&lt;E&gt;</code>, which keeps numbers the enum does not define (<code>.known()</code>, <code>.raw()</code>).</td></tr><tr><td><code>service::METHOD</code></td><td>for each service, a module with the <code>:path</code> and kind (unary, client, server or bidi streaming) of every method, for giong-grpc.</td></tr></tbody></table></div>
 <p>A view's <code>Encode</code> writes <strong>the bytes it was decoded from</strong>, unchanged (a view cannot be modified, so they are its encoding): forwarding a received message is one copy. <code>encode_canonical</code> writes it field by field instead, in Google's order.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-2" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="errors">Errors</h2>
-<p>Decoding and encoding errors carry codes <code>GIONG-E4001</code> to <code>GIONG-E4008</code> (<a href="https://github.com/giong-run/Giong/blob/v1.4.0/giong-proto/src/error.rs"><code>ErrorKind</code></a>), each with a page in <a href="/docs/errors/"><code>docs/errors/</code></a>: truncated input, malformed varints, invalid tags, unbalanced groups, non-UTF-8 strings, nesting deeper than 100, malformed packed fields, messages over 2 GiB.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-3" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="how-it-is-checked">How it is checked</h2>
+<p>Decoding and encoding errors carry codes <code>GIONG-E4001</code> to <code>GIONG-E4008</code> (<a href="https://github.com/giong-run/Giong/blob/v1.4.1/giong-proto/src/error.rs"><code>ErrorKind</code></a>), each with a page in <a href="/docs/errors/"><code>docs/errors/</code></a>: truncated input, malformed varints, invalid tags, unbalanced groups, non-UTF-8 strings, nesting deeper than 100, malformed packed fields, messages over 2 GiB.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-3" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="how-it-is-checked">How it is checked</h2>
 <ul><li><strong>Google's protobuf conformance suite</strong> (<code>conformance_test_runner</code> from protobuf v36.2): every binary-format test passes, required and recommended, 1414 of 1414, for proto2 and proto3. JSON and text-format tests are skipped: giong-proto reads and writes the binary format only. Run it with <code>giong-proto/conformance/run.sh</code>.</li><li><strong>Differential tests against prost</strong> (<code>giong-proto/conformance</code>): the same bytes into both; when both accept, prost must read giong-proto's canonical re-encoding as the same message; when only one accepts, the difference must be one of two documented ones (below). A seeded generator runs in the test suite, and the <code>differential</code> target in <code>fuzz/</code> runs the same check under libFuzzer.</li><li>Unit tests for the wire format, a test of the message structs against prost for every kind of field, and the example's tests.</li></ul>
 <p>Where giong-proto follows Google's libraries and prost does not (the differential test allows exactly these):</p>
 <ol><li>A known field arriving with the wrong wire type is kept as an unknown field; prost rejects the message (and for map fields skips the check and misreads what follows).</li><li>A proto2 (closed) enum field holding a number the enum does not define keeps that number as an unknown field; prost stores it as the field's value.</li></ol>
 <p>Known gaps against Google's libraries: proto2 <code>string</code> fields are checked for UTF-8 (Google accepts invalid UTF-8 there unchecked; prost rejects it, as giong-proto does); editions (<code>edition = "2023"</code>) and extensions are not supported; no JSON or text format.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-4" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="speed">Speed</h2>
-<p><code>bench/proto.sh</code> against prost 0.13 with its defaults (as tonic uses it), one core of the cloud VM, median of 10 rounds; raw data in <a href="https://github.com/giong-run/Giong/blob/v1.4.0/bench/results/proto"><code>bench/results/proto/</code></a>. "decode+read" decodes and reads every field, the fair comparison since views read repeated fields lazily:</p>
+<p><code>bench/proto.sh</code> against prost 0.13 with its defaults (as tonic uses it), one core of the cloud VM, median of 10 rounds; raw data in <a href="https://github.com/giong-run/Giong/blob/v1.4.1/bench/results/proto"><code>bench/results/proto/</code></a>. "decode+read" decodes and reads every field, the fair comparison since views read repeated fields lazily:</p>
 <div class="table-scroll"><table><thead><tr><th>Message</th><th>Bytes</th><th>decode+read prost → giong-proto</th><th>ratio</th><th>encode prost → giong-proto</th><th>ratio</th><th>heap allocations per decode, prost / giong-proto</th></tr></thead><tbody><tr><td>6 scalars</td><td>34</td><td>26 ns → 27 ns</td><td>0.97x</td><td>14 ns → 13 ns</td><td>1.08x</td><td>0 / 0</td></tr><tr><td>user record (strings, map)</td><td>187</td><td>462 ns → 186 ns</td><td>2.49x</td><td>72 ns → 51 ns</td><td>1.42x</td><td>17 / 0</td></tr><tr><td>list of 100 items</td><td>9211</td><td>17.3 µs → 11.9 µs</td><td>1.45x</td><td>5.6 µs → 2.9 µs</td><td>1.97x</td><td>607 / 0</td></tr><tr><td>64 KiB bytes field</td><td>65552</td><td>3.0 µs → 16 ns</td><td>192.26x</td><td>1.5 µs → 1.5 µs</td><td>1.00x</td><td>3 / 0</td></tr><tr><td>descriptor.proto set (upb's benchmark input)</td><td>53773</td><td>198.6 µs → 100.9 µs</td><td>1.97x</td><td>not measured (no hand-built message)</td><td>–</td><td>3688 / 0</td></tr></tbody></table></div>
 <p>What a view costs instead of allocations: nested messages inside repeated fields are parsed once at decode (to check them) and again when the iterator reaches them, so messages made mostly of small repeated sub-messages gain less than the others.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-5" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="for-agents">For agents</h2>
 <ul><li>One way to read (<code>XView::decode</code>, then accessors) and one way to write (the <code>X</code> struct, then <code>encode</code>). Accessors never fail: all checking happens in <code>decode</code>.</li><li>Views borrow the input: keep the buffer alive as long as the view. To keep data longer, copy what you need (<code>.to_string()</code>, <code>.to_vec()</code>), or keep the bytes and decode again.</li><li>Match errors on <code>err.kind()</code> (<code>giong_proto::ErrorKind</code>), not on the message text.</li></ul></section>
-    <p class="src-note">giong 1.4.0 · from <a href="https://github.com/giong-run/Giong/blob/v1.4.0/giong-proto/README.md">giong-proto/README.md</a> at v1.4.0</p>
-    <script type="text/markdown" id="md-0"><!-- giong 1.4.0, https://giong.run/docs/giong-proto/#use -->
+    <p class="src-note">giong 1.4.1 · from <a href="https://github.com/giong-run/Giong/blob/v1.4.1/giong-proto/README.md">giong-proto/README.md</a> at v1.4.1</p>
+    <script type="text/markdown" id="md-0"><!-- giong 1.4.1, https://giong.run/docs/giong-proto/#use -->
 
 ## Use
 
@@ -136,7 +136,7 @@ for item in order.items() {
 ```
 
 [`examples/proto-hello`](../examples/proto-hello) is a complete program with enums,
-oneofs, maps, `optional` fields and a service (`cargo run -p proto-hello`).</script><script type="text/markdown" id="md-1"><!-- giong 1.4.0, https://giong.run/docs/giong-proto/#what-is-generated -->
+oneofs, maps, `optional` fields and a service (`cargo run -p proto-hello`).</script><script type="text/markdown" id="md-1"><!-- giong 1.4.1, https://giong.run/docs/giong-proto/#what-is-generated -->
 
 ## What is generated
 
@@ -152,14 +152,14 @@ For each message `M` in package `a.b` (module `a::b`):
 
 A view's `Encode` writes **the bytes it was decoded from**, unchanged (a view cannot be
 modified, so they are its encoding): forwarding a received message is one copy.
-`encode_canonical` writes it field by field instead, in Google's order.</script><script type="text/markdown" id="md-2"><!-- giong 1.4.0, https://giong.run/docs/giong-proto/#errors -->
+`encode_canonical` writes it field by field instead, in Google's order.</script><script type="text/markdown" id="md-2"><!-- giong 1.4.1, https://giong.run/docs/giong-proto/#errors -->
 
 ## Errors
 
 Decoding and encoding errors carry codes `GIONG-E4001` to `GIONG-E4008`
 ([`ErrorKind`](src/error.rs)), each with a page in [`docs/errors/`](../docs/errors/README.md):
 truncated input, malformed varints, invalid tags, unbalanced groups, non-UTF-8 strings,
-nesting deeper than 100, malformed packed fields, messages over 2 GiB.</script><script type="text/markdown" id="md-3"><!-- giong 1.4.0, https://giong.run/docs/giong-proto/#how-it-is-checked -->
+nesting deeper than 100, malformed packed fields, messages over 2 GiB.</script><script type="text/markdown" id="md-3"><!-- giong 1.4.1, https://giong.run/docs/giong-proto/#how-it-is-checked -->
 
 ## How it is checked
 
@@ -185,7 +185,7 @@ allows exactly these):
 
 Known gaps against Google's libraries: proto2 `string` fields are checked for UTF-8
 (Google accepts invalid UTF-8 there unchecked; prost rejects it, as giong-proto does);
-editions (`edition = "2023"`) and extensions are not supported; no JSON or text format.</script><script type="text/markdown" id="md-4"><!-- giong 1.4.0, https://giong.run/docs/giong-proto/#speed -->
+editions (`edition = "2023"`) and extensions are not supported; no JSON or text format.</script><script type="text/markdown" id="md-4"><!-- giong 1.4.1, https://giong.run/docs/giong-proto/#speed -->
 
 ## Speed
 
@@ -204,7 +204,7 @@ repeated fields lazily:
 
 What a view costs instead of allocations: nested messages inside repeated fields are
 parsed once at decode (to check them) and again when the iterator reaches them, so
-messages made mostly of small repeated sub-messages gain less than the others.</script><script type="text/markdown" id="md-5"><!-- giong 1.4.0, https://giong.run/docs/giong-proto/#for-agents -->
+messages made mostly of small repeated sub-messages gain less than the others.</script><script type="text/markdown" id="md-5"><!-- giong 1.4.1, https://giong.run/docs/giong-proto/#for-agents -->
 
 ## For agents
 
@@ -214,15 +214,15 @@ messages made mostly of small repeated sub-messages gain less than the others.</
   copy what you need (`.to_string()`, `.to_vec()`), or keep the bytes and decode again.
 - Match errors on `err.kind()` (`giong_proto::ErrorKind`), not on the message text.</script><script type="text/markdown" id="md-page"># giong-proto
 
-> giong 1.4.0 · https://giong.run/docs/giong-proto/ · source: https://github.com/giong-run/Giong/blob/v1.4.0/giong-proto/README.md
+> giong 1.4.1 · https://giong.run/docs/giong-proto/ · source: https://github.com/giong-run/Giong/blob/v1.4.1/giong-proto/README.md
 
 Protocol Buffers for [giong](https://github.com/giong-run/Giong): messages decoded as
 **views over the receive buffer**. Strings, bytes, repeated fields and maps borrow from
 the input, so decoding copies nothing and makes no heap allocation; encoding writes
 message structs whose fields borrow too. Code is generated from `.proto` files by
-[giong-grpc-build](https://github.com/giong-run/Giong/blob/v1.4.0/giong-grpc-build), which parses them in Rust: no `protoc` to install.
+[giong-grpc-build](https://github.com/giong-run/Giong/blob/v1.4.1/giong-grpc-build), which parses them in Rust: no `protoc` to install.
 
-> **New in giong 1.1.** It is the message layer of [giong-grpc](https://github.com/giong-run/Giong/blob/v1.4.0/giong-grpc), gRPC on giong's HTTP/2.
+> **New in giong 1.1.** It is the message layer of [giong-grpc](https://github.com/giong-run/Giong/blob/v1.4.1/giong-grpc), gRPC on giong's HTTP/2.
 
 ## Use
 
@@ -258,7 +258,7 @@ for item in order.items() {
 }
 ```
 
-[`examples/proto-hello`](https://github.com/giong-run/Giong/blob/v1.4.0/examples/proto-hello) is a complete program with enums,
+[`examples/proto-hello`](https://github.com/giong-run/Giong/blob/v1.4.1/examples/proto-hello) is a complete program with enums,
 oneofs, maps, `optional` fields and a service (`cargo run -p proto-hello`).
 
 ## What is generated
@@ -280,7 +280,7 @@ modified, so they are its encoding): forwarding a received message is one copy.
 ## Errors
 
 Decoding and encoding errors carry codes `GIONG-E4001` to `GIONG-E4008`
-([`ErrorKind`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-proto/src/error.rs)), each with a page in [`docs/errors/`](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/README.md):
+([`ErrorKind`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-proto/src/error.rs)), each with a page in [`docs/errors/`](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/README.md):
 truncated input, malformed varints, invalid tags, unbalanced groups, non-UTF-8 strings,
 nesting deeper than 100, malformed packed fields, messages over 2 GiB.
 
@@ -313,7 +313,7 @@ editions (`edition = "2023"`) and extensions are not supported; no JSON or text 
 ## Speed
 
 `bench/proto.sh` against prost 0.13 with its defaults (as tonic uses it), one core of the
-cloud VM, median of 10 rounds; raw data in [`bench/results/proto/`](https://github.com/giong-run/Giong/blob/v1.4.0/bench/results/proto).
+cloud VM, median of 10 rounds; raw data in [`bench/results/proto/`](https://github.com/giong-run/Giong/blob/v1.4.1/bench/results/proto).
 "decode+read" decodes and reads every field, the fair comparison since views read
 repeated fields lazily:
 
@@ -336,7 +336,7 @@ messages made mostly of small repeated sub-messages gain less than the others.
 - Views borrow the input: keep the buffer alive as long as the view. To keep data longer,
   copy what you need (`.to_string()`, `.to_vec()`), or keep the bytes and decode again.
 - Match errors on `err.kind()` (`giong_proto::ErrorKind`), not on the message text.
-</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.4.0, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use giong-proto as documented below.
+</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.4.1, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use giong-proto as documented below.
 
 Rules for giong code:
 - Start the runtime with giong::Builder::new().shutdown_on_signals(true).build()?.run(|_worker| async { .. }); there are no macros. Build listeners, routers, pools and clients inside each worker's future.
@@ -349,19 +349,19 @@ More facts: https://giong.run/llms.txt. Best practices: https://giong.run/docs/b
 
 My task: <describe what to build or fix>
 
-Documentation of giong-proto, giong 1.4.0 (https://giong.run/docs/giong-proto.md):
+Documentation of giong-proto, giong 1.4.1 (https://giong.run/docs/giong-proto.md):
 
 # giong-proto
 
-> giong 1.4.0 · https://giong.run/docs/giong-proto/ · source: https://github.com/giong-run/Giong/blob/v1.4.0/giong-proto/README.md
+> giong 1.4.1 · https://giong.run/docs/giong-proto/ · source: https://github.com/giong-run/Giong/blob/v1.4.1/giong-proto/README.md
 
 Protocol Buffers for [giong](https://github.com/giong-run/Giong): messages decoded as
 **views over the receive buffer**. Strings, bytes, repeated fields and maps borrow from
 the input, so decoding copies nothing and makes no heap allocation; encoding writes
 message structs whose fields borrow too. Code is generated from `.proto` files by
-[giong-grpc-build](https://github.com/giong-run/Giong/blob/v1.4.0/giong-grpc-build), which parses them in Rust: no `protoc` to install.
+[giong-grpc-build](https://github.com/giong-run/Giong/blob/v1.4.1/giong-grpc-build), which parses them in Rust: no `protoc` to install.
 
-> **New in giong 1.1.** It is the message layer of [giong-grpc](https://github.com/giong-run/Giong/blob/v1.4.0/giong-grpc), gRPC on giong's HTTP/2.
+> **New in giong 1.1.** It is the message layer of [giong-grpc](https://github.com/giong-run/Giong/blob/v1.4.1/giong-grpc), gRPC on giong's HTTP/2.
 
 ## Use
 
@@ -397,7 +397,7 @@ for item in order.items() {
 }
 ```
 
-[`examples/proto-hello`](https://github.com/giong-run/Giong/blob/v1.4.0/examples/proto-hello) is a complete program with enums,
+[`examples/proto-hello`](https://github.com/giong-run/Giong/blob/v1.4.1/examples/proto-hello) is a complete program with enums,
 oneofs, maps, `optional` fields and a service (`cargo run -p proto-hello`).
 
 ## What is generated
@@ -419,7 +419,7 @@ modified, so they are its encoding): forwarding a received message is one copy.
 ## Errors
 
 Decoding and encoding errors carry codes `GIONG-E4001` to `GIONG-E4008`
-([`ErrorKind`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-proto/src/error.rs)), each with a page in [`docs/errors/`](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/README.md):
+([`ErrorKind`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-proto/src/error.rs)), each with a page in [`docs/errors/`](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/README.md):
 truncated input, malformed varints, invalid tags, unbalanced groups, non-UTF-8 strings,
 nesting deeper than 100, malformed packed fields, messages over 2 GiB.
 
@@ -452,7 +452,7 @@ editions (`edition = "2023"`) and extensions are not supported; no JSON or text 
 ## Speed
 
 `bench/proto.sh` against prost 0.13 with its defaults (as tonic uses it), one core of the
-cloud VM, median of 10 rounds; raw data in [`bench/results/proto/`](https://github.com/giong-run/Giong/blob/v1.4.0/bench/results/proto).
+cloud VM, median of 10 rounds; raw data in [`bench/results/proto/`](https://github.com/giong-run/Giong/blob/v1.4.1/bench/results/proto).
 "decode+read" decodes and reads every field, the fair comparison since views read
 repeated fields lazily:
 
@@ -496,7 +496,7 @@ messages made mostly of small repeated sub-messages gain less than the others.
         <h2>Learn</h2>
         <a href="/docs/">Get started</a>
         <a href="/docs/#examples">Examples</a>
-        <a href="https://docs.rs/giong/1.4.0/giong/">API reference</a>
+        <a href="https://docs.rs/giong/1.4.1/giong/">API reference</a>
         <a href="/docs/#errors">Error codes</a>
         <a href="/docs/best-practices/">Best practices</a><a href="/docs/agent-skill/">Agent skill</a>
         <a href="/llms.txt">llms.txt</a>

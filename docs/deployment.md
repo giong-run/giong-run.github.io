@@ -1,6 +1,6 @@
 # Deployment
 
-> giong 1.4.0 · https://giong.run/docs/deployment/ · source: https://github.com/giong-run/Giong/blob/v1.4.0/docs/DEPLOYMENT.md
+> giong 1.4.1 · https://giong.run/docs/deployment/ · source: https://github.com/giong-run/Giong/blob/v1.4.1/docs/DEPLOYMENT.md
 
 giong is fastest on io_uring, which needs Linux 6.0 or newer (6.1 or newer recommended)
 and the three io_uring system calls: `io_uring_setup`, `io_uring_enter` and
@@ -26,7 +26,7 @@ giong::block_on(async {
 ```
 
 `giong-mcp`'s `overview` shows the same for each worker. The
-[benchmarks](https://github.com/giong-run/Giong/blob/v1.4.0/docs/BENCHMARKS.md#io_uring-against-epoll) have the measured difference.
+[benchmarks](https://github.com/giong-run/Giong/blob/v1.4.1/docs/BENCHMARKS.md#io_uring-against-epoll) have the measured difference.
 
 So a container needs no special settings to run giong. Allow io_uring, as this page shows,
 when you want its speed:
@@ -34,7 +34,7 @@ when you want its speed:
 - `Builder::driver(DriverKind::IoUring)`, or `GIONG_DRIVER=io_uring` in the environment,
   makes the runtime fail to start where io_uring is blocked, instead of running on epoll.
   The error begins with `giong needs io_uring, which is not available here`
-  ([GIONG-E0001](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0001.md)).
+  ([GIONG-E0001](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0001.md)).
 - `Builder::driver(DriverKind::Epoll)`, or `GIONG_DRIVER=epoll`, uses epoll even where
   io_uring is available.
 
@@ -64,7 +64,7 @@ with the default settings: the submission and completion queues take 136 KiB of 
 all of the user's processes together; the 64 KiB of older systems holds none.
 
 A worker that cannot lock the memory gets `ENOMEM` from the kernel, which giong reports as
-[GIONG-E0010](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E0010.md), naming the limit; without an explicit driver it runs that
+[GIONG-E0010](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0010.md), naming the limit; without an explicit driver it runs that
 worker on epoll and says so once on stderr. Root is not held to the limit, since it has
 `CAP_IPC_LOCK`, except where that capability was taken away, as in a Docker container.
 Raise the limit, or lift it, for any service that is not root:
@@ -153,7 +153,7 @@ memory per worker  ≈  max_buffered_request_bytes
   default 64 MiB, or a quarter of the cgroup memory limit divided among the workers if that
   is less, so that one worker in a 128 MiB container takes 32 MiB at most. Past it, requests
   are refused with `503` (HTTP/1.1) or `REFUSED_STREAM` (HTTP/2) instead of being buffered
-  ([GIONG-E1120](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1120.md)). Bodies read as a stream (`Handler::stream_body`) hold
+  ([GIONG-E1120](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1120.md)). Bodies read as a stream (`Handler::stream_body`) hold
   one piece at a time and are not counted.
 - An idle connection costs about 2 KiB over HTTP/1.1, 4.5 KiB over HTTP/2 and 10.5 KiB over
   HTTPS in the process, and the kernel about 4 KiB more per socket (charged to the
@@ -165,7 +165,7 @@ idle HTTPS connections take about 145 MiB with the kernel's share. Past what fit
 server does not get killed: while less than `min_free_memory` is left to the process (a
 tenth of the container's limit by default, between 16 and 256 MiB), it refuses new
 connections with `503` and `Retry-After: 1`, or closes them before the TLS handshake
-([GIONG-E1121](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/E1121.md)), and keeps serving the ones it holds. That is a last line
+([GIONG-E1121](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E1121.md)), and keeps serving the ones it holds. That is a last line
 of defence, which refuses clients the load balancer could have sent elsewhere. In a small
 container, lower `max_connections` to what fits next to the budget, so that the server
 stops accepting before memory runs low:
@@ -184,10 +184,10 @@ CI checks the bound: the `slow-uploads` job runs a server with one worker and wi
 a Docker container limited to 128 MiB, sends it hundreds of uploads that stop one byte short
 of their announced length, over HTTP/1.1 and HTTP/2, and fails if the container is
 OOM-killed or a well-behaved client mixed in stops getting answers
-([scripts/slow-uploads.sh](https://github.com/giong-run/Giong/blob/v1.4.0/scripts/slow-uploads.sh)). The same job then runs it in 48 MiB
+([scripts/slow-uploads.sh](https://github.com/giong-run/Giong/blob/v1.4.1/scripts/slow-uploads.sh)). The same job then runs it in 48 MiB
 and opens idle connections until it refuses them, and fails if the container is
 OOM-killed, if the connections it holds stop being served, or if it does not take new ones
-once those close ([scripts/idle-connections.sh](https://github.com/giong-run/Giong/blob/v1.4.0/scripts/idle-connections.sh)).
+once those close ([scripts/idle-connections.sh](https://github.com/giong-run/Giong/blob/v1.4.1/scripts/idle-connections.sh)).
 
 ## Docker
 
@@ -247,4 +247,12 @@ let you change; check that yours allows `Localhost` profiles.
 
 Runtimes that put a user-space kernel between the container and Linux, such as gVisor
 (used by GKE Sandbox), do not offer io_uring by default. giong runs on epoll there; run it
-outside such a sandbox for io_uring.
+outside such a sandbox for io_uring. gVisor's optional io_uring (`runsc --iouring`) takes
+none of the settings giong's rings need, so giong runs on epoll there too, with
+[GIONG-E0001](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E0001.md) as the reason.
+
+gVisor's network stack decides whether sockets may share a port when each one binds,
+where Linux decides when the next one binds. giong finds out once per process which way
+the system works, and its workers share a port either way. CI runs the tests that bind
+one port from several workers, and a four-worker server, under gVisor
+([scripts/gvisor.sh](https://github.com/giong-run/Giong/blob/v1.4.1/scripts/gvisor.sh)).

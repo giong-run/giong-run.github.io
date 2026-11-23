@@ -1,8 +1,8 @@
 # giong-http
 
-> giong 1.4.0 · https://giong.run/docs/giong-http/ · source: https://github.com/giong-run/Giong/blob/v1.4.0/giong-http/README.md
+> giong 1.4.1 · https://giong.run/docs/giong-http/ · source: https://github.com/giong-run/Giong/blob/v1.4.1/giong-http/README.md
 
-A small, strict HTTP/1.1 and HTTP/2 server, and an HTTP/1.1 and HTTP/2 client, for the [giong](https://github.com/giong-run/Giong/blob/v1.4.0/README.md) runtime.
+A small, strict HTTP/1.1 and HTTP/2 server, and an HTTP/1.1 and HTTP/2 client, for the [giong](https://github.com/giong-run/Giong/blob/v1.4.1/README.md) runtime.
 
 ```rust,no_run
 use std::time::Duration;
@@ -42,9 +42,9 @@ fn main() -> std::io::Result<()> {
 - Limits on the size of the head (64 KiB) and the body (1 MiB); timeouts for idle connections (60 s), slow requests (30 s, against slowloris) and clients that read slowly (30 s). All of them can be changed on `Server`.
 - A cap on open connections, 10,000 per `serve` call (so per worker) unless `Server::max_connections` says otherwise: at the cap the server stops accepting, and new clients wait in the kernel's listen queue until a connection closes.
 - A floor under free memory: while less than `Server::min_free_memory` is left to the process (by default a tenth of its cgroup's memory limit, or of the machine's memory, between 16 and 256 MiB), new connections are refused, with `503` and `Retry-After: 1` (`GIONG-E1121`) without TLS and closed before the handshake with it, and the connections the server holds keep being served. Without it, enough idle connections get the process killed by the kernel's out-of-memory killer, connections and all (0.8.0 was killed at 7,900 idle HTTPS connections in a 96 MiB container, under the default connection cap).
-- A cap on the bytes of requests a worker holds while receiving them, shared by all its connections, HTTP/1.1 and HTTP/2: `Server::max_buffered_request_bytes`, by default 64 MiB per worker or, in a container, a quarter of its memory limit divided among the workers if that is less. Without it, a few hundred clients sending large bodies slowly could exhaust a small container's memory (measured with one worker: 130 such clients got a 128 MiB container OOM-killed; with the cap, 450 of them over HTTP/1.1 and HTTP/2 leave it at a 35 MiB peak). Past the cap a request gets `503` with `Retry-After: 1` (`GIONG-E1120`) over HTTP/1.1, `REFUSED_STREAM` over HTTP/2, without its handler being called; the first 4 KiB of each HTTP/1.1 request do not count, so ordinary requests keep being served. Bodies read as a stream do not count. How to size a container: [docs/DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.0/docs/DEPLOYMENT.md#sizing-memory).
+- A cap on the bytes of requests a worker holds while receiving them, shared by all its connections, HTTP/1.1 and HTTP/2: `Server::max_buffered_request_bytes`, by default 64 MiB per worker or, in a container, a quarter of its memory limit divided among the workers if that is less. Without it, a few hundred clients sending large bodies slowly could exhaust a small container's memory (measured with one worker: 130 such clients got a 128 MiB container OOM-killed; with the cap, 450 of them over HTTP/1.1 and HTTP/2 leave it at a 35 MiB peak). Past the cap a request gets `503` with `Retry-After: 1` (`GIONG-E1120`) over HTTP/1.1, `REFUSED_STREAM` over HTTP/2, without its handler being called; the first 4 KiB of each HTTP/1.1 request do not count, so ordinary requests keep being served. Bodies read as a stream do not count. How to size a container: [docs/DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.1/docs/DEPLOYMENT.md#sizing-memory).
 - Handlers that keep a worker busy (heavy computation, long responses) leave the kernel's even spread of connections uneven. Bind each worker's listener with `giong::net::TcpListener::bind_balanced` instead of `bind` and a busy worker hands new connections to a quieter one; `Server::serve` takes either.
-- A handler is an `async fn(Request) -> Response`, a closure that returns a future (write its argument's type: `|req: Request| async move { .. }`), or a type of your own that implements `Handler` and borrows from itself while it answers. [`giong-web`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-web/README.md) builds routing, middleware and JSON on it.
+- A handler is an `async fn(Request) -> Response`, a closure that returns a future (write its argument's type: `|req: Request| async move { .. }`), or a type of your own that implements `Handler` and borrows from itself while it answers. [`giong-web`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-web/README.md) builds routing, middleware and JSON on it.
 - `Server::serve` takes its handler by value. To serve one handler on two listeners (plain HTTP and HTTPS, a public port and an internal one), put it in an `Rc` and give each `serve` a clone: `Handler` is implemented for `Rc<H>`, and streaming routes keep streaming. Do not wrap it in a closure instead: a closure never streams, so every route that reads its body as it arrives would get it whole, or a `413`.
 - **When a handler is dropped.** A handler's future can be dropped at any `.await`, so work that must finish once started (a charge, then its record) belongs in a task of its own (`giong::spawn`), not after an `.await` in the handler. It is dropped when the client resets its HTTP/2 stream (`RST_STREAM`, which giong-http's own client sends when its timeout runs out), when a timeout around it runs out (giong-web's `Timeout`), and at the end of the grace period of a shutdown. It is *not* dropped when the client closes the connection, over HTTP/1.1 or HTTP/2: the handler runs to its end and the answer is thrown away, so a slow query for a client that has gone still runs. A body from `Body::channel()` learns that the client has gone at its next `send`.
 - `Request::from_bytes` makes a request from its bytes and `Response::headers`, `get_header` and `body_bytes` read an answer back, so handlers are tested without a socket.
@@ -111,11 +111,11 @@ Other status codes: `408` the request was too slow, `413` the body is too large,
 
 ## HTTPS
 
-Turn on the `tls` feature to get `Server::serve_tls`, which uses the [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-tls/README.md) crate (rustls, TLS 1.2 and 1.3):
+Turn on the `tls` feature to get `Server::serve_tls`, which uses the [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-tls/README.md) crate (rustls, TLS 1.2 and 1.3):
 
 ```toml
-giong-http = { version = "1.4.0", features = ["tls"] }
-giong-tls = "1.4.0"
+giong-http = { version = "1.4.1", features = ["tls"] }
+giong-tls = "1.4.1"
 ```
 
 ```rust,no_run
@@ -144,7 +144,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 Handlers, limits, timeouts and graceful shutdown are the same as for plain HTTP. Each handshake runs in its connection's own task, so a slow client does not hold up accepting new connections; a client that does not speak TLS (a port scan, plain HTTP sent to the wrong port) is closed when the handshake timeout expires. When it closes a connection the server sends `close_notify`, so the client can tell a complete response from a connection that was cut.
 
-To have the kernel encrypt and decrypt the records once rustls has done the handshake (kernel TLS, Linux with the `tls` module), build the acceptor with `.ktls(giong_tls::Ktls::Auto)?`; nothing else changes. When it pays off and when it does not is in [giong-tls's README](https://github.com/giong-run/Giong/blob/v1.4.0/giong-tls/README.md#kernel-tls).
+To have the kernel encrypt and decrypt the records once rustls has done the handshake (kernel TLS, Linux with the `tls` module), build the acceptor with `.ktls(giong_tls::Ktls::Auto)?`; nothing else changes. When it pays off and when it does not is in [giong-tls's README](https://github.com/giong-run/Giong/blob/v1.4.1/giong-tls/README.md#kernel-tls).
 
 To serve over another kind of connection (a different TLS layer, a fake connection in a test), implement the `Transport` trait and call `Server::serve_connection`.
 
@@ -160,7 +160,7 @@ curl --http2-prior-knowledge http://localhost:8080/bytes?n=100000 -o /dev/null
 
 What a handler sees:
 
-- Each stream is a `Request` like any other, and `Request::version()` is `Version::Http2`. `:authority` becomes the `Host` header (a `Host` that differs from it is refused), and the `cookie` fields a client sends apart are joined into one. A [`giong-web`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-web/README.md) app serves HTTP/2 without a change.
+- Each stream is a `Request` like any other, and `Request::version()` is `Version::Http2`. `:authority` becomes the `Host` header (a `Host` that differs from it is refused), and the `cookie` fields a client sends apart are joined into one. A [`giong-web`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-web/README.md) app serves HTTP/2 without a change.
 - Streams are served at once and answered as their handlers finish; a slow handler holds up no other stream. Each handler runs in its connection's task, like an HTTP/1.1 one, on the same core. A handler that panics has its stream answered with `500`; the other streams and the connection go on (over HTTP/1.1, the `500` is followed by the end of the connection).
 - The response is written as HEADERS and DATA frames. Its headers are sent in lowercase, without those HTTP/2 forbids (`Connection`, `Keep-Alive`, `Transfer-Encoding`, `Upgrade`); a streamed body (`Body::channel`) goes out as DATA frames instead of chunks.
 - A stream the client resets (`RST_STREAM`) drops its handler at once, as a dropped future: whatever it was waiting on is cancelled. A handler that answers before the request body has all arrived has its response sent, then the rest of the body is refused with `RST_STREAM(NO_ERROR)`; the connection stays open.
@@ -169,7 +169,7 @@ What a handler sees:
 
 ### Limits
 
-Every resource a client can make the server hold is bounded. A client that goes past a limit loses its stream or its connection; a connection ends with a GOAWAY whose debug data starts with a `GIONG-E` code, which has a page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/README.md).
+Every resource a client can make the server hold is bounded. A client that goes past a limit loses its stream or its connection; a connection ends with a GOAWAY whose debug data starts with a `GIONG-E` code, which has a page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/README.md).
 
 | Attack | What the server does | Code |
 |---|---|---|
@@ -204,7 +204,7 @@ Measured with `bench/h2.sh` against axum 0.8 on hyper's HTTP/2 (through `axum-se
 | axum, prior knowledge | 138.9k (126–146k) | 23.0k (22–26k) | 158.0k (152–171k) |
 
 - **3.8 to 4.4 times axum's requests per second on small answers, 2.5 to 3.0 times on 8.5 KiB ones.** The server's core is the limit in every case (97–100% busy), and no request failed. h2load's mean time per request follows: 0.83 ms against 3.63 ms for `json` over HTTPS, 8.1 against 20.5 ms for `users`.
-- Our reading, not profiled: with 10 or 100 streams in flight on a connection, one read brings many requests and one write takes many answers, much as pipelining does over HTTP/1.1, and giong-http turns that batching into requests served as it does for pipelined ones ([giong-web's benchmark](https://github.com/giong-run/Giong/blob/v1.4.0/giong-web/README.md#performance)). hyper gains far less from either.
+- Our reading, not profiled: with 10 or 100 streams in flight on a connection, one read brings many requests and one write takes many answers, much as pipelining does over HTTP/1.1, and giong-http turns that batching into requests served as it does for pipelined ones ([giong-web's benchmark](https://github.com/giong-run/Giong/blob/v1.4.1/giong-web/README.md#performance)). hyper gains far less from either.
 - Not measured yet: several cores, a load generator on another machine, request bodies.
 
 Memory per connection, measured with `bench/hold` over HTTP/2 with prior knowledge: 5,000 connections on one worker thread, the server's resident memory before and after, divided by 5,000. KiB, the same in all 5 rounds within 0.2%:
@@ -218,13 +218,13 @@ An idle connection gives its buffers back, so what it keeps is its task, its HPA
 
 ## HTTP/3 (unstable)
 
-The `unstable-http3` feature adds HTTP/3 (RFC 9114) on [`giong-quic`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-quic/README.md),
+The `unstable-http3` feature adds HTTP/3 (RFC 9114) on [`giong-quic`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-quic/README.md),
 for the same handlers, on Linux and macOS. It needs Rust 1.85, and may change before it is
 stabilised; the default build does not have it.
 
 ```toml
-giong-http = { version = "1.4.0", features = ["unstable-http3", "client"] }
-giong-quic = "1.4.0"
+giong-http = { version = "1.4.1", features = ["unstable-http3", "client"] }
+giong-quic = "1.4.1"
 ```
 
 ```rust,ignore
@@ -261,14 +261,14 @@ async fn serve(tls: rustls::ServerConfig) -> std::io::Result<()> {
   0-RTT, which the example leaves off). `cargo run --release -p giong-http --features
   unstable-http3 --example h3` serves it locally (`curl -k --http3-only https://localhost:8443/`).
 - **Not measured yet** end to end; the QUIC layer underneath is in
-  [docs/BENCHMARKS.md](https://github.com/giong-run/Giong/blob/v1.4.0/docs/BENCHMARKS.md#quic).
+  [docs/BENCHMARKS.md](https://github.com/giong-run/Giong/blob/v1.4.1/docs/BENCHMARKS.md#quic).
 
 ## Client
 
 The `client` feature adds an HTTP/1.1 and HTTP/2 client, `giong_http::client` (HTTPS included, through giong-tls):
 
 ```toml
-giong-http = { version = "1.4.0", features = ["client"] }
+giong-http = { version = "1.4.1", features = ["client"] }
 ```
 
 ```rust,no_run
@@ -306,7 +306,7 @@ async fn demo() -> Result<(), Error> {
 - **Proxies.** `ClientBuilder::proxy(Proxy::all("http://user:pass@proxy:3128")?.no_proxy(".svc.cluster.local, 10.0.0.0/8")?)`, or `Proxy::from_env()` for `HTTPS_PROXY`, `HTTP_PROXY`, `ALL_PROXY` and `NO_PROXY` the way curl reads them (never read unless asked). It returns `Result<Option<Proxy>, Error>`, `None` when the environment names no proxy: `if let Some(proxy) = Proxy::from_env()? { builder = builder.proxy(proxy); }`. `https` goes through a `CONNECT` tunnel, so the proxy sees only the host name; the credentials go to the proxy, never to the server. Plain `http://` proxies only, for now (no SOCKS, no TLS to the proxy itself).
 - **Compression.** Responses are asked for with `Accept-Encoding: gzip, deflate` and decompressed as they arrive (`ClientBuilder::decompress(false)` turns it off; a request with its own `Accept-Encoding` gets the bytes as sent). The size limit applies to the decompressed body, so 32 KiB that would expand to gigabytes fails at the limit instead of filling memory; the gzip checksum is checked, and a body cut short is an error, not a shorter body.
 - **Streaming.** `RequestBuilder::send_streaming()` returns once the head has arrived; `StreamingResponse::chunk()` gives the body piece by piece (64 KiB at most, decompressed), with no limit on its size and the timeout applying to each piece. Read to its end, the connection goes back to the pool; dropped before, it is closed (over HTTP/2, only its stream is reset).
-- **Errors that say what to do.** `Error::kind` is one of `Request`, `Connect`, `Timeout`, `TooLarge`, `Redirect`, `Closed`, `Protocol`, `Status`, `Decode` and `Proxy`, each with a giong code (GIONG-E1101 to E1110) and a page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.0/docs/errors/README.md); `Error::is_transient` says whether retrying can help. Any status is a `Response`; `error_for_status` turns 4xx and 5xx into an error with the start of the body.
+- **Errors that say what to do.** `Error::kind` is one of `Request`, `Connect`, `Timeout`, `TooLarge`, `Redirect`, `Closed`, `Protocol`, `Status`, `Decode` and `Proxy`, each with a giong code (GIONG-E1101 to E1110) and a page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/README.md); `Error::is_transient` says whether retrying can help. Any status is a `Response`; `error_for_status` turns 4xx and 5xx into an error with the start of the body.
 
 The client is not `Send`, like everything in giong: make one per worker (in the closure given to `Runtime::run`) and clone it into that worker's tasks.
 
@@ -338,7 +338,7 @@ Results are in `bench/results/http-client/`.
 
 ## Not there yet
 
-Server push. Routing and compression of responses are in [`giong-web`](https://github.com/giong-run/Giong/blob/v1.4.0/giong-web/README.md). In the client: cookies, `br` and `zstd`, SOCKS proxies, HTTP/2 through an `http://` proxy (HTTPS through a proxy's tunnel gets HTTP/2), the `Upgrade: h2c` handshake.
+Server push. Routing and compression of responses are in [`giong-web`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-web/README.md). In the client: cookies, `br` and `zstd`, SOCKS proxies, HTTP/2 through an `http://` proxy (HTTPS through a proxy's tunnel gets HTTP/2), the `Upgrade: h2c` handshake.
 
 ## Tests
 
