@@ -127,6 +127,7 @@ Every page is also Markdown, for agents:
 - [giong-web](https://docs.rs/giong-web/1.4.2): Router, middleware and JSON on giong-http; errors as coded problem+json.
 - [giong-mcp](https://docs.rs/giong-mcp/1.4.2): A read-only MCP server: an agent sees what each worker, task and pool is doing.
 - [giong-compat](https://docs.rs/giong-compat/1.4.2): Tokio's and futures-io's I/O traits for giong's streams, for h2, tokio-rustls and the like.
+- [giong-cli](https://docs.rs/giong-cli/1.4.2): The giong command: start, run, check and ship services on the Gióng async runtime
 
 ## Error codes
 
@@ -136,7 +137,7 @@ Every error giong raises starts with a code, says what went wrong and how to fix
 GIONG-E0102: no address found for db.internal. Fix: check the spelling of the name, /etc/hosts, and the DNS servers in /etc/resolv.conf (in a container, the network it is attached to). See https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E0102.md
 ```
 
-All 149 codes: https://giong.run/docs/errors.md
+All 174 codes: https://giong.run/docs/errors.md
 
 ## When giong is the wrong choice
 
