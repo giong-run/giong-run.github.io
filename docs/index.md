@@ -111,6 +111,7 @@ Every page is also Markdown, for agents:
 - [examples/http.rs](https://github.com/giong-run/Giong/blob/v1.4.2/examples/http.rs): A small HTTP/1.1 server: keep-alive, pipelining, idle timeouts, a header size limit and graceful shutdown on SIGINT and SIGTERM. The same routes the benchmarks use. `cargo run --release --example http`
 - [examples/udp_echo.rs](https://github.com/giong-run/Giong/blob/v1.4.2/examples/udp_echo.rs): A UDP echo server, receiving with multishot `recvmsg`. `cargo run --release --example udp_echo`
 - [examples/cat.rs](https://github.com/giong-run/Giong/blob/v1.4.2/examples/cat.rs): Prints files to standard output, reading them through io_uring with positional reads. `cargo run --release --example cat -- Cargo.toml`
+- [examples/stdio.rs](https://github.com/giong-run/Giong/blob/v1.4.2/examples/stdio.rs): A line protocol over standard input and output, as a local tool server speaks it: runs programs as child processes and answers with their output, and notes `SIGHUP`. `cargo run --release --example stdio`
 
 ## API reference
 
@@ -137,7 +138,7 @@ Every error giong raises starts with a code, says what went wrong and how to fix
 GIONG-E0102: no address found for db.internal. Fix: check the spelling of the name, /etc/hosts, and the DNS servers in /etc/resolv.conf (in a container, the network it is attached to). See https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E0102.md
 ```
 
-All 175 codes: https://giong.run/docs/errors.md
+All 198 codes: https://giong.run/docs/errors.md
 
 ## When giong is the wrong choice
 
