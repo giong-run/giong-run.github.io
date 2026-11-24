@@ -1,6 +1,6 @@
 # Best practices
 
-> giong 1.4.1 · https://giong.run/docs/best-practices/ · source: https://github.com/giong-run/Giong/blob/v1.4.1/docs/BEST_PRACTICES.md
+> giong 1.4.2 · https://giong.run/docs/best-practices/ · source: https://github.com/giong-run/Giong/blob/v1.4.2/docs/BEST_PRACTICES.md
 
 How to build a service on giong that is correct the first time, fast without tuning, and
 easy to run. Each rule says why, so that a person or an agent can tell when it applies.
@@ -88,7 +88,7 @@ let result = rx.await;
 - Thread-per-core has a cost to know about: a short request waits behind a long one on the
   same core, where Tokio's work stealing would move it. With one request in twenty
   computing for a millisecond, the short requests' p99 on giong was 1.3 to 1.7 times the
-  best runtime's ([benchmark lab](https://github.com/giong-run/Giong/blob/v1.4.1/docs/BENCHMARKS.md#benchmark-lab)). Move heavy computation off
+  best runtime's ([benchmark lab](https://github.com/giong-run/Giong/blob/v1.4.2/docs/BENCHMARKS.md#benchmark-lab)). Move heavy computation off
   the workers.
 - To find a blocked worker, ask the service: giong-mcp's `overview` warns about it and
   names the line that spawned the task ([Observe](#observe-the-running-service)).
@@ -125,7 +125,7 @@ let result = rx.await;
 
 - **Match on the code, never on the text.** Every error giong raises starts with a code
   (`GIONG-E0102: no address found for db.internal. Fix: ...`) and links to its page in
-  [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/README.md). `giong::error::code(&err)` returns it as a `Code`.
+  [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/README.md). `giong::error::code(&err)` returns it as a `Code`.
 - **In giong-web handlers, return `Result<Response, Error>`** and use `?`. A giong error
   anywhere down the `source()` chain becomes the right status (a database that cannot be
   reached is a `503` with `Retry-After`), any other error a `500` whose cause is logged and
@@ -162,7 +162,7 @@ let result = rx.await;
 
 ## Choose the giong crate first
 
-For each job, take the first that fits ([Choosing crates](https://github.com/giong-run/Giong/blob/v1.4.1/README.md#choosing-crates)):
+For each job, take the first that fits ([Choosing crates](https://github.com/giong-run/Giong/blob/v1.4.2/README.md#choosing-crates)):
 
 1. **A giong crate**: giong-http (server and client), giong-web, giong-tls, giong-grpc,
    giong-proto, giong-quic, giong-postgres, giong-mysql, giong-redis, `giong::fs`,
@@ -197,17 +197,17 @@ claude mcp add --transport http giong http://127.0.0.1:7777/mcp \
 ## Deploy
 
 - **Production runs on Linux.** macOS is for developing and testing on a Mac; on Windows
-  only the runtime crate runs ([Platforms](https://github.com/giong-run/Giong/blob/v1.4.1/README.md#platforms)).
+  only the runtime crate runs ([Platforms](https://github.com/giong-run/Giong/blob/v1.4.2/README.md#platforms)).
 - **Containers need no settings**: where io_uring is blocked (Docker's and Kubernetes'
   default seccomp profiles, gVisor), giong runs on epoll and says so once on stderr. Allow
-  io_uring for its full speed with the profile in [DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.1/docs/DEPLOYMENT.md), and
+  io_uring for its full speed with the profile in [DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.2/docs/DEPLOYMENT.md), and
   raise the locked-memory limit on the kernels that count the rings against it.
 - **Insist on io_uring where you measured with it**: `GIONG_DRIVER=io_uring` makes the
   runtime refuse to start without it (`GIONG-E0001`) instead of falling back quietly.
 - **One process owns a port.** `bind` refuses a port another process holds, so a service
   started twice fails the second time instead of quietly splitting the traffic. Stop the old
   process before starting the new one, or run the two on different ports behind the load
-  balancer; [DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.1/docs/DEPLOYMENT.md#restarting-on-the-same-port) has the other ways and
+  balancer; [DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.2/docs/DEPLOYMENT.md#restarting-on-the-same-port) has the other ways and
   what the load balancer should do.
 
 ## Performance

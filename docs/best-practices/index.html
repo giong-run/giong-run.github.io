@@ -38,7 +38,7 @@
     <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="28" height="28"></picture><span>giong</span></a>
     <nav class="nav" aria-label="Site"><a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a><a href="/docs/agent-skill/">Agent skill</a></nav>
     <div class="hdr-side">
-      <a class="ver" href="/releases/#v1-4-1" title="Release notes for v1.4.1">v1.4.1</a>
+      <a class="ver" href="/releases/#v1-4-2" title="Release notes for v1.4.2">v1.4.2</a>
       <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="giong on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
       <a class="icon-btn hide-sm" href="https://x.com/giongrun" aria-label="giong on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
       <button class="icon-btn theme" type="button" aria-label="Switch between light and dark" hidden>
@@ -113,8 +113,8 @@ claude mcp add --transport http giong http://127.0.0.1:7777/mcp \
 <ul><li><strong>Every 1.x release only adds.</strong> <code>cargo update</code> within 1.x needs no code change; the CHANGELOG lists what each release added.</li><li><strong>Unstable features may change</strong>: <code>unstable-http3</code> and <code>unstable-udp-offload</code> are outside the stability promise until they are stabilised.</li><li><strong>Rust 1.80</strong> for every crate, <strong>1.85</strong> for giong-quic and <code>unstable-http3</code>.</li></ul></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-14" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="before-you-call-it-done">Before you call it done</h2>
 <p>A short list for people and agents reviewing a change to a giong service:</p>
 <ol><li>Nothing blocks a worker: no <code>std::fs</code>, <code>std::net</code>, <code>thread::sleep</code> or long loop without a yield on it.</li><li>Every wait for another party has a deadline.</li><li>No <code>RefCell</code> borrow is held across an <code>.await</code>.</li><li>Pools, clients and routers are built per worker.</li><li>Errors are matched by <code>giong::error::code</code>, not by text.</li><li>Transactions and session changes run on <code>pool.get()</code>, never on the pool itself.</li><li>No crate that needs the Tokio runtime runs on a worker.</li><li>The tests pass on both drivers (<code>GIONG_DRIVER=epoll</code>).</li></ol></section>
-    <p class="src-note">giong 1.4.1 · from <a href="https://github.com/giong-run/Giong/blob/v1.4.1/docs/BEST_PRACTICES.md">docs/BEST_PRACTICES.md</a> at v1.4.1</p>
-    <script type="text/markdown" id="md-0"><!-- giong 1.4.1, https://giong.run/docs/best-practices/#the-shape-of-a-service -->
+    <p class="src-note">giong 1.4.2 · from <a href="https://github.com/giong-run/Giong/blob/v1.4.2/docs/BEST_PRACTICES.md">docs/BEST_PRACTICES.md</a> at v1.4.2</p>
+    <script type="text/markdown" id="md-0"><!-- giong 1.4.2, https://giong.run/docs/best-practices/#the-shape-of-a-service -->
 
 ## The shape of a service
 
@@ -162,7 +162,7 @@ fn main() -> std::io::Result<()> {
   for example a Kubernetes CPU request with no limit.
 - **Stop gracefully.** `shutdown_on_signals(true)` and `shutdown_grace(..)`; in your own
   accept loops, wrap the wait in `giong::until_shutdown(..)`. Without them, a program that
-  runs as process 1 in a container ignores `SIGTERM` until it is killed.</script><script type="text/markdown" id="md-1"><!-- giong 1.4.1, https://giong.run/docs/best-practices/#state -->
+  runs as process 1 in a container ignores `SIGTERM` until it is killed.</script><script type="text/markdown" id="md-1"><!-- giong 1.4.2, https://giong.run/docs/best-practices/#state -->
 
 ## State
 
@@ -174,7 +174,7 @@ fn main() -> std::io::Result<()> {
   `tokio = { version = "1", default-features = false, features = ["sync"] }`.
 - **Work for another worker** goes through `Handle::spawn_on(worker, || async { .. })`, or
   `Handle::spawn_balanced(|| async { .. })` for the first idle one. A task never moves once
-  it has started.</script><script type="text/markdown" id="md-2"><!-- giong 1.4.1, https://giong.run/docs/best-practices/#never-block-a-worker -->
+  it has started.</script><script type="text/markdown" id="md-2"><!-- giong 1.4.2, https://giong.run/docs/best-practices/#never-block-a-worker -->
 
 ## Never block a worker
 
@@ -200,7 +200,7 @@ let result = rx.await;
   best runtime's ([benchmark lab](BENCHMARKS.md#benchmark-lab)). Move heavy computation off
   the workers.
 - To find a blocked worker, ask the service: giong-mcp's `overview` warns about it and
-  names the line that spawned the task ([Observe](#observe-the-running-service)).</script><script type="text/markdown" id="md-3"><!-- giong 1.4.1, https://giong.run/docs/best-practices/#timeouts-limits-and-cancellation -->
+  names the line that spawned the task ([Observe](#observe-the-running-service)).</script><script type="text/markdown" id="md-3"><!-- giong 1.4.2, https://giong.run/docs/best-practices/#timeouts-limits-and-cancellation -->
 
 ## Timeouts, limits and cancellation
 
@@ -213,7 +213,7 @@ let result = rx.await;
 - **Keep giong-http's limits.** Every timeout and size limit is finite by default. Tune them
   for the service rather than turning them off: `Server::request_timeout`, `idle_timeout`,
   `max_head_size`, `max_body_size`, `max_connections` (10,000 per `serve` call) and
-  `min_free_memory`, which refuses new work before the process runs out of memory.</script><script type="text/markdown" id="md-4"><!-- giong 1.4.1, https://giong.run/docs/best-practices/#buffers -->
+  `min_free_memory`, which refuses new work before the process runs out of memory.</script><script type="text/markdown" id="md-4"><!-- giong 1.4.2, https://giong.run/docs/best-practices/#buffers -->
 
 ## Buffers
 
@@ -228,7 +228,7 @@ let result = rx.await;
   payload is the buffer size minus 44 bytes (16 KiB − 44 by default) and `is_truncated()`
   says when it was cut. Raise `Builder::recv_buffers(count, size)` or use `read_from()` with
   a buffer of your own; do not mix the two on one socket.
-- **A `File` has no cursor**: every read and write names its offset.</script><script type="text/markdown" id="md-5"><!-- giong 1.4.1, https://giong.run/docs/best-practices/#errors -->
+- **A `File` has no cursor**: every read and write names its offset.</script><script type="text/markdown" id="md-5"><!-- giong 1.4.2, https://giong.run/docs/best-practices/#errors -->
 
 ## Errors
 
@@ -240,7 +240,7 @@ let result = rx.await;
   reached is a `503` with `Retry-After`), any other error a `500` whose cause is logged and
   never sent. Answers are problem+json with a `GIONG-E` code.
 - **When an error is new to you, read its page**: it says what went wrong and how to fix
-  it, often with the one line to change.</script><script type="text/markdown" id="md-6"><!-- giong 1.4.1, https://giong.run/docs/best-practices/#databases-and-redis -->
+  it, often with the one line to change.</script><script type="text/markdown" id="md-6"><!-- giong 1.4.2, https://giong.run/docs/best-practices/#databases-and-redis -->
 
 ## Databases and Redis
 
@@ -257,7 +257,7 @@ let result = rx.await;
   off where row-level security or other settings are made per request inside a function.
 - **TLS is verified by default** for remote hosts. Keep it that way.
 - **Redis**: the commands of every task pipeline over the pool's connections; use `take()`
-  for a connection of your own (Pub/Sub, `WATCH` transactions).</script><script type="text/markdown" id="md-7"><!-- giong 1.4.1, https://giong.run/docs/best-practices/#http-clients -->
+  for a connection of your own (Pub/Sub, `WATCH` transactions).</script><script type="text/markdown" id="md-7"><!-- giong 1.4.2, https://giong.run/docs/best-practices/#http-clients -->
 
 ## HTTP clients
 
@@ -267,7 +267,7 @@ let result = rx.await;
   before the first request does; `ping_idle_http2(url, deadline)` finds a dead idle HTTP/2
   connection before a request does.
 - Use giong-http's client, not reqwest: crates that need the Tokio runtime panic on a giong
-  worker with "there is no reactor running".</script><script type="text/markdown" id="md-8"><!-- giong 1.4.1, https://giong.run/docs/best-practices/#choose-the-giong-crate-first -->
+  worker with "there is no reactor running".</script><script type="text/markdown" id="md-8"><!-- giong 1.4.2, https://giong.run/docs/best-practices/#choose-the-giong-crate-first -->
 
 ## Choose the giong crate first
 
@@ -283,7 +283,7 @@ For each job, take the first that fits ([Choosing crates](../README.md#choosing-
    (WebSocket with tokio-tungstenite, for one).
 4. **Never a crate that needs the Tokio runtime** on a worker (sqlx, reqwest, tonic's
    transport, most cloud SDKs). If you must use one, run it on a Tokio runtime in a thread
-   of its own and pass work to it over a channel.</script><script type="text/markdown" id="md-9"><!-- giong 1.4.1, https://giong.run/docs/best-practices/#observe-the-running-service -->
+   of its own and pass work to it over a channel.</script><script type="text/markdown" id="md-9"><!-- giong 1.4.2, https://giong.run/docs/best-practices/#observe-the-running-service -->
 
 ## Observe the running service
 
@@ -301,7 +301,7 @@ For each job, take the first that fits ([Choosing crates](../README.md#choosing-
 GIONG_MCP=127.0.0.1:7777 GIONG_MCP_TOKEN=$(openssl rand -hex 16) cargo run --release
 claude mcp add --transport http giong http://127.0.0.1:7777/mcp \
     --header "Authorization: Bearer $GIONG_MCP_TOKEN"
-```</script><script type="text/markdown" id="md-10"><!-- giong 1.4.1, https://giong.run/docs/best-practices/#deploy -->
+```</script><script type="text/markdown" id="md-10"><!-- giong 1.4.2, https://giong.run/docs/best-practices/#deploy -->
 
 ## Deploy
 
@@ -317,7 +317,7 @@ claude mcp add --transport http giong http://127.0.0.1:7777/mcp \
   started twice fails the second time instead of quietly splitting the traffic. Stop the old
   process before starting the new one, or run the two on different ports behind the load
   balancer; [DEPLOYMENT.md](DEPLOYMENT.md#restarting-on-the-same-port) has the other ways and
-  what the load balancer should do.</script><script type="text/markdown" id="md-11"><!-- giong 1.4.1, https://giong.run/docs/best-practices/#performance -->
+  what the load balancer should do.</script><script type="text/markdown" id="md-11"><!-- giong 1.4.2, https://giong.run/docs/best-practices/#performance -->
 
 ## Performance
 
@@ -333,7 +333,7 @@ claude mcp add --transport http giong http://127.0.0.1:7777/mcp \
 - **Files to the network**: `Body::file` in giong-http sends with `sendfile`; kernel TLS
   (`Ktls::Auto` in giong-tls) pays off for large files only, so it is off by default.
 - **Instruction counts, not wall time, for small changes**: a percent or two is below the
-  noise of a benchmark run; `bench/instr` counts instructions instead.</script><script type="text/markdown" id="md-12"><!-- giong 1.4.1, https://giong.run/docs/best-practices/#test -->
+  noise of a benchmark run; `bench/instr` counts instructions instead.</script><script type="text/markdown" id="md-12"><!-- giong 1.4.2, https://giong.run/docs/best-practices/#test -->
 
 ## Test
 
@@ -343,7 +343,7 @@ claude mcp add --transport http giong http://127.0.0.1:7777/mcp \
 - **Leaks**: `giong::observe::worker_stats()` gives the current worker's counters (tasks,
   operations in flight), to compare before and after.
 - **Both Linux drivers**: run the suite once more with `GIONG_DRIVER=epoll`, which is what
-  a container without io_uring will use.</script><script type="text/markdown" id="md-13"><!-- giong 1.4.1, https://giong.run/docs/best-practices/#upgrade -->
+  a container without io_uring will use.</script><script type="text/markdown" id="md-13"><!-- giong 1.4.2, https://giong.run/docs/best-practices/#upgrade -->
 
 ## Upgrade
 
@@ -351,7 +351,7 @@ claude mcp add --transport http giong http://127.0.0.1:7777/mcp \
   CHANGELOG lists what each release added.
 - **Unstable features may change**: `unstable-http3` and `unstable-udp-offload` are outside
   the stability promise until they are stabilised.
-- **Rust 1.80** for every crate, **1.85** for giong-quic and `unstable-http3`.</script><script type="text/markdown" id="md-14"><!-- giong 1.4.1, https://giong.run/docs/best-practices/#before-you-call-it-done -->
+- **Rust 1.80** for every crate, **1.85** for giong-quic and `unstable-http3`.</script><script type="text/markdown" id="md-14"><!-- giong 1.4.2, https://giong.run/docs/best-practices/#before-you-call-it-done -->
 
 ## Before you call it done
 
@@ -367,7 +367,7 @@ A short list for people and agents reviewing a change to a giong service:
 7. No crate that needs the Tokio runtime runs on a worker.
 8. The tests pass on both drivers (`GIONG_DRIVER=epoll`).</script><script type="text/markdown" id="md-page"># Best practices
 
-> giong 1.4.1 · https://giong.run/docs/best-practices/ · source: https://github.com/giong-run/Giong/blob/v1.4.1/docs/BEST_PRACTICES.md
+> giong 1.4.2 · https://giong.run/docs/best-practices/ · source: https://github.com/giong-run/Giong/blob/v1.4.2/docs/BEST_PRACTICES.md
 
 How to build a service on giong that is correct the first time, fast without tuning, and
 easy to run. Each rule says why, so that a person or an agent can tell when it applies.
@@ -455,7 +455,7 @@ let result = rx.await;
 - Thread-per-core has a cost to know about: a short request waits behind a long one on the
   same core, where Tokio's work stealing would move it. With one request in twenty
   computing for a millisecond, the short requests' p99 on giong was 1.3 to 1.7 times the
-  best runtime's ([benchmark lab](https://github.com/giong-run/Giong/blob/v1.4.1/docs/BENCHMARKS.md#benchmark-lab)). Move heavy computation off
+  best runtime's ([benchmark lab](https://github.com/giong-run/Giong/blob/v1.4.2/docs/BENCHMARKS.md#benchmark-lab)). Move heavy computation off
   the workers.
 - To find a blocked worker, ask the service: giong-mcp's `overview` warns about it and
   names the line that spawned the task ([Observe](#observe-the-running-service)).
@@ -492,7 +492,7 @@ let result = rx.await;
 
 - **Match on the code, never on the text.** Every error giong raises starts with a code
   (`GIONG-E0102: no address found for db.internal. Fix: ...`) and links to its page in
-  [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/README.md). `giong::error::code(&err)` returns it as a `Code`.
+  [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/README.md). `giong::error::code(&err)` returns it as a `Code`.
 - **In giong-web handlers, return `Result<Response, Error>`** and use `?`. A giong error
   anywhere down the `source()` chain becomes the right status (a database that cannot be
   reached is a `503` with `Retry-After`), any other error a `500` whose cause is logged and
@@ -529,7 +529,7 @@ let result = rx.await;
 
 ## Choose the giong crate first
 
-For each job, take the first that fits ([Choosing crates](https://github.com/giong-run/Giong/blob/v1.4.1/README.md#choosing-crates)):
+For each job, take the first that fits ([Choosing crates](https://github.com/giong-run/Giong/blob/v1.4.2/README.md#choosing-crates)):
 
 1. **A giong crate**: giong-http (server and client), giong-web, giong-tls, giong-grpc,
    giong-proto, giong-quic, giong-postgres, giong-mysql, giong-redis, `giong::fs`,
@@ -564,17 +564,17 @@ claude mcp add --transport http giong http://127.0.0.1:7777/mcp \
 ## Deploy
 
 - **Production runs on Linux.** macOS is for developing and testing on a Mac; on Windows
-  only the runtime crate runs ([Platforms](https://github.com/giong-run/Giong/blob/v1.4.1/README.md#platforms)).
+  only the runtime crate runs ([Platforms](https://github.com/giong-run/Giong/blob/v1.4.2/README.md#platforms)).
 - **Containers need no settings**: where io_uring is blocked (Docker's and Kubernetes'
   default seccomp profiles, gVisor), giong runs on epoll and says so once on stderr. Allow
-  io_uring for its full speed with the profile in [DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.1/docs/DEPLOYMENT.md), and
+  io_uring for its full speed with the profile in [DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.2/docs/DEPLOYMENT.md), and
   raise the locked-memory limit on the kernels that count the rings against it.
 - **Insist on io_uring where you measured with it**: `GIONG_DRIVER=io_uring` makes the
   runtime refuse to start without it (`GIONG-E0001`) instead of falling back quietly.
 - **One process owns a port.** `bind` refuses a port another process holds, so a service
   started twice fails the second time instead of quietly splitting the traffic. Stop the old
   process before starting the new one, or run the two on different ports behind the load
-  balancer; [DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.1/docs/DEPLOYMENT.md#restarting-on-the-same-port) has the other ways and
+  balancer; [DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.2/docs/DEPLOYMENT.md#restarting-on-the-same-port) has the other ways and
   what the load balancer should do.
 
 ## Performance
@@ -624,7 +624,7 @@ A short list for people and agents reviewing a change to a giong service:
 6. Transactions and session changes run on `pool.get()`, never on the pool itself.
 7. No crate that needs the Tokio runtime runs on a worker.
 8. The tests pass on both drivers (`GIONG_DRIVER=epoll`).
-</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.4.1, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use Best practices as documented below.
+</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.4.2, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use Best practices as documented below.
 
 Rules for giong code:
 - Start the runtime with giong::Builder::new().shutdown_on_signals(true).build()?.run(|_worker| async { .. }); there are no macros. Build listeners, routers, pools and clients inside each worker's future.
@@ -637,11 +637,11 @@ More facts: https://giong.run/llms.txt. Best practices: https://giong.run/docs/b
 
 My task: <describe what to build or fix>
 
-Documentation of Best practices, giong 1.4.1 (https://giong.run/docs/best-practices.md):
+Documentation of Best practices, giong 1.4.2 (https://giong.run/docs/best-practices.md):
 
 # Best practices
 
-> giong 1.4.1 · https://giong.run/docs/best-practices/ · source: https://github.com/giong-run/Giong/blob/v1.4.1/docs/BEST_PRACTICES.md
+> giong 1.4.2 · https://giong.run/docs/best-practices/ · source: https://github.com/giong-run/Giong/blob/v1.4.2/docs/BEST_PRACTICES.md
 
 How to build a service on giong that is correct the first time, fast without tuning, and
 easy to run. Each rule says why, so that a person or an agent can tell when it applies.
@@ -729,7 +729,7 @@ let result = rx.await;
 - Thread-per-core has a cost to know about: a short request waits behind a long one on the
   same core, where Tokio's work stealing would move it. With one request in twenty
   computing for a millisecond, the short requests' p99 on giong was 1.3 to 1.7 times the
-  best runtime's ([benchmark lab](https://github.com/giong-run/Giong/blob/v1.4.1/docs/BENCHMARKS.md#benchmark-lab)). Move heavy computation off
+  best runtime's ([benchmark lab](https://github.com/giong-run/Giong/blob/v1.4.2/docs/BENCHMARKS.md#benchmark-lab)). Move heavy computation off
   the workers.
 - To find a blocked worker, ask the service: giong-mcp's `overview` warns about it and
   names the line that spawned the task ([Observe](#observe-the-running-service)).
@@ -766,7 +766,7 @@ let result = rx.await;
 
 - **Match on the code, never on the text.** Every error giong raises starts with a code
   (`GIONG-E0102: no address found for db.internal. Fix: ...`) and links to its page in
-  [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/README.md). `giong::error::code(&err)` returns it as a `Code`.
+  [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/README.md). `giong::error::code(&err)` returns it as a `Code`.
 - **In giong-web handlers, return `Result<Response, Error>`** and use `?`. A giong error
   anywhere down the `source()` chain becomes the right status (a database that cannot be
   reached is a `503` with `Retry-After`), any other error a `500` whose cause is logged and
@@ -803,7 +803,7 @@ let result = rx.await;
 
 ## Choose the giong crate first
 
-For each job, take the first that fits ([Choosing crates](https://github.com/giong-run/Giong/blob/v1.4.1/README.md#choosing-crates)):
+For each job, take the first that fits ([Choosing crates](https://github.com/giong-run/Giong/blob/v1.4.2/README.md#choosing-crates)):
 
 1. **A giong crate**: giong-http (server and client), giong-web, giong-tls, giong-grpc,
    giong-proto, giong-quic, giong-postgres, giong-mysql, giong-redis, `giong::fs`,
@@ -838,17 +838,17 @@ claude mcp add --transport http giong http://127.0.0.1:7777/mcp \
 ## Deploy
 
 - **Production runs on Linux.** macOS is for developing and testing on a Mac; on Windows
-  only the runtime crate runs ([Platforms](https://github.com/giong-run/Giong/blob/v1.4.1/README.md#platforms)).
+  only the runtime crate runs ([Platforms](https://github.com/giong-run/Giong/blob/v1.4.2/README.md#platforms)).
 - **Containers need no settings**: where io_uring is blocked (Docker's and Kubernetes'
   default seccomp profiles, gVisor), giong runs on epoll and says so once on stderr. Allow
-  io_uring for its full speed with the profile in [DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.1/docs/DEPLOYMENT.md), and
+  io_uring for its full speed with the profile in [DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.2/docs/DEPLOYMENT.md), and
   raise the locked-memory limit on the kernels that count the rings against it.
 - **Insist on io_uring where you measured with it**: `GIONG_DRIVER=io_uring` makes the
   runtime refuse to start without it (`GIONG-E0001`) instead of falling back quietly.
 - **One process owns a port.** `bind` refuses a port another process holds, so a service
   started twice fails the second time instead of quietly splitting the traffic. Stop the old
   process before starting the new one, or run the two on different ports behind the load
-  balancer; [DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.1/docs/DEPLOYMENT.md#restarting-on-the-same-port) has the other ways and
+  balancer; [DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.2/docs/DEPLOYMENT.md#restarting-on-the-same-port) has the other ways and
   what the load balancer should do.
 
 ## Performance
@@ -919,7 +919,7 @@ A short list for people and agents reviewing a change to a giong service:
         <h2>Learn</h2>
         <a href="/docs/">Get started</a>
         <a href="/docs/#examples">Examples</a>
-        <a href="https://docs.rs/giong/1.4.1/giong/">API reference</a>
+        <a href="https://docs.rs/giong/1.4.2/giong/">API reference</a>
         <a href="/docs/#errors">Error codes</a>
         <a href="/docs/best-practices/">Best practices</a><a href="/docs/agent-skill/">Agent skill</a>
         <a href="/llms.txt">llms.txt</a>

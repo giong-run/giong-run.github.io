@@ -1,13 +1,13 @@
 # giong-redis
 
-> giong 1.4.1 · https://giong.run/docs/giong-redis/ · source: https://github.com/giong-run/Giong/blob/v1.4.1/giong-redis/README.md
+> giong 1.4.2 · https://giong.run/docs/giong-redis/ · source: https://github.com/giong-run/Giong/blob/v1.4.2/giong-redis/README.md
 
-A Redis client and connection pool for the [giong](https://github.com/giong-run/Giong/blob/v1.4.1/README.md) runtime. It speaks RESP3 itself, encrypts with [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-tls/README.md), and depends on nothing from the Tokio ecosystem.
+A Redis client and connection pool for the [giong](https://github.com/giong-run/Giong/blob/v1.4.2/README.md) runtime. It speaks RESP3 itself, encrypts with [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.4.2/giong-tls/README.md), and depends on nothing from the Tokio ecosystem.
 
 ```toml
 [dependencies]
-giong = "1.4.1"
-giong-redis = "1.4.1"
+giong = "1.4.2"
+giong-redis = "1.4.2"
 ```
 
 ```rust,no_run
@@ -187,21 +187,21 @@ A conversion never loses anything silently: a number that does not fit, bytes th
 
 ## Errors
 
-`Error` is cheap to clone, implements `std::error::Error`, and converts into `io::Error`. `error.kind()` says what went wrong. Each kind has a giong error code, shown in front of the message and linked to its page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/README.md) (`GIONG-E3204: WRONGTYPE Operation against a key holding the wrong kind of value. See …`); after `?` into an `io::Error`, `giong::error::code(&err)` finds it:
+`Error` is cheap to clone, implements `std::error::Error`, and converts into `io::Error`. `error.kind()` says what went wrong. Each kind has a giong error code, shown in front of the message and linked to its page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/README.md) (`GIONG-E3204: WRONGTYPE Operation against a key holding the wrong kind of value. See …`); after `?` into an `io::Error`, `giong::error::code(&err)` finds it:
 
 | `ErrorKind` | Code | Meaning |
 |---|---|---|
-| `Config` | [E3201](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3201.md) | The configuration or URL is not valid. |
-| `Connect` | [E3202](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3202.md) | Name resolution, TCP, TLS, the handshake, or the connect timeout. Also a server older than Redis 6 and a database number the server does not have. |
-| `Auth` | [E3203](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3203.md) | The server refused the user name or the password. |
-| `Server` | [E3204](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3204.md) | The server answered with an error; `error.server_code()` is its code (`ERR`, `WRONGTYPE`, `NOSCRIPT`, `READONLY`...). |
-| `Type` | [E3205](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3205.md) | A reply could not be converted to the Rust type asked for. |
-| `Command` | [E3206](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3206.md) | The command would break sharing the connection, and was not sent; the message says what to use instead. |
-| `TooLarge` | [E3207](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3207.md) | The reply was larger than `max_reply_size`. The connection stays usable. |
-| `Closed` | [E3208](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3208.md) | The connection is closed. A `Pool` replaces it by itself. |
-| `PoolTimeout` | [E3209](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3209.md) | No pooled connection became free within `wait_timeout`. |
-| `Protocol` | [E3210](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3210.md) | The server sent something that is not RESP3. The connection is closed. |
-| `Timeout` | [E3211](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3211.md) | No reply within `response_timeout`. The command may still have run; the connection stays usable. |
+| `Config` | [E3201](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3201.md) | The configuration or URL is not valid. |
+| `Connect` | [E3202](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3202.md) | Name resolution, TCP, TLS, the handshake, or the connect timeout. Also a server older than Redis 6 and a database number the server does not have. |
+| `Auth` | [E3203](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3203.md) | The server refused the user name or the password. |
+| `Server` | [E3204](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3204.md) | The server answered with an error; `error.server_code()` is its code (`ERR`, `WRONGTYPE`, `NOSCRIPT`, `READONLY`...). |
+| `Type` | [E3205](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3205.md) | A reply could not be converted to the Rust type asked for. |
+| `Command` | [E3206](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3206.md) | The command would break sharing the connection, and was not sent; the message says what to use instead. |
+| `TooLarge` | [E3207](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3207.md) | The reply was larger than `max_reply_size`. The connection stays usable. |
+| `Closed` | [E3208](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3208.md) | The connection is closed. A `Pool` replaces it by itself. |
+| `PoolTimeout` | [E3209](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3209.md) | No pooled connection became free within `wait_timeout`. |
+| `Protocol` | [E3210](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3210.md) | The server sent something that is not RESP3. The connection is closed. |
+| `Timeout` | [E3211](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3211.md) | No reply within `response_timeout`. The command may still have run; the connection stays usable. |
 
 `error.is_transient()` is true for errors worth retrying after a pause: connecting, a closed connection, timeouts, and the server's `LOADING`, `BUSY`, `TRYAGAIN`, `MASTERDOWN` and `CLUSTERDOWN`. An error from the server affects only its own command: the commands that other tasks pipelined on the same connection get their own replies.
 
@@ -248,7 +248,7 @@ Not measured: a server on another machine (network latency, where pipelining mat
 
 ## Not there yet
 
-Redis Cluster (a `MOVED` or `ASK` reply is an error that says so) and Sentinel, client-side caching (`CLIENT TRACKING` can be turned on with `query`, but a `Client` passes over the invalidations it brings), sharded Pub/Sub (`SSUBSCRIBE`), RESP2-only servers (Redis 5 and older), and streaming a large reply in pieces (a reply is collected in full, up to `max_reply_size`). Proxies that do not pass `HELLO 3` on (twemproxy, Envoy's Redis proxy) cannot be used, since the client speaks RESP3 only. An independent review before 1.0 found problems that have since been fixed (see the [changelog](https://github.com/giong-run/Giong/blob/v1.4.1/CHANGELOG.md)); the crate has had no outside security audit.
+Redis Cluster (a `MOVED` or `ASK` reply is an error that says so) and Sentinel, client-side caching (`CLIENT TRACKING` can be turned on with `query`, but a `Client` passes over the invalidations it brings), sharded Pub/Sub (`SSUBSCRIBE`), RESP2-only servers (Redis 5 and older), and streaming a large reply in pieces (a reply is collected in full, up to `max_reply_size`). Proxies that do not pass `HELLO 3` on (twemproxy, Envoy's Redis proxy) cannot be used, since the client speaks RESP3 only. An independent review before 1.0 found problems that have since been fixed (see the [changelog](https://github.com/giong-run/Giong/blob/v1.4.2/CHANGELOG.md)); the crate has had no outside security audit.
 
 ## Tests
 

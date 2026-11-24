@@ -38,7 +38,7 @@
     <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="28" height="28"></picture><span>giong</span></a>
     <nav class="nav" aria-label="Site"><a href="/docs/">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a><a href="/docs/agent-skill/" aria-current="page">Agent skill</a></nav>
     <div class="hdr-side">
-      <a class="ver" href="/releases/#v1-4-1" title="Release notes for v1.4.1">v1.4.1</a>
+      <a class="ver" href="/releases/#v1-4-2" title="Release notes for v1.4.2">v1.4.2</a>
       <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="giong on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
       <a class="icon-btn hide-sm" href="https://x.com/giongrun" aria-label="giong on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
       <button class="icon-btn theme" type="button" aria-label="Switch between light and dark" hidden>
@@ -94,7 +94,7 @@ curl -fsSL https://giong.run/skills/giong.zip -o giong.zip &amp;&amp; unzip -o g
   references/giong-web.md
   references/giong-mcp.md
   references/giong-compat.md</code></pre>
-      <p class="hint">Built from giong 1.4.1; download it again after an upgrade.</p></div>
+      <p class="hint">Built from giong 1.4.2; download it again after an upgrade.</p></div>
   </div>
   <script type="text/markdown" id="md-skill">---
 name: giong
@@ -314,8 +314,8 @@ Transactions on `pool.get()`. 7. No Tokio-runtime crate on a worker. 8. Tests pa
 <ul><li>Production: Linux. io_uring needs 6.0+ and the three io_uring system calls; otherwise epoll, by itself. macOS (kqueue) is for development. Windows (1.4+): the <code>giong</code> crate only, no Unix sockets.</li><li>Docker works with no settings (epoll under the default seccomp profile). For io_uring, use the seccomp profile from <code>references/deployment.md</code>; <code>GIONG_DRIVER=io_uring</code> refuses to start without it. Workers follow the container's CPU quota.</li><li>Rust 1.80+, 1.85 for giong-quic and <code>unstable-http3</code>.</li></ul></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-7" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="before-finishing-a-change">Before finishing a change</h2>
 <ol><li>Nothing blocks a worker. 2. Every wait has a deadline. 3. No <code>RefCell</code> borrow across an</li></ol>
 <p><code>.await</code>. 4. Pools, clients and routers are per worker. 5. Errors matched by code. 6. Transactions on <code>pool.get()</code>. 7. No Tokio-runtime crate on a worker. 8. Tests pass with <code>GIONG_DRIVER=epoll</code> too.</p></section>
-    <p class="src-note">giong 1.4.1 · from <a href="https://github.com/giong-run/Giong/blob/v1.4.1/skills/giong/SKILL.md">skills/giong/SKILL.md</a> at v1.4.1</p>
-    <script type="text/markdown" id="md-0"><!-- giong 1.4.1, https://giong.run/docs/agent-skill/#rules-that-are-easy-to-get-wrong -->
+    <p class="src-note">giong 1.4.2 · from <a href="https://github.com/giong-run/Giong/blob/v1.4.2/skills/giong/SKILL.md">skills/giong/SKILL.md</a> at v1.4.2</p>
+    <script type="text/markdown" id="md-0"><!-- giong 1.4.2, https://giong.run/docs/agent-skill/#rules-that-are-easy-to-get-wrong -->
 
 ## Rules that are easy to get wrong
 
@@ -356,7 +356,7 @@ Transactions on `pool.get()`. 7. No Tokio-runtime crate on a worker. 8. Tests pa
     `500` whose cause is logged, never sent. `req.param::<T>("id")?`, `req.query::<T>()?`,
     `req.json::<T>()?`, `json(200, &value)`, `Error::not_found("code", msg)`.
 11. **Shutdown**: `shutdown_on_signals(true)` and `shutdown_grace(Duration)` on the builder;
-    `giong::until_shutdown(fut)` around waits in your own accept loops.</script><script type="text/markdown" id="md-1"><!-- giong 1.4.1, https://giong.run/docs/agent-skill/#which-crate-for-which-job -->
+    `giong::until_shutdown(fut)` around waits in your own accept loops.</script><script type="text/markdown" id="md-1"><!-- giong 1.4.2, https://giong.run/docs/agent-skill/#which-crate-for-which-job -->
 
 ## Which crate for which job
 
@@ -382,7 +382,7 @@ as they are. A crate generic over a Tokio or futures-io stream (tokio-tungstenit
 tokio-rustls, hyper's `conn`) runs through `giong_compat::Compat::new(stream)`, only for a
 protocol giong has no crate for. **A crate that needs the Tokio runtime (sqlx, reqwest,
 tonic's transport, most cloud SDKs) panics on a giong worker** with "there is no reactor
-running": replace it, or run it on a Tokio runtime in a thread of its own behind a channel.</script><script type="text/markdown" id="md-2"><!-- giong 1.4.1, https://giong.run/docs/agent-skill/#porting-from-tokio -->
+running": replace it, or run it on a Tokio runtime in a thread of its own behind a channel.</script><script type="text/markdown" id="md-2"><!-- giong 1.4.2, https://giong.run/docs/agent-skill/#porting-from-tokio -->
 
 ## Porting from Tokio
 
@@ -395,7 +395,7 @@ running": replace it, or run it on a Tokio runtime in a thread of its own behind
 | `Arc<Mutex<T>>` in handlers | `Rc<RefCell<T>>` per worker, or a channel |
 | `tokio::time::interval` | a loop around `giong::time::sleep_until(next)` |
 | `tokio::signal::ctrl_c()` | `Builder::shutdown_on_signals(true)` + `giong::shutdown_signal().await` |
-| `read(&mut buf)` / `write_all(&buf)` | `recv()` lends a buffer; `write_all(buf)` returns `(result, buf)` |</script><script type="text/markdown" id="md-3"><!-- giong 1.4.1, https://giong.run/docs/agent-skill/#a-service-start-to-finish -->
+| `read(&mut buf)` / `write_all(&buf)` | `recv()` lends a buffer; `write_all(buf)` returns `(result, buf)` |</script><script type="text/markdown" id="md-3"><!-- giong 1.4.2, https://giong.run/docs/agent-skill/#a-service-start-to-finish -->
 
 ## A service, start to finish
 
@@ -429,14 +429,14 @@ fn main() -> std::io::Result<()> {
 }
 ```
 
-`cargo add giong giong-web serde --features serde/derive`, then `cargo run --release`.</script><script type="text/markdown" id="md-4"><!-- giong 1.4.1, https://giong.run/docs/agent-skill/#testing -->
+`cargo add giong giong-web serde --features serde/derive`, then `cargo run --release`.</script><script type="text/markdown" id="md-4"><!-- giong 1.4.2, https://giong.run/docs/agent-skill/#testing -->
 
 ## Testing
 
 - `giong::block_on(async { .. })` in a plain `#[test]`.
 - giong-web without a socket: `app.handle(Request::from_bytes(b"GET /users/7 HTTP/1.1\r\nHost: t\r\n\r\n").unwrap())`,
   then check `resp.status()` and `giong_web::Error::of(&resp)`.
-- Run the suite again with `GIONG_DRIVER=epoll`: containers without io_uring use it.</script><script type="text/markdown" id="md-5"><!-- giong 1.4.1, https://giong.run/docs/agent-skill/#debugging-a-running-service -->
+- Run the suite again with `GIONG_DRIVER=epoll`: containers without io_uring use it.</script><script type="text/markdown" id="md-5"><!-- giong 1.4.2, https://giong.run/docs/agent-skill/#debugging-a-running-service -->
 
 ## Debugging a running service
 
@@ -451,7 +451,7 @@ claude mcp add --transport http giong http://127.0.0.1:7777/mcp --header "Author
 Tools: `overview` (memory, descriptors, each worker, warnings such as a blocked worker with
 the line that spawned the task), `workers`, `tasks` (live tasks by spawn line: a count that
 keeps growing is a leak), `sources` (database pools) and `profile` (where the time goes).
-Log `giong::driver_choice()` at start-up to see which driver each worker got and why.</script><script type="text/markdown" id="md-6"><!-- giong 1.4.1, https://giong.run/docs/agent-skill/#platforms-and-deployment -->
+Log `giong::driver_choice()` at start-up to see which driver each worker got and why.</script><script type="text/markdown" id="md-6"><!-- giong 1.4.2, https://giong.run/docs/agent-skill/#platforms-and-deployment -->
 
 ## Platforms and deployment
 
@@ -461,7 +461,7 @@ Log `giong::driver_choice()` at start-up to see which driver each worker got and
 - Docker works with no settings (epoll under the default seccomp profile). For io_uring,
   use the seccomp profile from `references/deployment.md`; `GIONG_DRIVER=io_uring` refuses
   to start without it. Workers follow the container's CPU quota.
-- Rust 1.80+, 1.85 for giong-quic and `unstable-http3`.</script><script type="text/markdown" id="md-7"><!-- giong 1.4.1, https://giong.run/docs/agent-skill/#before-finishing-a-change -->
+- Rust 1.80+, 1.85 for giong-quic and `unstable-http3`.</script><script type="text/markdown" id="md-7"><!-- giong 1.4.2, https://giong.run/docs/agent-skill/#before-finishing-a-change -->
 
 ## Before finishing a change
 
@@ -470,7 +470,7 @@ Log `giong::driver_choice()` at start-up to see which driver each worker got and
 Transactions on `pool.get()`. 7. No Tokio-runtime crate on a worker. 8. Tests pass with
 `GIONG_DRIVER=epoll` too.</script><script type="text/markdown" id="md-page"># Agent skill
 
-> giong 1.4.1 · https://giong.run/docs/agent-skill/ · source: https://github.com/giong-run/Giong/blob/v1.4.1/skills/giong/SKILL.md
+> giong 1.4.2 · https://giong.run/docs/agent-skill/ · source: https://github.com/giong-run/Giong/blob/v1.4.2/skills/giong/SKILL.md
 
 giong is a thread-per-core async runtime for Rust: one worker per core, each with its own
 io_uring ring (epoll where io_uring is blocked; kqueue on macOS; I/O completion ports on
@@ -638,7 +638,7 @@ Log `giong::driver_choice()` at start-up to see which driver each worker got and
 `.await`. 4. Pools, clients and routers are per worker. 5. Errors matched by code. 6.
 Transactions on `pool.get()`. 7. No Tokio-runtime crate on a worker. 8. Tests pass with
 `GIONG_DRIVER=epoll` too.
-</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.4.1, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use Agent skill as documented below.
+</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.4.2, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use Agent skill as documented below.
 
 Rules for giong code:
 - Start the runtime with giong::Builder::new().shutdown_on_signals(true).build()?.run(|_worker| async { .. }); there are no macros. Build listeners, routers, pools and clients inside each worker's future.
@@ -651,11 +651,11 @@ More facts: https://giong.run/llms.txt. Best practices: https://giong.run/docs/b
 
 My task: <describe what to build or fix>
 
-Documentation of Agent skill, giong 1.4.1 (https://giong.run/docs/agent-skill.md):
+Documentation of Agent skill, giong 1.4.2 (https://giong.run/docs/agent-skill.md):
 
 # Agent skill
 
-> giong 1.4.1 · https://giong.run/docs/agent-skill/ · source: https://github.com/giong-run/Giong/blob/v1.4.1/skills/giong/SKILL.md
+> giong 1.4.2 · https://giong.run/docs/agent-skill/ · source: https://github.com/giong-run/Giong/blob/v1.4.2/skills/giong/SKILL.md
 
 giong is a thread-per-core async runtime for Rust: one worker per core, each with its own
 io_uring ring (epoll where io_uring is blocked; kqueue on macOS; I/O completion ports on
@@ -844,7 +844,7 @@ Transactions on `pool.get()`. 7. No Tokio-runtime crate on a worker. 8. Tests pa
         <h2>Learn</h2>
         <a href="/docs/">Get started</a>
         <a href="/docs/#examples">Examples</a>
-        <a href="https://docs.rs/giong/1.4.1/giong/">API reference</a>
+        <a href="https://docs.rs/giong/1.4.2/giong/">API reference</a>
         <a href="/docs/#errors">Error codes</a>
         <a href="/docs/best-practices/">Best practices</a><a href="/docs/agent-skill/">Agent skill</a>
         <a href="/llms.txt">llms.txt</a>

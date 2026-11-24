@@ -1,13 +1,13 @@
 # giong-mysql
 
-> giong 1.4.1 · https://giong.run/docs/giong-mysql/ · source: https://github.com/giong-run/Giong/blob/v1.4.1/giong-mysql/README.md
+> giong 1.4.2 · https://giong.run/docs/giong-mysql/ · source: https://github.com/giong-run/Giong/blob/v1.4.2/giong-mysql/README.md
 
-A MySQL and MariaDB client and connection pool for the [giong](https://github.com/giong-run/Giong/blob/v1.4.1/README.md) runtime. It speaks the client/server protocol itself (no libmysqlclient), encrypts with [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-tls/README.md), and depends on nothing from the Tokio ecosystem.
+A MySQL and MariaDB client and connection pool for the [giong](https://github.com/giong-run/Giong/blob/v1.4.2/README.md) runtime. It speaks the client/server protocol itself (no libmysqlclient), encrypts with [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.4.2/giong-tls/README.md), and depends on nothing from the Tokio ecosystem.
 
 ```toml
 [dependencies]
-giong = "1.4.1"
-giong-mysql = "1.4.1"
+giong = "1.4.2"
+giong-mysql = "1.4.2"
 ```
 
 ```rust,no_run
@@ -55,7 +55,7 @@ fn main() -> std::io::Result<()> {
 ## What it does
 
 - **Pipelining across tasks.** Tasks that share a connection send their statements together, and one round trip answers all of them. A few connections serve hundreds of concurrent tasks, none of them waiting for a free connection. The usual MySQL clients (libmysqlclient, mysql_async, SQLx) have one statement in flight per connection.
-- **Prepared statements, kept.** Every statement is prepared the first time a connection runs it and kept in a bounded cache (64 per connection by default), so from then on it takes one round trip, and parameters and rows travel in MySQL's binary format. The server's `max_prepared_stmt_count` bounds the statements of all its clients together; when it is reached anyway (error 1461), the connection closes its statements that are not in use and prepares again, once.
+- **Prepared statements, kept.** Every statement is prepared the first time a connection runs it and kept in a bounded cache (64 per connection by default), so from then on it takes one round trip, and parameters and rows travel in MySQL's binary format. The server's `max_prepared_stmt_count` bounds the statements of all its clients together; when it is reached anyway (error 1461), the connection's prepares take turns: each closes the statements not in use and tries again, pausing between tries, so a burst of new statements waits instead of failing; a prepare fails once none on the connection has succeeded for a second.
 - **A pool per worker.** Statements that stand alone share connections; `pool.get()` takes one connection for a transaction, session settings or a slow statement. A connection comes back clean: if its session may have changed (a `SET`, a temporary table, a lock, a transaction left open), it is reset before anything else runs on it, without waiting for a round trip; one that ran only plain statements keeps its prepared statements. Tasks waiting in `get()` are served in order, and shared statements cannot keep them waiting: a connection is set aside for the oldest and handed over once the statements on it are answered. Transactions and session changes never run on the shared connections: the pool's own methods refuse `BEGIN`, `COMMIT`, `SET`, `LOCK TABLES`, `CALL` and the like, and a batch that leaves a transaction open closes its connection rather than let the statements of other tasks run inside it. The pool steers new statements away from a connection whose oldest statement has been running for more than 5 ms, so a slow query does not hold up the fast ones behind it.
 - **Transactions that cannot end silently.** In MySQL, a deadlock rolls the whole transaction back, so does a lock wait timeout when the server has `innodb_rollback_on_timeout` on, and `CREATE`, `ALTER` or `DROP` commits it; the statements after that run on their own, outside any transaction, without a word. Here they fail instead, and so does `commit`. So does a transaction in which a statement was given up (its future dropped by a timeout), since it may have run.
 - **TLS on by default for remote hosts, always verified.** `caching_sha2_password` (MySQL 8's default) and `mysql_native_password`. A password is never sent where it could be read on the way (see [Passwords](#passwords)).
@@ -171,21 +171,21 @@ Conversions never lose anything silently: a value that does not fit, a binary co
 
 ## Errors
 
-`Error` is cheap to clone, implements `std::error::Error`, and converts into `io::Error`. `error.kind()` says what went wrong. Each kind has a giong error code, shown in front of the message and linked to its page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/README.md) (`GIONG-E3104: ERROR 1062 (23000): Duplicate entry '1' for key 'users.PRIMARY'. See …`); after `?` into an `io::Error`, `giong::error::code(&err)` finds it:
+`Error` is cheap to clone, implements `std::error::Error`, and converts into `io::Error`. `error.kind()` says what went wrong. Each kind has a giong error code, shown in front of the message and linked to its page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/README.md) (`GIONG-E3104: ERROR 1062 (23000): Duplicate entry '1' for key 'users.PRIMARY'. See …`); after `?` into an `io::Error`, `giong::error::code(&err)` finds it:
 
 | `ErrorKind` | Code | Meaning |
 |---|---|---|
-| `Config` | [E3101](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3101.md) | The configuration or URL is not valid, or the server refused a session variable. |
-| `Connect` | [E3102](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3102.md) | Name resolution, TCP, TLS, or the connect timeout. Also an unknown database (1049), a server older than MySQL 8.0 or MariaDB 10.6, a session whose character set is not `utf8mb4`, and a cancel request that reached another server. |
-| `Auth` | [E3103](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3103.md) | The server refused the credentials, asked for a plugin this crate does not support, or would have needed the password where it could be read. |
-| `Db` | [E3104](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3104.md) | The server reported an error for the statement; `error.server_code()` is MySQL's error number (1062 for a duplicate key, 1213 for a deadlock...) and `error.db()` has the SQLSTATE too. |
-| `Type` | [E3105](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3105.md) | A value could not be converted between Rust and MySQL, or the number of parameters is wrong. The message names the parameter or column and suggests the Rust type to use. |
-| `RowCount` | [E3106](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3106.md) | `query_one` found no row or several, `query_opt` several. |
-| `TooLarge` | [E3107](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3107.md) | The result was larger than `max_result_size`. The connection stays usable. |
-| `Closed` | [E3108](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3108.md) | The connection is closed. A `Pool` replaces it by itself. |
-| `PoolTimeout` | [E3109](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3109.md) | No pooled connection became free within `wait_timeout`. |
-| `Protocol` | [E3110](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3110.md) | The server sent something this crate cannot understand. The connection is closed. |
-| `Statement` | [E3111](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3111.md) | Refused before sending: a transaction statement, or one that changes the session (`SET`, `USE`, `LOCK TABLES`, a temporary table, `GET_LOCK`, a user variable), on the connections a `Pool` shares. Use `pool.get()`, and `transaction()`. |
+| `Config` | [E3101](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3101.md) | The configuration or URL is not valid, or the server refused a session variable. |
+| `Connect` | [E3102](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3102.md) | Name resolution, TCP, TLS, or the connect timeout. Also an unknown database (1049), a server older than MySQL 8.0 or MariaDB 10.6, a session whose character set is not `utf8mb4`, and a cancel request that reached another server. |
+| `Auth` | [E3103](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3103.md) | The server refused the credentials, asked for a plugin this crate does not support, or would have needed the password where it could be read. |
+| `Db` | [E3104](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3104.md) | The server reported an error for the statement; `error.server_code()` is MySQL's error number (1062 for a duplicate key, 1213 for a deadlock...) and `error.db()` has the SQLSTATE too. |
+| `Type` | [E3105](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3105.md) | A value could not be converted between Rust and MySQL, or the number of parameters is wrong. The message names the parameter or column and suggests the Rust type to use. |
+| `RowCount` | [E3106](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3106.md) | `query_one` found no row or several, `query_opt` several. |
+| `TooLarge` | [E3107](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3107.md) | The result was larger than `max_result_size`. The connection stays usable. |
+| `Closed` | [E3108](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3108.md) | The connection is closed. A `Pool` replaces it by itself. |
+| `PoolTimeout` | [E3109](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3109.md) | No pooled connection became free within `wait_timeout`. |
+| `Protocol` | [E3110](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3110.md) | The server sent something this crate cannot understand. The connection is closed. |
+| `Statement` | [E3111](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3111.md) | Refused before sending: a transaction statement, or one that changes the session (`SET`, `USE`, `LOCK TABLES`, a temporary table, `GET_LOCK`, a user variable), on the connections a `Pool` shares. Use `pool.get()`, and `transaction()`. |
 
 `error.is_transient()` is true for errors worth retrying after a pause: connecting, a closed connection, a pool wait timeout, and the server's deadlock (1213), lock wait timeout (1205), too many connections (1040, 1203), shutdown (1053), read-only mode (1290 naming `--read-only`, 1792, 1836) and a killed connection (1927, MariaDB). Retry a whole transaction, not its failed statement.
 
@@ -198,7 +198,7 @@ An error from the server affects only its own statement: the statements that oth
 | `Config::connect_timeout` | 10 s | `ErrorKind::Connect`, "connect timeout". |
 | `Config::statement_timeout` | 30 s | On MySQL, sent as the session's `max_execution_time`, so the server stops a `SELECT` that runs too long (error 3024), and as `lock_wait_timeout`, so a statement waiting for a table or metadata lock gives up (1205). A write waiting for a row lock gives up after `innodb_lock_wait_timeout` (50 s by default); one that holds its locks and runs long is not stopped. On MariaDB, sent as `max_statement_time`, which stops every statement (1969), and as `lock_wait_timeout`. |
 | `Config::max_result_size` | 64 MiB of row data | `ErrorKind::TooLarge`; the rest of the result is read and thrown away. |
-| `Config::statement_cache_capacity` | 64 per connection | The least recently used statement is closed. 0 prepares and closes every statement each time. The server's `max_prepared_stmt_count` (16,382 by default) bounds the statements of all its clients: processes × workers × pool size × this must stay below it (64 allows 255 connections). At that limit (error 1461), the connection closes its unused statements and prepares again, once. |
+| `Config::statement_cache_capacity` | 64 per connection | The least recently used statement is closed. 0 prepares and closes every statement each time. The server's `max_prepared_stmt_count` (16,382 by default) bounds the statements of all its clients: processes × workers × pool size × this must stay below it (64 allows 255 connections). At that limit (error 1461), the connection's prepares take turns, closing its unused statements and trying again, and fail once none has succeeded for a second. |
 | `Pool::wait_timeout` | 5 s | `ErrorKind::PoolTimeout`. |
 | `Pool::idle_timeout` | 10 min | The connection is closed. |
 | `Pool::max_lifetime` | 30 min, less up to 10% | The connection is closed once no statement uses it (one taken with `get()`, when it comes back), and a new one is opened when needed. |

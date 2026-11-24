@@ -1,13 +1,13 @@
 # giong-postgres
 
-> giong 1.4.1 · https://giong.run/docs/giong-postgres/ · source: https://github.com/giong-run/Giong/blob/v1.4.1/giong-postgres/README.md
+> giong 1.4.2 · https://giong.run/docs/giong-postgres/ · source: https://github.com/giong-run/Giong/blob/v1.4.2/giong-postgres/README.md
 
-A PostgreSQL client and connection pool for the [giong](https://github.com/giong-run/Giong/blob/v1.4.1/README.md) runtime. It speaks the wire protocol itself (no libpq), encrypts with [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.4.1/giong-tls/README.md), and depends on nothing from the Tokio ecosystem.
+A PostgreSQL client and connection pool for the [giong](https://github.com/giong-run/Giong/blob/v1.4.2/README.md) runtime. It speaks the wire protocol itself (no libpq), encrypts with [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.4.2/giong-tls/README.md), and depends on nothing from the Tokio ecosystem.
 
 ```toml
 [dependencies]
-giong = "1.4.1"
-giong-postgres = "1.4.1"
+giong = "1.4.2"
+giong-postgres = "1.4.2"
 ```
 
 ```rust,no_run
@@ -146,21 +146,21 @@ Integers convert between the three integer types when the value fits and fail wh
 
 ## Errors
 
-`Error` is cheap to clone, implements `std::error::Error`, and converts into `io::Error`. `error.kind()` says what went wrong. Each kind has a giong error code, shown in front of the message and linked to its page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/README.md) (`GIONG-E3003: password authentication failed for user "app". See …`); after `?` into an `io::Error`, `giong::error::code(&err)` finds it:
+`Error` is cheap to clone, implements `std::error::Error`, and converts into `io::Error`. `error.kind()` says what went wrong. Each kind has a giong error code, shown in front of the message and linked to its page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/README.md) (`GIONG-E3003: password authentication failed for user "app". See …`); after `?` into an `io::Error`, `giong::error::code(&err)` finds it:
 
 | `ErrorKind` | Code | Meaning |
 |---|---|---|
-| `Config` | [E3001](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3001.md) | The configuration or URL is not valid. |
-| `Connect` | [E3002](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3002.md) | Name resolution, TCP, TLS, or the connect timeout. Also an unknown database (`3D000`). |
-| `Auth` | [E3003](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3003.md) | The server refused the credentials, or asked for a method this crate does not support. |
-| `Db` | [E3004](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3004.md) | The server reported an error for the statement; `error.server_code()` is the SQLSTATE (`23505` for a unique violation...) and `error.db()` has every field. A `COMMIT` that the server turned into a rollback is `Db` with code `25P02` and no `db()`. |
-| `Type` | [E3005](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3005.md) | A value could not be converted between Rust and PostgreSQL. The message names the parameter or column and suggests the Rust type to use. |
-| `RowCount` | [E3006](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3006.md) | `query_one` found no row, or more than one. |
-| `TooLarge` | [E3007](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3007.md) | The result was larger than `max_result_size`. The connection stays usable. |
-| `Closed` | [E3008](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3008.md) | The connection is closed. A `Pool` replaces it by itself. Also a cancel token whose pooled connection went back to the pool. |
-| `PoolTimeout` | [E3009](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3009.md) | No pooled connection became free within `wait_timeout`. |
-| `Protocol` | [E3010](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3010.md) | The server sent something this crate cannot understand. The connection is closed. |
-| `Statement` | [E3011](https://github.com/giong-run/Giong/blob/v1.4.1/docs/errors/E3011.md) | Refused before sending, on the connections a `Pool` shares: a transaction statement, a statement that changes the session (`SET`, `LISTEN`, `PREPARE`, temporary tables...), or `COPY ... FROM STDIN`. Use `pool.get()`. The check reads the statement, not what a function does: `SELECT set_config('search_path', 'x', false)` is sent, and changes the session for every task that shares the connection. |
+| `Config` | [E3001](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3001.md) | The configuration or URL is not valid. |
+| `Connect` | [E3002](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3002.md) | Name resolution, TCP, TLS, or the connect timeout. Also an unknown database (`3D000`). |
+| `Auth` | [E3003](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3003.md) | The server refused the credentials, or asked for a method this crate does not support. |
+| `Db` | [E3004](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3004.md) | The server reported an error for the statement; `error.server_code()` is the SQLSTATE (`23505` for a unique violation...) and `error.db()` has every field. A `COMMIT` that the server turned into a rollback is `Db` with code `25P02` and no `db()`. |
+| `Type` | [E3005](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3005.md) | A value could not be converted between Rust and PostgreSQL. The message names the parameter or column and suggests the Rust type to use. |
+| `RowCount` | [E3006](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3006.md) | `query_one` found no row, or more than one. |
+| `TooLarge` | [E3007](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3007.md) | The result was larger than `max_result_size`. The connection stays usable. |
+| `Closed` | [E3008](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3008.md) | The connection is closed. A `Pool` replaces it by itself. Also a cancel token whose pooled connection went back to the pool. |
+| `PoolTimeout` | [E3009](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3009.md) | No pooled connection became free within `wait_timeout`. |
+| `Protocol` | [E3010](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3010.md) | The server sent something this crate cannot understand. The connection is closed. |
+| `Statement` | [E3011](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E3011.md) | Refused before sending, on the connections a `Pool` shares: a transaction statement, a statement that changes the session (`SET`, `LISTEN`, `PREPARE`, temporary tables...), or `COPY ... FROM STDIN`. Use `pool.get()`. The check reads the statement, not what a function does: `SELECT set_config('search_path', 'x', false)` is sent, and changes the session for every task that shares the connection. |
 
 `error.is_transient()` is true for errors worth retrying after a pause: connecting, a closed connection, a pool wait timeout, and the server's serialization failure (`40001`), deadlock (`40P01`), lock not available (`55P03`), too many connections (`53300`), connection errors (class `08`), shutdown or startup (`57P01`, `57P02`, `57P03`) and standby (`25006`). Retry a whole transaction, not its failed statement.
 
