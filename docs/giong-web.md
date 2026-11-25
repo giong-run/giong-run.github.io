@@ -1,13 +1,13 @@
 # giong-web
 
-> giong 1.4.2 · https://giong.run/docs/giong-web/ · source: https://github.com/giong-run/Giong/blob/v1.4.2/giong-web/README.md
+> giong 1.5.0 · https://giong.run/docs/giong-web/ · source: https://github.com/giong-run/Giong/blob/v1.5.0/giong-web/README.md
 
 Routing, middleware and JSON for HTTP services on the [giong](https://giong.run/docs/giong.md) runtime, on top of [`giong-http`](https://giong.run/docs/giong-http.md). A handler is a plain `async fn`; every error, yours or the framework's, is answered as a problem+json body with a stable code (the three answers `giong-http` gives before a request reaches the app are the [exception](#errors)). No macros, no Tokio.
 
 ```toml
 [dependencies]
-giong = "1.4.2"
-giong-web = { version = "1.4.2", features = ["serde"] }
+giong = "1.5.0"
+giong-web = { version = "1.5.0", features = ["serde"] }
 serde = { version = "1", features = ["derive"] }
 ```
 
@@ -193,6 +193,7 @@ impl<S: 'static> Middleware<S> for RequireAuth {
 | `Cors::new()` | answers preflights and adds `Access-Control-Allow-*` for the origins named; on the outermost router or a nested one, before any credentials check (preflights carry none) | no origin allowed until named with `.allow_origin(..)`; methods `GET`, `HEAD`, `POST`; no extra headers |
 | `Compression::new()` | gzip for clients that accept it | level 1, bodies from 1 KiB to 16 MiB; text, JSON, JavaScript, XML (SVG too) and WebAssembly |
 | `Timeout::new(d)` | answers `503` (`GIONG-E1209`) when the handler takes longer than `d` | not for routes that stream their request body |
+| `Record::new(Sink::Stdout)` | for development: one `exchange` JSON line per answered request with both sides, headers and bodies (up to 64 KiB each, `.max_body(n)`), so that `giong test record` can turn real requests into tests | secret headers (`Authorization`, `Cookie`, `Set-Cookie`, `X-Api-Key`, ...) and query parameters, form fields and JSON keys named like secrets (`password`, `token`, `api_key`, `card`, ...) written as `[redacted]`, more with `.redact_header(..)` and `.redact_field(..)`, fewer with `.keep_field(..)`; add it only when you want recordings, such as when `GIONG_RECORD` is set; in a release build only with the `dev` feature (otherwise `Record::new` panics with `GIONG-E1213`) |
 | `Trace::new()` (feature `tracing`) | runs each request in a `tracing` span with OpenTelemetry's field names (`http.request.method`, `url.path`, `http.route`, `http.response.status_code`, `client.address`) plus `request_id` and `worker`, ended by one event; a `5xx` at `ERROR` with its code and cause | instead of `Logger`, or beside it |
 
 A log line:
@@ -261,6 +262,25 @@ assert_eq!(resp.status(), 400);
 assert_eq!(giong_web::Error::of(&resp).unwrap().code(), "GIONG-E1205");
 ```
 
+## Route list
+
+`app.routes()` lists what a built app serves, in the order the routes were added: method, full pattern (with the prefixes it was nested under), parameter names, whether the last one is a catch-all, the body limit of a streaming route, how many middleware run around it and the line that added it. `.to_json()` gives the same as one JSON object, for tools. `RouteList::live()` returns the lists of every app alive on the current worker, which is how giong-mcp's `routes` tool (feature `web`) and the `giong` CLI list a running service's routes without the service handing them over.
+
+```rust
+use giong_web::{Error, Req, Response, Router};
+
+async fn user(_req: Req) -> Result<Response, Error> {
+    Ok(Response::text("ok"))
+}
+
+let app = Router::new().get("/users/{id}", user).build(());
+let route = app.routes().iter().next().unwrap();
+assert_eq!((route.method(), route.pattern()), ("GET", "/users/{id}"));
+assert!(app.routes().to_json().starts_with(r#"{"routes":[{"method":"GET""#));
+```
+
+The list is made once, when the router is built; nothing runs while requests are served.
+
 ## Performance
 
 Measured with `bench/web.sh`: the same handlers on giong-web and on axum 0.8.9 (Tokio 1.54, hyper 1.12), both with serde_json 1.0, each server on one core and `wrk` on another of a 4-vCPU virtual machine (Xeon 2.1 GHz, Linux 6.18), 50 connections. `/json` serializes a one-field struct, `/users` a list of 100 users (8 KB), `/users/{id}` reads a path parameter, `/compute?n=25` a typed query and then computes a Fibonacci number. The middleware rows add request ids, gzip at level 1 from 1 KiB and a 10 s timeout: giong-web's own, and tower-http 0.6.11's for axum; `wrk` asks for gzip. Requests per second, median of 5 interleaved rounds of 5 s, with the range; p99 is the median of the rounds' p99s.
@@ -280,10 +300,10 @@ With middleware:
 
 - **1.3 times axum on small JSON answers, 1.8 times on the list of users, 1.9 to 2.3 times with middleware.** The routes, the parameters and serde cost giong-web about 5% against giong-http's bare handler on `/json`. giong-http's `/users` is faster because it writes its JSON by hand, without serde or the 200 small strings the handler builds; giong-web and axum run the same handler.
 - **`/compute` is the handler's time,** the same for both within noise (giong-web's range 3.66–4.01k, axum's 3.58–4.07k). Its p99 is higher on giong-web (22.9 against 18.5 ms), as it is on giong-http (24.2 ms). Our guess, not measured: a worker runs every ready request before it reads its sockets again, so when each costs 250 µs of CPU, some wait for a whole batch.
-- **Pipelined requests** (16 per write): axum stays at 18k, as in the [main benchmark](https://github.com/giong-run/Giong/blob/v1.4.2/docs/BENCHMARKS.md#throughput-at-50-connections); we have not looked into why. giong-http reads a pipeline and answers it as a batch.
+- **Pipelined requests** (16 per write): axum stays at 18k, as in the [main benchmark](https://github.com/giong-run/Giong/blob/v1.5.0/docs/BENCHMARKS.md#throughput-at-50-connections); we have not looked into why. giong-http reads a pipeline and answers it as a batch.
 - Resident memory after the run: 6.6 MB for giong-web, 5.2 MB for axum.
 
-HTTPS and a database behind the handlers are measured with the [example REST API](https://github.com/giong-run/Giong/blob/v1.4.2/examples/rest-api/README.md#performance). Not measured yet: several cores, and middleware one at a time. Results are in `bench/results/web/`.
+HTTPS and a database behind the handlers are measured with the [example REST API](https://github.com/giong-run/Giong/blob/v1.5.0/examples/rest-api/README.md#performance). Not measured yet: several cores, and middleware one at a time. Results are in `bench/results/web/`.
 
 ## Features
 
@@ -293,7 +313,7 @@ HTTPS and a database behind the handlers are measured with the [example REST API
 | `tls` | `Server::serve_tls`, through giong-http: HTTP/2 or HTTP/1.1, as ALPN picks |
 | `tracing` | `middleware::Trace`, through `tracing` 0.1 |
 
-Apps are served over HTTP/2 as well as HTTP/1.1, with nothing to change: giong-http turns each HTTP/2 stream into the request a handler already knows (see [its HTTP/2 section](https://github.com/giong-run/Giong/blob/v1.4.2/giong-http/README.md#http2)). Over TLS, ALPN picks the protocol; without TLS, a client that knows the server speaks HTTP/2 (prior knowledge) gets it on the same port.
+Apps are served over HTTP/2 as well as HTTP/1.1, with nothing to change: giong-http turns each HTTP/2 stream into the request a handler already knows (see [its HTTP/2 section](https://github.com/giong-run/Giong/blob/v1.5.0/giong-http/README.md#http2)). Over TLS, ALPN picks the protocol; without TLS, a client that knows the server speaks HTTP/2 (prior knowledge) gets it on the same port.
 
 ## Not there yet
 
@@ -301,6 +321,6 @@ Cookies and sessions, forms and multipart bodies, WebSockets, serving static fil
 
 ## Tests
 
-`cargo test -p giong-web --all-features`: 36 tests without a socket, most through `App::handle`: text beating parameters beating catch-alls, `HEAD`, `404` with its hint, `405` and `OPTIONS` with `Allow` (the union of every route that matches the path), parameters that do not parse and a parameter the route lacks, `..`, `.`, NUL and `%2F` refused in parameters, query strings, errors from `?`, state and nested routers, the order middleware run in and which routes they see, the router's own `404`, `405` and `OPTIONS` answers passing through a nested router's middleware, a middleware answering by itself and passing values to the handler, closures, the startup panics for bad and duplicate routes; a panicking handler or middleware answered `500` and logged once; request ids (made, trusted only when asked, sent back), log lines and their fields, long paths cut in them, a line for a request dropped before its response, timeouts, CORS preflights allowed and refused and simple requests, on the outermost router and a nested one, every middleware setting that cannot work, gzip and when not to use it, `HEAD` with the headers of `GET`; JSON bodies in and out, `415`, `400` and `422`, escaped strings and the `500` for a `&str` field that cannot borrow, typed queries, a repeated key and a bad escape refused by both query APIs. 4 tests over real TCP with giong-http's client, over HTTP/1.1 and HTTP/2: gzip on the wire for `GET` and `HEAD`, CORS, `405`, 50 requests on one kept-alive connection; a panic that leaves the connection, and the other HTTP/2 streams, alone. 5 tests of streamed bodies over real TCP: uploads past the server's body limit on a streaming route, `413` with its code for one past the route's limit, a slow upload that the timeout leaves alone, `req.json()` on a streaming route, a streamed response that passes through every middleware untouched. 3 tests of `Trace` with a recording subscriber: the span's fields, the code and cause of errors, and the event for a request dropped before its response. 42 unit tests, among them 30,000 random route sets matched against a slow reference matcher (which works out `Allow` its own way), 4,000 random requests through every middleware with the checks below, bodies around the 64 KiB compression slice, giong codes found down an error's `source()` chain, a cause said once when an error already shows its source, and the log writer giving back memory and the slot of a thread that ended. 19 documentation examples.
+`cargo test -p giong-web --all-features`: 36 tests without a socket, most through `App::handle`: text beating parameters beating catch-alls, `HEAD`, `404` with its hint, `405` and `OPTIONS` with `Allow` (the union of every route that matches the path), parameters that do not parse and a parameter the route lacks, `..`, `.`, NUL and `%2F` refused in parameters, query strings, errors from `?`, state and nested routers, the order middleware run in and which routes they see, the router's own `404`, `405` and `OPTIONS` answers passing through a nested router's middleware, a middleware answering by itself and passing values to the handler, closures, the startup panics for bad and duplicate routes; a panicking handler or middleware answered `500` and logged once; request ids (made, trusted only when asked, sent back), log lines and their fields, long paths cut in them, a line for a request dropped before its response, timeouts, CORS preflights allowed and refused and simple requests, on the outermost router and a nested one, every middleware setting that cannot work, gzip and when not to use it, `HEAD` with the headers of `GET`; JSON bodies in and out, `415`, `400` and `422`, escaped strings and the `500` for a `&str` field that cannot borrow, typed queries, a repeated key and a bad escape refused by both query APIs. 4 tests over real TCP with giong-http's client, over HTTP/1.1 and HTTP/2: gzip on the wire for `GET` and `HEAD`, CORS, `405`, 50 requests on one kept-alive connection; a panic that leaves the connection, and the other HTTP/2 streams, alone. 5 tests of streamed bodies over real TCP: uploads past the server's body limit on a streaming route, `413` with its code for one past the route's limit, a slow upload that the timeout leaves alone, `req.json()` on a streaming route, a streamed response that passes through every middleware untouched. 8 tests of the route list: order, nested prefixes and parameters, catch-alls, streaming limits and middleware counts, the JSON form, the apps alive on a thread (another thread's and dropped ones left out, 10,000 built and dropped apps not kept) and on each worker of a runtime. 14 tests of `Record`: both sides with every secret header redacted, secrets in queries, form bodies and JSON bodies (request and response) redacted, also in bodies that are not UTF-8, binary bodies in base64 that decode back, every byte value and non-UTF-8 header values still giving valid JSON, bodies cut at `max_body` and its limit, custom redaction, `404`s and panics recorded without the panic's message, streamed responses and request bodies marked (over real TCP, the handler still reading the body), no line for a request a timeout further out cancelled; 2 more in a release build without `dev`, where `Record::new` refuses with its code. 3 tests of `Trace` with a recording subscriber: the span's fields, the code and cause of errors, and the event for a request dropped before its response. 54 unit tests, among them 30,000 random route sets matched against a slow reference matcher (which works out `Allow` its own way), 4,000 random requests through every middleware with the checks below, bodies around the 64 KiB compression slice, giong codes found down an error's `source()` chain, a cause said once when an error already shows its source, and the log writer giving back memory and the slot of a thread that ended. 21 documentation examples.
 
 Two fuzz targets in `fuzz/` (`cargo +nightly fuzz run request`, or `routes`): `routes` checks that the route table finds the route a slow reference finds, with the same parameters, or the same `404`, `405` or `OPTIONS` answer; `request` sends any bytes as a request to an app with every middleware and checks that the answer is well formed: a valid status and headers, a problem+json body with a code for every error, gzip only when asked and decoding to what the handler wrote, one log line that is JSON and agrees with the response, and the request id sent back. 5.4 million inputs ran without a failure when the crate was added; CI fuzzes both every night.

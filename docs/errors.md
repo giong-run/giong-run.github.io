@@ -1,6 +1,6 @@
 # Error codes
 
-> giong 1.4.2 · https://giong.run/docs/errors/ · source: https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/README.md
+> giong 1.5.0 · https://giong.run/docs/errors/ · source: https://github.com/giong-run/Giong/blob/v1.5.0/docs/errors/README.md
 
 Every error giong raises itself starts with a code and ends with a link to its page here:
 
@@ -44,13 +44,31 @@ when it is no longer raised.
 | [GIONG-E0011](https://giong.run/docs/errors/E0011.md) | `NotInRuntime` | not inside a giong runtime |
 | [GIONG-E0012](https://giong.run/docs/errors/E0012.md) | `RuntimeAlreadyRunning` | a runtime already runs on this thread |
 | [GIONG-E0013](https://giong.run/docs/errors/E0013.md) | `WrongWorker` | an operation was polled on another worker |
+| [GIONG-E0014](https://giong.run/docs/errors/E0014.md) | `ComputeBusy` | the compute lane is full |
+| [GIONG-E0016](https://giong.run/docs/errors/E0016.md) | `SignalNotAllowed` | this signal cannot be listened for |
+| [GIONG-E0017](https://giong.run/docs/errors/E0017.md) | `FdPassing` | descriptors could not be passed |
+| [GIONG-E0018](https://giong.run/docs/errors/E0018.md) | `ActivatedSocket` | the inherited socket cannot be used that way |
+| [GIONG-E0019](https://giong.run/docs/errors/E0019.md) | `ChildProcess` | cannot watch the child process |
 | [GIONG-E0020](https://giong.run/docs/errors/E0020.md) | `ThreadLimit` | a worker thread could not be started |
+| [GIONG-E0080](https://giong.run/docs/errors/E0080.md) | `BudgetFull` | the budget is at its limit |
+| [GIONG-E0081](https://giong.run/docs/errors/E0081.md) | `BudgetTooSmall` | a reservation larger than the budget |
 
 ## macOS
 
 | Code | `Code::` | Meaning |
 |---|---|---|
 | [GIONG-E0028](https://giong.run/docs/errors/E0028.md) | `NetworkBuffersExhausted` | the system ran out of network buffers |
+
+## Messages between processes (`giong::ipc`)
+
+| Code | `Code::` | Meaning |
+|---|---|---|
+| [GIONG-E0090](https://giong.run/docs/errors/E0090.md) | `IpcMessageTooLarge` | IPC message too large |
+| [GIONG-E0091](https://giong.run/docs/errors/E0091.md) | `IpcCorrupted` | IPC channel memory corrupted |
+| [GIONG-E0092](https://giong.run/docs/errors/E0092.md) | `IpcCapacity` | IPC capacity out of range |
+| [GIONG-E0093](https://giong.run/docs/errors/E0093.md) | `IpcHandshake` | IPC handshake failed |
+| [GIONG-E0094](https://giong.run/docs/errors/E0094.md) | `IpcPeerGone` | IPC peer process gone |
+| [GIONG-E0095](https://giong.run/docs/errors/E0095.md) | `IpcReceiverClosed` | IPC receiver closed |
 
 ## Network and name resolution
 
@@ -104,6 +122,7 @@ when it is no longer raised.
 | [GIONG-E1120](https://giong.run/docs/errors/E1120.md) | `HttpServerBusy` | request refused: the server's memory budget for requests is full |
 | [GIONG-E1121](https://giong.run/docs/errors/E1121.md) | `HttpServerLowMemory` | connection refused: the server is low on memory |
 | [GIONG-E1122](https://giong.run/docs/errors/E1122.md) | `HttpInvalidTrailer` | invalid HTTP trailer field |
+| [GIONG-E1123](https://giong.run/docs/errors/E1123.md) | `HttpServerOutOfFiles` | connection not accepted: the server is out of file descriptors |
 
 ## giong-web
 
@@ -243,3 +262,90 @@ New in giong 1.1. A call that fails ends with a gRPC status; the statuses giong-
 | [GIONG-E4108](https://giong.run/docs/errors/E4108.md) | `GrpcDeadline` | gRPC deadline exceeded |
 | [GIONG-E4109](https://giong.run/docs/errors/E4109.md) | `GrpcCancelled` | gRPC call cancelled |
 | [GIONG-E4110](https://giong.run/docs/errors/E4110.md) | `GrpcUnimplemented` | gRPC method not found |
+
+## giong-cli
+
+The `giong` command reports `GIONG-E5000` to `GIONG-E5099`. Its findings can also carry the runtime's own codes (`GIONG-E0001` when io_uring is blocked, for example).
+
+| Code | Name | Meaning |
+|---|---|---|
+| [GIONG-E5000](https://giong.run/docs/errors/E5000.md) | `Usage` | the command line is not valid |
+| [GIONG-E5001](https://giong.run/docs/errors/E5001.md) | `NotAProject` | no Cargo project here |
+| [GIONG-E5002](https://giong.run/docs/errors/E5002.md) | `CargoFailed` | cargo could not be run |
+| [GIONG-E5003](https://giong.run/docs/errors/E5003.md) | `RustTooOld` | the Rust compiler is too old |
+| [GIONG-E5004](https://giong.run/docs/errors/E5004.md) | `TokioCrate` | a dependency needs the Tokio runtime |
+| [GIONG-E5005](https://giong.run/docs/errors/E5005.md) | `UnknownCode` | no such error code |
+| [GIONG-E5006](https://giong.run/docs/errors/E5006.md) | `BlockingCall` | a blocking call inside a worker |
+| [GIONG-E5007](https://giong.run/docs/errors/E5007.md) | `HostNameBind` | binding a host name |
+| [GIONG-E5008](https://giong.run/docs/errors/E5008.md) | `BorrowAcrossAwait` | a RefCell borrow held across an await |
+| [GIONG-E5009](https://giong.run/docs/errors/E5009.md) | `BuildFailed` | the code does not compile |
+| [GIONG-E5010](https://giong.run/docs/errors/E5010.md) | `Lint` | clippy has a finding |
+| [GIONG-E5011](https://giong.run/docs/errors/E5011.md) | `DiskUsed` | build directories use a lot of disk |
+| [GIONG-E5012](https://giong.run/docs/errors/E5012.md) | `SlowDebugInfo` | the dev profile writes full debug information |
+| [GIONG-E5013](https://giong.run/docs/errors/E5013.md) | `OpenFilesLimit` | the open-files limit is low |
+| [GIONG-E5014](https://giong.run/docs/errors/E5014.md) | `PortInUse` | the port is in use |
+| [GIONG-E5015](https://giong.run/docs/errors/E5015.md) | `DockerSeccomp` | Docker blocks io_uring |
+| [GIONG-E5016](https://giong.run/docs/errors/E5016.md) | `EnvMissing` | a variable from .env.example is not set |
+| [GIONG-E5017](https://giong.run/docs/errors/E5017.md) | `ServiceExited` | the service stopped |
+| [GIONG-E5018](https://giong.run/docs/errors/E5018.md) | `ServiceNotReady` | the service did not start listening |
+| [GIONG-E5019](https://giong.run/docs/errors/E5019.md) | `McpUnreachable` | the service's giong-mcp does not answer |
+| [GIONG-E5020](https://giong.run/docs/errors/E5020.md) | `WatchLimit` | too many files to watch |
+| [GIONG-E5021](https://giong.run/docs/errors/E5021.md) | `NoLinker` | no linker found |
+| [GIONG-E5022](https://giong.run/docs/errors/E5022.md) | `DevRunning` | giong dev already serves this project |
+| [GIONG-E5023](https://giong.run/docs/errors/E5023.md) | `CompilerWarning` | the compiler has a warning |
+| [GIONG-E5024](https://giong.run/docs/errors/E5024.md) | `ListensOnNetwork` | the service would listen on every network interface |
+| [GIONG-E5030](https://giong.run/docs/errors/E5030.md) | `BadProjectName` | the project name is not valid |
+| [GIONG-E5031](https://giong.run/docs/errors/E5031.md) | `TargetNotEmpty` | the directory for the new project is not empty |
+| [GIONG-E5032](https://giong.run/docs/errors/E5032.md) | `BadTemplateChoice` | the template does not offer that choice |
+| [GIONG-E5033](https://giong.run/docs/errors/E5033.md) | `WriteFailed` | a file of the project could not be written |
+| [GIONG-E5034](https://giong.run/docs/errors/E5034.md) | `WindowsLimited` | the project's crates do not build on Windows |
+| [GIONG-E5035](https://giong.run/docs/errors/E5035.md) | `BadGiongPath` | --giong-path is not a giong checkout |
+| [GIONG-E5036](https://giong.run/docs/errors/E5036.md) | `AgentFileForeign` | an agent file exists that giong did not write |
+| [GIONG-E5037](https://giong.run/docs/errors/E5037.md) | `McpJsonInvalid` | .mcp.json is not valid JSON |
+| [GIONG-E5038](https://giong.run/docs/errors/E5038.md) | `VersionMismatch` | the project uses another giong version than this command |
+| [GIONG-E5039](https://giong.run/docs/errors/E5039.md) | `NotGiongProject` | the project does not depend on giong |
+| [GIONG-E5040](https://giong.run/docs/errors/E5040.md) | `NoContainerRuntime` | neither Docker nor Podman answers |
+| [GIONG-E5041](https://giong.run/docs/errors/E5041.md) | `DbNotReady` | the database does not answer queries |
+| [GIONG-E5042](https://giong.run/docs/errors/E5042.md) | `DbUrl` | no usable database URL |
+| [GIONG-E5043](https://giong.run/docs/errors/E5043.md) | `MigrationChanged` | an applied migration was changed |
+| [GIONG-E5044](https://giong.run/docs/errors/E5044.md) | `MigrationFailed` | a migration failed |
+| [GIONG-E5045](https://giong.run/docs/errors/E5045.md) | `MigrationName` | a migration file is not valid |
+| [GIONG-E5046](https://giong.run/docs/errors/E5046.md) | `DbClientMissing` | no database client to run the SQL |
+| [GIONG-E5047](https://giong.run/docs/errors/E5047.md) | `MigrationUnknown` | the database has a migration the project does not |
+| [GIONG-E5048](https://giong.run/docs/errors/E5048.md) | `DbNotManaged` | the database was not started by giong db up |
+| [GIONG-E5049](https://giong.run/docs/errors/E5049.md) | `DbStartFailed` | the database container could not start |
+| [GIONG-E5050](https://giong.run/docs/errors/E5050.md) | `RecordSecret` | a recorded value looks like a secret |
+| [GIONG-E5051](https://giong.run/docs/errors/E5051.md) | `DashboardToken` | the dashboard refused a request without its token |
+| [GIONG-E5053](https://giong.run/docs/errors/E5053.md) | `DashboardPortInUse` | the dashboard's port is in use |
+| [GIONG-E5054](https://giong.run/docs/errors/E5054.md) | `DashboardFailed` | the dashboard could not do what the page asked |
+| [GIONG-E5055](https://giong.run/docs/errors/E5055.md) | `WorkerBlocked` | a worker of the service is stuck in one task |
+| [GIONG-E5056](https://giong.run/docs/errors/E5056.md) | `ServiceWarning` | the service reports a warning |
+| [GIONG-E5057](https://giong.run/docs/errors/E5057.md) | `NoService` | no running service to ask |
+| [GIONG-E5058](https://giong.run/docs/errors/E5058.md) | `McpNoTool` | the service's giong-mcp lacks a tool |
+| [GIONG-E5059](https://giong.run/docs/errors/E5059.md) | `McpToolError` | the service's giong-mcp refused a call |
+| [GIONG-E5060](https://giong.run/docs/errors/E5060.md) | `BenchTarget` | the service to measure cannot be reached |
+| [GIONG-E5061](https://giong.run/docs/errors/E5061.md) | `BenchAgainst` | the build to compare against cannot be made |
+| [GIONG-E5062](https://giong.run/docs/errors/E5062.md) | `BenchGeneratorBehind` | the load generator fell behind its schedule |
+| [GIONG-E5063](https://giong.run/docs/errors/E5063.md) | `BenchErrors` | requests failed during the benchmark |
+| [GIONG-E5064](https://giong.run/docs/errors/E5064.md) | `BenchRegression` | the change is slower than the build it is compared with |
+| [GIONG-E5065](https://giong.run/docs/errors/E5065.md) | `NoRecording` | no recorded requests to use |
+| [GIONG-E5066](https://giong.run/docs/errors/E5066.md) | `RecordedCaseFailed` | a recorded case answers differently |
+| [GIONG-E5067](https://giong.run/docs/errors/E5067.md) | `RecordingInvalid` | a recording cannot be read or used |
+| [GIONG-E5068](https://giong.run/docs/errors/E5068.md) | `RecordValueMissing` | a recorded case needs a value that is not set |
+| [GIONG-E5069](https://giong.run/docs/errors/E5069.md) | `ReplayUnreachable` | the service to replay against does not answer |
+| [GIONG-E5070](https://giong.run/docs/errors/E5070.md) | `ImageTarget` | the service cannot be built for Linux here |
+| [GIONG-E5071](https://giong.run/docs/errors/E5071.md) | `ImageLibraries` | the shared libraries of the binary cannot be found |
+| [GIONG-E5072](https://giong.run/docs/errors/E5072.md) | `ImageNoCerts` | no CA certificates to put in the image |
+| [GIONG-E5073](https://giong.run/docs/errors/E5073.md) | `ImageAdd` | a file to add to the image is not usable |
+| [GIONG-E5074](https://giong.run/docs/errors/E5074.md) | `ImageLoad` | the image could not be loaded into Docker or Podman |
+| [GIONG-E5075](https://giong.run/docs/errors/E5075.md) | `ImagePush` | the image could not be pushed to the registry |
+| [GIONG-E5076](https://giong.run/docs/errors/E5076.md) | `ImageTag` | the image name or tag is not valid |
+| [GIONG-E5080](https://giong.run/docs/errors/E5080.md) | `FixDirty` | the project has changes that are not committed |
+| [GIONG-E5081](https://giong.run/docs/errors/E5081.md) | `FixFailed` | cargo could not apply its fixes |
+| [GIONG-E5082](https://giong.run/docs/errors/E5082.md) | `FixConflict` | a fix no longer matches the code |
+| [GIONG-E5083](https://giong.run/docs/errors/E5083.md) | `TestFailed` | a test failed |
+| [GIONG-E5084](https://giong.run/docs/errors/E5084.md) | `DriverNotHere` | the tests could not run on every driver |
+| [GIONG-E5085](https://giong.run/docs/errors/E5085.md) | `NextestMissing` | cargo-nextest is not installed |
+| [GIONG-E5086](https://giong.run/docs/errors/E5086.md) | `TestTimeout` | the tests took longer than the time limit |
+| [GIONG-E5087](https://giong.run/docs/errors/E5087.md) | `GitInitFailed` | git init failed in the new project |
+| [GIONG-E5088](https://giong.run/docs/errors/E5088.md) | `DotenvBuildSetting` | .env sets a cargo or rustc setting |

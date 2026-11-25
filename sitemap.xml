@@ -21,6 +21,30 @@
   <url><loc>https://giong.run/docs/giong-web/</loc></url>
   <url><loc>https://giong.run/docs/giong-mcp/</loc></url>
   <url><loc>https://giong.run/docs/giong-compat/</loc></url>
+  <url><loc>https://giong.run/docs/cli/</loc></url>
+  <url><loc>https://giong.run/docs/cli/new/</loc></url>
+  <url><loc>https://giong.run/docs/cli/ai/</loc></url>
+  <url><loc>https://giong.run/docs/cli/dev/</loc></url>
+  <url><loc>https://giong.run/docs/cli/check/</loc></url>
+  <url><loc>https://giong.run/docs/cli/fix/</loc></url>
+  <url><loc>https://giong.run/docs/cli/test/</loc></url>
+  <url><loc>https://giong.run/docs/cli/doctor/</loc></url>
+  <url><loc>https://giong.run/docs/cli/db/</loc></url>
+  <url><loc>https://giong.run/docs/cli/env/</loc></url>
+  <url><loc>https://giong.run/docs/cli/routes/</loc></url>
+  <url><loc>https://giong.run/docs/cli/record/</loc></url>
+  <url><loc>https://giong.run/docs/cli/dashboard/</loc></url>
+  <url><loc>https://giong.run/docs/cli/top/</loc></url>
+  <url><loc>https://giong.run/docs/cli/bench/</loc></url>
+  <url><loc>https://giong.run/docs/cli/image/</loc></url>
+  <url><loc>https://giong.run/docs/cli/clean/</loc></url>
+  <url><loc>https://giong.run/docs/cli/mcp/</loc></url>
+  <url><loc>https://giong.run/docs/guides/coding-agents/</loc></url>
+  <url><loc>https://giong.run/docs/guides/safe-defaults/</loc></url>
+  <url><loc>https://giong.run/docs/guides/database/</loc></url>
+  <url><loc>https://giong.run/docs/guides/testing/</loc></url>
+  <url><loc>https://giong.run/docs/guides/ship/</loc></url>
+  <url><loc>https://giong.run/docs/guides/from-tokio/</loc></url>
   <url><loc>https://giong.run/docs/deployment/</loc></url>
   <url><loc>https://giong.run/docs/stability/</loc></url>
   <url><loc>https://giong.run/docs/benchmark-tables/</loc></url>
@@ -38,8 +62,21 @@
   <url><loc>https://giong.run/docs/errors/E0011/</loc></url>
   <url><loc>https://giong.run/docs/errors/E0012/</loc></url>
   <url><loc>https://giong.run/docs/errors/E0013/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E0014/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E0016/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E0017/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E0018/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E0019/</loc></url>
   <url><loc>https://giong.run/docs/errors/E0020/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E0080/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E0081/</loc></url>
   <url><loc>https://giong.run/docs/errors/E0028/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E0090/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E0091/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E0092/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E0093/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E0094/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E0095/</loc></url>
   <url><loc>https://giong.run/docs/errors/E0100/</loc></url>
   <url><loc>https://giong.run/docs/errors/E0101/</loc></url>
   <url><loc>https://giong.run/docs/errors/E0102/</loc></url>
@@ -78,6 +115,7 @@
   <url><loc>https://giong.run/docs/errors/E1120/</loc></url>
   <url><loc>https://giong.run/docs/errors/E1121/</loc></url>
   <url><loc>https://giong.run/docs/errors/E1122/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E1123/</loc></url>
   <url><loc>https://giong.run/docs/errors/E1201/</loc></url>
   <url><loc>https://giong.run/docs/errors/E1202/</loc></url>
   <url><loc>https://giong.run/docs/errors/E1203/</loc></url>
@@ -168,4 +206,84 @@
   <url><loc>https://giong.run/docs/errors/E4108/</loc></url>
   <url><loc>https://giong.run/docs/errors/E4109/</loc></url>
   <url><loc>https://giong.run/docs/errors/E4110/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5000/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5001/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5002/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5003/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5004/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5005/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5006/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5007/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5008/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5009/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5010/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5011/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5012/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5013/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5014/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5015/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5016/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5017/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5018/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5019/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5020/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5021/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5022/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5023/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5024/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5030/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5031/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5032/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5033/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5034/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5035/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5036/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5037/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5038/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5039/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5040/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5041/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5042/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5043/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5044/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5045/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5046/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5047/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5048/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5049/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5050/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5051/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5053/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5054/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5055/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5056/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5057/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5058/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5059/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5060/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5061/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5062/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5063/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5064/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5065/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5066/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5067/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5068/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5069/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5070/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5071/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5072/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5073/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5074/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5075/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5076/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5080/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5081/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5082/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5083/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5084/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5085/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5086/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5087/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5088/</loc></url>
 </urlset>

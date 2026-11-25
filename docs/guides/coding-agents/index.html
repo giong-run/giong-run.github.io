@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Build with a coding agent · giong</title>
+<meta name="description" content="Set a project up for an agent once, then the loop it follows: one runner, checks in JSON, tools over MCP, and the docs as Markdown.">
+<link rel="canonical" href="https://giong.run/docs/guides/coding-agents/">
+<meta name="theme-color" content="#0A0C10">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="giong">
+<meta property="og:title" content="Build with a coding agent · giong">
+<meta property="og:description" content="Set a project up for an agent once, then the loop it follows: one runner, checks in JSON, tools over MCP, and the docs as Markdown.">
+<meta property="og:url" content="https://giong.run/docs/guides/coding-agents/">
+<meta property="og:image" content="https://giong.run/assets/social-preview.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="The giong logo: a segmented ember ring">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@giongrun">
+<meta name="twitter:title" content="Build with a coding agent · giong">
+<meta name="twitter:description" content="Set a project up for an agent once, then the loop it follows: one runner, checks in JSON, tools over MCP, and the docs as Markdown.">
+<meta name="twitter:image" content="https://giong.run/assets/social-preview.png">
+<meta name="author" content="thekivashyn">
+<link rel="alternate" type="application/atom+xml" title="giong releases" href="https://github.com/giong-run/Giong/releases.atom">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","name":"Build with a coding agent · giong","description":"Set a project up for an agent once, then the loop it follows: one runner, checks in JSON, tools over MCP, and the docs as Markdown.","url":"https://giong.run/docs/guides/coding-agents/"}]}</script>
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/giong-icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/giong-icon-180.png">
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/styles.css">
+<script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("giong-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}})(document.documentElement)</script>
+</head>
+<body class="page-docs-guides-coding-agents">
+<a class="skip" href="#main">Skip to content</a>
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="28" height="28"></picture><span>giong</span></a>
+    <nav class="nav" aria-label="Site"><a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a><a href="/docs/agent-skill/">Agent skill</a></nav>
+    <div class="hdr-side">
+      <a class="ver" href="/releases/#v1-5-0" title="Release notes for v1.5.0">v1.5.0</a>
+      <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="giong on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
+      <a class="icon-btn hide-sm" href="https://x.com/giongrun" aria-label="giong on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
+      <button class="icon-btn theme" type="button" aria-label="Switch between light and dark" hidden>
+        <span class="if-dark"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></span><span class="if-light"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z"/></svg></span></button>
+      <details class="menu">
+        <summary class="icon-btn" aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
+        <nav class="menu-panel" aria-label="Site">
+          <a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a><a href="/docs/agent-skill/">Agent skill</a>
+          <span class="menu-social"><a href="https://github.com/giong-run/Giong">GitHub</a><a href="https://x.com/giongrun">X</a></span>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+<main id="main">
+<div class="wrap docs-layout">
+  <nav class="side" aria-label="Documentation"><details class="side-menu" open><summary>Documentation</summary><div class="side-links"><div class="side-group"><p>Start</p><a href="/docs/">Get started</a><a href="/docs/best-practices/">Best practices</a><a href="/docs/agent-skill/">Agent skill</a></div><div class="side-group"><p>Dev kit</p><a href="/docs/cli/">Dev kit overview</a><a href="/docs/cli/new/">giong new</a><a href="/docs/cli/ai/">giong ai init</a><a href="/docs/cli/dev/">giong dev</a><a href="/docs/cli/check/">giong check</a><a href="/docs/cli/fix/">giong fix</a><a href="/docs/cli/test/">giong test</a><a href="/docs/cli/doctor/">giong doctor</a><a href="/docs/cli/db/">giong db</a><a href="/docs/cli/env/">giong env</a><a href="/docs/cli/routes/">giong routes and giong openapi</a><a href="/docs/cli/record/">giong record</a><a href="/docs/cli/dashboard/">giong dashboard</a><a href="/docs/cli/top/">giong top</a><a href="/docs/cli/bench/">giong bench</a><a href="/docs/cli/image/">giong image</a><a href="/docs/cli/clean/">giong clean</a><a href="/docs/cli/mcp/">giong mcp</a></div><div class="side-group"><p>Guides</p><a href="/docs/guides/coding-agents/" aria-current=page>Build with a coding agent</a><a href="/docs/guides/safe-defaults/">Safe defaults of the dev kit</a><a href="/docs/guides/database/">Use a database</a><a href="/docs/guides/testing/">Test a service</a><a href="/docs/guides/ship/">Ship a service</a><a href="/docs/guides/from-tokio/">Coming from Tokio</a></div><div class="side-group"><p>Runtime</p><a href="/docs/giong/">giong</a></div><div class="side-group"><p>Protocols</p><a href="/docs/giong-proto/">giong-proto</a><a href="/docs/giong-quic/">giong-quic</a><a href="/docs/giong-tls/">giong-tls</a><a href="/docs/giong-http/">giong-http</a><a href="/docs/giong-grpc/">giong-grpc</a><a href="/docs/giong-compat/">giong-compat</a></div><div class="side-group"><p>Clients</p><a href="/docs/giong-postgres/">giong-postgres</a><a href="/docs/giong-mysql/">giong-mysql</a><a href="/docs/giong-redis/">giong-redis</a></div><div class="side-group"><p>Framework</p><a href="/docs/giong-web/">giong-web</a></div><div class="side-group"><p>Tooling</p><a href="/docs/giong-grpc-build/">giong-grpc-build</a><a href="/docs/giong-mcp/">giong-mcp</a></div><div class="side-group"><p>Operate</p><a href="/docs/deployment/">Deployment</a><a href="/docs/stability/">Stability</a><a href="/docs/benchmark-tables/">Benchmark tables</a><a href="/docs/errors/">Error codes</a></div></div></details></nav>
+  <article class="doc-page prose">
+    <header class="doc-head"><p class="eyebrow">Guides</p><h1>Build with a coding agent</h1><p class="lede">Set a project up for an agent once, then the loop it follows: one runner, checks in JSON, tools over MCP, and the docs as Markdown.</p>
+      <div class="doc-bar"><details class="ver-menu"><summary title="Documentation version">giong 1.5</summary><nav class="ver-list" aria-label="Documentation versions"><a href="/docs/guides/coding-agents/" aria-current=true><b>1.5</b><span>newest</span></a><a href="/docs/1.4/"><b>1.4</b></a><a href="/docs/1.3/"><b>1.3</b></a><a href="/docs/1.2/"><b>1.2</b></a><a href="/docs/1.1/"><b>1.1</b></a><a href="/docs/1.0/"><b>1.0</b></a></nav></details><div class="doc-actions"><button class="act" type="button" data-md="md-page" data-done="copied" title="Copy this page as Markdown, for a coding agent"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy for agent</span></button><button class="act" type="button" data-md="md-prompt" data-done="copied" title="Copy a ready prompt with the rules and this page"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9Z"/><path d="M18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8Z"/></svg><span>Copy prompt</span></button><a class="act" href="/docs/guides/coding-agents.md" title="This page as plain Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><span>.md</span></a></div></div></header>
+    <div class="md-intro"><p>Gióng is made for code that agents write: one obvious way to do each job, errors that say how to fix them, and a <code>giong</code> command that answers in JSON. This page is the setup and the loop to give an agent, whether you type every prompt or let it run on its own.</p></div><section class="md-sec"><button class="sec-copy" type="button" data-md="md-0" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="set-the-project-up-once">Set the project up once</h2>
+<p><code>giong new</code> writes a project that already teaches agents how to work on it. For a project you already have, run the same step on its own:</p>
+<pre class="code"><code class="lang-sh">giong new api --db postgres <span class="c">  # a new project, with the files below</span>
+giong ai init               <span class="c">  # an existing project: the same files, nothing else touched</span></code></pre>
+<p>It writes:</p>
+<div class="table-scroll"><table><thead><tr><th>File</th><th>Read by</th></tr></thead><tbody><tr><td><code>AGENTS.md</code></td><td>Codex, Copilot, Cursor, Gemini and most other agents: the Gióng rules and this project's commands</td></tr><tr><td><code>CLAUDE.md</code></td><td>Claude Code; it imports <code>AGENTS.md</code></td></tr><tr><td><code>.cursor/rules/giong.mdc</code></td><td>Cursor</td></tr><tr><td><code>.claude/skills/giong/</code></td><td>Agents that load skills: the Gióng skill of this release</td></tr><tr><td><code>.mcp.json</code></td><td>Agents that speak MCP: the <code>giong</code> server (<code>giong mcp</code>)</td></tr></tbody></table></div>
+<p>Run it again after upgrading Gióng. In a file you wrote, it replaces only its own marked block; in <code>.mcp.json</code> it adds its server and keeps everything else.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-1" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="the-loop-an-agent-follows">The loop an agent follows</h2>
+<p>One project has one runner, and the agent drives it with these commands only:</p>
+<pre class="code"><code class="lang-sh">giong dev --background        <span class="c">  # once: builds, serves on 127.0.0.1, returns when it answers</span>
+<span class="c"># ... edit the code: the runner rebuilds on every save and swaps the new build in ...</span>
+curl http://127.0.0.1:8080/health
+giong dev status --json       <span class="c">  # is it up, where, and the first error of the last build</span>
+giong dev logs --lines 50     <span class="c">  # what the service printed</span>
+giong check --json            <span class="c">  # compiler, clippy and giong's own checks: run before calling it done</span>
+giong fix                     <span class="c">  # applies the fixes that need no judgement</span>
+giong test                    <span class="c">  # the tests, on io_uring and on epoll</span>
+giong dev stop                <span class="c">  # at the end: the service, and the database giong started</span></code></pre>
+<p>What the agent must not do while developing: <code>cargo run</code>, <code>cargo build --release</code>, start Docker or a container itself, or open a second terminal to run the service. Each of those starts a second copy that fights the runner for the port. A build that fails leaves the last good build serving and comes back as findings, so the agent reads <code>giong dev status --json</code>, fixes the code and saves again.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-2" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="connect-the-agent-to-giong-over-mcp">Connect the agent to giong over MCP</h2>
+<p><code>.mcp.json</code> already names the server for agents that read it. In Claude Code, by hand:</p>
+<pre class="code"><code class="lang-sh">claude mcp add giong -- giong mcp</code></pre>
+<p>Every command that only reads is a tool: <code>check</code>, <code>doctor</code>, <code>explain</code>, <code>routes</code>, <code>top</code>, <code>dev</code> for <code>status</code> and <code>logs</code>. Commands that change the project (<code>fix</code>, <code>dev --background</code>, <code>dev stop</code>, ...) are tools only when you start the server with <code>giong mcp --allow-writes</code>. Some are never tools, whatever the flag: emptying or removing a database, <code>clean --all</code>, reading a secret value, pushing an image.</p>
+<p>While <code>giong dev</code> runs the service, the agent can also ask the service itself, through <a href="/docs/giong-mcp/">giong-mcp</a>, which task blocks a worker, which line spawned the tasks that keep growing, and how full the pools are. That is faster and more certain than guessing from the code.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-3" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="read-what-giong-reports">Read what giong reports</h2>
+<p>Every command takes <code>--json</code> and answers with one document. Each problem is a finding with a code, the place in the source, the cause and the fix:</p>
+<pre class="code"><code class="lang-json">{"command": "check", "ok": false,
+ "findings": [{"code": "GIONG-E5006", "severity": "warning",
+               "title": "std::fs blocks the worker inside an async function",
+               "fix": "...", "file": "src/main.rs", "line": 14, "column": 19}]}</code></pre>
+<p>The exit status is 0 when nothing is wrong, 1 when a finding is an error, and 2 when the command could not run. Every code has a page: <code>giong explain GIONG-E5006</code> prints it without the network, and the <a href="/docs/errors/">error index</a> lists them all.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-4" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="give-the-agent-the-documentation">Give the agent the documentation</h2>
+<ul><li><code>https://giong.run/llms.txt</code>: what an agent needs first, with links to everything else.</li><li><code>https://giong.run/llms-full.txt</code>: every README, the guides and every error page in one file.</li><li>Every page of giong.run is also Markdown: add <code>.md</code> to its address, or press <strong>Copy for agent</strong>.</li><li><strong>Copy prompt</strong> on any page copies the rules and that page, ready to paste with your task.</li></ul></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-5" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="a-first-prompt">A first prompt</h2>
+<pre class="code"><code class="lang-text">This is a Rust service on Gióng. Read AGENTS.md first.
+Start it with `giong dev --background` if `giong dev status` says it is not running,
+then: &lt;what to build or fix&gt;.
+Check your work with curl against 127.0.0.1, then `giong check --json` and `giong test`.
+Do not use cargo run, a release build or Docker. Stop with `giong dev stop` when done.</code></pre></section>
+    <p class="src-note">giong 1.5.0 · from <a href="https://github.com/giong-run/Giong/blob/v1.5.0/docs/guides/coding-agents.md">docs/guides/coding-agents.md</a> at v1.5.0</p>
+    <script type="text/markdown" id="md-0"><!-- giong 1.5.0, https://giong.run/docs/guides/coding-agents/#set-the-project-up-once -->
+
+## Set the project up once
+
+`giong new` writes a project that already teaches agents how to work on it. For a project you already have, run the same step on its own:
+
+```sh
+giong new api --db postgres   # a new project, with the files below
+giong ai init                 # an existing project: the same files, nothing else touched
+```
+
+It writes:
+
+| File | Read by |
+|---|---|
+| `AGENTS.md` | Codex, Copilot, Cursor, Gemini and most other agents: the Gióng rules and this project's commands |
+| `CLAUDE.md` | Claude Code; it imports `AGENTS.md` |
+| `.cursor/rules/giong.mdc` | Cursor |
+| `.claude/skills/giong/` | Agents that load skills: the Gióng skill of this release |
+| `.mcp.json` | Agents that speak MCP: the `giong` server (`giong mcp`) |
+
+Run it again after upgrading Gióng. In a file you wrote, it replaces only its own marked block; in `.mcp.json` it adds its server and keeps everything else.</script><script type="text/markdown" id="md-1"><!-- giong 1.5.0, https://giong.run/docs/guides/coding-agents/#the-loop-an-agent-follows -->
+
+## The loop an agent follows
+
+One project has one runner, and the agent drives it with these commands only:
+
+```sh
+giong dev --background          # once: builds, serves on 127.0.0.1, returns when it answers
+# ... edit the code: the runner rebuilds on every save and swaps the new build in ...
+curl http://127.0.0.1:8080/health
+giong dev status --json         # is it up, where, and the first error of the last build
+giong dev logs --lines 50       # what the service printed
+giong check --json              # compiler, clippy and giong's own checks: run before calling it done
+giong fix                       # applies the fixes that need no judgement
+giong test                      # the tests, on io_uring and on epoll
+giong dev stop                  # at the end: the service, and the database giong started
+```
+
+What the agent must not do while developing: `cargo run`, `cargo build --release`, start Docker or a container itself, or open a second terminal to run the service. Each of those starts a second copy that fights the runner for the port. A build that fails leaves the last good build serving and comes back as findings, so the agent reads `giong dev status --json`, fixes the code and saves again.</script><script type="text/markdown" id="md-2"><!-- giong 1.5.0, https://giong.run/docs/guides/coding-agents/#connect-the-agent-to-giong-over-mcp -->
+
+## Connect the agent to giong over MCP
+
+`.mcp.json` already names the server for agents that read it. In Claude Code, by hand:
+
+```sh
+claude mcp add giong -- giong mcp
+```
+
+Every command that only reads is a tool: `check`, `doctor`, `explain`, `routes`, `top`, `dev` for `status` and `logs`. Commands that change the project (`fix`, `dev --background`, `dev stop`, ...) are tools only when you start the server with `giong mcp --allow-writes`. Some are never tools, whatever the flag: emptying or removing a database, `clean --all`, reading a secret value, pushing an image.
+
+While `giong dev` runs the service, the agent can also ask the service itself, through [giong-mcp](../../giong-mcp/README.md), which task blocks a worker, which line spawned the tasks that keep growing, and how full the pools are. That is faster and more certain than guessing from the code.</script><script type="text/markdown" id="md-3"><!-- giong 1.5.0, https://giong.run/docs/guides/coding-agents/#read-what-giong-reports -->
+
+## Read what giong reports
+
+Every command takes `--json` and answers with one document. Each problem is a finding with a code, the place in the source, the cause and the fix:
+
+```json
+{"command": "check", "ok": false,
+ "findings": [{"code": "GIONG-E5006", "severity": "warning",
+               "title": "std::fs blocks the worker inside an async function",
+               "fix": "...", "file": "src/main.rs", "line": 14, "column": 19}]}
+```
+
+The exit status is 0 when nothing is wrong, 1 when a finding is an error, and 2 when the command could not run. Every code has a page: `giong explain GIONG-E5006` prints it without the network, and the [error index](../errors/README.md) lists them all.</script><script type="text/markdown" id="md-4"><!-- giong 1.5.0, https://giong.run/docs/guides/coding-agents/#give-the-agent-the-documentation -->
+
+## Give the agent the documentation
+
+- `https://giong.run/llms.txt`: what an agent needs first, with links to everything else.
+- `https://giong.run/llms-full.txt`: every README, the guides and every error page in one file.
+- Every page of giong.run is also Markdown: add `.md` to its address, or press **Copy for agent**.
+- **Copy prompt** on any page copies the rules and that page, ready to paste with your task.</script><script type="text/markdown" id="md-5"><!-- giong 1.5.0, https://giong.run/docs/guides/coding-agents/#a-first-prompt -->
+
+## A first prompt
+
+```text
+This is a Rust service on Gióng. Read AGENTS.md first.
+Start it with `giong dev --background` if `giong dev status` says it is not running,
+then: <what to build or fix>.
+Check your work with curl against 127.0.0.1, then `giong check --json` and `giong test`.
+Do not use cargo run, a release build or Docker. Stop with `giong dev stop` when done.
+```</script><script type="text/markdown" id="md-page"># Build with a coding agent
+
+> giong 1.5.0 · https://giong.run/docs/guides/coding-agents/ · source: https://github.com/giong-run/Giong/blob/v1.5.0/docs/guides/coding-agents.md
+
+Gióng is made for code that agents write: one obvious way to do each job, errors that say how to fix them, and a `giong` command that answers in JSON. This page is the setup and the loop to give an agent, whether you type every prompt or let it run on its own.
+
+## Set the project up once
+
+`giong new` writes a project that already teaches agents how to work on it. For a project you already have, run the same step on its own:
+
+```sh
+giong new api --db postgres   # a new project, with the files below
+giong ai init                 # an existing project: the same files, nothing else touched
+```
+
+It writes:
+
+| File | Read by |
+|---|---|
+| `AGENTS.md` | Codex, Copilot, Cursor, Gemini and most other agents: the Gióng rules and this project's commands |
+| `CLAUDE.md` | Claude Code; it imports `AGENTS.md` |
+| `.cursor/rules/giong.mdc` | Cursor |
+| `.claude/skills/giong/` | Agents that load skills: the Gióng skill of this release |
+| `.mcp.json` | Agents that speak MCP: the `giong` server (`giong mcp`) |
+
+Run it again after upgrading Gióng. In a file you wrote, it replaces only its own marked block; in `.mcp.json` it adds its server and keeps everything else.
+
+## The loop an agent follows
+
+One project has one runner, and the agent drives it with these commands only:
+
+```sh
+giong dev --background          # once: builds, serves on 127.0.0.1, returns when it answers
+# ... edit the code: the runner rebuilds on every save and swaps the new build in ...
+curl http://127.0.0.1:8080/health
+giong dev status --json         # is it up, where, and the first error of the last build
+giong dev logs --lines 50       # what the service printed
+giong check --json              # compiler, clippy and giong's own checks: run before calling it done
+giong fix                       # applies the fixes that need no judgement
+giong test                      # the tests, on io_uring and on epoll
+giong dev stop                  # at the end: the service, and the database giong started
+```
+
+What the agent must not do while developing: `cargo run`, `cargo build --release`, start Docker or a container itself, or open a second terminal to run the service. Each of those starts a second copy that fights the runner for the port. A build that fails leaves the last good build serving and comes back as findings, so the agent reads `giong dev status --json`, fixes the code and saves again.
+
+## Connect the agent to giong over MCP
+
+`.mcp.json` already names the server for agents that read it. In Claude Code, by hand:
+
+```sh
+claude mcp add giong -- giong mcp
+```
+
+Every command that only reads is a tool: `check`, `doctor`, `explain`, `routes`, `top`, `dev` for `status` and `logs`. Commands that change the project (`fix`, `dev --background`, `dev stop`, ...) are tools only when you start the server with `giong mcp --allow-writes`. Some are never tools, whatever the flag: emptying or removing a database, `clean --all`, reading a secret value, pushing an image.
+
+While `giong dev` runs the service, the agent can also ask the service itself, through [giong-mcp](https://giong.run/docs/giong-mcp.md), which task blocks a worker, which line spawned the tasks that keep growing, and how full the pools are. That is faster and more certain than guessing from the code.
+
+## Read what giong reports
+
+Every command takes `--json` and answers with one document. Each problem is a finding with a code, the place in the source, the cause and the fix:
+
+```json
+{"command": "check", "ok": false,
+ "findings": [{"code": "GIONG-E5006", "severity": "warning",
+               "title": "std::fs blocks the worker inside an async function",
+               "fix": "...", "file": "src/main.rs", "line": 14, "column": 19}]}
+```
+
+The exit status is 0 when nothing is wrong, 1 when a finding is an error, and 2 when the command could not run. Every code has a page: `giong explain GIONG-E5006` prints it without the network, and the [error index](https://giong.run/docs/errors.md) lists them all.
+
+## Give the agent the documentation
+
+- `https://giong.run/llms.txt`: what an agent needs first, with links to everything else.
+- `https://giong.run/llms-full.txt`: every README, the guides and every error page in one file.
+- Every page of giong.run is also Markdown: add `.md` to its address, or press **Copy for agent**.
+- **Copy prompt** on any page copies the rules and that page, ready to paste with your task.
+
+## A first prompt
+
+```text
+This is a Rust service on Gióng. Read AGENTS.md first.
+Start it with `giong dev --background` if `giong dev status` says it is not running,
+then: <what to build or fix>.
+Check your work with curl against 127.0.0.1, then `giong check --json` and `giong test`.
+Do not use cargo run, a release build or Docker. Stop with `giong dev stop` when done.
+```
+</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.5.0, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use Build with a coding agent as documented below.
+
+Rules for giong code:
+- Start the runtime with giong::Builder::new().shutdown_on_signals(true).build()?.run(|_worker| async { .. }); there are no macros. Build listeners, routers, pools and clients inside each worker's future.
+- Never block a worker: no std::fs, std::net or std::thread::sleep; use giong::fs, giong::net and giong::time. Run heavy work on std::thread::spawn and await a giong::sync::oneshot.
+- Futures need not be Send. Per-worker state is Rc<RefCell<T>>, never borrowed across an .await.
+- Bind IP addresses ("0.0.0.0:8080"), never host names.
+- Match errors with giong::error::code(&err); every GIONG-Exxxx code has a page that says how to fix it.
+- Use the giong crate for each job (giong-http, giong-web, giong-postgres, giong-redis, ...). Crates that need the Tokio runtime (sqlx, reqwest, tonic's transport) panic on a giong worker.
+More facts: https://giong.run/llms.txt. Best practices: https://giong.run/docs/best-practices.md
+
+My task: <describe what to build or fix>
+
+Documentation of Build with a coding agent, giong 1.5.0 (https://giong.run/docs/guides/coding-agents.md):
+
+# Build with a coding agent
+
+> giong 1.5.0 · https://giong.run/docs/guides/coding-agents/ · source: https://github.com/giong-run/Giong/blob/v1.5.0/docs/guides/coding-agents.md
+
+Gióng is made for code that agents write: one obvious way to do each job, errors that say how to fix them, and a `giong` command that answers in JSON. This page is the setup and the loop to give an agent, whether you type every prompt or let it run on its own.
+
+## Set the project up once
+
+`giong new` writes a project that already teaches agents how to work on it. For a project you already have, run the same step on its own:
+
+```sh
+giong new api --db postgres   # a new project, with the files below
+giong ai init                 # an existing project: the same files, nothing else touched
+```
+
+It writes:
+
+| File | Read by |
+|---|---|
+| `AGENTS.md` | Codex, Copilot, Cursor, Gemini and most other agents: the Gióng rules and this project's commands |
+| `CLAUDE.md` | Claude Code; it imports `AGENTS.md` |
+| `.cursor/rules/giong.mdc` | Cursor |
+| `.claude/skills/giong/` | Agents that load skills: the Gióng skill of this release |
+| `.mcp.json` | Agents that speak MCP: the `giong` server (`giong mcp`) |
+
+Run it again after upgrading Gióng. In a file you wrote, it replaces only its own marked block; in `.mcp.json` it adds its server and keeps everything else.
+
+## The loop an agent follows
+
+One project has one runner, and the agent drives it with these commands only:
+
+```sh
+giong dev --background          # once: builds, serves on 127.0.0.1, returns when it answers
+# ... edit the code: the runner rebuilds on every save and swaps the new build in ...
+curl http://127.0.0.1:8080/health
+giong dev status --json         # is it up, where, and the first error of the last build
+giong dev logs --lines 50       # what the service printed
+giong check --json              # compiler, clippy and giong's own checks: run before calling it done
+giong fix                       # applies the fixes that need no judgement
+giong test                      # the tests, on io_uring and on epoll
+giong dev stop                  # at the end: the service, and the database giong started
+```
+
+What the agent must not do while developing: `cargo run`, `cargo build --release`, start Docker or a container itself, or open a second terminal to run the service. Each of those starts a second copy that fights the runner for the port. A build that fails leaves the last good build serving and comes back as findings, so the agent reads `giong dev status --json`, fixes the code and saves again.
+
+## Connect the agent to giong over MCP
+
+`.mcp.json` already names the server for agents that read it. In Claude Code, by hand:
+
+```sh
+claude mcp add giong -- giong mcp
+```
+
+Every command that only reads is a tool: `check`, `doctor`, `explain`, `routes`, `top`, `dev` for `status` and `logs`. Commands that change the project (`fix`, `dev --background`, `dev stop`, ...) are tools only when you start the server with `giong mcp --allow-writes`. Some are never tools, whatever the flag: emptying or removing a database, `clean --all`, reading a secret value, pushing an image.
+
+While `giong dev` runs the service, the agent can also ask the service itself, through [giong-mcp](https://giong.run/docs/giong-mcp.md), which task blocks a worker, which line spawned the tasks that keep growing, and how full the pools are. That is faster and more certain than guessing from the code.
+
+## Read what giong reports
+
+Every command takes `--json` and answers with one document. Each problem is a finding with a code, the place in the source, the cause and the fix:
+
+```json
+{"command": "check", "ok": false,
+ "findings": [{"code": "GIONG-E5006", "severity": "warning",
+               "title": "std::fs blocks the worker inside an async function",
+               "fix": "...", "file": "src/main.rs", "line": 14, "column": 19}]}
+```
+
+The exit status is 0 when nothing is wrong, 1 when a finding is an error, and 2 when the command could not run. Every code has a page: `giong explain GIONG-E5006` prints it without the network, and the [error index](https://giong.run/docs/errors.md) lists them all.
+
+## Give the agent the documentation
+
+- `https://giong.run/llms.txt`: what an agent needs first, with links to everything else.
+- `https://giong.run/llms-full.txt`: every README, the guides and every error page in one file.
+- Every page of giong.run is also Markdown: add `.md` to its address, or press **Copy for agent**.
+- **Copy prompt** on any page copies the rules and that page, ready to paste with your task.
+
+## A first prompt
+
+```text
+This is a Rust service on Gióng. Read AGENTS.md first.
+Start it with `giong dev --background` if `giong dev status` says it is not running,
+then: <what to build or fix>.
+Check your work with curl against 127.0.0.1, then `giong check --json` and `giong test`.
+Do not use cargo run, a release build or Docker. Stop with `giong dev stop` when done.
+```
+</script>
+  </article>
+  <nav class="toc doc-toc" aria-label="On this page"><p>On this page</p><div class="toc-links"><a href="#set-the-project-up-once">Set the project up once</a><a href="#the-loop-an-agent-follows">The loop an agent follows</a><a href="#connect-the-agent-to-giong-over-mcp">Connect the agent to giong over MCP</a><a href="#read-what-giong-reports">Read what giong reports</a><a href="#give-the-agent-the-documentation">Give the agent the documentation</a><a href="#a-first-prompt">A first prompt</a></div></nav>
+</div>
+</main>
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr-grid">
+      <div class="ftr-brand">
+        <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="22" height="22"></picture><span>giong</span></a>
+        <p>A thread-per-core async runtime for Rust, built on io_uring and made for the code agents write.</p>
+        <p class="ftr-social">
+          <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
+          <a class="icon-btn" href="https://x.com/giongrun" aria-label="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
+          <a class="icon-btn" href="https://github.com/giong-run/Giong/releases.atom" aria-label="Release feed"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3a16 16 0 0 1 16 16h-3A13 13 0 0 0 5 6Zm0 6a10 10 0 0 1 10 10h-3a7 7 0 0 0-7-7Zm1.5 6.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z"/></svg></a>
+        </p>
+      </div>
+      <nav class="ftr-col" aria-label="Learn">
+        <h2>Learn</h2>
+        <a href="/docs/">Get started</a>
+        <a href="/docs/#examples">Examples</a>
+        <a href="https://docs.rs/giong/1.5.0/giong/">API reference</a>
+        <a href="/docs/#errors">Error codes</a>
+        <a href="/docs/best-practices/">Best practices</a><a href="/docs/agent-skill/">Agent skill</a>
+        <a href="/llms.txt">llms.txt</a>
+      </nav>
+      <nav class="ftr-col" aria-label="Project">
+        <h2>Project</h2>
+        <a href="/crates/">Crates</a>
+        <a href="/benchmarks/">Benchmarks</a>
+        <a href="/roadmap/">Roadmap</a>
+        <a href="/releases/">Releases</a>
+      </nav>
+      <nav class="ftr-col" aria-label="Community">
+        <h2>Community</h2>
+        <a href="https://github.com/giong-run/Giong">GitHub</a>
+        <a href="https://x.com/giongrun">X · @giongrun</a>
+        <a href="https://github.com/giong-run/Giong/issues">Issues</a>
+        <a href="https://github.com/giong-run/Giong/blob/main/CONTRIBUTING.md">Contributing</a>
+        <a href="https://github.com/giong-run/Giong/security/advisories/new">Report a vulnerability</a>
+      </nav>
+    </div>
+    <div class="ftr-base">
+      <span>© 2026 <a href="https://github.com/thekivashyn">thekivashyn</a> and the giong contributors. MIT or Apache-2.0.</span>
+      <span class="ramp" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+    </div>
+  </div>
+</footer>
+<script src="/main.js" defer></script>
+</body>
+</html>

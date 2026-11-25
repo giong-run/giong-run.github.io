@@ -1,6 +1,6 @@
 # giong-tls
 
-> giong 1.4.2 · https://giong.run/docs/giong-tls/ · source: https://github.com/giong-run/Giong/blob/v1.4.2/giong-tls/README.md
+> giong 1.5.0 · https://giong.run/docs/giong-tls/ · source: https://github.com/giong-run/Giong/blob/v1.5.0/giong-tls/README.md
 
 TLS for the [giong](https://giong.run/docs/giong.md) runtime, built on [rustls](https://github.com/rustls/rustls) (TLS 1.2 and 1.3, cryptography from `ring`, no OpenSSL): `TlsAcceptor` for servers, `TlsConnector` for clients.
 
@@ -136,7 +136,7 @@ Two more cases stay in the process under `Auto` and fail under `Required`: a con
 
 ### When it pays off
 
-Kernel TLS is not faster by itself. Measured on bare metal (AMD EPYC 4345P, Linux 7.0, loopback, the server on one core, TLS 1.3 with AES-256-GCM, medians of five rounds; `bench/tls.sh` and `bench/http-client.sh`, recorded in [`bench/results/bare-metal-epyc-4345p/linux-7.0/ktls/`](https://github.com/giong-run/Giong/blob/v1.4.2/bench/results/bare-metal-epyc-4345p/linux-7.0/ktls/summary.txt)):
+Kernel TLS is not faster by itself. Measured on bare metal (AMD EPYC 4345P, Linux 7.0, loopback, the server on one core, TLS 1.3 with AES-256-GCM, medians of five rounds; `bench/tls.sh` and `bench/http-client.sh`, recorded in [`bench/results/bare-metal-epyc-4345p/linux-7.0/ktls/`](https://github.com/giong-run/Giong/blob/v1.5.0/bench/results/bare-metal-epyc-4345p/linux-7.0/ktls/summary.txt)):
 
 | What the server sends | rustls in the process | Kernel TLS | |
 |---|---|---|---|
@@ -156,7 +156,7 @@ So `Ktls::Off` stays the default. Use `Ktls::Auto` on a server whose large respo
 
 ## Performance
 
-Measured with `bench/tls.sh` on one core, with the same rustls and `ring` on both sides (4-vCPU VM, seven rounds, [`bench/results/tls/`](https://github.com/giong-run/Giong/blob/v1.4.2/bench/results/tls/README.md)): HTTPS through `giong-http` reaches 146.6k req/s on `/json` against 81.2k for Axum + rustls, and 48.7k against 18.5k with 8 KB responses. Details and how to read the numbers are in [docs/BENCHMARKS.md](https://github.com/giong-run/Giong/blob/v1.4.2/docs/BENCHMARKS.md#https); kernel TLS has its own numbers [above](#when-it-pays-off).
+Measured with `bench/tls.sh` on one core, with the same rustls and `ring` on both sides (4-vCPU VM, seven rounds, [`bench/results/tls/`](https://github.com/giong-run/Giong/blob/v1.5.0/bench/results/tls/README.md)): HTTPS through `giong-http` reaches 146.6k req/s on `/json` against 81.2k for Axum + rustls, and 48.7k against 18.5k with 8 KB responses. Details and how to read the numbers are in [docs/BENCHMARKS.md](https://github.com/giong-run/Giong/blob/v1.5.0/docs/BENCHMARKS.md#https); kernel TLS has its own numbers [above](#when-it-pays-off).
 
 ### Handshakes
 
@@ -177,7 +177,7 @@ With the `post-quantum` feature, giong-tls uses aws-lc-rs instead of *ring* for 
 
 ## Not there yet
 
-Checking certificate revocation on the client side (rustls can, through `TlsConnector::from_rustls` with your own verifier). All of them can be added in 1.x without breaking anything. The crate has had a [security review](https://github.com/giong-run/Giong/blob/v1.4.2/docs/reviews/2026-11-giong-tls.md) by the project's AI agent, which found and fixed two issues in its users, and a second one for kernel TLS, but no independent audit yet; the cryptography and the protocol are rustls's, and the kernel's once it takes a connection.
+Checking certificate revocation on the client side (rustls can, through `TlsConnector::from_rustls` with your own verifier). All of them can be added in 1.x without breaking anything. The crate has had a [security review](https://github.com/giong-run/Giong/blob/v1.5.0/docs/reviews/2026-11-giong-tls.md) by the project's AI agent, which found and fixed two issues in its users, and a second one for kernel TLS, but no independent audit yet; the cryptography and the protocol are rustls's, and the kernel's once it takes a connection.
 
 ## Tests
 

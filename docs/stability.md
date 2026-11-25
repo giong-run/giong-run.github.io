@@ -1,6 +1,6 @@
 # Stability
 
-> giong 1.4.2 · https://giong.run/docs/stability/ · source: https://github.com/giong-run/Giong/blob/v1.4.2/docs/STABILITY.md
+> giong 1.5.0 · https://giong.run/docs/stability/ · source: https://github.com/giong-run/Giong/blob/v1.5.0/docs/STABILITY.md
 
 From 1.0.0 on, giong keeps major version 1 for a long time and grows through 1.x minor
 releases. Code that builds and behaves correctly on 1.N builds and behaves the same way on
@@ -207,7 +207,7 @@ from a 1.x release unless it turns a new policy on.
 
 Breaking changes are refused between releases (`scripts/semver.sh`), so the few the API
 review left for 1.0 were made together by one release pull request, that of 1.0.0-rc.1
-(see [RELEASING.md](https://github.com/giong-run/Giong/blob/v1.4.2/docs/RELEASING.md)). Nothing used giong in production yet, so no deprecated
+(see [RELEASING.md](https://github.com/giong-run/Giong/blob/v1.5.0/docs/RELEASING.md)). Nothing used giong in production yet, so no deprecated
 alias was kept: old names went outright. This list was that pull request's checklist, and
 every item of it is done:
 
@@ -218,7 +218,7 @@ every item of it is done:
   constructors), `TlsConnector::with_roots` (`with_root_pem`);
 - `giong::sync::mpsc::Sender` and `Receiver` go to the bounded channel, and
   `BoundedSender` and `BoundedReceiver` are removed (the API freeze record,
-  [reviews/2026-11-api-freeze.md](https://github.com/giong-run/Giong/blob/v1.4.2/docs/reviews/2026-11-api-freeze.md)); the unbounded halves
+  [reviews/2026-11-api-freeze.md](https://github.com/giong-run/Giong/blob/v1.5.0/docs/reviews/2026-11-api-freeze.md)); the unbounded halves
   stay `UnboundedSender` and `UnboundedReceiver`;
 - the tests of the old names go with them, and the README's test counts drop to match;
 - the texts that describe keeping aliases (the freeze record, RELEASING.md, the
