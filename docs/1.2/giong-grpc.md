@@ -2,7 +2,7 @@
 
 > giong 1.2.0 · https://giong.run/docs/1.2/giong-grpc/ · source: https://github.com/giong-run/Giong/blob/v1.2.0/giong-grpc/README.md
 
-gRPC for the [giong](https://github.com/giong-run/Giong/blob/v1.2.0/README.md) runtime: servers and clients over [giong-http](https://github.com/giong-run/Giong/blob/v1.2.0/giong-http/README.md)'s HTTP/2, with messages read as [giong-proto](https://github.com/giong-run/Giong/blob/v1.2.0/giong-proto/README.md) views that borrow from the bytes received. Nothing from the Tokio ecosystem, and no `protoc` to install: [giong-grpc-build](https://github.com/giong-run/Giong/blob/v1.2.0/giong-grpc-build/README.md) parses the `.proto` files in Rust.
+gRPC for the [giong](https://giong.run/docs/1.2/giong.md) runtime: servers and clients over [giong-http](https://giong.run/docs/1.2/giong-http.md)'s HTTP/2, with messages read as [giong-proto](https://giong.run/docs/1.2/giong-proto.md) views that borrow from the bytes received. Nothing from the Tokio ecosystem, and no `protoc` to install: [giong-grpc-build](https://giong.run/docs/1.2/giong-grpc-build.md) parses the `.proto` files in Rust.
 
 It interoperates with grpc-go in both directions on the test cases of [gRPC's interoperability specification](https://github.com/grpc/grpc/blob/master/doc/interop-test-descriptions.md), on io_uring and on epoll, in CI ([`interop/run.sh`](https://github.com/giong-run/Giong/blob/v1.2.0/giong-grpc/interop/run.sh)).
 

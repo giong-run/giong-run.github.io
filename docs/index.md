@@ -10,10 +10,10 @@ Requirements, a first server, and every page of the documentation: a page for ea
 - **macos**: **Development.** A kqueue driver, tested on macOS 15 and 26 on Apple Silicon. Every crate; correct, not tuned.
 - **windows**: **The runtime crate.** I/O completion ports, tested on Windows Server 2022 and 2025: tasks, timers, channels, TCP, UDP, files, DNS. Unix sockets and the other crates come in later 1.x releases.
 - **rust**: 1.80 or newer; 1.85 for giong-quic and giong-http's `unstable-http3`.
-- **docker**: Docker's default seccomp profile blocks io_uring, so giong runs on epoll there by itself. [docs/DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.4.2/docs/DEPLOYMENT.md) shows how to allow io_uring in Docker, Compose and Kubernetes without turning seccomp off.
+- **docker**: Docker's default seccomp profile blocks io_uring, so giong runs on epoll there by itself. [docs/DEPLOYMENT.md](https://giong.run/docs/deployment.md) shows how to allow io_uring in Docker, Compose and Kubernetes without turning seccomp off.
 - **license**: MIT OR Apache-2.0, at your option.
 
-## Install
+## Install the crates
 
 The crates are on crates.io and share one version number, 1.4.2.
 
@@ -128,7 +128,6 @@ Every page is also Markdown, for agents:
 - [giong-web](https://docs.rs/giong-web/1.4.2): Router, middleware and JSON on giong-http; errors as coded problem+json.
 - [giong-mcp](https://docs.rs/giong-mcp/1.4.2): A read-only MCP server: an agent sees what each worker, task and pool is doing.
 - [giong-compat](https://docs.rs/giong-compat/1.4.2): Tokio's and futures-io's I/O traits for giong's streams, for h2, tokio-rustls and the like.
-- [giong-cli](https://docs.rs/giong-cli/1.4.2): The giong command: start, run, check and ship services on the Gióng async runtime
 
 ## Error codes
 

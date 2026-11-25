@@ -2,7 +2,7 @@
 
 > giong 1.1.0 · https://giong.run/docs/1.1/giong-compat/ · source: https://github.com/giong-run/Giong/blob/v1.1.0/giong-compat/README.md
 
-The I/O traits of Tokio and of the futures crates for [giong](https://github.com/giong-run/Giong/blob/v1.1.0/README.md)'s streams, so that protocol crates which are generic over their transport run on giong: TLS (tokio-rustls, futures-rustls), WebSocket (tokio-tungstenite), HTTP/2 (h2), hyper's connection API, framing (tokio-util's codecs) and the like. No Tokio runtime is involved: giong drives everything, on its own threads.
+The I/O traits of Tokio and of the futures crates for [giong](https://giong.run/docs/1.1/giong.md)'s streams, so that protocol crates which are generic over their transport run on giong: TLS (tokio-rustls, futures-rustls), WebSocket (tokio-tungstenite), HTTP/2 (h2), hyper's connection API, framing (tokio-util's codecs) and the like. No Tokio runtime is involved: giong drives everything, on its own threads.
 
 ```toml
 [dependencies]
@@ -35,9 +35,9 @@ fn main() -> std::io::Result<()> {
 
 | You need | Use |
 |---|---|
-| An HTTP/1.1 or HTTP/2 server or client (not hyper or reqwest) | [`giong-http`](https://github.com/giong-run/Giong/blob/v1.1.0/giong-http/README.md); [`giong-web`](https://github.com/giong-run/Giong/blob/v1.1.0/giong-web/README.md) for routing and JSON |
-| TLS (tokio-rustls over `Compat` works too, with `Compat`'s copies added) | [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.1.0/giong-tls/README.md) |
-| PostgreSQL, MySQL, Redis (not sqlx, tokio-postgres or redis-rs, which need the Tokio runtime) | [`giong-postgres`](https://github.com/giong-run/Giong/blob/v1.1.0/giong-postgres/README.md), [`giong-mysql`](https://github.com/giong-run/Giong/blob/v1.1.0/giong-mysql/README.md), [`giong-redis`](https://github.com/giong-run/Giong/blob/v1.1.0/giong-redis/README.md) |
+| An HTTP/1.1 or HTTP/2 server or client (not hyper or reqwest) | [`giong-http`](https://giong.run/docs/1.1/giong-http.md); [`giong-web`](https://giong.run/docs/1.1/giong-web.md) for routing and JSON |
+| TLS (tokio-rustls over `Compat` works too, with `Compat`'s copies added) | [`giong-tls`](https://giong.run/docs/1.1/giong-tls.md) |
+| PostgreSQL, MySQL, Redis (not sqlx, tokio-postgres or redis-rs, which need the Tokio runtime) | [`giong-postgres`](https://giong.run/docs/1.1/giong-postgres.md), [`giong-mysql`](https://giong.run/docs/1.1/giong-mysql.md), [`giong-redis`](https://giong.run/docs/1.1/giong-redis.md) |
 | h2's own API (HTTP/2 frames and streams, or a library built on h2) | [h2](https://docs.rs/h2) over `Compat`, plain or over `giong-tls` with ALPN `h2` |
 | WebSocket | [tokio-tungstenite](https://docs.rs/tokio-tungstenite) (`accept_async`, `client_async`) over `Compat` |
 | A protocol framed by length or by line | [tokio-util](https://docs.rs/tokio-util)'s `Framed` with a codec over `Compat` |

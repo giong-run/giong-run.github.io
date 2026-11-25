@@ -2,7 +2,7 @@
 
 > giong 1.3.0 · https://giong.run/docs/1.3/giong-postgres/ · source: https://github.com/giong-run/Giong/blob/v1.3.0/giong-postgres/README.md
 
-A PostgreSQL client and connection pool for the [giong](https://github.com/giong-run/Giong/blob/v1.3.0/README.md) runtime. It speaks the wire protocol itself (no libpq), encrypts with [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.3.0/giong-tls/README.md), and depends on nothing from the Tokio ecosystem.
+A PostgreSQL client and connection pool for the [giong](https://giong.run/docs/1.3/giong.md) runtime. It speaks the wire protocol itself (no libpq), encrypts with [`giong-tls`](https://giong.run/docs/1.3/giong-tls.md), and depends on nothing from the Tokio ecosystem.
 
 ```toml
 [dependencies]
@@ -146,7 +146,7 @@ Integers convert between the three integer types when the value fits and fail wh
 
 ## Errors
 
-`Error` is cheap to clone, implements `std::error::Error`, and converts into `io::Error`. `error.kind()` says what went wrong. Each kind has a giong error code, shown in front of the message and linked to its page in [docs/errors](https://github.com/giong-run/Giong/blob/v1.3.0/docs/errors/README.md) (`GIONG-E3003: password authentication failed for user "app". See …`); after `?` into an `io::Error`, `giong::error::code(&err)` finds it:
+`Error` is cheap to clone, implements `std::error::Error`, and converts into `io::Error`. `error.kind()` says what went wrong. Each kind has a giong error code, shown in front of the message and linked to its page in [docs/errors](https://giong.run/docs/1.3/errors.md) (`GIONG-E3003: password authentication failed for user "app". See …`); after `?` into an `io::Error`, `giong::error::code(&err)` finds it:
 
 | `ErrorKind` | Code | Meaning |
 |---|---|---|

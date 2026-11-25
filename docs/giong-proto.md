@@ -66,7 +66,7 @@ modified, so they are its encoding): forwarding a received message is one copy.
 ## Errors
 
 Decoding and encoding errors carry codes `GIONG-E4001` to `GIONG-E4008`
-([`ErrorKind`](https://github.com/giong-run/Giong/blob/v1.4.2/giong-proto/src/error.rs)), each with a page in [`docs/errors/`](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/README.md):
+([`ErrorKind`](https://github.com/giong-run/Giong/blob/v1.4.2/giong-proto/src/error.rs)), each with a page in [`docs/errors/`](https://giong.run/docs/errors.md):
 truncated input, malformed varints, invalid tags, unbalanced groups, non-UTF-8 strings,
 nesting deeper than 100, malformed packed fields, messages over 2 GiB.
 

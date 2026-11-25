@@ -2,7 +2,7 @@
 
 > giong 1.2.0 · https://giong.run/docs/1.2/giong-tls/ · source: https://github.com/giong-run/Giong/blob/v1.2.0/giong-tls/README.md
 
-TLS for the [giong](https://github.com/giong-run/Giong/blob/v1.2.0/README.md) runtime, built on [rustls](https://github.com/rustls/rustls) (TLS 1.2 and 1.3, cryptography from `ring`, no OpenSSL): `TlsAcceptor` for servers, `TlsConnector` for clients.
+TLS for the [giong](https://giong.run/docs/1.2/giong.md) runtime, built on [rustls](https://github.com/rustls/rustls) (TLS 1.2 and 1.3, cryptography from `ring`, no OpenSSL): `TlsAcceptor` for servers, `TlsConnector` for clients.
 
 ```rust,no_run
 use giong::net::TcpListener;
@@ -36,7 +36,7 @@ fn main() -> std::io::Result<()> {
 }
 ```
 
-For HTTPS you do not need to write this loop yourself: turn on the `tls` feature of [`giong-http`](https://github.com/giong-run/Giong/blob/v1.2.0/giong-http/README.md) and call `Server::serve_tls`.
+For HTTPS you do not need to write this loop yourself: turn on the `tls` feature of [`giong-http`](https://giong.run/docs/1.2/giong-http.md) and call `Server::serve_tls`.
 
 A client, checking the server's certificate against the certificate authorities installed on the machine:
 

@@ -150,7 +150,7 @@ giong-compat = "1.4.2"</code></pre>
 <p>What the numbers say:</p>
 <ul><li><strong>Sending</strong> large writes now goes straight from the caller's memory to the socket (sessions 7 and 8). Until 0.8.0 each byte was copied into the write buffer first (under callgrind, <code>memcpy</code> was 96% of the user-space instructions <code>Compat</code> ran on this workload), which cost 10–20% of throughput and 14–25% more CPU per byte against giong's own <code>write_all</code> in sessions 1–4. In sessions 7 and 8 <code>Compat</code> sends at 5–7% less CPU per byte than 0.8.0's, from 9% above to 6% below Tokio. giong's own <code>write_all</code> measured faster than both (331 and 351 ns per KiB against Tokio's 347 and 404), which is why the column against it still shows +8% to +14%. Small writes are still gathered and copied: that is what lets <code>Compat</code> send one segment per flush.</li><li><strong>Receiving</strong> through <code>read</code> costs 6–16% more CPU per byte (5.7% in session 8) than giong's own <code>recv</code>, for the copy into the caller's buffer, at the same throughput. Through <code>AsyncBufRead</code> (<code>fill_buf</code>, then <code>consume</code>) there is no copy: the eight sessions put it between 6% below and 9% above giong's own cost, which is the noise between sessions.</li><li><strong>Request and reply</strong> differ by less than the noise in throughput; the CPU per round trip is up to 5% higher (0.7% lower in session 8). Callgrind counts about 1,000 more user-space instructions per round trip (the boxed send, the flush, one more poll), against 14 to 16 µs spent mostly in the kernel.</li><li><strong>Tokio's own receive spends less CPU per KiB</strong> than giong's <code>recv</code> on this benchmark: 11% less in session 8, with 16 KiB receive buffers, and 6–20% less in the sessions before, with 8 KiB. Each receive brings at most one buffer, so Tokio's 64 KiB reads take fewer system calls. That gap is giong's own, not <code>Compat</code>'s.</li></ul>
 <p>Run it with <code>bench/compat.sh</code> (the method is at the top of the script, and in <a href="https://github.com/giong-run/Giong/blob/v1.4.2/bench/compat/src/main.rs"><code>bench/compat/src/main.rs</code></a>); the raw numbers of the latest session are in <a href="https://github.com/giong-run/Giong/blob/v1.4.2/bench/results/compat"><code>bench/results/compat/</code></a>, the earlier ones in its <code>sessions/</code> folder.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-3" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="errors">Errors</h2>
-<div class="table-scroll"><table><thead><tr><th>Code</th><th>When</th></tr></thead><tbody><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E1401.md"><code>GIONG-E1401</code></a></td><td>A write, flush or shutdown after a buffered send or a shutdown failed (the first call after the failure got the error itself)</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E1402.md"><code>GIONG-E1402</code></a></td><td>A write after <code>shutdown</code> or <code>close</code> started</td></tr><tr><td><a href="https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E1403.md"><code>GIONG-E1403</code></a></td><td><code>write_buffer</code> given 0 or more than 1 GiB (a panic)</td></tr></tbody></table></div>
+<div class="table-scroll"><table><thead><tr><th>Code</th><th>When</th></tr></thead><tbody><tr><td><a href="/docs/errors/E1401/"><code>GIONG-E1401</code></a></td><td>A write, flush or shutdown after a buffered send or a shutdown failed (the first call after the failure got the error itself)</td></tr><tr><td><a href="/docs/errors/E1402/"><code>GIONG-E1402</code></a></td><td>A write after <code>shutdown</code> or <code>close</code> started</td></tr><tr><td><a href="/docs/errors/E1403/"><code>GIONG-E1403</code></a></td><td><code>write_buffer</code> given 0 or more than 1 GiB (a panic)</td></tr></tbody></table></div>
 <p><code>giong::error::code(&amp;err)</code> returns the code, to match on instead of the message.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-4" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="license">License</h2>
 <p>MIT or Apache-2.0, at your option.</p></section>
     <p class="src-note">giong 1.4.2 · from <a href="https://github.com/giong-run/Giong/blob/v1.4.2/giong-compat/README.md">giong-compat/README.md</a> at v1.4.2</p>
@@ -331,7 +331,7 @@ MIT or Apache-2.0, at your option.</script><script type="text/markdown" id="md-p
 
 > giong 1.4.2 · https://giong.run/docs/giong-compat/ · source: https://github.com/giong-run/Giong/blob/v1.4.2/giong-compat/README.md
 
-The I/O traits of Tokio and of the futures crates for [giong](https://github.com/giong-run/Giong/blob/v1.4.2/README.md)'s streams, so that protocol crates which are generic over their transport run on giong: TLS (tokio-rustls, futures-rustls), WebSocket (tokio-tungstenite), HTTP/2 (h2), hyper's connection API, framing (tokio-util's codecs) and the like. No Tokio runtime is involved: giong drives everything, on its own threads.
+The I/O traits of Tokio and of the futures crates for [giong](https://giong.run/docs/giong.md)'s streams, so that protocol crates which are generic over their transport run on giong: TLS (tokio-rustls, futures-rustls), WebSocket (tokio-tungstenite), HTTP/2 (h2), hyper's connection API, framing (tokio-util's codecs) and the like. No Tokio runtime is involved: giong drives everything, on its own threads.
 
 ```toml
 [dependencies]
@@ -364,9 +364,9 @@ fn main() -> std::io::Result<()> {
 
 | You need | Use |
 |---|---|
-| An HTTP/1.1 or HTTP/2 server or client (not hyper or reqwest) | [`giong-http`](https://github.com/giong-run/Giong/blob/v1.4.2/giong-http/README.md); [`giong-web`](https://github.com/giong-run/Giong/blob/v1.4.2/giong-web/README.md) for routing and JSON |
-| TLS (tokio-rustls over `Compat` works too, with `Compat`'s copies added) | [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.4.2/giong-tls/README.md) |
-| PostgreSQL, MySQL, Redis (not sqlx, tokio-postgres or redis-rs, which need the Tokio runtime) | [`giong-postgres`](https://github.com/giong-run/Giong/blob/v1.4.2/giong-postgres/README.md), [`giong-mysql`](https://github.com/giong-run/Giong/blob/v1.4.2/giong-mysql/README.md), [`giong-redis`](https://github.com/giong-run/Giong/blob/v1.4.2/giong-redis/README.md) |
+| An HTTP/1.1 or HTTP/2 server or client (not hyper or reqwest) | [`giong-http`](https://giong.run/docs/giong-http.md); [`giong-web`](https://giong.run/docs/giong-web.md) for routing and JSON |
+| TLS (tokio-rustls over `Compat` works too, with `Compat`'s copies added) | [`giong-tls`](https://giong.run/docs/giong-tls.md) |
+| PostgreSQL, MySQL, Redis (not sqlx, tokio-postgres or redis-rs, which need the Tokio runtime) | [`giong-postgres`](https://giong.run/docs/giong-postgres.md), [`giong-mysql`](https://giong.run/docs/giong-mysql.md), [`giong-redis`](https://giong.run/docs/giong-redis.md) |
 | h2's own API (HTTP/2 frames and streams, or a library built on h2) | [h2](https://docs.rs/h2) over `Compat`, plain or over `giong-tls` with ALPN `h2` |
 | WebSocket | [tokio-tungstenite](https://docs.rs/tokio-tungstenite) (`accept_async`, `client_async`) over `Compat` |
 | A protocol framed by length or by line | [tokio-util](https://docs.rs/tokio-util)'s `Framed` with a codec over `Compat` |
@@ -521,9 +521,9 @@ Run it with `bench/compat.sh` (the method is at the top of the script, and in [`
 
 | Code | When |
 |---|---|
-| [`GIONG-E1401`](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E1401.md) | A write, flush or shutdown after a buffered send or a shutdown failed (the first call after the failure got the error itself) |
-| [`GIONG-E1402`](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E1402.md) | A write after `shutdown` or `close` started |
-| [`GIONG-E1403`](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E1403.md) | `write_buffer` given 0 or more than 1 GiB (a panic) |
+| [`GIONG-E1401`](https://giong.run/docs/errors/E1401.md) | A write, flush or shutdown after a buffered send or a shutdown failed (the first call after the failure got the error itself) |
+| [`GIONG-E1402`](https://giong.run/docs/errors/E1402.md) | A write after `shutdown` or `close` started |
+| [`GIONG-E1403`](https://giong.run/docs/errors/E1403.md) | `write_buffer` given 0 or more than 1 GiB (a panic) |
 
 `giong::error::code(&err)` returns the code, to match on instead of the message.
 
@@ -549,7 +549,7 @@ Documentation of giong-compat, giong 1.4.2 (https://giong.run/docs/giong-compat.
 
 > giong 1.4.2 · https://giong.run/docs/giong-compat/ · source: https://github.com/giong-run/Giong/blob/v1.4.2/giong-compat/README.md
 
-The I/O traits of Tokio and of the futures crates for [giong](https://github.com/giong-run/Giong/blob/v1.4.2/README.md)'s streams, so that protocol crates which are generic over their transport run on giong: TLS (tokio-rustls, futures-rustls), WebSocket (tokio-tungstenite), HTTP/2 (h2), hyper's connection API, framing (tokio-util's codecs) and the like. No Tokio runtime is involved: giong drives everything, on its own threads.
+The I/O traits of Tokio and of the futures crates for [giong](https://giong.run/docs/giong.md)'s streams, so that protocol crates which are generic over their transport run on giong: TLS (tokio-rustls, futures-rustls), WebSocket (tokio-tungstenite), HTTP/2 (h2), hyper's connection API, framing (tokio-util's codecs) and the like. No Tokio runtime is involved: giong drives everything, on its own threads.
 
 ```toml
 [dependencies]
@@ -582,9 +582,9 @@ fn main() -> std::io::Result<()> {
 
 | You need | Use |
 |---|---|
-| An HTTP/1.1 or HTTP/2 server or client (not hyper or reqwest) | [`giong-http`](https://github.com/giong-run/Giong/blob/v1.4.2/giong-http/README.md); [`giong-web`](https://github.com/giong-run/Giong/blob/v1.4.2/giong-web/README.md) for routing and JSON |
-| TLS (tokio-rustls over `Compat` works too, with `Compat`'s copies added) | [`giong-tls`](https://github.com/giong-run/Giong/blob/v1.4.2/giong-tls/README.md) |
-| PostgreSQL, MySQL, Redis (not sqlx, tokio-postgres or redis-rs, which need the Tokio runtime) | [`giong-postgres`](https://github.com/giong-run/Giong/blob/v1.4.2/giong-postgres/README.md), [`giong-mysql`](https://github.com/giong-run/Giong/blob/v1.4.2/giong-mysql/README.md), [`giong-redis`](https://github.com/giong-run/Giong/blob/v1.4.2/giong-redis/README.md) |
+| An HTTP/1.1 or HTTP/2 server or client (not hyper or reqwest) | [`giong-http`](https://giong.run/docs/giong-http.md); [`giong-web`](https://giong.run/docs/giong-web.md) for routing and JSON |
+| TLS (tokio-rustls over `Compat` works too, with `Compat`'s copies added) | [`giong-tls`](https://giong.run/docs/giong-tls.md) |
+| PostgreSQL, MySQL, Redis (not sqlx, tokio-postgres or redis-rs, which need the Tokio runtime) | [`giong-postgres`](https://giong.run/docs/giong-postgres.md), [`giong-mysql`](https://giong.run/docs/giong-mysql.md), [`giong-redis`](https://giong.run/docs/giong-redis.md) |
 | h2's own API (HTTP/2 frames and streams, or a library built on h2) | [h2](https://docs.rs/h2) over `Compat`, plain or over `giong-tls` with ALPN `h2` |
 | WebSocket | [tokio-tungstenite](https://docs.rs/tokio-tungstenite) (`accept_async`, `client_async`) over `Compat` |
 | A protocol framed by length or by line | [tokio-util](https://docs.rs/tokio-util)'s `Framed` with a codec over `Compat` |
@@ -739,9 +739,9 @@ Run it with `bench/compat.sh` (the method is at the top of the script, and in [`
 
 | Code | When |
 |---|---|
-| [`GIONG-E1401`](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E1401.md) | A write, flush or shutdown after a buffered send or a shutdown failed (the first call after the failure got the error itself) |
-| [`GIONG-E1402`](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E1402.md) | A write after `shutdown` or `close` started |
-| [`GIONG-E1403`](https://github.com/giong-run/Giong/blob/v1.4.2/docs/errors/E1403.md) | `write_buffer` given 0 or more than 1 GiB (a panic) |
+| [`GIONG-E1401`](https://giong.run/docs/errors/E1401.md) | A write, flush or shutdown after a buffered send or a shutdown failed (the first call after the failure got the error itself) |
+| [`GIONG-E1402`](https://giong.run/docs/errors/E1402.md) | A write after `shutdown` or `close` started |
+| [`GIONG-E1403`](https://giong.run/docs/errors/E1403.md) | `write_buffer` given 0 or more than 1 GiB (a panic) |
 
 `giong::error::code(&err)` returns the code, to match on instead of the message.
 
