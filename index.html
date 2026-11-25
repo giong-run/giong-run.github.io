@@ -86,7 +86,7 @@
 </section>
 
 <section class="stats-band" aria-label="giong in numbers">
-  <div class="wrap stats"><div class="stat"><b>0.03</b><span>system calls per request on <code>/json</code>; raw Tokio makes 2.05</span></div><div class="stat"><b>14</b><span>crates on one version: the runtime and what a service needs on top</span></div><div class="stat"><b>249</b><span>error codes, each with the cause, the fix and a page of its own</span></div><div class="stat"><b>1,598</b><span>tests, run on three io_uring setups, on epoll and on real 5.15, 6.0 and 6.1 kernels</span></div></div>
+  <div class="wrap stats"><div class="stat"><b>0.03</b><span>system calls per request on <code>/json</code>; raw Tokio makes 2.05</span></div><div class="stat"><b>14</b><span>crates on one version: the runtime and what a service needs on top</span></div><div class="stat"><b>250</b><span>error codes, each with the cause, the fix and a page of its own</span></div><div class="stat"><b>1,598</b><span>tests, run on three io_uring setups, on epoll and on real 5.15, 6.0 and 6.1 kernels</span></div></div>
 </section>
 
 <section class="band" id="devkit">
@@ -134,7 +134,7 @@ Error: <span class="e">GIONG-E0102: no address found for db.internal. Fix: check
       <div class="files">
         <a href="https://github.com/giong-run/Giong/blob/main/AGENTS.md"><b>AGENTS.md</b><span>how to build, test and change giong</span></a>
         <a href="/llms.txt"><b>llms.txt</b><span>where a model finds the docs</span></a>
-        <a href="/docs/#errors"><b>249 error codes</b><span>each with a page: cause and fix</span></a>
+        <a href="/docs/#errors"><b>250 error codes</b><span>each with a page: cause and fix</span></a>
       </div>
     </div>
     <ol class="points points-5"><li><h3>Errors that say how to fix them</h3><p>Every error giong raises has a stable code, the cause and the fix, and a page of its own. <code>giong::error::code(&amp;err)</code> matches on the code, never on the message.</p></li><li><h3>One obvious way</h3><p>One way to do each thing, and no macros that hide control flow. Misuse fails at compile time, or at run time with a coded error. Every timeout and size limit is finite and documented.</p></li><li><h3>Version 1 for years</h3><p>After 1.0, giong grows through 1.x releases rather than a 2.0. Every behaviour code relies on is documented, and a release only adds: it never changes what existing code means. <code>cargo-semver-checks</code> runs on every change.</p></li><li><h3>Verification is the law</h3><p>Tests, ThreadSanitizer, loom, fuzzing and soak tests run in CI and block merging. Machines check the work, not only reviewers.</p></li><li><h3>Docs a machine can read</h3><p><code>AGENTS.md</code> in the repository and <code>llms.txt</code> on this site: the facts a model gets wrong, which crate to use for each job, and every page in one file.</p></li></ol>
