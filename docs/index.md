@@ -1,6 +1,6 @@
 # Get started with giong
 
-> giong 1.5.0 · https://giong.run/docs/
+> giong 1.5.1 · https://giong.run/docs/
 
 A running service in a few commands, then every page of the documentation: the `giong` command, a page for each crate, the best practices, the agent skill. The API reference for each crate is on docs.rs.
 
@@ -10,14 +10,13 @@ The `giong` command writes a project that builds and passes its tests, runs it o
 
 ```sh
 curl -fsSL https://giong.run/install.sh | sh
-giong new api --db postgres   # a JSON API that passes its tests
+giong new api                 # a users API on SQLite that passes its tests
 cd api
-giong db up                   # local PostgreSQL, URL in .env
 giong dev --background        # serve 127.0.0.1:8080, rebuild on save
 curl http://127.0.0.1:8080/health
 giong check                   # compiler, clippy, giong's checks
 giong test                    # on io_uring and on epoll
-giong dev stop                # service and database; data kept
+giong dev stop                # the service; data/api.db kept
 ```
 
 - [`giong new`](https://giong.run/docs/cli/new.md) writes the service, its tests, migrations, `.env.example`, a Dockerfile, CI and the files that teach coding agents.
@@ -30,14 +29,14 @@ Every command: https://giong.run/docs/cli.md
 
 - **linux**: **Production.** io_uring on 6.0 or newer, 6.1+ recommended; developed and tested on 6.18. Elsewhere giong runs on its epoll driver, tested down to 5.15. Every crate.
 - **macos**: **Development.** A kqueue driver, tested on macOS 15 and 26 on Apple Silicon. Every crate; correct, not tuned.
-- **windows**: **The runtime crate.** I/O completion ports, tested on Windows Server 2022 and 2025: tasks, timers, channels, TCP, UDP, files, DNS. Unix sockets and the other crates come in later 1.x releases.
+- **windows**: **Every crate.** I/O completion ports, tested on Windows Server 2022 and 2025: tasks, timers, channels, TCP, UDP, Unix sockets (Windows 10 1803 or newer), files, DNS, and the HTTP, TLS, database and other crates; correct, not tuned.
 - **rust**: 1.80 or newer; 1.85 for giong-quic and giong-http's `unstable-http3`.
 - **docker**: Docker's default seccomp profile blocks io_uring, so giong runs on epoll there by itself. [docs/DEPLOYMENT.md](https://giong.run/docs/deployment.md) shows how to allow io_uring in Docker, Compose and Kubernetes without turning seccomp off.
 - **license**: MIT OR Apache-2.0, at your option.
 
 ## Install the crates
 
-The crates are on crates.io and share one version number, 1.5.0.
+The crates are on crates.io and share one version number, 1.5.1.
 
 ```sh
 cargo add giong
@@ -111,6 +110,7 @@ Every page is also Markdown, for agents:
 - [giong image](https://giong.run/docs/cli/image.md): An OCI image of the service without Docker or a Dockerfile.
 - [giong clean](https://giong.run/docs/cli/clean.md): Free the disk old builds take, keeping what the next build needs.
 - [giong mcp](https://giong.run/docs/cli/mcp.md): Every command as a tool for coding agents over MCP, read-only unless allowed.
+- [giong upgrade](https://giong.run/docs/cli/upgrade.md): 
 
 ### Guides
 
@@ -158,42 +158,42 @@ Every page is also Markdown, for agents:
 
 ## Examples
 
-- [examples/rest-api](https://github.com/giong-run/Giong/tree/v1.5.0/examples/rest-api): A whole service on `giong-web`: users kept in PostgreSQL, read through a Redis cache, served over HTTPS, with request ids, a JSON access log, readiness, a streamed export and graceful shutdown. Its README has the routes, the configuration and how it is tested. `cargo run --release -p rest-api`
-- [examples/echo.rs](https://github.com/giong-run/Giong/blob/v1.5.0/examples/echo.rs): A TCP echo server on every core. `cargo run --release --example echo`
-- [examples/http.rs](https://github.com/giong-run/Giong/blob/v1.5.0/examples/http.rs): A small HTTP/1.1 server: keep-alive, pipelining, idle timeouts, a header size limit and graceful shutdown on SIGINT and SIGTERM. The same routes the benchmarks use. `cargo run --release --example http`
-- [examples/udp_echo.rs](https://github.com/giong-run/Giong/blob/v1.5.0/examples/udp_echo.rs): A UDP echo server, receiving with multishot `recvmsg`. `cargo run --release --example udp_echo`
-- [examples/cat.rs](https://github.com/giong-run/Giong/blob/v1.5.0/examples/cat.rs): Prints files to standard output, reading them through io_uring with positional reads. `cargo run --release --example cat -- Cargo.toml`
-- [examples/stdio.rs](https://github.com/giong-run/Giong/blob/v1.5.0/examples/stdio.rs): A line protocol over standard input and output, as a local tool server speaks it: runs programs as child processes and answers with their output, and notes `SIGHUP`. `cargo run --release --example stdio`
+- [examples/rest-api](https://github.com/giong-run/Giong/tree/v1.5.1/examples/rest-api): A whole service on `giong-web`: users kept in PostgreSQL, read through a Redis cache, served over HTTPS, with request ids, a JSON access log, readiness, a streamed export and graceful shutdown. Its README has the routes, the configuration and how it is tested. `cargo run --release -p rest-api`
+- [examples/echo.rs](https://github.com/giong-run/Giong/blob/v1.5.1/examples/echo.rs): A TCP echo server on every core. `cargo run --release --example echo`
+- [examples/http.rs](https://github.com/giong-run/Giong/blob/v1.5.1/examples/http.rs): A small HTTP/1.1 server: keep-alive, pipelining, idle timeouts, a header size limit and graceful shutdown on SIGINT and SIGTERM. The same routes the benchmarks use. `cargo run --release --example http`
+- [examples/udp_echo.rs](https://github.com/giong-run/Giong/blob/v1.5.1/examples/udp_echo.rs): A UDP echo server, receiving with multishot `recvmsg`. `cargo run --release --example udp_echo`
+- [examples/cat.rs](https://github.com/giong-run/Giong/blob/v1.5.1/examples/cat.rs): Prints files to standard output, reading them through io_uring with positional reads. `cargo run --release --example cat -- Cargo.toml`
+- [examples/stdio.rs](https://github.com/giong-run/Giong/blob/v1.5.1/examples/stdio.rs): A line protocol over standard input and output, as a local tool server speaks it: runs programs as child processes and answers with their output, and notes `SIGHUP`. `cargo run --release --example stdio`
 
 ## API reference
 
-- [giong](https://docs.rs/giong/1.5.0): Executor, io_uring, epoll and kqueue drivers and IOCP; TCP, UDP, Unix sockets, files, timers, DNS, channels.
-- [giong-proto](https://docs.rs/giong-proto/1.5.0): Protocol Buffers decoded as views over the receive buffer: no copy, no allocation per field.
-- [giong-grpc-build](https://docs.rs/giong-grpc-build/1.5.0): Generates giong-proto messages and gRPC services from .proto files at build time.
-- [giong-quic](https://docs.rs/giong-quic/1.5.0): QUIC on giong's own UDP sockets: endpoints, streams and 0-RTT, TLS 1.3 from rustls.
-- [giong-tls](https://docs.rs/giong-tls/1.5.0): TLS 1.2 and 1.3 for servers and clients on rustls. No OpenSSL.
-- [giong-http](https://docs.rs/giong-http/1.5.0): A strict HTTP/1.1 and HTTP/2 server, HTTPS behind a feature, and a pooled client.
-- [giong-grpc](https://docs.rs/giong-grpc/1.5.0): gRPC servers and clients on giong-http's HTTP/2, messages read as giong-proto views.
-- [giong-postgres](https://docs.rs/giong-postgres/1.5.0): PostgreSQL client and pool; statements of every task pipeline together.
-- [giong-mysql](https://docs.rs/giong-mysql/1.5.0): MySQL and MariaDB client and pool, built the same way as giong-postgres.
-- [giong-redis](https://docs.rs/giong-redis/1.5.0): Redis client on RESP3: pipelining across tasks, Pub/Sub, a pool.
-- [giong-web](https://docs.rs/giong-web/1.5.0): Router, middleware and JSON on giong-http; errors as coded problem+json.
-- [giong-mcp](https://docs.rs/giong-mcp/1.5.0): A read-only MCP server: an agent sees what each worker, task and pool is doing.
-- [giong-compat](https://docs.rs/giong-compat/1.5.0): Tokio's and futures-io's I/O traits for giong's streams, for h2, tokio-rustls and the like.
+- [giong](https://docs.rs/giong/1.5.1): Executor, io_uring, epoll and kqueue drivers and IOCP; TCP, UDP, Unix sockets, files, timers, DNS, channels.
+- [giong-proto](https://docs.rs/giong-proto/1.5.1): Protocol Buffers decoded as views over the receive buffer: no copy, no allocation per field.
+- [giong-grpc-build](https://docs.rs/giong-grpc-build/1.5.1): Generates giong-proto messages and gRPC services from .proto files at build time.
+- [giong-quic](https://docs.rs/giong-quic/1.5.1): QUIC on giong's own UDP sockets: endpoints, streams and 0-RTT, TLS 1.3 from rustls.
+- [giong-tls](https://docs.rs/giong-tls/1.5.1): TLS 1.2 and 1.3 for servers and clients on rustls. No OpenSSL.
+- [giong-http](https://docs.rs/giong-http/1.5.1): A strict HTTP/1.1 and HTTP/2 server, HTTPS behind a feature, and a pooled client.
+- [giong-grpc](https://docs.rs/giong-grpc/1.5.1): gRPC servers and clients on giong-http's HTTP/2, messages read as giong-proto views.
+- [giong-postgres](https://docs.rs/giong-postgres/1.5.1): PostgreSQL client and pool; statements of every task pipeline together.
+- [giong-mysql](https://docs.rs/giong-mysql/1.5.1): MySQL and MariaDB client and pool, built the same way as giong-postgres.
+- [giong-redis](https://docs.rs/giong-redis/1.5.1): Redis client on RESP3: pipelining across tasks, Pub/Sub, a pool.
+- [giong-web](https://docs.rs/giong-web/1.5.1): Router, middleware and JSON on giong-http; errors as coded problem+json.
+- [giong-mcp](https://docs.rs/giong-mcp/1.5.1): A read-only MCP server: an agent sees what each worker, task and pool is doing.
+- [giong-compat](https://docs.rs/giong-compat/1.5.1): Tokio's and futures-io's I/O traits for giong's streams, for h2, tokio-rustls and the like.
 
 ## Error codes
 
 Every error giong raises starts with a code, says what went wrong and how to fix it, and links to its page. Match on `giong::error::code(&err)`, never on the message.
 
 ```text
-GIONG-E0102: no address found for db.internal. Fix: check the spelling of the name, /etc/hosts, and the DNS servers in /etc/resolv.conf (in a container, the network it is attached to). See https://github.com/giong-run/Giong/blob/v1.5.0/docs/errors/E0102.md
+GIONG-E0102: no address found for db.internal. Fix: check the spelling of the name, /etc/hosts, and the DNS servers in /etc/resolv.conf (in a container, the network it is attached to). See https://github.com/giong-run/Giong/blob/v1.5.1/docs/errors/E0102.md
 ```
 
 All 250 codes: https://giong.run/docs/errors.md
 
 ## When giong is the wrong choice
 
-- **Tuned for Linux**: io_uring on 6.0 or newer, epoll elsewhere; on epoll giong is as fast as other epoll runtimes, not faster. macOS is for development, and Windows has the runtime crate only.
+- **Tuned for Linux**: io_uring on 6.0 or newer, epoll elsewhere; on epoll giong is as fast as other epoll runtimes, not faster. macOS is for development, and so is Windows.
 - **Not Tokio's ecosystem**: Crates that need the Tokio runtime (sqlx, reqwest, tonic's transport) do not run on giong. Crates generic over a Tokio or futures-io stream (h2, tokio-rustls) run through `giong-compat`, at the cost of a copy.
 - **TLS certificates**: Certificates are not reloaded for you. Kernel TLS is off by default: it pays off for large files, not for data in memory.
 - **Running tasks stay put**: New work can go to the least busy worker (`spawn_balanced`, `bind_balanced`), but a task never moves once it has started.
@@ -211,7 +211,7 @@ It is at 1.x with a frozen API, tested hard on every change and in long soaks, a
 
 **Does it run on macOS or Windows?**
 
-macOS, yes, for development: a kqueue driver runs every crate, tested on macOS 15 and 26 on Apple Silicon, correct but not tuned. Windows, the runtime crate: tasks, timers, channels, TCP, UDP and files on I/O completion ports, tested on Windows Server 2022 and 2025; the HTTP, TLS, database and other crates come to Windows in later 1.x releases. Until then use WSL2 or Docker for those.
+macOS, yes, for development: a kqueue driver runs every crate, tested on macOS 15 and 26 on Apple Silicon, correct but not tuned. Windows, yes, every crate: I/O completion ports, tested on Windows Server 2022 and 2025, correct but not tuned; Linux is where giong is fast.
 
 **Which Linux kernel do I need?**
 

@@ -1,6 +1,6 @@
 # giong bench
 
-> giong 1.5.0 · https://giong.run/docs/cli/bench/ · source: https://github.com/giong-run/Giong/blob/v1.5.0/giong-cli/README.md#giong-bench
+> giong 1.5.1 · https://giong.run/docs/cli/bench/ · source: https://github.com/giong-run/Giong/blob/v1.5.1/giong-cli/README.md#giong-bench
 
 ```sh
 giong bench [<url>] [--rate <n>|auto|max] [--conns 50] [--duration 10]

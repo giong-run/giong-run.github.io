@@ -1,6 +1,6 @@
 # giong dashboard
 
-> giong 1.5.0 · https://giong.run/docs/cli/dashboard/ · source: https://github.com/giong-run/Giong/blob/v1.5.0/giong-cli/README.md#giong-dashboard
+> giong 1.5.1 · https://giong.run/docs/cli/dashboard/ · source: https://github.com/giong-run/Giong/blob/v1.5.1/giong-cli/README.md#giong-dashboard
 
 ```sh
 giong dashboard [--port N] [--mcp ADDRESS] [--base-url URL] [--log FILE]

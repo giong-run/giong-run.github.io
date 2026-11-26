@@ -39,6 +39,7 @@
   <url><loc>https://giong.run/docs/cli/image/</loc></url>
   <url><loc>https://giong.run/docs/cli/clean/</loc></url>
   <url><loc>https://giong.run/docs/cli/mcp/</loc></url>
+  <url><loc>https://giong.run/docs/cli/upgrade/</loc></url>
   <url><loc>https://giong.run/docs/guides/coding-agents/</loc></url>
   <url><loc>https://giong.run/docs/guides/safe-defaults/</loc></url>
   <url><loc>https://giong.run/docs/guides/database/</loc></url>
@@ -71,6 +72,9 @@
   <url><loc>https://giong.run/docs/errors/E0080/</loc></url>
   <url><loc>https://giong.run/docs/errors/E0081/</loc></url>
   <url><loc>https://giong.run/docs/errors/E0028/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E0060/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E0061/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E0062/</loc></url>
   <url><loc>https://giong.run/docs/errors/E0090/</loc></url>
   <url><loc>https://giong.run/docs/errors/E0091/</loc></url>
   <url><loc>https://giong.run/docs/errors/E0092/</loc></url>
@@ -93,6 +97,7 @@
   <url><loc>https://giong.run/docs/errors/E0201/</loc></url>
   <url><loc>https://giong.run/docs/errors/E0202/</loc></url>
   <url><loc>https://giong.run/docs/errors/E0203/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E0204/</loc></url>
   <url><loc>https://giong.run/docs/errors/E1101/</loc></url>
   <url><loc>https://giong.run/docs/errors/E1102/</loc></url>
   <url><loc>https://giong.run/docs/errors/E1103/</loc></url>
@@ -286,4 +291,13 @@
   <url><loc>https://giong.run/docs/errors/E5086/</loc></url>
   <url><loc>https://giong.run/docs/errors/E5087/</loc></url>
   <url><loc>https://giong.run/docs/errors/E5088/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5090/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5091/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5092/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5093/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5094/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5095/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5096/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5097/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5098/</loc></url>
 </urlset>

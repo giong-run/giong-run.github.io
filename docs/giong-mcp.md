@@ -1,13 +1,13 @@
 # giong-mcp
 
-> giong 1.5.0 · https://giong.run/docs/giong-mcp/ · source: https://github.com/giong-run/Giong/blob/v1.5.0/giong-mcp/README.md
+> giong 1.5.1 · https://giong.run/docs/giong-mcp/ · source: https://github.com/giong-run/Giong/blob/v1.5.1/giong-mcp/README.md
 
 An [MCP](https://modelcontextprotocol.io) server that lets an AI agent look inside a running [giong](https://giong.run/docs/giong.md) service: what each worker is doing, which tasks are alive and which line spawned them, what the connection pools hold, and where the time goes. Read-only, on a loopback address or a Unix socket, and only when the service turns it on.
 
 ```toml
 [dependencies]
-giong = "1.5.0"
-giong-mcp = "1.5.0"
+giong = "1.5.1"
+giong-mcp = "1.5.1"
 ```
 
 ```rust,no_run

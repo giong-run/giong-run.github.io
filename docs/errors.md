@@ -1,6 +1,6 @@
 # Error codes
 
-> giong 1.5.0 · https://giong.run/docs/errors/ · source: https://github.com/giong-run/Giong/blob/v1.5.0/docs/errors/README.md
+> giong 1.5.1 · https://giong.run/docs/errors/ · source: https://github.com/giong-run/Giong/blob/v1.5.1/docs/errors/README.md
 
 Every error giong raises itself starts with a code and ends with a link to its page here:
 
@@ -59,6 +59,14 @@ when it is no longer raised.
 |---|---|---|
 | [GIONG-E0028](https://giong.run/docs/errors/E0028.md) | `NetworkBuffersExhausted` | the system ran out of network buffers |
 
+## Windows
+
+| Code | `Code::` | Meaning |
+|---|---|---|
+| [GIONG-E0060](https://giong.run/docs/errors/E0060.md) | `UnixSocketInUse` | a file is already at the Unix socket path |
+| [GIONG-E0061](https://giong.run/docs/errors/E0061.md) | `UnixPathTooLong` | Unix socket path too long |
+| [GIONG-E0062](https://giong.run/docs/errors/E0062.md) | `UnixSocketsUnavailable` | no Unix domain sockets on this Windows |
+
 ## Messages between processes (`giong::ipc`)
 
 | Code | `Code::` | Meaning |
@@ -95,6 +103,7 @@ when it is no longer raised.
 | [GIONG-E0201](https://giong.run/docs/errors/E0201.md) | `FileTooShort` | the file ended before the bytes to send |
 | [GIONG-E0202](https://giong.run/docs/errors/E0202.md) | `OffsetOutOfRange` | file offset out of range |
 | [GIONG-E0203](https://giong.run/docs/errors/E0203.md) | `InvalidOpenOptions` | invalid combination of open options |
+| [GIONG-E0204](https://giong.run/docs/errors/E0204.md) | `FileTooLarge` | file too large to read into memory |
 
 ## giong-http
 
@@ -349,3 +358,12 @@ The `giong` command reports `GIONG-E5000` to `GIONG-E5099`. Its findings can als
 | [GIONG-E5086](https://giong.run/docs/errors/E5086.md) | `TestTimeout` | the tests took longer than the time limit |
 | [GIONG-E5087](https://giong.run/docs/errors/E5087.md) | `GitInitFailed` | git init failed in the new project |
 | [GIONG-E5088](https://giong.run/docs/errors/E5088.md) | `DotenvBuildSetting` | .env sets a cargo or rustc setting |
+| [GIONG-E5090](https://giong.run/docs/errors/E5090.md) | `GiongOutdated` | a newer giong release is out |
+| [GIONG-E5091](https://giong.run/docs/errors/E5091.md) | `GiongMixed` | the project's giong crates are on different releases |
+| [GIONG-E5092](https://giong.run/docs/errors/E5092.md) | `CliOutdated` | this giong command is older than the newest release |
+| [GIONG-E5093](https://giong.run/docs/errors/E5093.md) | `UpgradeTarget` | the version to move to is not a release giong upgrade can move to |
+| [GIONG-E5094](https://giong.run/docs/errors/E5094.md) | `MsrvBelowTarget` | the project's rust-version is below what the release needs |
+| [GIONG-E5095](https://giong.run/docs/errors/E5095.md) | `PinnedVersion` | a giong dependency is pinned to a version |
+| [GIONG-E5096](https://giong.run/docs/errors/E5096.md) | `SelfUpdateFailed` | giong upgrade --self could not replace this command |
+| [GIONG-E5097](https://giong.run/docs/errors/E5097.md) | `ReleaseUnknown` | the newest giong release could not be looked up |
+| [GIONG-E5098](https://giong.run/docs/errors/E5098.md) | `ManifestShape` | a giong dependency is written in a form giong upgrade cannot edit |

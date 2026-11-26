@@ -1,13 +1,13 @@
 # giong-postgres
 
-> giong 1.5.0 · https://giong.run/docs/giong-postgres/ · source: https://github.com/giong-run/Giong/blob/v1.5.0/giong-postgres/README.md
+> giong 1.5.1 · https://giong.run/docs/giong-postgres/ · source: https://github.com/giong-run/Giong/blob/v1.5.1/giong-postgres/README.md
 
 A PostgreSQL client and connection pool for the [giong](https://giong.run/docs/giong.md) runtime. It speaks the wire protocol itself (no libpq), encrypts with [`giong-tls`](https://giong.run/docs/giong-tls.md), and depends on nothing from the Tokio ecosystem.
 
 ```toml
 [dependencies]
-giong = "1.5.0"
-giong-postgres = "1.5.0"
+giong = "1.5.1"
+giong-postgres = "1.5.1"
 ```
 
 ```rust,no_run

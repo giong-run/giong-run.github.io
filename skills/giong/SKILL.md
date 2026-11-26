@@ -7,7 +7,7 @@ description: Write, review and debug Rust services on the giong async runtime an
 
 giong is a thread-per-core async runtime for Rust: one worker per core, each with its own
 io_uring ring (epoll where io_uring is blocked; kqueue on macOS; I/O completion ports on
-Windows, runtime crate only), and its own crates for a whole service with no Tokio
+Windows), and its own crates for a whole service with no Tokio
 underneath. The API is strict and stays on major version 1: one way to do each thing,
 coded errors that say how to fix them, releases that only add.
 
@@ -74,6 +74,7 @@ Take the first that fits:
 | Protocol Buffers | `giong-proto` (views over the buffer) | prost |
 | HTTP/3, QUIC | `giong-http` feature `unstable-http3`, `giong-quic` (Rust 1.85; may change) | quinn, h3 |
 | PostgreSQL | `giong-postgres` (`Pool` per worker) | sqlx, tokio-postgres |
+| SQLite | rusqlite (feature `bundled`), every call inside `giong::spawn_blocking`: one write connection and a few read connections in WAL mode, shared by the workers (`src/db.rs` of `giong new`) | sqlx, a query on a worker |
 | MySQL, MariaDB | `giong-mysql` | sqlx, mysql_async |
 | Redis | `giong-redis` | redis-rs, fred |
 | Files, timers, names | `giong::fs`, `giong::time`, `giong::net::lookup_host` | `tokio::fs`, `tokio::time` |
@@ -142,7 +143,7 @@ the cause and the fix.
 
 | You want | Run |
 |---|---|
-| Start a project | `giong new api --template web --db postgres` (templates `web`, `grpc`, `worker`; `--db postgres`, `mysql`, `redis`, comma-separated; `--tls`) |
+| Start a project | `giong new api` (a users API on SQLite; templates `web`, `grpc`, `worker`; `--db postgres`, `mysql`, `sqlite`, `redis`, comma-separated, or `none`; `--tls`) |
 | Teach this project to your agent | `giong ai init` (`giong new` does it) |
 | Work on it | `giong dev --background`, once (see Local development) |
 | Is my machine right? | `giong doctor` |
@@ -150,6 +151,7 @@ the cause and the fix.
 | What does this error mean? | `giong explain GIONG-E0102` |
 | Run the tests | `giong test` (on io_uring, then on epoll; reads `.env`) |
 | A database | `giong db up`, `giong db migrate` |
+| A newer giong release | `giong upgrade` (all giong crates at once; `--dry-run` first) |
 
 `giong new` writes a project that builds and passes its tests: the service, an end to end
 test, migrations, `.env.example`, a Dockerfile, a CI workflow and fast dev builds. Extend it

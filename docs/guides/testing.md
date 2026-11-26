@@ -1,6 +1,6 @@
 # Test a service
 
-> giong 1.5.0 · https://giong.run/docs/guides/testing/ · source: https://github.com/giong-run/Giong/blob/v1.5.0/docs/guides/testing.md
+> giong 1.5.1 · https://giong.run/docs/guides/testing/ · source: https://github.com/giong-run/Giong/blob/v1.5.1/docs/guides/testing.md
 
 Three kinds of tests cover a giong service: plain unit tests of async code, handler tests without a socket, and recorded requests replayed against the running service. `giong test` runs the first two the way CI and production will see them.
 

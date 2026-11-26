@@ -1,11 +1,11 @@
 # Benchmark tables
 
-> giong 1.5.0 · https://giong.run/docs/benchmark-tables/ · source: https://github.com/giong-run/Giong/blob/v1.5.0/docs/BENCHMARKS.md
+> giong 1.5.1 · https://giong.run/docs/benchmark-tables/ · source: https://github.com/giong-run/Giong/blob/v1.5.1/docs/BENCHMARKS.md
 
 Every number giong publishes, with its method, the machine and where the raw output is.
 Medians of interleaved rounds, ranges in parentheses, losses next to wins. The
-[README](https://github.com/giong-run/Giong/blob/v1.5.0/README.md#results-at-a-glance) has the short version; recorded output is in
-[`bench/results/`](https://github.com/giong-run/Giong/blob/v1.5.0/bench/results), and every script is in [`bench/`](https://github.com/giong-run/Giong/blob/v1.5.0/bench).
+[README](https://github.com/giong-run/Giong/blob/v1.5.1/README.md#results-at-a-glance) has the short version; recorded output is in
+[`bench/results/`](https://github.com/giong-run/Giong/blob/v1.5.1/bench/results), and every script is in [`bench/`](https://github.com/giong-run/Giong/blob/v1.5.1/bench).
 
 ## Method
 
@@ -339,7 +339,7 @@ shows the one-worker numbers (giong 218.9k, Monoio 214.2k, giong-http 186.1k, Gl
 `ring`, so the TLS library and the cryptography are the same and only the runtime, the
 HTTP layer and the TLS settings differ. The server gets one core and `wrk` three (the load
 generator has to encrypt too); 50 connections, TLS 1.3, an ECDSA P-256 certificate, seven
-interleaved rounds on a 4-vCPU VM (2026-11-17, [`bench/results/tls/`](https://github.com/giong-run/Giong/blob/v1.5.0/bench/results/tls/README.md)).
+interleaved rounds on a 4-vCPU VM (2026-11-17, [`bench/results/tls/`](https://github.com/giong-run/Giong/blob/v1.5.1/bench/results/tls/README.md)).
 The server's core was 97–100% busy in every row, so the server was the limit. The plain
 HTTP rows are from the earlier session of five rounds (`bench/results/tls/2026-11-12/`).
 
@@ -382,11 +382,11 @@ straight from the page cache. nginx with kernel TLS and `sendfile` does 6,039 on
 same machine. With 64 KiB files, with bodies from memory and with small responses the
 kernel is 4–22% slower than rustls, so `Ktls::Off` stays the default. A client receiving
 64 KiB bodies gains 11% from letting the kernel decrypt. The whole table and a profile
-are in the [`giong-tls` README](https://github.com/giong-run/Giong/blob/v1.5.0/giong-tls/README.md#when-it-pays-off).
+are in the [`giong-tls` README](https://github.com/giong-run/Giong/blob/v1.5.1/giong-tls/README.md#when-it-pays-off).
 
 ## PostgreSQL
 
-`bench/postgres.sh`: [`giong-postgres`](https://github.com/giong-run/Giong/blob/v1.5.0/giong-postgres/README.md#performance) against
+`bench/postgres.sh`: [`giong-postgres`](https://github.com/giong-run/Giong/blob/v1.5.1/giong-postgres/README.md#performance) against
 tokio-postgres with deadpool-postgres, each client on one core, the same PostgreSQL 16
 server on the other three, 64 tasks issuing statements back to back. Medians, statements
 per second:
@@ -418,11 +418,11 @@ by key (`bench/results/postgres/batch/`):
 nothing for 100-row reads, where producing the rows costs far more than the reply. On the
 full path of an HTTP request (`bench/db-path.sh`) it gains little, because there the HTTP
 side is the limit. When to leave it off (row-level security set up per request) is in
-the [giong-postgres README](https://github.com/giong-run/Giong/blob/v1.5.0/giong-postgres/README.md#batched-reads).
+the [giong-postgres README](https://github.com/giong-run/Giong/blob/v1.5.1/giong-postgres/README.md#batched-reads).
 
 ## MySQL
 
-`bench/mysql.sh`: [`giong-mysql`](https://github.com/giong-run/Giong/blob/v1.5.0/giong-mysql/README.md#performance) against mysql_async and
+`bench/mysql.sh`: [`giong-mysql`](https://github.com/giong-run/Giong/blob/v1.5.1/giong-mysql/README.md#performance) against mysql_async and
 SQLx on Tokio, each client on one core with its own pool, the same MySQL 8.0 server on the
 other three, 64 tasks issuing statements back to back. Medians, statements per second:
 
@@ -440,7 +440,7 @@ than the server has cores.
 
 ## Redis
 
-`bench/redis.sh`: [`giong-redis`](https://github.com/giong-run/Giong/blob/v1.5.0/giong-redis/README.md#performance) against redis-rs (a
+`bench/redis.sh`: [`giong-redis`](https://github.com/giong-run/Giong/blob/v1.5.1/giong-redis/README.md#performance) against redis-rs (a
 `MultiplexedConnection`) and fred on Tokio, all three pipelining the commands of 64 tasks,
 each client on one core, the same Redis 7.0 server on the other three. Medians, commands
 per second, and the client core's time per command:
@@ -460,7 +460,7 @@ and how many connections to use.
 
 ## gRPC
 
-`bench/grpc.sh`: [`giong-grpc`](https://github.com/giong-run/Giong/blob/v1.5.0/giong-grpc/README.md#measured-against-tonic) against
+`bench/grpc.sh`: [`giong-grpc`](https://github.com/giong-run/Giong/blob/v1.5.1/giong-grpc/README.md#measured-against-tonic) against
 tonic 0.14 (prost, hyper, Tokio) with the same service. One server thread, loaded from three
 other cores until its core is the limit, with tonic's client and giong-grpc's as the load
 generator; a 4-core cloud VM, io_uring, the median of 10 rounds of 5 s
@@ -484,7 +484,7 @@ many messages in a row.
 
 ## Routing, JSON and middleware
 
-`bench/web.sh`: [`giong-web`](https://github.com/giong-run/Giong/blob/v1.5.0/giong-web/README.md#performance) against axum 0.8 with the
+`bench/web.sh`: [`giong-web`](https://github.com/giong-run/Giong/blob/v1.5.1/giong-web/README.md#performance) against axum 0.8 with the
 same serde handlers, each on one core, 50 connections. Medians of 5 rounds, requests per
 second:
 
@@ -504,7 +504,7 @@ buffer instead of copying it out of the runtime's receive buffers
 ([#194](https://github.com/giong-run/Giong/pull/194)). `bench-giong-http` on one core of a
 4-vCPU VM, `bench/lab/loadgen` on the other three, 16 connections, before (`main` at
 5a4cdb3) and after, versions in turns, medians
-([`bench/results/upload-recv-into/`](https://github.com/giong-run/Giong/blob/v1.5.0/bench/results/upload-recv-into/README.md)):
+([`bench/results/upload-recv-into/`](https://github.com/giong-run/Giong/blob/v1.5.1/bench/results/upload-recv-into/README.md)):
 
 | Driver | Request | Before, req/s | After, req/s | | CPU per request |
 |---|---|---:|---:|---:|---|
@@ -526,7 +526,7 @@ runtime, without giong-http, Tokio still receives large uploads faster: see the
 `bench/fs.sh`: 200,000 operations per measurement, five rounds, all data in the page cache,
 so this measures what one operation costs, not the disk. giong, Monoio, compio and `std` use
 one thread. Tokio hands every file operation to its blocking thread pool, so it is measured
-pinned to one core and free to use all four. Raw data: [bench/results/fs](https://github.com/giong-run/Giong/blob/v1.5.0/bench/results/fs/summary.txt).
+pinned to one core and free to use all four. Raw data: [bench/results/fs](https://github.com/giong-run/Giong/blob/v1.5.1/bench/results/fs/summary.txt).
 
 | Operations per second | Whole 4 KiB file, 1 task | 64 tasks | 4 KiB at a random offset, 1 task | 64 tasks |
 |---|---|---|---|---|
@@ -548,7 +548,7 @@ pinned to one core and free to use all four. Raw data: [bench/results/fs](https:
   is not cached, which this benchmark does not measure.
 
 Measured on 2026-11-17 on the same machine; the run before the page-cache path is in
-[bench/results/fs/before-core-pr](https://github.com/giong-run/Giong/blob/v1.5.0/bench/results/fs/before-core-pr/summary.txt).
+[bench/results/fs/before-core-pr](https://github.com/giong-run/Giong/blob/v1.5.1/bench/results/fs/before-core-pr/summary.txt).
 
 ## Core primitives
 
@@ -556,7 +556,7 @@ Measured on 2026-11-17 on the same machine; the run before the page-cache path i
 `LocalSet`, multi-thread), Monoio, Glommio, compio and smol, each on its own scheduler and
 channels, pinned to two cores. Median nanoseconds per operation over five rounds, lower is
 better; giong on io_uring (epoll in parentheses). Method, every runtime and the raw data:
-[bench/results/core/vm](https://github.com/giong-run/Giong/blob/v1.5.0/bench/results/core/vm/README.md).
+[bench/results/core/vm](https://github.com/giong-run/Giong/blob/v1.5.1/bench/results/core/vm/README.md).
 
 | ns per operation | giong | Tokio (best) | Monoio | Glommio | compio | smol |
 |---|---|---|---|---|---|---|
@@ -650,13 +650,13 @@ five rounds of 5 s, 2026-11-15, before giong-quic's API existed
 
 ## Benchmark lab
 
-[`bench/lab`](https://github.com/giong-run/Giong/blob/v1.5.0/bench/lab/README.md) drives giong, Tokio, Monoio and Glommio with the same
+[`bench/lab`](https://github.com/giong-run/Giong/blob/v1.5.1/bench/lab/README.md) drives giong, Tokio, Monoio and Glommio with the same
 server program and a load generator built on none of them (raw epoll, open loop for
 latency, corrected for coordinated omission), in interleaved rounds, and marks each row
 ahead, level (within 3%) or behind the best of the others. Run on a 4-vCPU cloud VM on
 2026-11-21, three rounds of 6 s, at commit 6c163cd (the runtime as of 1.0); the tables
 for every scenario and the raw data are in
-[`bench/results/lab/cloud-4vcpu/`](https://github.com/giong-run/Giong/blob/v1.5.0/bench/results/lab/cloud-4vcpu/summary.md).
+[`bench/results/lab/cloud-4vcpu/`](https://github.com/giong-run/Giong/blob/v1.5.1/bench/results/lab/cloud-4vcpu/summary.md).
 
 | Scenario | Metric | giong | Best of the others | | |
 |---|---|---:|---|---:|---|
@@ -709,11 +709,11 @@ more than two tenants, tenants sharing a database pool, and HTTP/1.1 uploads, wh
 
 ## Build time and size
 
-[`bench/build.sh`](https://github.com/giong-run/Giong/blob/v1.5.0/bench/build.sh): the same three-route JSON service with the same
+[`bench/build.sh`](https://github.com/giong-run/Giong/blob/v1.5.1/bench/build.sh): the same three-route JSON service with the same
 layers (request ids, a log line per request, compression, a timeout), on giong-web 1.3.0
 from crates.io and on axum 0.8 + tokio + tower-http, built on a 4-vCPU cloud VM with
 Rust 1.97. Mean of two rounds; times ±10% on a VM, sizes exact. Raw data and the full
-table: [`bench/results/build/cloud-4vcpu/`](https://github.com/giong-run/Giong/blob/v1.5.0/bench/results/build/cloud-4vcpu/summary.md).
+table: [`bench/results/build/cloud-4vcpu/`](https://github.com/giong-run/Giong/blob/v1.5.1/bench/results/build/cloud-4vcpu/summary.md).
 
 | | giong-web | axum + tokio + tower-http |
 |---|---|---|
@@ -753,4 +753,4 @@ the noise of these runs; `bench/instructions.sh` counts the server's instruction
 request with callgrind instead, which repeats within 0.1%. CI holds the hot paths to
 their counts: `scripts/instr.py check` fails a change that makes any of 16 operations
 (spawning a task, a TCP round trip, an HTTP/1.1, HTTP/2 or TLS request, a database query)
-cost 1% more instructions, or an idle connection 1% more heap ([bench/instr](https://github.com/giong-run/Giong/blob/v1.5.0/bench/instr/README.md)).
+cost 1% more instructions, or an idle connection 1% more heap ([bench/instr](https://github.com/giong-run/Giong/blob/v1.5.1/bench/instr/README.md)).

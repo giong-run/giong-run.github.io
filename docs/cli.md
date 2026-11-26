@@ -1,6 +1,6 @@
 # Dev kit overview
 
-> giong 1.5.0 · https://giong.run/docs/cli/ · source: https://github.com/giong-run/Giong/blob/v1.5.0/giong-cli/README.md
+> giong 1.5.1 · https://giong.run/docs/cli/ · source: https://github.com/giong-run/Giong/blob/v1.5.1/giong-cli/README.md
 
 The `giong` command: start, run, check and ship services on the [Gióng](https://github.com/giong-run/Giong) async runtime. One small binary (the standard library, `serde_json`, and `socket2` on Unix), the same on Linux, macOS and Windows.
 
@@ -13,11 +13,12 @@ cargo install giong-cli --locked                            # anywhere Rust runs
 The install scripts download the prebuilt binary of the latest release from GitHub, check its SHA-256 and put it in `~/.giong/bin` (`%USERPROFILE%\.giong\bin` on Windows) without asking for root; where no binary is published they build it with cargo. `GIONG_VERSION=1.5.0` picks a version, `GIONG_INSTALL=/path` another folder, `GIONG_DOWNLOAD_URL` a mirror of the release downloads. Then:
 
 ```sh
-giong new api --db postgres   # a service that builds and passes its tests now
+giong new api    # a users API on SQLite that builds and passes its tests now, nothing to install
 giong doctor     # is this machine (and project) ready?
 giong dev --background  # build, run on localhost and rebuild on every save; returns once it serves
 giong dev status        # what runs, where, and how the last build went (logs, stop: the same way)
 giong check      # compiler errors, clippy and giong's own checks in one report
+giong upgrade    # move the project (and this command) to the newest giong release
 ```
 
 ## Commands
@@ -41,6 +42,7 @@ giong check      # compiler errors, clippy and giong's own checks in one report
 | [`giong image`](https://giong.run/docs/cli/image.md) | An OCI image of the service without Docker or a Dockerfile. |
 | [`giong clean`](https://giong.run/docs/cli/clean.md) | Free the disk old builds take, keeping what the next build needs. |
 | [`giong mcp`](https://giong.run/docs/cli/mcp.md) | Every command as a tool for coding agents over MCP, read-only unless allowed. |
+| [`giong upgrade`](https://giong.run/docs/cli/upgrade.md) |  |
 
 ## One shape for every command
 

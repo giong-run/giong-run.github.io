@@ -1,6 +1,6 @@
 # giong record
 
-> giong 1.5.0 · https://giong.run/docs/cli/record/ · source: https://github.com/giong-run/Giong/blob/v1.5.0/giong-cli/README.md#giong-record
+> giong 1.5.1 · https://giong.run/docs/cli/record/ · source: https://github.com/giong-run/Giong/blob/v1.5.1/giong-cli/README.md#giong-record
 
 ```sh
 giong record list [--route TEXT] [--method M] [--status 404|4xx] [--limit N] [--from LOG]

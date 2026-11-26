@@ -1,6 +1,6 @@
 # giong image
 
-> giong 1.5.0 · https://giong.run/docs/cli/image/ · source: https://github.com/giong-run/Giong/blob/v1.5.0/giong-cli/README.md#giong-image
+> giong 1.5.1 · https://giong.run/docs/cli/image/ · source: https://github.com/giong-run/Giong/blob/v1.5.1/giong-cli/README.md#giong-image
 
 ```sh
 giong image [--tag name:tag] [--add static,migrations] [--load] [--push ghcr.io/owner/name:tag]
