@@ -1,6 +1,6 @@
 # Use a database
 
-> giong 1.5.2 · https://giong.run/docs/guides/database/ · source: https://github.com/giong-run/Giong/blob/v1.5.2/docs/guides/database.md
+> giong 1.5.3 · https://giong.run/docs/guides/database/ · source: https://github.com/giong-run/Giong/blob/v1.5.3/docs/guides/database.md
 
 A local database for development in one command, forward-only migrations, and the pool pattern every giong service uses. PostgreSQL is shown; MySQL and Redis work the same way. A project from `giong new` starts on [SQLite](#sqlite), which needs nothing installed or started.
 

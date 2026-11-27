@@ -1,6 +1,6 @@
 # giong env
 
-> giong 1.5.2 · https://giong.run/docs/cli/env/ · source: https://github.com/giong-run/Giong/blob/v1.5.2/giong-cli/README.md#giong-env
+> giong 1.5.3 · https://giong.run/docs/cli/env/ · source: https://github.com/giong-run/Giong/blob/v1.5.3/giong-cli/README.md#giong-env
 
 ```sh
 giong env [show|check|init|get <KEY>]

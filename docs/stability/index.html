@@ -38,7 +38,7 @@
     <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="28" height="28"></picture><span>giong</span></a>
     <nav class="nav" aria-label="Site"><a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a><a href="/docs/agent-skill/">Agent skill</a></nav>
     <div class="hdr-side">
-      <a class="ver" href="/releases/#v1-5-2" title="Release notes for v1.5.2">v1.5.2</a>
+      <a class="ver" href="/releases/#v1-5-3" title="Release notes for v1.5.3">v1.5.3</a>
       <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="giong on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
       <a class="icon-btn hide-sm" href="https://x.com/giongrun" aria-label="giong on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
       <button class="icon-btn theme" type="button" aria-label="Switch between light and dark" hidden>
@@ -79,10 +79,10 @@
 <p>When a limit is reached, a giong API does one of three things by default, and which one is part of the promise: it <strong>waits</strong> (with no end, or until a stated timeout), or it <strong>refuses</strong> with a coded error. A 1.x release never turns a default that waits into one that refuses, or the reverse; a new way of refusing early (an overload policy, a per-tenant budget) comes as a setting that is off until it is turned on. The numbers may be tuned when the documentation does not promise them; the kind of answer stays.</p>
 <div class="table-scroll"><table><thead><tr><th>Limit</th><th>Default answer</th></tr></thead><tbody><tr><td>A bounded channel is full (<code>send</code>)</td><td>waits until there is room</td></tr><tr><td>A database pool has no free connection (<code>Pool::get</code>)</td><td>waits up to <code>wait_timeout</code> (5 s), then <code>E3009</code>, <code>E3109</code> or <code>E3209</code></td></tr><tr><td>The HTTP client has <code>max_connections_per_host</code> (16) open to the origin</td><td>waits for a connection to be free, within the request's <code>timeout</code> (30 s)</td></tr><tr><td>The HTTP server holds <code>max_connections</code> (10,000 per worker)</td><td>stops accepting; new connections wait in the kernel's backlog</td></tr><tr><td>A request would take a worker past <code>max_buffered_request_bytes</code></td><td>refuses: <code>503</code> with <code>E1120</code> (HTTP/2: <code>REFUSED_STREAM</code>)</td></tr><tr><td>Free memory is below <code>min_free_memory</code> when a connection arrives</td><td>refuses: <code>503</code> with <code>E1121</code>, or a TLS connection closed before its handshake</td></tr><tr><td>An HTTP/2 client opens more than <code>max_concurrent_streams</code> (100)</td><td>refuses the extra streams, as HTTP/2 requires</td></tr></tbody></table></div>
 <p>The two memory refusals are on by default because waiting is not possible there: the memory is already gone. Everything else waits, so code written for 1.0 sees no new errors from a 1.x release unless it turns a new policy on.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-9" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="changes-made-before-10">Changes made before 1.0</h2>
-<p>Breaking changes are refused between releases (<code>scripts/semver.sh</code>), so the few the API review left for 1.0 were made together by one release pull request, that of 1.0.0-rc.1 (see <a href="https://github.com/giong-run/Giong/blob/v1.5.2/docs/RELEASING.md">RELEASING.md</a>). Nothing used giong in production yet, so no deprecated alias was kept: old names went outright. This list was that pull request's checklist, and every item of it is done:</p>
-<ul><li>every item deprecated after 0.8 is removed, each listed under <em>Removed</em> with the name that replaces it: <code>Error::code</code> in giong-postgres and giong-mysql (<code>server_code</code>), <code>Config::dbname</code> in giong-postgres (<code>database</code>), <code>giong::sync::mpsc::channel</code> (<code>unbounded</code>), <code>TlsAcceptor::new</code> and <code>TlsConnector::new</code> (<code>from_rustls</code>, or the stable constructors), <code>TlsConnector::with_roots</code> (<code>with_root_pem</code>);</li><li><code>giong::sync::mpsc::Sender</code> and <code>Receiver</code> go to the bounded channel, and <code>BoundedSender</code> and <code>BoundedReceiver</code> are removed (the API freeze record, <a href="https://github.com/giong-run/Giong/blob/v1.5.2/docs/reviews/2026-11-api-freeze.md">reviews/2026-11-api-freeze.md</a>); the unbounded halves stay <code>UnboundedSender</code> and <code>UnboundedReceiver</code>;</li><li>the tests of the old names go with them, and the README's test counts drop to match;</li><li>the texts that describe keeping aliases (the freeze record, RELEASING.md, the <em>Deprecated</em> section of CHANGELOG.md) say what was done instead;</li><li><code>giong_mcp::FromEnv</code> becomes <code>#[non_exhaustive]</code>, like every other enum that is not complete by nature;</li><li>three shortcuts that repeated another function go, so that each task has one spelling: <code>TlsAcceptor::from_pem</code> (<code>with_certificates</code> with <code>Certificates::from_pem</code>), <code>giong_redis::Cmd::new</code> (<code>cmd</code>) and <code>giong::observe::register_rc</code> (<code>register</code>).</li></ul></section>
-    <p class="src-note">giong 1.5.2 · from <a href="https://github.com/giong-run/Giong/blob/v1.5.2/docs/STABILITY.md">docs/STABILITY.md</a> at v1.5.2</p>
-    <script type="text/markdown" id="md-0"><!-- giong 1.5.2, https://giong.run/docs/stability/#what-the-promise-covers -->
+<p>Breaking changes are refused between releases (<code>scripts/semver.sh</code>), so the few the API review left for 1.0 were made together by one release pull request, that of 1.0.0-rc.1 (see <a href="https://github.com/giong-run/Giong/blob/v1.5.3/docs/RELEASING.md">RELEASING.md</a>). Nothing used giong in production yet, so no deprecated alias was kept: old names went outright. This list was that pull request's checklist, and every item of it is done:</p>
+<ul><li>every item deprecated after 0.8 is removed, each listed under <em>Removed</em> with the name that replaces it: <code>Error::code</code> in giong-postgres and giong-mysql (<code>server_code</code>), <code>Config::dbname</code> in giong-postgres (<code>database</code>), <code>giong::sync::mpsc::channel</code> (<code>unbounded</code>), <code>TlsAcceptor::new</code> and <code>TlsConnector::new</code> (<code>from_rustls</code>, or the stable constructors), <code>TlsConnector::with_roots</code> (<code>with_root_pem</code>);</li><li><code>giong::sync::mpsc::Sender</code> and <code>Receiver</code> go to the bounded channel, and <code>BoundedSender</code> and <code>BoundedReceiver</code> are removed (the API freeze record, <a href="https://github.com/giong-run/Giong/blob/v1.5.3/docs/reviews/2026-11-api-freeze.md">reviews/2026-11-api-freeze.md</a>); the unbounded halves stay <code>UnboundedSender</code> and <code>UnboundedReceiver</code>;</li><li>the tests of the old names go with them, and the README's test counts drop to match;</li><li>the texts that describe keeping aliases (the freeze record, RELEASING.md, the <em>Deprecated</em> section of CHANGELOG.md) say what was done instead;</li><li><code>giong_mcp::FromEnv</code> becomes <code>#[non_exhaustive]</code>, like every other enum that is not complete by nature;</li><li>three shortcuts that repeated another function go, so that each task has one spelling: <code>TlsAcceptor::from_pem</code> (<code>with_certificates</code> with <code>Certificates::from_pem</code>), <code>giong_redis::Cmd::new</code> (<code>cmd</code>) and <code>giong::observe::register_rc</code> (<code>register</code>).</li></ul></section>
+    <p class="src-note">giong 1.5.3 · from <a href="https://github.com/giong-run/Giong/blob/v1.5.3/docs/STABILITY.md">docs/STABILITY.md</a> at v1.5.3</p>
+    <script type="text/markdown" id="md-0"><!-- giong 1.5.3, https://giong.run/docs/stability/#what-the-promise-covers -->
 
 ## What the promise covers
 
@@ -107,7 +107,7 @@ All nine published crates: `giong`, `giong-http`, `giong-tls`, `giong-postgres`,
 - **Documented behaviour**: limits and defaults that the documentation states, such as
   "every limit has a finite default" or "dropping an I/O future never frees memory the
   kernel may still write to". A default value may be tuned in a minor release when the
-  documentation does not promise the number; the change is in the CHANGELOG.</script><script type="text/markdown" id="md-1"><!-- giong 1.5.2, https://giong.run/docs/stability/#what-it-does-not-cover -->
+  documentation does not promise the number; the change is in the CHANGELOG.</script><script type="text/markdown" id="md-1"><!-- giong 1.5.3, https://giong.run/docs/stability/#what-it-does-not-cover -->
 
 ## What it does not cover
 
@@ -125,7 +125,7 @@ All nine published crates: `giong`, `giong-http`, `giong-tls`, `giong-postgres`,
   on purpose, but a number is not an API.
 - **Which driver a worker gets.** A newer kernel may get a worker the io_uring driver where
   an older giong chose epoll, or the reverse when a kernel bug needs avoiding
-  (`KernelWorkaround`); both drivers behave the same through the API.</script><script type="text/markdown" id="md-2"><!-- giong 1.5.2, https://giong.run/docs/stability/#how-the-api-grows -->
+  (`KernelWorkaround`); both drivers behave the same through the API.</script><script type="text/markdown" id="md-2"><!-- giong 1.5.3, https://giong.run/docs/stability/#how-the-api-grows -->
 
 ## How the API grows
 
@@ -151,7 +151,7 @@ These rules let 1.x add what the roadmap needs (gRPC, macOS, HTTP/3, Windows) wi
   API (`IoBuf`, `RecvBuf`) was built for. Methods that only make sense on Unix
   (`OpenOptions::mode`, `Metadata::mode`, `DirEntry::ino`, the `AsRawFd` implementations)
   stay on Unix when other systems are added. HTTP/3 comes as a new entry point next to
-  `Server::serve_tls`, and `giong_http::Version` can take a new variant.</script><script type="text/markdown" id="md-3"><!-- giong 1.5.2, https://giong.run/docs/stability/#public-dependencies -->
+  `Server::serve_tls`, and `giong_http::Version` can take a new variant.</script><script type="text/markdown" id="md-3"><!-- giong 1.5.3, https://giong.run/docs/stability/#public-dependencies -->
 
 ## Public dependencies
 
@@ -170,7 +170,7 @@ feature and keeps the old one; nothing is taken away in 1.x. Every other depende
 (`io-uring`, `libc`, `socket2`, `rustls`, `ring`, `miniz_oxide`, `serde_json`, `tracing`,
 `webpki-roots`) is private: giong can move to its next version in a minor release without
 anyone noticing. rustls in particular is kept out of `giong-tls`'s stable API for this
-reason; its types are reachable only through the `unstable-rustls` feature.</script><script type="text/markdown" id="md-4"><!-- giong 1.5.2, https://giong.run/docs/stability/#rust-version-msrv -->
+reason; its types are reachable only through the `unstable-rustls` feature.</script><script type="text/markdown" id="md-4"><!-- giong 1.5.3, https://giong.run/docs/stability/#rust-version-msrv -->
 
 ## Rust version (MSRV)
 
@@ -184,7 +184,7 @@ a remote memory exhaustion (GHSA-4w2j-m93h-cj5j) on.
 - It is raised to a Rust release that is at least six months old at the time, and only
   when that brings something giong needs (async closures, a newer `std` API, a fix).
 - The edition of giong's own code may change in a minor release; it does not affect code
-  that uses giong.</script><script type="text/markdown" id="md-5"><!-- giong 1.5.2, https://giong.run/docs/stability/#linux-kernel -->
+  that uses giong.</script><script type="text/markdown" id="md-5"><!-- giong 1.5.3, https://giong.run/docs/stability/#linux-kernel -->
 
 ## Linux kernel
 
@@ -196,13 +196,13 @@ run on the epoll driver with the same API.
   support.
 - Newer kernel features (zero-copy receive, newer io_uring operations) are used when the
   running kernel has them and give way to the older path when it does not; they never
-  raise the minimum.</script><script type="text/markdown" id="md-6"><!-- giong 1.5.2, https://giong.run/docs/stability/#versions-of-the-crates -->
+  raise the minimum.</script><script type="text/markdown" id="md-6"><!-- giong 1.5.3, https://giong.run/docs/stability/#versions-of-the-crates -->
 
 ## Versions of the crates
 
 The thirteen crates are released together and carry the same version. A crate that depends on
 another depends on the same minor or newer. New crates (`giong-quic`, `giong-grpc` and the
-others on the roadmap) join at the current version when they are first published.</script><script type="text/markdown" id="md-7"><!-- giong 1.5.2, https://giong.run/docs/stability/#cancellation -->
+others on the roadmap) join at the current version when they are first published.</script><script type="text/markdown" id="md-7"><!-- giong 1.5.3, https://giong.run/docs/stability/#cancellation -->
 
 ## Cancellation
 
@@ -251,7 +251,7 @@ part of the promise, because callers rely on it as much as on a return value.
   have run, so the transaction refuses `commit` with a coded error and has to be rolled
   back (dropping it does that). A statement whose answer had arrived before
   its future was dropped does not count: its outcome is known. giong-postgres and
-  giong-mysql both do this.</script><script type="text/markdown" id="md-8"><!-- giong 1.5.2, https://giong.run/docs/stability/#defaults-you-can-rely-on -->
+  giong-mysql both do this.</script><script type="text/markdown" id="md-8"><!-- giong 1.5.3, https://giong.run/docs/stability/#defaults-you-can-rely-on -->
 
 ## Defaults you can rely on
 
@@ -274,7 +274,7 @@ the documentation does not promise them; the kind of answer stays.
 
 The two memory refusals are on by default because waiting is not possible there: the
 memory is already gone. Everything else waits, so code written for 1.0 sees no new errors
-from a 1.x release unless it turns a new policy on.</script><script type="text/markdown" id="md-9"><!-- giong 1.5.2, https://giong.run/docs/stability/#changes-made-before-10 -->
+from a 1.x release unless it turns a new policy on.</script><script type="text/markdown" id="md-9"><!-- giong 1.5.3, https://giong.run/docs/stability/#changes-made-before-10 -->
 
 ## Changes made before 1.0
 
@@ -302,7 +302,7 @@ every item of it is done:
   `TlsAcceptor::from_pem` (`with_certificates` with `Certificates::from_pem`),
   `giong_redis::Cmd::new` (`cmd`) and `giong::observe::register_rc` (`register`).</script><script type="text/markdown" id="md-page"># Stability
 
-> giong 1.5.2 · https://giong.run/docs/stability/ · source: https://github.com/giong-run/Giong/blob/v1.5.2/docs/STABILITY.md
+> giong 1.5.3 · https://giong.run/docs/stability/ · source: https://github.com/giong-run/Giong/blob/v1.5.3/docs/STABILITY.md
 
 From 1.0.0 on, giong keeps major version 1 for a long time and grows through 1.x minor
 releases. Code that builds and behaves correctly on 1.N builds and behaves the same way on
@@ -509,7 +509,7 @@ from a 1.x release unless it turns a new policy on.
 
 Breaking changes are refused between releases (`scripts/semver.sh`), so the few the API
 review left for 1.0 were made together by one release pull request, that of 1.0.0-rc.1
-(see [RELEASING.md](https://github.com/giong-run/Giong/blob/v1.5.2/docs/RELEASING.md)). Nothing used giong in production yet, so no deprecated
+(see [RELEASING.md](https://github.com/giong-run/Giong/blob/v1.5.3/docs/RELEASING.md)). Nothing used giong in production yet, so no deprecated
 alias was kept: old names went outright. This list was that pull request's checklist, and
 every item of it is done:
 
@@ -520,7 +520,7 @@ every item of it is done:
   constructors), `TlsConnector::with_roots` (`with_root_pem`);
 - `giong::sync::mpsc::Sender` and `Receiver` go to the bounded channel, and
   `BoundedSender` and `BoundedReceiver` are removed (the API freeze record,
-  [reviews/2026-11-api-freeze.md](https://github.com/giong-run/Giong/blob/v1.5.2/docs/reviews/2026-11-api-freeze.md)); the unbounded halves
+  [reviews/2026-11-api-freeze.md](https://github.com/giong-run/Giong/blob/v1.5.3/docs/reviews/2026-11-api-freeze.md)); the unbounded halves
   stay `UnboundedSender` and `UnboundedReceiver`;
 - the tests of the old names go with them, and the README's test counts drop to match;
 - the texts that describe keeping aliases (the freeze record, RELEASING.md, the
@@ -530,7 +530,7 @@ every item of it is done:
 - three shortcuts that repeated another function go, so that each task has one spelling:
   `TlsAcceptor::from_pem` (`with_certificates` with `Certificates::from_pem`),
   `giong_redis::Cmd::new` (`cmd`) and `giong::observe::register_rc` (`register`).
-</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.5.2, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use Stability as documented below.
+</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.5.3, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use Stability as documented below.
 
 Rules for giong code:
 - Start the runtime with giong::Builder::new().shutdown_on_signals(true).build()?.run(|_worker| async { .. }); there are no macros. Build listeners, routers, pools and clients inside each worker's future.
@@ -543,11 +543,11 @@ More facts: https://giong.run/llms.txt. Best practices: https://giong.run/docs/b
 
 My task: <describe what to build or fix>
 
-Documentation of Stability, giong 1.5.2 (https://giong.run/docs/stability.md):
+Documentation of Stability, giong 1.5.3 (https://giong.run/docs/stability.md):
 
 # Stability
 
-> giong 1.5.2 · https://giong.run/docs/stability/ · source: https://github.com/giong-run/Giong/blob/v1.5.2/docs/STABILITY.md
+> giong 1.5.3 · https://giong.run/docs/stability/ · source: https://github.com/giong-run/Giong/blob/v1.5.3/docs/STABILITY.md
 
 From 1.0.0 on, giong keeps major version 1 for a long time and grows through 1.x minor
 releases. Code that builds and behaves correctly on 1.N builds and behaves the same way on
@@ -754,7 +754,7 @@ from a 1.x release unless it turns a new policy on.
 
 Breaking changes are refused between releases (`scripts/semver.sh`), so the few the API
 review left for 1.0 were made together by one release pull request, that of 1.0.0-rc.1
-(see [RELEASING.md](https://github.com/giong-run/Giong/blob/v1.5.2/docs/RELEASING.md)). Nothing used giong in production yet, so no deprecated
+(see [RELEASING.md](https://github.com/giong-run/Giong/blob/v1.5.3/docs/RELEASING.md)). Nothing used giong in production yet, so no deprecated
 alias was kept: old names went outright. This list was that pull request's checklist, and
 every item of it is done:
 
@@ -765,7 +765,7 @@ every item of it is done:
   constructors), `TlsConnector::with_roots` (`with_root_pem`);
 - `giong::sync::mpsc::Sender` and `Receiver` go to the bounded channel, and
   `BoundedSender` and `BoundedReceiver` are removed (the API freeze record,
-  [reviews/2026-11-api-freeze.md](https://github.com/giong-run/Giong/blob/v1.5.2/docs/reviews/2026-11-api-freeze.md)); the unbounded halves
+  [reviews/2026-11-api-freeze.md](https://github.com/giong-run/Giong/blob/v1.5.3/docs/reviews/2026-11-api-freeze.md)); the unbounded halves
   stay `UnboundedSender` and `UnboundedReceiver`;
 - the tests of the old names go with them, and the README's test counts drop to match;
 - the texts that describe keeping aliases (the freeze record, RELEASING.md, the
@@ -796,7 +796,7 @@ every item of it is done:
         <h2>Learn</h2>
         <a href="/docs/">Get started</a>
         <a href="/docs/#examples">Examples</a>
-        <a href="https://docs.rs/giong/1.5.2/giong/">API reference</a>
+        <a href="https://docs.rs/giong/1.5.3/giong/">API reference</a>
         <a href="/docs/#errors">Error codes</a>
         <a href="/docs/best-practices/">Best practices</a><a href="/docs/agent-skill/">Agent skill</a>
         <a href="/llms.txt">llms.txt</a>

@@ -38,7 +38,7 @@
     <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="28" height="28"></picture><span>giong</span></a>
     <nav class="nav" aria-label="Site"><a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a><a href="/docs/agent-skill/">Agent skill</a></nav>
     <div class="hdr-side">
-      <a class="ver" href="/releases/#v1-5-2" title="Release notes for v1.5.2">v1.5.2</a>
+      <a class="ver" href="/releases/#v1-5-3" title="Release notes for v1.5.3">v1.5.3</a>
       <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="giong on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
       <a class="icon-btn hide-sm" href="https://x.com/giongrun" aria-label="giong on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
       <button class="icon-btn theme" type="button" aria-label="Switch between light and dark" hidden>
@@ -61,8 +61,8 @@
       <div class="doc-bar"><details class="ver-menu"><summary title="Documentation version">giong 1.5</summary><nav class="ver-list" aria-label="Documentation versions"><a href="/docs/giong-mcp/" aria-current=true><b>1.5</b><span>newest</span></a><a href="/docs/1.4/giong-mcp/"><b>1.4</b></a><a href="/docs/1.3/giong-mcp/"><b>1.3</b></a><a href="/docs/1.2/giong-mcp/"><b>1.2</b></a><a href="/docs/1.1/giong-mcp/"><b>1.1</b></a><a href="/docs/1.0/giong-mcp/"><b>1.0</b></a></nav></details><div class="doc-actions"><button class="act" type="button" data-md="md-page" data-done="copied" title="Copy this page as Markdown, for a coding agent"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy for agent</span></button><button class="act" type="button" data-md="md-prompt" data-done="copied" title="Copy a ready prompt with the rules and this page"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9Z"/><path d="M18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8Z"/></svg><span>Copy prompt</span></button><a class="act" href="/docs/giong-mcp.md" title="This page as plain Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><span>.md</span></a></div></div><div class="doc-meta"><div class="cmd"><code id="add-giong-mcp">cargo add giong-mcp</code><button class="copy" type="button" data-copy="add-giong-mcp" data-done="copied">copy</button></div><p class="crate-links"><a href="https://docs.rs/giong-mcp">docs.rs</a> · <a href="https://crates.io/crates/giong-mcp">crates.io</a> · <a href="https://github.com/giong-run/Giong/tree/main/giong-mcp">source</a></p></div></header>
     <div class="md-intro"><p>An <a href="https://modelcontextprotocol.io">MCP</a> server that lets an AI agent look inside a running <a href="/docs/giong/">giong</a> service: what each worker is doing, which tasks are alive and which line spawned them, what the connection pools hold, and where the time goes. Read-only, on a loopback address or a Unix socket, and only when the service turns it on.</p>
 <pre class="code"><code class="lang-toml">[dependencies]
-giong = "1.5.2"
-giong-mcp = "1.5.2"</code></pre>
+giong = "1.5.3"
+giong-mcp = "1.5.3"</code></pre>
 <pre class="code"><code class="lang-rust"><span class="k">fn</span> main() -&gt; std::io::<span class="t">Result</span>&lt;()&gt; {
     <span class="k">let</span> rt = giong::<span class="t">Builder</span>::new().shutdown_on_signals(true).build()?;
     <span class="c">// Starts only when GIONG_MCP is set. Keep the value: dropping it stops</span>
@@ -128,8 +128,8 @@ claude mcp add --transport http giong http://127.0.0.1:7777/mcp \
 <p><code>cargo test -p giong-mcp</code>: 43 tests, 45 with <code>--features web</code>. Sixteen (eighteen) run a two-worker service with a server on a loopback port and a plain HTTP client: the handshake and tool list, every tool's answer checked against known tasks and sources and against its <code>outputSchema</code>, a service with nothing to do reported as idle, a worker blocked in <code>std::thread::sleep</code> reported with its line while the other worker still answers, a panicking source told apart from a stopped worker, a profile finding a busy task, <code>slow_requests</code> blaming a pool that makes requests wait (high confidence) and naming the route whose handler holds the worker, the <code>routes</code> tool grouping two workers' identical apps apart from one worker's extra app and saying why an empty list is empty, JSON-RPC errors and malformed messages, the limits (the review's 254 KiB batch, batches past 16 or from newer clients, 24 clients at once with the process's memory checked), the token rules, busy addresses, and the refusals (token, <code>Host</code>, <code>Origin</code>, method, content type, protocol version, non-loopback addresses, a Unix socket's mode, a stale socket replaced and a live one or a successor's left alone). <code>tests/env.rs</code> checks that <code>start_from_env</code> keeps the service running whatever goes wrong. Twenty-three unit tests cover address parsing, tokens, a listener the kernel put somewhere else than asked, the <code>Host</code> check and the <code>Bearer</code> scheme, version negotiation, the watcher (including a second-long window under quick calls), <code>/proc</code>, a <code>profile</code> call dropped half-way (profiling goes back off), giong-http's connection tasks told apart from others, quantile labels and the fuzz target's starting inputs; three doc tests check the example and that dropping the server at once is a warning. <code>tests/observe.rs</code> in the runtime (13 tests) checks the counters, spawn locations, profiles, sources and request phases underneath, on both drivers.</p>
 <p><code>fuzz/</code> has a cargo-fuzz target, <code>request</code>, that sends any bytes as one request through every check and the JSON-RPC dispatch, and checks that the answer is one the server means to send and that no request without the token gets through (<code>cd giong-mcp &amp;&amp; cargo +nightly fuzz run request</code>).</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-5" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="license">License</h2>
 <p>MIT or Apache-2.0, at your option.</p></section>
-    <p class="src-note">giong 1.5.2 · from <a href="https://github.com/giong-run/Giong/blob/v1.5.2/giong-mcp/README.md">giong-mcp/README.md</a> at v1.5.2</p>
-    <script type="text/markdown" id="md-0"><!-- giong 1.5.2, https://giong.run/docs/giong-mcp/#what-an-agent-can-ask -->
+    <p class="src-note">giong 1.5.3 · from <a href="https://github.com/giong-run/Giong/blob/v1.5.3/giong-mcp/README.md">giong-mcp/README.md</a> at v1.5.3</p>
+    <script type="text/markdown" id="md-0"><!-- giong 1.5.3, https://giong.run/docs/giong-mcp/#what-an-agent-can-ask -->
 
 ## What an agent can ask
 
@@ -177,7 +177,7 @@ For each route it compares the slow requests with the faster half and blames the
 
 The causes are `pool_wait`, `slow_queries`, `slow_upstream`, `handler_cpu`, `worker_blocked` (another route's handler or a task held the worker: it is named), `worker_saturated`, `slow_request_arrival`, `slow_response_write`, `unattributed_wait` (the handler waited on something no code timed: wrap it in `giong::observe::wait`) and `not_slow`. Confidence is high with at least 20 slow requests and a phase that accounts for 60% of the difference, medium with 5 and 40%, low otherwise. The verdict is a proposal for an agent or a person to check against the numbers next to it; giong-mcp changes nothing in the service.
 
-What it does not see yet: waits inside tasks a handler spawns (they are not the request's), and on HTTP/2 the time to receive a request and to write its answer.</script><script type="text/markdown" id="md-1"><!-- giong 1.5.2, https://giong.run/docs/giong-mcp/#how-it-works -->
+What it does not see yet: waits inside tasks a handler spawns (they are not the request's), and on HTTP/2 the time to receive a request and to write its answer.</script><script type="text/markdown" id="md-1"><!-- giong 1.5.3, https://giong.run/docs/giong-mcp/#how-it-works -->
 
 ## How it works
 
@@ -187,7 +187,7 @@ The runtime keeps the data; this crate only serves it. In `giong`:
 - `spawn`, `Handle::spawn_on` and `Handle::spawn_balanced` record where they were called (`#[track_caller]`), so a task is named by a line of your code, and `observe::snapshot()` groups the live tasks by it.
 - `Handle::set_profiling(true)` makes every worker read the clock around each poll; when it is off, it costs one relaxed load per batch of tasks (the loop is compiled twice, with and without the clock).
 - Pools register themselves as `observe::Source`s, by weak reference.
-- `Handle::set_request_tracing(true)` makes giong-http follow each request with an `observe::RequestTrace`, and the pools and clients time their waits with `observe::wait`. Each worker adds every finished request to fixed-size latency buckets per route, with the time of each phase summed per bucket, and keeps the slowest eight: nothing is sampled away and nothing grows with load. Off, it costs one read of a thread-local per request and per database command. On, it costs 250 to 350 ns per request on one worker (several clock reads, an allocation and the per-route record); a one-worker giong-web server kept busy by `wrk` answered 5.5% fewer requests per second on `/json` and 7% fewer on `/users/{id}` while it was on (`bench/request-tracing.sh`, raw data in `bench/results/request-tracing/`). It is on only while `slow_requests` runs. With it off, what it costs is a read of a thread-local per request and a few branches: the traced paths are out of line, and the requests a connection follows are kept in a table of the worker's, not in the connection, so idle HTTP/1.1 and HTTP/2 connections are as large as without tracing. `bench/instr` counts the HTTP cases within 0.5% of their counts before (HTTP/1.1 0.4% lower, HTTPS 0.5% higher), a difference that moves with the compiler's code layout.</script><script type="text/markdown" id="md-2"><!-- giong 1.5.2, https://giong.run/docs/giong-mcp/#security -->
+- `Handle::set_request_tracing(true)` makes giong-http follow each request with an `observe::RequestTrace`, and the pools and clients time their waits with `observe::wait`. Each worker adds every finished request to fixed-size latency buckets per route, with the time of each phase summed per bucket, and keeps the slowest eight: nothing is sampled away and nothing grows with load. Off, it costs one read of a thread-local per request and per database command. On, it costs 250 to 350 ns per request on one worker (several clock reads, an allocation and the per-route record); a one-worker giong-web server kept busy by `wrk` answered 5.5% fewer requests per second on `/json` and 7% fewer on `/users/{id}` while it was on (`bench/request-tracing.sh`, raw data in `bench/results/request-tracing/`). It is on only while `slow_requests` runs. With it off, what it costs is a read of a thread-local per request and a few branches: the traced paths are out of line, and the requests a connection follows are kept in a table of the worker's, not in the connection, so idle HTTP/1.1 and HTTP/2 connections are as large as without tracing. `bench/instr` counts the HTTP cases within 0.5% of their counts before (HTTP/1.1 0.4% lower, HTTPS 0.5% higher), a difference that moves with the compiler's code layout.</script><script type="text/markdown" id="md-2"><!-- giong 1.5.3, https://giong.run/docs/giong-mcp/#security -->
 
 ## Security
 
@@ -198,32 +198,32 @@ Whoever can reach the server can read the internals of the service: task locatio
 - A Unix socket is created with mode `0600`, under a temporary name first, so that it is never reachable by other users, and needs no token. A live socket at the path is never replaced, and stopping removes only the socket this server created. Most MCP clients speak HTTP over TCP only; to use one with a socket, bridge it: `socat TCP-LISTEN:7777,bind=127.0.0.1,fork UNIX-CONNECT:/run/giong/mcp.sock` (which lets every local process in again), or `ssh -L 7777:/run/giong/mcp.sock host` from another machine.
 - A request whose `Host` header is not a loopback name, or whose `Origin` is not a loopback origin, is refused with `403`: a web page cannot reach the server through DNS rebinding.
 - What a client can make the server hold is bounded, since it lives in the service's process. Requests are served over HTTP/1.1 only (an HTTP/2 connection could carry a hundred at once), on at most 16 connections, each answered one request at a time; more wait in the kernel's listen queue. A body holds at most 64 KiB (`413` past that), a batch at most 16 messages, and an answer at most 4 MiB (an error past that, which tells the agent to ask for less). Connections idle for 60 s are closed, and a request must arrive within 10 s. Before these limits, 24 connections each sending one 254 KiB batch took a 4-worker service from 4 MB to 2 GB; now 64 such connections leave it under 8 MB.
-- The tools only read, apart from `profile` and `slow_requests`, which make every worker time its polls (and, for `slow_requests`, follow its requests) for the window they measure (their `readOnlyHint` is false, so clients can ask before calling them). `slow_requests` is refused while the service has request tracing on itself. `profile` shares the runtime's profiling switch with the service: it is refused while the service has profiling on, and it discards poll timings the service collected earlier and has not taken yet.</script><script type="text/markdown" id="md-3"><!-- giong 1.5.2, https://giong.run/docs/giong-mcp/#protocol -->
+- The tools only read, apart from `profile` and `slow_requests`, which make every worker time its polls (and, for `slow_requests`, follow its requests) for the window they measure (their `readOnlyHint` is false, so clients can ask before calling them). `slow_requests` is refused while the service has request tracing on itself. `profile` shares the runtime's profiling switch with the service: it is refused while the service has profiling on, and it discards poll timings the service collected earlier and has not taken yet.</script><script type="text/markdown" id="md-3"><!-- giong 1.5.3, https://giong.run/docs/giong-mcp/#protocol -->
 
 ## Protocol
 
 MCP over Streamable HTTP at `/mcp`, protocol versions 2025-11-25, 2025-06-18 and 2025-03-26. One JSON-RPC message per `POST`, answered with `application/json`; notifications and the client's responses get `202 Accepted`. Batches (at most 16 messages) are answered only for clients of 2025-03-26, the one version that has them; a request with a later `MCP-Protocol-Version` gets `-32600`. The server offers no event stream (`GET` gets `405`) and keeps no sessions.
 
-Tool results carry the JSON both as `structuredContent` and as compact text, and each tool declares the shape of its answer as an `outputSchema`, so clients can validate answers and models know the fields before the first call. That JSON is part of the crate's API: from 1.0 on, fields are added in minor releases and never renamed, retyped or removed before 2.0. Fields that are present only in some answers (a worker that did not answer, a call for one worker) are marked so in the schema.</script><script type="text/markdown" id="md-4"><!-- giong 1.5.2, https://giong.run/docs/giong-mcp/#testing -->
+Tool results carry the JSON both as `structuredContent` and as compact text, and each tool declares the shape of its answer as an `outputSchema`, so clients can validate answers and models know the fields before the first call. That JSON is part of the crate's API: from 1.0 on, fields are added in minor releases and never renamed, retyped or removed before 2.0. Fields that are present only in some answers (a worker that did not answer, a call for one worker) are marked so in the schema.</script><script type="text/markdown" id="md-4"><!-- giong 1.5.3, https://giong.run/docs/giong-mcp/#testing -->
 
 ## Testing
 
 `cargo test -p giong-mcp`: 43 tests, 45 with `--features web`. Sixteen (eighteen) run a two-worker service with a server on a loopback port and a plain HTTP client: the handshake and tool list, every tool's answer checked against known tasks and sources and against its `outputSchema`, a service with nothing to do reported as idle, a worker blocked in `std::thread::sleep` reported with its line while the other worker still answers, a panicking source told apart from a stopped worker, a profile finding a busy task, `slow_requests` blaming a pool that makes requests wait (high confidence) and naming the route whose handler holds the worker, the `routes` tool grouping two workers' identical apps apart from one worker's extra app and saying why an empty list is empty, JSON-RPC errors and malformed messages, the limits (the review's 254 KiB batch, batches past 16 or from newer clients, 24 clients at once with the process's memory checked), the token rules, busy addresses, and the refusals (token, `Host`, `Origin`, method, content type, protocol version, non-loopback addresses, a Unix socket's mode, a stale socket replaced and a live one or a successor's left alone). `tests/env.rs` checks that `start_from_env` keeps the service running whatever goes wrong. Twenty-three unit tests cover address parsing, tokens, a listener the kernel put somewhere else than asked, the `Host` check and the `Bearer` scheme, version negotiation, the watcher (including a second-long window under quick calls), `/proc`, a `profile` call dropped half-way (profiling goes back off), giong-http's connection tasks told apart from others, quantile labels and the fuzz target's starting inputs; three doc tests check the example and that dropping the server at once is a warning. `tests/observe.rs` in the runtime (13 tests) checks the counters, spawn locations, profiles, sources and request phases underneath, on both drivers.
 
-`fuzz/` has a cargo-fuzz target, `request`, that sends any bytes as one request through every check and the JSON-RPC dispatch, and checks that the answer is one the server means to send and that no request without the token gets through (`cd giong-mcp && cargo +nightly fuzz run request`).</script><script type="text/markdown" id="md-5"><!-- giong 1.5.2, https://giong.run/docs/giong-mcp/#license -->
+`fuzz/` has a cargo-fuzz target, `request`, that sends any bytes as one request through every check and the JSON-RPC dispatch, and checks that the answer is one the server means to send and that no request without the token gets through (`cd giong-mcp && cargo +nightly fuzz run request`).</script><script type="text/markdown" id="md-5"><!-- giong 1.5.3, https://giong.run/docs/giong-mcp/#license -->
 
 ## License
 
 MIT or Apache-2.0, at your option.</script><script type="text/markdown" id="md-page"># giong-mcp
 
-> giong 1.5.2 · https://giong.run/docs/giong-mcp/ · source: https://github.com/giong-run/Giong/blob/v1.5.2/giong-mcp/README.md
+> giong 1.5.3 · https://giong.run/docs/giong-mcp/ · source: https://github.com/giong-run/Giong/blob/v1.5.3/giong-mcp/README.md
 
 An [MCP](https://modelcontextprotocol.io) server that lets an AI agent look inside a running [giong](https://giong.run/docs/giong.md) service: what each worker is doing, which tasks are alive and which line spawned them, what the connection pools hold, and where the time goes. Read-only, on a loopback address or a Unix socket, and only when the service turns it on.
 
 ```toml
 [dependencies]
-giong = "1.5.2"
-giong-mcp = "1.5.2"
+giong = "1.5.3"
+giong-mcp = "1.5.3"
 ```
 
 ```rust,no_run
@@ -355,7 +355,7 @@ Tool results carry the JSON both as `structuredContent` and as compact text, and
 ## License
 
 MIT or Apache-2.0, at your option.
-</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.5.2, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use giong-mcp as documented below.
+</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.5.3, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use giong-mcp as documented below.
 
 Rules for giong code:
 - Start the runtime with giong::Builder::new().shutdown_on_signals(true).build()?.run(|_worker| async { .. }); there are no macros. Build listeners, routers, pools and clients inside each worker's future.
@@ -368,18 +368,18 @@ More facts: https://giong.run/llms.txt. Best practices: https://giong.run/docs/b
 
 My task: <describe what to build or fix>
 
-Documentation of giong-mcp, giong 1.5.2 (https://giong.run/docs/giong-mcp.md):
+Documentation of giong-mcp, giong 1.5.3 (https://giong.run/docs/giong-mcp.md):
 
 # giong-mcp
 
-> giong 1.5.2 · https://giong.run/docs/giong-mcp/ · source: https://github.com/giong-run/Giong/blob/v1.5.2/giong-mcp/README.md
+> giong 1.5.3 · https://giong.run/docs/giong-mcp/ · source: https://github.com/giong-run/Giong/blob/v1.5.3/giong-mcp/README.md
 
 An [MCP](https://modelcontextprotocol.io) server that lets an AI agent look inside a running [giong](https://giong.run/docs/giong.md) service: what each worker is doing, which tasks are alive and which line spawned them, what the connection pools hold, and where the time goes. Read-only, on a loopback address or a Unix socket, and only when the service turns it on.
 
 ```toml
 [dependencies]
-giong = "1.5.2"
-giong-mcp = "1.5.2"
+giong = "1.5.3"
+giong-mcp = "1.5.3"
 ```
 
 ```rust,no_run
@@ -532,7 +532,7 @@ MIT or Apache-2.0, at your option.
         <h2>Learn</h2>
         <a href="/docs/">Get started</a>
         <a href="/docs/#examples">Examples</a>
-        <a href="https://docs.rs/giong/1.5.2/giong/">API reference</a>
+        <a href="https://docs.rs/giong/1.5.3/giong/">API reference</a>
         <a href="/docs/#errors">Error codes</a>
         <a href="/docs/best-practices/">Best practices</a><a href="/docs/agent-skill/">Agent skill</a>
         <a href="/llms.txt">llms.txt</a>

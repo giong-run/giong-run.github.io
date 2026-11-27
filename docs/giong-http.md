@@ -1,6 +1,6 @@
 # giong-http
 
-> giong 1.5.2 · https://giong.run/docs/giong-http/ · source: https://github.com/giong-run/Giong/blob/v1.5.2/giong-http/README.md
+> giong 1.5.3 · https://giong.run/docs/giong-http/ · source: https://github.com/giong-run/Giong/blob/v1.5.3/giong-http/README.md
 
 A small, strict HTTP/1.1 and HTTP/2 server, and an HTTP/1.1 and HTTP/2 client, for the [giong](https://giong.run/docs/giong.md) runtime.
 
@@ -41,8 +41,9 @@ fn main() -> std::io::Result<()> {
 - A `Request` shares the connection's receive buffer instead of copying it, so building a request allocates nothing. A handler may keep the request for as long as it likes.
 - Limits on the size of the head (64 KiB) and the body (1 MiB); timeouts for idle connections (60 s), slow requests (30 s, against slowloris) and clients that read slowly (30 s). All of them can be changed on `Server`.
 - A cap on open connections, 10,000 per `serve` call (so per worker) unless `Server::max_connections` says otherwise: at the cap the server stops accepting, and new clients wait in the kernel's listen queue until a connection closes.
+- Off by default, for a server that faces clients directly: `Server::max_connections_per_ip` caps the connections one client (an IPv4 address, an IPv6 /64) may hold per worker, refusing the rest with `429` (`GIONG-E1124`) without TLS and before the handshake with it, so one client cannot take every place; `Server::first_request_timeout` closes a new connection that has not sent its first request's head within that time, so connections that send nothing hold their places for seconds instead of the 60 s idle timeout. Behind a load balancer every connection comes from the balancer, so leave the per-address cap to it.
 - A floor under free memory: while less than `Server::min_free_memory` is left to the process (by default a tenth of its cgroup's memory limit, or of the machine's memory, between 16 and 256 MiB), new connections are refused, with `503` and `Retry-After: 1` (`GIONG-E1121`) without TLS and closed before the handshake with it, and the connections the server holds keep being served. Without it, enough idle connections get the process killed by the kernel's out-of-memory killer, connections and all (0.8.0 was killed at 7,900 idle HTTPS connections in a 96 MiB container, under the default connection cap).
-- A cap on the bytes of requests a worker holds while receiving them, shared by all its connections, HTTP/1.1 and HTTP/2: `Server::max_buffered_request_bytes`, by default 64 MiB per worker or, in a container, a quarter of its memory limit divided among the workers if that is less. Without it, a few hundred clients sending large bodies slowly could exhaust a small container's memory (measured with one worker: 130 such clients got a 128 MiB container OOM-killed; with the cap, 450 of them over HTTP/1.1 and HTTP/2 leave it at a 35 MiB peak). Past the cap a request gets `503` with `Retry-After: 1` (`GIONG-E1120`) over HTTP/1.1, `REFUSED_STREAM` over HTTP/2, without its handler being called; the first 4 KiB of each HTTP/1.1 request do not count, so ordinary requests keep being served. Bodies read as a stream do not count. How to size a container: [docs/DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.5.2/docs/DEPLOYMENT.md#sizing-memory).
+- A cap on the bytes of requests a worker holds while receiving them, shared by all its connections, HTTP/1.1 and HTTP/2: `Server::max_buffered_request_bytes`, by default 64 MiB per worker or, in a container, a quarter of its memory limit divided among the workers if that is less. Without it, a few hundred clients sending large bodies slowly could exhaust a small container's memory (measured with one worker: 130 such clients got a 128 MiB container OOM-killed; with the cap, 450 of them over HTTP/1.1 and HTTP/2 leave it at a 35 MiB peak). Past the cap a request gets `503` with `Retry-After: 1` (`GIONG-E1120`) over HTTP/1.1, `REFUSED_STREAM` over HTTP/2, without its handler being called; the first 4 KiB of each HTTP/1.1 request do not count, so ordinary requests keep being served. Bodies read as a stream do not count. How to size a container: [docs/DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.5.3/docs/DEPLOYMENT.md#sizing-memory).
 - Handlers that keep a worker busy (heavy computation, long responses) leave the kernel's even spread of connections uneven. Bind each worker's listener with `giong::net::TcpListener::bind_balanced` instead of `bind` and a busy worker hands new connections to a quieter one; `Server::serve` takes either.
 - A handler is an `async fn(Request) -> Response`, a closure that returns a future (write its argument's type: `|req: Request| async move { .. }`), or a type of your own that implements `Handler` and borrows from itself while it answers. [`giong-web`](https://giong.run/docs/giong-web.md) builds routing, middleware and JSON on it.
 - `Server::serve` takes its handler by value. To serve one handler on two listeners (plain HTTP and HTTPS, a public port and an internal one), put it in an `Rc` and give each `serve` a clone: `Handler` is implemented for `Rc<H>`, and streaming routes keep streaming. Do not wrap it in a closure instead: a closure never streams, so every route that reads its body as it arrives would get it whole, or a `413`.
@@ -114,8 +115,8 @@ Other status codes: `408` the request was too slow, `413` the body is too large,
 Turn on the `tls` feature to get `Server::serve_tls`, which uses the [`giong-tls`](https://giong.run/docs/giong-tls.md) crate (rustls, TLS 1.2 and 1.3):
 
 ```toml
-giong-http = { version = "1.5.2", features = ["tls"] }
-giong-tls = "1.5.2"
+giong-http = { version = "1.5.3", features = ["tls"] }
+giong-tls = "1.5.3"
 ```
 
 ```rust,no_run
@@ -144,7 +145,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 Handlers, limits, timeouts and graceful shutdown are the same as for plain HTTP. Each handshake runs in its connection's own task, so a slow client does not hold up accepting new connections; a client that does not speak TLS (a port scan, plain HTTP sent to the wrong port) is closed when the handshake timeout expires. When it closes a connection the server sends `close_notify`, so the client can tell a complete response from a connection that was cut.
 
-To have the kernel encrypt and decrypt the records once rustls has done the handshake (kernel TLS, Linux with the `tls` module), build the acceptor with `.ktls(giong_tls::Ktls::Auto)?`; nothing else changes. When it pays off and when it does not is in [giong-tls's README](https://github.com/giong-run/Giong/blob/v1.5.2/giong-tls/README.md#kernel-tls).
+To have the kernel encrypt and decrypt the records once rustls has done the handshake (kernel TLS, Linux with the `tls` module), build the acceptor with `.ktls(giong_tls::Ktls::Auto)?`; nothing else changes. When it pays off and when it does not is in [giong-tls's README](https://github.com/giong-run/Giong/blob/v1.5.3/giong-tls/README.md#kernel-tls).
 
 To serve over another kind of connection (a different TLS layer, a fake connection in a test), implement the `Transport` trait and call `Server::serve_connection`.
 
@@ -204,17 +205,17 @@ Measured with `bench/h2.sh` against axum 0.8 on hyper's HTTP/2 (through `axum-se
 | axum, prior knowledge | 138.9k (126–146k) | 23.0k (22–26k) | 158.0k (152–171k) |
 
 - **3.8 to 4.4 times axum's requests per second on small answers, 2.5 to 3.0 times on 8.5 KiB ones.** The server's core is the limit in every case (97–100% busy), and no request failed. h2load's mean time per request follows: 0.83 ms against 3.63 ms for `json` over HTTPS, 8.1 against 20.5 ms for `users`.
-- Our reading, not profiled: with 10 or 100 streams in flight on a connection, one read brings many requests and one write takes many answers, much as pipelining does over HTTP/1.1, and giong-http turns that batching into requests served as it does for pipelined ones ([giong-web's benchmark](https://github.com/giong-run/Giong/blob/v1.5.2/giong-web/README.md#performance)). hyper gains far less from either.
+- Our reading, not profiled: with 10 or 100 streams in flight on a connection, one read brings many requests and one write takes many answers, much as pipelining does over HTTP/1.1, and giong-http turns that batching into requests served as it does for pipelined ones ([giong-web's benchmark](https://github.com/giong-run/Giong/blob/v1.5.3/giong-web/README.md#performance)). hyper gains far less from either.
 - Not measured yet: several cores, a load generator on another machine, request bodies.
 
-Memory per connection, measured with `bench/hold` over HTTP/2 with prior knowledge: 5,000 connections on one worker thread, the server's resident memory before and after, divided by 5,000. KiB, the same in all rounds within 0.2% (giong-http's row measured again in 1.5.2 with `PARTS=memory MEM_SERVERS=giong-http bench/h2.sh 3`, `bench/results/idle-conn-memory/`):
+Memory per connection, measured with `bench/hold` over HTTP/2 with prior knowledge: 5,000 connections on one worker thread, the server's resident memory before and after, divided by 5,000. KiB, the same in all rounds within 0.2% (giong-http's row measured again in 1.5.2 with `PARTS=memory MEM_SERVERS=giong-http bench/h2.sh 3`, `bench/results/h2-idle-memory/`):
 
 | Server | Idle (one request answered) | One request in progress | Each further request in progress |
 |---|---|---|---|
-| **giong-http** | **3.5** | **4.9** | **1.5** |
+| **giong-http** | **2.7** | **4.1** | **1.5** |
 | axum | 23.8 | 23.0 | 2.0 |
 
-An idle connection gives its buffers back, so what it keeps is its task, its HPACK tables and its state; an idle HTTP/1.1 connection still costs 1.3 KiB of heap (`bench/instr`'s `idle-http1`). Results are in `bench/results/h2/`.
+An idle connection gives its buffers back, so what it keeps is its task, its HPACK tables and its state. An HTTP/2 connection goes on in a task of its own once its preface arrives (or TLS picks `h2`), so it does not also keep the task that read its first bytes, which is as large as an HTTP/1.1 connection's: 2.5 KiB of heap per idle HTTP/2 connection, 6.2 KiB over TLS, and 1.2 KiB per idle HTTP/1.1 one (`bench/instr`'s `idle-h2`, `idle-h2-tls` and `idle-http1`). Results are in `bench/results/h2/`.
 
 ## HTTP/3 (unstable)
 
@@ -223,8 +224,8 @@ for the same handlers, on Linux and macOS. It needs Rust 1.85, and may change be
 stabilised; the default build does not have it.
 
 ```toml
-giong-http = { version = "1.5.2", features = ["unstable-http3", "client"] }
-giong-quic = "1.5.2"
+giong-http = { version = "1.5.3", features = ["unstable-http3", "client"] }
+giong-quic = "1.5.3"
 ```
 
 ```rust,ignore
@@ -261,14 +262,14 @@ async fn serve(tls: rustls::ServerConfig) -> std::io::Result<()> {
   0-RTT, which the example leaves off). `cargo run --release -p giong-http --features
   unstable-http3 --example h3` serves it locally (`curl -k --http3-only https://localhost:8443/`).
 - **Not measured yet** end to end; the QUIC layer underneath is in
-  [docs/BENCHMARKS.md](https://github.com/giong-run/Giong/blob/v1.5.2/docs/BENCHMARKS.md#quic).
+  [docs/BENCHMARKS.md](https://github.com/giong-run/Giong/blob/v1.5.3/docs/BENCHMARKS.md#quic).
 
 ## Client
 
 The `client` feature adds an HTTP/1.1 and HTTP/2 client, `giong_http::client` (HTTPS included, through giong-tls):
 
 ```toml
-giong-http = { version = "1.5.2", features = ["client"] }
+giong-http = { version = "1.5.3", features = ["client"] }
 ```
 
 ```rust,no_run

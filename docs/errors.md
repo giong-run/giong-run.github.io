@@ -1,6 +1,6 @@
 # Error codes
 
-> giong 1.5.2 · https://giong.run/docs/errors/ · source: https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/README.md
+> giong 1.5.3 · https://giong.run/docs/errors/ · source: https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/README.md
 
 Every error giong raises itself starts with a code and ends with a link to its page here:
 
@@ -132,6 +132,7 @@ when it is no longer raised.
 | [GIONG-E1121](https://giong.run/docs/errors/E1121.md) | `HttpServerLowMemory` | connection refused: the server is low on memory |
 | [GIONG-E1122](https://giong.run/docs/errors/E1122.md) | `HttpInvalidTrailer` | invalid HTTP trailer field |
 | [GIONG-E1123](https://giong.run/docs/errors/E1123.md) | `HttpServerOutOfFiles` | connection not accepted: the server is out of file descriptors |
+| [GIONG-E1124](https://giong.run/docs/errors/E1124.md) | `HttpServerAddressLimit` | connection refused: the client's address has too many connections open |
 
 ## giong-web
 

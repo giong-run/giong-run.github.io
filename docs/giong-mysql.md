@@ -1,13 +1,13 @@
 # giong-mysql
 
-> giong 1.5.2 · https://giong.run/docs/giong-mysql/ · source: https://github.com/giong-run/Giong/blob/v1.5.2/giong-mysql/README.md
+> giong 1.5.3 · https://giong.run/docs/giong-mysql/ · source: https://github.com/giong-run/Giong/blob/v1.5.3/giong-mysql/README.md
 
 A MySQL and MariaDB client and connection pool for the [giong](https://giong.run/docs/giong.md) runtime. It speaks the client/server protocol itself (no libmysqlclient), encrypts with [`giong-tls`](https://giong.run/docs/giong-tls.md), and depends on nothing from the Tokio ecosystem.
 
 ```toml
 [dependencies]
-giong = "1.5.2"
-giong-mysql = "1.5.2"
+giong = "1.5.3"
+giong-mysql = "1.5.3"
 ```
 
 ```rust,no_run

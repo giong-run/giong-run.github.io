@@ -1,6 +1,6 @@
 # giong-quic
 
-> giong 1.5.2 · https://giong.run/docs/giong-quic/ · source: https://github.com/giong-run/Giong/blob/v1.5.2/giong-quic/README.md
+> giong 1.5.3 · https://giong.run/docs/giong-quic/ · source: https://github.com/giong-run/Giong/blob/v1.5.3/giong-quic/README.md
 
 QUIC (RFC 9000) for the [giong](https://github.com/giong-run/Giong) runtime: endpoints, connections, bidirectional and unidirectional streams, and 0-RTT, with TLS 1.3 from [rustls](https://github.com/rustls/rustls). It carries giong-http's HTTP/3 server (`Server::serve_h3`) and client, behind giong-http's `unstable-http3` feature.
 

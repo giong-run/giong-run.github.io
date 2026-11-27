@@ -38,7 +38,7 @@
     <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="28" height="28"></picture><span>giong</span></a>
     <nav class="nav" aria-label="Site"><a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a><a href="/docs/agent-skill/">Agent skill</a></nav>
     <div class="hdr-side">
-      <a class="ver" href="/releases/#v1-5-2" title="Release notes for v1.5.2">v1.5.2</a>
+      <a class="ver" href="/releases/#v1-5-3" title="Release notes for v1.5.3">v1.5.3</a>
       <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="giong on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
       <a class="icon-btn hide-sm" href="https://x.com/giongrun" aria-label="giong on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
       <button class="icon-btn theme" type="button" aria-label="Switch between light and dark" hidden>
@@ -61,8 +61,8 @@
       <div class="doc-bar"><details class="ver-menu"><summary title="Documentation version">giong 1.5</summary><nav class="ver-list" aria-label="Documentation versions"><a href="/docs/giong-postgres/" aria-current=true><b>1.5</b><span>newest</span></a><a href="/docs/1.4/giong-postgres/"><b>1.4</b></a><a href="/docs/1.3/giong-postgres/"><b>1.3</b></a><a href="/docs/1.2/giong-postgres/"><b>1.2</b></a><a href="/docs/1.1/giong-postgres/"><b>1.1</b></a><a href="/docs/1.0/giong-postgres/"><b>1.0</b></a></nav></details><div class="doc-actions"><button class="act" type="button" data-md="md-page" data-done="copied" title="Copy this page as Markdown, for a coding agent"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy for agent</span></button><button class="act" type="button" data-md="md-prompt" data-done="copied" title="Copy a ready prompt with the rules and this page"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9Z"/><path d="M18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8Z"/></svg><span>Copy prompt</span></button><a class="act" href="/docs/giong-postgres.md" title="This page as plain Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><span>.md</span></a></div></div><div class="doc-meta"><div class="cmd"><code id="add-giong-postgres">cargo add giong-postgres</code><button class="copy" type="button" data-copy="add-giong-postgres" data-done="copied">copy</button></div><p class="crate-links"><a href="https://docs.rs/giong-postgres">docs.rs</a> · <a href="https://crates.io/crates/giong-postgres">crates.io</a> · <a href="https://github.com/giong-run/Giong/tree/main/giong-postgres">source</a></p></div></header>
     <div class="md-intro"><p>A PostgreSQL client and connection pool for the <a href="/docs/giong/">giong</a> runtime. It speaks the wire protocol itself (no libpq), encrypts with <a href="/docs/giong-tls/"><code>giong-tls</code></a>, and depends on nothing from the Tokio ecosystem.</p>
 <pre class="code"><code class="lang-toml">[dependencies]
-giong = "1.5.2"
-giong-postgres = "1.5.2"</code></pre>
+giong = "1.5.3"
+giong-postgres = "1.5.3"</code></pre>
 <pre class="code"><code class="lang-rust"><span class="k">use</span> giong_postgres::{<span class="t">Client</span>, <span class="t">Config</span>};
 
 <span class="k">fn</span> main() -&gt; <span class="t">Result</span>&lt;(), giong_postgres::<span class="t">Error</span>&gt; {
@@ -142,8 +142,8 @@ giong-postgres = "1.5.2"</code></pre>
 <p><code>COPY</code>, <code>LISTEN</code>/<code>NOTIFY</code>, streaming a result one row at a time (a result is collected in full, up to <code>max_result_size</code>), arrays, <code>numeric</code>, <code>uuid</code>, <code>date</code> and the other types not listed above in binary form (read them as strings), channel binding (<code>SCRAM-SHA-256-PLUS</code>), client certificates in the URL (<code>sslcert</code> and <code>sslkey</code> are refused; in code, give the connector one with <code>TlsConnector::client_auth</code>), several hosts with failover, running through PgBouncer without <code>max_prepared_statements</code>, and SASLprep normalization of non-ASCII passwords. The crate has had one independent review before 1.0, whose findings are fixed, but no security audit.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-8" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="tests">Tests</h2>
 <p><code>cargo test -p giong-postgres</code>: 70 tests against a real PostgreSQL server that the test binary starts for itself (a throwaway cluster from <code>initdb</code>, with users for SCRAM, MD5, clear text and TLS only, listening on a Unix socket, 127.0.0.1 and 127.0.0.2): every supported type in both directions; conversion errors; server errors and their fields; pipelining across tasks, and a failing statement in the middle of a pipeline; the statement cache, its bound, statement names an application took, and schema changes under cached statements, in and out of a transaction; notices and errors larger than the result limit; the result-size limit; the statement timeout, and leaving it to the server; cancel requests; a query dropped mid-flight; a connection the server terminates; transactions committed, rolled back and dropped, and a <code>COMMIT</code> turned into a rollback; no task or connection left behind after a client is dropped; TLS against the right and the wrong authority and host; each authentication method with the right and the wrong password, and <code>require_auth</code>; SCRAM keys derived once and off the worker; a server that answers the TLS request with extra bytes; a clear-text password never sent unencrypted; the connect timeout; and the pool (spreading statements, exclusive use and the rollback on return, even with <code>BEGIN</code> still in flight, the session reset on return and no reset for an unused connection, <code>get()</code> served in order while shared statements keep every connection busy, waiting, and waking when a dropped statement frees the connection, cancel tokens that stop working on return, idle and old connections closed, at most 1024 statements per connection at a time, replacing broken connections, connect errors, a slow statement not holding up the others, transaction and session statements refused on shared connections and a batch that leaves a transaction open; batched reads: each statement's own rows, one failing statement among good ones, <code>SELECT</code>s that write and lock rows, reads after writes, statements leaving the cache mid-batch, an error at a batch's commit, statements rolled back with their batch and run again, a statement that calls <code>set_config</code> kept out of batches (and one hidden in a function shared within its batch), the read-only guard prepared again after a <code>DEALLOCATE</code>, and no deadlock with a migration or with another batch taking locks in the opposite order). Two of them run a workload through PgBouncer in transaction mode, with the statement timeout left to the role, when PgBouncer is installed. 45 unit tests: the message encoder and parser, SCRAM against the RFC 7677 example, MD5 against RFC 1321, URLs, type conversions and how their errors name types, the statements the pool refuses and the ones it batches (never one that calls <code>set_config</code>), which errors are worth a retry, the old names of renamed methods, 42,000 random inputs for the message parser, the URL parser and SCRAM, and 300 sessions against a fake server answering with mutated replies (also the <code>session</code> fuzz target). 8 documentation examples.</p>
 <p>The tests find PostgreSQL through <code>GIONG_PG_BIN</code>, <code>/usr/lib/postgresql/*/bin</code> or <code>PATH</code>, and skip when it is not installed, unless <code>GIONG_PG_REQUIRED=1</code> (CI sets it); PgBouncer likewise through <code>GIONG_PGBOUNCER_BIN</code>, <code>PATH</code> or <code>/usr/sbin</code>, and <code>GIONG_PGBOUNCER_REQUIRED=1</code>. Run as root, they start the server as the <code>postgres</code> user. They also pass under ThreadSanitizer and on the fallback io_uring setups (<code>scripts/check.sh tsan</code> and <code>fallback</code>).</p></section>
-    <p class="src-note">giong 1.5.2 · from <a href="https://github.com/giong-run/Giong/blob/v1.5.2/giong-postgres/README.md">giong-postgres/README.md</a> at v1.5.2</p>
-    <script type="text/markdown" id="md-0"><!-- giong 1.5.2, https://giong.run/docs/giong-postgres/#what-it-does -->
+    <p class="src-note">giong 1.5.3 · from <a href="https://github.com/giong-run/Giong/blob/v1.5.3/giong-postgres/README.md">giong-postgres/README.md</a> at v1.5.3</p>
+    <script type="text/markdown" id="md-0"><!-- giong 1.5.3, https://giong.run/docs/giong-postgres/#what-it-does -->
 
 ## What it does
 
@@ -153,7 +153,7 @@ giong-postgres = "1.5.2"</code></pre>
 - **A pool per worker.** Statements that stand alone share connections; `pool.get()` takes one connection for a transaction, session settings or a slow statement. When it comes back, a transaction left open is rolled back and the session is reset (settings, temporary tables, advisory locks, `LISTEN`, cursors), so nothing one task did reaches the next. Tasks waiting in `get()` are served in the order they came, even while shared statements keep every connection busy. `get()` can take every connection of the pool: while all of them are held, the pool's own `query` waits too, and fails with `GIONG-E3009` when the wait runs out, so size a pool for the transactions that run at once and one connection more. Transactions and session changes never run on the shared connections: the pool's own methods refuse `BEGIN`, `SET`, `LISTEN`, `PREPARE`, temporary tables and the like before sending them, and a batch that leaves a transaction open closes its connection rather than let the statements of other tasks run inside it. The pool steers new statements away from a connection whose oldest statement has been running for more than 5 ms, so a slow query does not hold up the fast ones behind it. Connections are closed after 10 minutes unused and replaced after 30 minutes, or as soon as their server turns out to be a standby after a failover.
 - **TLS on by default for remote hosts, always verified.** SCRAM-SHA-256, MD5, and clear-text passwords only over TLS or to this machine. `require_auth` limits the methods the server may ask for. SCRAM's key derivation runs on a thread of its own, once per password and salt, so connecting does not stall the other tasks of the worker.
 - **Errors that say what to do.** Every error has an `ErrorKind`; errors from the server carry the SQLSTATE code and every field the server sent (`detail`, `hint`, `constraint`...).
-- **Finite limits everywhere.** Connecting, running a statement, the size of a result, the statement cache and waiting for the pool all have a limit by default, so nothing waits forever and nothing grows without bound.</script><script type="text/markdown" id="md-1"><!-- giong 1.5.2, https://giong.run/docs/giong-postgres/#connecting -->
+- **Finite limits everywhere.** Connecting, running a statement, the size of a result, the statement cache and waiting for the pool all have a limit by default, so nothing waits forever and nothing grows without bound.</script><script type="text/markdown" id="md-1"><!-- giong 1.5.3, https://giong.run/docs/giong-postgres/#connecting -->
 
 ## Connecting
 
@@ -198,7 +198,7 @@ In transaction mode, PgBouncer gives each transaction any server connection, so 
 - **Prepared statements** need PgBouncer 1.21 or later with `max_prepared_statements` above 0 (it then prepares them on whichever server connection runs them). With it, the statement cache works as usual. Without it, prepared statements cannot work through PgBouncer in transaction mode, whatever `statement_cache_capacity` is.
 - **The statement timeout** cannot be sent when connecting: PgBouncer refuses the connection, and neither `track_extra_parameters` nor `ignore_startup_parameters` passes it on to the server (checked with PgBouncer 1.22). Call `Config::statement_timeout(None)` and set the limit on the role: `ALTER ROLE app SET statement_timeout = '30s'`. Connecting without `None` fails with an error that says this.
 
-Both are tested in CI against PgBouncer in transaction mode.</script><script type="text/markdown" id="md-2"><!-- giong 1.5.2, https://giong.run/docs/giong-postgres/#api -->
+Both are tested in CI against PgBouncer in transaction mode.</script><script type="text/markdown" id="md-2"><!-- giong 1.5.3, https://giong.run/docs/giong-postgres/#api -->
 
 ## API
 
@@ -224,7 +224,7 @@ Both are tested in CI against PgBouncer in transaction mode.</script><script typ
 | `pool.stats()` | Connections open, taken, being opened; requests in flight; tasks waiting; and counters for connections opened, connect errors, wait timeouts and connections recycled. |
 | `Config::require_auth(&[AuthMethod::..])` | The only authentication methods the server may ask for. |
 
-A `Client` belongs to the worker that opened it (it is not `Send`, like everything in giong). Its methods take `&self`, so tasks share one by cloning an `Rc` or by holding a reference, and their statements are pipelined.</script><script type="text/markdown" id="md-3"><!-- giong 1.5.2, https://giong.run/docs/giong-postgres/#types -->
+A `Client` belongs to the worker that opened it (it is not `Send`, like everything in giong). Its methods take `&self`, so tasks share one by cloning an `Rc` or by holding a reference, and their statements are pipelined.</script><script type="text/markdown" id="md-3"><!-- giong 1.5.3, https://giong.run/docs/giong-postgres/#types -->
 
 ## Types
 
@@ -238,7 +238,7 @@ A `Client` belongs to the worker that opened it (it is not `Send`, like everythi
 | `SystemTime` | `timestamptz` |
 | `Option<T>` | `NULL` or a value |
 
-Integers convert between the three integer types when the value fits and fail when it does not, with an error that names the parameter or column, so a conversion never loses anything silently. Implement `ToSql` and `FromSql` for your own types.</script><script type="text/markdown" id="md-4"><!-- giong 1.5.2, https://giong.run/docs/giong-postgres/#errors -->
+Integers convert between the three integer types when the value fits and fail when it does not, with an error that names the parameter or column, so a conversion never loses anything silently. Implement `ToSql` and `FromSql` for your own types.</script><script type="text/markdown" id="md-4"><!-- giong 1.5.3, https://giong.run/docs/giong-postgres/#errors -->
 
 ## Errors
 
@@ -260,7 +260,7 @@ Integers convert between the three integer types when the value fits and fail wh
 
 `error.is_transient()` is true for errors worth retrying after a pause: connecting, a closed connection, a pool wait timeout, and the server's serialization failure (`40001`), deadlock (`40P01`), lock not available (`55P03`), too many connections (`53300`), connection errors (class `08`), shutdown or startup (`57P01`, `57P02`, `57P03`) and standby (`25006`). Retry a whole transaction, not its failed statement.
 
-An error from the server affects only its own statement: the statements that other tasks pipelined on the same connection get their own results. Two things close the connection instead, and every statement sent on it after them fails with `ErrorKind::Closed`: `COPY ... FROM STDIN` on a `Client` (COPY is not supported yet; the pool refuses it), and a `batch_execute` that leaves a transaction open on a pool's shared connection.</script><script type="text/markdown" id="md-5"><!-- giong 1.5.2, https://giong.run/docs/giong-postgres/#limits -->
+An error from the server affects only its own statement: the statements that other tasks pipelined on the same connection get their own results. Two things close the connection instead, and every statement sent on it after them fails with `ErrorKind::Closed`: `COPY ... FROM STDIN` on a `Client` (COPY is not supported yet; the pool refuses it), and a `batch_execute` that leaves a transaction open on a pool's shared connection.</script><script type="text/markdown" id="md-5"><!-- giong 1.5.3, https://giong.run/docs/giong-postgres/#limits -->
 
 ## Limits
 
@@ -273,7 +273,7 @@ An error from the server affects only its own statement: the statements that oth
 | `Pool::wait_timeout` | 5 s | `ErrorKind::PoolTimeout`. It bounds the wait for a connection; a task that opens a new connection itself waits up to `connect_timeout` instead. |
 | `Pool::idle_timeout` | 10 min | The connection is closed. |
 | `Pool::max_lifetime` | 30 min, less up to 10% | The connection is closed once no statement uses it, and a new one is opened when needed. |
-| Statements on one pooled connection at a time | 1024 | The statement methods use another connection, or wait for room. A `Client` used directly has no such bound: its callers decide how many tasks share it. |</script><script type="text/markdown" id="md-6"><!-- giong 1.5.2, https://giong.run/docs/giong-postgres/#performance -->
+| Statements on one pooled connection at a time | 1024 | The statement methods use another connection, or wait for room. A `Client` used directly has no such bound: its callers decide how many tasks share it. |</script><script type="text/markdown" id="md-6"><!-- giong 1.5.3, https://giong.run/docs/giong-postgres/#performance -->
 
 ## Performance
 
@@ -309,11 +309,11 @@ With `Config::batch_reads(true)`, the `SELECT`s that a pool's shared connection 
 - What else changes for a statement in a batch is in the documentation of `Config::batch_reads`: in short, a write is refused in the batch (`25006`) and the statement is sent again alone; when a statement or the batch's commit fails, the batch is rolled back and every other statement of it is sent again alone; answers arrive when the batch ends; `now()` is the batch's start.
 - MySQL has nothing like it: its protocol has no `Sync`, every statement gets its own reply, and giong-mysql already pipelines them.
 
-Not measured: a server on another machine (network latency, where pipelining should matter more), writes, more than one client core, PostgreSQL versions other than 16. Results are in `bench/results/postgres/`; pool sizes other than 4 in `pool-size/`.</script><script type="text/markdown" id="md-7"><!-- giong 1.5.2, https://giong.run/docs/giong-postgres/#not-there-yet -->
+Not measured: a server on another machine (network latency, where pipelining should matter more), writes, more than one client core, PostgreSQL versions other than 16. Results are in `bench/results/postgres/`; pool sizes other than 4 in `pool-size/`.</script><script type="text/markdown" id="md-7"><!-- giong 1.5.3, https://giong.run/docs/giong-postgres/#not-there-yet -->
 
 ## Not there yet
 
-`COPY`, `LISTEN`/`NOTIFY`, streaming a result one row at a time (a result is collected in full, up to `max_result_size`), arrays, `numeric`, `uuid`, `date` and the other types not listed above in binary form (read them as strings), channel binding (`SCRAM-SHA-256-PLUS`), client certificates in the URL (`sslcert` and `sslkey` are refused; in code, give the connector one with `TlsConnector::client_auth`), several hosts with failover, running through PgBouncer without `max_prepared_statements`, and SASLprep normalization of non-ASCII passwords. The crate has had one independent review before 1.0, whose findings are fixed, but no security audit.</script><script type="text/markdown" id="md-8"><!-- giong 1.5.2, https://giong.run/docs/giong-postgres/#tests -->
+`COPY`, `LISTEN`/`NOTIFY`, streaming a result one row at a time (a result is collected in full, up to `max_result_size`), arrays, `numeric`, `uuid`, `date` and the other types not listed above in binary form (read them as strings), channel binding (`SCRAM-SHA-256-PLUS`), client certificates in the URL (`sslcert` and `sslkey` are refused; in code, give the connector one with `TlsConnector::client_auth`), several hosts with failover, running through PgBouncer without `max_prepared_statements`, and SASLprep normalization of non-ASCII passwords. The crate has had one independent review before 1.0, whose findings are fixed, but no security audit.</script><script type="text/markdown" id="md-8"><!-- giong 1.5.3, https://giong.run/docs/giong-postgres/#tests -->
 
 ## Tests
 
@@ -321,14 +321,14 @@ Not measured: a server on another machine (network latency, where pipelining sho
 
 The tests find PostgreSQL through `GIONG_PG_BIN`, `/usr/lib/postgresql/*/bin` or `PATH`, and skip when it is not installed, unless `GIONG_PG_REQUIRED=1` (CI sets it); PgBouncer likewise through `GIONG_PGBOUNCER_BIN`, `PATH` or `/usr/sbin`, and `GIONG_PGBOUNCER_REQUIRED=1`. Run as root, they start the server as the `postgres` user. They also pass under ThreadSanitizer and on the fallback io_uring setups (`scripts/check.sh tsan` and `fallback`).</script><script type="text/markdown" id="md-page"># giong-postgres
 
-> giong 1.5.2 · https://giong.run/docs/giong-postgres/ · source: https://github.com/giong-run/Giong/blob/v1.5.2/giong-postgres/README.md
+> giong 1.5.3 · https://giong.run/docs/giong-postgres/ · source: https://github.com/giong-run/Giong/blob/v1.5.3/giong-postgres/README.md
 
 A PostgreSQL client and connection pool for the [giong](https://giong.run/docs/giong.md) runtime. It speaks the wire protocol itself (no libpq), encrypts with [`giong-tls`](https://giong.run/docs/giong-tls.md), and depends on nothing from the Tokio ecosystem.
 
 ```toml
 [dependencies]
-giong = "1.5.2"
-giong-postgres = "1.5.2"
+giong = "1.5.3"
+giong-postgres = "1.5.3"
 ```
 
 ```rust,no_run
@@ -545,7 +545,7 @@ Not measured: a server on another machine (network latency, where pipelining sho
 `cargo test -p giong-postgres`: 70 tests against a real PostgreSQL server that the test binary starts for itself (a throwaway cluster from `initdb`, with users for SCRAM, MD5, clear text and TLS only, listening on a Unix socket, 127.0.0.1 and 127.0.0.2): every supported type in both directions; conversion errors; server errors and their fields; pipelining across tasks, and a failing statement in the middle of a pipeline; the statement cache, its bound, statement names an application took, and schema changes under cached statements, in and out of a transaction; notices and errors larger than the result limit; the result-size limit; the statement timeout, and leaving it to the server; cancel requests; a query dropped mid-flight; a connection the server terminates; transactions committed, rolled back and dropped, and a `COMMIT` turned into a rollback; no task or connection left behind after a client is dropped; TLS against the right and the wrong authority and host; each authentication method with the right and the wrong password, and `require_auth`; SCRAM keys derived once and off the worker; a server that answers the TLS request with extra bytes; a clear-text password never sent unencrypted; the connect timeout; and the pool (spreading statements, exclusive use and the rollback on return, even with `BEGIN` still in flight, the session reset on return and no reset for an unused connection, `get()` served in order while shared statements keep every connection busy, waiting, and waking when a dropped statement frees the connection, cancel tokens that stop working on return, idle and old connections closed, at most 1024 statements per connection at a time, replacing broken connections, connect errors, a slow statement not holding up the others, transaction and session statements refused on shared connections and a batch that leaves a transaction open; batched reads: each statement's own rows, one failing statement among good ones, `SELECT`s that write and lock rows, reads after writes, statements leaving the cache mid-batch, an error at a batch's commit, statements rolled back with their batch and run again, a statement that calls `set_config` kept out of batches (and one hidden in a function shared within its batch), the read-only guard prepared again after a `DEALLOCATE`, and no deadlock with a migration or with another batch taking locks in the opposite order). Two of them run a workload through PgBouncer in transaction mode, with the statement timeout left to the role, when PgBouncer is installed. 45 unit tests: the message encoder and parser, SCRAM against the RFC 7677 example, MD5 against RFC 1321, URLs, type conversions and how their errors name types, the statements the pool refuses and the ones it batches (never one that calls `set_config`), which errors are worth a retry, the old names of renamed methods, 42,000 random inputs for the message parser, the URL parser and SCRAM, and 300 sessions against a fake server answering with mutated replies (also the `session` fuzz target). 8 documentation examples.
 
 The tests find PostgreSQL through `GIONG_PG_BIN`, `/usr/lib/postgresql/*/bin` or `PATH`, and skip when it is not installed, unless `GIONG_PG_REQUIRED=1` (CI sets it); PgBouncer likewise through `GIONG_PGBOUNCER_BIN`, `PATH` or `/usr/sbin`, and `GIONG_PGBOUNCER_REQUIRED=1`. Run as root, they start the server as the `postgres` user. They also pass under ThreadSanitizer and on the fallback io_uring setups (`scripts/check.sh tsan` and `fallback`).
-</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.5.2, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use giong-postgres as documented below.
+</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.5.3, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use giong-postgres as documented below.
 
 Rules for giong code:
 - Start the runtime with giong::Builder::new().shutdown_on_signals(true).build()?.run(|_worker| async { .. }); there are no macros. Build listeners, routers, pools and clients inside each worker's future.
@@ -558,18 +558,18 @@ More facts: https://giong.run/llms.txt. Best practices: https://giong.run/docs/b
 
 My task: <describe what to build or fix>
 
-Documentation of giong-postgres, giong 1.5.2 (https://giong.run/docs/giong-postgres.md):
+Documentation of giong-postgres, giong 1.5.3 (https://giong.run/docs/giong-postgres.md):
 
 # giong-postgres
 
-> giong 1.5.2 · https://giong.run/docs/giong-postgres/ · source: https://github.com/giong-run/Giong/blob/v1.5.2/giong-postgres/README.md
+> giong 1.5.3 · https://giong.run/docs/giong-postgres/ · source: https://github.com/giong-run/Giong/blob/v1.5.3/giong-postgres/README.md
 
 A PostgreSQL client and connection pool for the [giong](https://giong.run/docs/giong.md) runtime. It speaks the wire protocol itself (no libpq), encrypts with [`giong-tls`](https://giong.run/docs/giong-tls.md), and depends on nothing from the Tokio ecosystem.
 
 ```toml
 [dependencies]
-giong = "1.5.2"
-giong-postgres = "1.5.2"
+giong = "1.5.3"
+giong-postgres = "1.5.3"
 ```
 
 ```rust,no_run
@@ -807,7 +807,7 @@ The tests find PostgreSQL through `GIONG_PG_BIN`, `/usr/lib/postgresql/*/bin` or
         <h2>Learn</h2>
         <a href="/docs/">Get started</a>
         <a href="/docs/#examples">Examples</a>
-        <a href="https://docs.rs/giong/1.5.2/giong/">API reference</a>
+        <a href="https://docs.rs/giong/1.5.3/giong/">API reference</a>
         <a href="/docs/#errors">Error codes</a>
         <a href="/docs/best-practices/">Best practices</a><a href="/docs/agent-skill/">Agent skill</a>
         <a href="/llms.txt">llms.txt</a>

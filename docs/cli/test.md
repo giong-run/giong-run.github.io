@@ -1,6 +1,6 @@
 # giong test
 
-> giong 1.5.2 · https://giong.run/docs/cli/test/ · source: https://github.com/giong-run/Giong/blob/v1.5.2/giong-cli/README.md#giong-test
+> giong 1.5.3 · https://giong.run/docs/cli/test/ · source: https://github.com/giong-run/Giong/blob/v1.5.3/giong-cli/README.md#giong-test
 
 ```sh
 giong test [--quick] [--nextest] [--timeout SECS] [-- cargo test arguments]

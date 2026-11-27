@@ -38,7 +38,7 @@
     <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="28" height="28"></picture><span>giong</span></a>
     <nav class="nav" aria-label="Site"><a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a><a href="/docs/agent-skill/">Agent skill</a></nav>
     <div class="hdr-side">
-      <a class="ver" href="/releases/#v1-5-2" title="Release notes for v1.5.2">v1.5.2</a>
+      <a class="ver" href="/releases/#v1-5-3" title="Release notes for v1.5.3">v1.5.3</a>
       <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="giong on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
       <a class="icon-btn hide-sm" href="https://x.com/giongrun" aria-label="giong on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
       <button class="icon-btn theme" type="button" aria-label="Switch between light and dark" hidden>
@@ -68,18 +68,18 @@
 <p><code>giong dev</code> hands its listening sockets to the service it starts, so a new build can take over without refusing a connection. The runtime takes a socket only from the <code>giong dev</code> that started it, and only in debug builds or with giong's <code>dev</code> feature, which <code>giong dev --release</code> and <code>--prod-like</code> turn on for their own builds. A release build without it refuses to start under <code>giong dev</code> instead of taking the socket.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-5" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="secrets-stay-in-env-and-env-stays-on-this-machine">Secrets stay in .env, and .env stays on this machine</h2>
 <ul><li><code>giong db up</code> starts each database with a random password and writes its URL to <code>.env</code>, which it makes readable by you only and lists in <code>.gitignore</code>.</li><li>Each checkout gets its own container, so two copies of a project never share a database; a container giong did not record is refused with <code>GIONG-E5049</code> instead of guessing its password.</li><li><code>.env</code> is read in development only (<code>giong dev</code>, <code>giong test</code>); in production the service takes its settings from the environment. <code>giong env show</code> masks secret values, and a value only the process environment sets shows as <code>*** (set in the environment)</code>; <code>--reveal</code> prints them.</li><li><code>giong db</code> ignores an entry in <code>.giong/db.json</code> that <code>giong db up</code> could not have written (another container runtime, another checkout's container, an unusual image or user), with the warning <code>GIONG-E5048</code>, so an edited file cannot point it at something else.</li><li><code>giong db</code>, <code>giong env</code> and <code>giong bench</code> refuse to read or write <code>.env</code>, <code>.gitignore</code> or their <code>.giong</code> files through a symbolic link, and <code>giong image --add</code> takes a link only to a file inside the project.</li></ul></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-6" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="the-install-script-checks-what-it-downloads">The install script checks what it downloads</h2>
 <p><code>curl -fsSL https://giong.run/install.sh | sh</code> downloads the release binary from GitHub, checks its SHA-256 and puts it in <code>~/.giong/bin</code> without asking for root. <code>GIONG_VERSION</code> pins a version.</p></section>
-    <p class="src-note">giong 1.5.2 · from <a href="https://github.com/giong-run/Giong/blob/v1.5.2/docs/guides/safe-defaults.md">docs/guides/safe-defaults.md</a> at v1.5.2</p>
-    <script type="text/markdown" id="md-0"><!-- giong 1.5.2, https://giong.run/docs/guides/safe-defaults/#nothing-listens-beyond-this-machine -->
+    <p class="src-note">giong 1.5.3 · from <a href="https://github.com/giong-run/Giong/blob/v1.5.3/docs/guides/safe-defaults.md">docs/guides/safe-defaults.md</a> at v1.5.3</p>
+    <script type="text/markdown" id="md-0"><!-- giong 1.5.3, https://giong.run/docs/guides/safe-defaults/#nothing-listens-beyond-this-machine -->
 
 ## Nothing listens beyond this machine
 
 - A new project's `.env.example` sets `LISTEN=127.0.0.1:<port>`; only its Dockerfile sets `0.0.0.0`, for production.
 - `giong dev` serves an address of every interface (`0.0.0.0`, `[::]`) on loopback instead, with the warning `GIONG-E5024`. `--lan` keeps the address, to reach the service from a phone or another computer.
-- The dashboard listens on `127.0.0.1` only and answers only a loopback `Host`.</script><script type="text/markdown" id="md-1"><!-- giong 1.5.2, https://giong.run/docs/guides/safe-defaults/#the-dashboard-needs-its-token -->
+- The dashboard listens on `127.0.0.1` only and answers only a loopback `Host`.</script><script type="text/markdown" id="md-1"><!-- giong 1.5.3, https://giong.run/docs/guides/safe-defaults/#the-dashboard-needs-its-token -->
 
 ## The dashboard needs its token
 
-Each `giong dashboard` or `giong dev --ui` makes a random token, printed as part of its address (`http://127.0.0.1:7700/#t=...`). Every API call needs it in the `X-Giong-Dashboard` header, or gets `403` with `GIONG-E5051`. The token comes after `#`, so no request line, log or `Referer` carries it, and the page takes it out of the address bar once read. A web page, another program or another user on the machine cannot read the dashboard or send requests through it.</script><script type="text/markdown" id="md-2"><!-- giong 1.5.2, https://giong.run/docs/guides/safe-defaults/#recorded-requests-keep-secrets-out -->
+Each `giong dashboard` or `giong dev --ui` makes a random token, printed as part of its address (`http://127.0.0.1:7700/#t=...`). Every API call needs it in the `X-Giong-Dashboard` header, or gets `403` with `GIONG-E5051`. The token comes after `#`, so no request line, log or `Referer` carries it, and the page takes it out of the address bar once read. A web page, another program or another user on the machine cannot read the dashboard or send requests through it.</script><script type="text/markdown" id="md-2"><!-- giong 1.5.3, https://giong.run/docs/guides/safe-defaults/#recorded-requests-keep-secrets-out -->
 
 ## Recorded requests keep secrets out
 
@@ -87,15 +87,15 @@ Each `giong dashboard` or `giong dev --ui` makes a random token, printed as part
 
 - Redacted headers, and fields whose names say secret (`password`, `token`, `api_key`, `client_secret`, `card_number`, `cvv` and the like) in a query, a form or a JSON body, become `{{env:GIONG_RECORD_<NAME>}}` and are read from the environment when the cases run. The same fields in answers become `{{string}}`.
 - A value that still looks like a secret, such as a card number (by the Luhn check), a JWT or a value under a secret name, stops the save with `GIONG-E5050`, and nothing is written. `--keep-secrets` saves anyway, with warnings, for test values such as the `4242 4242 4242 4242` card.
-- giong-web's `Record` middleware redacts the same names as `[redacted]` (`redact_field` and `keep_field` change the list), and it is compiled out of release builds unless the `dev` feature is on (`GIONG-E1213`).</script><script type="text/markdown" id="md-3"><!-- giong 1.5.2, https://giong.run/docs/guides/safe-defaults/#agents-read-they-change-things-only-when-you-allow-it -->
+- giong-web's `Record` middleware redacts the same names as `[redacted]` (`redact_field` and `keep_field` change the list), and it is compiled out of release builds unless the `dev` feature is on (`GIONG-E1213`).</script><script type="text/markdown" id="md-3"><!-- giong 1.5.3, https://giong.run/docs/guides/safe-defaults/#agents-read-they-change-things-only-when-you-allow-it -->
 
 ## Agents read; they change things only when you allow it
 
-`giong mcp` serves the commands that only read. Commands that change the project need `giong mcp --allow-writes`. Emptying or removing a database, `giong clean --all`, printing a secret value (`giong env get`, `--reveal`) and pushing an image are never tools.</script><script type="text/markdown" id="md-4"><!-- giong 1.5.2, https://giong.run/docs/guides/safe-defaults/#development-code-stays-out-of-production -->
+`giong mcp` serves the commands that only read. Commands that change the project need `giong mcp --allow-writes`. Emptying or removing a database, `giong clean --all`, printing a secret value (`giong env get`, `--reveal`) and pushing an image are never tools.</script><script type="text/markdown" id="md-4"><!-- giong 1.5.3, https://giong.run/docs/guides/safe-defaults/#development-code-stays-out-of-production -->
 
 ## Development code stays out of production
 
-`giong dev` hands its listening sockets to the service it starts, so a new build can take over without refusing a connection. The runtime takes a socket only from the `giong dev` that started it, and only in debug builds or with giong's `dev` feature, which `giong dev --release` and `--prod-like` turn on for their own builds. A release build without it refuses to start under `giong dev` instead of taking the socket.</script><script type="text/markdown" id="md-5"><!-- giong 1.5.2, https://giong.run/docs/guides/safe-defaults/#secrets-stay-in-env-and-env-stays-on-this-machine -->
+`giong dev` hands its listening sockets to the service it starts, so a new build can take over without refusing a connection. The runtime takes a socket only from the `giong dev` that started it, and only in debug builds or with giong's `dev` feature, which `giong dev --release` and `--prod-like` turn on for their own builds. A release build without it refuses to start under `giong dev` instead of taking the socket.</script><script type="text/markdown" id="md-5"><!-- giong 1.5.3, https://giong.run/docs/guides/safe-defaults/#secrets-stay-in-env-and-env-stays-on-this-machine -->
 
 ## Secrets stay in .env, and .env stays on this machine
 
@@ -103,13 +103,13 @@ Each `giong dashboard` or `giong dev --ui` makes a random token, printed as part
 - Each checkout gets its own container, so two copies of a project never share a database; a container giong did not record is refused with `GIONG-E5049` instead of guessing its password.
 - `.env` is read in development only (`giong dev`, `giong test`); in production the service takes its settings from the environment. `giong env show` masks secret values, and a value only the process environment sets shows as `*** (set in the environment)`; `--reveal` prints them.
 - `giong db` ignores an entry in `.giong/db.json` that `giong db up` could not have written (another container runtime, another checkout's container, an unusual image or user), with the warning `GIONG-E5048`, so an edited file cannot point it at something else.
-- `giong db`, `giong env` and `giong bench` refuse to read or write `.env`, `.gitignore` or their `.giong` files through a symbolic link, and `giong image --add` takes a link only to a file inside the project.</script><script type="text/markdown" id="md-6"><!-- giong 1.5.2, https://giong.run/docs/guides/safe-defaults/#the-install-script-checks-what-it-downloads -->
+- `giong db`, `giong env` and `giong bench` refuse to read or write `.env`, `.gitignore` or their `.giong` files through a symbolic link, and `giong image --add` takes a link only to a file inside the project.</script><script type="text/markdown" id="md-6"><!-- giong 1.5.3, https://giong.run/docs/guides/safe-defaults/#the-install-script-checks-what-it-downloads -->
 
 ## The install script checks what it downloads
 
 `curl -fsSL https://giong.run/install.sh | sh` downloads the release binary from GitHub, checks its SHA-256 and puts it in `~/.giong/bin` without asking for root. `GIONG_VERSION` pins a version.</script><script type="text/markdown" id="md-page"># Safe defaults of the dev kit
 
-> giong 1.5.2 · https://giong.run/docs/guides/safe-defaults/ · source: https://github.com/giong-run/Giong/blob/v1.5.2/docs/guides/safe-defaults.md
+> giong 1.5.3 · https://giong.run/docs/guides/safe-defaults/ · source: https://github.com/giong-run/Giong/blob/v1.5.3/docs/guides/safe-defaults.md
 
 The `giong` command runs code, holds secrets and opens ports on the machine you work on. It is built so that the default is the safe choice, and every way out of it is a flag you type. This page lists each default, what it protects and how to change it.
 
@@ -150,7 +150,7 @@ Each `giong dashboard` or `giong dev --ui` makes a random token, printed as part
 ## The install script checks what it downloads
 
 `curl -fsSL https://giong.run/install.sh | sh` downloads the release binary from GitHub, checks its SHA-256 and puts it in `~/.giong/bin` without asking for root. `GIONG_VERSION` pins a version.
-</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.5.2, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use Safe defaults of the dev kit as documented below.
+</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.5.3, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use Safe defaults of the dev kit as documented below.
 
 Rules for giong code:
 - Start the runtime with giong::Builder::new().shutdown_on_signals(true).build()?.run(|_worker| async { .. }); there are no macros. Build listeners, routers, pools and clients inside each worker's future.
@@ -163,11 +163,11 @@ More facts: https://giong.run/llms.txt. Best practices: https://giong.run/docs/b
 
 My task: <describe what to build or fix>
 
-Documentation of Safe defaults of the dev kit, giong 1.5.2 (https://giong.run/docs/guides/safe-defaults.md):
+Documentation of Safe defaults of the dev kit, giong 1.5.3 (https://giong.run/docs/guides/safe-defaults.md):
 
 # Safe defaults of the dev kit
 
-> giong 1.5.2 · https://giong.run/docs/guides/safe-defaults/ · source: https://github.com/giong-run/Giong/blob/v1.5.2/docs/guides/safe-defaults.md
+> giong 1.5.3 · https://giong.run/docs/guides/safe-defaults/ · source: https://github.com/giong-run/Giong/blob/v1.5.3/docs/guides/safe-defaults.md
 
 The `giong` command runs code, holds secrets and opens ports on the machine you work on. It is built so that the default is the safe choice, and every way out of it is a flag you type. This page lists each default, what it protects and how to change it.
 
@@ -229,7 +229,7 @@ Each `giong dashboard` or `giong dev --ui` makes a random token, printed as part
         <h2>Learn</h2>
         <a href="/docs/">Get started</a>
         <a href="/docs/#examples">Examples</a>
-        <a href="https://docs.rs/giong/1.5.2/giong/">API reference</a>
+        <a href="https://docs.rs/giong/1.5.3/giong/">API reference</a>
         <a href="/docs/#errors">Error codes</a>
         <a href="/docs/best-practices/">Best practices</a><a href="/docs/agent-skill/">Agent skill</a>
         <a href="/llms.txt">llms.txt</a>

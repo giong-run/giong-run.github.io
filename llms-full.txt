@@ -1,12 +1,12 @@
-# giong 1.5.2: the documentation in one file
+# giong 1.5.3: the documentation in one file
 
 > The README of every crate and of the example service, the best practices, the guides, the deployment notes and every
-> error code page of giong 1.5.2, as released in v1.5.2. Links point at the same
+> error code page of giong 1.5.3, as released in v1.5.3. Links point at the same
 > release. The short index is https://giong.run/llms.txt.
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/README.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/README.md -->
 
 <p align="center">
   <picture>
@@ -42,13 +42,13 @@ load arrives.
 
 | Release | What it added |
 |---|---|
-| **1.5** | The developer kit: the [`giong` command](https://giong.run/docs/cli.md) (`new`, `dev`, `check`, `fix`, `test`, `db`, `env`, `top`, `bench`, `image`, `record`, `dashboard`, `mcp`), prebuilt for Linux, macOS and Windows; `giong dev` swaps in each new build with 0 failed requests out of 102,061 over 100 restarts (Linux, io_uring; [raw data](https://github.com/giong-run/Giong/tree/v1.5.2/bench/results/dev-restarts/)). In the runtime: blocking and compute lanes, budgets per tenant, child processes and signals, `giong::ipc` between processes on Linux, request tracing (giong-mcp's `slow_requests`), and the open-files limit raised in containers. |
+| **1.5** | The developer kit: the [`giong` command](https://giong.run/docs/cli.md) (`new`, `dev`, `check`, `fix`, `test`, `db`, `env`, `top`, `bench`, `image`, `record`, `dashboard`, `mcp`), prebuilt for Linux, macOS and Windows; `giong dev` swaps in each new build with 0 failed requests out of 102,061 over 100 restarts (Linux, io_uring; [raw data](https://github.com/giong-run/Giong/tree/v1.5.3/bench/results/dev-restarts/)). In the runtime: blocking and compute lanes, budgets per tenant, child processes and signals, `giong::ipc` between processes on Linux, request tracing (giong-mcp's `slow_requests`), and the open-files limit raised in containers. |
 | **1.4** | Windows: a completion-port (IOCP) driver for the runtime crate: tasks, timers, channels, TCP, UDP, files, DNS and Ctrl+C. The other crates come to Windows in later 1.x releases. |
 | **1.3** | HTTP/3: [`giong-quic`](https://giong.run/docs/giong-quic.md) (QUIC on giong's UDP sockets) and giong-http's HTTP/3 server and client behind the `unstable-http3` feature; UDP offloads (GSO, GRO, ECN) behind `unstable-udp-offload`. |
 | **1.2** | macOS: a kqueue driver, tested on macOS 15 and 26 on Apple Silicon; a send or connect that meets `ENOBUFS` waits for buffers ([GIONG-E0028](https://giong.run/docs/errors/E0028.md)). |
 | **1.1** | gRPC: [`giong-grpc`](https://giong.run/docs/giong-grpc.md), [`giong-proto`](https://giong.run/docs/giong-proto.md) and [`giong-grpc-build`](https://giong.run/docs/giong-grpc-build.md); HTTP trailers and streamed request bodies; `Client::preconnect` and HTTP/2 pings; batched PostgreSQL reads; uploads of 1 MiB 2.2 times as fast. |
 
-The full list is in [CHANGELOG.md](https://github.com/giong-run/Giong/blob/v1.5.2/CHANGELOG.md).
+The full list is in [CHANGELOG.md](https://github.com/giong-run/Giong/blob/v1.5.3/CHANGELOG.md).
 
 ## Start here
 
@@ -76,7 +76,7 @@ timeouts, databases, deployment and tests, each rule with its reason. A coding a
 same as a skill: [skills/giong](https://giong.run/docs/agent-skill.md), or download it from
 [giong.run/docs/agent-skill](https://giong.run/docs/agent-skill/).
 
-[AGENTS.md](https://github.com/giong-run/Giong/blob/v1.5.2/AGENTS.md) and [giong.run/llms.txt](https://giong.run/llms.txt) tell a model
+[AGENTS.md](https://github.com/giong-run/Giong/blob/v1.5.3/AGENTS.md) and [giong.run/llms.txt](https://giong.run/llms.txt) tell a model
 the facts it gets wrong; the API reference is on [docs.rs](https://docs.rs/giong).
 
 ## What giong is for
@@ -96,7 +96,7 @@ to type.
   its buffer pool and its batched system calls, not adapters. [Choosing crates](#choosing-crates)
   measures each one against the Tokio crate it replaces.
 - **Agent-first.** Every error giong raises carries a stable code, the cause and the fix,
-  and has a page of its own ([docs/errors](https://giong.run/docs/errors.md)). [AGENTS.md](https://github.com/giong-run/Giong/blob/v1.5.2/AGENTS.md)
+  and has a page of its own ([docs/errors](https://giong.run/docs/errors.md)). [AGENTS.md](https://github.com/giong-run/Giong/blob/v1.5.3/AGENTS.md)
   and [giong.run/llms.txt](https://giong.run/llms.txt) tell a model how to work with it;
   giong-web writes JSON-line logs and `tracing` spans; [`giong-mcp`](https://giong.run/docs/giong-mcp.md)
   lets an agent look inside a running service ([below](#let-your-agent-look-inside-the-running-service)).
@@ -107,7 +107,7 @@ to type.
   3. Every behaviour code relies on is documented.
   4. Releases only add; they never change what existing code means.
 
-  The API was settled in 0.7 ([review](https://github.com/giong-run/Giong/blob/v1.5.2/docs/reviews/2026-11-api-freeze.md)), and
+  The API was settled in 0.7 ([review](https://github.com/giong-run/Giong/blob/v1.5.3/docs/reviews/2026-11-api-freeze.md)), and
   `cargo-semver-checks` runs on every pull request.
 - **Linux first, and the same program elsewhere.** Tuned and measured on Linux with
   io_uring, with an epoll driver wherever io_uring is blocked. macOS runs on a kqueue
@@ -200,7 +200,7 @@ because the kernel's TCP stack, not the runtime, is most of the cost. Over one P
 connection shared by every task, giong-postgres is 7–9% behind tokio-postgres; a blocking
 `std` read of a cached file beats every async one, giong's included; and a TLS handshake
 costs the same as Axum's once both prefer the same cipher suite. The
-[benchmark lab](https://github.com/giong-run/Giong/blob/v1.5.2/docs/BENCHMARKS.md#benchmark-lab), which drives giong, Tokio, Monoio and
+[benchmark lab](https://github.com/giong-run/Giong/blob/v1.5.3/docs/BENCHMARKS.md#benchmark-lab), which drives giong, Tokio, Monoio and
 Glommio with the same program and a neutral load generator, also finds giong behind: Monoio
 serves 13% more requests on one core; Tokio receives 1 MiB uploads 1.7 times as fast on the
 bare runtime; and with one request in twenty computing for a millisecond, the short
@@ -241,7 +241,7 @@ Against the Tokio crate each giong crate replaces, one core each (details and lo
 | Redis `GET` | giong-redis | redis-rs | 640k against 492k commands/s at half the CPU per command |
 | Files, 4 KiB at an offset | `giong::fs` | `tokio::fs` | 1.33M against 163k reads/s (8×); level with blocking `std` |
 | Idle connection memory | giong-http | Axum | 1.4 KiB against 20.4 KiB |
-| Building a small web service | giong-web | axum + tower-http | 22 crates against 83; clean debug build 7.4 s against 18.8 s; stripped binary 1.45 MB against 3.60 MB ([build](https://github.com/giong-run/Giong/blob/v1.5.2/docs/BENCHMARKS.md#build-time-and-size)) |
+| Building a small web service | giong-web | axum + tower-http | 22 crates against 83; clean debug build 7.4 s against 18.8 s; stripped binary 1.45 MB against 3.60 MB ([build](https://github.com/giong-run/Giong/blob/v1.5.3/docs/BENCHMARKS.md#build-time-and-size)) |
 
 ## Platforms
 
@@ -262,7 +262,7 @@ Against the Tokio crate each giong crate replaces, one core each (details and lo
   told and says so once on stderr; [docs/DEPLOYMENT.md](https://giong.run/docs/deployment.md) shows how to
   allow io_uring in Docker, Docker Compose and Kubernetes.
 - The differences from Linux on macOS and Windows, area by area, are in
-  [docs/design/portability.md](https://github.com/giong-run/Giong/blob/v1.5.2/docs/design/portability.md).
+  [docs/design/portability.md](https://github.com/giong-run/Giong/blob/v1.5.3/docs/design/portability.md).
 - On Windows, Unix sockets are Winsock's `AF_UNIX` (Windows 10 version 1803 and later),
   trust roots come from the certificate store, and kernel TLS is Linux's: `Ktls::Auto`
   keeps connections in the process there.
@@ -326,7 +326,7 @@ cargo run --release --example cat -- Cargo.toml   # read a file through the ring
 ```
 
 A whole service, with PostgreSQL, a Redis cache and HTTPS, is in
-[examples/rest-api](https://github.com/giong-run/Giong/blob/v1.5.2/examples/rest-api/README.md).
+[examples/rest-api](https://github.com/giong-run/Giong/blob/v1.5.3/examples/rest-api/README.md).
 
 An HTTP service on every core, with [`giong-http`](https://giong.run/docs/giong-http.md):
 
@@ -528,21 +528,21 @@ For each job a service has, try these in order and take the first that fits:
 
 | You need | Use | Instead of | Measured against it (one core each, medians, method under [Benchmarks](#benchmarks)) |
 |---|---|---|---|
-| An HTTP/1.1 server | [`giong-http`](https://giong.run/docs/giong-http.md) | hyper, axum | 1.2 to 1.6 times axum on `/json` (1.2 where the load generator was the limit), 2.8 to 3.2 times on 8 KB answers ([Throughput](https://github.com/giong-run/Giong/blob/v1.5.2/docs/BENCHMARKS.md#throughput-at-50-connections), and the plain rows under [HTTPS](https://github.com/giong-run/Giong/blob/v1.5.2/docs/BENCHMARKS.md#https)) |
+| An HTTP/1.1 server | [`giong-http`](https://giong.run/docs/giong-http.md) | hyper, axum | 1.2 to 1.6 times axum on `/json` (1.2 where the load generator was the limit), 2.8 to 3.2 times on 8 KB answers ([Throughput](https://github.com/giong-run/Giong/blob/v1.5.3/docs/BENCHMARKS.md#throughput-at-50-connections), and the plain rows under [HTTPS](https://github.com/giong-run/Giong/blob/v1.5.3/docs/BENCHMARKS.md#https)) |
 | An HTTP/2 server | `giong-http` (on by default) | hyper, axum | 3.8 to 4.4 times axum on small answers, 2.5 to 3.0 times on 8.5 KiB ones ([giong-http](https://giong.run/docs/giong-http.md)) |
-| Routing, JSON, middleware | [`giong-web`](https://giong.run/docs/giong-web.md) | axum, tower-http | 1.3 times axum on `/json` and 1.8 times on 8 KB answers; with request ids, gzip and a timeout, 1.9 and 2.3 times ([Routing](https://github.com/giong-run/Giong/blob/v1.5.2/docs/BENCHMARKS.md#routing-json-and-middleware)) |
+| Routing, JSON, middleware | [`giong-web`](https://giong.run/docs/giong-web.md) | axum, tower-http | 1.3 times axum on `/json` and 1.8 times on 8 KB answers; with request ids, gzip and a timeout, 1.9 and 2.3 times ([Routing](https://github.com/giong-run/Giong/blob/v1.5.3/docs/BENCHMARKS.md#routing-json-and-middleware)) |
 | An HTTP client | `giong-http`, feature `client` | reqwest, hyper's client | 1.6 to 1.8 times reqwest over HTTP/1.1; over HTTP/2 2.0 to 2.2 times on small answers, 1.2 to 1.3 times on 8.5 KiB ones ([giong-http](https://giong.run/docs/giong-http.md)) |
-| TLS | [`giong-tls`](https://giong.run/docs/giong-tls.md) | tokio-rustls | The same rustls underneath. Measured with `giong-http`: 1.8 times axum + rustls on `/json`, 2.6 times on 8 KB answers, 1.18 times the new connections per second (level with axum set to prefer AES-128-GCM as giong does) ([HTTPS](https://github.com/giong-run/Giong/blob/v1.5.2/docs/BENCHMARKS.md#https)) |
-| PostgreSQL | [`giong-postgres`](https://giong.run/docs/giong-postgres.md) | tokio-postgres, sqlx | 3.3 times tokio-postgres + deadpool at its best on one row by key, 2.5 times on 100 rows; 7–9% behind tokio-postgres on one shared connection ([PostgreSQL](https://github.com/giong-run/Giong/blob/v1.5.2/docs/BENCHMARKS.md#postgresql)) |
-| MySQL, MariaDB | [`giong-mysql`](https://giong.run/docs/giong-mysql.md) | sqlx, mysql_async | 5.1 times SQLx at its best on one row by key, 3.7 times on 100 rows ([MySQL](https://github.com/giong-run/Giong/blob/v1.5.2/docs/BENCHMARKS.md#mysql)) |
-| Redis | [`giong-redis`](https://giong.run/docs/giong-redis.md) | redis-rs, fred | 1.1 to 1.8 times redis-rs on small commands, 1.25 to 2.5 times on 8 KiB values, at half its CPU per command or less ([Redis](https://github.com/giong-run/Giong/blob/v1.5.2/docs/BENCHMARKS.md#redis)) |
-| Messages between processes on one host (Linux) | `giong::ipc` | `tokio::net::UnixStream` | Shared memory: 6.7 times giong's own `UnixStream` on round trips with spinning workers (1.00 against 6.73 µs) and 8.3 times without; 2.0 to 2.1 times on streams of small messages, at half the CPU; not measured against Tokio ([results](https://github.com/giong-run/Giong/blob/v1.5.2/bench/results/ipc-giong/README.md)) |
-| Files | `giong::fs` | `tokio::fs` | 8 times Tokio on reads at an offset, 3.2 to 4.1 times on whole small files ([File I/O](https://github.com/giong-run/Giong/blob/v1.5.2/docs/BENCHMARKS.md#file-io)) |
-| Name lookups | `giong::net::lookup_host`, `net::Resolver` | `tokio::net::lookup_host`, hickory-resolver | `localhost` from `/etc/hosts`: 171 ns against Tokio's 28.6 µs ([Core primitives](https://github.com/giong-run/Giong/blob/v1.5.2/docs/BENCHMARKS.md#core-primitives)); DNS over the network not measured |
-| Tasks, timers, channels | `giong::spawn`, `giong::time`, `giong::sync` (`mpsc`, `oneshot`) | `tokio::spawn`, `tokio::time`, `tokio::sync` | 1.3 to 2.6 times Tokio; Monoio and Glommio are ahead on spawning and channels within one thread ([Core primitives](https://github.com/giong-run/Giong/blob/v1.5.2/docs/BENCHMARKS.md#core-primitives)) |
-| A gRPC server or client | [`giong-grpc`](https://giong.run/docs/giong-grpc.md), with [`giong-grpc-build`](https://giong.run/docs/giong-grpc-build.md) | tonic, prost | 1.3 to 1.5 times tonic on 100-byte unary calls, 1.2 to 1.25 times on 10 kB ones, 3.8 to 4.0 times on server streams, half the memory per open stream; a one-thread client level to 14% ahead ([giong-grpc](https://github.com/giong-run/Giong/blob/v1.5.2/giong-grpc/README.md#measured-against-tonic)) |
+| TLS | [`giong-tls`](https://giong.run/docs/giong-tls.md) | tokio-rustls | The same rustls underneath. Measured with `giong-http`: 1.8 times axum + rustls on `/json`, 2.6 times on 8 KB answers, 1.18 times the new connections per second (level with axum set to prefer AES-128-GCM as giong does) ([HTTPS](https://github.com/giong-run/Giong/blob/v1.5.3/docs/BENCHMARKS.md#https)) |
+| PostgreSQL | [`giong-postgres`](https://giong.run/docs/giong-postgres.md) | tokio-postgres, sqlx | 3.3 times tokio-postgres + deadpool at its best on one row by key, 2.5 times on 100 rows; 7–9% behind tokio-postgres on one shared connection ([PostgreSQL](https://github.com/giong-run/Giong/blob/v1.5.3/docs/BENCHMARKS.md#postgresql)) |
+| MySQL, MariaDB | [`giong-mysql`](https://giong.run/docs/giong-mysql.md) | sqlx, mysql_async | 5.1 times SQLx at its best on one row by key, 3.7 times on 100 rows ([MySQL](https://github.com/giong-run/Giong/blob/v1.5.3/docs/BENCHMARKS.md#mysql)) |
+| Redis | [`giong-redis`](https://giong.run/docs/giong-redis.md) | redis-rs, fred | 1.1 to 1.8 times redis-rs on small commands, 1.25 to 2.5 times on 8 KiB values, at half its CPU per command or less ([Redis](https://github.com/giong-run/Giong/blob/v1.5.3/docs/BENCHMARKS.md#redis)) |
+| Messages between processes on one host (Linux) | `giong::ipc` | `tokio::net::UnixStream` | Shared memory: 6.7 times giong's own `UnixStream` on round trips with spinning workers (1.00 against 6.73 µs) and 8.3 times without; 2.0 to 2.1 times on streams of small messages, at half the CPU; not measured against Tokio ([results](https://github.com/giong-run/Giong/blob/v1.5.3/bench/results/ipc-giong/README.md)) |
+| Files | `giong::fs` | `tokio::fs` | 8 times Tokio on reads at an offset, 3.2 to 4.1 times on whole small files ([File I/O](https://github.com/giong-run/Giong/blob/v1.5.3/docs/BENCHMARKS.md#file-io)) |
+| Name lookups | `giong::net::lookup_host`, `net::Resolver` | `tokio::net::lookup_host`, hickory-resolver | `localhost` from `/etc/hosts`: 171 ns against Tokio's 28.6 µs ([Core primitives](https://github.com/giong-run/Giong/blob/v1.5.3/docs/BENCHMARKS.md#core-primitives)); DNS over the network not measured |
+| Tasks, timers, channels | `giong::spawn`, `giong::time`, `giong::sync` (`mpsc`, `oneshot`) | `tokio::spawn`, `tokio::time`, `tokio::sync` | 1.3 to 2.6 times Tokio; Monoio and Glommio are ahead on spawning and channels within one thread ([Core primitives](https://github.com/giong-run/Giong/blob/v1.5.3/docs/BENCHMARKS.md#core-primitives)) |
+| A gRPC server or client | [`giong-grpc`](https://giong.run/docs/giong-grpc.md), with [`giong-grpc-build`](https://giong.run/docs/giong-grpc-build.md) | tonic, prost | 1.3 to 1.5 times tonic on 100-byte unary calls, 1.2 to 1.25 times on 10 kB ones, 3.8 to 4.0 times on server streams, half the memory per open stream; a one-thread client level to 14% ahead ([giong-grpc](https://github.com/giong-run/Giong/blob/v1.5.3/giong-grpc/README.md#measured-against-tonic)) |
 | Protocol Buffers | [`giong-proto`](https://giong.run/docs/giong-proto.md) | prost | Views over the receive buffer, no allocation per field; not measured on its own against prost |
-| HTTP/3, QUIC | `giong-http`, feature `unstable-http3`; [`giong-quic`](https://giong.run/docs/giong-quic.md) | quinn, h3 | The same QUIC engine (quinn-proto) on giong's UDP sockets: level with it on Tokio, 18% less CPU per request than quinn ([QUIC](https://github.com/giong-run/Giong/blob/v1.5.2/docs/BENCHMARKS.md#quic)); HTTP/3 end to end not measured yet |
+| HTTP/3, QUIC | `giong-http`, feature `unstable-http3`; [`giong-quic`](https://giong.run/docs/giong-quic.md) | quinn, h3 | The same QUIC engine (quinn-proto) on giong's UDP sockets: level with it on Tokio, 18% less CPU per request than quinn ([QUIC](https://github.com/giong-run/Giong/blob/v1.5.3/docs/BENCHMARKS.md#quic)); HTTP/3 end to end not measured yet |
 | Runtime state for an AI agent | [`giong-mcp`](https://giong.run/docs/giong-mcp.md) | | |
 
 Where a giong crate is not ahead, the sections linked above say so: over one shared
@@ -552,7 +552,7 @@ pass values within one thread faster, and TLS handshakes cost the same on both o
 rustls is set to the cipher suite giong-tls prefers.
 
 What `Compat` adds is measured on its own, on one TCP stream with no protocol on top
-([giong-compat](https://github.com/giong-run/Giong/blob/v1.5.2/giong-compat/README.md#what-it-costs)): large writes go straight from the
+([giong-compat](https://github.com/giong-run/Giong/blob/v1.5.3/giong-compat/README.md#what-it-costs)): large writes go straight from the
 caller's memory to the socket, from 9% above to 6% below Tokio's CPU per byte sent over the
 last two sessions (until 0.8.0 they were copied first: 25% above Tokio in a session the same
 day); against giong's own `recv`, 6–16% more CPU per byte read with `read`, and no measurable
@@ -652,7 +652,7 @@ back; `DriverKind::Epoll`, or `GIONG_DRIVER=epoll`, chooses epoll anywhere. A fa
 is said once on stderr, with the reason, and `giong::driver_choice()` tells which driver
 a worker got, who chose it and why. Kernel bugs that would cost io_uring are worked
 around: Ubuntu 24.04's 6.8 kernels from 6.8.0-135 on refuse correctly formed buffer rings,
-and giong registers its ring the way they accept ([DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.5.2/docs/DEPLOYMENT.md#ubuntu-2404)).
+and giong registers its ring the way they accept ([DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.5.3/docs/DEPLOYMENT.md#ubuntu-2404)).
 The whole test suite runs on both drivers, and in CI also inside a Docker container with
 the default profile, on a real 5.15 kernel and on Ubuntu 24.04's own kernel; CI fails if
 giong would not choose io_uring where it should.
@@ -670,7 +670,7 @@ giong would not choose io_uring where it should.
 On epoll giong is an epoll runtime like the others and as fast as they are (two system
 calls per request, the same requests per second as raw Tokio); what sets it apart comes
 from io_uring, such as 70% more requests per second on 8 KB responses. The measured table
-is under [io_uring against epoll](https://github.com/giong-run/Giong/blob/v1.5.2/docs/BENCHMARKS.md#io_uring-against-epoll).
+is under [io_uring against epoll](https://github.com/giong-run/Giong/blob/v1.5.3/docs/BENCHMARKS.md#io_uring-against-epoll).
 
 The other systems have one driver each, chosen by default (`DriverKind` is
 `non_exhaustive`; asking for a driver the system does not have fails with
@@ -696,7 +696,7 @@ per connection, system calls, bare metal from one worker to sixteen, HTTPS, the 
 Redis clients, routing, files, core primitives, UDP, gRPC, large uploads, QUIC, the
 benchmark lab against Tokio, Monoio and Glommio, and what has not been measured. A change of
 a percent or two is below the noise of those runs, so CI holds the hot paths to their
-instruction counts instead ([bench/instr](https://github.com/giong-run/Giong/blob/v1.5.2/bench/instr/README.md)): a change that makes any
+instruction counts instead ([bench/instr](https://github.com/giong-run/Giong/blob/v1.5.3/bench/instr/README.md)): a change that makes any
 of them cost 1% more fails.
 
 ## Testing and safety
@@ -774,7 +774,7 @@ Also:
   tasks, channels, timers, `observe`, several workers), on the epoll driver, in CI on
   every change. It found memory the kernel writes into being reached through a pointer
   taken before its `Box` moved, in the file and UDP paths (nothing miscompiled); fixed.
-- **Kani proofs** (`scripts/check.sh kani`, [docs/kani.md](https://github.com/giong-run/Giong/blob/v1.5.2/docs/kani.md)): the model
+- **Kani proofs** (`scripts/check.sh kani`, [docs/kani.md](https://github.com/giong-run/Giong/blob/v1.5.3/docs/kani.md)): the model
   checker proves, for every input within stated bounds, that the slab's free list stays
   sound, that no receive buffer is ever both lent to the kernel and read by user space or
   lent twice (from any pool state of two buffers, so for sequences of any length), that a
@@ -825,10 +825,10 @@ Not verified, and you should know it:
 - valgrind 3.22 cannot run the multi-threaded tests (it treats `io_uring_enter` as
   non-blocking, so threads starve each other); ThreadSanitizer covers those.
 - Every crate, the `unsafe` code and the workspace's security were reviewed before 0.6,
-  and what was found is fixed there (see the [changelog](https://github.com/giong-run/Giong/blob/v1.5.2/CHANGELOG.md)), but the reviewers
+  and what was found is fixed there (see the [changelog](https://github.com/giong-run/Giong/blob/v1.5.3/CHANGELOG.md)), but the reviewers
   were the project's AI agents, each reading code it had not written. No outside person
   has audited giong.
-- `giong-tls` has had a [security review](https://github.com/giong-run/Giong/blob/v1.5.2/docs/reviews/2026-11-giong-tls.md) of its own
+- `giong-tls` has had a [security review](https://github.com/giong-run/Giong/blob/v1.5.3/docs/reviews/2026-11-giong-tls.md) of its own
   code and of every crate that uses it, which found and fixed two medium issues, but it was
   done by the project's AI agent, not by an independent auditor. The cryptography and the
   protocol are rustls's; giong's part is connecting rustls to the socket.
@@ -882,7 +882,7 @@ younger than both, and one service runs on it so far.
   finishes there. Also missing: Unix datagram
   sockets, multicast, `set_len`, file locks, `O_DIRECT` with registered buffers.
 - **`giong-tls` has had no independent audit** (see the
-  [self-review](https://github.com/giong-run/Giong/blob/v1.5.2/docs/reviews/2026-11-giong-tls.md)).
+  [self-review](https://github.com/giong-run/Giong/blob/v1.5.3/docs/reviews/2026-11-giong-tls.md)).
 - **The Tokio ecosystem only through I/O traits.** Crates that are generic over the
   stream and driven by you (h2, tokio-rustls, tokio-tungstenite, hyper's connection API,
   tokio-util's codecs) run on giong through [`giong-compat`](https://giong.run/docs/giong-compat.md), at
@@ -910,14 +910,16 @@ younger than both, and one service runs on it so far.
 ## Project
 
 - Source, issues and discussions: <https://github.com/giong-run/Giong>
-- [CONTRIBUTING.md](https://github.com/giong-run/Giong/blob/v1.5.2/CONTRIBUTING.md) — building, required checks, the rules for `unsafe`
+- [CONTRIBUTING.md](https://github.com/giong-run/Giong/blob/v1.5.3/CONTRIBUTING.md) — building, required checks, the rules for `unsafe`
   and cancellation, commit conventions, and how to make a first contribution.
-- [CODE_OF_CONDUCT.md](https://github.com/giong-run/Giong/blob/v1.5.2/CODE_OF_CONDUCT.md) — how we treat each other, and how to report a
+- [CODE_OF_CONDUCT.md](https://github.com/giong-run/Giong/blob/v1.5.3/CODE_OF_CONDUCT.md) — how we treat each other, and how to report a
   problem.
-- [ROADMAP.md](https://github.com/giong-run/Giong/blob/v1.5.2/ROADMAP.md) — milestones and deliberate non-goals.
-- [AGENTS.md](https://github.com/giong-run/Giong/blob/v1.5.2/AGENTS.md) — building, testing and changing giong, written for AI coding agents;
+- [SECURITY.md](https://github.com/giong-run/Giong/blob/v1.5.3/SECURITY.md) — how to report a vulnerability, which versions get fixes, and
+  the threat model.
+- [ROADMAP.md](https://github.com/giong-run/Giong/blob/v1.5.3/ROADMAP.md) — milestones and deliberate non-goals.
+- [AGENTS.md](https://github.com/giong-run/Giong/blob/v1.5.3/AGENTS.md) — building, testing and changing giong, written for AI coding agents;
   [giong.run/llms.txt](https://giong.run/llms.txt) points a model at the docs.
-- [CHANGELOG.md](https://github.com/giong-run/Giong/blob/v1.5.2/CHANGELOG.md) — what changed in each release.
+- [CHANGELOG.md](https://github.com/giong-run/Giong/blob/v1.5.3/CHANGELOG.md) — what changed in each release.
 
 ```text
 src/
@@ -972,15 +974,15 @@ assets/         logo, icons, social preview (sources in assets/README.md)
 
 Dual-licensed under either of
 
-- Apache License, Version 2.0 ([LICENSE-APACHE](https://github.com/giong-run/Giong/blob/v1.5.2/LICENSE-APACHE))
-- MIT license ([LICENSE-MIT](https://github.com/giong-run/Giong/blob/v1.5.2/LICENSE-MIT))
+- Apache License, Version 2.0 ([LICENSE-APACHE](https://github.com/giong-run/Giong/blob/v1.5.3/LICENSE-APACHE))
+- MIT license ([LICENSE-MIT](https://github.com/giong-run/Giong/blob/v1.5.3/LICENSE-MIT))
 
 at your option. Unless you state otherwise, any contribution you submit is licensed the
 same way, without additional terms.
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/BEST_PRACTICES.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/BEST_PRACTICES.md -->
 
 # Best practices
 
@@ -1072,7 +1074,7 @@ let hash = giong::spawn_compute(move || expensive(input)).await;
 - Thread-per-core has a cost to know about: a short request waits behind a long one on the
   same core, where Tokio's work stealing would move it. With one request in twenty
   computing for a millisecond, the short requests' p99 on giong was 1.3 to 1.7 times the
-  best runtime's ([benchmark lab](https://github.com/giong-run/Giong/blob/v1.5.2/docs/BENCHMARKS.md#benchmark-lab)). Move heavy computation off
+  best runtime's ([benchmark lab](https://github.com/giong-run/Giong/blob/v1.5.3/docs/BENCHMARKS.md#benchmark-lab)). Move heavy computation off
   the workers.
 - To find a blocked worker, ask the service: giong-mcp's `overview` warns about it and
   names the line that spawned the task ([Observe](#observe-the-running-service)).
@@ -1089,6 +1091,11 @@ let hash = giong::spawn_compute(move || expensive(input)).await;
   for the service rather than turning them off: `Server::request_timeout`, `idle_timeout`,
   `max_head_size`, `max_body_size`, `max_connections` (10,000 per `serve` call) and
   `min_free_memory`, which refuses new work before the process runs out of memory.
+- **Facing clients directly, cap each client.** With no load balancer in front, one client
+  can open every connection a worker allows, and connections that send nothing hold their
+  places for `idle_timeout`. `Server::max_connections_per_ip(256)` and
+  `first_request_timeout(Duration::from_secs(10))` bound both; behind a load balancer
+  every connection comes from it, so cap clients there instead.
 - **Give streamed uploads a minimum rate.** `request_timeout` bounds each piece of a body
   read as a stream, not the whole body, so a client sending a byte every 29 s holds its
   handler for ever. `Server::min_body_rate(240, Duration::from_secs(10))` cuts such a
@@ -1157,7 +1164,7 @@ let hash = giong::spawn_compute(move || expensive(input)).await;
 
 ## Choose the giong crate first
 
-For each job, take the first that fits ([Choosing crates](https://github.com/giong-run/Giong/blob/v1.5.2/README.md#choosing-crates)):
+For each job, take the first that fits ([Choosing crates](https://github.com/giong-run/Giong/blob/v1.5.3/README.md#choosing-crates)):
 
 1. **A giong crate**: giong-http (server and client), giong-web, giong-tls, giong-grpc,
    giong-proto, giong-quic, giong-postgres, giong-mysql, giong-redis, `giong::fs`,
@@ -1192,7 +1199,7 @@ claude mcp add --transport http giong http://127.0.0.1:7777/mcp \
 ## Deploy
 
 - **Production runs on Linux.** macOS and Windows are for developing and testing there:
-  every crate runs, correct but not tuned ([Platforms](https://github.com/giong-run/Giong/blob/v1.5.2/README.md#platforms)).
+  every crate runs, correct but not tuned ([Platforms](https://github.com/giong-run/Giong/blob/v1.5.3/README.md#platforms)).
 - **Containers need no settings**: where io_uring is blocked (Docker's and Kubernetes'
   default seccomp profiles, gVisor), giong runs on epoll and says so once on stderr. Allow
   io_uring for its full speed with the profile in [DEPLOYMENT.md](https://giong.run/docs/deployment.md), and
@@ -1202,7 +1209,7 @@ claude mcp add --transport http giong http://127.0.0.1:7777/mcp \
 - **One process owns a port.** `bind` refuses a port another process holds, so a service
   started twice fails the second time instead of quietly splitting the traffic. Stop the old
   process before starting the new one, or run the two on different ports behind the load
-  balancer; [DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.5.2/docs/DEPLOYMENT.md#restarting-on-the-same-port) has the other ways and
+  balancer; [DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.5.3/docs/DEPLOYMENT.md#restarting-on-the-same-port) has the other ways and
   what the load balancer should do.
 
 ## Performance
@@ -1259,7 +1266,7 @@ A short list for people and agents reviewing a change to a giong service:
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/giong-proto/README.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/giong-proto/README.md -->
 
 # giong-proto
 
@@ -1267,9 +1274,9 @@ Protocol Buffers for [giong](https://github.com/giong-run/Giong): messages decod
 **views over the receive buffer**. Strings, bytes, repeated fields and maps borrow from
 the input, so decoding copies nothing and makes no heap allocation; encoding writes
 message structs whose fields borrow too. Code is generated from `.proto` files by
-[giong-grpc-build](https://github.com/giong-run/Giong/blob/v1.5.2/giong-grpc-build), which parses them in Rust: no `protoc` to install.
+[giong-grpc-build](https://github.com/giong-run/Giong/blob/v1.5.3/giong-grpc-build), which parses them in Rust: no `protoc` to install.
 
-> **New in giong 1.1.** It is the message layer of [giong-grpc](https://github.com/giong-run/Giong/blob/v1.5.2/giong-grpc), gRPC on giong's HTTP/2.
+> **New in giong 1.1.** It is the message layer of [giong-grpc](https://github.com/giong-run/Giong/blob/v1.5.3/giong-grpc), gRPC on giong's HTTP/2.
 
 ## Use
 
@@ -1305,7 +1312,7 @@ for item in order.items() {
 }
 ```
 
-[`examples/proto-hello`](https://github.com/giong-run/Giong/blob/v1.5.2/examples/proto-hello) is a complete program with enums,
+[`examples/proto-hello`](https://github.com/giong-run/Giong/blob/v1.5.3/examples/proto-hello) is a complete program with enums,
 oneofs, maps, `optional` fields and a service (`cargo run -p proto-hello`).
 
 ## What is generated
@@ -1327,7 +1334,7 @@ modified, so they are its encoding): forwarding a received message is one copy.
 ## Errors
 
 Decoding and encoding errors carry codes `GIONG-E4001` to `GIONG-E4008`
-([`ErrorKind`](https://github.com/giong-run/Giong/blob/v1.5.2/giong-proto/src/error.rs)), each with a page in [`docs/errors/`](https://giong.run/docs/errors.md):
+([`ErrorKind`](https://github.com/giong-run/Giong/blob/v1.5.3/giong-proto/src/error.rs)), each with a page in [`docs/errors/`](https://giong.run/docs/errors.md):
 truncated input, malformed varints, invalid tags, unbalanced groups, non-UTF-8 strings,
 nesting deeper than 100, malformed packed fields, messages over 2 GiB.
 
@@ -1360,7 +1367,7 @@ editions (`edition = "2023"`) and extensions are not supported; no JSON or text 
 ## Speed
 
 `bench/proto.sh` against prost 0.13 with its defaults (as tonic uses it), one core of the
-cloud VM, median of 10 rounds; raw data in [`bench/results/proto/`](https://github.com/giong-run/Giong/blob/v1.5.2/bench/results/proto).
+cloud VM, median of 10 rounds; raw data in [`bench/results/proto/`](https://github.com/giong-run/Giong/blob/v1.5.3/bench/results/proto).
 "decode+read" decodes and reads every field, the fair comparison since views read
 repeated fields lazily:
 
@@ -1386,11 +1393,11 @@ messages made mostly of small repeated sub-messages gain less than the others.
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/giong-grpc-build/README.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/giong-grpc-build/README.md -->
 
 # giong-grpc-build
 
-Generates [giong-proto](https://github.com/giong-run/Giong/blob/v1.5.2/giong-proto) messages and [giong-grpc](https://github.com/giong-run/Giong/blob/v1.5.2/giong-grpc) services from `.proto` files at build time. The
+Generates [giong-proto](https://github.com/giong-run/Giong/blob/v1.5.3/giong-proto) messages and [giong-grpc](https://github.com/giong-run/Giong/blob/v1.5.3/giong-grpc) services from `.proto` files at build time. The
 `.proto` files are parsed in Rust by [protox](https://docs.rs/protox) (Google's
 well-known types included), so there is **no `protoc` to install**: `cargo build` is
 enough, on any machine an agent or a CI runner starts with.
@@ -1418,8 +1425,8 @@ paths and kinds of its methods, a trait to implement (one method for each rpc), 
 `...Server` that routes calls to an implementation of the trait, and a `...Client`.
 [giong-proto's README](https://giong.run/docs/giong-proto.md) describes the generated messages and
 [giong-grpc's](https://giong.run/docs/giong-grpc.md) the services;
-[`examples/proto-hello`](https://github.com/giong-run/Giong/blob/v1.5.2/examples/proto-hello) and
-[`examples/grpc-hello`](https://github.com/giong-run/Giong/blob/v1.5.2/examples/grpc-hello) use them.
+[`examples/proto-hello`](https://github.com/giong-run/Giong/blob/v1.5.3/examples/proto-hello) and
+[`examples/grpc-hello`](https://github.com/giong-run/Giong/blob/v1.5.3/examples/grpc-hello) use them.
 
 The file also holds `FILE_DESCRIPTOR_SET`, the `.proto` files themselves in encoded form,
 which `giong_grpc::reflection` serves to tools such as `grpcurl`. A program that does not
@@ -1447,7 +1454,7 @@ The minimum Rust version is 1.80, as for giong (protox 0.8 is the newest that bu
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/giong-quic/README.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/giong-quic/README.md -->
 
 # giong-quic
 
@@ -1494,7 +1501,7 @@ MIT or Apache-2.0, at your option.
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/giong-tls/README.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/giong-tls/README.md -->
 
 # giong-tls
 
@@ -1632,7 +1639,7 @@ Two more cases stay in the process under `Auto` and fail under `Required`: a con
 
 ### When it pays off
 
-Kernel TLS is not faster by itself. Measured on bare metal (AMD EPYC 4345P, Linux 7.0, loopback, the server on one core, TLS 1.3 with AES-256-GCM, medians of five rounds; `bench/tls.sh` and `bench/http-client.sh`, recorded in [`bench/results/bare-metal-epyc-4345p/linux-7.0/ktls/`](https://github.com/giong-run/Giong/blob/v1.5.2/bench/results/bare-metal-epyc-4345p/linux-7.0/ktls/summary.txt)):
+Kernel TLS is not faster by itself. Measured on bare metal (AMD EPYC 4345P, Linux 7.0, loopback, the server on one core, TLS 1.3 with AES-256-GCM, medians of five rounds; `bench/tls.sh` and `bench/http-client.sh`, recorded in [`bench/results/bare-metal-epyc-4345p/linux-7.0/ktls/`](https://github.com/giong-run/Giong/blob/v1.5.3/bench/results/bare-metal-epyc-4345p/linux-7.0/ktls/summary.txt)):
 
 | What the server sends | rustls in the process | Kernel TLS | |
 |---|---|---|---|
@@ -1652,7 +1659,7 @@ So `Ktls::Off` stays the default. Use `Ktls::Auto` on a server whose large respo
 
 ## Performance
 
-Measured with `bench/tls.sh` on one core, with the same rustls and `ring` on both sides (4-vCPU VM, seven rounds, [`bench/results/tls/`](https://github.com/giong-run/Giong/blob/v1.5.2/bench/results/tls/README.md)): HTTPS through `giong-http` reaches 146.6k req/s on `/json` against 81.2k for Axum + rustls, and 48.7k against 18.5k with 8 KB responses. Details and how to read the numbers are in [docs/BENCHMARKS.md](https://github.com/giong-run/Giong/blob/v1.5.2/docs/BENCHMARKS.md#https); kernel TLS has its own numbers [above](#when-it-pays-off).
+Measured with `bench/tls.sh` on one core, with the same rustls and `ring` on both sides (4-vCPU VM, seven rounds, [`bench/results/tls/`](https://github.com/giong-run/Giong/blob/v1.5.3/bench/results/tls/README.md)): HTTPS through `giong-http` reaches 146.6k req/s on `/json` against 81.2k for Axum + rustls, and 48.7k against 18.5k with 8 KB responses. Details and how to read the numbers are in [docs/BENCHMARKS.md](https://github.com/giong-run/Giong/blob/v1.5.3/docs/BENCHMARKS.md#https); kernel TLS has its own numbers [above](#when-it-pays-off).
 
 ### Handshakes
 
@@ -1665,11 +1672,12 @@ Most of the handshake gain is the cipher suite: Axum with its rustls set to the 
 
 ### Memory
 
-An idle connection, rustls in the process, holds 6.1 KiB of heap (`bench/instr`'s `idle-https`, which counts the server's side after a handshake and one request), down from 10.8 KiB before 1.5.2; 8,000 idle connections to one worker of giong-http take 52.8 MiB of resident memory instead of 89.8 (`bench/tls-idle.sh`, [`bench/results/tls-idle/`](https://github.com/giong-run/Giong/blob/v1.5.2/bench/results/tls-idle/README.md)). For comparison, nginx 1.24 with OpenSSL took 15.1 KiB per idle HTTPS connection in the same kind of measurement in 0.7.
+An idle connection, rustls in the process, holds 5.0 KiB of heap (`bench/instr`'s `idle-https`, which counts the server's side after a handshake and one request), down from 10.8 KiB before 1.5.2, and 6.2 KiB with HTTP/2 (`idle-h2-tls`, 9.5 KiB before); 8,000 idle connections to one worker of giong-http take 45.7 MiB of resident memory instead of 89.8, and 56.1 MiB with HTTP/2 (`bench/tls-idle.sh`, [`bench/results/tls-idle/`](https://github.com/giong-run/Giong/blob/v1.5.3/bench/results/tls-idle/README.md), [`bench/results/h2-idle-memory/`](https://github.com/giong-run/Giong/blob/v1.5.3/bench/results/h2-idle-memory/README.md)). For comparison, nginx 1.24 with OpenSSL took 15.1 KiB per idle HTTPS connection in the same kind of measurement in 0.7.
 
 - **No receive buffer while idle.** rustls runs through its unbuffered API: received bytes are processed from a scratch buffer each thread shares, and a connection keeps bytes of its own only while it holds part of a record. rustls' buffered connection kept a 4 KiB buffer for the life of every connection.
 - **No send buffer while idle.** Outgoing records are written through scratch buffers each thread shares (up to four of up to 16 KiB), where every stream kept its own.
-- What is left is mostly the connection's task, which holds the TLS state (3.5 KiB), and rustls' own allocations for the keys and the handshake state.
+- **No room for sends in a waiting receive.** On an established stream a receive only ever sends a key update or an alert, which go out without waiting, so a waiting `TlsStream::recv` is 136 bytes; it held 640, room for the handshake's sends, in every idle connection's task.
+- What is left is mostly the connection's task (2.5 KiB, the TLS state included), and rustls' own allocations for the keys and the handshake state.
 
 Requests cost the same or less: 1.1% fewer instructions per HTTPS request (`bench/instr`'s `https`, client and server), and `bench/tls.sh` measured no loss on any endpoint (requests per second, median of five rounds, against 1cb2988: small JSON +1.5%, 8.5 KiB JSON +7.8%, new connections +3.8%, 64 KiB answers +2.3%, with less server CPU per request on all four).
 
@@ -1683,7 +1691,7 @@ With the `post-quantum` feature, giong-tls uses aws-lc-rs instead of *ring* for 
 
 ## Not there yet
 
-Checking certificate revocation on the client side (rustls can, through `TlsConnector::from_rustls` with your own verifier). All of them can be added in 1.x without breaking anything. The crate has had a [security review](https://github.com/giong-run/Giong/blob/v1.5.2/docs/reviews/2026-11-giong-tls.md) by the project's AI agent, which found and fixed two issues in its users, and a second one for kernel TLS, but no independent audit yet; the cryptography and the protocol are rustls's, and the kernel's once it takes a connection.
+Checking certificate revocation on the client side (rustls can, through `TlsConnector::from_rustls` with your own verifier). All of them can be added in 1.x without breaking anything. The crate has had a [security review](https://github.com/giong-run/Giong/blob/v1.5.3/docs/reviews/2026-11-giong-tls.md) by the project's AI agent, which found and fixed two issues in its users, and a second one for kernel TLS, but no independent audit yet; the cryptography and the protocol are rustls's, and the kernel's once it takes a connection.
 
 ## Tests
 
@@ -1697,7 +1705,7 @@ Twelve end-to-end HTTPS tests live in `giong-http` (`cargo test -p giong-http --
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/giong-http/README.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/giong-http/README.md -->
 
 # giong-http
 
@@ -1740,8 +1748,9 @@ fn main() -> std::io::Result<()> {
 - A `Request` shares the connection's receive buffer instead of copying it, so building a request allocates nothing. A handler may keep the request for as long as it likes.
 - Limits on the size of the head (64 KiB) and the body (1 MiB); timeouts for idle connections (60 s), slow requests (30 s, against slowloris) and clients that read slowly (30 s). All of them can be changed on `Server`.
 - A cap on open connections, 10,000 per `serve` call (so per worker) unless `Server::max_connections` says otherwise: at the cap the server stops accepting, and new clients wait in the kernel's listen queue until a connection closes.
+- Off by default, for a server that faces clients directly: `Server::max_connections_per_ip` caps the connections one client (an IPv4 address, an IPv6 /64) may hold per worker, refusing the rest with `429` (`GIONG-E1124`) without TLS and before the handshake with it, so one client cannot take every place; `Server::first_request_timeout` closes a new connection that has not sent its first request's head within that time, so connections that send nothing hold their places for seconds instead of the 60 s idle timeout. Behind a load balancer every connection comes from the balancer, so leave the per-address cap to it.
 - A floor under free memory: while less than `Server::min_free_memory` is left to the process (by default a tenth of its cgroup's memory limit, or of the machine's memory, between 16 and 256 MiB), new connections are refused, with `503` and `Retry-After: 1` (`GIONG-E1121`) without TLS and closed before the handshake with it, and the connections the server holds keep being served. Without it, enough idle connections get the process killed by the kernel's out-of-memory killer, connections and all (0.8.0 was killed at 7,900 idle HTTPS connections in a 96 MiB container, under the default connection cap).
-- A cap on the bytes of requests a worker holds while receiving them, shared by all its connections, HTTP/1.1 and HTTP/2: `Server::max_buffered_request_bytes`, by default 64 MiB per worker or, in a container, a quarter of its memory limit divided among the workers if that is less. Without it, a few hundred clients sending large bodies slowly could exhaust a small container's memory (measured with one worker: 130 such clients got a 128 MiB container OOM-killed; with the cap, 450 of them over HTTP/1.1 and HTTP/2 leave it at a 35 MiB peak). Past the cap a request gets `503` with `Retry-After: 1` (`GIONG-E1120`) over HTTP/1.1, `REFUSED_STREAM` over HTTP/2, without its handler being called; the first 4 KiB of each HTTP/1.1 request do not count, so ordinary requests keep being served. Bodies read as a stream do not count. How to size a container: [docs/DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.5.2/docs/DEPLOYMENT.md#sizing-memory).
+- A cap on the bytes of requests a worker holds while receiving them, shared by all its connections, HTTP/1.1 and HTTP/2: `Server::max_buffered_request_bytes`, by default 64 MiB per worker or, in a container, a quarter of its memory limit divided among the workers if that is less. Without it, a few hundred clients sending large bodies slowly could exhaust a small container's memory (measured with one worker: 130 such clients got a 128 MiB container OOM-killed; with the cap, 450 of them over HTTP/1.1 and HTTP/2 leave it at a 35 MiB peak). Past the cap a request gets `503` with `Retry-After: 1` (`GIONG-E1120`) over HTTP/1.1, `REFUSED_STREAM` over HTTP/2, without its handler being called; the first 4 KiB of each HTTP/1.1 request do not count, so ordinary requests keep being served. Bodies read as a stream do not count. How to size a container: [docs/DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.5.3/docs/DEPLOYMENT.md#sizing-memory).
 - Handlers that keep a worker busy (heavy computation, long responses) leave the kernel's even spread of connections uneven. Bind each worker's listener with `giong::net::TcpListener::bind_balanced` instead of `bind` and a busy worker hands new connections to a quieter one; `Server::serve` takes either.
 - A handler is an `async fn(Request) -> Response`, a closure that returns a future (write its argument's type: `|req: Request| async move { .. }`), or a type of your own that implements `Handler` and borrows from itself while it answers. [`giong-web`](https://giong.run/docs/giong-web.md) builds routing, middleware and JSON on it.
 - `Server::serve` takes its handler by value. To serve one handler on two listeners (plain HTTP and HTTPS, a public port and an internal one), put it in an `Rc` and give each `serve` a clone: `Handler` is implemented for `Rc<H>`, and streaming routes keep streaming. Do not wrap it in a closure instead: a closure never streams, so every route that reads its body as it arrives would get it whole, or a `413`.
@@ -1813,8 +1822,8 @@ Other status codes: `408` the request was too slow, `413` the body is too large,
 Turn on the `tls` feature to get `Server::serve_tls`, which uses the [`giong-tls`](https://giong.run/docs/giong-tls.md) crate (rustls, TLS 1.2 and 1.3):
 
 ```toml
-giong-http = { version = "1.5.2", features = ["tls"] }
-giong-tls = "1.5.2"
+giong-http = { version = "1.5.3", features = ["tls"] }
+giong-tls = "1.5.3"
 ```
 
 ```rust,no_run
@@ -1843,7 +1852,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 Handlers, limits, timeouts and graceful shutdown are the same as for plain HTTP. Each handshake runs in its connection's own task, so a slow client does not hold up accepting new connections; a client that does not speak TLS (a port scan, plain HTTP sent to the wrong port) is closed when the handshake timeout expires. When it closes a connection the server sends `close_notify`, so the client can tell a complete response from a connection that was cut.
 
-To have the kernel encrypt and decrypt the records once rustls has done the handshake (kernel TLS, Linux with the `tls` module), build the acceptor with `.ktls(giong_tls::Ktls::Auto)?`; nothing else changes. When it pays off and when it does not is in [giong-tls's README](https://github.com/giong-run/Giong/blob/v1.5.2/giong-tls/README.md#kernel-tls).
+To have the kernel encrypt and decrypt the records once rustls has done the handshake (kernel TLS, Linux with the `tls` module), build the acceptor with `.ktls(giong_tls::Ktls::Auto)?`; nothing else changes. When it pays off and when it does not is in [giong-tls's README](https://github.com/giong-run/Giong/blob/v1.5.3/giong-tls/README.md#kernel-tls).
 
 To serve over another kind of connection (a different TLS layer, a fake connection in a test), implement the `Transport` trait and call `Server::serve_connection`.
 
@@ -1903,17 +1912,17 @@ Measured with `bench/h2.sh` against axum 0.8 on hyper's HTTP/2 (through `axum-se
 | axum, prior knowledge | 138.9k (126–146k) | 23.0k (22–26k) | 158.0k (152–171k) |
 
 - **3.8 to 4.4 times axum's requests per second on small answers, 2.5 to 3.0 times on 8.5 KiB ones.** The server's core is the limit in every case (97–100% busy), and no request failed. h2load's mean time per request follows: 0.83 ms against 3.63 ms for `json` over HTTPS, 8.1 against 20.5 ms for `users`.
-- Our reading, not profiled: with 10 or 100 streams in flight on a connection, one read brings many requests and one write takes many answers, much as pipelining does over HTTP/1.1, and giong-http turns that batching into requests served as it does for pipelined ones ([giong-web's benchmark](https://github.com/giong-run/Giong/blob/v1.5.2/giong-web/README.md#performance)). hyper gains far less from either.
+- Our reading, not profiled: with 10 or 100 streams in flight on a connection, one read brings many requests and one write takes many answers, much as pipelining does over HTTP/1.1, and giong-http turns that batching into requests served as it does for pipelined ones ([giong-web's benchmark](https://github.com/giong-run/Giong/blob/v1.5.3/giong-web/README.md#performance)). hyper gains far less from either.
 - Not measured yet: several cores, a load generator on another machine, request bodies.
 
-Memory per connection, measured with `bench/hold` over HTTP/2 with prior knowledge: 5,000 connections on one worker thread, the server's resident memory before and after, divided by 5,000. KiB, the same in all rounds within 0.2% (giong-http's row measured again in 1.5.2 with `PARTS=memory MEM_SERVERS=giong-http bench/h2.sh 3`, `bench/results/idle-conn-memory/`):
+Memory per connection, measured with `bench/hold` over HTTP/2 with prior knowledge: 5,000 connections on one worker thread, the server's resident memory before and after, divided by 5,000. KiB, the same in all rounds within 0.2% (giong-http's row measured again in 1.5.2 with `PARTS=memory MEM_SERVERS=giong-http bench/h2.sh 3`, `bench/results/h2-idle-memory/`):
 
 | Server | Idle (one request answered) | One request in progress | Each further request in progress |
 |---|---|---|---|
-| **giong-http** | **3.5** | **4.9** | **1.5** |
+| **giong-http** | **2.7** | **4.1** | **1.5** |
 | axum | 23.8 | 23.0 | 2.0 |
 
-An idle connection gives its buffers back, so what it keeps is its task, its HPACK tables and its state; an idle HTTP/1.1 connection still costs 1.3 KiB of heap (`bench/instr`'s `idle-http1`). Results are in `bench/results/h2/`.
+An idle connection gives its buffers back, so what it keeps is its task, its HPACK tables and its state. An HTTP/2 connection goes on in a task of its own once its preface arrives (or TLS picks `h2`), so it does not also keep the task that read its first bytes, which is as large as an HTTP/1.1 connection's: 2.5 KiB of heap per idle HTTP/2 connection, 6.2 KiB over TLS, and 1.2 KiB per idle HTTP/1.1 one (`bench/instr`'s `idle-h2`, `idle-h2-tls` and `idle-http1`). Results are in `bench/results/h2/`.
 
 ## HTTP/3 (unstable)
 
@@ -1922,8 +1931,8 @@ for the same handlers, on Linux and macOS. It needs Rust 1.85, and may change be
 stabilised; the default build does not have it.
 
 ```toml
-giong-http = { version = "1.5.2", features = ["unstable-http3", "client"] }
-giong-quic = "1.5.2"
+giong-http = { version = "1.5.3", features = ["unstable-http3", "client"] }
+giong-quic = "1.5.3"
 ```
 
 ```rust,ignore
@@ -1960,14 +1969,14 @@ async fn serve(tls: rustls::ServerConfig) -> std::io::Result<()> {
   0-RTT, which the example leaves off). `cargo run --release -p giong-http --features
   unstable-http3 --example h3` serves it locally (`curl -k --http3-only https://localhost:8443/`).
 - **Not measured yet** end to end; the QUIC layer underneath is in
-  [docs/BENCHMARKS.md](https://github.com/giong-run/Giong/blob/v1.5.2/docs/BENCHMARKS.md#quic).
+  [docs/BENCHMARKS.md](https://github.com/giong-run/Giong/blob/v1.5.3/docs/BENCHMARKS.md#quic).
 
 ## Client
 
 The `client` feature adds an HTTP/1.1 and HTTP/2 client, `giong_http::client` (HTTPS included, through giong-tls):
 
 ```toml
-giong-http = { version = "1.5.2", features = ["client"] }
+giong-http = { version = "1.5.3", features = ["client"] }
 ```
 
 ```rust,no_run
@@ -2052,13 +2061,13 @@ Server push. Routing and compression of responses are in [`giong-web`](https://g
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/giong-grpc/README.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/giong-grpc/README.md -->
 
 # giong-grpc
 
 gRPC for the [giong](https://giong.run/docs/giong.md) runtime: servers and clients over [giong-http](https://giong.run/docs/giong-http.md)'s HTTP/2, with messages read as [giong-proto](https://giong.run/docs/giong-proto.md) views that borrow from the bytes received. Nothing from the Tokio ecosystem, and no `protoc` to install: [giong-grpc-build](https://giong.run/docs/giong-grpc-build.md) parses the `.proto` files in Rust.
 
-It interoperates with grpc-go in both directions on the test cases of [gRPC's interoperability specification](https://github.com/grpc/grpc/blob/master/doc/interop-test-descriptions.md), on io_uring and on epoll, in CI ([`interop/run.sh`](https://github.com/giong-run/Giong/blob/v1.5.2/giong-grpc/interop/run.sh)).
+It interoperates with grpc-go in both directions on the test cases of [gRPC's interoperability specification](https://github.com/grpc/grpc/blob/master/doc/interop-test-descriptions.md), on io_uring and on epoll, in CI ([`interop/run.sh`](https://github.com/giong-run/Giong/blob/v1.5.3/giong-grpc/interop/run.sh)).
 
 > **New in giong 1.1.**
 
@@ -2164,7 +2173,7 @@ while let Some(received) = replies.message().await? {
 }
 ```
 
-[`examples/grpc-hello`](https://github.com/giong-run/Giong/blob/v1.5.2/examples/grpc-hello) is this program, complete, with health and reflection.
+[`examples/grpc-hello`](https://github.com/giong-run/Giong/blob/v1.5.3/examples/grpc-hello) is this program, complete, with health and reflection.
 
 ## What it does
 
@@ -2178,7 +2187,7 @@ while let Some(received) = replies.message().await? {
 - **gzip**, per message, off by default.
 - **TLS** through `giong_http::Server::serve_tls` and `https://` addresses (ALPN), with private authorities and client certificates.
 - **Health checking** (`grpc.health.v1.Health`: Check, List, Watch) and **server reflection** (`v1` and `v1alpha`): `grpcurl list`, `describe` and calls work without the `.proto` files.
-- **Errors with codes.** The statuses giong-grpc raises itself carry `GIONG-E4101` to `GIONG-E4110`, with what happened and how to fix it in the message ([docs/errors](https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/README.md#giong-grpc)).
+- **Errors with codes.** The statuses giong-grpc raises itself carry `GIONG-E4101` to `GIONG-E4110`, with what happened and how to fix it in the message ([docs/errors](https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/README.md#giong-grpc)).
 
 ## The four kinds of method
 
@@ -2252,7 +2261,7 @@ $ grpcurl -plaintext -d '{"name": "An"}' localhost:50051 hello.v1.Greeter/SayHel
 
 ## Measured against tonic
 
-`bench/grpc.sh`, against tonic 0.14 (prost, hyper, Tokio) with the same service: unary calls with 100-byte and 10,000-byte payloads, round trips on a bidirectional stream, and server streams of 1,000 messages of 100 bytes. A 4-core cloud VM (Xeon 2.1 GHz, Linux 6.18, io_uring), the median of 10 rounds of 5 s; the method is at the top of the script and the raw data in [`bench/results/grpc/`](https://github.com/giong-run/Giong/blob/v1.5.2/bench/results/grpc).
+`bench/grpc.sh`, against tonic 0.14 (prost, hyper, Tokio) with the same service: unary calls with 100-byte and 10,000-byte payloads, round trips on a bidirectional stream, and server streams of 1,000 messages of 100 bytes. A 4-core cloud VM (Xeon 2.1 GHz, Linux 6.18, io_uring), the median of 10 rounds of 5 s; the method is at the top of the script and the raw data in [`bench/results/grpc/`](https://github.com/giong-run/Giong/blob/v1.5.3/bench/results/grpc).
 
 One server thread, loaded from three other cores until its core is the limit, with tonic's client and with giong-grpc's as the load generator:
 
@@ -2267,7 +2276,7 @@ One server thread, loaded from three other cores until its core is the limit, wi
 | server stream | tonic | 2,917,860 msg/s | 11,694,153 | 4.0× | 0.329 → 0.081 µs |
 | server stream | giong | 2,985,038 | 11,394,657 | 3.8× | 0.321 → 0.084 µs |
 
-No workload is behind on the server side. 10,000-byte unary calls from tonic's client were 7.5% behind until giong-http's HTTP/2 server sent the answers to a burst of short requests in one write: it cut its output at 64 KiB, and with one write in flight per connection each further write waited a turn of the worker. With 64 calls in flight per connection (`TASKS=128`, [`tasks-128/`](https://github.com/giong-run/Giong/blob/v1.5.2/bench/results/grpc/tasks-128)) giong-grpc's server does 78,401 calls/s against tonic's 70,778 (+10.8%) under tonic's client and 103,618 against 70,002 (+48%) under its own. The server stream is ahead by that much because the messages a handler sends in a row leave in one write.
+No workload is behind on the server side. 10,000-byte unary calls from tonic's client were 7.5% behind until giong-http's HTTP/2 server sent the answers to a burst of short requests in one write: it cut its output at 64 KiB, and with one write in flight per connection each further write waited a turn of the worker. With 64 calls in flight per connection (`TASKS=128`, [`tasks-128/`](https://github.com/giong-run/Giong/blob/v1.5.3/bench/results/grpc/tasks-128)) giong-grpc's server does 78,401 calls/s against tonic's 70,778 (+10.8%) under tonic's client and 103,618 against 70,002 (+48%) under its own. The server stream is ahead by that much because the messages a handler sends in a row leave in one write.
 
 One client thread, against a server with three threads (tonic's, then giong-grpc's):
 
@@ -2307,7 +2316,7 @@ The minimum Rust version is 1.80, as for giong.
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/giong-postgres/README.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/giong-postgres/README.md -->
 
 # giong-postgres
 
@@ -2315,8 +2324,8 @@ A PostgreSQL client and connection pool for the [giong](https://giong.run/docs/g
 
 ```toml
 [dependencies]
-giong = "1.5.2"
-giong-postgres = "1.5.2"
+giong = "1.5.3"
+giong-postgres = "1.5.3"
 ```
 
 ```rust,no_run
@@ -2536,7 +2545,7 @@ The tests find PostgreSQL through `GIONG_PG_BIN`, `/usr/lib/postgresql/*/bin` or
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/giong-mysql/README.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/giong-mysql/README.md -->
 
 # giong-mysql
 
@@ -2544,8 +2553,8 @@ A MySQL and MariaDB client and connection pool for the [giong](https://giong.run
 
 ```toml
 [dependencies]
-giong = "1.5.2"
-giong-mysql = "1.5.2"
+giong = "1.5.3"
+giong-mysql = "1.5.3"
 ```
 
 ```rust,no_run
@@ -2777,7 +2786,7 @@ The tests find `mysqld` through `GIONG_MYSQL_BIN` (the directory that holds it),
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/giong-redis/README.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/giong-redis/README.md -->
 
 # giong-redis
 
@@ -2785,8 +2794,8 @@ A Redis client and connection pool for the [giong](https://giong.run/docs/giong.
 
 ```toml
 [dependencies]
-giong = "1.5.2"
-giong-redis = "1.5.2"
+giong = "1.5.3"
+giong-redis = "1.5.3"
 ```
 
 ```rust,no_run
@@ -3027,7 +3036,7 @@ Not measured: a server on another machine (network latency, where pipelining mat
 
 ## Not there yet
 
-Redis Cluster (a `MOVED` or `ASK` reply is an error that says so) and Sentinel, client-side caching (`CLIENT TRACKING` can be turned on with `query`, but a `Client` passes over the invalidations it brings), sharded Pub/Sub (`SSUBSCRIBE`), RESP2-only servers (Redis 5 and older), and streaming a large reply in pieces (a reply is collected in full, up to `max_reply_size`). Proxies that do not pass `HELLO 3` on (twemproxy, Envoy's Redis proxy) cannot be used, since the client speaks RESP3 only. An independent review before 1.0 found problems that have since been fixed (see the [changelog](https://github.com/giong-run/Giong/blob/v1.5.2/CHANGELOG.md)); the crate has had no outside security audit.
+Redis Cluster (a `MOVED` or `ASK` reply is an error that says so) and Sentinel, client-side caching (`CLIENT TRACKING` can be turned on with `query`, but a `Client` passes over the invalidations it brings), sharded Pub/Sub (`SSUBSCRIBE`), RESP2-only servers (Redis 5 and older), and streaming a large reply in pieces (a reply is collected in full, up to `max_reply_size`). Proxies that do not pass `HELLO 3` on (twemproxy, Envoy's Redis proxy) cannot be used, since the client speaks RESP3 only. An independent review before 1.0 found problems that have since been fixed (see the [changelog](https://github.com/giong-run/Giong/blob/v1.5.3/CHANGELOG.md)); the crate has had no outside security audit.
 
 ## Tests
 
@@ -3037,7 +3046,7 @@ The tests find `redis-server` through `GIONG_REDIS_BIN` (the directory that hold
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/giong-web/README.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/giong-web/README.md -->
 
 # giong-web
 
@@ -3045,8 +3054,8 @@ Routing, middleware and JSON for HTTP services on the [giong](https://giong.run/
 
 ```toml
 [dependencies]
-giong = "1.5.2"
-giong-web = { version = "1.5.2", features = ["serde"] }
+giong = "1.5.3"
+giong-web = { version = "1.5.3", features = ["serde"] }
 serde = { version = "1", features = ["derive"] }
 ```
 
@@ -3339,10 +3348,10 @@ With middleware:
 
 - **1.3 times axum on small JSON answers, 1.8 times on the list of users, 1.9 to 2.3 times with middleware.** The routes, the parameters and serde cost giong-web about 5% against giong-http's bare handler on `/json`. giong-http's `/users` is faster because it writes its JSON by hand, without serde or the 200 small strings the handler builds; giong-web and axum run the same handler.
 - **`/compute` is the handler's time,** the same for both within noise (giong-web's range 3.66–4.01k, axum's 3.58–4.07k). Its p99 is higher on giong-web (22.9 against 18.5 ms), as it is on giong-http (24.2 ms). Our guess, not measured: a worker runs every ready request before it reads its sockets again, so when each costs 250 µs of CPU, some wait for a whole batch.
-- **Pipelined requests** (16 per write): axum stays at 18k, as in the [main benchmark](https://github.com/giong-run/Giong/blob/v1.5.2/docs/BENCHMARKS.md#throughput-at-50-connections); we have not looked into why. giong-http reads a pipeline and answers it as a batch.
+- **Pipelined requests** (16 per write): axum stays at 18k, as in the [main benchmark](https://github.com/giong-run/Giong/blob/v1.5.3/docs/BENCHMARKS.md#throughput-at-50-connections); we have not looked into why. giong-http reads a pipeline and answers it as a batch.
 - Resident memory after the run: 6.6 MB for giong-web, 5.2 MB for axum.
 
-HTTPS and a database behind the handlers are measured with the [example REST API](https://github.com/giong-run/Giong/blob/v1.5.2/examples/rest-api/README.md#performance). Not measured yet: several cores, and middleware one at a time. Results are in `bench/results/web/`.
+HTTPS and a database behind the handlers are measured with the [example REST API](https://github.com/giong-run/Giong/blob/v1.5.3/examples/rest-api/README.md#performance). Not measured yet: several cores, and middleware one at a time. Results are in `bench/results/web/`.
 
 ## Features
 
@@ -3352,7 +3361,7 @@ HTTPS and a database behind the handlers are measured with the [example REST API
 | `tls` | `Server::serve_tls`, through giong-http: HTTP/2 or HTTP/1.1, as ALPN picks |
 | `tracing` | `middleware::Trace`, through `tracing` 0.1 |
 
-Apps are served over HTTP/2 as well as HTTP/1.1, with nothing to change: giong-http turns each HTTP/2 stream into the request a handler already knows (see [its HTTP/2 section](https://github.com/giong-run/Giong/blob/v1.5.2/giong-http/README.md#http2)). Over TLS, ALPN picks the protocol; without TLS, a client that knows the server speaks HTTP/2 (prior knowledge) gets it on the same port.
+Apps are served over HTTP/2 as well as HTTP/1.1, with nothing to change: giong-http turns each HTTP/2 stream into the request a handler already knows (see [its HTTP/2 section](https://github.com/giong-run/Giong/blob/v1.5.3/giong-http/README.md#http2)). Over TLS, ALPN picks the protocol; without TLS, a client that knows the server speaks HTTP/2 (prior knowledge) gets it on the same port.
 
 ## Not there yet
 
@@ -3366,7 +3375,7 @@ Two fuzz targets in `fuzz/` (`cargo +nightly fuzz run request`, or `routes`): `r
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/giong-mcp/README.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/giong-mcp/README.md -->
 
 # giong-mcp
 
@@ -3374,8 +3383,8 @@ An [MCP](https://modelcontextprotocol.io) server that lets an AI agent look insi
 
 ```toml
 [dependencies]
-giong = "1.5.2"
-giong-mcp = "1.5.2"
+giong = "1.5.3"
+giong-mcp = "1.5.3"
 ```
 
 ```rust,no_run
@@ -3510,7 +3519,7 @@ MIT or Apache-2.0, at your option.
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/giong-compat/README.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/giong-compat/README.md -->
 
 # giong-compat
 
@@ -3518,8 +3527,8 @@ The I/O traits of Tokio and of the futures crates for [giong](https://giong.run/
 
 ```toml
 [dependencies]
-giong = "1.5.2"
-giong-compat = "1.5.2"
+giong = "1.5.3"
+giong-compat = "1.5.3"
 ```
 
 ```rust,no_run
@@ -3543,7 +3552,7 @@ fn main() -> std::io::Result<()> {
 
 ## When to use it, and when not
 
-**Use the giong crate when there is one; `Compat` is the bridge for a protocol giong has no crate for yet.** The giong crates are built on giong's owned buffers and batched system calls, and measured against the Tokio crates they replace on Tokio they serve 1.1 to 5.1 times the requests or statements per core on the workloads measured, with the exceptions listed there ([the table in giong's README](https://github.com/giong-run/Giong/blob/v1.5.2/README.md#choosing-crates)). A Tokio crate run on giong through `Compat` keeps its own design and adds the copies described under [What it costs](#what-it-costs). No crate over `Compat` has been measured against the giong crate for the same protocol.
+**Use the giong crate when there is one; `Compat` is the bridge for a protocol giong has no crate for yet.** The giong crates are built on giong's owned buffers and batched system calls, and measured against the Tokio crates they replace on Tokio they serve 1.1 to 5.1 times the requests or statements per core on the workloads measured, with the exceptions listed there ([the table in giong's README](https://github.com/giong-run/Giong/blob/v1.5.3/README.md#choosing-crates)). A Tokio crate run on giong through `Compat` keeps its own design and adds the copies described under [What it costs](#what-it-costs). No crate over `Compat` has been measured against the giong crate for the same protocol.
 
 | You need | Use |
 |---|---|
@@ -3560,7 +3569,7 @@ fn main() -> std::io::Result<()> {
 
 A crate works through `Compat` when **it takes the stream from you and you drive it**: a function such as `tokio_rustls::TlsConnector::connect(name, stream)`, `tokio_tungstenite::client_async(request, stream)`, `h2::client::handshake(stream)` or `hyper::client::conn::http1::handshake(io)`, which returns a future, or a connection object, that your task (or a task you start with `giong::spawn`) polls. Futures that are not `Send` are fine, since giong's tasks stay on their worker.
 
-These are tested in [`tests/`](https://github.com/giong-run/Giong/blob/v1.5.2/giong-compat/tests), on giong's io_uring driver, its older ring setups and its epoll driver, with no Tokio runtime in the process:
+These are tested in [`tests/`](https://github.com/giong-run/Giong/blob/v1.5.3/giong-compat/tests), on giong's io_uring driver, its older ring setups and its epoll driver, with no Tokio runtime in the process:
 
 | Crate | What the tests do |
 |---|---|
@@ -3622,7 +3631,7 @@ impl hyper::rt::Timer for GiongTimer {
 //     .serve_connection(hyper_util::rt::TokioIo::new(Compat::new(tcp)), service)
 ```
 
-[`tests/hyper.rs`](https://github.com/giong-run/Giong/blob/v1.5.2/giong-compat/tests/hyper.rs) checks that a server built this way closes such a connection when the timeout ends.
+[`tests/hyper.rs`](https://github.com/giong-run/Giong/blob/v1.5.3/giong-compat/tests/hyper.rs) checks that a server built this way closes such a connection when the timeout ends.
 
 hyper's HTTP/2, client and server, also takes an executor for the tasks it starts. They need not be `Send`, so giong's tasks do:
 
@@ -3648,7 +3657,7 @@ impl<F: std::future::Future + 'static> hyper::rt::Executor<F> for GiongExec {
 - **A failed send is reported by the next write, flush or shutdown**, with the kernel's own error (a large write sent straight to the socket reports its own failure at once); after that, writes, flushes and shutdowns fail with `GIONG-E1401`. So does a failed shutdown (a TLS stream that cannot send its `close_notify`). Writing after `shutdown` (or `close`) has started fails with `GIONG-E1402`. Reading still works in all these cases. A shutdown that finds the connection already reset counts as done, as with Tokio's `TcpStream`.
 - **Dropping a `Compat` discards what was written but not flushed**, like dropping a `BufWriter`. Sends in flight are cancelled the way giong cancels any operation: their buffers stay alive until the kernel lets go.
 - **One task reads and one task writes at a time.** `tokio::io::split` and `futures::io::AsyncReadExt::split` work, and so does splitting a `Framed` or a WebSocket stream.
-- **Cancel safe.** A read that is dropped loses no data. A write either copies bytes and says how many, or copies nothing. [`tests/cancel.rs`](https://github.com/giong-run/Giong/blob/v1.5.2/giong-compat/tests/cancel.rs) drops reads, writes, flushes and whole streams at random (seeded, so a failure repeats), over TCP and giong-tls and through TLS 1.3 key updates, and checks every byte and that nothing leaks.
+- **Cancel safe.** A read that is dropped loses no data. A write either copies bytes and says how many, or copies nothing. [`tests/cancel.rs`](https://github.com/giong-run/Giong/blob/v1.5.3/giong-compat/tests/cancel.rs) drops reads, writes, flushes and whole streams at random (seeded, so a failure repeats), over TCP and giong-tls and through TLS 1.3 key updates, and checks every byte and that nothing leaks.
 - **`fill_buf` holds a buffer of the worker's pool** until `consume` takes all of it, or a read or `consume` of part of it moves the rest to the heap. Do not wait on something else between `fill_buf` and `consume`: with many connections doing that, the worker's receive pool runs dry and every socket on the worker stalls. `consume` of more than `fill_buf` returned is ignored, as with std's and Tokio's `BufReader`.
 - **Reading after the end of the stream** keeps returning 0 bytes. `into_inner().await` flushes and hands back the stream with the bytes received but not yet read, to go on with giong's own API.
 
@@ -3659,7 +3668,7 @@ giong reads into buffers from the worker's pool and writes buffers it owns until
 - **Reading:** each byte once more than giong's own `recv`, from the pool buffer into the caller's buffer. Through `AsyncBufRead` (`fill_buf`, then `consume` of the whole chunk) there is no extra copy. When a caller takes only part of a chunk, the rest moves to a heap buffer at once, so that a slow reader never holds on to the worker's pool.
 - **Writing:** small writes are copied into the write buffer, which giong's `write_all` sends at a flush or when it fills; one small allocation per send (the future that sends it). A write at least as large as the buffer's limit (64 KiB by default), with nothing buffered or being sent before it, goes straight from the caller's memory to the socket in one `sendmsg(2)` that does not wait, as `BufWriter` and Tokio's streams do; only what the socket cannot take at once is copied.
 
-Measured with [`bench/compat.sh`](https://github.com/giong-run/Giong/blob/v1.5.2/bench/compat.sh): one TCP stream over loopback, the measured side on one pinned core and the other end on another, the same peer for every variant, 9 runs interleaved. Median, with the range of the 9 runs in brackets. The machine is a 4-vCPU cloud VM (Xeon at 2.1 GHz, Linux 6.18), where bulk transfers over loopback vary from run to run and from one session to the next: read the medians, the spread, and the sessions below. This session (2026-11-17, [`bench/results/compat/`](https://github.com/giong-run/Giong/blob/v1.5.2/bench/results/compat/README.md)) ran this version, with giong's default receive buffers of 16 KiB (8 KiB until 0.8.0), and, interleaved, `Compat` from 0.8.0 on giong 0.8.0.
+Measured with [`bench/compat.sh`](https://github.com/giong-run/Giong/blob/v1.5.3/bench/compat.sh): one TCP stream over loopback, the measured side on one pinned core and the other end on another, the same peer for every variant, 9 runs interleaved. Median, with the range of the 9 runs in brackets. The machine is a 4-vCPU cloud VM (Xeon at 2.1 GHz, Linux 6.18), where bulk transfers over loopback vary from run to run and from one session to the next: read the medians, the spread, and the sessions below. This session (2026-11-17, [`bench/results/compat/`](https://github.com/giong-run/Giong/blob/v1.5.3/bench/results/compat/README.md)) ran this version, with giong's default receive buffers of 16 KiB (8 KiB until 0.8.0), and, interleaved, `Compat` from 0.8.0 on giong 0.8.0.
 
 | Workload | giong's own API | `Compat` | `Compat` 0.8.0 | `Compat`, `AsyncBufRead` | Tokio |
 |---|---|---|---|---|---|
@@ -3698,7 +3707,7 @@ What the numbers say:
 - **Request and reply** differ by less than the noise in throughput; the CPU per round trip is up to 5% higher (0.7% lower in session 8). Callgrind counts about 1,000 more user-space instructions per round trip (the boxed send, the flush, one more poll), against 14 to 16 µs spent mostly in the kernel.
 - **Tokio's own receive spends less CPU per KiB** than giong's `recv` on this benchmark: 11% less in session 8, with 16 KiB receive buffers, and 6–20% less in the sessions before, with 8 KiB. Each receive brings at most one buffer, so Tokio's 64 KiB reads take fewer system calls. That gap is giong's own, not `Compat`'s.
 
-Run it with `bench/compat.sh` (the method is at the top of the script, and in [`bench/compat/src/main.rs`](https://github.com/giong-run/Giong/blob/v1.5.2/bench/compat/src/main.rs)); the raw numbers of the latest session are in [`bench/results/compat/`](https://github.com/giong-run/Giong/blob/v1.5.2/bench/results/compat), the earlier ones in its `sessions/` folder.
+Run it with `bench/compat.sh` (the method is at the top of the script, and in [`bench/compat/src/main.rs`](https://github.com/giong-run/Giong/blob/v1.5.3/bench/compat/src/main.rs)); the raw numbers of the latest session are in [`bench/results/compat/`](https://github.com/giong-run/Giong/blob/v1.5.3/bench/results/compat), the earlier ones in its `sessions/` folder.
 
 ## Errors
 
@@ -3716,7 +3725,7 @@ MIT or Apache-2.0, at your option.
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/giong-cli/README.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/giong-cli/README.md -->
 
 # giong-cli
 
@@ -3728,7 +3737,16 @@ powershell -c "irm https://giong.run/install.ps1 | iex"     # Windows
 cargo install giong-cli --locked                            # anywhere Rust runs
 ```
 
-The install scripts download the prebuilt binary of the latest release from GitHub, check its SHA-256 and put it in `~/.giong/bin` (`%USERPROFILE%\.giong\bin` on Windows) without asking for root; where no binary is published they build it with cargo. `GIONG_VERSION=1.5.0` picks a version, `GIONG_INSTALL=/path` another folder, `GIONG_DOWNLOAD_URL` a mirror of the release downloads. Then:
+The install scripts download the prebuilt binary of the latest release from GitHub, check its SHA-256 and put it in `~/.giong/bin` (`%USERPROFILE%\.giong\bin` on Windows) without asking for root; where no binary is published they build it with cargo. `GIONG_VERSION=1.5.0` picks a version, `GIONG_INSTALL=/path` another folder, `GIONG_DOWNLOAD_URL` a mirror of the release downloads.
+
+Each release archive, and the binary in it, has a signed [build provenance attestation](https://docs.github.com/en/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds) saying which workflow built it from which commit, and a CycloneDX SBOM (`giong-<version>-<target>.cdx.json` on the Release) listing every crate compiled in. With the GitHub CLI, check an installed command or a downloaded archive:
+
+```sh
+gh attestation verify ~/.giong/bin/giong --repo giong-run/Giong \
+  --signer-workflow giong-run/Giong/.github/workflows/release.yml
+```
+
+The binary also carries that list of crates itself ([cargo auditable](https://github.com/rust-secure-code/cargo-auditable), a few hundred bytes), so `cargo audit bin ~/.giong/bin/giong`, Trivy, Grype or osv-scanner can check it for known advisories. Then:
 
 ```sh
 giong new api    # a users API on SQLite that builds and passes its tests now, nothing to install
@@ -3763,7 +3781,7 @@ giong dev logs [--lines N]
 giong dev stop [--all]
 ```
 
-Builds the service and runs it. On every save it builds again, starts the new build next to the old one, and swaps it in once it accepts connections: measured 0 failed requests out of 102,061 over 100 restarts under constant load ([method and raw output](https://github.com/giong-run/Giong/blob/v1.5.2/bench/results/dev-restarts)). A response in progress, a streamed one too, finishes on the old build when it ends within the grace, the smaller of the service's `shutdown_grace` (10 s in the web template) and `--grace` (30 s); a longer one is cut there, without the end of its body ([streamed responses over 50 restarts](https://github.com/giong-run/Giong/blob/v1.5.2/bench/results/dev-restarts-streaming)). It never serves code older than the files: a change that does not compile, or that compiles and then stops before it serves (a panic at start-up, a port it cannot bind, no bind within `--ready-timeout`), stops the running build too and closes the port, so a request is refused at once rather than answered by the old code or left waiting. The terminal shows the compiler's errors or the service's last lines with a coded error and its fix, `giong dev status` says `failed` with the same (`failure` in its JSON), and the dashboard shows it at the top; the next save builds and starts again. A service that stops by itself later is reported the same way and waits for a save, so a crash at start-up does not loop. A change to `.env` alone restarts without building.
+Builds the service and runs it. On every save it builds again, starts the new build next to the old one, and swaps it in once it accepts connections: measured 0 failed requests out of 102,061 over 100 restarts under constant load ([method and raw output](https://github.com/giong-run/Giong/blob/v1.5.3/bench/results/dev-restarts)). A response in progress, a streamed one too, finishes on the old build when it ends within the grace, the smaller of the service's `shutdown_grace` (10 s in the web template) and `--grace` (30 s); a longer one is cut there, without the end of its body ([streamed responses over 50 restarts](https://github.com/giong-run/Giong/blob/v1.5.3/bench/results/dev-restarts-streaming)). It never serves code older than the files: a change that does not compile, or that compiles and then stops before it serves (a panic at start-up, a port it cannot bind, no bind within `--ready-timeout`), stops the running build too and closes the port, so a request is refused at once rather than answered by the old code or left waiting. The terminal shows the compiler's errors or the service's last lines with a coded error and its fix, `giong dev status` says `failed` with the same (`failure` in its JSON), and the dashboard shows it at the top; the next save builds and starts again. A service that stops by itself later is reported the same way and waits for a save, so a crash at start-up does not loop. A change to `.env` alone restarts without building.
 
 How the swap works: `giong dev` binds the service's listening sockets itself and hands them down (`GIONG_DEV_LISTEN`). `giong::net::TcpListener::bind` on the same address takes the socket it was given instead of binding a new one, so the old and the new build accept on one socket and the kernel queues connections between them rather than refusing them. Once the new build accepts, the old one is told to stop accepting, finishes the connections it already took, and gets `SIGTERM` (`--grace` seconds, 30 by default, before `SIGKILL`). The runtime takes a socket only from the `giong dev` that started it; anywhere else `bind` binds as usual. The hand-off is compiled into debug builds, and into release builds only with giong's `dev` feature, which `giong dev --release` and `--prod-like` turn on for their own builds; a release build without it, started by `giong dev`, refuses to bind with a coded error.
 
@@ -3971,7 +3989,7 @@ MIT or Apache-2.0, at your option.
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/examples/rest-api/README.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/examples/rest-api/README.md -->
 
 # rest-api
 
@@ -4035,7 +4053,7 @@ The table is created at startup when it is missing (`migrations/0001_init.sql`, 
 
 ## Against axum
 
-[`bench/rest-api-axum`](https://github.com/giong-run/Giong/blob/v1.5.2/bench/rest-api-axum) is the same API on axum 0.8, tokio-postgres with deadpool-postgres, redis-rs and rustls: the same routes, SQL, validation, cache and middleware. `bench/rest-api.sh` measures both; see [Performance](#performance).
+[`bench/rest-api-axum`](https://github.com/giong-run/Giong/blob/v1.5.3/bench/rest-api-axum) is the same API on axum 0.8, tokio-postgres with deadpool-postgres, redis-rs and rustls: the same routes, SQL, validation, cache and middleware. `bench/rest-api.sh` measures both; see [Performance](#performance).
 
 ## Performance
 
@@ -4054,7 +4072,7 @@ Not measured yet: several workers, `PUT`, `DELETE` and the export, and the acces
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/guides/coding-agents.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/guides/coding-agents.md -->
 
 # Build with a coding agent
 
@@ -4143,7 +4161,7 @@ Do not use cargo run, a release build or Docker. Stop with `giong dev stop` when
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/guides/safe-defaults.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/guides/safe-defaults.md -->
 
 # Safe defaults of the dev kit
 
@@ -4189,7 +4207,7 @@ Each `giong dashboard` or `giong dev --ui` makes a random token, printed as part
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/guides/database.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/guides/database.md -->
 
 # Use a database
 
@@ -4271,7 +4289,7 @@ Crates that need the Tokio runtime (sqlx, tokio-postgres's runtime, most ORMs bu
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/guides/testing.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/guides/testing.md -->
 
 # Test a service
 
@@ -4342,7 +4360,7 @@ A project from `giong new` has a GitHub Actions workflow that starts the databas
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/guides/ship.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/guides/ship.md -->
 
 # Ship a service
 
@@ -4379,7 +4397,7 @@ Docker's and Kubernetes' default seccomp profiles block io_uring, so giong runs 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/guides/from-tokio.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/guides/from-tokio.md -->
 
 # Coming from Tokio
 
@@ -4429,7 +4447,7 @@ Crates that need no runtime (serde, rustls, Tokio's `sync`) work as they are. Fo
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/DEPLOYMENT.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/DEPLOYMENT.md -->
 
 # Deploying giong
 
@@ -4457,7 +4475,7 @@ giong::block_on(async {
 ```
 
 `giong-mcp`'s `overview` shows the same for each worker. The
-[benchmarks](https://github.com/giong-run/Giong/blob/v1.5.2/docs/BENCHMARKS.md#io_uring-against-epoll) have the measured difference.
+[benchmarks](https://github.com/giong-run/Giong/blob/v1.5.3/docs/BENCHMARKS.md#io_uring-against-epoll) have the measured difference.
 
 So a container needs no special settings to run giong. Allow io_uring, as this page shows,
 when you want its speed:
@@ -4586,8 +4604,8 @@ memory per worker  ≈  max_buffered_request_bytes
   are refused with `503` (HTTP/1.1) or `REFUSED_STREAM` (HTTP/2) instead of being buffered
   ([GIONG-E1120](https://giong.run/docs/errors/E1120.md)). Bodies read as a stream (`Handler::stream_body`) hold
   one piece at a time and are not counted.
-- An idle connection costs about 1.3 KiB over HTTP/1.1, 3.2 KiB over HTTP/2, 5.2 KiB over
-  HTTPS and 10 KiB over HTTP/2 with TLS in the process, and the kernel about 4 KiB more per socket (charged to the
+- An idle connection costs about 1.2 KiB over HTTP/1.1, 2.5 KiB over HTTP/2, 5.0 KiB over
+  HTTPS and 6.2 KiB over HTTP/2 with TLS in the process, and the kernel about 4 KiB more per socket (charged to the
   container's memory under cgroup v2). `max_connections` (10,000 per `serve` call by
   default) bounds the count.
 
@@ -4615,10 +4633,10 @@ CI checks the bound: the `slow-uploads` job runs a server with one worker and wi
 a Docker container limited to 128 MiB, sends it hundreds of uploads that stop one byte short
 of their announced length, over HTTP/1.1 and HTTP/2, and fails if the container is
 OOM-killed or a well-behaved client mixed in stops getting answers
-([scripts/slow-uploads.sh](https://github.com/giong-run/Giong/blob/v1.5.2/scripts/slow-uploads.sh)). The same job then runs it in 48 MiB
+([scripts/slow-uploads.sh](https://github.com/giong-run/Giong/blob/v1.5.3/scripts/slow-uploads.sh)). The same job then runs it in 48 MiB
 and opens idle connections until it refuses them, and fails if the container is
 OOM-killed, if the connections it holds stop being served, or if it does not take new ones
-once those close ([scripts/idle-connections.sh](https://github.com/giong-run/Giong/blob/v1.5.2/scripts/idle-connections.sh)).
+once those close ([scripts/idle-connections.sh](https://github.com/giong-run/Giong/blob/v1.5.3/scripts/idle-connections.sh)).
 
 ## Docker
 
@@ -4683,7 +4701,7 @@ on a 64-core node gets 2 workers. Tokio and `std::thread::available_parallelism`
 same way.
 
 A fraction is rounded down on purpose. Measured with the `defaults` example, wrk with 64
-connections, io_uring ([raw data](https://github.com/giong-run/Giong/blob/v1.5.2/bench/results/containers/cpu-quota.txt)):
+connections, io_uring ([raw data](https://github.com/giong-run/Giong/blob/v1.5.3/bench/results/containers/cpu-quota.txt)):
 
 | Quota | Workers | Requests/s | p99 |
 | --- | --- | --- | --- |
@@ -4701,7 +4719,7 @@ give a latency-sensitive service at least one whole CPU.
 
 Kubernetes CPU requests without a limit set no quota: the process sees every CPU of the node,
 and giong starts a worker for each. That costs little memory (about 0.4 MiB per worker under
-load, [raw data](https://github.com/giong-run/Giong/blob/v1.5.2/bench/results/containers/memory-workers.txt)), but the workers share the
+load, [raw data](https://github.com/giong-run/Giong/blob/v1.5.3/bench/results/containers/memory-workers.txt)), but the workers share the
 CPU time the pod gets. Pass the request to the program and use it, for example:
 
 ```yaml
@@ -4758,9 +4776,9 @@ the `rest-api` example stops in under half a second. Without it, run the contain
 
 ## Container image
 
-[examples/rest-api/Dockerfile](https://github.com/giong-run/Giong/blob/v1.5.2/examples/rest-api/Dockerfile) builds the `rest-api` example
+[examples/rest-api/Dockerfile](https://github.com/giong-run/Giong/blob/v1.5.3/examples/rest-api/Dockerfile) builds the `rest-api` example
 into a 44 MB image (distroless, glibc, no shell, an unprivileged user), and
-[compose.yaml](https://github.com/giong-run/Giong/blob/v1.5.2/examples/rest-api/compose.yaml) runs it with PostgreSQL and Redis, a CPU
+[compose.yaml](https://github.com/giong-run/Giong/blob/v1.5.3/examples/rest-api/compose.yaml) runs it with PostgreSQL and Redis, a CPU
 and a memory limit, and the lines that allow io_uring. Copy them for a service of your own:
 giong needs nothing in the image besides the program.
 
@@ -4776,11 +4794,11 @@ gVisor's network stack decides whether sockets may share a port when each one bi
 where Linux decides when the next one binds. giong finds out once per process which way
 the system works, and its workers share a port either way. CI runs the tests that bind
 one port from several workers, and a four-worker server, under gVisor
-([scripts/gvisor.sh](https://github.com/giong-run/Giong/blob/v1.5.2/scripts/gvisor.sh)).
+([scripts/gvisor.sh](https://github.com/giong-run/Giong/blob/v1.5.3/scripts/gvisor.sh)).
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/README.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/README.md -->
 
 # Error codes
 
@@ -4914,6 +4932,7 @@ when it is no longer raised.
 | [GIONG-E1121](https://giong.run/docs/errors/E1121.md) | `HttpServerLowMemory` | connection refused: the server is low on memory |
 | [GIONG-E1122](https://giong.run/docs/errors/E1122.md) | `HttpInvalidTrailer` | invalid HTTP trailer field |
 | [GIONG-E1123](https://giong.run/docs/errors/E1123.md) | `HttpServerOutOfFiles` | connection not accepted: the server is out of file descriptors |
+| [GIONG-E1124](https://giong.run/docs/errors/E1124.md) | `HttpServerAddressLimit` | connection refused: the client's address has too many connections open |
 
 ## giong-web
 
@@ -5152,7 +5171,7 @@ The `giong` command reports `GIONG-E5000` to `GIONG-E5099`. Its findings can als
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0001.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0001.md -->
 
 # GIONG-E0001: io_uring is not available
 
@@ -5174,7 +5193,7 @@ The runtime was told to use io_uring (`Builder::driver(DriverKind::IoUring)`, or
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0002.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0002.md -->
 
 # GIONG-E0002: the kernel is too old
 
@@ -5194,7 +5213,7 @@ The runtime was told to use io_uring (`Builder::driver(DriverKind::IoUring)`, or
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0003.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0003.md -->
 
 # GIONG-E0003: another runtime handles the signals
 
@@ -5213,7 +5232,7 @@ The runtime was built with `Builder::shutdown_on_signals(true)`, but another gio
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0004.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0004.md -->
 
 # GIONG-E0004: invalid runtime setting
 
@@ -5233,7 +5252,7 @@ A runtime setting is outside the range giong accepts, such as the number or the 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0005.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0005.md -->
 
 # GIONG-E0005: unexpected result from the kernel
 
@@ -5253,7 +5272,7 @@ The kernel returned something giong does not expect, such as received data witho
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0006.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0006.md -->
 
 # GIONG-E0006: read used after recv
 
@@ -5273,7 +5292,7 @@ On a `UnixStream`, `recv_with_fds` counts as a one-off read: it cannot follow `r
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0007.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0007.md -->
 
 # GIONG-E0007: the time limit passed
 
@@ -5292,7 +5311,7 @@ The future given to `giong::time::timeout` did not finish within its time limit,
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0008.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0008.md -->
 
 # GIONG-E0008: no such worker
 
@@ -5311,7 +5330,7 @@ Raised by `giong::Handle::spawn_on`, as a panic. In code: `giong::error::Code::N
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0009.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0009.md -->
 
 # GIONG-E0009: the kernel refused io_uring buffer rings
 
@@ -5331,7 +5350,7 @@ The runtime was told to use io_uring (`Builder::driver(DriverKind::IoUring)`, or
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0010.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0010.md -->
 
 # GIONG-E0010: the locked-memory limit is used up
 
@@ -5345,7 +5364,7 @@ Without `Builder::driver(DriverKind::IoUring)` or `GIONG_DRIVER=io_uring`, giong
 
 ## How to fix it
 
-- Raise the limit for the service: `LimitMEMLOCK=infinity` in its systemd unit, `--ulimit memlock=-1` with `docker run` (in Docker Compose, `memlock` under `ulimits` with `soft: -1` and `hard: -1`), or `ulimit -l unlimited` in the shell that starts it. [DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.5.2/docs/DEPLOYMENT.md#locked-memory-limit) has the details, Kubernetes included.
+- Raise the limit for the service: `LimitMEMLOCK=infinity` in its systemd unit, `--ulimit memlock=-1` with `docker run` (in Docker Compose, `memlock` under `ulimits` with `soft: -1` and `hard: -1`), or `ulimit -l unlimited` in the shell that starts it. [DEPLOYMENT.md](https://github.com/giong-run/Giong/blob/v1.5.3/docs/DEPLOYMENT.md#locked-memory-limit) has the details, Kubernetes included.
 - Or give the process `CAP_IPC_LOCK`, which lifts the limit (`AmbientCapabilities=CAP_IPC_LOCK` in a systemd unit, `--cap-add IPC_LOCK` with `docker run`).
 - Or need less: fewer workers (`Builder::workers`), smaller rings (`Builder::ring_entries`), fewer receive buffers (`Builder::recv_buffers`). Other processes of the same user ID count too, other containers running as that ID on the same machine included.
 - Or run a kernel that does not count io_uring's rings: Linux 7.3 or newer, or 6.18.58 or newer in the 6.18 series.
@@ -5355,7 +5374,7 @@ Without `Builder::driver(DriverKind::IoUring)` or `GIONG_DRIVER=io_uring`, giong
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0011.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0011.md -->
 
 # GIONG-E0011: not inside a giong runtime
 
@@ -5376,7 +5395,7 @@ The call ran on a thread where no giong runtime runs: a plain thread, a thread o
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0012.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0012.md -->
 
 # GIONG-E0012: a runtime already runs on this thread
 
@@ -5396,7 +5415,7 @@ Raised by `giong::block_on` and `giong::Builder::block_on`, as a panic. In code:
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0013.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0013.md -->
 
 # GIONG-E0013: an operation was polled on another worker
 
@@ -5415,7 +5434,7 @@ A future that had started an I/O operation (a read, a write, a connect, a file o
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0014.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0014.md -->
 
 # GIONG-E0014: the compute lane is full
 
@@ -5436,7 +5455,7 @@ Every thread of the compute lane was busy and as many closures as `Builder::comp
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0016.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0016.md -->
 
 # GIONG-E0016: this signal cannot be listened for
 
@@ -5459,7 +5478,7 @@ Raised by `giong::signal::listen`. In code: `giong::error::Code::SignalNotAllowe
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0017.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0017.md -->
 
 # GIONG-E0017: descriptors could not be passed
 
@@ -5483,7 +5502,7 @@ One of these:
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0018.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0018.md -->
 
 # GIONG-E0018: the inherited socket cannot be used that way
 
@@ -5505,7 +5524,7 @@ One of these:
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0019.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0019.md -->
 
 # GIONG-E0019: cannot watch the child process
 
@@ -5527,7 +5546,7 @@ giong waits for a child process through a pidfd, a descriptor for the process th
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0020.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0020.md -->
 
 # GIONG-E0020: a worker thread could not be started
 
@@ -5548,7 +5567,7 @@ The workers that had started are stopped again, and `run` returns this error; no
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0080.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0080.md -->
 
 # GIONG-E0080: the budget is at its limit
 
@@ -5569,7 +5588,7 @@ The budget (one tenant's share of the runtime) already holds as much as one of i
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0081.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0081.md -->
 
 # GIONG-E0081: a reservation larger than the budget
 
@@ -5588,7 +5607,7 @@ The reservation asked for more bytes than the budget's whole memory limit (`Limi
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0028.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0028.md -->
 
 # GIONG-E0028: the system ran out of network buffers
 
@@ -5619,7 +5638,7 @@ Calls that return the kernel's `ENOBUFS` as it is, with no code, as on Linux:
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0060.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0060.md -->
 
 # GIONG-E0060: a file is already at the Unix socket path
 
@@ -5638,7 +5657,7 @@ A Unix domain socket that listens is a file at its path. When the listener close
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0061.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0061.md -->
 
 # GIONG-E0061: Unix socket path too long
 
@@ -5657,7 +5676,7 @@ Winsock keeps the path of a Unix domain socket in a fixed field of 108 bytes, in
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0062.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0062.md -->
 
 # GIONG-E0062: no Unix domain sockets on this Windows
 
@@ -5676,7 +5695,7 @@ Windows has had Unix domain stream sockets (`AF_UNIX`) since Windows 10 version 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0090.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0090.md -->
 
 # GIONG-E0090: IPC message too large
 
@@ -5695,7 +5714,7 @@ The message is longer than the channel carries. A message may take at most a qua
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0091.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0091.md -->
 
 # GIONG-E0091: IPC channel memory corrupted
 
@@ -5717,7 +5736,7 @@ Causes: the other process writes into the mapping by its own means, runs a giong
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0092.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0092.md -->
 
 # GIONG-E0092: IPC capacity out of range
 
@@ -5736,7 +5755,7 @@ An IPC channel's capacity (the bytes of one direction's ring) must be a power of
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0093.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0093.md -->
 
 # GIONG-E0093: IPC handshake failed
 
@@ -5756,7 +5775,7 @@ Setting up the channel over the Unix socket failed: the other end is not a giong
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0094.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0094.md -->
 
 # GIONG-E0094: IPC peer process gone
 
@@ -5777,7 +5796,7 @@ A peer that drops its `Sender` normally ends the channel with `Ok(None)` from `r
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0095.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0095.md -->
 
 # GIONG-E0095: IPC receiver closed
 
@@ -5796,7 +5815,7 @@ The other side dropped its `Receiver`, so nothing reads this direction of the ch
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0100.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0100.md -->
 
 # GIONG-E0100: invalid address
 
@@ -5820,7 +5839,7 @@ One of these:
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0101.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0101.md -->
 
 # GIONG-E0101: invalid host name
 
@@ -5839,7 +5858,7 @@ A host name has characters or a shape that DNS does not allow, so it was refused
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0102.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0102.md -->
 
 # GIONG-E0102: host not found
 
@@ -5859,7 +5878,7 @@ The name has no address. giong looked in `/etc/hosts`, then asked the DNS server
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0103.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0103.md -->
 
 # GIONG-E0103: no address to use
 
@@ -5877,7 +5896,7 @@ A connect or bind was given an empty list of addresses, so there was nothing to 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0104.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0104.md -->
 
 # GIONG-E0104: no DNS server configured
 
@@ -5900,7 +5919,7 @@ On Windows the DNS servers come from the network adapters, and Windows runs no s
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0105.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0105.md -->
 
 # GIONG-E0105: DNS server did not answer
 
@@ -5919,7 +5938,7 @@ No DNS server answered in time, after trying each server in `/etc/resolv.conf` t
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0106.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0106.md -->
 
 # GIONG-E0106: DNS server failed
 
@@ -5939,7 +5958,7 @@ A DNS server answered, but with an error such as `SERVFAIL` (it could not get an
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0107.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0107.md -->
 
 # GIONG-E0107: malformed DNS answer
 
@@ -5959,7 +5978,7 @@ A DNS server sent an answer giong cannot read, or closed a TCP connection before
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0108.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0108.md -->
 
 # GIONG-E0108: cannot reach the DNS server
 
@@ -5981,7 +6000,7 @@ Before giong 0.6.0 this came back as the kernel's bare "connection refused", so 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0109.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0109.md -->
 
 # GIONG-E0109: buffer with no room
 
@@ -6000,7 +6019,7 @@ Raised by `giong::net::UdpSocket::read_from`. In code: `giong::error::Code::Empt
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0110.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0110.md -->
 
 # GIONG-E0110: receive buffers too small for GRO
 
@@ -6019,7 +6038,7 @@ With generic receive offload the kernel hands over up to 64 KiB of datagrams fro
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0111.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0111.md -->
 
 # GIONG-E0111: receive option set after recv started
 
@@ -6037,7 +6056,7 @@ These options change the layout of what the kernel writes for each received data
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0200.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0200.md -->
 
 # GIONG-E0200: invalid path
 
@@ -6055,7 +6074,7 @@ A path contains a NUL byte. Linux paths are passed to the kernel as C strings, w
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0201.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0201.md -->
 
 # GIONG-E0201: the file ended before the bytes to send
 
@@ -6077,7 +6096,7 @@ The connection is not closed, but whatever announced the length (an HTTP `Conten
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0202.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0202.md -->
 
 # GIONG-E0202: file offset out of range
 
@@ -6096,7 +6115,7 @@ The offset is above `i64::MAX` (9,223,372,036,854,775,807), the largest file off
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0203.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0203.md -->
 
 # GIONG-E0203: invalid combination of open options
 
@@ -6122,7 +6141,7 @@ These are the combinations the standard library's `std::fs::OpenOptions` refuses
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E0204.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0204.md -->
 
 # GIONG-E0204: file too large to read into memory
 
@@ -6143,7 +6162,7 @@ The length can be far more than the file holds: a sparse file (a disk image, a d
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1101.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1101.md -->
 
 # GIONG-E1101: invalid HTTP request
 
@@ -6164,7 +6183,7 @@ The request could not be sent as written: the URL is not an absolute `http` or `
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1102.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1102.md -->
 
 # GIONG-E1102: cannot connect to the HTTP server
 
@@ -6187,7 +6206,7 @@ Opening the connection failed: the host name did not resolve, the TCP connection
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1103.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1103.md -->
 
 # GIONG-E1103: HTTP request timed out
 
@@ -6210,7 +6229,7 @@ Two client calls that send no request raise it too. `Client::preconnect` did not
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1104.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1104.md -->
 
 # GIONG-E1104: HTTP response too large
 
@@ -6229,7 +6248,7 @@ The response was larger than the client accepts: its body over `ClientBuilder::m
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1105.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1105.md -->
 
 # GIONG-E1105: redirect not followed
 
@@ -6249,7 +6268,7 @@ A redirect was not followed: there were more than `ClientBuilder::redirects` of 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1106.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1106.md -->
 
 # GIONG-E1106: connection closed before the response
 
@@ -6274,7 +6293,7 @@ Over HTTP/2 the same error covers a stream the server reset (`RST_STREAM`; the m
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1107.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1107.md -->
 
 # GIONG-E1107: malformed HTTP response
 
@@ -6297,7 +6316,7 @@ Over HTTP/2 the server broke a rule of RFC 9113 instead. On one stream (a respon
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1108.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1108.md -->
 
 # GIONG-E1108: HTTP error status
 
@@ -6317,7 +6336,7 @@ The response has a 4xx (client error) or 5xx (server error) status, and the prog
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1109.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1109.md -->
 
 # GIONG-E1109: cannot decode the response body
 
@@ -6337,7 +6356,7 @@ The body could not be read the way it was asked for: `Response::text` found byte
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1110.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1110.md -->
 
 # GIONG-E1110: the HTTP proxy refused the request
 
@@ -6358,7 +6377,7 @@ The proxy given with `ClientBuilder::proxy` (or read by `Proxy::from_env`) would
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1111.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1111.md -->
 
 # GIONG-E1111: request body too large
 
@@ -6377,7 +6396,7 @@ The handler's `Handler::stream_body` returned `Some(limit)`, and the body grew p
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1112.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1112.md -->
 
 # GIONG-E1112: request body cut short
 
@@ -6396,7 +6415,7 @@ The body ended before its end. Either the client closed the connection, cancelle
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1113.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1113.md -->
 
 # GIONG-E1113: malformed request body
 
@@ -6417,7 +6436,7 @@ Over HTTP/2 the client broke a rule of the request's stream instead: a body long
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1114.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1114.md -->
 
 # GIONG-E1114: response body not sent
 
@@ -6436,7 +6455,7 @@ Raised by giong-http's server, to the code producing a streamed response body. I
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1115.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1115.md -->
 
 # GIONG-E1115: HTTP/2 protocol error
 
@@ -6463,7 +6482,7 @@ Requests already being answered are cut off. A mistake that only concerns one st
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1116.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1116.md -->
 
 # GIONG-E1116: too many HTTP/2 streams reset
 
@@ -6485,7 +6504,7 @@ The server also drops the handler of a cancelled stream at once, so a cancelled 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1117.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1117.md -->
 
 # GIONG-E1117: too many HTTP/2 control frames
 
@@ -6506,7 +6525,7 @@ WINDOW_UPDATE frames that answer data are not counted: a client that reads an an
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1118.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1118.md -->
 
 # GIONG-E1118: HTTP/2 header block too large
 
@@ -6527,7 +6546,7 @@ A header block within that size whose fields decode to more than `max_head_size`
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1119.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1119.md -->
 
 # GIONG-E1119: invalid HTTP response
 
@@ -6553,7 +6572,7 @@ The message names the header and where the bad byte is, without repeating the va
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1120.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1120.md -->
 
 # GIONG-E1120: request refused: the server's memory budget for requests is full
 
@@ -6583,7 +6602,7 @@ A request larger than the whole budget gets `413 Content Too Large` instead, sin
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1121.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1121.md -->
 
 # GIONG-E1121: connection refused: the server is low on memory
 
@@ -6597,7 +6616,7 @@ giong-http: GIONG-E1121 refused 812 connection(s) on this worker: less than 51 M
 
 Before it takes on a new connection, the server checks how much memory is left to the process: the smaller of what its cgroup allows (a container's memory limit, systemd's `MemoryMax`: `memory.max`, or `memory.high` if lower, less what the cgroup uses apart from page cache the kernel can reclaim) and what the machine has (`MemAvailable`; on macOS, which has no cgroups, its free and inactive pages). Less than `Server::min_free_memory` was left, so the server accepted the connection and closed it at once. The connections it already had are served as before, and new ones are taken on again as soon as memory is freed.
 
-Every connection costs memory even while idle (about 1.3 KiB over HTTP/1.1, 3.2 KiB over HTTP/2, 5.2 KiB over HTTPS, 10 KiB over HTTP/2 with TLS, and about 4 KiB of kernel socket memory, which a cgroup v2 limit counts). Without this check, enough connections fill the memory the process may use and the kernel's out-of-memory killer ends it, with every connection it holds. The default reserve is a tenth of the memory limit (of the machine's memory without a cgroup limit), at least 16 MiB and at most 256 MiB.
+Every connection costs memory even while idle (about 1.2 KiB over HTTP/1.1, 2.5 KiB over HTTP/2, 5.0 KiB over HTTPS, 6.2 KiB over HTTP/2 with TLS, and about 4 KiB of kernel socket memory, which a cgroup v2 limit counts). Without this check, enough connections fill the memory the process may use and the kernel's out-of-memory killer ends it, with every connection it holds. The default reserve is a tenth of the memory limit (of the machine's memory without a cgroup limit), at least 16 MiB and at most 256 MiB.
 
 ## How to fix it
 
@@ -6611,7 +6630,7 @@ Every connection costs memory even while idle (about 1.3 KiB over HTTP/1.1, 3.2 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1122.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1122.md -->
 
 # GIONG-E1122: invalid HTTP trailer field
 
@@ -6637,7 +6656,7 @@ The message names the field and where the bad byte is, without repeating the val
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1123.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1123.md -->
 
 # GIONG-E1123: connection not accepted: the server is out of file descriptors
 
@@ -6665,7 +6684,34 @@ On Linux, giong raises the soft limit to the hard one when a runtime is built (`
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1201.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1124.md -->
+
+# GIONG-E1124: connection refused: the client's address has too many connections open
+
+Sent by giong-http's server in the body of a `429 Too Many Requests` (with `Retry-After: 1` and `Connection: close`) to a new connection without TLS; a new TLS connection is closed before its handshake instead, since nothing can be said to it before. In code: `giong::error::Code::HttpServerAddressLimit`. Each worker also says on stderr, at most once a minute, how many connections it refused and the last address refused:
+
+```text
+giong-http: GIONG-E1124 refused 3120 connection(s) on this worker from addresses that had 64 open, its max_connections_per_ip, the last from 203.0.113.7; see docs/errors/E1124.md
+```
+
+## What happened
+
+The server was given `Server::max_connections_per_ip`, and a client that already had that many connections open on the worker opened another. An IPv4 address counts as one client, and so does an IPv6 /64 network (an IPv4 address mapped into IPv6 counts as that IPv4 address). The connection was refused before an idle connection was asked to make room for it; the client's other connections, and every other client, are served as before. Like `max_connections`, the limit applies to each `serve` call, normally one per worker.
+
+Without the limit, one client can take every place under `max_connections`: a connection that has not sent a request is never closed to make room for a new client, since its client would not retry a request lost on it, so connections that send nothing keep new clients waiting in the listen queue until `idle_timeout` (or `first_request_timeout`) closes them.
+
+## How to fix it
+
+- If the client is yours: it opens more connections than it needs. Reuse connections (HTTP keep-alive, one HTTP/2 connection), or bound its pool.
+- If many people share the address (carrier-grade NAT, an office, a VPN exit): raise the limit. A browser opens up to 6 HTTP/1.1 connections to a host, and one over HTTP/2.
+- If every connection comes from a load balancer or a reverse proxy: the limit counts the proxy, not the clients behind it. Turn it off (`max_connections_per_ip(0)`) and limit clients at the proxy, or set it above what the proxy opens.
+- If the connections are an attack, the refusals are the intended outcome. `Server::first_request_timeout` frees the places of connections that send nothing sooner; block the address at the firewall or the load balancer if it keeps coming.
+
+[All error codes](https://giong.run/docs/errors.md)
+
+---
+
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1201.md -->
 
 # GIONG-E1201: invalid route pattern
 
@@ -6687,7 +6733,7 @@ The pattern is not one the router understands. The message quotes the pattern an
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1202.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1202.md -->
 
 # GIONG-E1202: route added twice
 
@@ -6707,7 +6753,7 @@ Two routes would answer exactly the same requests: same method, and the same pat
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1203.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1203.md -->
 
 # GIONG-E1203: no route for the path
 
@@ -6726,7 +6772,7 @@ No route's pattern matches the request's path, whatever the method. Paths are ma
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1204.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1204.md -->
 
 # GIONG-E1204: method not allowed
 
@@ -6745,7 +6791,7 @@ The path matches at least one route, but none of them is for the request's metho
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1205.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1205.md -->
 
 # GIONG-E1205: invalid path or query parameter
 
@@ -6764,7 +6810,7 @@ A path or query parameter could not be read as the type the handler asked for, a
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1206.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1206.md -->
 
 # GIONG-E1206: the route has no such parameter
 
@@ -6783,7 +6829,7 @@ The handler asked for a path parameter that the route which matched does not hav
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1207.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1207.md -->
 
 # GIONG-E1207: unreadable request body
 
@@ -6802,7 +6848,7 @@ The body could not be turned into the type the handler expects. The detail quote
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1208.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1208.md -->
 
 # GIONG-E1208: unsupported Content-Type
 
@@ -6820,7 +6866,7 @@ The handler reads the body as JSON, but the request's `Content-Type` is not a JS
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1209.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1209.md -->
 
 # GIONG-E1209: no response in time
 
@@ -6839,7 +6885,7 @@ The handler, with the middleware after `Timeout`, did not produce a response wit
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1210.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1210.md -->
 
 # GIONG-E1210: the handler failed
 
@@ -6858,7 +6904,7 @@ The handler failed for a reason of its own: a bug, a query error, a file that is
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1211.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1211.md -->
 
 # GIONG-E1211: a service the handler needs is unavailable
 
@@ -6877,7 +6923,7 @@ A database, cache or other HTTP service the handler needs did not answer in time
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1212.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1212.md -->
 
 # GIONG-E1212: cross-origin request refused
 
@@ -6896,7 +6942,7 @@ A browser asked, with an `OPTIONS` preflight, whether a page from another origin
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1213.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1213.md -->
 
 # GIONG-E1213: invalid giong-web setting
 
@@ -6915,7 +6961,7 @@ A setting is out of range or contradicts another, so the middleware could never 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1301.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1301.md -->
 
 # GIONG-E1301: the MCP server listens on this machine only
 
@@ -6934,7 +6980,7 @@ The MCP server was given an address that other machines could reach, such as `0.
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1302.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1302.md -->
 
 # GIONG-E1302: invalid address for the MCP server
 
@@ -6953,7 +6999,7 @@ The address given to the MCP server, in code or in the `GIONG_MCP` environment v
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1303.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1303.md -->
 
 # GIONG-E1303: the MCP server cannot listen on its address
 
@@ -6975,7 +7021,7 @@ The service's own port is not involved: only the MCP server failed.
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1304.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1304.md -->
 
 # GIONG-E1304: the MCP server needs a token on TCP
 
@@ -7003,7 +7049,7 @@ giong-mcp was asked to listen on a TCP address (`GIONG_MCP=127.0.0.1:7777`, or `
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1305.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1305.md -->
 
 # GIONG-E1305: invalid token for the MCP server
 
@@ -7026,7 +7072,7 @@ The token given to the MCP server (`GIONG_MCP_TOKEN`, or `giong_mcp::Config::tok
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1401.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1401.md -->
 
 # GIONG-E1401: an earlier buffered write failed
 
@@ -7047,7 +7093,7 @@ Reading is not affected: whatever the peer sent before the failure can still be 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1402.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1402.md -->
 
 # GIONG-E1402: write after shutdown
 
@@ -7066,7 +7112,7 @@ The sending direction of the stream was already shut down, or is being shut down
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E1403.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E1403.md -->
 
 # GIONG-E1403: invalid giong-compat setting
 
@@ -7085,7 +7131,7 @@ Raised by giong-compat as a panic, when a `Compat` is configured with a value ou
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E2001.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E2001.md -->
 
 # GIONG-E2001: no trusted certificate authorities
 
@@ -7105,7 +7151,7 @@ There is no certificate authority to check servers against: `TlsConnector::with_
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E2002.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E2002.md -->
 
 # GIONG-E2002: unreadable certificate data
 
@@ -7125,7 +7171,7 @@ A certificate, a certificate file or a private key cannot be used: it is not PEM
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E2003.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E2003.md -->
 
 # GIONG-E2003: invalid TLS server name
 
@@ -7143,7 +7189,7 @@ The server name given to `connect` is neither a DNS name nor an IP address. It i
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E2004.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E2004.md -->
 
 # GIONG-E2004: certificate rejected
 
@@ -7171,7 +7217,7 @@ The peer's certificate was rejected. The message says why: `UnknownIssuer` (not 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E2005.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E2005.md -->
 
 # GIONG-E2005: TLS protocol error
 
@@ -7190,7 +7236,7 @@ The TLS session failed: the peer sent something that is not valid TLS, or sent a
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E2006.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E2006.md -->
 
 # GIONG-E2006: TLS handshake timed out
 
@@ -7209,7 +7255,7 @@ The TLS handshake did not finish within the handshake timeout (10 seconds unless
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E2007.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E2007.md -->
 
 # GIONG-E2007: connection closed during the TLS handshake
 
@@ -7228,7 +7274,7 @@ The peer closed the connection before the TLS handshake finished.
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E2008.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E2008.md -->
 
 # GIONG-E2008: TLS stream broken
 
@@ -7250,7 +7296,7 @@ The same code says that the stream was shut down (`shutdown()` sent `close_notif
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E2009.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E2009.md -->
 
 # GIONG-E2009: kernel TLS is not available
 
@@ -7277,7 +7323,7 @@ Kernel TLS (kTLS) was required, and this machine or this connection cannot use i
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E2010.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E2010.md -->
 
 # GIONG-E2010: the kernel refused the TLS keys
 
@@ -7300,7 +7346,7 @@ The same code is raised by `write_all` and `recv` when a TLS 1.3 key update fail
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E2011.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E2011.md -->
 
 # GIONG-E2011: the kernel cannot change TLS keys
 
@@ -7324,7 +7370,7 @@ On a TLS 1.2 connection the message says that the kernel took a piece of a hands
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E2012.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E2012.md -->
 
 # GIONG-E2012: TLS keys used up
 
@@ -7345,7 +7391,7 @@ A connection that sends many small records over a long time, such as a busy keep
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E2013.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E2013.md -->
 
 # GIONG-E2013: TLS setting not possible here
 
@@ -7364,7 +7410,7 @@ The acceptor was made with `TlsAcceptor::from_rustls`, from a rustls configurati
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3001.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3001.md -->
 
 # GIONG-E3001: invalid PostgreSQL configuration
 
@@ -7383,7 +7429,7 @@ The configuration or the connection URL is not valid. The message names the sett
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3002.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3002.md -->
 
 # GIONG-E3002: cannot connect to PostgreSQL
 
@@ -7403,7 +7449,7 @@ Opening the connection failed before authentication: name resolution, the TCP co
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3003.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3003.md -->
 
 # GIONG-E3003: PostgreSQL authentication failed
 
@@ -7423,7 +7469,7 @@ The server refused the credentials, or asked for an authentication method giong-
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3004.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3004.md -->
 
 # GIONG-E3004: PostgreSQL server error
 
@@ -7444,7 +7490,7 @@ The server reported an error for a statement. The message contains the server's 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3005.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3005.md -->
 
 # GIONG-E3005: PostgreSQL type mismatch
 
@@ -7463,7 +7509,7 @@ A value could not be converted between Rust and PostgreSQL: a parameter of a typ
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3006.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3006.md -->
 
 # GIONG-E3006: wrong number of rows
 
@@ -7482,7 +7528,7 @@ Raised by giong-postgres, `query_one`. In code: `giong::error::Code::PostgresRow
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3007.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3007.md -->
 
 # GIONG-E3007: PostgreSQL result too large
 
@@ -7501,7 +7547,7 @@ A result was larger than `Config::max_result_size` (64 MiB by default). The limi
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3008.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3008.md -->
 
 # GIONG-E3008: PostgreSQL connection closed
 
@@ -7521,7 +7567,7 @@ The connection is closed: the server closed it (restart, `pg_terminate_backend`,
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3009.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3009.md -->
 
 # GIONG-E3009: PostgreSQL pool wait timed out
 
@@ -7543,7 +7589,7 @@ Tasks waiting in `get` are served in the order they asked, and shared statements
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3010.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3010.md -->
 
 # GIONG-E3010: PostgreSQL protocol error
 
@@ -7563,7 +7609,7 @@ The server sent something that is not the PostgreSQL protocol, or that giong-pos
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3011.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3011.md -->
 
 # GIONG-E3011: statement refused before sending
 
@@ -7590,7 +7636,7 @@ Statements are recognised by their first words, outside comments and quoted text
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3101.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3101.md -->
 
 # GIONG-E3101: invalid MySQL configuration
 
@@ -7611,7 +7657,7 @@ The configuration or the connection URL is not valid. The message names the sett
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3102.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3102.md -->
 
 # GIONG-E3102: cannot connect to MySQL
 
@@ -7639,7 +7685,7 @@ Opening the connection failed before authentication: name resolution, the TCP or
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3103.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3103.md -->
 
 # GIONG-E3103: MySQL authentication failed
 
@@ -7659,7 +7705,7 @@ The server refused the credentials (error 1045), or asked for an authentication 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3104.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3104.md -->
 
 # GIONG-E3104: MySQL server error
 
@@ -7681,7 +7727,7 @@ The server reported an error for a statement. The message contains the server's 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3105.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3105.md -->
 
 # GIONG-E3105: MySQL type mismatch
 
@@ -7700,7 +7746,7 @@ A value could not be converted between Rust and MySQL without losing something: 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3106.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3106.md -->
 
 # GIONG-E3106: wrong number of rows
 
@@ -7720,7 +7766,7 @@ Raised by giong-mysql, `query_one` and `query_opt`. In code: `giong::error::Code
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3107.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3107.md -->
 
 # GIONG-E3107: MySQL result too large
 
@@ -7739,7 +7785,7 @@ A result was larger than `Config::max_result_size` (64 MiB by default). The limi
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3108.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3108.md -->
 
 # GIONG-E3108: MySQL connection closed
 
@@ -7762,7 +7808,7 @@ The pool also closes a connection given back from `Pool::get` whose session it c
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3109.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3109.md -->
 
 # GIONG-E3109: MySQL pool wait timed out
 
@@ -7782,7 +7828,7 @@ No pooled connection became free within the pool's wait timeout (5 seconds by de
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3110.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3110.md -->
 
 # GIONG-E3110: MySQL protocol error
 
@@ -7801,7 +7847,7 @@ The server sent something that is not the MySQL protocol, or that giong-mysql do
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3111.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3111.md -->
 
 # GIONG-E3111: statement refused before sending
 
@@ -7825,7 +7871,7 @@ The statement was refused before anything was sent. The pool's own methods run s
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3201.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3201.md -->
 
 # GIONG-E3201: invalid Redis configuration
 
@@ -7846,7 +7892,7 @@ The configuration or the connection URL is not valid. The message names the sett
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3202.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3202.md -->
 
 # GIONG-E3202: cannot connect to Redis
 
@@ -7868,7 +7914,7 @@ Opening the connection failed before it could be used: name resolution, the TCP 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3203.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3203.md -->
 
 # GIONG-E3203: Redis authentication failed
 
@@ -7888,7 +7934,7 @@ The server refused the user name or the password (`WRONGPASS`), asked for a pass
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3204.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3204.md -->
 
 # GIONG-E3204: Redis server error
 
@@ -7912,7 +7958,7 @@ It is also the error of an atomic pipeline (`Pipeline::atomic`) that the server 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3205.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3205.md -->
 
 # GIONG-E3205: Redis type mismatch
 
@@ -7931,7 +7977,7 @@ A reply could not be converted to the Rust type asked for without losing somethi
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3206.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3206.md -->
 
 # GIONG-E3206: command refused before sending
 
@@ -7952,7 +7998,7 @@ The command was refused before anything was sent, because it would change the co
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3207.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3207.md -->
 
 # GIONG-E3207: Redis reply too large
 
@@ -7971,7 +8017,7 @@ A reply was larger than `Config::max_reply_size` (64 MiB by default). The limit 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3208.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3208.md -->
 
 # GIONG-E3208: Redis connection closed
 
@@ -7991,7 +8037,7 @@ The connection is closed: the server closed it (restart, `CLIENT KILL`, `timeout
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3209.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3209.md -->
 
 # GIONG-E3209: Redis pool wait timed out
 
@@ -8011,7 +8057,7 @@ No pooled connection became available within the pool's wait timeout (5 seconds 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3210.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3210.md -->
 
 # GIONG-E3210: Redis protocol error
 
@@ -8030,7 +8076,7 @@ The server sent something that is not RESP3, or a reply when no command was wait
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3211.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3211.md -->
 
 # GIONG-E3211: Redis reply timed out
 
@@ -8050,7 +8096,7 @@ The reply did not arrive within `Config::response_timeout` (30 seconds by defaul
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3601.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3601.md -->
 
 # GIONG-E3601: invalid QUIC configuration
 
@@ -8070,7 +8116,7 @@ The configuration cannot work for QUIC. QUIC carries TLS 1.3 only (RFC 9001), so
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3602.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3602.md -->
 
 # GIONG-E3602: cannot set up the QUIC connection
 
@@ -8090,7 +8136,7 @@ The handshake did not complete. The server did not answer over UDP before the id
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3603.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3603.md -->
 
 # GIONG-E3603: the QUIC connection was lost
 
@@ -8110,7 +8156,7 @@ The connection is closed. The peer closed it (with an application or transport e
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3604.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3604.md -->
 
 # GIONG-E3604: the QUIC stream was reset
 
@@ -8129,7 +8175,7 @@ The peer abandoned the stream: it reset the half it was sending (`RESET_STREAM`)
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3605.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E3605.md -->
 
 # GIONG-E3605: the server refused the 0-RTT data
 
@@ -8148,7 +8194,7 @@ The client resumed an earlier session and sent the first bytes of this stream wi
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E4001.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E4001.md -->
 
 # GIONG-E4001: the message ends in the middle of a field
 
@@ -8171,7 +8217,7 @@ Almost always the message was cut off before it reached the decoder: the bytes o
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E4002.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E4002.md -->
 
 # GIONG-E4002: malformed varint
 
@@ -8192,7 +8238,7 @@ A varint runs for more than 10 bytes, or its tenth byte holds more than the top 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E4003.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E4003.md -->
 
 # GIONG-E4003: invalid field tag
 
@@ -8215,7 +8261,7 @@ Common causes: the bytes are not protobuf (JSON, text, an HTML error page), they
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E4004.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E4004.md -->
 
 # GIONG-E4004: unbalanced group
 
@@ -8236,7 +8282,7 @@ A proto2 group is not closed properly: an end-group tag with no group open, an e
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E4005.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E4005.md -->
 
 # GIONG-E4005: string field is not UTF-8
 
@@ -8257,7 +8303,7 @@ A field declared `string` in the `.proto` holds bytes that are not valid UTF-8. 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E4006.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E4006.md -->
 
 # GIONG-E4006: messages nested too deeply
 
@@ -8278,7 +8324,7 @@ Messages (or groups) are nested more than 100 levels deep, the same limit as Goo
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E4007.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E4007.md -->
 
 # GIONG-E4007: malformed packed field
 
@@ -8298,7 +8344,7 @@ A packed repeated field is inconsistent: its length is not a multiple of 4 (fixe
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E4008.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E4008.md -->
 
 # GIONG-E4008: message larger than 2 GiB
 
@@ -8319,7 +8365,7 @@ Raised by giong-proto, when decoding a message (`View::decode`) or encoding one 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E4101.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E4101.md -->
 
 # GIONG-E4101: invalid gRPC metadata
 
@@ -8345,7 +8391,7 @@ The message names the entry and where the bad byte is, without repeating the val
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E4102.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E4102.md -->
 
 # GIONG-E4102: gRPC message too large
 
@@ -8366,7 +8412,7 @@ The message gives the size and the limit.
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E4103.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E4103.md -->
 
 # GIONG-E4103: gRPC protocol error
 
@@ -8395,7 +8441,7 @@ One of these, named in the message:
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E4104.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E4104.md -->
 
 # GIONG-E4104: unsupported gRPC message encoding
 
@@ -8414,7 +8460,7 @@ The `grpc-encoding` of a request or a response names a compression other than `g
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E4105.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E4105.md -->
 
 # GIONG-E4105: gRPC message is not valid protobuf
 
@@ -8434,7 +8480,7 @@ The bytes of a request (on a server) or a response (on a client) are not a valid
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E4106.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E4106.md -->
 
 # GIONG-E4106: gRPC connection failed
 
@@ -8456,7 +8502,7 @@ Whether the server ran the method is unknown when the connection broke after the
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E4107.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E4107.md -->
 
 # GIONG-E4107: invalid gRPC endpoint
 
@@ -8475,7 +8521,7 @@ The address is not an `http://` or `https://` URL with a host: the scheme is mis
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E4108.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E4108.md -->
 
 # GIONG-E4108: gRPC deadline exceeded
 
@@ -8497,7 +8543,7 @@ The deadline covers the whole call, streaming calls included: every message of a
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E4109.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E4109.md -->
 
 # GIONG-E4109: gRPC call cancelled
 
@@ -8519,7 +8565,7 @@ On a client: the call was cancelled with `RequestSink::cancel` or `ClientStreami
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E4110.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E4110.md -->
 
 # GIONG-E4110: gRPC method not found
 
@@ -8539,7 +8585,7 @@ The path of the request, `/package.Service/Method`, names a service that was not
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5000.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5000.md -->
 
 # GIONG-E5000: the command line is not valid
 
@@ -8559,7 +8605,7 @@ The command line names a command `giong` does not have, a flag the command does 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5001.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5001.md -->
 
 # GIONG-E5001: no Cargo project here
 
@@ -8578,7 +8624,7 @@ There is no `Cargo.toml` in the current directory or any directory above it, so 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5002.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5002.md -->
 
 # GIONG-E5002: cargo could not be run
 
@@ -8597,7 +8643,7 @@ cargo could not be started, or it failed before it could build: Cargo.toml has a
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5003.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5003.md -->
 
 # GIONG-E5003: the Rust compiler is too old
 
@@ -8617,7 +8663,7 @@ The Rust compiler on the `PATH` is older than the minimum the giong crates need 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5004.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5004.md -->
 
 # GIONG-E5004: a dependency needs the Tokio runtime
 
@@ -8636,7 +8682,7 @@ A dependency in Cargo.toml (such as sqlx, reqwest, tonic's transport or axum) ru
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5005.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5005.md -->
 
 # GIONG-E5005: no such error code
 
@@ -8655,7 +8701,7 @@ The word given to `giong explain` is not an error code, or no giong crate of thi
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5006.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5006.md -->
 
 # GIONG-E5006: a blocking call inside a worker
 
@@ -8675,7 +8721,7 @@ The code calls something that blocks the thread (`std::fs`, `std::net`, `std::th
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5007.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5007.md -->
 
 # GIONG-E5007: binding a host name
 
@@ -8694,7 +8740,7 @@ A listener binds a host name such as `"localhost:8080"`. giong binds IP addresse
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5008.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5008.md -->
 
 # GIONG-E5008: a RefCell borrow held across an await
 
@@ -8713,7 +8759,7 @@ A `RefCell` borrow (`borrow()` or `borrow_mut()`) is kept in a variable while th
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5009.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5009.md -->
 
 # GIONG-E5009: the code does not compile
 
@@ -8732,7 +8778,7 @@ The compiler reported an error. `giong dev` stops the build that was running, so
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5010.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5010.md -->
 
 # GIONG-E5010: clippy has a finding
 
@@ -8751,7 +8797,7 @@ clippy, Rust's linter, reported a warning. The finding carries clippy's lint nam
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5011.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5011.md -->
 
 # GIONG-E5011: build directories use a lot of disk
 
@@ -8770,7 +8816,7 @@ The project's build directory (`target/`) holds more than a few gigabytes. Cargo
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5012.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5012.md -->
 
 # GIONG-E5012: the dev profile writes full debug information
 
@@ -8796,7 +8842,7 @@ The project's dev profile writes full debug information. Debug builds then write
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5013.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5013.md -->
 
 # GIONG-E5013: the open-files limit is low
 
@@ -8815,7 +8861,7 @@ The soft limit on open files (`ulimit -n`) is low. Every connection, file and pi
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5014.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5014.md -->
 
 # GIONG-E5014: the port is in use
 
@@ -8835,7 +8881,7 @@ Another process listens on the port the service is configured to use, so the ser
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5015.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5015.md -->
 
 # GIONG-E5015: Docker blocks io_uring
 
@@ -8854,7 +8900,7 @@ This runs in a container whose seccomp profile blocks the io_uring system calls 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5016.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5016.md -->
 
 # GIONG-E5016: a variable from .env.example is not set
 
@@ -8873,7 +8919,7 @@ Raised by the `giong` command (giong-cli): `giong doctor` and `giong dev`. In JS
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5017.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5017.md -->
 
 # GIONG-E5017: the service stopped
 
@@ -8893,7 +8939,7 @@ The service `giong dev` started exited by itself (it panicked, returned an error
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5018.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5018.md -->
 
 # GIONG-E5018: the service did not start listening
 
@@ -8912,7 +8958,7 @@ The new build of the service did not accept connections within the time `giong d
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5019.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5019.md -->
 
 # GIONG-E5019: the service's giong-mcp does not answer
 
@@ -8931,7 +8977,7 @@ The command could not reach the giong-mcp server inside the service: the service
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5020.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5020.md -->
 
 # GIONG-E5020: too many files to watch
 
@@ -8950,7 +8996,7 @@ The project has more files than `giong dev` watches (a build directory or `node_
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5021.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5021.md -->
 
 # GIONG-E5021: no linker found
 
@@ -8970,7 +9016,7 @@ Rust needs a system linker (`cc` on Linux and macOS, the MSVC build tools on Win
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5022.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5022.md -->
 
 # GIONG-E5022: giong dev already serves this project
 
@@ -8989,7 +9035,7 @@ Another `giong dev` is running for the same project: `.giong/dev.json` names its
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5023.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5023.md -->
 
 # GIONG-E5023: the compiler has a warning
 
@@ -9008,7 +9054,7 @@ rustc compiled the code but warned about it: an unused variable or import, unrea
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5024.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5024.md -->
 
 # GIONG-E5024: the service would listen on every network interface
 
@@ -9031,7 +9077,7 @@ With `--lan`, `giong dev` keeps the address as written and the warning says that
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5030.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5030.md -->
 
 # GIONG-E5030: the project name is not valid
 
@@ -9050,7 +9096,7 @@ The name of the new project (the last part of its path, or `--name`) cannot be u
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5031.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5031.md -->
 
 # GIONG-E5031: the directory for the new project is not empty
 
@@ -9069,7 +9115,7 @@ Raised by the `giong` command (giong-cli): `giong new`. In JSON output: `"code":
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5032.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5032.md -->
 
 # GIONG-E5032: the template does not offer that choice
 
@@ -9088,7 +9134,7 @@ The template, a store in `--db`, or the combination asked for is not one `giong 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5033.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5033.md -->
 
 # GIONG-E5033: a file of the project could not be written
 
@@ -9107,7 +9153,7 @@ A directory or file could not be created: no permission, a full disk, a path tha
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5034.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5034.md -->
 
 # GIONG-E5034: the project's crates do not build on Windows
 
@@ -9126,7 +9172,7 @@ Up to giong 1.4, only the runtime crate (`giong`) built on Windows, so `giong ne
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5035.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5035.md -->
 
 # GIONG-E5035: --giong-path is not a giong checkout
 
@@ -9145,7 +9191,7 @@ Raised by the `giong` command (giong-cli): `giong new`. In JSON output: `"code":
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5036.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5036.md -->
 
 # GIONG-E5036: an agent file exists that giong did not write
 
@@ -9168,7 +9214,7 @@ It is also raised when the file, or a folder on its way, is a symbolic link (a r
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5037.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5037.md -->
 
 # GIONG-E5037: .mcp.json is not valid JSON
 
@@ -9187,7 +9233,7 @@ Raised by the `giong` command (giong-cli): `giong ai init` (also run by `giong n
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5038.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5038.md -->
 
 # GIONG-E5038: the project uses another giong version than this command
 
@@ -9206,7 +9252,7 @@ The project depends on a giong `major.minor` other than the one this `giong` com
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5039.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5039.md -->
 
 # GIONG-E5039: the project does not depend on giong
 
@@ -9226,7 +9272,7 @@ No package of the workspace has `giong` in its `[dependencies]`, so the rules wr
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5040.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5040.md -->
 
 # GIONG-E5040: neither Docker nor Podman answers
 
@@ -9248,7 +9294,7 @@ Docker Desktop on Windows can also answer in Windows-container mode, where no da
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5041.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5041.md -->
 
 # GIONG-E5041: the database does not answer queries
 
@@ -9267,7 +9313,7 @@ The database did not answer a query in time, or refused the connection: it is st
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5042.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5042.md -->
 
 # GIONG-E5042: no usable database URL
 
@@ -9286,7 +9332,7 @@ Raised by the `giong` command (giong-cli): `giong db` migrate and status. In JSO
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5043.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5043.md -->
 
 # GIONG-E5043: an applied migration was changed
 
@@ -9305,7 +9351,7 @@ A file in `migrations/` was edited after it was applied: its SHA-256 checksum di
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5044.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5044.md -->
 
 # GIONG-E5044: a migration failed
 
@@ -9324,7 +9370,7 @@ The database refused a statement of a migration. The finding points at the file 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5045.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5045.md -->
 
 # GIONG-E5045: a migration file is not valid
 
@@ -9343,7 +9389,7 @@ A `.sql` file in `migrations/` is not named `NNNN_name.sql` (at least four digit
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5046.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5046.md -->
 
 # GIONG-E5046: no database client to run the SQL
 
@@ -9362,7 +9408,7 @@ Raised by the `giong` command (giong-cli): `giong db` migrate, status and reset.
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5047.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5047.md -->
 
 # GIONG-E5047: the database has a migration the project does not
 
@@ -9381,7 +9427,7 @@ Raised by the `giong` command (giong-cli): `giong db` migrate and status. In JSO
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5048.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5048.md -->
 
 # GIONG-E5048: the database was not started by giong db up
 
@@ -9400,7 +9446,7 @@ Raised by the `giong` command (giong-cli): `giong db` reset. In JSON output: `"c
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5049.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5049.md -->
 
 # GIONG-E5049: the database container could not start
 
@@ -9421,7 +9467,7 @@ Docker or Podman could not create, start or remove the database container, or th
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5050.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5050.md -->
 
 # GIONG-E5050: a recorded value looks like a secret
 
@@ -9448,7 +9494,7 @@ The message names each place, as `<case>: <where> (<what>)`, for example `login_
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5051.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5051.md -->
 
 # GIONG-E5051: the dashboard refused a request without its token
 
@@ -9470,7 +9516,7 @@ Most often the page was opened without the printed address: by typing `127.0.0.1
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5053.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5053.md -->
 
 # GIONG-E5053: the dashboard's port is in use
 
@@ -9490,7 +9536,7 @@ Raised by the `giong` command (giong-cli): `giong dashboard`. In JSON output: `"
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5054.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5054.md -->
 
 # GIONG-E5054: the dashboard could not do what the page asked
 
@@ -9510,7 +9556,7 @@ The dashboard page asked the `giong` command for something it could not do: the 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5055.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5055.md -->
 
 # GIONG-E5055: a worker of the service is stuck in one task
 
@@ -9530,7 +9576,7 @@ giong-mcp saw a worker that is awake but has not moved on for a while: one task'
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5056.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5056.md -->
 
 # GIONG-E5056: the service reports a warning
 
@@ -9548,7 +9594,7 @@ giong-mcp's `overview` listed a warning other than a stuck worker: workers that 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5057.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5057.md -->
 
 # GIONG-E5057: no running service to ask
 
@@ -9568,7 +9614,7 @@ The command reads a running service through its giong-mcp server, and found none
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5058.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5058.md -->
 
 # GIONG-E5058: the service's giong-mcp lacks a tool
 
@@ -9587,7 +9633,7 @@ The service's giong-mcp answered, but has no tool the command needs. The `routes
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5059.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5059.md -->
 
 # GIONG-E5059: the service's giong-mcp refused a call
 
@@ -9606,7 +9652,7 @@ The service's giong-mcp answered the call with an error, or with an answer this 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5060.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5060.md -->
 
 # GIONG-E5060: the service to measure cannot be reached
 
@@ -9626,7 +9672,7 @@ Raised by the `giong` command (giong-cli): `giong bench`. In JSON output: `"code
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5061.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5061.md -->
 
 # GIONG-E5061: the build to compare against cannot be made
 
@@ -9645,7 +9691,7 @@ Raised by the `giong` command (giong-cli): `giong bench --against`. In JSON outp
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5062.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5062.md -->
 
 # GIONG-E5062: the load generator fell behind its schedule
 
@@ -9664,7 +9710,7 @@ With a fixed rate, every request has a time it is due, and its latency counts fr
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5063.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5063.md -->
 
 # GIONG-E5063: requests failed during the benchmark
 
@@ -9683,7 +9729,7 @@ Some requests got no answer (the connection was refused, reset or timed out) or 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5064.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5064.md -->
 
 # GIONG-E5064: the change is slower than the build it is compared with
 
@@ -9702,7 +9748,7 @@ In every round the working tree was slower than the build of `<ref>` (99th perce
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5065.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5065.md -->
 
 # GIONG-E5065: no recorded requests to use
 
@@ -9730,7 +9776,7 @@ Raised by the `giong` command (giong-cli): `giong record list`, `giong record sa
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5066.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5066.md -->
 
 # GIONG-E5066: a recorded case answers differently
 
@@ -9753,7 +9799,7 @@ A case that fails still keeps the values it captured (`{{capture:NAME}}`) from f
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5067.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5067.md -->
 
 # GIONG-E5067: a recording cannot be read or used
 
@@ -9789,7 +9835,7 @@ One of these:
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5068.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5068.md -->
 
 # GIONG-E5068: a recorded case needs a value that is not set
 
@@ -9813,7 +9859,7 @@ A case's request has a placeholder with no value yet, so it was not sent:
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5069.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5069.md -->
 
 # GIONG-E5069: the service to replay against does not answer
 
@@ -9833,7 +9879,7 @@ Raised by the `giong` command (giong-cli): `giong record replay`. In JSON output
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5070.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5070.md -->
 
 # GIONG-E5070: the service cannot be built for Linux here
 
@@ -9853,7 +9899,7 @@ An image runs a Linux binary. On Linux, `giong image` builds for this machine, s
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5071.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5071.md -->
 
 # GIONG-E5071: the shared libraries of the binary cannot be found
 
@@ -9872,7 +9918,7 @@ The binary is linked against glibc, so the image needs the libraries it loads (`
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5072.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5072.md -->
 
 # GIONG-E5072: no CA certificates to put in the image
 
@@ -9890,7 +9936,7 @@ The image carries the CA certificates of this machine (`/etc/ssl/certs/ca-certif
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5073.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5073.md -->
 
 # GIONG-E5073: a file to add to the image is not usable
 
@@ -9909,7 +9955,7 @@ Raised by the `giong` command (giong-cli): `giong image --add`. In JSON output: 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5074.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5074.md -->
 
 # GIONG-E5074: the image could not be loaded into Docker or Podman
 
@@ -9928,7 +9974,7 @@ Raised by the `giong` command (giong-cli): `giong image --load`. In JSON output:
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5075.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5075.md -->
 
 # GIONG-E5075: the image could not be pushed to the registry
 
@@ -9947,7 +9993,7 @@ Raised by the `giong` command (giong-cli): `giong image --push <ref>`. In JSON o
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5076.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5076.md -->
 
 # GIONG-E5076: the image name or tag is not valid
 
@@ -9966,7 +10012,7 @@ An image reference is `[registry/]name[:tag]`: the name in lower case (letters, 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5080.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5080.md -->
 
 # GIONG-E5080: the project has changes that are not committed
 
@@ -9985,7 +10031,7 @@ Raised by the `giong` command (giong-cli): `giong fix`. In JSON output: `"code":
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5081.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5081.md -->
 
 # GIONG-E5081: cargo could not apply its fixes
 
@@ -10004,7 +10050,7 @@ Raised by the `giong` command (giong-cli): `giong fix`. In JSON output: `"code":
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5082.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5082.md -->
 
 # GIONG-E5082: a fix no longer matches the code
 
@@ -10023,7 +10069,7 @@ A fix found by `giong check` names bytes of a file that no longer hold the code 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5083.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5083.md -->
 
 # GIONG-E5083: a test failed
 
@@ -10043,7 +10089,7 @@ A test failed. `giong test` runs the suite on the default driver (io_uring on Li
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5084.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5084.md -->
 
 # GIONG-E5084: the tests could not run on every driver
 
@@ -10062,7 +10108,7 @@ Raised by the `giong` command (giong-cli): `giong test`. In JSON output: `"code"
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5085.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5085.md -->
 
 # GIONG-E5085: cargo-nextest is not installed
 
@@ -10081,7 +10127,7 @@ Raised by the `giong` command (giong-cli): `giong test --nextest`. In JSON outpu
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5086.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5086.md -->
 
 # GIONG-E5086: the tests took longer than the time limit
 
@@ -10101,7 +10147,7 @@ A run of the suite went on longer than `--timeout` seconds (1800 by default), so
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5087.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5087.md -->
 
 # GIONG-E5087: git init failed in the new project
 
@@ -10120,7 +10166,7 @@ Raised by the `giong` command (giong-cli): `giong new`. In JSON output: `"code":
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5088.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5088.md -->
 
 # GIONG-E5088: .env sets a cargo or rustc setting
 
@@ -10139,7 +10185,7 @@ Raised by the `giong` command (giong-cli): `giong test`. In JSON output: `"code"
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5090.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5090.md -->
 
 # GIONG-E5090: a newer giong release is out
 
@@ -10160,7 +10206,7 @@ Releases within 1.x only add (docs/STABILITY.md), so moving up keeps code that b
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5091.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5091.md -->
 
 # GIONG-E5091: the project's giong crates are on different releases
 
@@ -10181,7 +10227,7 @@ From `giong upgrade`: after `cargo update`, a giong crate stayed on another vers
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5092.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5092.md -->
 
 # GIONG-E5092: this giong command is older than the newest release
 
@@ -10202,7 +10248,7 @@ From `giong upgrade`: the command updated itself, and the one started afterwards
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5093.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5093.md -->
 
 # GIONG-E5093: the version to move to is not a release giong upgrade can move to
 
@@ -10221,7 +10267,7 @@ Raised by the `giong` command (giong-cli): `giong upgrade`. In JSON output: `"co
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5094.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5094.md -->
 
 # GIONG-E5094: the project's rust-version is below what the release needs
 
@@ -10240,7 +10286,7 @@ A package of the project promises to build on an older Rust (`rust-version` in i
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5095.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5095.md -->
 
 # GIONG-E5095: a giong dependency is pinned to a version
 
@@ -10259,7 +10305,7 @@ A giong requirement names an exact version or a range (`=1.4.2`, `>=1.4, <1.5`) 
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5096.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5096.md -->
 
 # GIONG-E5096: giong upgrade --self could not replace this command
 
@@ -10279,7 +10325,7 @@ Raised by the `giong` command (giong-cli): `giong upgrade`. In JSON output: `"co
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5097.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5097.md -->
 
 # GIONG-E5097: the newest giong release could not be looked up
 
@@ -10300,7 +10346,7 @@ giong upgrade asks crates.io for the newest giong release through `cargo info gi
 
 ---
 
-<!-- https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E5098.md -->
+<!-- https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E5098.md -->
 
 # GIONG-E5098: a giong dependency is written in a form giong upgrade cannot edit
 
