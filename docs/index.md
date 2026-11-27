@@ -189,7 +189,7 @@ Every error giong raises starts with a code, says what went wrong and how to fix
 GIONG-E0102: no address found for db.internal. Fix: check the spelling of the name, /etc/hosts, and the DNS servers in /etc/resolv.conf (in a container, the network it is attached to). See https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0102.md
 ```
 
-All 251 codes: https://giong.run/docs/errors.md
+All 252 codes: https://giong.run/docs/errors.md
 
 ## When giong is the wrong choice
 
