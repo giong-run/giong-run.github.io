@@ -1,6 +1,6 @@
 # giong routes and giong openapi
 
-> giong 1.5.4 · https://giong.run/docs/cli/routes/ · source: https://github.com/giong-run/Giong/blob/v1.5.4/giong-cli/README.md#giong-routes-and-giong-openapi
+> giong 1.5.5 · https://giong.run/docs/cli/routes/ · source: https://github.com/giong-run/Giong/blob/v1.5.5/giong-cli/README.md#giong-routes-and-giong-openapi
 
 ```sh
 giong routes [--mcp ADDRESS] [--base-url URL]

@@ -1,6 +1,6 @@
 # Dev kit overview
 
-> giong 1.5.4 · https://giong.run/docs/cli/ · source: https://github.com/giong-run/Giong/blob/v1.5.4/giong-cli/README.md
+> giong 1.5.5 · https://giong.run/docs/cli/ · source: https://github.com/giong-run/Giong/blob/v1.5.5/giong-cli/README.md
 
 The `giong` command: start, run, check and ship services on the [Gióng](https://github.com/giong-run/Giong) async runtime. One small binary (the standard library, `serde_json`, and `socket2` on Unix), the same on Linux, macOS and Windows.
 
@@ -52,6 +52,7 @@ giong upgrade    # move the project (and this command) to the newest giong relea
 | [`giong clean`](https://giong.run/docs/cli/clean.md) | Free the disk old builds take, keeping what the next build needs. |
 | [`giong mcp`](https://giong.run/docs/cli/mcp.md) | Every command as a tool for coding agents over MCP, read-only unless allowed. |
 | [`giong upgrade`](https://giong.run/docs/cli/upgrade.md) |  |
+| [`giong cache`](https://giong.run/docs/cli/cache.md) |  |
 
 ## One shape for every command
 

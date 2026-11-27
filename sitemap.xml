@@ -40,6 +40,7 @@
   <url><loc>https://giong.run/docs/cli/clean/</loc></url>
   <url><loc>https://giong.run/docs/cli/mcp/</loc></url>
   <url><loc>https://giong.run/docs/cli/upgrade/</loc></url>
+  <url><loc>https://giong.run/docs/cli/cache/</loc></url>
   <url><loc>https://giong.run/docs/guides/coding-agents/</loc></url>
   <url><loc>https://giong.run/docs/guides/safe-defaults/</loc></url>
   <url><loc>https://giong.run/docs/guides/database/</loc></url>
@@ -238,6 +239,7 @@
   <url><loc>https://giong.run/docs/errors/E5022/</loc></url>
   <url><loc>https://giong.run/docs/errors/E5023/</loc></url>
   <url><loc>https://giong.run/docs/errors/E5024/</loc></url>
+  <url><loc>https://giong.run/docs/errors/E5025/</loc></url>
   <url><loc>https://giong.run/docs/errors/E5030/</loc></url>
   <url><loc>https://giong.run/docs/errors/E5031/</loc></url>
   <url><loc>https://giong.run/docs/errors/E5032/</loc></url>

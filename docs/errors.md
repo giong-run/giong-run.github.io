@@ -1,6 +1,6 @@
 # Error codes
 
-> giong 1.5.4 · https://giong.run/docs/errors/ · source: https://github.com/giong-run/Giong/blob/v1.5.4/docs/errors/README.md
+> giong 1.5.5 · https://giong.run/docs/errors/ · source: https://github.com/giong-run/Giong/blob/v1.5.5/docs/errors/README.md
 
 Every error giong raises itself starts with a code and ends with a link to its page here:
 
@@ -305,6 +305,7 @@ The `giong` command reports `GIONG-E5000` to `GIONG-E5099`. Its findings can als
 | [GIONG-E5022](https://giong.run/docs/errors/E5022.md) | `DevRunning` | giong dev already serves this project |
 | [GIONG-E5023](https://giong.run/docs/errors/E5023.md) | `CompilerWarning` | the compiler has a warning |
 | [GIONG-E5024](https://giong.run/docs/errors/E5024.md) | `ListensOnNetwork` | the service would listen on every network interface |
+| [GIONG-E5025](https://giong.run/docs/errors/E5025.md) | `StoreUnusable` | the build store cannot share a build |
 | [GIONG-E5030](https://giong.run/docs/errors/E5030.md) | `BadProjectName` | the project name is not valid |
 | [GIONG-E5031](https://giong.run/docs/errors/E5031.md) | `TargetNotEmpty` | the directory for the new project is not empty |
 | [GIONG-E5032](https://giong.run/docs/errors/E5032.md) | `BadTemplateChoice` | the template does not offer that choice |
