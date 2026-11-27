@@ -1,6 +1,6 @@
 # Build with a coding agent
 
-> giong 1.5.1 · https://giong.run/docs/guides/coding-agents/ · source: https://github.com/giong-run/Giong/blob/v1.5.1/docs/guides/coding-agents.md
+> giong 1.5.2 · https://giong.run/docs/guides/coding-agents/ · source: https://github.com/giong-run/Giong/blob/v1.5.2/docs/guides/coding-agents.md
 
 Gióng is made for code that agents write: one obvious way to do each job, errors that say how to fix them, and a `giong` command that answers in JSON. This page is the setup and the loop to give an agent, whether you type every prompt or let it run on its own.
 

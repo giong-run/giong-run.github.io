@@ -1,6 +1,6 @@
 # Error codes
 
-> giong 1.5.1 · https://giong.run/docs/errors/ · source: https://github.com/giong-run/Giong/blob/v1.5.1/docs/errors/README.md
+> giong 1.5.2 · https://giong.run/docs/errors/ · source: https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/README.md
 
 Every error giong raises itself starts with a code and ends with a link to its page here:
 

@@ -1,6 +1,6 @@
 # Safe defaults of the dev kit
 
-> giong 1.5.1 · https://giong.run/docs/guides/safe-defaults/ · source: https://github.com/giong-run/Giong/blob/v1.5.1/docs/guides/safe-defaults.md
+> giong 1.5.2 · https://giong.run/docs/guides/safe-defaults/ · source: https://github.com/giong-run/Giong/blob/v1.5.2/docs/guides/safe-defaults.md
 
 The `giong` command runs code, holds secrets and opens ports on the machine you work on. It is built so that the default is the safe choice, and every way out of it is a flag you type. This page lists each default, what it protects and how to change it.
 

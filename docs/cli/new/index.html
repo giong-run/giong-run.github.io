@@ -38,7 +38,7 @@
     <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="28" height="28"></picture><span>giong</span></a>
     <nav class="nav" aria-label="Site"><a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a><a href="/docs/agent-skill/">Agent skill</a></nav>
     <div class="hdr-side">
-      <a class="ver" href="/releases/#v1-5-1" title="Release notes for v1.5.1">v1.5.1</a>
+      <a class="ver" href="/releases/#v1-5-2" title="Release notes for v1.5.2">v1.5.2</a>
       <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="giong on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
       <a class="icon-btn hide-sm" href="https://x.com/giongrun" aria-label="giong on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
       <button class="icon-btn theme" type="button" aria-label="Switch between light and dark" hidden>
@@ -64,10 +64,10 @@
 <div class="table-scroll"><table><thead><tr><th>Template</th><th>What it is</th></tr></thead><tbody><tr><td><code>web</code> (default)</td><td>A JSON API on giong-web with <code>/health</code> (and <code>/ready</code> when it has a database): a users API on SQLite by default, or on PostgreSQL or MySQL with <code>--db</code> (with Redis as a cache when <code>redis</code> is added), counters on Redis (<code>--db redis</code>), or a hello service without a database (<code>--db none</code>). Migrations in <code>migrations/</code>.</td></tr><tr><td><code>grpc</code></td><td>A gRPC service from <code>proto/service.proto</code> with health and reflection, built by giong-grpc-build (no <code>protoc</code> to install).</td></tr><tr><td><code>worker</code></td><td>A job runner: jobs claimed from a table with <code>FOR UPDATE SKIP LOCKED</code> (PostgreSQL) or in a transaction (MySQL), from a Redis list, or on a timer, with retries and backoff.</td></tr></tbody></table></div>
 <p>SQLite needs nothing installed or started: the database is the file <code>data/&lt;name&gt;.db</code>, made at the first start, compiled in through rusqlite (feature <code>bundled</code>). Its calls block, so the project's <code>src/db.rs</code> runs each one on giong's blocking lane (<code>giong::spawn_blocking</code>), with one write connection and a few read connections in WAL mode shared by every worker; the tests use a file of their own each, and the CI workflow starts no service. One copy of the service owns a file; for several machines start from <code>--db postgres</code>.</p>
 <p><code>--tls</code> serves HTTPS or gRPC over TLS when <code>TLS_CERT</code> and <code>TLS_KEY</code> are set. <code>sqlite</code>, <code>postgres</code> and <code>mysql</code> exclude each other, <code>grpc</code> takes no database and <code>worker</code> one, without <code>--tls</code>: anything else is refused with <code>GIONG-E5032</code> and the choices that work. The directory must be new or empty (<code>GIONG-E5031</code>); a write that fails takes back everything it made. Every combination is built, linted, tested on io_uring and on epoll against real databases, started and stopped with <code>SIGTERM</code> on every pull request.</p></div>
-    <p class="src-note">giong 1.5.1 · from <a href="https://github.com/giong-run/Giong/blob/v1.5.1/giong-cli/README.md#giong-new">giong-cli/README.md#giong-new</a> at v1.5.1</p>
+    <p class="src-note">giong 1.5.2 · from <a href="https://github.com/giong-run/Giong/blob/v1.5.2/giong-cli/README.md#giong-new">giong-cli/README.md#giong-new</a> at v1.5.2</p>
     <script type="text/markdown" id="md-page"># giong new
 
-> giong 1.5.1 · https://giong.run/docs/cli/new/ · source: https://github.com/giong-run/Giong/blob/v1.5.1/giong-cli/README.md#giong-new
+> giong 1.5.2 · https://giong.run/docs/cli/new/ · source: https://github.com/giong-run/Giong/blob/v1.5.2/giong-cli/README.md#giong-new
 
 ```sh
 giong new <dir> [--template web|grpc|worker] [--db sqlite|postgres|mysql|none[,redis]] [--tls] [--name NAME] [--no-git] [--no-ai] [--dry-run]
@@ -84,7 +84,7 @@ Writes a project that builds, passes `clippy -D warnings` and passes its tests f
 SQLite needs nothing installed or started: the database is the file `data/<name>.db`, made at the first start, compiled in through rusqlite (feature `bundled`). Its calls block, so the project's `src/db.rs` runs each one on giong's blocking lane (`giong::spawn_blocking`), with one write connection and a few read connections in WAL mode shared by every worker; the tests use a file of their own each, and the CI workflow starts no service. One copy of the service owns a file; for several machines start from `--db postgres`.
 
 `--tls` serves HTTPS or gRPC over TLS when `TLS_CERT` and `TLS_KEY` are set. `sqlite`, `postgres` and `mysql` exclude each other, `grpc` takes no database and `worker` one, without `--tls`: anything else is refused with `GIONG-E5032` and the choices that work. The directory must be new or empty (`GIONG-E5031`); a write that fails takes back everything it made. Every combination is built, linted, tested on io_uring and on epoll against real databases, started and stopped with `SIGTERM` on every pull request.
-</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.5.1, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use giong new as documented below.
+</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.5.2, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use giong new as documented below.
 
 Rules for giong code:
 - Start the runtime with giong::Builder::new().shutdown_on_signals(true).build()?.run(|_worker| async { .. }); there are no macros. Build listeners, routers, pools and clients inside each worker's future.
@@ -97,11 +97,11 @@ More facts: https://giong.run/llms.txt. Best practices: https://giong.run/docs/b
 
 My task: <describe what to build or fix>
 
-Documentation of giong new, giong 1.5.1 (https://giong.run/docs/cli/new.md):
+Documentation of giong new, giong 1.5.2 (https://giong.run/docs/cli/new.md):
 
 # giong new
 
-> giong 1.5.1 · https://giong.run/docs/cli/new/ · source: https://github.com/giong-run/Giong/blob/v1.5.1/giong-cli/README.md#giong-new
+> giong 1.5.2 · https://giong.run/docs/cli/new/ · source: https://github.com/giong-run/Giong/blob/v1.5.2/giong-cli/README.md#giong-new
 
 ```sh
 giong new <dir> [--template web|grpc|worker] [--db sqlite|postgres|mysql|none[,redis]] [--tls] [--name NAME] [--no-git] [--no-ai] [--dry-run]
@@ -139,7 +139,7 @@ SQLite needs nothing installed or started: the database is the file `data/<name>
         <h2>Learn</h2>
         <a href="/docs/">Get started</a>
         <a href="/docs/#examples">Examples</a>
-        <a href="https://docs.rs/giong/1.5.1/giong/">API reference</a>
+        <a href="https://docs.rs/giong/1.5.2/giong/">API reference</a>
         <a href="/docs/#errors">Error codes</a>
         <a href="/docs/best-practices/">Best practices</a><a href="/docs/agent-skill/">Agent skill</a>
         <a href="/llms.txt">llms.txt</a>

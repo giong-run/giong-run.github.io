@@ -1,6 +1,6 @@
 # giong clean
 
-> giong 1.5.1 · https://giong.run/docs/cli/clean/ · source: https://github.com/giong-run/Giong/blob/v1.5.1/giong-cli/README.md#giong-clean
+> giong 1.5.2 · https://giong.run/docs/cli/clean/ · source: https://github.com/giong-run/Giong/blob/v1.5.2/giong-cli/README.md#giong-clean
 
 ```sh
 giong clean [dir...] [--days N] [--all] [--dry-run]

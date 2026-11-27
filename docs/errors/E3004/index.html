@@ -38,7 +38,7 @@
     <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="28" height="28"></picture><span>giong</span></a>
     <nav class="nav" aria-label="Site"><a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a><a href="/docs/agent-skill/">Agent skill</a></nav>
     <div class="hdr-side">
-      <a class="ver" href="/releases/#v1-5-1" title="Release notes for v1.5.1">v1.5.1</a>
+      <a class="ver" href="/releases/#v1-5-2" title="Release notes for v1.5.2">v1.5.2</a>
       <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="giong on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
       <a class="icon-btn hide-sm" href="https://x.com/giongrun" aria-label="giong on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
       <button class="icon-btn theme" type="button" aria-label="Switch between light and dark" hidden>
@@ -63,12 +63,12 @@
 <p>The server reported an error for a statement. The message contains the server's text, and <code>Error::server_code()</code> returns its SQLSTATE, such as <code>23505</code> for a unique violation or <code>40001</code> for a serialization failure.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-1" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="how-to-fix-it">How to fix it</h2>
 <ul><li>Look the SQLSTATE up in the PostgreSQL manual (appendix A, "PostgreSQL Error Codes").</li><li>Match on <code>Error::server_code()</code> in code, not on the message, which the server may translate.</li><li><code>40001</code> and <code>40P01</code> mean the transaction should be retried from the start.</li><li>A message saying that a statement of the transaction was given up comes from giong-postgres rather than the server (<code>Error::server_code()</code> is <code>None</code>): a statement in the transaction was dropped before its answer came and may have run, so the transaction may hold work the application believes undone, and this statement (or <code>COMMIT</code>) was not sent. Drop the transaction, which rolls it back, and run it again from the start.</li></ul>
 <p><a href="/docs/errors/">All error codes</a></p></section>
-    <p class="src-note">giong 1.5.1 · from <a href="https://github.com/giong-run/Giong/blob/v1.5.1/docs/errors/E3004.md">docs/errors/E3004.md</a> at v1.5.1</p>
-    <script type="text/markdown" id="md-0"><!-- giong 1.5.1, https://giong.run/docs/errors/E3004/#what-happened -->
+    <p class="src-note">giong 1.5.2 · from <a href="https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3004.md">docs/errors/E3004.md</a> at v1.5.2</p>
+    <script type="text/markdown" id="md-0"><!-- giong 1.5.2, https://giong.run/docs/errors/E3004/#what-happened -->
 
 ## What happened
 
-The server reported an error for a statement. The message contains the server's text, and `Error::server_code()` returns its SQLSTATE, such as `23505` for a unique violation or `40001` for a serialization failure.</script><script type="text/markdown" id="md-1"><!-- giong 1.5.1, https://giong.run/docs/errors/E3004/#how-to-fix-it -->
+The server reported an error for a statement. The message contains the server's text, and `Error::server_code()` returns its SQLSTATE, such as `23505` for a unique violation or `40001` for a serialization failure.</script><script type="text/markdown" id="md-1"><!-- giong 1.5.2, https://giong.run/docs/errors/E3004/#how-to-fix-it -->
 
 ## How to fix it
 
@@ -79,7 +79,7 @@ The server reported an error for a statement. The message contains the server's 
 
 [All error codes](README.md)</script><script type="text/markdown" id="md-page"># GIONG-E3004: PostgreSQL server error
 
-> giong 1.5.1 · https://giong.run/docs/errors/E3004/ · source: https://github.com/giong-run/Giong/blob/v1.5.1/docs/errors/E3004.md
+> giong 1.5.2 · https://giong.run/docs/errors/E3004/ · source: https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3004.md
 
 Raised by giong-postgres, running a statement. In code: `giong::error::Code::PostgresServer`.
 
@@ -95,7 +95,7 @@ The server reported an error for a statement. The message contains the server's 
 - A message saying that a statement of the transaction was given up comes from giong-postgres rather than the server (`Error::server_code()` is `None`): a statement in the transaction was dropped before its answer came and may have run, so the transaction may hold work the application believes undone, and this statement (or `COMMIT`) was not sent. Drop the transaction, which rolls it back, and run it again from the start.
 
 [All error codes](https://giong.run/docs/errors.md)
-</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.5.1, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use GIONG-E3004: PostgreSQL server error as documented below.
+</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.5.2, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use GIONG-E3004: PostgreSQL server error as documented below.
 
 Rules for giong code:
 - Start the runtime with giong::Builder::new().shutdown_on_signals(true).build()?.run(|_worker| async { .. }); there are no macros. Build listeners, routers, pools and clients inside each worker's future.
@@ -108,11 +108,11 @@ More facts: https://giong.run/llms.txt. Best practices: https://giong.run/docs/b
 
 My task: <describe what to build or fix>
 
-Documentation of GIONG-E3004: PostgreSQL server error, giong 1.5.1 (https://giong.run/docs/errors/E3004.md):
+Documentation of GIONG-E3004: PostgreSQL server error, giong 1.5.2 (https://giong.run/docs/errors/E3004.md):
 
 # GIONG-E3004: PostgreSQL server error
 
-> giong 1.5.1 · https://giong.run/docs/errors/E3004/ · source: https://github.com/giong-run/Giong/blob/v1.5.1/docs/errors/E3004.md
+> giong 1.5.2 · https://giong.run/docs/errors/E3004/ · source: https://github.com/giong-run/Giong/blob/v1.5.2/docs/errors/E3004.md
 
 Raised by giong-postgres, running a statement. In code: `giong::error::Code::PostgresServer`.
 
@@ -149,7 +149,7 @@ The server reported an error for a statement. The message contains the server's 
         <h2>Learn</h2>
         <a href="/docs/">Get started</a>
         <a href="/docs/#examples">Examples</a>
-        <a href="https://docs.rs/giong/1.5.1/giong/">API reference</a>
+        <a href="https://docs.rs/giong/1.5.2/giong/">API reference</a>
         <a href="/docs/#errors">Error codes</a>
         <a href="/docs/best-practices/">Best practices</a><a href="/docs/agent-skill/">Agent skill</a>
         <a href="/llms.txt">llms.txt</a>

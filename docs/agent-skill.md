@@ -1,6 +1,6 @@
 # Agent skill
 
-> giong 1.5.1 · https://giong.run/docs/agent-skill/ · source: https://github.com/giong-run/Giong/blob/v1.5.1/skills/giong/SKILL.md
+> giong 1.5.2 · https://giong.run/docs/agent-skill/ · source: https://github.com/giong-run/Giong/blob/v1.5.2/skills/giong/SKILL.md
 
 giong is a thread-per-core async runtime for Rust: one worker per core, each with its own
 io_uring ring (epoll where io_uring is blocked; kqueue on macOS; I/O completion ports on
