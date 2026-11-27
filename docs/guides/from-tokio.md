@@ -1,6 +1,6 @@
 # Coming from Tokio
 
-> giong 1.5.3 · https://giong.run/docs/guides/from-tokio/ · source: https://github.com/giong-run/Giong/blob/v1.5.3/docs/guides/from-tokio.md
+> giong 1.5.4 · https://giong.run/docs/guides/from-tokio/ · source: https://github.com/giong-run/Giong/blob/v1.5.4/docs/guides/from-tokio.md
 
 What changes when a Tokio service moves to giong: the runtime model, the names, and the crate for each job. Most code keeps its shape; the differences are where tasks run and who owns buffers.
 

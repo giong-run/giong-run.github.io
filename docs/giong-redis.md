@@ -1,13 +1,13 @@
 # giong-redis
 
-> giong 1.5.3 · https://giong.run/docs/giong-redis/ · source: https://github.com/giong-run/Giong/blob/v1.5.3/giong-redis/README.md
+> giong 1.5.4 · https://giong.run/docs/giong-redis/ · source: https://github.com/giong-run/Giong/blob/v1.5.4/giong-redis/README.md
 
 A Redis client and connection pool for the [giong](https://giong.run/docs/giong.md) runtime. It speaks RESP3 itself, encrypts with [`giong-tls`](https://giong.run/docs/giong-tls.md), and depends on nothing from the Tokio ecosystem.
 
 ```toml
 [dependencies]
-giong = "1.5.3"
-giong-redis = "1.5.3"
+giong = "1.5.4"
+giong-redis = "1.5.4"
 ```
 
 ```rust,no_run
@@ -248,7 +248,7 @@ Not measured: a server on another machine (network latency, where pipelining mat
 
 ## Not there yet
 
-Redis Cluster (a `MOVED` or `ASK` reply is an error that says so) and Sentinel, client-side caching (`CLIENT TRACKING` can be turned on with `query`, but a `Client` passes over the invalidations it brings), sharded Pub/Sub (`SSUBSCRIBE`), RESP2-only servers (Redis 5 and older), and streaming a large reply in pieces (a reply is collected in full, up to `max_reply_size`). Proxies that do not pass `HELLO 3` on (twemproxy, Envoy's Redis proxy) cannot be used, since the client speaks RESP3 only. An independent review before 1.0 found problems that have since been fixed (see the [changelog](https://github.com/giong-run/Giong/blob/v1.5.3/CHANGELOG.md)); the crate has had no outside security audit.
+Redis Cluster (a `MOVED` or `ASK` reply is an error that says so) and Sentinel, client-side caching (`CLIENT TRACKING` can be turned on with `query`, but a `Client` passes over the invalidations it brings), sharded Pub/Sub (`SSUBSCRIBE`), RESP2-only servers (Redis 5 and older), and streaming a large reply in pieces (a reply is collected in full, up to `max_reply_size`). Proxies that do not pass `HELLO 3` on (twemproxy, Envoy's Redis proxy) cannot be used, since the client speaks RESP3 only. An independent review before 1.0 found problems that have since been fixed (see the [changelog](https://github.com/giong-run/Giong/blob/v1.5.4/CHANGELOG.md)); the crate has had no outside security audit.
 
 ## Tests
 

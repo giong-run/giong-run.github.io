@@ -1,6 +1,6 @@
 # giong upgrade
 
-> giong 1.5.3 · https://giong.run/docs/cli/upgrade/ · source: https://github.com/giong-run/Giong/blob/v1.5.3/giong-cli/README.md#giong-upgrade
+> giong 1.5.4 · https://giong.run/docs/cli/upgrade/ · source: https://github.com/giong-run/Giong/blob/v1.5.4/giong-cli/README.md#giong-upgrade
 
 ```sh
 giong upgrade [--to 1.5.0] [--dry-run] [--offline]

@@ -1,6 +1,6 @@
 # Get started with giong
 
-> giong 1.5.3 · https://giong.run/docs/
+> giong 1.5.4 · https://giong.run/docs/
 
 A running service in a few commands, then every page of the documentation: the `giong` command, a page for each crate, the best practices, the agent skill. The API reference for each crate is on docs.rs.
 
@@ -36,7 +36,7 @@ Every command: https://giong.run/docs/cli.md
 
 ## Install the crates
 
-The crates are on crates.io and share one version number, 1.5.3.
+The crates are on crates.io and share one version number, 1.5.4.
 
 ```sh
 cargo add giong
@@ -158,35 +158,35 @@ Every page is also Markdown, for agents:
 
 ## Examples
 
-- [examples/rest-api](https://github.com/giong-run/Giong/tree/v1.5.3/examples/rest-api): A whole service on `giong-web`: users kept in PostgreSQL, read through a Redis cache, served over HTTPS, with request ids, a JSON access log, readiness, a streamed export and graceful shutdown. Its README has the routes, the configuration and how it is tested. `cargo run --release -p rest-api`
-- [examples/echo.rs](https://github.com/giong-run/Giong/blob/v1.5.3/examples/echo.rs): A TCP echo server on every core. `cargo run --release --example echo`
-- [examples/http.rs](https://github.com/giong-run/Giong/blob/v1.5.3/examples/http.rs): A small HTTP/1.1 server: keep-alive, pipelining, idle timeouts, a header size limit and graceful shutdown on SIGINT and SIGTERM. The same routes the benchmarks use. `cargo run --release --example http`
-- [examples/udp_echo.rs](https://github.com/giong-run/Giong/blob/v1.5.3/examples/udp_echo.rs): A UDP echo server, receiving with multishot `recvmsg`. `cargo run --release --example udp_echo`
-- [examples/cat.rs](https://github.com/giong-run/Giong/blob/v1.5.3/examples/cat.rs): Prints files to standard output, reading them through io_uring with positional reads. `cargo run --release --example cat -- Cargo.toml`
-- [examples/stdio.rs](https://github.com/giong-run/Giong/blob/v1.5.3/examples/stdio.rs): A line protocol over standard input and output, as a local tool server speaks it: runs programs as child processes and answers with their output, and notes `SIGHUP`. `cargo run --release --example stdio`
+- [examples/rest-api](https://github.com/giong-run/Giong/tree/v1.5.4/examples/rest-api): A whole service on `giong-web`: users kept in PostgreSQL, read through a Redis cache, served over HTTPS, with request ids, a JSON access log, readiness, a streamed export and graceful shutdown. Its README has the routes, the configuration and how it is tested. `cargo run --release -p rest-api`
+- [examples/echo.rs](https://github.com/giong-run/Giong/blob/v1.5.4/examples/echo.rs): A TCP echo server on every core. `cargo run --release --example echo`
+- [examples/http.rs](https://github.com/giong-run/Giong/blob/v1.5.4/examples/http.rs): A small HTTP/1.1 server: keep-alive, pipelining, idle timeouts, a header size limit and graceful shutdown on SIGINT and SIGTERM. The same routes the benchmarks use. `cargo run --release --example http`
+- [examples/udp_echo.rs](https://github.com/giong-run/Giong/blob/v1.5.4/examples/udp_echo.rs): A UDP echo server, receiving with multishot `recvmsg`. `cargo run --release --example udp_echo`
+- [examples/cat.rs](https://github.com/giong-run/Giong/blob/v1.5.4/examples/cat.rs): Prints files to standard output, reading them through io_uring with positional reads. `cargo run --release --example cat -- Cargo.toml`
+- [examples/stdio.rs](https://github.com/giong-run/Giong/blob/v1.5.4/examples/stdio.rs): A line protocol over standard input and output, as a local tool server speaks it: runs programs as child processes and answers with their output, and notes `SIGHUP`. `cargo run --release --example stdio`
 
 ## API reference
 
-- [giong](https://docs.rs/giong/1.5.3): Executor, io_uring, epoll and kqueue drivers and IOCP; TCP, UDP, Unix sockets, files, timers, DNS, channels.
-- [giong-proto](https://docs.rs/giong-proto/1.5.3): Protocol Buffers decoded as views over the receive buffer: no copy, no allocation per field.
-- [giong-grpc-build](https://docs.rs/giong-grpc-build/1.5.3): Generates giong-proto messages and gRPC services from .proto files at build time.
-- [giong-quic](https://docs.rs/giong-quic/1.5.3): QUIC on giong's own UDP sockets: endpoints, streams and 0-RTT, TLS 1.3 from rustls.
-- [giong-tls](https://docs.rs/giong-tls/1.5.3): TLS 1.2 and 1.3 for servers and clients on rustls. No OpenSSL.
-- [giong-http](https://docs.rs/giong-http/1.5.3): A strict HTTP/1.1 and HTTP/2 server, HTTPS behind a feature, and a pooled client.
-- [giong-grpc](https://docs.rs/giong-grpc/1.5.3): gRPC servers and clients on giong-http's HTTP/2, messages read as giong-proto views.
-- [giong-postgres](https://docs.rs/giong-postgres/1.5.3): PostgreSQL client and pool; statements of every task pipeline together.
-- [giong-mysql](https://docs.rs/giong-mysql/1.5.3): MySQL and MariaDB client and pool, built the same way as giong-postgres.
-- [giong-redis](https://docs.rs/giong-redis/1.5.3): Redis client on RESP3: pipelining across tasks, Pub/Sub, a pool.
-- [giong-web](https://docs.rs/giong-web/1.5.3): Router, middleware and JSON on giong-http; errors as coded problem+json.
-- [giong-mcp](https://docs.rs/giong-mcp/1.5.3): A read-only MCP server: an agent sees what each worker, task and pool is doing.
-- [giong-compat](https://docs.rs/giong-compat/1.5.3): Tokio's and futures-io's I/O traits for giong's streams, for h2, tokio-rustls and the like.
+- [giong](https://docs.rs/giong/1.5.4): Executor, io_uring, epoll and kqueue drivers and IOCP; TCP, UDP, Unix sockets, files, timers, DNS, channels.
+- [giong-proto](https://docs.rs/giong-proto/1.5.4): Protocol Buffers decoded as views over the receive buffer: no copy, no allocation per field.
+- [giong-grpc-build](https://docs.rs/giong-grpc-build/1.5.4): Generates giong-proto messages and gRPC services from .proto files at build time.
+- [giong-quic](https://docs.rs/giong-quic/1.5.4): QUIC on giong's own UDP sockets: endpoints, streams and 0-RTT, TLS 1.3 from rustls.
+- [giong-tls](https://docs.rs/giong-tls/1.5.4): TLS 1.2 and 1.3 for servers and clients on rustls. No OpenSSL.
+- [giong-http](https://docs.rs/giong-http/1.5.4): A strict HTTP/1.1 and HTTP/2 server, HTTPS behind a feature, and a pooled client.
+- [giong-grpc](https://docs.rs/giong-grpc/1.5.4): gRPC servers and clients on giong-http's HTTP/2, messages read as giong-proto views.
+- [giong-postgres](https://docs.rs/giong-postgres/1.5.4): PostgreSQL client and pool; statements of every task pipeline together.
+- [giong-mysql](https://docs.rs/giong-mysql/1.5.4): MySQL and MariaDB client and pool, built the same way as giong-postgres.
+- [giong-redis](https://docs.rs/giong-redis/1.5.4): Redis client on RESP3: pipelining across tasks, Pub/Sub, a pool.
+- [giong-web](https://docs.rs/giong-web/1.5.4): Router, middleware and JSON on giong-http; errors as coded problem+json.
+- [giong-mcp](https://docs.rs/giong-mcp/1.5.4): A read-only MCP server: an agent sees what each worker, task and pool is doing.
+- [giong-compat](https://docs.rs/giong-compat/1.5.4): Tokio's and futures-io's I/O traits for giong's streams, for h2, tokio-rustls and the like.
 
 ## Error codes
 
 Every error giong raises starts with a code, says what went wrong and how to fix it, and links to its page. Match on `giong::error::code(&err)`, never on the message.
 
 ```text
-GIONG-E0102: no address found for db.internal. Fix: check the spelling of the name, /etc/hosts, and the DNS servers in /etc/resolv.conf (in a container, the network it is attached to). See https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/E0102.md
+GIONG-E0102: no address found for db.internal. Fix: check the spelling of the name, /etc/hosts, and the DNS servers in /etc/resolv.conf (in a container, the network it is attached to). See https://github.com/giong-run/Giong/blob/v1.5.4/docs/errors/E0102.md
 ```
 
 All 252 codes: https://giong.run/docs/errors.md

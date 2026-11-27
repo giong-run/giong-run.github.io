@@ -1,6 +1,6 @@
 # Ship a service
 
-> giong 1.5.3 · https://giong.run/docs/guides/ship/ · source: https://github.com/giong-run/Giong/blob/v1.5.3/docs/guides/ship.md
+> giong 1.5.4 · https://giong.run/docs/guides/ship/ · source: https://github.com/giong-run/Giong/blob/v1.5.4/docs/guides/ship.md
 
 From a project that passes `giong check` and `giong test` to an image running in production: measure the change, build the image, and set the few things production needs.
 

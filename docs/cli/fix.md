@@ -1,6 +1,6 @@
 # giong fix
 
-> giong 1.5.3 · https://giong.run/docs/cli/fix/ · source: https://github.com/giong-run/Giong/blob/v1.5.3/giong-cli/README.md#giong-fix
+> giong 1.5.4 · https://giong.run/docs/cli/fix/ · source: https://github.com/giong-run/Giong/blob/v1.5.4/giong-cli/README.md#giong-fix
 
 ```sh
 giong fix [--dry-run] [--allow-dirty] [-- cargo arguments]

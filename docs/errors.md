@@ -1,6 +1,6 @@
 # Error codes
 
-> giong 1.5.3 · https://giong.run/docs/errors/ · source: https://github.com/giong-run/Giong/blob/v1.5.3/docs/errors/README.md
+> giong 1.5.4 · https://giong.run/docs/errors/ · source: https://github.com/giong-run/Giong/blob/v1.5.4/docs/errors/README.md
 
 Every error giong raises itself starts with a code and ends with a link to its page here:
 
@@ -104,6 +104,7 @@ when it is no longer raised.
 | [GIONG-E0202](https://giong.run/docs/errors/E0202.md) | `OffsetOutOfRange` | file offset out of range |
 | [GIONG-E0203](https://giong.run/docs/errors/E0203.md) | `InvalidOpenOptions` | invalid combination of open options |
 | [GIONG-E0204](https://giong.run/docs/errors/E0204.md) | `FileTooLarge` | file too large to read into memory |
+| [GIONG-E0205](https://giong.run/docs/errors/E0205.md) | `OutsideRoot` | the path leads outside the root |
 
 ## giong-http
 

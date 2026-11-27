@@ -38,7 +38,7 @@
     <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="28" height="28"></picture><span>giong</span></a>
     <nav class="nav" aria-label="Site"><a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a><a href="/docs/agent-skill/">Agent skill</a></nav>
     <div class="hdr-side">
-      <a class="ver" href="/releases/#v1-5-3" title="Release notes for v1.5.3">v1.5.3</a>
+      <a class="ver" href="/releases/#v1-5-4" title="Release notes for v1.5.4">v1.5.4</a>
       <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="giong on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
       <a class="icon-btn hide-sm" href="https://x.com/giongrun" aria-label="giong on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
       <button class="icon-btn theme" type="button" aria-label="Switch between light and dark" hidden>
@@ -61,8 +61,8 @@
       <div class="doc-bar"><details class="ver-menu"><summary title="Documentation version">giong 1.5</summary><nav class="ver-list" aria-label="Documentation versions"><a href="/docs/giong-mysql/" aria-current=true><b>1.5</b><span>newest</span></a><a href="/docs/1.4/giong-mysql/"><b>1.4</b></a><a href="/docs/1.3/giong-mysql/"><b>1.3</b></a><a href="/docs/1.2/giong-mysql/"><b>1.2</b></a><a href="/docs/1.1/giong-mysql/"><b>1.1</b></a><a href="/docs/1.0/giong-mysql/"><b>1.0</b></a></nav></details><div class="doc-actions"><button class="act" type="button" data-md="md-page" data-done="copied" title="Copy this page as Markdown, for a coding agent"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy for agent</span></button><button class="act" type="button" data-md="md-prompt" data-done="copied" title="Copy a ready prompt with the rules and this page"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9Z"/><path d="M18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8Z"/></svg><span>Copy prompt</span></button><a class="act" href="/docs/giong-mysql.md" title="This page as plain Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><span>.md</span></a></div></div><div class="doc-meta"><div class="cmd"><code id="add-giong-mysql">cargo add giong-mysql</code><button class="copy" type="button" data-copy="add-giong-mysql" data-done="copied">copy</button></div><p class="crate-links"><a href="https://docs.rs/giong-mysql">docs.rs</a> · <a href="https://crates.io/crates/giong-mysql">crates.io</a> · <a href="https://github.com/giong-run/Giong/tree/main/giong-mysql">source</a></p></div></header>
     <div class="md-intro"><p>A MySQL and MariaDB client and connection pool for the <a href="/docs/giong/">giong</a> runtime. It speaks the client/server protocol itself (no libmysqlclient), encrypts with <a href="/docs/giong-tls/"><code>giong-tls</code></a>, and depends on nothing from the Tokio ecosystem.</p>
 <pre class="code"><code class="lang-toml">[dependencies]
-giong = "1.5.3"
-giong-mysql = "1.5.3"</code></pre>
+giong = "1.5.4"
+giong-mysql = "1.5.4"</code></pre>
 <pre class="code"><code class="lang-rust"><span class="k">use</span> giong_mysql::{<span class="t">Client</span>, <span class="t">Config</span>};
 
 <span class="k">fn</span> main() -&gt; <span class="t">Result</span>&lt;(), giong_mysql::<span class="t">Error</span>&gt; {
@@ -146,8 +146,8 @@ giong-mysql = "1.5.3"</code></pre>
 <p>Streaming a result one row at a time (a result is collected in full, up to <code>max_result_size</code>) and cursors, the result sets after the first from a <code>CALL</code>, <code>LOAD DATA LOCAL INFILE</code> (the server is never sent a file), compression, several hosts with failover, MariaDB's own extensions (its <code>client_ed25519</code> login among them), and authentication plugins other than those above. MySQL 8.0 and later and MariaDB 10.6 and later are supported; older versions are refused when connecting.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-8" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="tests">Tests</h2>
 <p><code>cargo test -p giong-mysql</code>: 74 tests against a real MySQL or MariaDB server that the test binary starts for itself (a throwaway data directory from <code>mysqld --initialize-insecure</code> or <code>mariadb-install-db</code>, with a user for each authentication plugin and path and one that requires TLS, listening on a Unix socket, 127.0.0.1 and 127.0.0.2), and a second one set up the way some production servers are (<code>init_connect</code> setting latin1, <code>innodb_rollback_on_timeout</code> on, the certificates MySQL generates itself): every supported type in both directions; conversion errors that name the column; server errors and their fields; pipelining across tasks, and a failing statement in the middle of a pipeline; the statement cache and its bound, counted on the server, and a cached statement after a schema change; values of 16 MiB and more, both ways; the result-size limit; the statement timeout; <code>KILL QUERY</code> through a cancel token; a query dropped mid-flight; a connection the server kills; a stored procedure with two results; <code>LOAD DATA LOCAL INFILE</code> refused; transactions committed, rolled back, dropped, ended by DDL and by a deadlock; no task or connection left behind after a client is dropped; TLS against the right and the wrong authority and host; <code>caching_sha2_password</code> over a socket, TCP and TLS, with RSA (the key asked for on loopback, or configured), and from a non-loopback address (through a forwarder on this machine's network address) where only the fast path may log in; <code>mysql_native_password</code>; <code>sha256_password</code> only over TLS; fake servers that ask for the password over the network, lack TLS, or predate MySQL 8; the connect timeout; and the pool (spreading statements, exclusive use and the rollback on return, even with <code>BEGIN</code> still in flight, waiting, and waking when a dropped statement frees the connection, replacing broken connections, connect errors, a slow statement not holding up the others, transaction statements refused on shared connections and a batch that leaves a transaction open); a connection taken and given back with session variables, a temporary table, user variables, <code>autocommit</code> off, <code>LOCK TABLES</code> and <code>GET_LOCK</code> comes back clean, and one that ran only plain statements keeps its prepared statements; session statements refused on shared connections, and a reset after a shared batch or trigger that changed the session; a failed reset closes the connection; <code>get()</code> not starved by 32 tasks of shared statements, waiting tasks served in order, a connection set aside for a task that gave up going back, idle connections closed, and old ones replaced under load and when they come back from <code>get()</code>, and lifetimes too long for the clock; text stored as <code>utf8mb4</code> where the server would make it latin1; the server-wide limit on prepared statements reached; a cancel request through a round-robin balancer that must not stop another server's statement; lock wait timeouts with and without the rollback of the transaction; a write waiting for a table lock bounded by the statement timeout; a statement given up inside a transaction stopping the commit; and <code>VERIFY_CA</code> with the certificates MySQL generates. 44 unit tests: packets and their splitting, the scrambles checked the way the server checks them, RSA-OAEP decrypted by the <code>openssl</code> command, URLs, type conversions and how their errors name types, the certificate check of <code>VERIFY_CA</code>, the versions refused, which errors are worth a retry and the old name of <code>server_code</code>, and random inputs for the packet parsers, the framing, rows of every column type, URLs, key files and the connection's state machine (3,000 sessions against a scripted server that sends mutated answers). 8 documentation examples. The fuzz targets in <code>fuzz/</code> cover the same parsers and the state machine (<code>session</code>) with coverage guidance.</p>
 <p>The tests find <code>mysqld</code> through <code>GIONG_MYSQL_BIN</code> (the directory that holds it), <code>/usr/sbin</code> or <code>PATH</code>, and the <code>mysql</code> client next to it or on <code>PATH</code>. They skip when MySQL is not installed, unless <code>GIONG_MYSQL_REQUIRED=1</code> (CI sets it). They also pass under ThreadSanitizer and on the fallback io_uring setups (<code>scripts/check.sh tsan</code> and <code>fallback</code>). They have passed against MySQL 8.0.46 and MariaDB 10.11 here; CI runs them against MySQL 8.0, 8.4 and 9.1 and MariaDB 10.6, 10.11, 11.4 and 11.8. For MariaDB, point <code>GIONG_MYSQL_BIN</code> at the directory that holds <code>mariadbd</code>.</p></section>
-    <p class="src-note">giong 1.5.3 · from <a href="https://github.com/giong-run/Giong/blob/v1.5.3/giong-mysql/README.md">giong-mysql/README.md</a> at v1.5.3</p>
-    <script type="text/markdown" id="md-0"><!-- giong 1.5.3, https://giong.run/docs/giong-mysql/#what-it-does -->
+    <p class="src-note">giong 1.5.4 · from <a href="https://github.com/giong-run/Giong/blob/v1.5.4/giong-mysql/README.md">giong-mysql/README.md</a> at v1.5.4</p>
+    <script type="text/markdown" id="md-0"><!-- giong 1.5.4, https://giong.run/docs/giong-mysql/#what-it-does -->
 
 ## What it does
 
@@ -157,7 +157,7 @@ giong-mysql = "1.5.3"</code></pre>
 - **Transactions that cannot end silently.** In MySQL, a deadlock rolls the whole transaction back, so does a lock wait timeout when the server has `innodb_rollback_on_timeout` on, and `CREATE`, `ALTER` or `DROP` commits it; the statements after that run on their own, outside any transaction, without a word. Here they fail instead, and so does `commit`. So does a transaction in which a statement was given up (its future dropped by a timeout), since it may have run.
 - **TLS on by default for remote hosts, always verified.** `caching_sha2_password` (MySQL 8's default) and `mysql_native_password`. A password is never sent where it could be read on the way (see [Passwords](#passwords)).
 - **Errors that say what to do.** Every error has an `ErrorKind`; errors from the server carry MySQL's error number and SQLSTATE.
-- **Finite limits everywhere.** Connecting, running a `SELECT`, waiting for a lock, the size of a result, the statement cache and waiting for the pool all have a limit by default, so nothing grows without bound. The one thing MySQL does not bound is a write that holds its locks and runs long; MariaDB bounds that too (see [Limits](#limits)).</script><script type="text/markdown" id="md-1"><!-- giong 1.5.3, https://giong.run/docs/giong-mysql/#connecting -->
+- **Finite limits everywhere.** Connecting, running a `SELECT`, waiting for a lock, the size of a result, the statement cache and waiting for the pool all have a limit by default, so nothing grows without bound. The one thing MySQL does not bound is a write that holds its locks and runs long; MariaDB bounds that too (see [Limits](#limits)).</script><script type="text/markdown" id="md-1"><!-- giong 1.5.4, https://giong.run/docs/giong-mysql/#connecting -->
 
 ## Connecting
 
@@ -221,7 +221,7 @@ Each connection starts its session with:
 | No TLS, to a loopback address | Encrypted with the RSA key the server sends when asked. Nobody can sit in between on this machine's loopback. |
 | No TLS, to another machine, no key configured | Not at all: connecting fails with `ErrorKind::Auth`. Asking the server for its key over the network would let anyone in between replace it and read the password. |
 
-`sha256_password` and clear-text plugins are answered only over TLS or a Unix socket. LDAP, Kerberos and PAM plugins are not supported.</script><script type="text/markdown" id="md-2"><!-- giong 1.5.3, https://giong.run/docs/giong-mysql/#api -->
+`sha256_password` and clear-text plugins are answered only over TLS or a Unix socket. LDAP, Kerberos and PAM plugins are not supported.</script><script type="text/markdown" id="md-2"><!-- giong 1.5.4, https://giong.run/docs/giong-mysql/#api -->
 
 ## API
 
@@ -247,7 +247,7 @@ Each connection starts its session with:
 | `pool.get()` | A `PooledClient` for this task alone, which derefs to `Client`. For transactions, session settings and statements known to be slow. Its session is reset when it comes back, if it may have changed. |
 | `pool.stats()` | Connections open, taken, being opened, set aside for `get()`; requests in flight; tasks waiting; and counters for connections opened, connect errors, wait timeouts, sessions reset, prepares refused for `max_prepared_stmt_count` and connections recycled. |
 
-A `Client` belongs to the worker that opened it (it is not `Send`, like everything in giong). Its methods take `&self`, so tasks share one by cloning an `Rc` or by holding a reference, and their statements are pipelined.</script><script type="text/markdown" id="md-3"><!-- giong 1.5.3, https://giong.run/docs/giong-mysql/#types -->
+A `Client` belongs to the worker that opened it (it is not `Send`, like everything in giong). Its methods take `&self`, so tasks share one by cloning an `Rc` or by holding a reference, and their statements are pipelined.</script><script type="text/markdown" id="md-3"><!-- giong 1.5.4, https://giong.run/docs/giong-mysql/#types -->
 
 ## Types
 
@@ -264,7 +264,7 @@ Parameters are sent as the MySQL type that holds them exactly; the server conver
 | `giong_mysql::Bits` | | `BIT` |
 | `Option<T>` | `NULL` or a value | `NULL` or a value |
 
-Conversions never lose anything silently: a value that does not fit, a binary column read as text, or a `NULL` read into a type that cannot hold it fails with an error that names the column and the types that would work. Pass a `DECIMAL` as a string (`"19.99"`) to keep it exact. Implement `ToSql` and `FromSql` for your own types.</script><script type="text/markdown" id="md-4"><!-- giong 1.5.3, https://giong.run/docs/giong-mysql/#errors -->
+Conversions never lose anything silently: a value that does not fit, a binary column read as text, or a `NULL` read into a type that cannot hold it fails with an error that names the column and the types that would work. Pass a `DECIMAL` as a string (`"19.99"`) to keep it exact. Implement `ToSql` and `FromSql` for your own types.</script><script type="text/markdown" id="md-4"><!-- giong 1.5.4, https://giong.run/docs/giong-mysql/#errors -->
 
 ## Errors
 
@@ -286,7 +286,7 @@ Conversions never lose anything silently: a value that does not fit, a binary co
 
 `error.is_transient()` is true for errors worth retrying after a pause: connecting, a closed connection, a pool wait timeout, and the server's deadlock (1213), lock wait timeout (1205), too many connections (1040, 1203), shutdown (1053), read-only mode (1290 naming `--read-only`, 1792, 1836) and a killed connection (1927, MariaDB). Retry a whole transaction, not its failed statement.
 
-An error from the server affects only its own statement: the statements that other tasks pipelined on the same connection get their own results.</script><script type="text/markdown" id="md-5"><!-- giong 1.5.3, https://giong.run/docs/giong-mysql/#limits -->
+An error from the server affects only its own statement: the statements that other tasks pipelined on the same connection get their own results.</script><script type="text/markdown" id="md-5"><!-- giong 1.5.4, https://giong.run/docs/giong-mysql/#limits -->
 
 ## Limits
 
@@ -300,7 +300,7 @@ An error from the server affects only its own statement: the statements that oth
 | `Pool::idle_timeout` | 10 min | The connection is closed. |
 | `Pool::max_lifetime` | 30 min, less up to 10% | The connection is closed once no statement uses it (one taken with `get()`, when it comes back), and a new one is opened when needed. |
 
-Values over 16 MiB are split into packets and joined again, both ways. The server's `max_allowed_packet` (64 MiB by default) limits the size of a statement with its parameters, and of a row.</script><script type="text/markdown" id="md-6"><!-- giong 1.5.3, https://giong.run/docs/giong-mysql/#performance -->
+Values over 16 MiB are split into packets and joined again, both ways. The server's `max_allowed_packet` (64 MiB by default) limits the size of a statement with its parameters, and of a row.</script><script type="text/markdown" id="md-6"><!-- giong 1.5.4, https://giong.run/docs/giong-mysql/#performance -->
 
 ## Performance
 
@@ -322,11 +322,11 @@ A pool, on one client core:
 - **Size the pool to the database's cores.** With more connections than the server has cores (4 on 3 here), one server thread at a time waits for a core, and the statements pipelined on its connection wait with it: the same throughput, but a p99 of 4.4 ms instead of 0.81. 8 connections give 161.6k at a p99 of 8.2 ms; 2 connections leave a server core idle, 87.9k. With several workers, the connections of all their pools add up. Statements that wait on disk or on locks need more connections than this.
 - **One connection shared by every task:** 26.6k point lookups and 10.8k 100-row reads, about what SQLx does with 64 connections, using 29–35% of the client core. The single server thread is the limit. Neither of the others can share a connection between tasks.
 
-Not measured: a server on another machine (network latency, where pipelining should matter more), writes, more than one client core, MySQL versions other than 8.0.46. Results are in `bench/results/mysql/`; pool sizes other than 4 in `pool-size/`.</script><script type="text/markdown" id="md-7"><!-- giong 1.5.3, https://giong.run/docs/giong-mysql/#not-there-yet -->
+Not measured: a server on another machine (network latency, where pipelining should matter more), writes, more than one client core, MySQL versions other than 8.0.46. Results are in `bench/results/mysql/`; pool sizes other than 4 in `pool-size/`.</script><script type="text/markdown" id="md-7"><!-- giong 1.5.4, https://giong.run/docs/giong-mysql/#not-there-yet -->
 
 ## Not there yet
 
-Streaming a result one row at a time (a result is collected in full, up to `max_result_size`) and cursors, the result sets after the first from a `CALL`, `LOAD DATA LOCAL INFILE` (the server is never sent a file), compression, several hosts with failover, MariaDB's own extensions (its `client_ed25519` login among them), and authentication plugins other than those above. MySQL 8.0 and later and MariaDB 10.6 and later are supported; older versions are refused when connecting.</script><script type="text/markdown" id="md-8"><!-- giong 1.5.3, https://giong.run/docs/giong-mysql/#tests -->
+Streaming a result one row at a time (a result is collected in full, up to `max_result_size`) and cursors, the result sets after the first from a `CALL`, `LOAD DATA LOCAL INFILE` (the server is never sent a file), compression, several hosts with failover, MariaDB's own extensions (its `client_ed25519` login among them), and authentication plugins other than those above. MySQL 8.0 and later and MariaDB 10.6 and later are supported; older versions are refused when connecting.</script><script type="text/markdown" id="md-8"><!-- giong 1.5.4, https://giong.run/docs/giong-mysql/#tests -->
 
 ## Tests
 
@@ -334,14 +334,14 @@ Streaming a result one row at a time (a result is collected in full, up to `max_
 
 The tests find `mysqld` through `GIONG_MYSQL_BIN` (the directory that holds it), `/usr/sbin` or `PATH`, and the `mysql` client next to it or on `PATH`. They skip when MySQL is not installed, unless `GIONG_MYSQL_REQUIRED=1` (CI sets it). They also pass under ThreadSanitizer and on the fallback io_uring setups (`scripts/check.sh tsan` and `fallback`). They have passed against MySQL 8.0.46 and MariaDB 10.11 here; CI runs them against MySQL 8.0, 8.4 and 9.1 and MariaDB 10.6, 10.11, 11.4 and 11.8. For MariaDB, point `GIONG_MYSQL_BIN` at the directory that holds `mariadbd`.</script><script type="text/markdown" id="md-page"># giong-mysql
 
-> giong 1.5.3 · https://giong.run/docs/giong-mysql/ · source: https://github.com/giong-run/Giong/blob/v1.5.3/giong-mysql/README.md
+> giong 1.5.4 · https://giong.run/docs/giong-mysql/ · source: https://github.com/giong-run/Giong/blob/v1.5.4/giong-mysql/README.md
 
 A MySQL and MariaDB client and connection pool for the [giong](https://giong.run/docs/giong.md) runtime. It speaks the client/server protocol itself (no libmysqlclient), encrypts with [`giong-tls`](https://giong.run/docs/giong-tls.md), and depends on nothing from the Tokio ecosystem.
 
 ```toml
 [dependencies]
-giong = "1.5.3"
-giong-mysql = "1.5.3"
+giong = "1.5.4"
+giong-mysql = "1.5.4"
 ```
 
 ```rust,no_run
@@ -570,7 +570,7 @@ Streaming a result one row at a time (a result is collected in full, up to `max_
 `cargo test -p giong-mysql`: 74 tests against a real MySQL or MariaDB server that the test binary starts for itself (a throwaway data directory from `mysqld --initialize-insecure` or `mariadb-install-db`, with a user for each authentication plugin and path and one that requires TLS, listening on a Unix socket, 127.0.0.1 and 127.0.0.2), and a second one set up the way some production servers are (`init_connect` setting latin1, `innodb_rollback_on_timeout` on, the certificates MySQL generates itself): every supported type in both directions; conversion errors that name the column; server errors and their fields; pipelining across tasks, and a failing statement in the middle of a pipeline; the statement cache and its bound, counted on the server, and a cached statement after a schema change; values of 16 MiB and more, both ways; the result-size limit; the statement timeout; `KILL QUERY` through a cancel token; a query dropped mid-flight; a connection the server kills; a stored procedure with two results; `LOAD DATA LOCAL INFILE` refused; transactions committed, rolled back, dropped, ended by DDL and by a deadlock; no task or connection left behind after a client is dropped; TLS against the right and the wrong authority and host; `caching_sha2_password` over a socket, TCP and TLS, with RSA (the key asked for on loopback, or configured), and from a non-loopback address (through a forwarder on this machine's network address) where only the fast path may log in; `mysql_native_password`; `sha256_password` only over TLS; fake servers that ask for the password over the network, lack TLS, or predate MySQL 8; the connect timeout; and the pool (spreading statements, exclusive use and the rollback on return, even with `BEGIN` still in flight, waiting, and waking when a dropped statement frees the connection, replacing broken connections, connect errors, a slow statement not holding up the others, transaction statements refused on shared connections and a batch that leaves a transaction open); a connection taken and given back with session variables, a temporary table, user variables, `autocommit` off, `LOCK TABLES` and `GET_LOCK` comes back clean, and one that ran only plain statements keeps its prepared statements; session statements refused on shared connections, and a reset after a shared batch or trigger that changed the session; a failed reset closes the connection; `get()` not starved by 32 tasks of shared statements, waiting tasks served in order, a connection set aside for a task that gave up going back, idle connections closed, and old ones replaced under load and when they come back from `get()`, and lifetimes too long for the clock; text stored as `utf8mb4` where the server would make it latin1; the server-wide limit on prepared statements reached; a cancel request through a round-robin balancer that must not stop another server's statement; lock wait timeouts with and without the rollback of the transaction; a write waiting for a table lock bounded by the statement timeout; a statement given up inside a transaction stopping the commit; and `VERIFY_CA` with the certificates MySQL generates. 44 unit tests: packets and their splitting, the scrambles checked the way the server checks them, RSA-OAEP decrypted by the `openssl` command, URLs, type conversions and how their errors name types, the certificate check of `VERIFY_CA`, the versions refused, which errors are worth a retry and the old name of `server_code`, and random inputs for the packet parsers, the framing, rows of every column type, URLs, key files and the connection's state machine (3,000 sessions against a scripted server that sends mutated answers). 8 documentation examples. The fuzz targets in `fuzz/` cover the same parsers and the state machine (`session`) with coverage guidance.
 
 The tests find `mysqld` through `GIONG_MYSQL_BIN` (the directory that holds it), `/usr/sbin` or `PATH`, and the `mysql` client next to it or on `PATH`. They skip when MySQL is not installed, unless `GIONG_MYSQL_REQUIRED=1` (CI sets it). They also pass under ThreadSanitizer and on the fallback io_uring setups (`scripts/check.sh tsan` and `fallback`). They have passed against MySQL 8.0.46 and MariaDB 10.11 here; CI runs them against MySQL 8.0, 8.4 and 9.1 and MariaDB 10.6, 10.11, 11.4 and 11.8. For MariaDB, point `GIONG_MYSQL_BIN` at the directory that holds `mariadbd`.
-</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.5.3, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use giong-mysql as documented below.
+</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.5.4, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use giong-mysql as documented below.
 
 Rules for giong code:
 - Start the runtime with giong::Builder::new().shutdown_on_signals(true).build()?.run(|_worker| async { .. }); there are no macros. Build listeners, routers, pools and clients inside each worker's future.
@@ -583,18 +583,18 @@ More facts: https://giong.run/llms.txt. Best practices: https://giong.run/docs/b
 
 My task: <describe what to build or fix>
 
-Documentation of giong-mysql, giong 1.5.3 (https://giong.run/docs/giong-mysql.md):
+Documentation of giong-mysql, giong 1.5.4 (https://giong.run/docs/giong-mysql.md):
 
 # giong-mysql
 
-> giong 1.5.3 · https://giong.run/docs/giong-mysql/ · source: https://github.com/giong-run/Giong/blob/v1.5.3/giong-mysql/README.md
+> giong 1.5.4 · https://giong.run/docs/giong-mysql/ · source: https://github.com/giong-run/Giong/blob/v1.5.4/giong-mysql/README.md
 
 A MySQL and MariaDB client and connection pool for the [giong](https://giong.run/docs/giong.md) runtime. It speaks the client/server protocol itself (no libmysqlclient), encrypts with [`giong-tls`](https://giong.run/docs/giong-tls.md), and depends on nothing from the Tokio ecosystem.
 
 ```toml
 [dependencies]
-giong = "1.5.3"
-giong-mysql = "1.5.3"
+giong = "1.5.4"
+giong-mysql = "1.5.4"
 ```
 
 ```rust,no_run
@@ -844,7 +844,7 @@ The tests find `mysqld` through `GIONG_MYSQL_BIN` (the directory that holds it),
         <h2>Learn</h2>
         <a href="/docs/">Get started</a>
         <a href="/docs/#examples">Examples</a>
-        <a href="https://docs.rs/giong/1.5.3/giong/">API reference</a>
+        <a href="https://docs.rs/giong/1.5.4/giong/">API reference</a>
         <a href="/docs/#errors">Error codes</a>
         <a href="/docs/best-practices/">Best practices</a><a href="/docs/agent-skill/">Agent skill</a>
         <a href="/llms.txt">llms.txt</a>

@@ -1,6 +1,6 @@
 # Deployment
 
-> giong 1.5.3 · https://giong.run/docs/deployment/ · source: https://github.com/giong-run/Giong/blob/v1.5.3/docs/DEPLOYMENT.md
+> giong 1.5.4 · https://giong.run/docs/deployment/ · source: https://github.com/giong-run/Giong/blob/v1.5.4/docs/DEPLOYMENT.md
 
 giong is fastest on io_uring, which needs Linux 6.0 or newer (6.1 or newer recommended)
 and the three io_uring system calls: `io_uring_setup`, `io_uring_enter` and
@@ -26,7 +26,7 @@ giong::block_on(async {
 ```
 
 `giong-mcp`'s `overview` shows the same for each worker. The
-[benchmarks](https://github.com/giong-run/Giong/blob/v1.5.3/docs/BENCHMARKS.md#io_uring-against-epoll) have the measured difference.
+[benchmarks](https://github.com/giong-run/Giong/blob/v1.5.4/docs/BENCHMARKS.md#io_uring-against-epoll) have the measured difference.
 
 So a container needs no special settings to run giong. Allow io_uring, as this page shows,
 when you want its speed:
@@ -184,10 +184,10 @@ CI checks the bound: the `slow-uploads` job runs a server with one worker and wi
 a Docker container limited to 128 MiB, sends it hundreds of uploads that stop one byte short
 of their announced length, over HTTP/1.1 and HTTP/2, and fails if the container is
 OOM-killed or a well-behaved client mixed in stops getting answers
-([scripts/slow-uploads.sh](https://github.com/giong-run/Giong/blob/v1.5.3/scripts/slow-uploads.sh)). The same job then runs it in 48 MiB
+([scripts/slow-uploads.sh](https://github.com/giong-run/Giong/blob/v1.5.4/scripts/slow-uploads.sh)). The same job then runs it in 48 MiB
 and opens idle connections until it refuses them, and fails if the container is
 OOM-killed, if the connections it holds stop being served, or if it does not take new ones
-once those close ([scripts/idle-connections.sh](https://github.com/giong-run/Giong/blob/v1.5.3/scripts/idle-connections.sh)).
+once those close ([scripts/idle-connections.sh](https://github.com/giong-run/Giong/blob/v1.5.4/scripts/idle-connections.sh)).
 
 ## Docker
 
@@ -252,7 +252,7 @@ on a 64-core node gets 2 workers. Tokio and `std::thread::available_parallelism`
 same way.
 
 A fraction is rounded down on purpose. Measured with the `defaults` example, wrk with 64
-connections, io_uring ([raw data](https://github.com/giong-run/Giong/blob/v1.5.3/bench/results/containers/cpu-quota.txt)):
+connections, io_uring ([raw data](https://github.com/giong-run/Giong/blob/v1.5.4/bench/results/containers/cpu-quota.txt)):
 
 | Quota | Workers | Requests/s | p99 |
 | --- | --- | --- | --- |
@@ -270,7 +270,7 @@ give a latency-sensitive service at least one whole CPU.
 
 Kubernetes CPU requests without a limit set no quota: the process sees every CPU of the node,
 and giong starts a worker for each. That costs little memory (about 0.4 MiB per worker under
-load, [raw data](https://github.com/giong-run/Giong/blob/v1.5.3/bench/results/containers/memory-workers.txt)), but the workers share the
+load, [raw data](https://github.com/giong-run/Giong/blob/v1.5.4/bench/results/containers/memory-workers.txt)), but the workers share the
 CPU time the pod gets. Pass the request to the program and use it, for example:
 
 ```yaml
@@ -327,9 +327,9 @@ the `rest-api` example stops in under half a second. Without it, run the contain
 
 ## Container image
 
-[examples/rest-api/Dockerfile](https://github.com/giong-run/Giong/blob/v1.5.3/examples/rest-api/Dockerfile) builds the `rest-api` example
+[examples/rest-api/Dockerfile](https://github.com/giong-run/Giong/blob/v1.5.4/examples/rest-api/Dockerfile) builds the `rest-api` example
 into a 44 MB image (distroless, glibc, no shell, an unprivileged user), and
-[compose.yaml](https://github.com/giong-run/Giong/blob/v1.5.3/examples/rest-api/compose.yaml) runs it with PostgreSQL and Redis, a CPU
+[compose.yaml](https://github.com/giong-run/Giong/blob/v1.5.4/examples/rest-api/compose.yaml) runs it with PostgreSQL and Redis, a CPU
 and a memory limit, and the lines that allow io_uring. Copy them for a service of your own:
 giong needs nothing in the image besides the program.
 
@@ -345,4 +345,4 @@ gVisor's network stack decides whether sockets may share a port when each one bi
 where Linux decides when the next one binds. giong finds out once per process which way
 the system works, and its workers share a port either way. CI runs the tests that bind
 one port from several workers, and a four-worker server, under gVisor
-([scripts/gvisor.sh](https://github.com/giong-run/Giong/blob/v1.5.3/scripts/gvisor.sh)).
+([scripts/gvisor.sh](https://github.com/giong-run/Giong/blob/v1.5.4/scripts/gvisor.sh)).
