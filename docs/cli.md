@@ -1,6 +1,6 @@
 # Dev kit overview
 
-> giong 1.5.6 · https://giong.run/docs/cli/ · source: https://github.com/giong-run/Giong/blob/v1.5.6/giong-cli/README.md
+> giong 1.5.7 · https://giong.run/docs/cli/ · source: https://github.com/giong-run/Giong/blob/v1.5.7/giong-cli/README.md
 
 The `giong` command: start, run, check and ship services on the [Gióng](https://github.com/giong-run/Giong) async runtime. One small binary (the standard library, `serde_json`, and `socket2` on Unix), the same on Linux, macOS and Windows.
 

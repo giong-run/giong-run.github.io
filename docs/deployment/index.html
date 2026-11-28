@@ -38,7 +38,7 @@
     <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="28" height="28"></picture><span>giong</span></a>
     <nav class="nav" aria-label="Site"><a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a><a href="/docs/agent-skill/">Agent skill</a></nav>
     <div class="hdr-side">
-      <a class="ver" href="/releases/#v1-5-6" title="Release notes for v1.5.6">v1.5.6</a>
+      <a class="ver" href="/releases/#v1-5-7" title="Release notes for v1.5.7">v1.5.7</a>
       <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="giong on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
       <a class="icon-btn hide-sm" href="https://x.com/giongrun" aria-label="giong on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
       <button class="icon-btn theme" type="button" aria-label="Switch between light and dark" hidden>
@@ -98,7 +98,7 @@ ulimit -l                           <span class="c">  # Linux 6.14-7.2: unlimite
 <span class="k">let</span> server = <span class="t">Server</span>::new()
     .max_buffered_request_bytes(64 &lt;&lt; 20)
     .max_connections(5_000);</code></pre>
-<p>CI checks the bound: the <code>slow-uploads</code> job runs a server with one worker and with four in a Docker container limited to 128 MiB, sends it hundreds of uploads that stop one byte short of their announced length, over HTTP/1.1 and HTTP/2, and fails if the container is OOM-killed or a well-behaved client mixed in stops getting answers (<a href="https://github.com/giong-run/Giong/blob/v1.5.6/scripts/slow-uploads.sh">scripts/slow-uploads.sh</a>). The same job then runs it in 48 MiB and opens idle connections until it refuses them, and fails if the container is OOM-killed, if the connections it holds stop being served, or if it does not take new ones once those close (<a href="https://github.com/giong-run/Giong/blob/v1.5.6/scripts/idle-connections.sh">scripts/idle-connections.sh</a>).</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-6" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="docker">Docker</h2>
+<p>CI checks the bound: the <code>slow-uploads</code> job runs a server with one worker and with four in a Docker container limited to 128 MiB, sends it hundreds of uploads that stop one byte short of their announced length, over HTTP/1.1 and HTTP/2, and fails if the container is OOM-killed or a well-behaved client mixed in stops getting answers (<a href="https://github.com/giong-run/Giong/blob/v1.5.7/scripts/slow-uploads.sh">scripts/slow-uploads.sh</a>). The same job then runs it in 48 MiB and opens idle connections until it refuses them, and fails if the container is OOM-killed, if the connections it holds stop being served, or if it does not take new ones once those close (<a href="https://github.com/giong-run/Giong/blob/v1.5.7/scripts/idle-connections.sh">scripts/idle-connections.sh</a>).</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-6" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="docker">Docker</h2>
 <p>Docker's default seccomp profile does not allow the io_uring system calls, so in a container run with default settings giong uses its epoll driver. For io_uring, use a profile that is Docker's default plus those three calls:</p>
 <pre class="code"><code class="lang-sh">curl -fsSLo docker-default.json \
   https://raw.githubusercontent.com/moby/profiles/main/seccomp/default.json
@@ -122,10 +122,10 @@ docker run --security-opt seccomp=giong-seccomp.json your-image</code></pre>
     localhostProfile: profiles/giong.json</code></pre>
 <p>The <a href="https://github.com/kubernetes-sigs/security-profiles-operator">Security Profiles Operator</a> can distribute the profile to the nodes for you. Managed platforms differ in what they let you change; check that yours allows <code>Localhost</code> profiles.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-8" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="cpu-limits">CPU limits</h2>
 <p>giong starts one worker per CPU the process may use: the CPUs it may run on (<code>--cpuset-cpus</code>, the exclusive CPUs of Kubernetes' static CPU manager), fewer when a CPU quota allows less (<code>--cpus</code>, <code>resources.limits.cpu</code>), rounded down, and at least one. A pod limited to 2 CPUs on a 64-core node gets 2 workers. Tokio and <code>std::thread::available_parallelism</code> count the same way.</p>
-<p>A fraction is rounded down on purpose. Measured with the <code>defaults</code> example, wrk with 64 connections, io_uring (<a href="https://github.com/giong-run/Giong/blob/v1.5.6/bench/results/containers/cpu-quota.txt">raw data</a>):</p>
+<p>A fraction is rounded down on purpose. Measured with the <code>defaults</code> example, wrk with 64 connections, io_uring (<a href="https://github.com/giong-run/Giong/blob/v1.5.7/bench/results/containers/cpu-quota.txt">raw data</a>):</p>
 <div class="table-scroll"><table><thead><tr><th>Quota</th><th>Workers</th><th>Requests/s</th><th>p99</th></tr></thead><tbody><tr><td>2 CPUs</td><td>2 (default)</td><td>285k</td><td>0.55 ms</td></tr><tr><td>2 CPUs</td><td>4</td><td>248k</td><td>4.1 ms</td></tr><tr><td>1.5 CPUs</td><td>1 (default)</td><td>147k</td><td>1.0-2.0 ms</td></tr><tr><td>1.5 CPUs</td><td>2</td><td>214k</td><td>23 ms</td></tr><tr><td>0.5 CPUs</td><td>1 (default)</td><td>70k</td><td>50 ms</td></tr></tbody></table></div>
 <p>More workers than the quota run until the quota is used up and then wait for the next 100 ms period: more requests per second, and a p99 10 to 20 times higher. Set <code>Builder::workers</code> above the default only when throughput matters more than tail latency. Under one CPU, the 100 ms period itself sets the p99 near 50 ms whatever the program does; give a latency-sensitive service at least one whole CPU.</p>
-<p>Kubernetes CPU requests without a limit set no quota: the process sees every CPU of the node, and giong starts a worker for each. That costs little memory (about 0.4 MiB per worker under load, <a href="https://github.com/giong-run/Giong/blob/v1.5.6/bench/results/containers/memory-workers.txt">raw data</a>), but the workers share the CPU time the pod gets. Pass the request to the program and use it, for example:</p>
+<p>Kubernetes CPU requests without a limit set no quota: the process sees every CPU of the node, and giong starts a worker for each. That costs little memory (about 0.4 MiB per worker under load, <a href="https://github.com/giong-run/Giong/blob/v1.5.7/bench/results/containers/memory-workers.txt">raw data</a>), but the workers share the CPU time the pod gets. Pass the request to the program and use it, for example:</p>
 <pre class="code"><code class="lang-yaml">env:
   - name: WORKERS
     valueFrom:
@@ -139,11 +139,11 @@ docker run --security-opt seccomp=giong-seccomp.json your-image</code></pre>
 <p>Each connection is a file descriptor, and the soft <code>RLIMIT_NOFILE</code> (<code>ulimit -n</code>) bounds them. containerd from 1.8 on, and so Kubernetes on most nodes today, starts containers with the systemd default of 1,024 soft and 524,288 hard. At the soft limit giong-http's accept loop waits 50 ms and tries again, serving the connections it has, while new clients wait in the listen queue: measured with the <code>defaults</code> example in a container limited to 1,024 files, 1,071 of 1,100 keep-alive clients were answered and 29 were not.</p>
 <p>So on Linux giong raises the soft limit to the hard one when a runtime is built, as Go programs do: a process may do that without privileges, and with it all 1,100 clients are answered in the same container. A hard limit of <code>unlimited</code> is read as <code>fs.nr_open</code>. To keep the soft limit, for a program that starts children which still use <code>select(2)</code> and need descriptors below 1,024 (children inherit the limit), build with <code>Builder::raise_open_files_limit(false)</code>. A hard limit below what the service needs is raised from outside: <code>docker run --ulimit nofile=65536:65536</code>, <code>ulimits</code> in Compose, <code>LimitNOFILE</code> in systemd. When a server does run out, each worker says so on stderr at most once a minute, with the limits it found (<a href="/docs/errors/E1123/">GIONG-E1123</a>), and giong-mcp's <code>overview</code> shows the limits of the container (CPUs, CPU quota, memory, <code>pids.max</code>, open files) beside where the worker count came from.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-10" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="stopping-sigterm-and-process-1">Stopping: SIGTERM and process 1</h2>
 <p><code>docker stop</code> and Kubernetes send <code>SIGTERM</code>, then <code>SIGKILL</code> 10 seconds later (Kubernetes: <code>terminationGracePeriodSeconds</code>, 30 by default). A program that runs as process 1 of a container gets no default action for <code>SIGTERM</code>: unless it handles the signal, it keeps running until it is killed. With <code>Builder::shutdown_on_signals(true)</code> giong handles <code>SIGINT</code> and <code>SIGTERM</code>, and with <code>shutdown_grace</code> the requests in flight are answered first; the <code>rest-api</code> example stops in under half a second. Without it, run the container with <code>--init</code> (<code>init: true</code> in Docker Compose), which forwards the signal and stops the process.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-11" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="container-image">Container image</h2>
-<p><a href="https://github.com/giong-run/Giong/blob/v1.5.6/examples/rest-api/Dockerfile">examples/rest-api/Dockerfile</a> builds the <code>rest-api</code> example into a 44 MB image (distroless, glibc, no shell, an unprivileged user), and <a href="https://github.com/giong-run/Giong/blob/v1.5.6/examples/rest-api/compose.yaml">compose.yaml</a> runs it with PostgreSQL and Redis, a CPU and a memory limit, and the lines that allow io_uring. Copy them for a service of your own: giong needs nothing in the image besides the program.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-12" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="sandboxes">Sandboxes</h2>
+<p><a href="https://github.com/giong-run/Giong/blob/v1.5.7/examples/rest-api/Dockerfile">examples/rest-api/Dockerfile</a> builds the <code>rest-api</code> example into a 44 MB image (distroless, glibc, no shell, an unprivileged user), and <a href="https://github.com/giong-run/Giong/blob/v1.5.7/examples/rest-api/compose.yaml">compose.yaml</a> runs it with PostgreSQL and Redis, a CPU and a memory limit, and the lines that allow io_uring. Copy them for a service of your own: giong needs nothing in the image besides the program.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-12" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="sandboxes">Sandboxes</h2>
 <p>Runtimes that put a user-space kernel between the container and Linux, such as gVisor (used by GKE Sandbox), do not offer io_uring by default. giong runs on epoll there; run it outside such a sandbox for io_uring. gVisor's optional io_uring (<code>runsc --iouring</code>) takes none of the settings giong's rings need, so giong runs on epoll there too, with <a href="/docs/errors/E0001/">GIONG-E0001</a> as the reason.</p>
-<p>gVisor's network stack decides whether sockets may share a port when each one binds, where Linux decides when the next one binds. giong finds out once per process which way the system works, and its workers share a port either way. CI runs the tests that bind one port from several workers, and a four-worker server, under gVisor (<a href="https://github.com/giong-run/Giong/blob/v1.5.6/scripts/gvisor.sh">scripts/gvisor.sh</a>).</p></section>
-    <p class="src-note">giong 1.5.6 · from <a href="https://github.com/giong-run/Giong/blob/v1.5.6/docs/DEPLOYMENT.md">docs/DEPLOYMENT.md</a> at v1.5.6</p>
-    <script type="text/markdown" id="md-0"><!-- giong 1.5.6, https://giong.run/docs/deployment/#check-a-machine -->
+<p>gVisor's network stack decides whether sockets may share a port when each one binds, where Linux decides when the next one binds. giong finds out once per process which way the system works, and its workers share a port either way. CI runs the tests that bind one port from several workers, and a four-worker server, under gVisor (<a href="https://github.com/giong-run/Giong/blob/v1.5.7/scripts/gvisor.sh">scripts/gvisor.sh</a>).</p></section>
+    <p class="src-note">giong 1.5.7 · from <a href="https://github.com/giong-run/Giong/blob/v1.5.7/docs/DEPLOYMENT.md">docs/DEPLOYMENT.md</a> at v1.5.7</p>
+    <script type="text/markdown" id="md-0"><!-- giong 1.5.7, https://giong.run/docs/deployment/#check-a-machine -->
 
 ## Check a machine
 
@@ -156,7 +156,7 @@ ulimit -l                             # Linux 6.14-7.2: unlimited, or 150 KiB pe
 `kernel.io_uring_disabled` (Linux 6.6 and newer): `0` allows io_uring for every process,
 `1` only for privileged processes and members of the group in `kernel.io_uring_group`,
 `2` for nobody. Set it with `sysctl -w kernel.io_uring_disabled=0`, or put the service's
-user in that group.</script><script type="text/markdown" id="md-1"><!-- giong 1.5.6, https://giong.run/docs/deployment/#locked-memory-limit -->
+user in that group.</script><script type="text/markdown" id="md-1"><!-- giong 1.5.7, https://giong.run/docs/deployment/#locked-memory-limit -->
 
 ## Locked-memory limit
 
@@ -199,7 +199,7 @@ Raise the limit, or lift it, for any service that is not root:
   `/etc/security/limits.conf` for its user.
 
 Or need less: fewer workers, a smaller `Builder::ring_entries`, fewer receive buffers. Or
-run a kernel that does not count the rings.</script><script type="text/markdown" id="md-2"><!-- giong 1.5.6, https://giong.run/docs/deployment/#ubuntu-2404 -->
+run a kernel that does not count the rings.</script><script type="text/markdown" id="md-2"><!-- giong 1.5.7, https://giong.run/docs/deployment/#ubuntu-2404 -->
 
 ## Ubuntu 24.04
 
@@ -211,7 +211,7 @@ the way those kernels accept, so io_uring works there at full speed, and
 `giong::driver_choice()` lists the workaround (`buffer-ring-reserved-check`). Nothing to
 do on your side. Other software that uses buffer rings through liburing fails on those
 kernels with `EINVAL`. The 7.0 HWE kernel (`linux-generic-hwe-24.04`) does not have the
-bug.</script><script type="text/markdown" id="md-3"><!-- giong 1.5.6, https://giong.run/docs/deployment/#linux-6016-to-6019 -->
+bug.</script><script type="text/markdown" id="md-3"><!-- giong 1.5.7, https://giong.run/docs/deployment/#linux-6016-to-6019 -->
 
 ## Linux 6.0.16 to 6.0.19
 
@@ -223,7 +223,7 @@ of every interface, so a server asked for a busy port starts on another one.
 `AddrInUse`, as on every other kernel. A listener that the standard library bound, handed
 over with `TcpListener::from_std`, is not checked: compare its `local_addr()` with the
 address you asked for, or let giong bind it. 6.0.15 and older, 6.1 and later, and UDP and
-Unix sockets are not affected.</script><script type="text/markdown" id="md-4"><!-- giong 1.5.6, https://giong.run/docs/deployment/#restarting-on-the-same-port -->
+Unix sockets are not affected.</script><script type="text/markdown" id="md-4"><!-- giong 1.5.7, https://giong.run/docs/deployment/#restarting-on-the-same-port -->
 
 ## Restarting on the same port
 
@@ -243,7 +243,7 @@ half of the first one's connections. What that means for a restart:
   giong sets no option on such a socket and does not check who else holds its port.
 - Connections still in a closing listener's accept queue are refused when it closes: have
   the load balancer stop sending to the old process first, and give it a
-  `Builder::shutdown_grace` to answer what it already has.</script><script type="text/markdown" id="md-5"><!-- giong 1.5.6, https://giong.run/docs/deployment/#sizing-memory -->
+  `Builder::shutdown_grace` to answer what it already has.</script><script type="text/markdown" id="md-5"><!-- giong 1.5.7, https://giong.run/docs/deployment/#sizing-memory -->
 
 ## Sizing memory
 
@@ -294,7 +294,7 @@ OOM-killed or a well-behaved client mixed in stops getting answers
 ([scripts/slow-uploads.sh](../scripts/slow-uploads.sh)). The same job then runs it in 48 MiB
 and opens idle connections until it refuses them, and fails if the container is
 OOM-killed, if the connections it holds stop being served, or if it does not take new ones
-once those close ([scripts/idle-connections.sh](../scripts/idle-connections.sh)).</script><script type="text/markdown" id="md-6"><!-- giong 1.5.6, https://giong.run/docs/deployment/#docker -->
+once those close ([scripts/idle-connections.sh](../scripts/idle-connections.sh)).</script><script type="text/markdown" id="md-6"><!-- giong 1.5.7, https://giong.run/docs/deployment/#docker -->
 
 ## Docker
 
@@ -326,7 +326,7 @@ This keeps every other restriction of the default profile. Avoid
 
 Checked on Docker Engine 29.9.2 with a static binary that starts a runtime and does a TCP
 round trip: with `giong-seccomp.json` it runs on io_uring. With the default profile,
-giong's test suite runs on the epoll driver in CI (the `docker` job).</script><script type="text/markdown" id="md-7"><!-- giong 1.5.6, https://giong.run/docs/deployment/#kubernetes -->
+giong's test suite runs on the epoll driver in CI (the `docker` job).</script><script type="text/markdown" id="md-7"><!-- giong 1.5.7, https://giong.run/docs/deployment/#kubernetes -->
 
 ## Kubernetes
 
@@ -348,7 +348,7 @@ securityContext:
 
 The [Security Profiles Operator](https://github.com/kubernetes-sigs/security-profiles-operator)
 can distribute the profile to the nodes for you. Managed platforms differ in what they
-let you change; check that yours allows `Localhost` profiles.</script><script type="text/markdown" id="md-8"><!-- giong 1.5.6, https://giong.run/docs/deployment/#cpu-limits -->
+let you change; check that yours allows `Localhost` profiles.</script><script type="text/markdown" id="md-8"><!-- giong 1.5.7, https://giong.run/docs/deployment/#cpu-limits -->
 
 ## CPU limits
 
@@ -393,7 +393,7 @@ let mut builder = giong::Builder::new();
 if let Some(n) = std::env::var("WORKERS").ok().and_then(|n| n.parse().ok()) {
     builder = builder.workers(n);
 }
-```</script><script type="text/markdown" id="md-9"><!-- giong 1.5.6, https://giong.run/docs/deployment/#thread-and-file-limits -->
+```</script><script type="text/markdown" id="md-9"><!-- giong 1.5.7, https://giong.run/docs/deployment/#thread-and-file-limits -->
 
 ## Thread and file limits
 
@@ -420,7 +420,7 @@ raised from outside: `docker run --ulimit nofile=65536:65536`, `ulimits` in Comp
 `LimitNOFILE` in systemd. When a server does run out, each worker says so on stderr at most
 once a minute, with the limits it found ([GIONG-E1123](errors/E1123.md)), and giong-mcp's
 `overview` shows the limits of the container (CPUs, CPU quota, memory, `pids.max`, open
-files) beside where the worker count came from.</script><script type="text/markdown" id="md-10"><!-- giong 1.5.6, https://giong.run/docs/deployment/#stopping-sigterm-and-process-1 -->
+files) beside where the worker count came from.</script><script type="text/markdown" id="md-10"><!-- giong 1.5.7, https://giong.run/docs/deployment/#stopping-sigterm-and-process-1 -->
 
 ## Stopping: SIGTERM and process 1
 
@@ -430,7 +430,7 @@ container gets no default action for `SIGTERM`: unless it handles the signal, it
 running until it is killed. With `Builder::shutdown_on_signals(true)` giong handles
 `SIGINT` and `SIGTERM`, and with `shutdown_grace` the requests in flight are answered first;
 the `rest-api` example stops in under half a second. Without it, run the container with
-`--init` (`init: true` in Docker Compose), which forwards the signal and stops the process.</script><script type="text/markdown" id="md-11"><!-- giong 1.5.6, https://giong.run/docs/deployment/#container-image -->
+`--init` (`init: true` in Docker Compose), which forwards the signal and stops the process.</script><script type="text/markdown" id="md-11"><!-- giong 1.5.7, https://giong.run/docs/deployment/#container-image -->
 
 ## Container image
 
@@ -438,7 +438,7 @@ the `rest-api` example stops in under half a second. Without it, run the contain
 into a 44 MB image (distroless, glibc, no shell, an unprivileged user), and
 [compose.yaml](../examples/rest-api/compose.yaml) runs it with PostgreSQL and Redis, a CPU
 and a memory limit, and the lines that allow io_uring. Copy them for a service of your own:
-giong needs nothing in the image besides the program.</script><script type="text/markdown" id="md-12"><!-- giong 1.5.6, https://giong.run/docs/deployment/#sandboxes -->
+giong needs nothing in the image besides the program.</script><script type="text/markdown" id="md-12"><!-- giong 1.5.7, https://giong.run/docs/deployment/#sandboxes -->
 
 ## Sandboxes
 
@@ -454,7 +454,7 @@ the system works, and its workers share a port either way. CI runs the tests tha
 one port from several workers, and a four-worker server, under gVisor
 ([scripts/gvisor.sh](../scripts/gvisor.sh)).</script><script type="text/markdown" id="md-page"># Deployment
 
-> giong 1.5.6 · https://giong.run/docs/deployment/ · source: https://github.com/giong-run/Giong/blob/v1.5.6/docs/DEPLOYMENT.md
+> giong 1.5.7 · https://giong.run/docs/deployment/ · source: https://github.com/giong-run/Giong/blob/v1.5.7/docs/DEPLOYMENT.md
 
 giong is fastest on io_uring, which needs Linux 6.0 or newer (6.1 or newer recommended)
 and the three io_uring system calls: `io_uring_setup`, `io_uring_enter` and
@@ -480,7 +480,7 @@ giong::block_on(async {
 ```
 
 `giong-mcp`'s `overview` shows the same for each worker. The
-[benchmarks](https://github.com/giong-run/Giong/blob/v1.5.6/docs/BENCHMARKS.md#io_uring-against-epoll) have the measured difference.
+[benchmarks](https://github.com/giong-run/Giong/blob/v1.5.7/docs/BENCHMARKS.md#io_uring-against-epoll) have the measured difference.
 
 So a container needs no special settings to run giong. Allow io_uring, as this page shows,
 when you want its speed:
@@ -638,10 +638,10 @@ CI checks the bound: the `slow-uploads` job runs a server with one worker and wi
 a Docker container limited to 128 MiB, sends it hundreds of uploads that stop one byte short
 of their announced length, over HTTP/1.1 and HTTP/2, and fails if the container is
 OOM-killed or a well-behaved client mixed in stops getting answers
-([scripts/slow-uploads.sh](https://github.com/giong-run/Giong/blob/v1.5.6/scripts/slow-uploads.sh)). The same job then runs it in 48 MiB
+([scripts/slow-uploads.sh](https://github.com/giong-run/Giong/blob/v1.5.7/scripts/slow-uploads.sh)). The same job then runs it in 48 MiB
 and opens idle connections until it refuses them, and fails if the container is
 OOM-killed, if the connections it holds stop being served, or if it does not take new ones
-once those close ([scripts/idle-connections.sh](https://github.com/giong-run/Giong/blob/v1.5.6/scripts/idle-connections.sh)).
+once those close ([scripts/idle-connections.sh](https://github.com/giong-run/Giong/blob/v1.5.7/scripts/idle-connections.sh)).
 
 ## Docker
 
@@ -706,7 +706,7 @@ on a 64-core node gets 2 workers. Tokio and `std::thread::available_parallelism`
 same way.
 
 A fraction is rounded down on purpose. Measured with the `defaults` example, wrk with 64
-connections, io_uring ([raw data](https://github.com/giong-run/Giong/blob/v1.5.6/bench/results/containers/cpu-quota.txt)):
+connections, io_uring ([raw data](https://github.com/giong-run/Giong/blob/v1.5.7/bench/results/containers/cpu-quota.txt)):
 
 | Quota | Workers | Requests/s | p99 |
 | --- | --- | --- | --- |
@@ -724,7 +724,7 @@ give a latency-sensitive service at least one whole CPU.
 
 Kubernetes CPU requests without a limit set no quota: the process sees every CPU of the node,
 and giong starts a worker for each. That costs little memory (about 0.4 MiB per worker under
-load, [raw data](https://github.com/giong-run/Giong/blob/v1.5.6/bench/results/containers/memory-workers.txt)), but the workers share the
+load, [raw data](https://github.com/giong-run/Giong/blob/v1.5.7/bench/results/containers/memory-workers.txt)), but the workers share the
 CPU time the pod gets. Pass the request to the program and use it, for example:
 
 ```yaml
@@ -781,9 +781,9 @@ the `rest-api` example stops in under half a second. Without it, run the contain
 
 ## Container image
 
-[examples/rest-api/Dockerfile](https://github.com/giong-run/Giong/blob/v1.5.6/examples/rest-api/Dockerfile) builds the `rest-api` example
+[examples/rest-api/Dockerfile](https://github.com/giong-run/Giong/blob/v1.5.7/examples/rest-api/Dockerfile) builds the `rest-api` example
 into a 44 MB image (distroless, glibc, no shell, an unprivileged user), and
-[compose.yaml](https://github.com/giong-run/Giong/blob/v1.5.6/examples/rest-api/compose.yaml) runs it with PostgreSQL and Redis, a CPU
+[compose.yaml](https://github.com/giong-run/Giong/blob/v1.5.7/examples/rest-api/compose.yaml) runs it with PostgreSQL and Redis, a CPU
 and a memory limit, and the lines that allow io_uring. Copy them for a service of your own:
 giong needs nothing in the image besides the program.
 
@@ -799,8 +799,8 @@ gVisor's network stack decides whether sockets may share a port when each one bi
 where Linux decides when the next one binds. giong finds out once per process which way
 the system works, and its workers share a port either way. CI runs the tests that bind
 one port from several workers, and a four-worker server, under gVisor
-([scripts/gvisor.sh](https://github.com/giong-run/Giong/blob/v1.5.6/scripts/gvisor.sh)).
-</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.5.6, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use Deployment as documented below.
+([scripts/gvisor.sh](https://github.com/giong-run/Giong/blob/v1.5.7/scripts/gvisor.sh)).
+</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.5.7, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use Deployment as documented below.
 
 Rules for giong code:
 - Start the runtime with giong::Builder::new().shutdown_on_signals(true).build()?.run(|_worker| async { .. }); there are no macros. Build listeners, routers, pools and clients inside each worker's future.
@@ -813,11 +813,11 @@ More facts: https://giong.run/llms.txt. Best practices: https://giong.run/docs/b
 
 My task: <describe what to build or fix>
 
-Documentation of Deployment, giong 1.5.6 (https://giong.run/docs/deployment.md):
+Documentation of Deployment, giong 1.5.7 (https://giong.run/docs/deployment.md):
 
 # Deployment
 
-> giong 1.5.6 · https://giong.run/docs/deployment/ · source: https://github.com/giong-run/Giong/blob/v1.5.6/docs/DEPLOYMENT.md
+> giong 1.5.7 · https://giong.run/docs/deployment/ · source: https://github.com/giong-run/Giong/blob/v1.5.7/docs/DEPLOYMENT.md
 
 giong is fastest on io_uring, which needs Linux 6.0 or newer (6.1 or newer recommended)
 and the three io_uring system calls: `io_uring_setup`, `io_uring_enter` and
@@ -843,7 +843,7 @@ giong::block_on(async {
 ```
 
 `giong-mcp`'s `overview` shows the same for each worker. The
-[benchmarks](https://github.com/giong-run/Giong/blob/v1.5.6/docs/BENCHMARKS.md#io_uring-against-epoll) have the measured difference.
+[benchmarks](https://github.com/giong-run/Giong/blob/v1.5.7/docs/BENCHMARKS.md#io_uring-against-epoll) have the measured difference.
 
 So a container needs no special settings to run giong. Allow io_uring, as this page shows,
 when you want its speed:
@@ -1001,10 +1001,10 @@ CI checks the bound: the `slow-uploads` job runs a server with one worker and wi
 a Docker container limited to 128 MiB, sends it hundreds of uploads that stop one byte short
 of their announced length, over HTTP/1.1 and HTTP/2, and fails if the container is
 OOM-killed or a well-behaved client mixed in stops getting answers
-([scripts/slow-uploads.sh](https://github.com/giong-run/Giong/blob/v1.5.6/scripts/slow-uploads.sh)). The same job then runs it in 48 MiB
+([scripts/slow-uploads.sh](https://github.com/giong-run/Giong/blob/v1.5.7/scripts/slow-uploads.sh)). The same job then runs it in 48 MiB
 and opens idle connections until it refuses them, and fails if the container is
 OOM-killed, if the connections it holds stop being served, or if it does not take new ones
-once those close ([scripts/idle-connections.sh](https://github.com/giong-run/Giong/blob/v1.5.6/scripts/idle-connections.sh)).
+once those close ([scripts/idle-connections.sh](https://github.com/giong-run/Giong/blob/v1.5.7/scripts/idle-connections.sh)).
 
 ## Docker
 
@@ -1069,7 +1069,7 @@ on a 64-core node gets 2 workers. Tokio and `std::thread::available_parallelism`
 same way.
 
 A fraction is rounded down on purpose. Measured with the `defaults` example, wrk with 64
-connections, io_uring ([raw data](https://github.com/giong-run/Giong/blob/v1.5.6/bench/results/containers/cpu-quota.txt)):
+connections, io_uring ([raw data](https://github.com/giong-run/Giong/blob/v1.5.7/bench/results/containers/cpu-quota.txt)):
 
 | Quota | Workers | Requests/s | p99 |
 | --- | --- | --- | --- |
@@ -1087,7 +1087,7 @@ give a latency-sensitive service at least one whole CPU.
 
 Kubernetes CPU requests without a limit set no quota: the process sees every CPU of the node,
 and giong starts a worker for each. That costs little memory (about 0.4 MiB per worker under
-load, [raw data](https://github.com/giong-run/Giong/blob/v1.5.6/bench/results/containers/memory-workers.txt)), but the workers share the
+load, [raw data](https://github.com/giong-run/Giong/blob/v1.5.7/bench/results/containers/memory-workers.txt)), but the workers share the
 CPU time the pod gets. Pass the request to the program and use it, for example:
 
 ```yaml
@@ -1144,9 +1144,9 @@ the `rest-api` example stops in under half a second. Without it, run the contain
 
 ## Container image
 
-[examples/rest-api/Dockerfile](https://github.com/giong-run/Giong/blob/v1.5.6/examples/rest-api/Dockerfile) builds the `rest-api` example
+[examples/rest-api/Dockerfile](https://github.com/giong-run/Giong/blob/v1.5.7/examples/rest-api/Dockerfile) builds the `rest-api` example
 into a 44 MB image (distroless, glibc, no shell, an unprivileged user), and
-[compose.yaml](https://github.com/giong-run/Giong/blob/v1.5.6/examples/rest-api/compose.yaml) runs it with PostgreSQL and Redis, a CPU
+[compose.yaml](https://github.com/giong-run/Giong/blob/v1.5.7/examples/rest-api/compose.yaml) runs it with PostgreSQL and Redis, a CPU
 and a memory limit, and the lines that allow io_uring. Copy them for a service of your own:
 giong needs nothing in the image besides the program.
 
@@ -1162,7 +1162,7 @@ gVisor's network stack decides whether sockets may share a port when each one bi
 where Linux decides when the next one binds. giong finds out once per process which way
 the system works, and its workers share a port either way. CI runs the tests that bind
 one port from several workers, and a four-worker server, under gVisor
-([scripts/gvisor.sh](https://github.com/giong-run/Giong/blob/v1.5.6/scripts/gvisor.sh)).
+([scripts/gvisor.sh](https://github.com/giong-run/Giong/blob/v1.5.7/scripts/gvisor.sh)).
 </script>
   </article>
   <nav class="toc doc-toc" aria-label="On this page"><p>On this page</p><div class="toc-links"><a href="#check-a-machine">Check a machine</a><a href="#locked-memory-limit">Locked-memory limit</a><a href="#ubuntu-2404">Ubuntu 24.04</a><a href="#linux-6016-to-6019">Linux 6.0.16 to 6.0.19</a><a href="#restarting-on-the-same-port">Restarting on the same port</a><a href="#sizing-memory">Sizing memory</a><a href="#docker">Docker</a><a href="#kubernetes">Kubernetes</a><a href="#cpu-limits">CPU limits</a><a href="#thread-and-file-limits">Thread and file limits</a><a href="#stopping-sigterm-and-process-1">Stopping: SIGTERM and process 1</a><a href="#container-image">Container image</a><a href="#sandboxes">Sandboxes</a></div></nav>
@@ -1184,7 +1184,7 @@ one port from several workers, and a four-worker server, under gVisor
         <h2>Learn</h2>
         <a href="/docs/">Get started</a>
         <a href="/docs/#examples">Examples</a>
-        <a href="https://docs.rs/giong/1.5.6/giong/">API reference</a>
+        <a href="https://docs.rs/giong/1.5.7/giong/">API reference</a>
         <a href="/docs/#errors">Error codes</a>
         <a href="/docs/best-practices/">Best practices</a><a href="/docs/agent-skill/">Agent skill</a>
         <a href="/llms.txt">llms.txt</a>

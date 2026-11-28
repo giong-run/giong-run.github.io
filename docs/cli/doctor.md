@@ -1,6 +1,6 @@
 # giong doctor
 
-> giong 1.5.6 · https://giong.run/docs/cli/doctor/ · source: https://github.com/giong-run/Giong/blob/v1.5.6/giong-cli/README.md#giong-doctor
+> giong 1.5.7 · https://giong.run/docs/cli/doctor/ · source: https://github.com/giong-run/Giong/blob/v1.5.7/giong-cli/README.md#giong-doctor
 
 ```sh
 giong doctor [--machine] [--offline]

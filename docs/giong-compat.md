@@ -1,13 +1,13 @@
 # giong-compat
 
-> giong 1.5.6 · https://giong.run/docs/giong-compat/ · source: https://github.com/giong-run/Giong/blob/v1.5.6/giong-compat/README.md
+> giong 1.5.7 · https://giong.run/docs/giong-compat/ · source: https://github.com/giong-run/Giong/blob/v1.5.7/giong-compat/README.md
 
 The I/O traits of Tokio and of the futures crates for [giong](https://giong.run/docs/giong.md)'s streams, so that protocol crates which are generic over their transport run on giong: TLS (tokio-rustls, futures-rustls), WebSocket (tokio-tungstenite), HTTP/2 (h2), hyper's connection API, framing (tokio-util's codecs) and the like. No Tokio runtime is involved: giong drives everything, on its own threads.
 
 ```toml
 [dependencies]
-giong = "1.5.6"
-giong-compat = "1.5.6"
+giong = "1.5.7"
+giong-compat = "1.5.7"
 ```
 
 ```rust,no_run
@@ -31,7 +31,7 @@ fn main() -> std::io::Result<()> {
 
 ## When to use it, and when not
 
-**Use the giong crate when there is one; `Compat` is the bridge for a protocol giong has no crate for yet.** The giong crates are built on giong's owned buffers and batched system calls, and measured against the Tokio crates they replace on Tokio they serve 1.1 to 5.1 times the requests or statements per core on the workloads measured, with the exceptions listed there ([the table in giong's README](https://github.com/giong-run/Giong/blob/v1.5.6/README.md#choosing-crates)). A Tokio crate run on giong through `Compat` keeps its own design and adds the copies described under [What it costs](#what-it-costs). No crate over `Compat` has been measured against the giong crate for the same protocol.
+**Use the giong crate when there is one; `Compat` is the bridge for a protocol giong has no crate for yet.** The giong crates are built on giong's owned buffers and batched system calls, and measured against the Tokio crates they replace on Tokio they serve 1.1 to 5.1 times the requests or statements per core on the workloads measured, with the exceptions listed there ([the table in giong's README](https://github.com/giong-run/Giong/blob/v1.5.7/README.md#choosing-crates)). A Tokio crate run on giong through `Compat` keeps its own design and adds the copies described under [What it costs](#what-it-costs). No crate over `Compat` has been measured against the giong crate for the same protocol.
 
 | You need | Use |
 |---|---|
@@ -48,7 +48,7 @@ fn main() -> std::io::Result<()> {
 
 A crate works through `Compat` when **it takes the stream from you and you drive it**: a function such as `tokio_rustls::TlsConnector::connect(name, stream)`, `tokio_tungstenite::client_async(request, stream)`, `h2::client::handshake(stream)` or `hyper::client::conn::http1::handshake(io)`, which returns a future, or a connection object, that your task (or a task you start with `giong::spawn`) polls. Futures that are not `Send` are fine, since giong's tasks stay on their worker.
 
-These are tested in [`tests/`](https://github.com/giong-run/Giong/blob/v1.5.6/giong-compat/tests), on giong's io_uring driver, its older ring setups and its epoll driver, with no Tokio runtime in the process:
+These are tested in [`tests/`](https://github.com/giong-run/Giong/blob/v1.5.7/giong-compat/tests), on giong's io_uring driver, its older ring setups and its epoll driver, with no Tokio runtime in the process:
 
 | Crate | What the tests do |
 |---|---|
@@ -110,7 +110,7 @@ impl hyper::rt::Timer for GiongTimer {
 //     .serve_connection(hyper_util::rt::TokioIo::new(Compat::new(tcp)), service)
 ```
 
-[`tests/hyper.rs`](https://github.com/giong-run/Giong/blob/v1.5.6/giong-compat/tests/hyper.rs) checks that a server built this way closes such a connection when the timeout ends.
+[`tests/hyper.rs`](https://github.com/giong-run/Giong/blob/v1.5.7/giong-compat/tests/hyper.rs) checks that a server built this way closes such a connection when the timeout ends.
 
 hyper's HTTP/2, client and server, also takes an executor for the tasks it starts. They need not be `Send`, so giong's tasks do:
 
@@ -136,7 +136,7 @@ impl<F: std::future::Future + 'static> hyper::rt::Executor<F> for GiongExec {
 - **A failed send is reported by the next write, flush or shutdown**, with the kernel's own error (a large write sent straight to the socket reports its own failure at once); after that, writes, flushes and shutdowns fail with `GIONG-E1401`. So does a failed shutdown (a TLS stream that cannot send its `close_notify`). Writing after `shutdown` (or `close`) has started fails with `GIONG-E1402`. Reading still works in all these cases. A shutdown that finds the connection already reset counts as done, as with Tokio's `TcpStream`.
 - **Dropping a `Compat` discards what was written but not flushed**, like dropping a `BufWriter`. Sends in flight are cancelled the way giong cancels any operation: their buffers stay alive until the kernel lets go.
 - **One task reads and one task writes at a time.** `tokio::io::split` and `futures::io::AsyncReadExt::split` work, and so does splitting a `Framed` or a WebSocket stream.
-- **Cancel safe.** A read that is dropped loses no data. A write either copies bytes and says how many, or copies nothing. [`tests/cancel.rs`](https://github.com/giong-run/Giong/blob/v1.5.6/giong-compat/tests/cancel.rs) drops reads, writes, flushes and whole streams at random (seeded, so a failure repeats), over TCP and giong-tls and through TLS 1.3 key updates, and checks every byte and that nothing leaks.
+- **Cancel safe.** A read that is dropped loses no data. A write either copies bytes and says how many, or copies nothing. [`tests/cancel.rs`](https://github.com/giong-run/Giong/blob/v1.5.7/giong-compat/tests/cancel.rs) drops reads, writes, flushes and whole streams at random (seeded, so a failure repeats), over TCP and giong-tls and through TLS 1.3 key updates, and checks every byte and that nothing leaks.
 - **`fill_buf` holds a buffer of the worker's pool** until `consume` takes all of it, or a read or `consume` of part of it moves the rest to the heap. Do not wait on something else between `fill_buf` and `consume`: with many connections doing that, the worker's receive pool runs dry and every socket on the worker stalls. `consume` of more than `fill_buf` returned is ignored, as with std's and Tokio's `BufReader`.
 - **Reading after the end of the stream** keeps returning 0 bytes. `into_inner().await` flushes and hands back the stream with the bytes received but not yet read, to go on with giong's own API.
 
@@ -147,7 +147,7 @@ giong reads into buffers from the worker's pool and writes buffers it owns until
 - **Reading:** each byte once more than giong's own `recv`, from the pool buffer into the caller's buffer. Through `AsyncBufRead` (`fill_buf`, then `consume` of the whole chunk) there is no extra copy. When a caller takes only part of a chunk, the rest moves to a heap buffer at once, so that a slow reader never holds on to the worker's pool.
 - **Writing:** small writes are copied into the write buffer, which giong's `write_all` sends at a flush or when it fills; one small allocation per send (the future that sends it). A write at least as large as the buffer's limit (64 KiB by default), with nothing buffered or being sent before it, goes straight from the caller's memory to the socket in one `sendmsg(2)` that does not wait, as `BufWriter` and Tokio's streams do; only what the socket cannot take at once is copied.
 
-Measured with [`bench/compat.sh`](https://github.com/giong-run/Giong/blob/v1.5.6/bench/compat.sh): one TCP stream over loopback, the measured side on one pinned core and the other end on another, the same peer for every variant, 9 runs interleaved. Median, with the range of the 9 runs in brackets. The machine is a 4-vCPU cloud VM (Xeon at 2.1 GHz, Linux 6.18), where bulk transfers over loopback vary from run to run and from one session to the next: read the medians, the spread, and the sessions below. This session (2026-11-17, [`bench/results/compat/`](https://github.com/giong-run/Giong/blob/v1.5.6/bench/results/compat/README.md)) ran this version, with giong's default receive buffers of 16 KiB (8 KiB until 0.8.0), and, interleaved, `Compat` from 0.8.0 on giong 0.8.0.
+Measured with [`bench/compat.sh`](https://github.com/giong-run/Giong/blob/v1.5.7/bench/compat.sh): one TCP stream over loopback, the measured side on one pinned core and the other end on another, the same peer for every variant, 9 runs interleaved. Median, with the range of the 9 runs in brackets. The machine is a 4-vCPU cloud VM (Xeon at 2.1 GHz, Linux 6.18), where bulk transfers over loopback vary from run to run and from one session to the next: read the medians, the spread, and the sessions below. This session (2026-11-17, [`bench/results/compat/`](https://github.com/giong-run/Giong/blob/v1.5.7/bench/results/compat/README.md)) ran this version, with giong's default receive buffers of 16 KiB (8 KiB until 0.8.0), and, interleaved, `Compat` from 0.8.0 on giong 0.8.0.
 
 | Workload | giong's own API | `Compat` | `Compat` 0.8.0 | `Compat`, `AsyncBufRead` | Tokio |
 |---|---|---|---|---|---|
@@ -186,7 +186,7 @@ What the numbers say:
 - **Request and reply** differ by less than the noise in throughput; the CPU per round trip is up to 5% higher (0.7% lower in session 8). Callgrind counts about 1,000 more user-space instructions per round trip (the boxed send, the flush, one more poll), against 14 to 16 µs spent mostly in the kernel.
 - **Tokio's own receive spends less CPU per KiB** than giong's `recv` on this benchmark: 11% less in session 8, with 16 KiB receive buffers, and 6–20% less in the sessions before, with 8 KiB. Each receive brings at most one buffer, so Tokio's 64 KiB reads take fewer system calls. That gap is giong's own, not `Compat`'s.
 
-Run it with `bench/compat.sh` (the method is at the top of the script, and in [`bench/compat/src/main.rs`](https://github.com/giong-run/Giong/blob/v1.5.6/bench/compat/src/main.rs)); the raw numbers of the latest session are in [`bench/results/compat/`](https://github.com/giong-run/Giong/blob/v1.5.6/bench/results/compat), the earlier ones in its `sessions/` folder.
+Run it with `bench/compat.sh` (the method is at the top of the script, and in [`bench/compat/src/main.rs`](https://github.com/giong-run/Giong/blob/v1.5.7/bench/compat/src/main.rs)); the raw numbers of the latest session are in [`bench/results/compat/`](https://github.com/giong-run/Giong/blob/v1.5.7/bench/results/compat), the earlier ones in its `sessions/` folder.
 
 ## Errors
 

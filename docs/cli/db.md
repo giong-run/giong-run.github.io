@@ -1,6 +1,6 @@
 # giong db
 
-> giong 1.5.6 · https://giong.run/docs/cli/db/ · source: https://github.com/giong-run/Giong/blob/v1.5.6/giong-cli/README.md#giong-db
+> giong 1.5.7 · https://giong.run/docs/cli/db/ · source: https://github.com/giong-run/Giong/blob/v1.5.7/giong-cli/README.md#giong-db
 
 ```sh
 giong db up            # a development PostgreSQL, MySQL or Redis in Docker or Podman (SQLite: nothing to start)

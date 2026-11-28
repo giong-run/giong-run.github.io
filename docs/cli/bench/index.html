@@ -38,7 +38,7 @@
     <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="28" height="28"></picture><span>giong</span></a>
     <nav class="nav" aria-label="Site"><a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a><a href="/docs/agent-skill/">Agent skill</a></nav>
     <div class="hdr-side">
-      <a class="ver" href="/releases/#v1-5-6" title="Release notes for v1.5.6">v1.5.6</a>
+      <a class="ver" href="/releases/#v1-5-7" title="Release notes for v1.5.7">v1.5.7</a>
       <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="giong on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
       <a class="icon-btn hide-sm" href="https://x.com/giongrun" aria-label="giong on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
       <button class="icon-btn theme" type="button" aria-label="Switch between light and dark" hidden>
@@ -62,10 +62,10 @@
     <div class="md-intro"><pre class="code"><code class="lang-sh">giong bench [&lt;url&gt;] [--rate &lt;n&gt;|auto|max] [--conns 50] [--duration 10]
 giong bench --against main [--rounds 5] [--max-regression 5]</code></pre>
 <p>Load at a fixed rate, with each request's latency counted from when it was due, so a stall is charged for every request behind it (no coordinated omission): p50, p99, p99.9 and the maximum. <code>auto</code> finds the most the service answers and measures at half of it; <code>max</code> measures throughput. Without a URL it builds the service in release mode and starts it on a free port with every core. <code>--against &lt;ref&gt;</code> builds that commit too and alternates the two builds round by round; <code>--max-regression</code> fails only when the change is slower in every round of at least three. Every round goes to <code>.giong/bench/&lt;time&gt;.csv</code>. The load generator shares the machine with the service: numbers to publish come from two machines.</p></div>
-    <p class="src-note">giong 1.5.6 · from <a href="https://github.com/giong-run/Giong/blob/v1.5.6/giong-cli/README.md#giong-bench">giong-cli/README.md#giong-bench</a> at v1.5.6</p>
+    <p class="src-note">giong 1.5.7 · from <a href="https://github.com/giong-run/Giong/blob/v1.5.7/giong-cli/README.md#giong-bench">giong-cli/README.md#giong-bench</a> at v1.5.7</p>
     <script type="text/markdown" id="md-page"># giong bench
 
-> giong 1.5.6 · https://giong.run/docs/cli/bench/ · source: https://github.com/giong-run/Giong/blob/v1.5.6/giong-cli/README.md#giong-bench
+> giong 1.5.7 · https://giong.run/docs/cli/bench/ · source: https://github.com/giong-run/Giong/blob/v1.5.7/giong-cli/README.md#giong-bench
 
 ```sh
 giong bench [<url>] [--rate <n>|auto|max] [--conns 50] [--duration 10]
@@ -73,7 +73,7 @@ giong bench --against main [--rounds 5] [--max-regression 5]
 ```
 
 Load at a fixed rate, with each request's latency counted from when it was due, so a stall is charged for every request behind it (no coordinated omission): p50, p99, p99.9 and the maximum. `auto` finds the most the service answers and measures at half of it; `max` measures throughput. Without a URL it builds the service in release mode and starts it on a free port with every core. `--against <ref>` builds that commit too and alternates the two builds round by round; `--max-regression` fails only when the change is slower in every round of at least three. Every round goes to `.giong/bench/<time>.csv`. The load generator shares the machine with the service: numbers to publish come from two machines.
-</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.5.6, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use giong bench as documented below.
+</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.5.7, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use giong bench as documented below.
 
 Rules for giong code:
 - Start the runtime with giong::Builder::new().shutdown_on_signals(true).build()?.run(|_worker| async { .. }); there are no macros. Build listeners, routers, pools and clients inside each worker's future.
@@ -86,11 +86,11 @@ More facts: https://giong.run/llms.txt. Best practices: https://giong.run/docs/b
 
 My task: <describe what to build or fix>
 
-Documentation of giong bench, giong 1.5.6 (https://giong.run/docs/cli/bench.md):
+Documentation of giong bench, giong 1.5.7 (https://giong.run/docs/cli/bench.md):
 
 # giong bench
 
-> giong 1.5.6 · https://giong.run/docs/cli/bench/ · source: https://github.com/giong-run/Giong/blob/v1.5.6/giong-cli/README.md#giong-bench
+> giong 1.5.7 · https://giong.run/docs/cli/bench/ · source: https://github.com/giong-run/Giong/blob/v1.5.7/giong-cli/README.md#giong-bench
 
 ```sh
 giong bench [<url>] [--rate <n>|auto|max] [--conns 50] [--duration 10]
@@ -119,7 +119,7 @@ Load at a fixed rate, with each request's latency counted from when it was due, 
         <h2>Learn</h2>
         <a href="/docs/">Get started</a>
         <a href="/docs/#examples">Examples</a>
-        <a href="https://docs.rs/giong/1.5.6/giong/">API reference</a>
+        <a href="https://docs.rs/giong/1.5.7/giong/">API reference</a>
         <a href="/docs/#errors">Error codes</a>
         <a href="/docs/best-practices/">Best practices</a><a href="/docs/agent-skill/">Agent skill</a>
         <a href="/llms.txt">llms.txt</a>

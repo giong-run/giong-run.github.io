@@ -1,6 +1,6 @@
 # giong ai init
 
-> giong 1.5.6 · https://giong.run/docs/cli/ai/ · source: https://github.com/giong-run/Giong/blob/v1.5.6/giong-cli/README.md#giong-ai-init
+> giong 1.5.7 · https://giong.run/docs/cli/ai/ · source: https://github.com/giong-run/Giong/blob/v1.5.7/giong-cli/README.md#giong-ai-init
 
 ```sh
 giong ai init [--dry-run]
