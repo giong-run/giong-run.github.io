@@ -1,6 +1,6 @@
 # giong mcp
 
-> giong 1.5.5 · https://giong.run/docs/cli/mcp/ · source: https://github.com/giong-run/Giong/blob/v1.5.5/giong-cli/README.md#giong-mcp
+> giong 1.5.6 · https://giong.run/docs/cli/mcp/ · source: https://github.com/giong-run/Giong/blob/v1.5.6/giong-cli/README.md#giong-mcp
 
 ```sh
 claude mcp add giong -- giong mcp

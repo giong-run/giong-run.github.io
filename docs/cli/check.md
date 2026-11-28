@@ -1,6 +1,6 @@
 # giong check
 
-> giong 1.5.5 · https://giong.run/docs/cli/check/ · source: https://github.com/giong-run/Giong/blob/v1.5.5/giong-cli/README.md#giong-check
+> giong 1.5.6 · https://giong.run/docs/cli/check/ · source: https://github.com/giong-run/Giong/blob/v1.5.6/giong-cli/README.md#giong-check
 
 ```sh
 giong check [--no-clippy] [-- cargo arguments]

@@ -38,7 +38,7 @@
     <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="28" height="28"></picture><span>giong</span></a>
     <nav class="nav" aria-label="Site"><a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a><a href="/docs/agent-skill/">Agent skill</a></nav>
     <div class="hdr-side">
-      <a class="ver" href="/releases/#v1-5-5" title="Release notes for v1.5.5">v1.5.5</a>
+      <a class="ver" href="/releases/#v1-5-6" title="Release notes for v1.5.6">v1.5.6</a>
       <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="giong on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
       <a class="icon-btn hide-sm" href="https://x.com/giongrun" aria-label="giong on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
       <button class="icon-btn theme" type="button" aria-label="Switch between light and dark" hidden>
@@ -92,8 +92,8 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 <div class="table-scroll"><table><thead><tr><th>Code</th><th><code>Code::</code></th><th>Meaning</th></tr></thead><tbody><tr><td><a href="/docs/errors/E4101/">GIONG-E4101</a></td><td><code>GrpcInvalidMetadata</code></td><td>invalid gRPC metadata</td></tr><tr><td><a href="/docs/errors/E4102/">GIONG-E4102</a></td><td><code>GrpcMessageTooLarge</code></td><td>gRPC message too large</td></tr><tr><td><a href="/docs/errors/E4103/">GIONG-E4103</a></td><td><code>GrpcProtocol</code></td><td>gRPC protocol error</td></tr><tr><td><a href="/docs/errors/E4104/">GIONG-E4104</a></td><td><code>GrpcEncoding</code></td><td>unsupported gRPC message encoding</td></tr><tr><td><a href="/docs/errors/E4105/">GIONG-E4105</a></td><td><code>GrpcDecode</code></td><td>gRPC message is not valid protobuf</td></tr><tr><td><a href="/docs/errors/E4106/">GIONG-E4106</a></td><td><code>GrpcTransport</code></td><td>gRPC connection failed</td></tr><tr><td><a href="/docs/errors/E4107/">GIONG-E4107</a></td><td><code>GrpcEndpoint</code></td><td>invalid gRPC endpoint</td></tr><tr><td><a href="/docs/errors/E4108/">GIONG-E4108</a></td><td><code>GrpcDeadline</code></td><td>gRPC deadline exceeded</td></tr><tr><td><a href="/docs/errors/E4109/">GIONG-E4109</a></td><td><code>GrpcCancelled</code></td><td>gRPC call cancelled</td></tr><tr><td><a href="/docs/errors/E4110/">GIONG-E4110</a></td><td><code>GrpcUnimplemented</code></td><td>gRPC method not found</td></tr></tbody></table></div></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-16" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="giong-cli">giong-cli</h2>
 <p>The <code>giong</code> command reports <code>GIONG-E5000</code> to <code>GIONG-E5099</code>. Its findings can also carry the runtime's own codes (<code>GIONG-E0001</code> when io_uring is blocked, for example).</p>
 <div class="table-scroll"><table><thead><tr><th>Code</th><th>Name</th><th>Meaning</th></tr></thead><tbody><tr><td><a href="/docs/errors/E5000/">GIONG-E5000</a></td><td><code>Usage</code></td><td>the command line is not valid</td></tr><tr><td><a href="/docs/errors/E5001/">GIONG-E5001</a></td><td><code>NotAProject</code></td><td>no Cargo project here</td></tr><tr><td><a href="/docs/errors/E5002/">GIONG-E5002</a></td><td><code>CargoFailed</code></td><td>cargo could not be run</td></tr><tr><td><a href="/docs/errors/E5003/">GIONG-E5003</a></td><td><code>RustTooOld</code></td><td>the Rust compiler is too old</td></tr><tr><td><a href="/docs/errors/E5004/">GIONG-E5004</a></td><td><code>TokioCrate</code></td><td>a dependency needs the Tokio runtime</td></tr><tr><td><a href="/docs/errors/E5005/">GIONG-E5005</a></td><td><code>UnknownCode</code></td><td>no such error code</td></tr><tr><td><a href="/docs/errors/E5006/">GIONG-E5006</a></td><td><code>BlockingCall</code></td><td>a blocking call inside a worker</td></tr><tr><td><a href="/docs/errors/E5007/">GIONG-E5007</a></td><td><code>HostNameBind</code></td><td>binding a host name</td></tr><tr><td><a href="/docs/errors/E5008/">GIONG-E5008</a></td><td><code>BorrowAcrossAwait</code></td><td>a RefCell borrow held across an await</td></tr><tr><td><a href="/docs/errors/E5009/">GIONG-E5009</a></td><td><code>BuildFailed</code></td><td>the code does not compile</td></tr><tr><td><a href="/docs/errors/E5010/">GIONG-E5010</a></td><td><code>Lint</code></td><td>clippy has a finding</td></tr><tr><td><a href="/docs/errors/E5011/">GIONG-E5011</a></td><td><code>DiskUsed</code></td><td>build directories use a lot of disk</td></tr><tr><td><a href="/docs/errors/E5012/">GIONG-E5012</a></td><td><code>SlowDebugInfo</code></td><td>the dev profile writes full debug information</td></tr><tr><td><a href="/docs/errors/E5013/">GIONG-E5013</a></td><td><code>OpenFilesLimit</code></td><td>the open-files limit is low</td></tr><tr><td><a href="/docs/errors/E5014/">GIONG-E5014</a></td><td><code>PortInUse</code></td><td>the port is in use</td></tr><tr><td><a href="/docs/errors/E5015/">GIONG-E5015</a></td><td><code>DockerSeccomp</code></td><td>Docker blocks io_uring</td></tr><tr><td><a href="/docs/errors/E5016/">GIONG-E5016</a></td><td><code>EnvMissing</code></td><td>a variable from .env.example is not set</td></tr><tr><td><a href="/docs/errors/E5017/">GIONG-E5017</a></td><td><code>ServiceExited</code></td><td>the service stopped</td></tr><tr><td><a href="/docs/errors/E5018/">GIONG-E5018</a></td><td><code>ServiceNotReady</code></td><td>the service did not start listening</td></tr><tr><td><a href="/docs/errors/E5019/">GIONG-E5019</a></td><td><code>McpUnreachable</code></td><td>the service's giong-mcp does not answer</td></tr><tr><td><a href="/docs/errors/E5020/">GIONG-E5020</a></td><td><code>WatchLimit</code></td><td>too many files to watch</td></tr><tr><td><a href="/docs/errors/E5021/">GIONG-E5021</a></td><td><code>NoLinker</code></td><td>no linker found</td></tr><tr><td><a href="/docs/errors/E5022/">GIONG-E5022</a></td><td><code>DevRunning</code></td><td>giong dev already serves this project</td></tr><tr><td><a href="/docs/errors/E5023/">GIONG-E5023</a></td><td><code>CompilerWarning</code></td><td>the compiler has a warning</td></tr><tr><td><a href="/docs/errors/E5024/">GIONG-E5024</a></td><td><code>ListensOnNetwork</code></td><td>the service would listen on every network interface</td></tr><tr><td><a href="/docs/errors/E5025/">GIONG-E5025</a></td><td><code>StoreUnusable</code></td><td>the build store cannot share a build</td></tr><tr><td><a href="/docs/errors/E5030/">GIONG-E5030</a></td><td><code>BadProjectName</code></td><td>the project name is not valid</td></tr><tr><td><a href="/docs/errors/E5031/">GIONG-E5031</a></td><td><code>TargetNotEmpty</code></td><td>the directory for the new project is not empty</td></tr><tr><td><a href="/docs/errors/E5032/">GIONG-E5032</a></td><td><code>BadTemplateChoice</code></td><td>the template does not offer that choice</td></tr><tr><td><a href="/docs/errors/E5033/">GIONG-E5033</a></td><td><code>WriteFailed</code></td><td>a file of the project could not be written</td></tr><tr><td><a href="/docs/errors/E5034/">GIONG-E5034</a></td><td><code>WindowsLimited</code></td><td>the project's crates do not build on Windows</td></tr><tr><td><a href="/docs/errors/E5035/">GIONG-E5035</a></td><td><code>BadGiongPath</code></td><td>--giong-path is not a giong checkout</td></tr><tr><td><a href="/docs/errors/E5036/">GIONG-E5036</a></td><td><code>AgentFileForeign</code></td><td>an agent file exists that giong did not write</td></tr><tr><td><a href="/docs/errors/E5037/">GIONG-E5037</a></td><td><code>McpJsonInvalid</code></td><td>.mcp.json is not valid JSON</td></tr><tr><td><a href="/docs/errors/E5038/">GIONG-E5038</a></td><td><code>VersionMismatch</code></td><td>the project uses another giong version than this command</td></tr><tr><td><a href="/docs/errors/E5039/">GIONG-E5039</a></td><td><code>NotGiongProject</code></td><td>the project does not depend on giong</td></tr><tr><td><a href="/docs/errors/E5040/">GIONG-E5040</a></td><td><code>NoContainerRuntime</code></td><td>neither Docker nor Podman answers</td></tr><tr><td><a href="/docs/errors/E5041/">GIONG-E5041</a></td><td><code>DbNotReady</code></td><td>the database does not answer queries</td></tr><tr><td><a href="/docs/errors/E5042/">GIONG-E5042</a></td><td><code>DbUrl</code></td><td>no usable database URL</td></tr><tr><td><a href="/docs/errors/E5043/">GIONG-E5043</a></td><td><code>MigrationChanged</code></td><td>an applied migration was changed</td></tr><tr><td><a href="/docs/errors/E5044/">GIONG-E5044</a></td><td><code>MigrationFailed</code></td><td>a migration failed</td></tr><tr><td><a href="/docs/errors/E5045/">GIONG-E5045</a></td><td><code>MigrationName</code></td><td>a migration file is not valid</td></tr><tr><td><a href="/docs/errors/E5046/">GIONG-E5046</a></td><td><code>DbClientMissing</code></td><td>no database client to run the SQL</td></tr><tr><td><a href="/docs/errors/E5047/">GIONG-E5047</a></td><td><code>MigrationUnknown</code></td><td>the database has a migration the project does not</td></tr><tr><td><a href="/docs/errors/E5048/">GIONG-E5048</a></td><td><code>DbNotManaged</code></td><td>the database was not started by giong db up</td></tr><tr><td><a href="/docs/errors/E5049/">GIONG-E5049</a></td><td><code>DbStartFailed</code></td><td>the database container could not start</td></tr><tr><td><a href="/docs/errors/E5050/">GIONG-E5050</a></td><td><code>RecordSecret</code></td><td>a recorded value looks like a secret</td></tr><tr><td><a href="/docs/errors/E5051/">GIONG-E5051</a></td><td><code>DashboardToken</code></td><td>the dashboard refused a request without its token</td></tr><tr><td><a href="/docs/errors/E5053/">GIONG-E5053</a></td><td><code>DashboardPortInUse</code></td><td>the dashboard's port is in use</td></tr><tr><td><a href="/docs/errors/E5054/">GIONG-E5054</a></td><td><code>DashboardFailed</code></td><td>the dashboard could not do what the page asked</td></tr><tr><td><a href="/docs/errors/E5055/">GIONG-E5055</a></td><td><code>WorkerBlocked</code></td><td>a worker of the service is stuck in one task</td></tr><tr><td><a href="/docs/errors/E5056/">GIONG-E5056</a></td><td><code>ServiceWarning</code></td><td>the service reports a warning</td></tr><tr><td><a href="/docs/errors/E5057/">GIONG-E5057</a></td><td><code>NoService</code></td><td>no running service to ask</td></tr><tr><td><a href="/docs/errors/E5058/">GIONG-E5058</a></td><td><code>McpNoTool</code></td><td>the service's giong-mcp lacks a tool</td></tr><tr><td><a href="/docs/errors/E5059/">GIONG-E5059</a></td><td><code>McpToolError</code></td><td>the service's giong-mcp refused a call</td></tr><tr><td><a href="/docs/errors/E5060/">GIONG-E5060</a></td><td><code>BenchTarget</code></td><td>the service to measure cannot be reached</td></tr><tr><td><a href="/docs/errors/E5061/">GIONG-E5061</a></td><td><code>BenchAgainst</code></td><td>the build to compare against cannot be made</td></tr><tr><td><a href="/docs/errors/E5062/">GIONG-E5062</a></td><td><code>BenchGeneratorBehind</code></td><td>the load generator fell behind its schedule</td></tr><tr><td><a href="/docs/errors/E5063/">GIONG-E5063</a></td><td><code>BenchErrors</code></td><td>requests failed during the benchmark</td></tr><tr><td><a href="/docs/errors/E5064/">GIONG-E5064</a></td><td><code>BenchRegression</code></td><td>the change is slower than the build it is compared with</td></tr><tr><td><a href="/docs/errors/E5065/">GIONG-E5065</a></td><td><code>NoRecording</code></td><td>no recorded requests to use</td></tr><tr><td><a href="/docs/errors/E5066/">GIONG-E5066</a></td><td><code>RecordedCaseFailed</code></td><td>a recorded case answers differently</td></tr><tr><td><a href="/docs/errors/E5067/">GIONG-E5067</a></td><td><code>RecordingInvalid</code></td><td>a recording cannot be read or used</td></tr><tr><td><a href="/docs/errors/E5068/">GIONG-E5068</a></td><td><code>RecordValueMissing</code></td><td>a recorded case needs a value that is not set</td></tr><tr><td><a href="/docs/errors/E5069/">GIONG-E5069</a></td><td><code>ReplayUnreachable</code></td><td>the service to replay against does not answer</td></tr><tr><td><a href="/docs/errors/E5070/">GIONG-E5070</a></td><td><code>ImageTarget</code></td><td>the service cannot be built for Linux here</td></tr><tr><td><a href="/docs/errors/E5071/">GIONG-E5071</a></td><td><code>ImageLibraries</code></td><td>the shared libraries of the binary cannot be found</td></tr><tr><td><a href="/docs/errors/E5072/">GIONG-E5072</a></td><td><code>ImageNoCerts</code></td><td>no CA certificates to put in the image</td></tr><tr><td><a href="/docs/errors/E5073/">GIONG-E5073</a></td><td><code>ImageAdd</code></td><td>a file to add to the image is not usable</td></tr><tr><td><a href="/docs/errors/E5074/">GIONG-E5074</a></td><td><code>ImageLoad</code></td><td>the image could not be loaded into Docker or Podman</td></tr><tr><td><a href="/docs/errors/E5075/">GIONG-E5075</a></td><td><code>ImagePush</code></td><td>the image could not be pushed to the registry</td></tr><tr><td><a href="/docs/errors/E5076/">GIONG-E5076</a></td><td><code>ImageTag</code></td><td>the image name or tag is not valid</td></tr><tr><td><a href="/docs/errors/E5080/">GIONG-E5080</a></td><td><code>FixDirty</code></td><td>the project has changes that are not committed</td></tr><tr><td><a href="/docs/errors/E5081/">GIONG-E5081</a></td><td><code>FixFailed</code></td><td>cargo could not apply its fixes</td></tr><tr><td><a href="/docs/errors/E5082/">GIONG-E5082</a></td><td><code>FixConflict</code></td><td>a fix no longer matches the code</td></tr><tr><td><a href="/docs/errors/E5083/">GIONG-E5083</a></td><td><code>TestFailed</code></td><td>a test failed</td></tr><tr><td><a href="/docs/errors/E5084/">GIONG-E5084</a></td><td><code>DriverNotHere</code></td><td>the tests could not run on every driver</td></tr><tr><td><a href="/docs/errors/E5085/">GIONG-E5085</a></td><td><code>NextestMissing</code></td><td>cargo-nextest is not installed</td></tr><tr><td><a href="/docs/errors/E5086/">GIONG-E5086</a></td><td><code>TestTimeout</code></td><td>the tests took longer than the time limit</td></tr><tr><td><a href="/docs/errors/E5087/">GIONG-E5087</a></td><td><code>GitInitFailed</code></td><td>git init failed in the new project</td></tr><tr><td><a href="/docs/errors/E5088/">GIONG-E5088</a></td><td><code>DotenvBuildSetting</code></td><td>.env sets a cargo or rustc setting</td></tr><tr><td><a href="/docs/errors/E5090/">GIONG-E5090</a></td><td><code>GiongOutdated</code></td><td>a newer giong release is out</td></tr><tr><td><a href="/docs/errors/E5091/">GIONG-E5091</a></td><td><code>GiongMixed</code></td><td>the project's giong crates are on different releases</td></tr><tr><td><a href="/docs/errors/E5092/">GIONG-E5092</a></td><td><code>CliOutdated</code></td><td>this giong command is older than the newest release</td></tr><tr><td><a href="/docs/errors/E5093/">GIONG-E5093</a></td><td><code>UpgradeTarget</code></td><td>the version to move to is not a release giong upgrade can move to</td></tr><tr><td><a href="/docs/errors/E5094/">GIONG-E5094</a></td><td><code>MsrvBelowTarget</code></td><td>the project's rust-version is below what the release needs</td></tr><tr><td><a href="/docs/errors/E5095/">GIONG-E5095</a></td><td><code>PinnedVersion</code></td><td>a giong dependency is pinned to a version</td></tr><tr><td><a href="/docs/errors/E5096/">GIONG-E5096</a></td><td><code>SelfUpdateFailed</code></td><td>giong upgrade --self could not replace this command</td></tr><tr><td><a href="/docs/errors/E5097/">GIONG-E5097</a></td><td><code>ReleaseUnknown</code></td><td>the newest giong release could not be looked up</td></tr><tr><td><a href="/docs/errors/E5098/">GIONG-E5098</a></td><td><code>ManifestShape</code></td><td>a giong dependency is written in a form giong upgrade cannot edit</td></tr></tbody></table></div></section>
-    <p class="src-note">giong 1.5.5 · from <a href="https://github.com/giong-run/Giong/blob/v1.5.5/docs/errors/README.md">docs/errors/README.md</a> at v1.5.5</p>
-    <script type="text/markdown" id="md-0"><!-- giong 1.5.5, https://giong.run/docs/errors/#the-runtime -->
+    <p class="src-note">giong 1.5.6 · from <a href="https://github.com/giong-run/Giong/blob/v1.5.6/docs/errors/README.md">docs/errors/README.md</a> at v1.5.6</p>
+    <script type="text/markdown" id="md-0"><!-- giong 1.5.6, https://giong.run/docs/errors/#the-runtime -->
 
 ## The runtime
 
@@ -119,13 +119,13 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 | [GIONG-E0019](E0019.md) | `ChildProcess` | cannot watch the child process |
 | [GIONG-E0020](E0020.md) | `ThreadLimit` | a worker thread could not be started |
 | [GIONG-E0080](E0080.md) | `BudgetFull` | the budget is at its limit |
-| [GIONG-E0081](E0081.md) | `BudgetTooSmall` | a reservation larger than the budget |</script><script type="text/markdown" id="md-1"><!-- giong 1.5.5, https://giong.run/docs/errors/#macos -->
+| [GIONG-E0081](E0081.md) | `BudgetTooSmall` | a reservation larger than the budget |</script><script type="text/markdown" id="md-1"><!-- giong 1.5.6, https://giong.run/docs/errors/#macos -->
 
 ## macOS
 
 | Code | `Code::` | Meaning |
 |---|---|---|
-| [GIONG-E0028](E0028.md) | `NetworkBuffersExhausted` | the system ran out of network buffers |</script><script type="text/markdown" id="md-2"><!-- giong 1.5.5, https://giong.run/docs/errors/#windows -->
+| [GIONG-E0028](E0028.md) | `NetworkBuffersExhausted` | the system ran out of network buffers |</script><script type="text/markdown" id="md-2"><!-- giong 1.5.6, https://giong.run/docs/errors/#windows -->
 
 ## Windows
 
@@ -133,7 +133,7 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 |---|---|---|
 | [GIONG-E0060](E0060.md) | `UnixSocketInUse` | a file is already at the Unix socket path |
 | [GIONG-E0061](E0061.md) | `UnixPathTooLong` | Unix socket path too long |
-| [GIONG-E0062](E0062.md) | `UnixSocketsUnavailable` | no Unix domain sockets on this Windows |</script><script type="text/markdown" id="md-3"><!-- giong 1.5.5, https://giong.run/docs/errors/#messages-between-processes-giongipc -->
+| [GIONG-E0062](E0062.md) | `UnixSocketsUnavailable` | no Unix domain sockets on this Windows |</script><script type="text/markdown" id="md-3"><!-- giong 1.5.6, https://giong.run/docs/errors/#messages-between-processes-giongipc -->
 
 ## Messages between processes (`giong::ipc`)
 
@@ -144,7 +144,7 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 | [GIONG-E0092](E0092.md) | `IpcCapacity` | IPC capacity out of range |
 | [GIONG-E0093](E0093.md) | `IpcHandshake` | IPC handshake failed |
 | [GIONG-E0094](E0094.md) | `IpcPeerGone` | IPC peer process gone |
-| [GIONG-E0095](E0095.md) | `IpcReceiverClosed` | IPC receiver closed |</script><script type="text/markdown" id="md-4"><!-- giong 1.5.5, https://giong.run/docs/errors/#network-and-name-resolution -->
+| [GIONG-E0095](E0095.md) | `IpcReceiverClosed` | IPC receiver closed |</script><script type="text/markdown" id="md-4"><!-- giong 1.5.6, https://giong.run/docs/errors/#network-and-name-resolution -->
 
 ## Network and name resolution
 
@@ -161,7 +161,7 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 | [GIONG-E0108](E0108.md) | `DnsServerUnreachable` | cannot reach the DNS server |
 | [GIONG-E0109](E0109.md) | `EmptyBuffer` | buffer with no room |
 | [GIONG-E0110](E0110.md) | `RecvBufferTooSmall` | receive buffers too small for GRO |
-| [GIONG-E0111](E0111.md) | `RecvAlreadyStarted` | receive option set after recv started |</script><script type="text/markdown" id="md-5"><!-- giong 1.5.5, https://giong.run/docs/errors/#files -->
+| [GIONG-E0111](E0111.md) | `RecvAlreadyStarted` | receive option set after recv started |</script><script type="text/markdown" id="md-5"><!-- giong 1.5.6, https://giong.run/docs/errors/#files -->
 
 ## Files
 
@@ -172,7 +172,7 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 | [GIONG-E0202](E0202.md) | `OffsetOutOfRange` | file offset out of range |
 | [GIONG-E0203](E0203.md) | `InvalidOpenOptions` | invalid combination of open options |
 | [GIONG-E0204](E0204.md) | `FileTooLarge` | file too large to read into memory |
-| [GIONG-E0205](E0205.md) | `OutsideRoot` | the path leads outside the root |</script><script type="text/markdown" id="md-6"><!-- giong 1.5.5, https://giong.run/docs/errors/#giong-http -->
+| [GIONG-E0205](E0205.md) | `OutsideRoot` | the path leads outside the root |</script><script type="text/markdown" id="md-6"><!-- giong 1.5.6, https://giong.run/docs/errors/#giong-http -->
 
 ## giong-http
 
@@ -201,7 +201,7 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 | [GIONG-E1121](E1121.md) | `HttpServerLowMemory` | connection refused: the server is low on memory |
 | [GIONG-E1122](E1122.md) | `HttpInvalidTrailer` | invalid HTTP trailer field |
 | [GIONG-E1123](E1123.md) | `HttpServerOutOfFiles` | connection not accepted: the server is out of file descriptors |
-| [GIONG-E1124](E1124.md) | `HttpServerAddressLimit` | connection refused: the client's address has too many connections open |</script><script type="text/markdown" id="md-7"><!-- giong 1.5.5, https://giong.run/docs/errors/#giong-web -->
+| [GIONG-E1124](E1124.md) | `HttpServerAddressLimit` | connection refused: the client's address has too many connections open |</script><script type="text/markdown" id="md-7"><!-- giong 1.5.6, https://giong.run/docs/errors/#giong-web -->
 
 ## giong-web
 
@@ -219,7 +219,7 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 | [GIONG-E1210](E1210.md) | `WebInternal` | the handler failed |
 | [GIONG-E1211](E1211.md) | `WebUnavailable` | a service the handler needs is unavailable |
 | [GIONG-E1212](E1212.md) | `WebCorsRejected` | cross-origin request refused |
-| [GIONG-E1213](E1213.md) | `WebConfig` | invalid giong-web setting |</script><script type="text/markdown" id="md-8"><!-- giong 1.5.5, https://giong.run/docs/errors/#giong-mcp -->
+| [GIONG-E1213](E1213.md) | `WebConfig` | invalid giong-web setting |</script><script type="text/markdown" id="md-8"><!-- giong 1.5.6, https://giong.run/docs/errors/#giong-mcp -->
 
 ## giong-mcp
 
@@ -229,7 +229,7 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 | [GIONG-E1302](E1302.md) | `McpBadAddress` | invalid address for the MCP server |
 | [GIONG-E1303](E1303.md) | `McpBind` | the MCP server cannot listen on its address |
 | [GIONG-E1304](E1304.md) | `McpNoToken` | the MCP server needs a token on TCP |
-| [GIONG-E1305](E1305.md) | `McpBadToken` | invalid token for the MCP server |</script><script type="text/markdown" id="md-9"><!-- giong 1.5.5, https://giong.run/docs/errors/#giong-compat -->
+| [GIONG-E1305](E1305.md) | `McpBadToken` | invalid token for the MCP server |</script><script type="text/markdown" id="md-9"><!-- giong 1.5.6, https://giong.run/docs/errors/#giong-compat -->
 
 ## giong-compat
 
@@ -237,7 +237,7 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 |---|---|---|
 | [GIONG-E1401](E1401.md) | `CompatWriteFailed` | an earlier buffered write failed |
 | [GIONG-E1402](E1402.md) | `CompatShutDown` | write after shutdown |
-| [GIONG-E1403](E1403.md) | `CompatConfig` | invalid giong-compat setting |</script><script type="text/markdown" id="md-10"><!-- giong 1.5.5, https://giong.run/docs/errors/#giong-tls -->
+| [GIONG-E1403](E1403.md) | `CompatConfig` | invalid giong-compat setting |</script><script type="text/markdown" id="md-10"><!-- giong 1.5.6, https://giong.run/docs/errors/#giong-tls -->
 
 ## giong-tls
 
@@ -255,7 +255,7 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 | [GIONG-E2010](E2010.md) | `KtlsSetup` | the kernel refused the TLS keys |
 | [GIONG-E2011](E2011.md) | `KtlsKeyUpdate` | the kernel cannot change TLS keys |
 | [GIONG-E2012](E2012.md) | `TlsKeysExhausted` | TLS keys used up |
-| [GIONG-E2013](E2013.md) | `TlsConfig` | TLS setting not possible here |</script><script type="text/markdown" id="md-11"><!-- giong 1.5.5, https://giong.run/docs/errors/#giong-postgres -->
+| [GIONG-E2013](E2013.md) | `TlsConfig` | TLS setting not possible here |</script><script type="text/markdown" id="md-11"><!-- giong 1.5.6, https://giong.run/docs/errors/#giong-postgres -->
 
 ## giong-postgres
 
@@ -271,7 +271,7 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 | [GIONG-E3008](E3008.md) | `PostgresClosed` | PostgreSQL connection closed |
 | [GIONG-E3009](E3009.md) | `PostgresPoolTimeout` | PostgreSQL pool wait timed out |
 | [GIONG-E3010](E3010.md) | `PostgresProtocol` | PostgreSQL protocol error |
-| [GIONG-E3011](E3011.md) | `PostgresStatement` | statement refused before sending |</script><script type="text/markdown" id="md-12"><!-- giong 1.5.5, https://giong.run/docs/errors/#giong-mysql -->
+| [GIONG-E3011](E3011.md) | `PostgresStatement` | statement refused before sending |</script><script type="text/markdown" id="md-12"><!-- giong 1.5.6, https://giong.run/docs/errors/#giong-mysql -->
 
 ## giong-mysql
 
@@ -287,7 +287,7 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 | [GIONG-E3108](E3108.md) | `MysqlClosed` | MySQL connection closed |
 | [GIONG-E3109](E3109.md) | `MysqlPoolTimeout` | MySQL pool wait timed out |
 | [GIONG-E3110](E3110.md) | `MysqlProtocol` | MySQL protocol error |
-| [GIONG-E3111](E3111.md) | `MysqlStatement` | statement refused before sending |</script><script type="text/markdown" id="md-13"><!-- giong 1.5.5, https://giong.run/docs/errors/#giong-redis -->
+| [GIONG-E3111](E3111.md) | `MysqlStatement` | statement refused before sending |</script><script type="text/markdown" id="md-13"><!-- giong 1.5.6, https://giong.run/docs/errors/#giong-redis -->
 
 ## giong-redis
 
@@ -308,7 +308,7 @@ attached to). See https://github.com/giong-run/Giong/blob/main/docs/errors/E0102
 | [GIONG-E3602](E3602.md) | `QuicConnect` | cannot set up the QUIC connection |
 | [GIONG-E3603](E3603.md) | `QuicConnectionLost` | the QUIC connection was lost |
 | [GIONG-E3604](E3604.md) | `QuicStreamReset` | the QUIC stream was reset |
-| [GIONG-E3605](E3605.md) | `QuicEarlyDataRejected` | the server refused the 0-RTT data |</script><script type="text/markdown" id="md-14"><!-- giong 1.5.5, https://giong.run/docs/errors/#giong-proto -->
+| [GIONG-E3605](E3605.md) | `QuicEarlyDataRejected` | the server refused the 0-RTT data |</script><script type="text/markdown" id="md-14"><!-- giong 1.5.6, https://giong.run/docs/errors/#giong-proto -->
 
 ## giong-proto
 
@@ -323,7 +323,7 @@ A prototype for giong 1.1, not published yet; its codes are `giong_proto::ErrorK
 | [GIONG-E4005](E4005.md) | `ErrorKind::BadUtf8` | string field is not UTF-8 |
 | [GIONG-E4006](E4006.md) | `ErrorKind::TooDeep` | messages nested too deeply |
 | [GIONG-E4007](E4007.md) | `ErrorKind::BadPacked` | malformed packed field |
-| [GIONG-E4008](E4008.md) | `ErrorKind::TooLarge` | message larger than 2 GiB |</script><script type="text/markdown" id="md-15"><!-- giong 1.5.5, https://giong.run/docs/errors/#giong-grpc -->
+| [GIONG-E4008](E4008.md) | `ErrorKind::TooLarge` | message larger than 2 GiB |</script><script type="text/markdown" id="md-15"><!-- giong 1.5.6, https://giong.run/docs/errors/#giong-grpc -->
 
 ## giong-grpc
 
@@ -340,7 +340,7 @@ New in giong 1.1. A call that fails ends with a gRPC status; the statuses giong-
 | [GIONG-E4107](E4107.md) | `GrpcEndpoint` | invalid gRPC endpoint |
 | [GIONG-E4108](E4108.md) | `GrpcDeadline` | gRPC deadline exceeded |
 | [GIONG-E4109](E4109.md) | `GrpcCancelled` | gRPC call cancelled |
-| [GIONG-E4110](E4110.md) | `GrpcUnimplemented` | gRPC method not found |</script><script type="text/markdown" id="md-16"><!-- giong 1.5.5, https://giong.run/docs/errors/#giong-cli -->
+| [GIONG-E4110](E4110.md) | `GrpcUnimplemented` | gRPC method not found |</script><script type="text/markdown" id="md-16"><!-- giong 1.5.6, https://giong.run/docs/errors/#giong-cli -->
 
 ## giong-cli
 
@@ -439,7 +439,7 @@ The `giong` command reports `GIONG-E5000` to `GIONG-E5099`. Its findings can als
 | [GIONG-E5097](E5097.md) | `ReleaseUnknown` | the newest giong release could not be looked up |
 | [GIONG-E5098](E5098.md) | `ManifestShape` | a giong dependency is written in a form giong upgrade cannot edit |</script><script type="text/markdown" id="md-page"># Error codes
 
-> giong 1.5.5 · https://giong.run/docs/errors/ · source: https://github.com/giong-run/Giong/blob/v1.5.5/docs/errors/README.md
+> giong 1.5.6 · https://giong.run/docs/errors/ · source: https://github.com/giong-run/Giong/blob/v1.5.6/docs/errors/README.md
 
 Every error giong raises itself starts with a code and ends with a link to its page here:
 
@@ -809,7 +809,7 @@ The `giong` command reports `GIONG-E5000` to `GIONG-E5099`. Its findings can als
 | [GIONG-E5096](https://giong.run/docs/errors/E5096.md) | `SelfUpdateFailed` | giong upgrade --self could not replace this command |
 | [GIONG-E5097](https://giong.run/docs/errors/E5097.md) | `ReleaseUnknown` | the newest giong release could not be looked up |
 | [GIONG-E5098](https://giong.run/docs/errors/E5098.md) | `ManifestShape` | a giong dependency is written in a form giong upgrade cannot edit |
-</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.5.5, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use Error codes as documented below.
+</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.5.6, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use Error codes as documented below.
 
 Rules for giong code:
 - Start the runtime with giong::Builder::new().shutdown_on_signals(true).build()?.run(|_worker| async { .. }); there are no macros. Build listeners, routers, pools and clients inside each worker's future.
@@ -822,11 +822,11 @@ More facts: https://giong.run/llms.txt. Best practices: https://giong.run/docs/b
 
 My task: <describe what to build or fix>
 
-Documentation of Error codes, giong 1.5.5 (https://giong.run/docs/errors.md):
+Documentation of Error codes, giong 1.5.6 (https://giong.run/docs/errors.md):
 
 # Error codes
 
-> giong 1.5.5 · https://giong.run/docs/errors/ · source: https://github.com/giong-run/Giong/blob/v1.5.5/docs/errors/README.md
+> giong 1.5.6 · https://giong.run/docs/errors/ · source: https://github.com/giong-run/Giong/blob/v1.5.6/docs/errors/README.md
 
 Every error giong raises itself starts with a code and ends with a link to its page here:
 
@@ -1217,7 +1217,7 @@ The `giong` command reports `GIONG-E5000` to `GIONG-E5099`. Its findings can als
         <h2>Learn</h2>
         <a href="/docs/">Get started</a>
         <a href="/docs/#examples">Examples</a>
-        <a href="https://docs.rs/giong/1.5.5/giong/">API reference</a>
+        <a href="https://docs.rs/giong/1.5.6/giong/">API reference</a>
         <a href="/docs/#errors">Error codes</a>
         <a href="/docs/best-practices/">Best practices</a><a href="/docs/agent-skill/">Agent skill</a>
         <a href="/llms.txt">llms.txt</a>

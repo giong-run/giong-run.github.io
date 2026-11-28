@@ -38,7 +38,7 @@
     <a class="brand" href="/" aria-label="giong, home"><picture><source media="(prefers-color-scheme: light)" srcset="/assets/giong-mark-light.svg"><img src="/assets/giong-mark.svg" alt="" width="28" height="28"></picture><span>giong</span></a>
     <nav class="nav" aria-label="Site"><a href="/docs/" aria-current="page">Docs</a><a href="/crates/">Crates</a><a href="/benchmarks/">Benchmarks</a><a href="/roadmap/">Roadmap</a><a href="/releases/">Releases</a><a href="/docs/agent-skill/">Agent skill</a></nav>
     <div class="hdr-side">
-      <a class="ver" href="/releases/#v1-5-5" title="Release notes for v1.5.5">v1.5.5</a>
+      <a class="ver" href="/releases/#v1-5-6" title="Release notes for v1.5.6">v1.5.6</a>
       <a class="icon-btn" href="https://github.com/giong-run/Giong" aria-label="giong on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a>
       <a class="icon-btn hide-sm" href="https://x.com/giongrun" aria-label="giong on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.59-6.64 7.59H.47l8.6-9.83L0 1.15h7.59l5.25 6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3Z"/></svg></a>
       <button class="icon-btn theme" type="button" aria-label="Switch between light and dark" hidden>
@@ -61,8 +61,8 @@
       <div class="doc-bar"><details class="ver-menu"><summary title="Documentation version">giong 1.5</summary><nav class="ver-list" aria-label="Documentation versions"><a href="/docs/giong-redis/" aria-current=true><b>1.5</b><span>newest</span></a><a href="/docs/1.4/giong-redis/"><b>1.4</b></a><a href="/docs/1.3/giong-redis/"><b>1.3</b></a><a href="/docs/1.2/giong-redis/"><b>1.2</b></a><a href="/docs/1.1/giong-redis/"><b>1.1</b></a><a href="/docs/1.0/giong-redis/"><b>1.0</b></a></nav></details><div class="doc-actions"><button class="act" type="button" data-md="md-page" data-done="copied" title="Copy this page as Markdown, for a coding agent"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy for agent</span></button><button class="act" type="button" data-md="md-prompt" data-done="copied" title="Copy a ready prompt with the rules and this page"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9Z"/><path d="M18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8Z"/></svg><span>Copy prompt</span></button><a class="act" href="/docs/giong-redis.md" title="This page as plain Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><span>.md</span></a></div></div><div class="doc-meta"><div class="cmd"><code id="add-giong-redis">cargo add giong-redis</code><button class="copy" type="button" data-copy="add-giong-redis" data-done="copied">copy</button></div><p class="crate-links"><a href="https://docs.rs/giong-redis">docs.rs</a> · <a href="https://crates.io/crates/giong-redis">crates.io</a> · <a href="https://github.com/giong-run/Giong/tree/main/giong-redis">source</a></p></div></header>
     <div class="md-intro"><p>A Redis client and connection pool for the <a href="/docs/giong/">giong</a> runtime. It speaks RESP3 itself, encrypts with <a href="/docs/giong-tls/"><code>giong-tls</code></a>, and depends on nothing from the Tokio ecosystem.</p>
 <pre class="code"><code class="lang-toml">[dependencies]
-giong = "1.5.5"
-giong-redis = "1.5.5"</code></pre>
+giong = "1.5.6"
+giong-redis = "1.5.6"</code></pre>
 <pre class="code"><code class="lang-rust"><span class="k">use</span> std::time::<span class="t">Duration</span>;
 <span class="k">use</span> giong_redis::{cmd, <span class="t">Client</span>, <span class="t">Config</span>};
 
@@ -168,11 +168,11 @@ giong-redis = "1.5.5"</code></pre>
 <ul><li><strong>Small commands: 1.1 to 1.8 times redis-rs, at half its CPU time per command or less.</strong> With one connection none of the clients is held back by its core (giong-redis uses about half of it): the round trip is the limit, and giong-redis's is shorter, so its tasks send more. With four connections, redis-rs and fred use all of their core (97–98%), and giong-redis does 1.6 to 1.8 times redis-rs.</li><li><strong>Large values are mostly the kernel's work.</strong> For 8 KiB values about half of the client's core is time in the kernel, receiving the data, whatever the client. giong-redis has the kernel write replies straight into the connection's read buffer (up to 64 KiB per receive), so each byte is copied once on its way in, where reading through the runtime's pooled buffers copied it twice; that took four connections from level with redis-rs (259k against 269k) to 1.25 times it (345k against 276k), and one connection to 2.5 times it.</li><li><strong>How many connections.</strong> The server above has I/O threads; most run without them, as Redis does by default. Against Redis without I/O threads (<code>bench/results/redis/no-io-threads.txt</code>), giong-redis reads 645k <code>GET</code>s per second with one connection, 925k with two, and 845k with four; the server's single thread is then the limit. So a <code>Pool</code> of one or two connections per worker is enough for one Redis server, and more only add to its work. redis-rs does best with two too, 542k.</li></ul>
 <p>Cutting the client's own cost per command took the profile further than the first version: the command methods write their command straight into the connection's buffer, with no allocation; a reply is not kept in a <code>Vec</code> of its own; the read buffer moves what is left of a reply only when it is short of room, instead of on every read; and each connection has one timer, set for the oldest command waiting, instead of one per command (a test checks that every command still times out on its own deadline, and never early). Together they took <code>GET</code> with four connections from 660k to 881k per second.</p>
 <p>Not measured: a server on another machine (network latency, where pipelining matters more), Redis 7.2 and later, Valkey, TLS, more than one client core, <code>fred</code> with its own pool type. Results are in <code>bench/results/redis/</code>.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-8" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="not-there-yet">Not there yet</h2>
-<p>Redis Cluster (a <code>MOVED</code> or <code>ASK</code> reply is an error that says so) and Sentinel, client-side caching (<code>CLIENT TRACKING</code> can be turned on with <code>query</code>, but a <code>Client</code> passes over the invalidations it brings), sharded Pub/Sub (<code>SSUBSCRIBE</code>), RESP2-only servers (Redis 5 and older), and streaming a large reply in pieces (a reply is collected in full, up to <code>max_reply_size</code>). Proxies that do not pass <code>HELLO 3</code> on (twemproxy, Envoy's Redis proxy) cannot be used, since the client speaks RESP3 only. An independent review before 1.0 found problems that have since been fixed (see the <a href="https://github.com/giong-run/Giong/blob/v1.5.5/CHANGELOG.md">changelog</a>); the crate has had no outside security audit.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-9" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="tests">Tests</h2>
+<p>Redis Cluster (a <code>MOVED</code> or <code>ASK</code> reply is an error that says so) and Sentinel, client-side caching (<code>CLIENT TRACKING</code> can be turned on with <code>query</code>, but a <code>Client</code> passes over the invalidations it brings), sharded Pub/Sub (<code>SSUBSCRIBE</code>), RESP2-only servers (Redis 5 and older), and streaming a large reply in pieces (a reply is collected in full, up to <code>max_reply_size</code>). Proxies that do not pass <code>HELLO 3</code> on (twemproxy, Envoy's Redis proxy) cannot be used, since the client speaks RESP3 only. An independent review before 1.0 found problems that have since been fixed (see the <a href="https://github.com/giong-run/Giong/blob/v1.5.6/CHANGELOG.md">changelog</a>); the crate has had no outside security audit.</p></section><section class="md-sec"><button class="sec-copy" type="button" data-md="md-9" data-done="copied" title="Copy this section as Markdown"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></svg><span>Copy</span></button><h2 id="tests">Tests</h2>
 <p><code>cargo test -p giong-redis</code>: 42 tests against a real Redis server that the test binary starts for itself (a throwaway directory, listening on 127.0.0.1, a TLS port with a certificate from a test authority, and a Unix socket, with an ACL user besides the default one): strings, numbers and missing keys; every RESP3 reply type read into the Rust types; 200 tasks sharing one connection, each getting its own replies; typed keys written in pieces, and a <code>ToArg</code> that panics half way, on a shared connection, leaving every other task its own reply; server errors with their codes, leaving the connection usable; pipelines, transactions and a transaction the server refuses as it is queued; <code>WATCH</code> when a key changed and when it did not, and an atomic pipeline refusing to report success when a watch left behind stopped it; every command that would break sharing refused before sending; blocking commands on a connection of their own; a reply over the size limit failing alone; client-side caching invalidations over the size limit passed over, not taken for replies; the response timeout, with the late reply thrown away; commands queued behind one that gets no answer each timing out on their own deadline, never early (against a scripted server); commands waiting, then failing unsent, rather than piling up when a server stops reading; a dropped client closing though the server keeps its side open; a connection the server kills; ACL users and wrong passwords; the database and the client name; Unix sockets and TLS, against the right and the wrong authority, and TLS sent to the plain port and plain to the TLS port; connecting to a closed port, a silent server and a missing socket, fast and with a reason; a server that is not Redis; the pool (sharing a few connections among many tasks, <code>take()</code> and the return, a connection left in a cancelled blocking command closed rather than shared, a <code>watch</code> cancelled before its reply leaving no <code>WATCH</code> behind, a task waiting to take a connection woken when a dropped command frees it, connections the server closed replaced, a pool that cannot connect, <code>take()</code> served in order within milliseconds while 32 tasks keep a full pool busy, a taker giving up leaving no connection set aside, <code>wait_timeout(Duration::MAX)</code>, a connection whose server became a replica replaced, idle connections closed while a busy one is kept, and old ones replaced under load and when they come back from <code>take()</code>, and lifetimes too long for the clock); and Pub/Sub (channels and patterns, binary payloads, waiting cancelled without losing a message, a subscriber whose connection was killed, a late confirmation for another channel not taken for this one). 34 unit tests: command encoding (arguments written in pieces or not at all) and the refusals, URLs, error codes, the reply parser for every RESP3 type, attributes and pushes (a push behind attributes over the limit), replies cut anywhere and the size limit (each element counted for the value it becomes), the read buffer's memory, conversions; and 350,000 random inputs: replies, some behind attributes, cut at random places and read back with random limits and against a reading with no limit; damaged replies (an error, never a panic); URLs; and 20,000 scripts for a connection's reply matching (commands of every shape, dropped waiters, passed deadlines, push messages and replies over the limit among the replies), in which every command must get its own replies. The fuzz targets in <code>fuzz/</code> (<code>replies</code>, <code>connection</code>, <code>url</code>) run the same checks. 15 documentation examples.</p>
 <p>The tests find <code>redis-server</code> through <code>GIONG_REDIS_BIN</code> (the directory that holds it), <code>/usr/bin</code> or <code>PATH</code>. They skip when Redis is not installed, unless <code>GIONG_REDIS_REQUIRED=1</code> (CI sets it, and installs Ubuntu's Redis 7.0). They also pass under ThreadSanitizer and on the fallback io_uring setups (<code>scripts/check.sh tsan</code> and <code>fallback</code>). CI runs them against Redis 7.0 (Ubuntu's package) on every pull request, and against Redis 6.2, Redis 7.4 and Valkey 8.0 in its <code>servers</code> job.</p></section>
-    <p class="src-note">giong 1.5.5 · from <a href="https://github.com/giong-run/Giong/blob/v1.5.5/giong-redis/README.md">giong-redis/README.md</a> at v1.5.5</p>
-    <script type="text/markdown" id="md-0"><!-- giong 1.5.5, https://giong.run/docs/giong-redis/#what-it-does -->
+    <p class="src-note">giong 1.5.6 · from <a href="https://github.com/giong-run/Giong/blob/v1.5.6/giong-redis/README.md">giong-redis/README.md</a> at v1.5.6</p>
+    <script type="text/markdown" id="md-0"><!-- giong 1.5.6, https://giong.run/docs/giong-redis/#what-it-does -->
 
 ## What it does
 
@@ -186,7 +186,7 @@ giong-redis = "1.5.5"</code></pre>
 - **Errors that say what to do,** with the server's error code (`WRONGTYPE`, `NOSCRIPT`...) to match on.
 - **ACL users, TLS (always verified), Unix sockets,** and connection URLs.
 
-RESP3 needs Redis 6 or later; Valkey works too.</script><script type="text/markdown" id="md-1"><!-- giong 1.5.5, https://giong.run/docs/giong-redis/#connecting -->
+RESP3 needs Redis 6 or later; Valkey works too.</script><script type="text/markdown" id="md-1"><!-- giong 1.5.6, https://giong.run/docs/giong-redis/#connecting -->
 
 ## Connecting
 
@@ -213,7 +213,7 @@ A URL is `redis://user:password@host:port/database?param=value`, `rediss://` for
 
 A connection logs in, names itself and selects its database once, when it opens (`HELLO 3 AUTH ... SETNAME ...`, then `SELECT`), in one round trip.
 
-**TLS** is used for `rediss://` and when `Config::tls` asks for it: the server's certificate is checked against the certificate authorities installed on the machine, or the ones given (`Tls::Verify(TlsConnector::with_root_pem(..)?)`), and against the host name. There is no setting that skips the check. `redis://` and Unix sockets do not use TLS.</script><script type="text/markdown" id="md-2"><!-- giong 1.5.5, https://giong.run/docs/giong-redis/#sharing-a-connection -->
+**TLS** is used for `rediss://` and when `Config::tls` asks for it: the server's certificate is checked against the certificate authorities installed on the machine, or the ones given (`Tls::Verify(TlsConnector::with_root_pem(..)?)`), and against the host name. There is no setting that skips the check. `redis://` and Unix sockets do not use TLS.</script><script type="text/markdown" id="md-2"><!-- giong 1.5.6, https://giong.run/docs/giong-redis/#sharing-a-connection -->
 
 ## Sharing a connection
 
@@ -253,7 +253,7 @@ async fn demo(pool: &Pool) -> Result<(), Error> {
     println!("{count} visits, job {job:?}");
     Ok(())
 }
-```</script><script type="text/markdown" id="md-3"><!-- giong 1.5.5, https://giong.run/docs/giong-redis/#api -->
+```</script><script type="text/markdown" id="md-3"><!-- giong 1.5.6, https://giong.run/docs/giong-redis/#api -->
 
 ## API
 
@@ -275,7 +275,7 @@ async fn demo(pool: &Pool) -> Result<(), Error> {
 | `pool.take()` | A `PooledClient` for this task alone, which derefs to `Client`. For `WATCH` and blocking commands. When the pool is full, tasks waiting here are served in order: a connection is set aside for the first, shared commands go to the others (they keep at least one unless `max_size` is 1), and it is handed over once the commands already on it are answered. A connection whose blocking command was cancelled while still running is closed instead of coming back. |
 | `pool.stats()` | Connections open, taken, being opened; commands in flight; tasks waiting; and counters for connections opened, connect errors, wait timeouts and connections recycled. |
 
-A `Client` belongs to the worker that opened it (it is not `Send`, like everything in giong).</script><script type="text/markdown" id="md-4"><!-- giong 1.5.5, https://giong.run/docs/giong-redis/#types -->
+A `Client` belongs to the worker that opened it (it is not `Send`, like everything in giong).</script><script type="text/markdown" id="md-4"><!-- giong 1.5.6, https://giong.run/docs/giong-redis/#types -->
 
 ## Types
 
@@ -309,7 +309,7 @@ Replies convert with `FromValue`:
 | Tuples of 1 to 6 | An array of exactly that many replies (`(String, f64)` for `WITHSCORES` pairs). |
 | `Value` | Any reply, as it arrived. `#[non_exhaustive]`: a `match` on it needs a `_` arm, so that a later RESP type is not a breaking change. |
 
-A conversion never loses anything silently: a number that does not fit, bytes that are not UTF-8, or an array of the wrong length fails with `ErrorKind::Type` and names what arrived and what to read it as. Implement `FromValue` for your own types.</script><script type="text/markdown" id="md-5"><!-- giong 1.5.5, https://giong.run/docs/giong-redis/#errors -->
+A conversion never loses anything silently: a number that does not fit, bytes that are not UTF-8, or an array of the wrong length fails with `ErrorKind::Type` and names what arrived and what to read it as. Implement `FromValue` for your own types.</script><script type="text/markdown" id="md-5"><!-- giong 1.5.6, https://giong.run/docs/giong-redis/#errors -->
 
 ## Errors
 
@@ -329,7 +329,7 @@ A conversion never loses anything silently: a number that does not fit, bytes th
 | `Protocol` | [E3210](../docs/errors/E3210.md) | The server sent something that is not RESP3. The connection is closed. |
 | `Timeout` | [E3211](../docs/errors/E3211.md) | No reply within `response_timeout`. The command may still have run; the connection stays usable. |
 
-`error.is_transient()` is true for errors worth retrying after a pause: connecting, a closed connection, timeouts, and the server's `LOADING`, `BUSY`, `TRYAGAIN`, `MASTERDOWN` and `CLUSTERDOWN`. An error from the server affects only its own command: the commands that other tasks pipelined on the same connection get their own replies.</script><script type="text/markdown" id="md-6"><!-- giong 1.5.5, https://giong.run/docs/giong-redis/#limits -->
+`error.is_transient()` is true for errors worth retrying after a pause: connecting, a closed connection, timeouts, and the server's `LOADING`, `BUSY`, `TRYAGAIN`, `MASTERDOWN` and `CLUSTERDOWN`. An error from the server affects only its own command: the commands that other tasks pipelined on the same connection get their own replies.</script><script type="text/markdown" id="md-6"><!-- giong 1.5.6, https://giong.run/docs/giong-redis/#limits -->
 
 ## Limits
 
@@ -342,7 +342,7 @@ A conversion never loses anything silently: a number that does not fit, bytes th
 | `Pool::idle_timeout` | 10 min | The connection is closed. |
 | `Pool::max_lifetime` | 30 min, less up to 10% | The connection takes no new command and is closed once the ones on it are answered (one taken with `take()`, when it comes back); a new one is opened when needed. |
 
-Replies nested more than 128 deep, and lines over 1 MiB (an error message, a number), are refused as protocol errors.</script><script type="text/markdown" id="md-7"><!-- giong 1.5.5, https://giong.run/docs/giong-redis/#performance -->
+Replies nested more than 128 deep, and lines over 1 MiB (an error message, a number), are refused as protocol errors.</script><script type="text/markdown" id="md-7"><!-- giong 1.5.6, https://giong.run/docs/giong-redis/#performance -->
 
 ## Performance
 
@@ -370,11 +370,11 @@ Four connections (giong-redis's `Pool` of 4; four of the others', task `t` on nu
 
 Cutting the client's own cost per command took the profile further than the first version: the command methods write their command straight into the connection's buffer, with no allocation; a reply is not kept in a `Vec` of its own; the read buffer moves what is left of a reply only when it is short of room, instead of on every read; and each connection has one timer, set for the oldest command waiting, instead of one per command (a test checks that every command still times out on its own deadline, and never early). Together they took `GET` with four connections from 660k to 881k per second.
 
-Not measured: a server on another machine (network latency, where pipelining matters more), Redis 7.2 and later, Valkey, TLS, more than one client core, `fred` with its own pool type. Results are in `bench/results/redis/`.</script><script type="text/markdown" id="md-8"><!-- giong 1.5.5, https://giong.run/docs/giong-redis/#not-there-yet -->
+Not measured: a server on another machine (network latency, where pipelining matters more), Redis 7.2 and later, Valkey, TLS, more than one client core, `fred` with its own pool type. Results are in `bench/results/redis/`.</script><script type="text/markdown" id="md-8"><!-- giong 1.5.6, https://giong.run/docs/giong-redis/#not-there-yet -->
 
 ## Not there yet
 
-Redis Cluster (a `MOVED` or `ASK` reply is an error that says so) and Sentinel, client-side caching (`CLIENT TRACKING` can be turned on with `query`, but a `Client` passes over the invalidations it brings), sharded Pub/Sub (`SSUBSCRIBE`), RESP2-only servers (Redis 5 and older), and streaming a large reply in pieces (a reply is collected in full, up to `max_reply_size`). Proxies that do not pass `HELLO 3` on (twemproxy, Envoy's Redis proxy) cannot be used, since the client speaks RESP3 only. An independent review before 1.0 found problems that have since been fixed (see the [changelog](../CHANGELOG.md)); the crate has had no outside security audit.</script><script type="text/markdown" id="md-9"><!-- giong 1.5.5, https://giong.run/docs/giong-redis/#tests -->
+Redis Cluster (a `MOVED` or `ASK` reply is an error that says so) and Sentinel, client-side caching (`CLIENT TRACKING` can be turned on with `query`, but a `Client` passes over the invalidations it brings), sharded Pub/Sub (`SSUBSCRIBE`), RESP2-only servers (Redis 5 and older), and streaming a large reply in pieces (a reply is collected in full, up to `max_reply_size`). Proxies that do not pass `HELLO 3` on (twemproxy, Envoy's Redis proxy) cannot be used, since the client speaks RESP3 only. An independent review before 1.0 found problems that have since been fixed (see the [changelog](../CHANGELOG.md)); the crate has had no outside security audit.</script><script type="text/markdown" id="md-9"><!-- giong 1.5.6, https://giong.run/docs/giong-redis/#tests -->
 
 ## Tests
 
@@ -382,14 +382,14 @@ Redis Cluster (a `MOVED` or `ASK` reply is an error that says so) and Sentinel, 
 
 The tests find `redis-server` through `GIONG_REDIS_BIN` (the directory that holds it), `/usr/bin` or `PATH`. They skip when Redis is not installed, unless `GIONG_REDIS_REQUIRED=1` (CI sets it, and installs Ubuntu's Redis 7.0). They also pass under ThreadSanitizer and on the fallback io_uring setups (`scripts/check.sh tsan` and `fallback`). CI runs them against Redis 7.0 (Ubuntu's package) on every pull request, and against Redis 6.2, Redis 7.4 and Valkey 8.0 in its `servers` job.</script><script type="text/markdown" id="md-page"># giong-redis
 
-> giong 1.5.5 · https://giong.run/docs/giong-redis/ · source: https://github.com/giong-run/Giong/blob/v1.5.5/giong-redis/README.md
+> giong 1.5.6 · https://giong.run/docs/giong-redis/ · source: https://github.com/giong-run/Giong/blob/v1.5.6/giong-redis/README.md
 
 A Redis client and connection pool for the [giong](https://giong.run/docs/giong.md) runtime. It speaks RESP3 itself, encrypts with [`giong-tls`](https://giong.run/docs/giong-tls.md), and depends on nothing from the Tokio ecosystem.
 
 ```toml
 [dependencies]
-giong = "1.5.5"
-giong-redis = "1.5.5"
+giong = "1.5.6"
+giong-redis = "1.5.6"
 ```
 
 ```rust,no_run
@@ -630,14 +630,14 @@ Not measured: a server on another machine (network latency, where pipelining mat
 
 ## Not there yet
 
-Redis Cluster (a `MOVED` or `ASK` reply is an error that says so) and Sentinel, client-side caching (`CLIENT TRACKING` can be turned on with `query`, but a `Client` passes over the invalidations it brings), sharded Pub/Sub (`SSUBSCRIBE`), RESP2-only servers (Redis 5 and older), and streaming a large reply in pieces (a reply is collected in full, up to `max_reply_size`). Proxies that do not pass `HELLO 3` on (twemproxy, Envoy's Redis proxy) cannot be used, since the client speaks RESP3 only. An independent review before 1.0 found problems that have since been fixed (see the [changelog](https://github.com/giong-run/Giong/blob/v1.5.5/CHANGELOG.md)); the crate has had no outside security audit.
+Redis Cluster (a `MOVED` or `ASK` reply is an error that says so) and Sentinel, client-side caching (`CLIENT TRACKING` can be turned on with `query`, but a `Client` passes over the invalidations it brings), sharded Pub/Sub (`SSUBSCRIBE`), RESP2-only servers (Redis 5 and older), and streaming a large reply in pieces (a reply is collected in full, up to `max_reply_size`). Proxies that do not pass `HELLO 3` on (twemproxy, Envoy's Redis proxy) cannot be used, since the client speaks RESP3 only. An independent review before 1.0 found problems that have since been fixed (see the [changelog](https://github.com/giong-run/Giong/blob/v1.5.6/CHANGELOG.md)); the crate has had no outside security audit.
 
 ## Tests
 
 `cargo test -p giong-redis`: 42 tests against a real Redis server that the test binary starts for itself (a throwaway directory, listening on 127.0.0.1, a TLS port with a certificate from a test authority, and a Unix socket, with an ACL user besides the default one): strings, numbers and missing keys; every RESP3 reply type read into the Rust types; 200 tasks sharing one connection, each getting its own replies; typed keys written in pieces, and a `ToArg` that panics half way, on a shared connection, leaving every other task its own reply; server errors with their codes, leaving the connection usable; pipelines, transactions and a transaction the server refuses as it is queued; `WATCH` when a key changed and when it did not, and an atomic pipeline refusing to report success when a watch left behind stopped it; every command that would break sharing refused before sending; blocking commands on a connection of their own; a reply over the size limit failing alone; client-side caching invalidations over the size limit passed over, not taken for replies; the response timeout, with the late reply thrown away; commands queued behind one that gets no answer each timing out on their own deadline, never early (against a scripted server); commands waiting, then failing unsent, rather than piling up when a server stops reading; a dropped client closing though the server keeps its side open; a connection the server kills; ACL users and wrong passwords; the database and the client name; Unix sockets and TLS, against the right and the wrong authority, and TLS sent to the plain port and plain to the TLS port; connecting to a closed port, a silent server and a missing socket, fast and with a reason; a server that is not Redis; the pool (sharing a few connections among many tasks, `take()` and the return, a connection left in a cancelled blocking command closed rather than shared, a `watch` cancelled before its reply leaving no `WATCH` behind, a task waiting to take a connection woken when a dropped command frees it, connections the server closed replaced, a pool that cannot connect, `take()` served in order within milliseconds while 32 tasks keep a full pool busy, a taker giving up leaving no connection set aside, `wait_timeout(Duration::MAX)`, a connection whose server became a replica replaced, idle connections closed while a busy one is kept, and old ones replaced under load and when they come back from `take()`, and lifetimes too long for the clock); and Pub/Sub (channels and patterns, binary payloads, waiting cancelled without losing a message, a subscriber whose connection was killed, a late confirmation for another channel not taken for this one). 34 unit tests: command encoding (arguments written in pieces or not at all) and the refusals, URLs, error codes, the reply parser for every RESP3 type, attributes and pushes (a push behind attributes over the limit), replies cut anywhere and the size limit (each element counted for the value it becomes), the read buffer's memory, conversions; and 350,000 random inputs: replies, some behind attributes, cut at random places and read back with random limits and against a reading with no limit; damaged replies (an error, never a panic); URLs; and 20,000 scripts for a connection's reply matching (commands of every shape, dropped waiters, passed deadlines, push messages and replies over the limit among the replies), in which every command must get its own replies. The fuzz targets in `fuzz/` (`replies`, `connection`, `url`) run the same checks. 15 documentation examples.
 
 The tests find `redis-server` through `GIONG_REDIS_BIN` (the directory that holds it), `/usr/bin` or `PATH`. They skip when Redis is not installed, unless `GIONG_REDIS_REQUIRED=1` (CI sets it, and installs Ubuntu's Redis 7.0). They also pass under ThreadSanitizer and on the fallback io_uring setups (`scripts/check.sh tsan` and `fallback`). CI runs them against Redis 7.0 (Ubuntu's package) on every pull request, and against Redis 6.2, Redis 7.4 and Valkey 8.0 in its `servers` job.
-</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.5.5, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use giong-redis as documented below.
+</script><script type="text/markdown" id="md-prompt">I am building a Rust service on giong 1.5.6, a thread-per-core async runtime with its own crates for HTTP, TLS, gRPC, databases and more, and no Tokio underneath. Use giong-redis as documented below.
 
 Rules for giong code:
 - Start the runtime with giong::Builder::new().shutdown_on_signals(true).build()?.run(|_worker| async { .. }); there are no macros. Build listeners, routers, pools and clients inside each worker's future.
@@ -650,18 +650,18 @@ More facts: https://giong.run/llms.txt. Best practices: https://giong.run/docs/b
 
 My task: <describe what to build or fix>
 
-Documentation of giong-redis, giong 1.5.5 (https://giong.run/docs/giong-redis.md):
+Documentation of giong-redis, giong 1.5.6 (https://giong.run/docs/giong-redis.md):
 
 # giong-redis
 
-> giong 1.5.5 · https://giong.run/docs/giong-redis/ · source: https://github.com/giong-run/Giong/blob/v1.5.5/giong-redis/README.md
+> giong 1.5.6 · https://giong.run/docs/giong-redis/ · source: https://github.com/giong-run/Giong/blob/v1.5.6/giong-redis/README.md
 
 A Redis client and connection pool for the [giong](https://giong.run/docs/giong.md) runtime. It speaks RESP3 itself, encrypts with [`giong-tls`](https://giong.run/docs/giong-tls.md), and depends on nothing from the Tokio ecosystem.
 
 ```toml
 [dependencies]
-giong = "1.5.5"
-giong-redis = "1.5.5"
+giong = "1.5.6"
+giong-redis = "1.5.6"
 ```
 
 ```rust,no_run
@@ -902,7 +902,7 @@ Not measured: a server on another machine (network latency, where pipelining mat
 
 ## Not there yet
 
-Redis Cluster (a `MOVED` or `ASK` reply is an error that says so) and Sentinel, client-side caching (`CLIENT TRACKING` can be turned on with `query`, but a `Client` passes over the invalidations it brings), sharded Pub/Sub (`SSUBSCRIBE`), RESP2-only servers (Redis 5 and older), and streaming a large reply in pieces (a reply is collected in full, up to `max_reply_size`). Proxies that do not pass `HELLO 3` on (twemproxy, Envoy's Redis proxy) cannot be used, since the client speaks RESP3 only. An independent review before 1.0 found problems that have since been fixed (see the [changelog](https://github.com/giong-run/Giong/blob/v1.5.5/CHANGELOG.md)); the crate has had no outside security audit.
+Redis Cluster (a `MOVED` or `ASK` reply is an error that says so) and Sentinel, client-side caching (`CLIENT TRACKING` can be turned on with `query`, but a `Client` passes over the invalidations it brings), sharded Pub/Sub (`SSUBSCRIBE`), RESP2-only servers (Redis 5 and older), and streaming a large reply in pieces (a reply is collected in full, up to `max_reply_size`). Proxies that do not pass `HELLO 3` on (twemproxy, Envoy's Redis proxy) cannot be used, since the client speaks RESP3 only. An independent review before 1.0 found problems that have since been fixed (see the [changelog](https://github.com/giong-run/Giong/blob/v1.5.6/CHANGELOG.md)); the crate has had no outside security audit.
 
 ## Tests
 
@@ -930,7 +930,7 @@ The tests find `redis-server` through `GIONG_REDIS_BIN` (the directory that hold
         <h2>Learn</h2>
         <a href="/docs/">Get started</a>
         <a href="/docs/#examples">Examples</a>
-        <a href="https://docs.rs/giong/1.5.5/giong/">API reference</a>
+        <a href="https://docs.rs/giong/1.5.6/giong/">API reference</a>
         <a href="/docs/#errors">Error codes</a>
         <a href="/docs/best-practices/">Best practices</a><a href="/docs/agent-skill/">Agent skill</a>
         <a href="/llms.txt">llms.txt</a>

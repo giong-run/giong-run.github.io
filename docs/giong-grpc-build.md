@@ -1,8 +1,8 @@
 # giong-grpc-build
 
-> giong 1.5.5 · https://giong.run/docs/giong-grpc-build/ · source: https://github.com/giong-run/Giong/blob/v1.5.5/giong-grpc-build/README.md
+> giong 1.5.6 · https://giong.run/docs/giong-grpc-build/ · source: https://github.com/giong-run/Giong/blob/v1.5.6/giong-grpc-build/README.md
 
-Generates [giong-proto](https://github.com/giong-run/Giong/blob/v1.5.5/giong-proto) messages and [giong-grpc](https://github.com/giong-run/Giong/blob/v1.5.5/giong-grpc) services from `.proto` files at build time. The
+Generates [giong-proto](https://github.com/giong-run/Giong/blob/v1.5.6/giong-proto) messages and [giong-grpc](https://github.com/giong-run/Giong/blob/v1.5.6/giong-grpc) services from `.proto` files at build time. The
 `.proto` files are parsed in Rust by [protox](https://docs.rs/protox) (Google's
 well-known types included), so there is **no `protoc` to install**: `cargo build` is
 enough, on any machine an agent or a CI runner starts with.
@@ -30,8 +30,8 @@ paths and kinds of its methods, a trait to implement (one method for each rpc), 
 `...Server` that routes calls to an implementation of the trait, and a `...Client`.
 [giong-proto's README](https://giong.run/docs/giong-proto.md) describes the generated messages and
 [giong-grpc's](https://giong.run/docs/giong-grpc.md) the services;
-[`examples/proto-hello`](https://github.com/giong-run/Giong/blob/v1.5.5/examples/proto-hello) and
-[`examples/grpc-hello`](https://github.com/giong-run/Giong/blob/v1.5.5/examples/grpc-hello) use them.
+[`examples/proto-hello`](https://github.com/giong-run/Giong/blob/v1.5.6/examples/proto-hello) and
+[`examples/grpc-hello`](https://github.com/giong-run/Giong/blob/v1.5.6/examples/grpc-hello) use them.
 
 The file also holds `FILE_DESCRIPTOR_SET`, the `.proto` files themselves in encoded form,
 which `giong_grpc::reflection` serves to tools such as `grpcurl`. A program that does not
